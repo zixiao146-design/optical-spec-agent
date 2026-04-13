@@ -1,45 +1,55 @@
 # optical-spec-agent
 
-**Natural language in, validated spec JSON out — for optical simulation tasks.**
+[![Tests](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml/badge.svg)](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml)
 
-`optical-spec-agent` takes a paragraph of natural language (Chinese or English) describing an optical simulation task, and outputs a structured, validated JSON specification that downstream tools can consume.
+> Convert optical simulation requests into validated, solver-ready spec JSON.
 
-## Why spec-agent?
+**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks — ready for downstream solver agents.
 
-Optical simulation workflows involve many moving parts — geometry, materials, solver settings, sweep plans, post-processing — and no two users describe them the same way. This creates a bottleneck when building multi-agent systems or automated pipelines:
+```
+"用Meep FDTD仿真金纳米球-金膜gap plasmon，扫gap从5到25nm，提取共振波长和FWHM"
+                                    ↓
+                        OpticalSpec (JSON)
+                     ┌─────────────────────┐
+                     │ task, physics,       │
+                     │ geometry_material,   │
+                     │ simulation, output   │
+                     │ + validation status  │
+                     └─────────────────────┘
+```
 
-- **Humans write prose.** "用Meep FDTD仿真金纳米球-金膜gap plasmon，扫gap从5到25nm，提取共振波长和FWHM"
-- **Solvers need structure.** JSON with typed fields, units, and validation.
+It is **not** a solver. It does not run Meep, Lumerical, or COMSOL — it produces the spec that a solver agent would consume.
 
-`optical-spec-agent` bridges that gap. It parses the prose, fills in reasonable defaults, flags what's missing, and outputs a single spec object that can be:
+## Why this project?
 
-- Validated automatically
-- Passed to a solver agent (Meep / Lumerical / COMSOL)
-- Stored and diffed for reproducibility
+Optical simulation tasks are inherently multi-parameter: geometry, materials, solver settings, sweep plans, post-processing targets. Humans describe these imprecisely; solvers require exact, structured input. This gap makes automation and multi-agent pipelines fragile.
+
+`optical-spec-agent` is the **missing compiler**:
+- **Input**: messy natural language
+- **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
+- **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
 ## Current scope (v0.1)
 
-This is a **v0.1 baseline**. The current closed loop is:
+The v0.1 closed loop:
 
 ```
 Natural language  →  Rule-based parser  →  Structured spec JSON  →  Validation
 ```
 
-**What works now:**
+**What works:**
 - Keyword + regex parsing of Chinese and English optical task descriptions
 - Structured sub-models for geometry, materials, sweep plans, source settings, boundary conditions
-- Post-hoc inference (e.g. gap plasmon → FDTD, FWHM/T2 → Lorentzian fit)
-- Per-field provenance tracking (confirmed / inferred / missing)
+- Post-hoc inference (gap plasmon → FDTD, FWHM/T2 → Lorentzian fit, nanoparticle_on_film → 3D)
+- Per-field provenance tracking: confirmed / inferred / missing
 - Pydantic v2 validation with task-type-aware rules
 - CLI, FastAPI, and Python SDK interfaces
 
-**What is NOT in v0.1:**
-- No real LLM integration (placeholder only)
-- No Meep / Lumerical / COMSOL executor — spec-agent stops at the spec
-- No parameter file generation (`.ctl`, `.lsf`, `.mph`)
-- No visualization or plotting
-
-See [Roadmap](#roadmap) for planned work.
+**What does NOT work yet:**
+- Real LLM integration (only a placeholder parser exists)
+- Solver execution — no Meep, Lumerical, or COMSOL adapters
+- Parameter file generation (`.ctl`, `.lsf`, `.mph`)
+- Visualization or plotting pipeline
 
 ## Install
 
