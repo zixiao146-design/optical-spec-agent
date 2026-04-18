@@ -25,8 +25,8 @@ It is **not** a solver. It does not run any simulation tool — it produces the 
 | | |
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
-| **Benchmark** | 8 golden cases, 2 modes (exact regression + key-field extraction) — `python benchmarks/run_benchmark.py --mode all` |
-| **Tests** | 76 passing — `pytest -v` |
+| **Benchmark** | 16 golden cases, 2 modes (exact regression + key-field extraction) — `python benchmarks/run_benchmark.py --mode all` |
+| **Tests** | 85 passing — `pytest -v` |
 | **Scope** | Rule-based parser + validation only; no solver adapter yet — Meep adapter planned for v0.3 |
 
 ## Why this project?
@@ -191,6 +191,8 @@ All demo outputs with detailed field annotations: [`examples/outputs/README.md`]
 
 ## Schema design
 
+> **Stability policy:** The core fields listed below are frozen for 0.1.x. See [`docs/schema_stability.md`](docs/schema_stability.md) for the full stable surface, volatile fields, and compatibility rules.
+
 The spec is organized in five sections, each field wrapped in a `StatusField(value, status, note)`:
 
 ```
@@ -237,7 +239,9 @@ The validator is **task-type-aware**:
 
 - **Always required**: `task_type`, `research_goal`
 - **simulation requires**: `solver_method`, `software_tool`, `excitation_source`, `source_setting`, `boundary_condition`, `monitor_setting`
-- **Cross-field**: solver vs software consistency (fdtd→meep, fem→elmer), physical system rules (nanoparticle_on_film→particle_info), postprocess vs observables (fwhm_extraction→spectrum output)
+- **Cross-field**: solver vs software consistency (fdtd→meep, fem→elmer), physical system rules (nanoparticle_on_film→particle_info), postprocess vs observables (fwhm_extraction→spectrum output), physical_system+structure_type combination check
+- **Solver-specific**: FDTD requires source+boundary+monitor (≥3 missing → error); FEM requires boundary+monitor (both missing → error)
+- **Severity escalation**: FWHM/T2 extraction without spectrum output → error (not just warning); nanoparticle_on_film with all geometry missing → error
 
 ### JSON Schema export
 
@@ -249,7 +253,7 @@ print(OpticalSpec.export_json_schema())
 ## Testing
 
 ```bash
-pytest -v                      # 76 tests
+pytest -v                      # 85 tests
 pytest --cov=optical_spec_agent # with coverage
 ```
 
@@ -262,7 +266,7 @@ Test coverage includes:
 
 ## Benchmark
 
-8 golden cases, 2 comparison modes:
+16 golden cases, 2 comparison modes:
 
 ```bash
 python benchmarks/run_benchmark.py               # exact regression (default)

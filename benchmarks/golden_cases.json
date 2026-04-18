@@ -598,12 +598,13 @@
         "errors": [
           "缺少必填字段: simulation.excitation_source",
           "缺少必填字段: simulation.source_setting",
-          "缺少必填字段: simulation.monitor_setting"
+          "缺少必填字段: simulation.monitor_setting",
+          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters",
           "建议补充字段: simulation.polarization",
-          "物理系统为 nanoparticle_on_film，建议补充 geometry_material.gap_medium"
+          "物理系统为 nanoparticle_on_film，建议补充间隙介质"
         ]
       }
     }
@@ -892,11 +893,12 @@
         "errors": [
           "缺少必填字段: simulation.excitation_source",
           "缺少必填字段: simulation.source_setting",
-          "缺少必填字段: simulation.monitor_setting"
+          "缺少必填字段: simulation.monitor_setting",
+          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters",
-          "物理系统为 nanoparticle_on_film，建议补充 geometry_material.gap_medium"
+          "物理系统为 nanoparticle_on_film，建议补充间隙介质"
         ]
       }
     }
@@ -1168,7 +1170,8 @@
           "缺少必填字段: simulation.excitation_source",
           "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
-          "缺少必填字段: simulation.monitor_setting"
+          "缺少必填字段: simulation.monitor_setting",
+          "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters"
@@ -1178,7 +1181,6 @@
   },
   {
     "task_id": "golden-05",
-    "expected_key_fields": ["task.task_type", "output.output_observables", "output.postprocess_target"],
     "input": "对实验测得的散射谱进行Lorentzian拟合，数据范围500-900nm，主峰位于680nm附近，提取FWHM和T2退相干时间。用Python scipy做曲线拟合。",
     "output": {
       "task": {
@@ -1448,7 +1450,12 @@
           "建议补充字段: simulation.polarization"
         ]
       }
-    }
+    },
+    "expected_key_fields": [
+      "task.task_type",
+      "output.output_observables",
+      "output.postprocess_target"
+    ]
   },
   {
     "task_id": "golden-06",
@@ -2013,7 +2020,8 @@
         "errors": [
           "缺少必填字段: simulation.excitation_source",
           "缺少必填字段: simulation.source_setting",
-          "缺少必填字段: simulation.monitor_setting"
+          "缺少必填字段: simulation.monitor_setting",
+          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters"
@@ -2265,12 +2273,2267 @@
           "缺少必填字段: simulation.excitation_source",
           "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
-          "缺少必填字段: simulation.monitor_setting"
+          "缺少必填字段: simulation.monitor_setting",
+          "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters"
         ]
       }
     }
+  },
+  {
+    "task_id": "golden-09",
+    "input": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM。",
+    "output": {
+      "task": {
+        "task_id": "golden-09",
+        "task_name": {
+          "value": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": "nanoparticle_on_film",
+          "status": "confirmed",
+          "note": ""
+        },
+        "physical_mechanism": {
+          "value": "gap_plasmon",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": "3d",
+          "status": "inferred",
+          "note": "nanoparticle_on_film 通常需要 3D 仿真"
+        },
+        "structure_type": {
+          "value": "rod_on_film",
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": "rod",
+            "description": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM",
+            "dimensions": {
+              "直径": "直径40nm"
+            },
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Au",
+                "role": "film",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Ag",
+                "role": "film",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Al2O3",
+                "role": "",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": "Johnson-Christy",
+          "status": "inferred",
+          "note": "默认金属光学常数来源"
+        },
+        "substrate_or_film_info": {
+          "value": {
+            "has_substrate": false,
+            "substrate_material": "",
+            "substrate_thickness": "",
+            "has_film": true,
+            "film_material": "Au",
+            "film_thickness": "",
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "particle_info": {
+          "value": {
+            "particle_type": "rod",
+            "material": "Ag",
+            "dimensions": {
+              "直径": "直径40nm"
+            },
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": "Al2O3",
+          "status": "confirmed",
+          "note": ""
+        },
+        "key_parameters": {
+          "value": [
+            "直径40nm"
+          ],
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "fdtd",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": "meep",
+          "status": "confirmed",
+          "note": ""
+        },
+        "sweep_plan": {
+          "value": {
+            "sweep_type": "parameter",
+            "variable": "gap_nm",
+            "range_start": 3.0,
+            "range_end": 12.0,
+            "num_points": null,
+            "step": null,
+            "unit": "nm",
+            "description": "gap从3nm到12nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "excitation_source": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定激励源"
+        },
+        "source_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定光源设置"
+        },
+        "polarization": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定偏振"
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "inferred",
+          "note": "默认入射方向"
+        },
+        "boundary_condition": {
+          "value": {
+            "x_min": "PML",
+            "x_max": "PML",
+            "y_min": "PML",
+            "y_max": "PML",
+            "z_min": "PML",
+            "z_max": "PML",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "scattering_spectrum",
+            "FWHM"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": [
+            {
+              "target_type": "resonance_wavelength",
+              "parameters": {},
+              "description": ""
+            },
+            {
+              "target_type": "fwhm_extraction",
+              "parameters": {},
+              "description": ""
+            },
+            {
+              "target_type": "lorentzian_fit",
+              "parameters": {},
+              "description": ""
+            }
+          ],
+          "status": "inferred",
+          "note": "FWHM/T2 提取需求推断补充 Lorentzian 拟合"
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波",
+        "task.task_type": "simulation",
+        "physics.physical_system": "nanoparticle_on_film",
+        "physics.physical_mechanism": "gap_plasmon",
+        "physics.structure_type": "rod_on_film",
+        "geometry_material.geometry_definition": "geometry_type='rod' description='用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM' dimensions={'直径': '直径40nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Ag', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Al2O3', role='', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
+        "geometry_material.particle_info": "particle_type='rod' material='Ag' dimensions={'直径': '直径40nm'} notes=''",
+        "geometry_material.gap_medium": "Al2O3",
+        "geometry_material.key_parameters": [
+          "直径40nm"
+        ],
+        "simulation.solver_method": "fdtd",
+        "simulation.software_tool": "meep",
+        "simulation.sweep_plan": "sweep_type='parameter' variable='gap_nm' range_start=3.0 range_end=12.0 num_points=None step=None unit='nm' description='gap从3nm到12nm'",
+        "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
+        "output.output_observables": [
+          "scattering_spectrum",
+          "FWHM"
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM。",
+          "note": "从用户描述推断"
+        },
+        "physics.model_dimension": {
+          "value": "3d",
+          "note": "nanoparticle_on_film 通常需要 3D 仿真"
+        },
+        "geometry_material.material_model": {
+          "value": "Johnson-Christy",
+          "note": "默认金属光学常数来源"
+        },
+        "simulation.incident_direction": {
+          "value": "正入射",
+          "note": "默认入射方向"
+        },
+        "output.postprocess_target": {
+          "value": [
+            {
+              "target_type": "resonance_wavelength",
+              "parameters": {},
+              "description": ""
+            },
+            {
+              "target_type": "fwhm_extraction",
+              "parameters": {},
+              "description": ""
+            },
+            {
+              "target_type": "lorentzian_fit",
+              "parameters": {},
+              "description": ""
+            }
+          ],
+          "note": "FWHM/T2 提取需求推断补充 Lorentzian 拟合"
+        }
+      },
+      "missing_fields": [
+        "simulation.excitation_source",
+        "simulation.source_setting",
+        "simulation.polarization",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[physics.model_dimension] nanoparticle_on_film 通常需要 3D 仿真",
+        "[geometry_material.material_model] 默认金属光学常数来源",
+        "[simulation.incident_direction] 默认入射方向",
+        "[output.postprocess_target] FWHM/T2 提取需求推断补充 Lorentzian 拟合"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.excitation_source",
+          "缺少必填字段: simulation.source_setting",
+          "缺少必填字段: simulation.monitor_setting",
+          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
+        ],
+        "warnings": [
+          "建议补充字段: simulation.polarization"
+        ]
+      }
+    }
+  },
+  {
+    "task_id": "golden-10",
+    "input": "用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励。",
+    "output": {
+      "task": {
+        "task_id": "golden-10",
+        "task_name": {
+          "value": "用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": "grating",
+          "status": "confirmed",
+          "note": ""
+        },
+        "physical_mechanism": {
+          "value": "diffraction",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定维度"
+        },
+        "structure_type": {
+          "value": "array",
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": null,
+            "description": "用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励",
+            "dimensions": {
+              "厚": "厚50nm",
+              "周期": "周期300nm"
+            },
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Au",
+                "role": "particle",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Si",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "SiO2",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": "Johnson-Christy",
+          "status": "inferred",
+          "note": "默认金属光学常数来源"
+        },
+        "substrate_or_film_info": {
+          "value": {
+            "has_substrate": true,
+            "substrate_material": "SiO2",
+            "substrate_thickness": "",
+            "has_film": false,
+            "film_material": "",
+            "film_thickness": "",
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "particle_info": {
+          "value": null,
+          "status": "missing",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": [
+            "周期300nm"
+          ],
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "fdtd",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定软件工具"
+        },
+        "sweep_plan": {
+          "value": {
+            "sweep_type": "wavelength",
+            "variable": "wavelength_nm",
+            "range_start": 400.0,
+            "range_end": 1000.0,
+            "num_points": null,
+            "step": null,
+            "unit": "nm",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "excitation_source": {
+          "value": "plane_wave",
+          "status": "confirmed",
+          "note": ""
+        },
+        "source_setting": {
+          "value": {
+            "source_type": "plane_wave",
+            "wavelength_range": "400-1000 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "polarization": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定偏振"
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "confirmed",
+          "note": ""
+        },
+        "boundary_condition": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定边界条件"
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "transmission_spectrum",
+            "reflection_spectrum",
+            "spectrum"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定后处理目标"
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励",
+        "task.task_type": "simulation",
+        "physics.physical_system": "grating",
+        "physics.physical_mechanism": "diffraction",
+        "physics.structure_type": "array",
+        "geometry_material.geometry_definition": "geometry_type=None description='用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励' dimensions={'厚': '厚50nm', '周期': '周期300nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
+        "geometry_material.key_parameters": [
+          "周期300nm"
+        ],
+        "simulation.solver_method": "fdtd",
+        "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=400.0 range_end=1000.0 num_points=None step=None unit='nm' description=''",
+        "simulation.excitation_source": "plane_wave",
+        "simulation.source_setting": "source_type='plane_wave' wavelength_range='400-1000 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
+        "simulation.incident_direction": "正入射",
+        "output.output_observables": [
+          "transmission_spectrum",
+          "reflection_spectrum",
+          "spectrum"
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励。",
+          "note": "从用户描述推断"
+        },
+        "geometry_material.material_model": {
+          "value": "Johnson-Christy",
+          "note": "默认金属光学常数来源"
+        }
+      },
+      "missing_fields": [
+        "physics.model_dimension",
+        "geometry_material.particle_info",
+        "geometry_material.gap_medium",
+        "simulation.software_tool",
+        "simulation.polarization",
+        "simulation.boundary_condition",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting",
+        "output.postprocess_target"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[geometry_material.material_model] 默认金属光学常数来源"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.software_tool",
+          "缺少必填字段: simulation.boundary_condition",
+          "缺少必填字段: simulation.monitor_setting"
+        ],
+        "warnings": [
+          "建议补充字段: simulation.polarization",
+          "physical_system=grating 与 structure_type=array 组合不常见，请确认"
+        ]
+      }
+    }
+  },
+  {
+    "task_id": "golden-11",
+    "input": "用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度。",
+    "output": {
+      "task": {
+        "task_id": "golden-11",
+        "task_name": {
+          "value": "用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": "waveguide",
+          "status": "confirmed",
+          "note": ""
+        },
+        "physical_mechanism": {
+          "value": "photonic_crystal",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定维度"
+        },
+        "structure_type": {
+          "value": "array",
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": "waveguide",
+            "description": "用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度",
+            "dimensions": {},
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Si",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": null,
+          "status": "missing",
+          "note": ""
+        },
+        "substrate_or_film_info": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定基底/薄膜"
+        },
+        "particle_info": {
+          "value": {
+            "particle_type": "waveguide",
+            "material": "",
+            "dimensions": {},
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": null,
+          "status": "missing",
+          "note": "未提取到关键参数"
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "fem",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": "comsol",
+          "status": "confirmed",
+          "note": ""
+        },
+        "sweep_plan": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定扫描计划"
+        },
+        "excitation_source": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定激励源"
+        },
+        "source_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定光源设置"
+        },
+        "polarization": {
+          "value": "TE",
+          "status": "confirmed",
+          "note": ""
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "inferred",
+          "note": "默认入射方向"
+        },
+        "boundary_condition": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定边界条件"
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "mode_profile"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": [
+            {
+              "target_type": "band_diagram",
+              "parameters": {},
+              "description": ""
+            }
+          ],
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度",
+        "task.task_type": "simulation",
+        "physics.physical_system": "waveguide",
+        "physics.physical_mechanism": "photonic_crystal",
+        "physics.structure_type": "array",
+        "geometry_material.geometry_definition": "geometry_type='waveguide' description='用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度' dimensions={} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.particle_info": "particle_type='waveguide' material='' dimensions={} notes=''",
+        "simulation.solver_method": "fem",
+        "simulation.software_tool": "comsol",
+        "simulation.polarization": "TE",
+        "output.output_observables": [
+          "mode_profile"
+        ],
+        "output.postprocess_target": [
+          {
+            "target_type": "band_diagram",
+            "parameters": {},
+            "description": ""
+          }
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "用COMSOL有限元分析硅基光子晶体波导的能带结构和模式分布，晶格常数420nm，硅柱半径120nm，计算TE模式的带隙和群速度。",
+          "note": "从用户描述推断"
+        },
+        "simulation.incident_direction": {
+          "value": "正入射",
+          "note": "默认入射方向"
+        }
+      },
+      "missing_fields": [
+        "physics.model_dimension",
+        "geometry_material.material_model",
+        "geometry_material.substrate_or_film_info",
+        "geometry_material.gap_medium",
+        "geometry_material.key_parameters",
+        "simulation.sweep_plan",
+        "simulation.excitation_source",
+        "simulation.source_setting",
+        "simulation.boundary_condition",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[simulation.incident_direction] 默认入射方向"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.excitation_source",
+          "缺少必填字段: simulation.source_setting",
+          "缺少必填字段: simulation.boundary_condition",
+          "缺少必填字段: simulation.monitor_setting",
+          "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
+        ],
+        "warnings": [
+          "建议补充字段: geometry_material.key_parameters",
+          "physical_system=waveguide 与 structure_type=array 组合不常见，请确认"
+        ]
+      }
+    },
+    "expected_key_fields": [
+      "task.task_type",
+      "physics.physical_system",
+      "simulation.solver_method",
+      "output.output_observables"
+    ]
+  },
+  {
+    "task_id": "golden-12",
+    "input": "对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子。用Python matplotlib画图。",
+    "output": {
+      "task": {
+        "task_id": "golden-12",
+        "task_name": {
+          "value": "对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "fitting",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子。用Python matplotlib画图。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定物理系统"
+        },
+        "physical_mechanism": {
+          "value": "resonance",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定维度"
+        },
+        "structure_type": {
+          "value": null,
+          "status": "missing",
+          "note": "未识别结构类型"
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": null,
+            "description": "对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子",
+            "dimensions": {},
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": null,
+          "status": "missing",
+          "note": "未识别材料体系"
+        },
+        "material_model": {
+          "value": null,
+          "status": "missing",
+          "note": ""
+        },
+        "substrate_or_film_info": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定基底/薄膜"
+        },
+        "particle_info": {
+          "value": null,
+          "status": "missing",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": null,
+          "status": "missing",
+          "note": "未提取到关键参数"
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定求解方法"
+        },
+        "software_tool": {
+          "value": "python",
+          "status": "confirmed",
+          "note": ""
+        },
+        "sweep_plan": {
+          "value": {
+            "sweep_type": "wavelength",
+            "variable": "wavelength_nm",
+            "range_start": 500.0,
+            "range_end": 900.0,
+            "num_points": null,
+            "step": null,
+            "unit": "nm",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "excitation_source": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定激励源"
+        },
+        "source_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定光源设置"
+        },
+        "polarization": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定偏振"
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "inferred",
+          "note": "默认入射方向"
+        },
+        "boundary_condition": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定边界条件"
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "absorption_spectrum",
+            "Q_factor",
+            "FWHM"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": [
+            {
+              "target_type": "fwhm_extraction",
+              "parameters": {},
+              "description": ""
+            },
+            {
+              "target_type": "Q_factor_calc",
+              "parameters": {},
+              "description": ""
+            },
+            {
+              "target_type": "lorentzian_fit",
+              "parameters": {},
+              "description": ""
+            }
+          ],
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子",
+        "task.task_type": "fitting",
+        "physics.physical_mechanism": "resonance",
+        "geometry_material.geometry_definition": "geometry_type=None description='对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子' dimensions={} units='nm'",
+        "simulation.software_tool": "python",
+        "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=500.0 range_end=900.0 num_points=None step=None unit='nm' description=''",
+        "output.output_observables": [
+          "absorption_spectrum",
+          "Q_factor",
+          "FWHM"
+        ],
+        "output.postprocess_target": [
+          {
+            "target_type": "fwhm_extraction",
+            "parameters": {},
+            "description": ""
+          },
+          {
+            "target_type": "Q_factor_calc",
+            "parameters": {},
+            "description": ""
+          },
+          {
+            "target_type": "lorentzian_fit",
+            "parameters": {},
+            "description": ""
+          }
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子。用Python matplotlib画图。",
+          "note": "从用户描述推断"
+        },
+        "simulation.incident_direction": {
+          "value": "正入射",
+          "note": "默认入射方向"
+        }
+      },
+      "missing_fields": [
+        "physics.physical_system",
+        "physics.model_dimension",
+        "physics.structure_type",
+        "geometry_material.material_system",
+        "geometry_material.material_model",
+        "geometry_material.substrate_or_film_info",
+        "geometry_material.particle_info",
+        "geometry_material.gap_medium",
+        "geometry_material.key_parameters",
+        "simulation.solver_method",
+        "simulation.excitation_source",
+        "simulation.source_setting",
+        "simulation.polarization",
+        "simulation.boundary_condition",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[simulation.incident_direction] 默认入射方向"
+      ],
+      "validation_status": {
+        "is_executable": true,
+        "errors": [],
+        "warnings": [
+          "建议补充字段: physics.structure_type",
+          "建议补充字段: geometry_material.material_system",
+          "建议补充字段: geometry_material.key_parameters",
+          "建议补充字段: simulation.polarization"
+        ]
+      }
+    },
+    "expected_key_fields": [
+      "task.task_type",
+      "output.output_observables",
+      "output.postprocess_target"
+    ]
+  },
+  {
+    "task_id": "golden-13",
+    "input": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面。",
+    "output": {
+      "task": {
+        "task_id": "golden-13",
+        "task_name": {
+          "value": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": "single_particle",
+          "status": "confirmed",
+          "note": ""
+        },
+        "physical_mechanism": {
+          "value": "scattering",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": "2d",
+          "status": "inferred",
+          "note": "根据描述推断"
+        },
+        "structure_type": {
+          "value": "single_particle",
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": "sphere",
+            "description": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面",
+            "dimensions": {
+              "直径": "直径80nm"
+            },
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Au",
+                "role": "particle",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Air",
+                "role": "",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": "Johnson-Christy",
+          "status": "inferred",
+          "note": "默认金属光学常数来源"
+        },
+        "substrate_or_film_info": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定基底/薄膜"
+        },
+        "particle_info": {
+          "value": {
+            "particle_type": "sphere",
+            "material": "Au",
+            "dimensions": {
+              "直径": "直径80nm"
+            },
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": [
+            "直径80nm"
+          ],
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "fdtd",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": "meep",
+          "status": "confirmed",
+          "note": ""
+        },
+        "sweep_plan": {
+          "value": {
+            "sweep_type": "wavelength",
+            "variable": "wavelength_nm",
+            "range_start": 300.0,
+            "range_end": 900.0,
+            "num_points": null,
+            "step": null,
+            "unit": "nm",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "excitation_source": {
+          "value": "plane_wave",
+          "status": "confirmed",
+          "note": ""
+        },
+        "source_setting": {
+          "value": {
+            "source_type": "plane_wave",
+            "wavelength_range": "300-900 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "polarization": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定偏振"
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "confirmed",
+          "note": ""
+        },
+        "boundary_condition": {
+          "value": {
+            "x_min": "PML",
+            "x_max": "PML",
+            "y_min": "PML",
+            "y_max": "PML",
+            "z_min": "PML",
+            "z_max": "PML",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "absorption_spectrum",
+            "cross_section"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定后处理目标"
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面",
+        "task.task_type": "simulation",
+        "physics.physical_system": "single_particle",
+        "physics.physical_mechanism": "scattering",
+        "physics.structure_type": "single_particle",
+        "geometry_material.geometry_definition": "geometry_type='sphere' description='用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面' dimensions={'直径': '直径80nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.particle_info": "particle_type='sphere' material='Au' dimensions={'直径': '直径80nm'} notes=''",
+        "geometry_material.key_parameters": [
+          "直径80nm"
+        ],
+        "simulation.solver_method": "fdtd",
+        "simulation.software_tool": "meep",
+        "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=300.0 range_end=900.0 num_points=None step=None unit='nm' description=''",
+        "simulation.excitation_source": "plane_wave",
+        "simulation.source_setting": "source_type='plane_wave' wavelength_range='300-900 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
+        "simulation.incident_direction": "正入射",
+        "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
+        "output.output_observables": [
+          "absorption_spectrum",
+          "cross_section"
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面。",
+          "note": "从用户描述推断"
+        },
+        "physics.model_dimension": {
+          "value": "2d",
+          "note": "根据描述推断"
+        },
+        "geometry_material.material_model": {
+          "value": "Johnson-Christy",
+          "note": "默认金属光学常数来源"
+        }
+      },
+      "missing_fields": [
+        "geometry_material.substrate_or_film_info",
+        "geometry_material.gap_medium",
+        "simulation.polarization",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting",
+        "output.postprocess_target"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[physics.model_dimension] 根据描述推断",
+        "[geometry_material.material_model] 默认金属光学常数来源"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.monitor_setting"
+        ],
+        "warnings": [
+          "建议补充字段: simulation.polarization",
+          "2d 模型可能不适合颗粒/阵列结构，建议确认"
+        ]
+      }
+    }
+  },
+  {
+    "task_id": "golden-14",
+    "input": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1.55μm。",
+    "output": {
+      "task": {
+        "task_id": "golden-14",
+        "task_name": {
+          "value": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1.55μm。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": "waveguide",
+          "status": "confirmed",
+          "note": ""
+        },
+        "physical_mechanism": {
+          "value": "coupling",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定维度"
+        },
+        "structure_type": {
+          "value": "single_particle",
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": "waveguide",
+            "description": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1",
+            "dimensions": {
+              "直径": "直径60nm",
+              "长度": "宽450nm",
+              "宽": "宽450nm"
+            },
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Au",
+                "role": "particle",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Si",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": "Johnson-Christy",
+          "status": "inferred",
+          "note": "默认金属光学常数来源"
+        },
+        "substrate_or_film_info": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定基底/薄膜"
+        },
+        "particle_info": {
+          "value": {
+            "particle_type": "waveguide",
+            "material": "Au",
+            "dimensions": {
+              "直径": "直径60nm",
+              "长度": "宽450nm",
+              "宽": "宽450nm"
+            },
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": [
+            "直径60nm",
+            "波长1.55μm"
+          ],
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "fem",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": "comsol",
+          "status": "confirmed",
+          "note": ""
+        },
+        "sweep_plan": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定扫描计划"
+        },
+        "excitation_source": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定激励源"
+        },
+        "source_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定光源设置"
+        },
+        "polarization": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定偏振"
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "inferred",
+          "note": "默认入射方向"
+        },
+        "boundary_condition": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定边界条件"
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "field_distribution"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定后处理目标"
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1",
+        "task.task_type": "simulation",
+        "physics.physical_system": "waveguide",
+        "physics.physical_mechanism": "coupling",
+        "physics.structure_type": "single_particle",
+        "geometry_material.geometry_definition": "geometry_type='waveguide' description='用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1' dimensions={'直径': '直径60nm', '长度': '宽450nm', '宽': '宽450nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.particle_info": "particle_type='waveguide' material='Au' dimensions={'直径': '直径60nm', '长度': '宽450nm', '宽': '宽450nm'} notes=''",
+        "geometry_material.key_parameters": [
+          "直径60nm",
+          "波长1.55μm"
+        ],
+        "simulation.solver_method": "fem",
+        "simulation.software_tool": "comsol",
+        "output.output_observables": [
+          "field_distribution"
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1.55μm。",
+          "note": "从用户描述推断"
+        },
+        "geometry_material.material_model": {
+          "value": "Johnson-Christy",
+          "note": "默认金属光学常数来源"
+        },
+        "simulation.incident_direction": {
+          "value": "正入射",
+          "note": "默认入射方向"
+        }
+      },
+      "missing_fields": [
+        "physics.model_dimension",
+        "geometry_material.substrate_or_film_info",
+        "geometry_material.gap_medium",
+        "simulation.sweep_plan",
+        "simulation.excitation_source",
+        "simulation.source_setting",
+        "simulation.polarization",
+        "simulation.boundary_condition",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting",
+        "output.postprocess_target"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[geometry_material.material_model] 默认金属光学常数来源",
+        "[simulation.incident_direction] 默认入射方向"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.excitation_source",
+          "缺少必填字段: simulation.source_setting",
+          "缺少必填字段: simulation.boundary_condition",
+          "缺少必填字段: simulation.monitor_setting",
+          "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
+        ],
+        "warnings": [
+          "建议补充字段: simulation.polarization",
+          "physical_system=waveguide 与 structure_type=single_particle 组合不常见，请确认"
+        ]
+      }
+    }
+  },
+  {
+    "task_id": "golden-15",
+    "input": "设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射。",
+    "output": {
+      "task": {
+        "task_id": "golden-15",
+        "task_name": {
+          "value": "设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": "multilayer",
+          "status": "confirmed",
+          "note": ""
+        },
+        "physical_mechanism": {
+          "value": "dielectric",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定维度"
+        },
+        "structure_type": {
+          "value": "multilayer",
+          "status": "confirmed",
+          "note": ""
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": "film",
+            "description": "设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射",
+            "dimensions": {},
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Au",
+                "role": "particle",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Ag",
+                "role": "particle",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Si",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "SiO2",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": "Johnson-Christy",
+          "status": "inferred",
+          "note": "默认金属光学常数来源"
+        },
+        "substrate_or_film_info": {
+          "value": {
+            "has_substrate": false,
+            "substrate_material": "",
+            "substrate_thickness": "",
+            "has_film": true,
+            "film_material": "Au",
+            "film_thickness": "",
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "particle_info": {
+          "value": {
+            "particle_type": "film",
+            "material": "Ag",
+            "dimensions": {},
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": null,
+          "status": "missing",
+          "note": "未提取到关键参数"
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "rcwa",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定软件工具"
+        },
+        "sweep_plan": {
+          "value": {
+            "sweep_type": "wavelength",
+            "variable": "wavelength_nm",
+            "range_start": 400.0,
+            "range_end": 1600.0,
+            "num_points": null,
+            "step": null,
+            "unit": "nm",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "excitation_source": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定激励源"
+        },
+        "source_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定光源设置"
+        },
+        "polarization": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定偏振"
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "confirmed",
+          "note": ""
+        },
+        "boundary_condition": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定边界条件"
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "transmission_spectrum",
+            "reflection_spectrum",
+            "spectrum"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定后处理目标"
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射",
+        "task.task_type": "simulation",
+        "physics.physical_system": "multilayer",
+        "physics.physical_mechanism": "dielectric",
+        "physics.structure_type": "multilayer",
+        "geometry_material.geometry_definition": "geometry_type='film' description='设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射' dimensions={} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Ag', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
+        "geometry_material.particle_info": "particle_type='film' material='Ag' dimensions={} notes=''",
+        "simulation.solver_method": "rcwa",
+        "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=400.0 range_end=1600.0 num_points=None step=None unit='nm' description=''",
+        "simulation.incident_direction": "正入射",
+        "output.output_observables": [
+          "transmission_spectrum",
+          "reflection_spectrum",
+          "spectrum"
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射。",
+          "note": "从用户描述推断"
+        },
+        "geometry_material.material_model": {
+          "value": "Johnson-Christy",
+          "note": "默认金属光学常数来源"
+        }
+      },
+      "missing_fields": [
+        "physics.model_dimension",
+        "geometry_material.gap_medium",
+        "geometry_material.key_parameters",
+        "simulation.software_tool",
+        "simulation.excitation_source",
+        "simulation.source_setting",
+        "simulation.polarization",
+        "simulation.boundary_condition",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting",
+        "output.postprocess_target"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[geometry_material.material_model] 默认金属光学常数来源"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.software_tool",
+          "缺少必填字段: simulation.excitation_source",
+          "缺少必填字段: simulation.source_setting",
+          "缺少必填字段: simulation.boundary_condition",
+          "缺少必填字段: simulation.monitor_setting"
+        ],
+        "warnings": [
+          "建议补充字段: geometry_material.key_parameters",
+          "建议补充字段: simulation.polarization"
+        ]
+      }
+    }
+  },
+  {
+    "task_id": "golden-16",
+    "input": "用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，提取远场辐射方向图和散射谱。",
+    "output": {
+      "task": {
+        "task_id": "golden-16",
+        "task_name": {
+          "value": "用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，",
+          "status": "confirmed",
+          "note": ""
+        },
+        "task_type": {
+          "value": "simulation",
+          "status": "confirmed",
+          "note": ""
+        },
+        "research_goal": {
+          "value": "用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，提取远场辐射方向图和散射谱。",
+          "status": "inferred",
+          "note": "从用户描述推断"
+        }
+      },
+      "physics": {
+        "physical_system": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定物理系统"
+        },
+        "physical_mechanism": {
+          "value": "scattering",
+          "status": "confirmed",
+          "note": ""
+        },
+        "model_dimension": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定维度"
+        },
+        "structure_type": {
+          "value": null,
+          "status": "missing",
+          "note": "未识别结构类型"
+        }
+      },
+      "geometry_material": {
+        "geometry_definition": {
+          "value": {
+            "geometry_type": null,
+            "description": "用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，提取远场辐射方向图和散射谱",
+            "dimensions": {
+              "长度": "宽50nm",
+              "宽": "宽50nm"
+            },
+            "units": "nm"
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_system": {
+          "value": {
+            "materials": [
+              {
+                "name": "Au",
+                "role": "particle",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Si",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "SiO2",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              }
+            ],
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "material_model": {
+          "value": "Johnson-Christy",
+          "status": "inferred",
+          "note": "默认金属光学常数来源"
+        },
+        "substrate_or_film_info": {
+          "value": {
+            "has_substrate": true,
+            "substrate_material": "SiO2",
+            "substrate_thickness": "",
+            "has_film": false,
+            "film_material": "",
+            "film_thickness": "",
+            "notes": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "particle_info": {
+          "value": null,
+          "status": "missing",
+          "note": ""
+        },
+        "gap_medium": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
+        },
+        "key_parameters": {
+          "value": null,
+          "status": "missing",
+          "note": "未提取到关键参数"
+        }
+      },
+      "simulation": {
+        "solver_method": {
+          "value": "fdtd",
+          "status": "confirmed",
+          "note": ""
+        },
+        "software_tool": {
+          "value": "meep",
+          "status": "confirmed",
+          "note": ""
+        },
+        "sweep_plan": {
+          "value": {
+            "sweep_type": "wavelength",
+            "variable": "wavelength_nm",
+            "range_start": 600.0,
+            "range_end": 1400.0,
+            "num_points": null,
+            "step": null,
+            "unit": "nm",
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "excitation_source": {
+          "value": "plane_wave",
+          "status": "confirmed",
+          "note": ""
+        },
+        "source_setting": {
+          "value": {
+            "source_type": "plane_wave",
+            "wavelength_range": "600-1400 nm",
+            "polarization": "linear_x",
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
+        },
+        "polarization": {
+          "value": "linear_x",
+          "status": "confirmed",
+          "note": ""
+        },
+        "incident_direction": {
+          "value": "正入射",
+          "status": "inferred",
+          "note": "默认入射方向"
+        },
+        "boundary_condition": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定边界条件"
+        },
+        "symmetry_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定对称性设置"
+        },
+        "mesh_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定网格设置"
+        },
+        "stability_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定稳定性设置"
+        },
+        "monitor_setting": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定监视器设置"
+        }
+      },
+      "output": {
+        "output_observables": {
+          "value": [
+            "scattering_spectrum",
+            "far_field"
+          ],
+          "status": "confirmed",
+          "note": ""
+        },
+        "postprocess_target": {
+          "value": null,
+          "status": "missing",
+          "note": "未指定后处理目标"
+        }
+      },
+      "confirmed_fields": {
+        "task.task_name": "用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，",
+        "task.task_type": "simulation",
+        "physics.physical_mechanism": "scattering",
+        "geometry_material.geometry_definition": "geometry_type=None description='用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，提取远场辐射方向图和散射谱' dimensions={'长度': '宽50nm', '宽': '宽50nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
+        "simulation.solver_method": "fdtd",
+        "simulation.software_tool": "meep",
+        "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=600.0 range_end=1400.0 num_points=None step=None unit='nm' description=''",
+        "simulation.excitation_source": "plane_wave",
+        "simulation.source_setting": "source_type='plane_wave' wavelength_range='600-1400 nm' polarization='linear_x' incident_angle='0 deg' amplitude=None description=''",
+        "simulation.polarization": "linear_x",
+        "output.output_observables": [
+          "scattering_spectrum",
+          "far_field"
+        ]
+      },
+      "inferred_fields": {
+        "task.research_goal": {
+          "value": "用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，提取远场辐射方向图和散射谱。",
+          "note": "从用户描述推断"
+        },
+        "geometry_material.material_model": {
+          "value": "Johnson-Christy",
+          "note": "默认金属光学常数来源"
+        },
+        "simulation.incident_direction": {
+          "value": "正入射",
+          "note": "默认入射方向"
+        }
+      },
+      "missing_fields": [
+        "physics.physical_system",
+        "physics.model_dimension",
+        "physics.structure_type",
+        "geometry_material.particle_info",
+        "geometry_material.gap_medium",
+        "geometry_material.key_parameters",
+        "simulation.boundary_condition",
+        "simulation.symmetry_setting",
+        "simulation.mesh_setting",
+        "simulation.stability_setting",
+        "simulation.monitor_setting",
+        "output.postprocess_target"
+      ],
+      "assumption_log": [
+        "[task.research_goal] 从用户描述推断",
+        "[geometry_material.material_model] 默认金属光学常数来源",
+        "[simulation.incident_direction] 默认入射方向"
+      ],
+      "validation_status": {
+        "is_executable": false,
+        "errors": [
+          "缺少必填字段: simulation.boundary_condition",
+          "缺少必填字段: simulation.monitor_setting"
+        ],
+        "warnings": [
+          "建议补充字段: physics.structure_type",
+          "建议补充字段: geometry_material.key_parameters"
+        ]
+      }
+    },
+    "expected_key_fields": [
+      "task.task_type",
+      "simulation.solver_method",
+      "simulation.software_tool",
+      "output.output_observables"
+    ]
   }
 ]
