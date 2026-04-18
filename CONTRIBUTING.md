@@ -66,7 +66,7 @@ pip install -e ".[dev]"
 
 - New structured sub-models or enum values
 - LLM parser integration
-- Solver adapter work (Meep, Lumerical, COMSOL)
+- Solver adapter work (Meep, MPB, Elmer, Optiland)
 - Breaking schema changes
 
 ## Commit style

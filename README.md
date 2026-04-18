@@ -18,7 +18,7 @@
                      └─────────────────────┘
 ```
 
-It is **not** a solver. It does not run Meep, Lumerical, or COMSOL — it produces the spec that a solver agent would consume.
+It is **not** a solver. It does not run any simulation tool — it produces the spec that a solver agent would consume.
 
 ## Why this project?
 
@@ -47,7 +47,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 
 **What does NOT work yet:**
 - Real LLM integration (only a placeholder parser exists)
-- Solver execution — no Meep, Lumerical, or COMSOL adapters
+- Solver execution — no solver adapters exist yet (see Roadmap)
 - Parameter file generation (`.ctl`, `.lsf`, `.mph`)
 - Visualization or plotting pipeline
 
@@ -169,7 +169,7 @@ OpticalSpec
 | `TaskType` | modeling, simulation, fitting, data_analysis, plotting, writing |
 | `SolverMethod` | fdtd, fem, rcwa, analytical, coupled_oscillator |
 | `ModelDimension` | 2d, 3d, axisymmetric |
-| `SoftwareTool` | meep, lumerical, comsol, matlab, python, ... |
+| `SoftwareTool` | meep, elmer, gmsh, optiland, rayoptics, python, ... |
 | `PhysicalSystem` | nanoparticle_on_film, waveguide, metasurface, grating, ... |
 | `StructureType` | sphere_on_film, rod_on_film, cube_on_film, cross_structure, ... |
 | `ExcitationSource` | plane_wave, tfsf, dipole, mode_source, gaussian_beam, ... |
@@ -193,7 +193,7 @@ The validator is **task-type-aware**:
 
 - **Always required**: `task_type`, `research_goal`
 - **simulation requires**: `solver_method`, `software_tool`, `excitation_source`, `source_setting`, `boundary_condition`, `monitor_setting`
-- **Cross-field**: solver vs software consistency (fdtd→meep/lumerical), physical system rules (nanoparticle_on_film→particle_info), postprocess vs observables (fwhm_extraction→spectrum output)
+- **Cross-field**: solver vs software consistency (fdtd→meep, fem→elmer), physical system rules (nanoparticle_on_film→particle_info), postprocess vs observables (fwhm_extraction→spectrum output)
 
 ### JSON Schema export
 
@@ -273,14 +273,23 @@ optical-spec-agent/
 
 ## Roadmap
 
+> **Strategy**: build an open-source-native architecture first. All solver adapters target
+> open-source, scriptable, macOS-friendly tools. Commercial software (Zemax, LightTools,
+> COMSOL, CODE V, Lumerical) is **not a core dependency** — if compatibility is needed in
+> the future, it will be a secondary, optional interface.
+
 | Version | Goal | Status |
 |---------|------|--------|
 | **v0.1** | NL → spec JSON + validation (rule-based) | **Done** |
-| v0.2 | LLM parser integration (Claude / GPT) | Planned |
-| v0.3 | Meep adapter (spec → `.ctl` script) | Planned |
-| v0.4 | Lumerical adapter (spec → `.lsf` script) | Planned |
-| v0.5 | COMSOL adapter (spec → `.mph` Java API) | Planned |
-| v1.0 | Full multi-agent loop: spec → simulate → postprocess → report | Planned |
+| v0.2 | Spec hardening: expand golden benchmarks, improve validation coverage | Planned |
+| v0.3 | Meep adapter (spec → Meep Python script) | Planned |
+| v0.4 | MPB adapter (spec → photonic band structure script) | Planned |
+| v0.5 | Gmsh + Elmer adapter (spec → geometry mesh + FEM solver input) | Planned |
+| v0.6 | Optiland / RayOptics adapter (spec → imaging optics definition) | Planned |
+| v0.7 | LLM parser integration | Planned |
+| v0.8 | Multi-agent orchestration: spec → simulate → postprocess → report | Planned |
+
+See [`docs/open_source_stack.md`](docs/open_source_stack.md) for the full tool-stack rationale.
 
 ## License
 

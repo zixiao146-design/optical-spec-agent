@@ -1,0 +1,316 @@
+{
+  "task": {
+    "task_id": "demo-gap_plasmon_sweep",
+    "task_name": {
+      "value": "研究金纳米球-金膜体系中 gap 从 5 到 25 nm 变化对散射谱主峰线宽和退相位时间的影响，使用 Meep FDTD，提取共振波长、FWHM 和 T2",
+      "status": "confirmed",
+      "note": ""
+    },
+    "task_type": {
+      "value": "simulation",
+      "status": "confirmed",
+      "note": ""
+    },
+    "research_goal": {
+      "value": "研究金纳米球-金膜体系中 gap 从 5 到 25 nm 变化对散射谱主峰线宽和退相位时间的影响，使用 Meep FDTD，提取共振波长、FWHM 和 T2。",
+      "status": "inferred",
+      "note": "从用户描述推断"
+    }
+  },
+  "physics": {
+    "physical_system": {
+      "value": "nanoparticle_on_film",
+      "status": "confirmed",
+      "note": ""
+    },
+    "physical_mechanism": {
+      "value": "scattering",
+      "status": "confirmed",
+      "note": ""
+    },
+    "model_dimension": {
+      "value": "3d",
+      "status": "inferred",
+      "note": "nanoparticle_on_film 通常需要 3D 仿真"
+    },
+    "structure_type": {
+      "value": "sphere_on_film",
+      "status": "confirmed",
+      "note": ""
+    }
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {
+        "geometry_type": "sphere",
+        "description": "研究金纳米球-金膜体系中 gap 从 5 到 25 nm 变化对散射谱主峰线宽和退相位时间的影响，使用 Meep FDTD，提取共振波长、FWHM 和 T2",
+        "dimensions": {},
+        "units": "nm"
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "material_system": {
+      "value": {
+        "materials": [
+          {
+            "name": "Au",
+            "role": "film",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          }
+        ],
+        "description": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "material_model": {
+      "value": "Johnson-Christy",
+      "status": "inferred",
+      "note": "默认金属光学常数来源"
+    },
+    "substrate_or_film_info": {
+      "value": {
+        "has_substrate": false,
+        "substrate_material": "",
+        "substrate_thickness": "",
+        "has_film": true,
+        "film_material": "Au",
+        "film_thickness": "",
+        "notes": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "particle_info": {
+      "value": {
+        "particle_type": "sphere",
+        "material": "Au",
+        "dimensions": {},
+        "notes": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "gap_medium": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定间隙介质"
+    },
+    "key_parameters": {
+      "value": null,
+      "status": "missing",
+      "note": "未提取到关键参数"
+    }
+  },
+  "simulation": {
+    "solver_method": {
+      "value": "fdtd",
+      "status": "confirmed",
+      "note": ""
+    },
+    "software_tool": {
+      "value": "meep",
+      "status": "confirmed",
+      "note": ""
+    },
+    "sweep_plan": {
+      "value": {
+        "sweep_type": "parameter",
+        "variable": "gap_nm",
+        "range_start": 5.0,
+        "range_end": 25.0,
+        "num_points": null,
+        "step": null,
+        "unit": "nm",
+        "description": "gap 从 5 到 25 nm"
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "excitation_source": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定激励源"
+    },
+    "source_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定光源设置"
+    },
+    "polarization": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定偏振"
+    },
+    "incident_direction": {
+      "value": "正入射",
+      "status": "inferred",
+      "note": "默认入射方向"
+    },
+    "boundary_condition": {
+      "value": {
+        "x_min": "PML",
+        "x_max": "PML",
+        "y_min": "PML",
+        "y_max": "PML",
+        "z_min": "PML",
+        "z_max": "PML",
+        "description": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "symmetry_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定对称性设置"
+    },
+    "mesh_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定网格设置"
+    },
+    "stability_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定稳定性设置"
+    },
+    "monitor_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定监视器设置"
+    }
+  },
+  "output": {
+    "output_observables": {
+      "value": [
+        "scattering_spectrum",
+        "FWHM"
+      ],
+      "status": "confirmed",
+      "note": ""
+    },
+    "postprocess_target": {
+      "value": [
+        {
+          "target_type": "resonance_wavelength",
+          "parameters": {},
+          "description": ""
+        },
+        {
+          "target_type": "fwhm_extraction",
+          "parameters": {},
+          "description": ""
+        },
+        {
+          "target_type": "T2_extraction",
+          "parameters": {},
+          "description": ""
+        },
+        {
+          "target_type": "lorentzian_fit",
+          "parameters": {},
+          "description": ""
+        }
+      ],
+      "status": "inferred",
+      "note": "FWHM/T2 提取需求推断补充 Lorentzian 拟合"
+    }
+  },
+  "confirmed_fields": {
+    "task.task_name": "研究金纳米球-金膜体系中 gap 从 5 到 25 nm 变化对散射谱主峰线宽和退相位时间的影响，使用 Meep FDTD，提取共振波长、FWHM 和 T2",
+    "task.task_type": "simulation",
+    "physics.physical_system": "nanoparticle_on_film",
+    "physics.physical_mechanism": "scattering",
+    "physics.structure_type": "sphere_on_film",
+    "geometry_material.geometry_definition": "geometry_type='sphere' description='研究金纳米球-金膜体系中 gap 从 5 到 25 nm 变化对散射谱主峰线宽和退相位时间的影响，使用 Meep FDTD，提取共振波长、FWHM 和 T2' dimensions={} units='nm'",
+    "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes='')] description=''",
+    "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
+    "geometry_material.particle_info": "particle_type='sphere' material='Au' dimensions={} notes=''",
+    "simulation.solver_method": "fdtd",
+    "simulation.software_tool": "meep",
+    "simulation.sweep_plan": "sweep_type='parameter' variable='gap_nm' range_start=5.0 range_end=25.0 num_points=None step=None unit='nm' description='gap 从 5 到 25 nm'",
+    "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
+    "output.output_observables": [
+      "scattering_spectrum",
+      "FWHM"
+    ]
+  },
+  "inferred_fields": {
+    "task.research_goal": {
+      "value": "研究金纳米球-金膜体系中 gap 从 5 到 25 nm 变化对散射谱主峰线宽和退相位时间的影响，使用 Meep FDTD，提取共振波长、FWHM 和 T2。",
+      "note": "从用户描述推断"
+    },
+    "physics.model_dimension": {
+      "value": "3d",
+      "note": "nanoparticle_on_film 通常需要 3D 仿真"
+    },
+    "geometry_material.material_model": {
+      "value": "Johnson-Christy",
+      "note": "默认金属光学常数来源"
+    },
+    "simulation.incident_direction": {
+      "value": "正入射",
+      "note": "默认入射方向"
+    },
+    "output.postprocess_target": {
+      "value": [
+        {
+          "target_type": "resonance_wavelength",
+          "parameters": {},
+          "description": ""
+        },
+        {
+          "target_type": "fwhm_extraction",
+          "parameters": {},
+          "description": ""
+        },
+        {
+          "target_type": "T2_extraction",
+          "parameters": {},
+          "description": ""
+        },
+        {
+          "target_type": "lorentzian_fit",
+          "parameters": {},
+          "description": ""
+        }
+      ],
+      "note": "FWHM/T2 提取需求推断补充 Lorentzian 拟合"
+    }
+  },
+  "missing_fields": [
+    "geometry_material.gap_medium",
+    "geometry_material.key_parameters",
+    "simulation.excitation_source",
+    "simulation.source_setting",
+    "simulation.polarization",
+    "simulation.symmetry_setting",
+    "simulation.mesh_setting",
+    "simulation.stability_setting",
+    "simulation.monitor_setting"
+  ],
+  "assumption_log": [
+    "[task.research_goal] 从用户描述推断",
+    "[physics.model_dimension] nanoparticle_on_film 通常需要 3D 仿真",
+    "[geometry_material.material_model] 默认金属光学常数来源",
+    "[simulation.incident_direction] 默认入射方向",
+    "[output.postprocess_target] FWHM/T2 提取需求推断补充 Lorentzian 拟合"
+  ],
+  "validation_status": {
+    "is_executable": false,
+    "errors": [
+      "缺少必填字段: simulation.excitation_source",
+      "缺少必填字段: simulation.source_setting",
+      "缺少必填字段: simulation.monitor_setting"
+    ],
+    "warnings": [
+      "建议补充字段: geometry_material.key_parameters",
+      "建议补充字段: simulation.polarization",
+      "物理系统为 nanoparticle_on_film，建议补充 geometry_material.gap_medium"
+    ]
+  }
+}

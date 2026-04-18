@@ -1,0 +1,271 @@
+{
+  "task": {
+    "task_id": "demo-comsol_waveguide",
+    "task_name": {
+      "value": "COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1",
+      "status": "confirmed",
+      "note": ""
+    },
+    "task_type": {
+      "value": "simulation",
+      "status": "confirmed",
+      "note": ""
+    },
+    "research_goal": {
+      "value": "COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1.55μm波长下的基模有效折射率和模场分布，TE和TM模式都要计算。",
+      "status": "inferred",
+      "note": "从用户描述推断"
+    }
+  },
+  "physics": {
+    "physical_system": {
+      "value": "waveguide",
+      "status": "confirmed",
+      "note": ""
+    },
+    "physical_mechanism": {
+      "value": "waveguide",
+      "status": "confirmed",
+      "note": ""
+    },
+    "model_dimension": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定维度"
+    },
+    "structure_type": {
+      "value": "waveguide",
+      "status": "confirmed",
+      "note": ""
+    }
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {
+        "geometry_type": "waveguide",
+        "description": "COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1",
+        "dimensions": {
+          "长度": "宽800nm",
+          "宽": "宽800nm"
+        },
+        "units": "nm"
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "material_system": {
+      "value": {
+        "materials": [
+          {
+            "name": "Si",
+            "role": "substrate",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          },
+          {
+            "name": "SiO2",
+            "role": "substrate",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          },
+          {
+            "name": "Si3N4",
+            "role": "",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          },
+          {
+            "name": "Air",
+            "role": "",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          }
+        ],
+        "description": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "material_model": {
+      "value": null,
+      "status": "missing",
+      "note": ""
+    },
+    "substrate_or_film_info": {
+      "value": {
+        "has_substrate": true,
+        "substrate_material": "SiO2",
+        "substrate_thickness": "",
+        "has_film": false,
+        "film_material": "",
+        "film_thickness": "",
+        "notes": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "particle_info": {
+      "value": {
+        "particle_type": "waveguide",
+        "material": "",
+        "dimensions": {
+          "长度": "宽800nm",
+          "宽": "宽800nm"
+        },
+        "notes": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "gap_medium": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定间隙介质"
+    },
+    "key_parameters": {
+      "value": null,
+      "status": "missing",
+      "note": "未提取到关键参数"
+    }
+  },
+  "simulation": {
+    "solver_method": {
+      "value": "fem",
+      "status": "confirmed",
+      "note": ""
+    },
+    "software_tool": {
+      "value": "comsol",
+      "status": "confirmed",
+      "note": ""
+    },
+    "sweep_plan": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定扫描计划"
+    },
+    "excitation_source": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定激励源"
+    },
+    "source_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定光源设置"
+    },
+    "polarization": {
+      "value": "TM",
+      "status": "confirmed",
+      "note": ""
+    },
+    "incident_direction": {
+      "value": "正入射",
+      "status": "inferred",
+      "note": "默认入射方向"
+    },
+    "boundary_condition": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定边界条件"
+    },
+    "symmetry_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定对称性设置"
+    },
+    "mesh_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定网格设置"
+    },
+    "stability_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定稳定性设置"
+    },
+    "monitor_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定监视器设置"
+    }
+  },
+  "output": {
+    "output_observables": {
+      "value": [
+        "field_distribution",
+        "mode_profile"
+      ],
+      "status": "confirmed",
+      "note": ""
+    },
+    "postprocess_target": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定后处理目标"
+    }
+  },
+  "confirmed_fields": {
+    "task.task_name": "COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1",
+    "task.task_type": "simulation",
+    "physics.physical_system": "waveguide",
+    "physics.physical_mechanism": "waveguide",
+    "physics.structure_type": "waveguide",
+    "geometry_material.geometry_definition": "geometry_type='waveguide' description='COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1' dimensions={'长度': '宽800nm', '宽': '宽800nm'} units='nm'",
+    "geometry_material.material_system": "materials=[MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si3N4', role='', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes='')] description=''",
+    "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
+    "geometry_material.particle_info": "particle_type='waveguide' material='' dimensions={'长度': '宽800nm', '宽': '宽800nm'} notes=''",
+    "simulation.solver_method": "fem",
+    "simulation.software_tool": "comsol",
+    "simulation.polarization": "TM",
+    "output.output_observables": [
+      "field_distribution",
+      "mode_profile"
+    ]
+  },
+  "inferred_fields": {
+    "task.research_goal": {
+      "value": "COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1.55μm波长下的基模有效折射率和模场分布，TE和TM模式都要计算。",
+      "note": "从用户描述推断"
+    },
+    "simulation.incident_direction": {
+      "value": "正入射",
+      "note": "默认入射方向"
+    }
+  },
+  "missing_fields": [
+    "physics.model_dimension",
+    "geometry_material.material_model",
+    "geometry_material.gap_medium",
+    "geometry_material.key_parameters",
+    "simulation.sweep_plan",
+    "simulation.excitation_source",
+    "simulation.source_setting",
+    "simulation.boundary_condition",
+    "simulation.symmetry_setting",
+    "simulation.mesh_setting",
+    "simulation.stability_setting",
+    "simulation.monitor_setting",
+    "output.postprocess_target"
+  ],
+  "assumption_log": [
+    "[task.research_goal] 从用户描述推断",
+    "[simulation.incident_direction] 默认入射方向"
+  ],
+  "validation_status": {
+    "is_executable": false,
+    "errors": [
+      "缺少必填字段: simulation.excitation_source",
+      "缺少必填字段: simulation.source_setting",
+      "缺少必填字段: simulation.boundary_condition",
+      "缺少必填字段: simulation.monitor_setting"
+    ],
+    "warnings": [
+      "建议补充字段: geometry_material.key_parameters"
+    ]
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "task": {
+    "task_id": "demo-asymmetric_cross",
+    "task_name": {
+      "value": "建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上",
+      "status": "confirmed",
+      "note": ""
+    },
+    "task_type": {
+      "value": "simulation",
+      "status": "confirmed",
+      "note": ""
+    },
+    "research_goal": {
+      "value": "建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上。用Lumerical FDTD计算偏振相关的散射谱，x偏振和y偏振都要做，波长范围500-1200nm。",
+      "status": "inferred",
+      "note": "从用户描述推断"
+    }
+  },
+  "physics": {
+    "physical_system": {
+      "value": "nanoparticle_on_film",
+      "status": "confirmed",
+      "note": ""
+    },
+    "physical_mechanism": {
+      "value": "scattering",
+      "status": "confirmed",
+      "note": ""
+    },
+    "model_dimension": {
+      "value": "3d",
+      "status": "inferred",
+      "note": "nanoparticle_on_film 通常需要 3D 仿真"
+    },
+    "structure_type": {
+      "value": "cross_structure",
+      "status": "confirmed",
+      "note": ""
+    }
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {
+        "geometry_type": "cross",
+        "description": "建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上",
+        "dimensions": {
+          "长度": "宽40nm",
+          "宽": "宽40nm",
+          "厚": "厚30nm"
+        },
+        "units": "nm"
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "material_system": {
+      "value": {
+        "materials": [
+          {
+            "name": "Au",
+            "role": "particle",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          },
+          {
+            "name": "Si",
+            "role": "substrate",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          },
+          {
+            "name": "SiO2",
+            "role": "substrate",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          }
+        ],
+        "description": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "material_model": {
+      "value": "Johnson-Christy",
+      "status": "inferred",
+      "note": "默认金属光学常数来源"
+    },
+    "substrate_or_film_info": {
+      "value": {
+        "has_substrate": true,
+        "substrate_material": "SiO2",
+        "substrate_thickness": "",
+        "has_film": false,
+        "film_material": "",
+        "film_thickness": "",
+        "notes": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "particle_info": {
+      "value": {
+        "particle_type": "cross",
+        "material": "Au",
+        "dimensions": {
+          "长度": "宽40nm",
+          "宽": "宽40nm",
+          "厚": "厚30nm"
+        },
+        "notes": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "gap_medium": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定间隙介质"
+    },
+    "key_parameters": {
+      "value": null,
+      "status": "missing",
+      "note": "未提取到关键参数"
+    }
+  },
+  "simulation": {
+    "solver_method": {
+      "value": "fdtd",
+      "status": "confirmed",
+      "note": ""
+    },
+    "software_tool": {
+      "value": "lumerical",
+      "status": "confirmed",
+      "note": ""
+    },
+    "sweep_plan": {
+      "value": {
+        "sweep_type": "wavelength",
+        "variable": "wavelength_nm",
+        "range_start": 500.0,
+        "range_end": 1200.0,
+        "num_points": null,
+        "step": null,
+        "unit": "nm",
+        "description": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "excitation_source": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定激励源"
+    },
+    "source_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定光源设置"
+    },
+    "polarization": {
+      "value": "linear_x",
+      "status": "confirmed",
+      "note": ""
+    },
+    "incident_direction": {
+      "value": "正入射",
+      "status": "inferred",
+      "note": "默认入射方向"
+    },
+    "boundary_condition": {
+      "value": {
+        "x_min": "PML",
+        "x_max": "PML",
+        "y_min": "PML",
+        "y_max": "PML",
+        "z_min": "PML",
+        "z_max": "PML",
+        "description": ""
+      },
+      "status": "confirmed",
+      "note": ""
+    },
+    "symmetry_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定对称性设置"
+    },
+    "mesh_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定网格设置"
+    },
+    "stability_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定稳定性设置"
+    },
+    "monitor_setting": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定监视器设置"
+    }
+  },
+  "output": {
+    "output_observables": {
+      "value": [
+        "scattering_spectrum"
+      ],
+      "status": "confirmed",
+      "note": ""
+    },
+    "postprocess_target": {
+      "value": null,
+      "status": "missing",
+      "note": "未指定后处理目标"
+    }
+  },
+  "confirmed_fields": {
+    "task.task_name": "建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上",
+    "task.task_type": "simulation",
+    "physics.physical_system": "nanoparticle_on_film",
+    "physics.physical_mechanism": "scattering",
+    "physics.structure_type": "cross_structure",
+    "geometry_material.geometry_definition": "geometry_type='cross' description='建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上' dimensions={'长度': '宽40nm', '宽': '宽40nm', '厚': '厚30nm'} units='nm'",
+    "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+    "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
+    "geometry_material.particle_info": "particle_type='cross' material='Au' dimensions={'长度': '宽40nm', '宽': '宽40nm', '厚': '厚30nm'} notes=''",
+    "simulation.solver_method": "fdtd",
+    "simulation.software_tool": "lumerical",
+    "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=500.0 range_end=1200.0 num_points=None step=None unit='nm' description=''",
+    "simulation.polarization": "linear_x",
+    "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
+    "output.output_observables": [
+      "scattering_spectrum"
+    ]
+  },
+  "inferred_fields": {
+    "task.research_goal": {
+      "value": "建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上。用Lumerical FDTD计算偏振相关的散射谱，x偏振和y偏振都要做，波长范围500-1200nm。",
+      "note": "从用户描述推断"
+    },
+    "physics.model_dimension": {
+      "value": "3d",
+      "note": "nanoparticle_on_film 通常需要 3D 仿真"
+    },
+    "geometry_material.material_model": {
+      "value": "Johnson-Christy",
+      "note": "默认金属光学常数来源"
+    },
+    "simulation.incident_direction": {
+      "value": "正入射",
+      "note": "默认入射方向"
+    }
+  },
+  "missing_fields": [
+    "geometry_material.gap_medium",
+    "geometry_material.key_parameters",
+    "simulation.excitation_source",
+    "simulation.source_setting",
+    "simulation.symmetry_setting",
+    "simulation.mesh_setting",
+    "simulation.stability_setting",
+    "simulation.monitor_setting",
+    "output.postprocess_target"
+  ],
+  "assumption_log": [
+    "[task.research_goal] 从用户描述推断",
+    "[physics.model_dimension] nanoparticle_on_film 通常需要 3D 仿真",
+    "[geometry_material.material_model] 默认金属光学常数来源",
+    "[simulation.incident_direction] 默认入射方向"
+  ],
+  "validation_status": {
+    "is_executable": false,
+    "errors": [
+      "缺少必填字段: simulation.excitation_source",
+      "缺少必填字段: simulation.source_setting",
+      "缺少必填字段: simulation.monitor_setting"
+    ],
+    "warnings": [
+      "建议补充字段: geometry_material.key_parameters",
+      "物理系统为 nanoparticle_on_film，建议补充 geometry_material.gap_medium"
+    ]
+  }
+}
