@@ -27,7 +27,7 @@ It is **not** a solver. It does not run any simulation tool — it produces the 
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
 | **Benchmark** | 8 golden cases, 2 modes (exact regression + key-field extraction) — `python benchmarks/run_benchmark.py --mode all` |
 | **Tests** | 76 passing — `pytest -v` |
-| **Scope** | Rule-based parser + validation only; no solver, no LLM |
+| **Scope** | Rule-based parser + validation only; no solver adapter yet — Meep adapter planned for v0.3 |
 
 ## Why this project?
 
@@ -339,29 +339,38 @@ optical-spec-agent/
 │   ├── README.md
 │   ├── golden_cases.json
 │   └── run_benchmark.py
+├── docs/
+│   ├── open_source_stack.md              # Tool-stack rationale and per-tool specs
+│   ├── open_source_integration_focus.md  # Adapter priority tiers and Meep-first rationale
+│   ├── adapter_architecture.md
+│   ├── demo_output.md
+│   ├── tool_mapping.md
+│   └── repo_metadata.md                  # GitHub About + issue drafts
 └── outputs/
     └── .gitkeep
 ```
 
 ## Roadmap
 
-> **Strategy**: build an open-source-native architecture first. All solver adapters target
-> open-source, scriptable, macOS-friendly tools. Commercial software (Zemax, LightTools,
-> COMSOL, CODE V, Lumerical) is **not a core dependency** — if compatibility is needed in
-> the future, it will be a secondary, optional interface.
+> **Strategy**: open-source-native, scriptable-first. All adapters target open-source tools
+> (Meep, MPB, Gmsh, Elmer, Optiland, FreeCAD). Commercial software is not a core dependency.
 
-| Version | Goal | Status |
-|---------|------|--------|
-| **v0.1** | NL → spec JSON + validation (rule-based) | **Done** |
-| v0.2 | Spec hardening: expand golden benchmarks, improve validation coverage | Planned |
-| v0.3 | Meep adapter (spec → Meep Python script) | Planned |
-| v0.4 | MPB adapter (spec → photonic band structure script) | Planned |
-| v0.5 | Gmsh + Elmer adapter (spec → geometry mesh + FEM solver input) | Planned |
-| v0.6 | Optiland / RayOptics adapter (spec → imaging optics definition) | Planned |
-| v0.7 | LLM parser integration | Planned |
-| v0.8 | Multi-agent orchestration: spec → simulate → postprocess → report | Planned |
+| Version | Goal | Adapter Target | Status |
+|---------|------|---------------|--------|
+| **v0.1** | NL → spec JSON + validation (rule-based) | — | **Done** |
+| v0.2 | Spec hardening: expand benchmarks, improve validation | — | Planned |
+| v0.3 | Spec → runnable solver script | **Meep** (FDTD) | Planned |
+| v0.4 | Spec → photonic band structure script | **MPB** (eigenmode) | Planned |
+| v0.5 | Spec → geometry mesh + FEM input | **Gmsh** + **Elmer** (FEM) | Planned |
+| v0.6 | Spec → imaging optics definition | **Optiland** / **RayOptics** | Planned |
+| v0.7 | LLM parser integration | — | Planned |
+| v0.8 | Multi-agent orchestration: spec → simulate → postprocess → report | — | Planned |
 
-See [`docs/open_source_stack.md`](docs/open_source_stack.md) for the full tool-stack rationale.
+**Why Meep first:** Pure Python API, spec fields map 1:1 to Meep objects, and a working adapter proves the full NL → spec → simulation chain. See [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for the prioritization rationale.
+
+**Adapter vs LLM:** Adapters (v0.3–v0.6) ship before LLM integration (v0.7) because real solver feedback must stabilize the spec schema first. The rule-based parser + golden cases become the evaluation baseline for any future LLM parser.
+
+See [`docs/open_source_stack.md`](docs/open_source_stack.md) for per-tool details and [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for priority tiers.
 
 ## License
 

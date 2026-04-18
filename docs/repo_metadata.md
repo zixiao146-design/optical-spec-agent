@@ -24,11 +24,11 @@ pydantic
 scientific-computing
 simulation
 specification
+open-source-optics
 meep
 fdtd
 fem
 python
-natural-language-processing
 ```
 
 ---
@@ -37,13 +37,13 @@ natural-language-processing
 
 ### Issue 1: Key-field benchmark with per-case threshold
 
-**Title:** Add per-case key-field lists and pass thresholds to golden_cases.json
+**Title:** Add per-case key-field lists to all golden_cases.json entries
 
 **Description:**
 Current `key_fields` mode uses a shared `CORE_KEY_FIELDS` list. Each golden case should define its own `expected_key_fields` in `golden_cases.json` so that fitting tasks (golden-05) don't require `physical_system`, and simulation tasks can require more fields.
 
 Steps:
-- Add `expected_key_fields` to all 8 golden cases
+- Add `expected_key_fields` to all 8 golden cases (golden-05 already has one)
 - Document the expected list in `benchmarks/README.md`
 - Verify with `python benchmarks/run_benchmark.py --mode key_fields`
 
@@ -64,30 +64,29 @@ This would make CLI demos more compelling and help users quickly scan parsed spe
 
 ---
 
-### Issue 3: Lumerical/COMSOL examples — add schema-coverage note
+### Issue 3: Add Meep-focused golden case
 
-**Title:** Label commercial-software examples as schema-coverage demos
+**Title:** Add a golden case specifically targeting Meep FDTD output fields
 
 **Description:**
-Examples 03 (Lumerical FDTD) and 04 (COMSOL mode analysis) reference commercial software. Since the project roadmap is open-source-native, add inline comments in these example scripts clarifying they exist for schema coverage, not as adapter targets.
+Most golden cases reference unspecified or commercial software. Add a new golden case (`golden-09`) where the input explicitly specifies Meep FDTD with full parameter detail (TFSF source, PML, mesh resolution, monitor placement), so the parsed spec is `is_executable: true` with all required simulation fields filled.
 
-The README already has a note in the Demo gallery section; this issue tracks adding the same note to the example scripts themselves.
+This would demonstrate that the parser can produce a Meep-ready spec and serve as the first test case for the v0.3 Meep adapter.
 
-**Labels:** `documentation`, `good first issue`
+**Labels:** `enhancement`, `meep-adapter`
 
 ---
 
 ### Issue 4: Expand golden cases to 12
 
-**Title:** Add 4 more golden cases: grating, dipole source, coupled oscillator, bilingual edge case
+**Title:** Add 3 more golden cases: grating, coupled oscillator, bilingual edge case
 
 **Description:**
 Current 8 cases cover nanoparticle_on_film, waveguide, metasurface, and fitting. To improve parser coverage, add:
 
-1. `golden-09`: Grating structure (Chinese) — covers `PhysicalSystem.grating`
-2. `golden-10`: Dipole source near nanoparticle (English) — covers `ExcitationSource.dipole`
-3. `golden-11`: Coupled oscillator model (Chinese) — covers `SolverMethod.coupled_oscillator`
-4. `golden-12`: Mixed Chinese-English input — tests bilingual robustness
+1. `golden-10`: Grating structure (Chinese) — covers `PhysicalSystem.grating`
+2. `golden-11`: Coupled oscillator model (Chinese) — covers `SolverMethod.coupled_oscillator`
+3. `golden-12`: Mixed Chinese-English input — tests bilingual robustness
 
 Each case should include `expected_key_fields` and pass both benchmark modes.
 

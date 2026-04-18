@@ -2,6 +2,8 @@
 
 This document shows three representative inputs and their structured spec output, demonstrating `optical-spec-agent`'s parsing, inference, and validation capabilities.
 
+> **Note:** Demos 2 and 3 reference commercial software (Lumerical, COMSOL) to demonstrate schema coverage across solver types. These are not adapter targets — see the [Roadmap](../README.md#roadmap) for planned open-source adapters.
+
 Legend: **[C]** = confirmed, **[~]** = inferred, **---** = missing
 
 ---
