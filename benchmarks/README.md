@@ -2,23 +2,22 @@
 
 Golden-case regression tests for the rule-based parser + validator pipeline.
 
-## What this benchmarks
+## Benchmark modes
 
-**Key field matching** — each golden case pairs an input text with its expected structured output. The benchmark runner parses every input through the live parser and compares the output against the stored golden JSON, field by field.
+| Mode | What it checks | When to use |
+|------|---------------|-------------|
+| `exact` (default) | Full output JSON must match golden snapshot byte-for-byte | CI regression — catches any parser change |
+| `key_fields` | Only core fields must be present with `confirmed`/`inferred` status | Assessing parser extraction quality — resilient to non-breaking output changes |
+| `all` | Runs both modes | Full check |
 
-Specifically, it verifies:
-- All confirmed fields are correctly extracted (physical system, solver, materials, geometry, etc.)
-- Inference rules fire as expected (e.g., `nanoparticle_on_film → 3D`, `FWHM/T2 → lorentzian_fit`)
-- Missing fields are accurately reported
-- Validation errors and warnings match expectations
+**Key fields** checked in `key_fields` mode: `task.task_type`, `physics.physical_system`, `simulation.solver_method`, `output.output_observables`. Cases can override this list by adding an `expected_key_fields` array to their golden entry.
 
 ## What this does NOT benchmark
 
-This benchmark suite intentionally does **not** evaluate:
-- **Semantic understanding quality** — it checks exact parser output against a snapshot, not whether the parser chose the "best" interpretation
-- **Solver correctness** — no solver is invoked; the spec JSON is never used to run a simulation
-- **LLM parsing** — only the rule-based parser is tested (LLM parser is a future placeholder)
-- **Edge case robustness** — the 8 cases cover common scenarios, not adversarial or ambiguous inputs
+- **Semantic understanding quality** — exact mode checks byte equality, not "best" interpretation
+- **Solver correctness** — no solver is invoked
+- **LLM parsing** — only the rule-based parser is tested
+- **Edge case robustness** — 8 cases cover common scenarios only
 
 ## File structure
 
@@ -26,7 +25,7 @@ This benchmark suite intentionally does **not** evaluate:
 benchmarks/
 ├── README.md              # This file
 ├── golden_cases.json      # 8 golden test cases with input + expected output
-└── run_benchmark.py       # Runner: parse all cases, compare vs golden
+└── run_benchmark.py       # Runner with exact / key_fields / all modes
 ```
 
 ## Case format
@@ -37,11 +36,12 @@ Each entry in `golden_cases.json`:
 {
   "task_id": "golden-01",
   "input": "<natural language description>",
-  "output": { ... }       // Expected OpticalSpec flat dict
+  "output": { ... },
+  "expected_key_fields": ["task.task_type", "physics.physical_system", "..."]
 }
 ```
 
-The `output` contains the full spec structure: `task`, `physics`, `geometry_material`, `simulation`, `output`, plus `confirmed_fields`, `inferred_fields`, `missing_fields`, `assumption_log`, and `validation_status`.
+The `expected_key_fields` field is optional — if absent, a default set of 4 core fields is used.
 
 ## Current cases
 
@@ -59,34 +59,28 @@ The `output` contains the full spec structure: `task`, `physics`, `geometry_mate
 ## How to run
 
 ```bash
-# Run all golden cases and check for regressions
+# Exact regression (default)
 python benchmarks/run_benchmark.py
 
-# Update golden cases after intentional parser changes
+# Key-field extraction check
+python benchmarks/run_benchmark.py --mode key_fields
+
+# Both modes
+python benchmarks/run_benchmark.py --mode all
+
+# Update golden snapshots after intentional parser changes
 python benchmarks/run_benchmark.py --update
 ```
 
-**Output example:**
-```
-PASS  golden-01
-PASS  golden-02
-...
-PASS  golden-08
-
-8 cases: ALL PASSED
-```
-
-If a case fails, the runner prints a line-level diff showing where the output diverges from the golden snapshot.
-
 ## How to add a new case
 
-1. Choose a descriptive `task_id` (e.g., `golden-09`)
-2. Write the input text and run it through the parser:
+1. Choose a `task_id` (e.g., `golden-09`)
+2. Run the parser and capture output:
    ```python
    from optical_spec_agent.services.spec_service import SpecService
    svc = SpecService()
    spec = svc.process("your input text", task_id="golden-09")
-   print(spec.to_flat_dict())
    ```
-3. Add the entry to `golden_cases.json` with the produced output
-4. Run `python benchmarks/run_benchmark.py` to verify it passes
+3. Add the entry to `golden_cases.json`
+4. Optionally add `expected_key_fields` to customize which fields to check in key_fields mode
+5. Run `python benchmarks/run_benchmark.py --mode all` to verify

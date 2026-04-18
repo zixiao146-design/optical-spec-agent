@@ -1,0 +1,107 @@
+# Repository Metadata
+
+Copy-paste-ready content for GitHub settings and first issues.
+
+---
+
+## GitHub About (sidebar)
+
+**Description:**
+
+```
+NL → structured spec JSON for optical simulation tasks. Rule-based parser + Pydantic validation with provenance tracking.
+```
+
+**Website:** *(leave empty for now — point to docs site when available)*
+
+**Topics:**
+
+```
+optics
+photonics
+parser
+pydantic
+scientific-computing
+simulation
+specification
+meep
+fdtd
+fem
+python
+natural-language-processing
+```
+
+---
+
+## First Issues
+
+### Issue 1: Key-field benchmark with per-case threshold
+
+**Title:** Add per-case key-field lists and pass thresholds to golden_cases.json
+
+**Description:**
+Current `key_fields` mode uses a shared `CORE_KEY_FIELDS` list. Each golden case should define its own `expected_key_fields` in `golden_cases.json` so that fitting tasks (golden-05) don't require `physical_system`, and simulation tasks can require more fields.
+
+Steps:
+- Add `expected_key_fields` to all 8 golden cases
+- Document the expected list in `benchmarks/README.md`
+- Verify with `python benchmarks/run_benchmark.py --mode key_fields`
+
+**Labels:** `enhancement`, `good first issue`
+
+---
+
+### Issue 2: CLI `--format summary` human-readable output
+
+**Title:** Add `--format summary` to CLI parse output
+
+**Description:**
+Currently `optical-spec parse` outputs raw JSON. Add a `--format summary` option that prints a concise human-readable table (field, value, status) similar to the demo tables in README.
+
+This would make CLI demos more compelling and help users quickly scan parsed specs.
+
+**Labels:** `enhancement`
+
+---
+
+### Issue 3: Lumerical/COMSOL examples — add schema-coverage note
+
+**Title:** Label commercial-software examples as schema-coverage demos
+
+**Description:**
+Examples 03 (Lumerical FDTD) and 04 (COMSOL mode analysis) reference commercial software. Since the project roadmap is open-source-native, add inline comments in these example scripts clarifying they exist for schema coverage, not as adapter targets.
+
+The README already has a note in the Demo gallery section; this issue tracks adding the same note to the example scripts themselves.
+
+**Labels:** `documentation`, `good first issue`
+
+---
+
+### Issue 4: Expand golden cases to 12
+
+**Title:** Add 4 more golden cases: grating, dipole source, coupled oscillator, bilingual edge case
+
+**Description:**
+Current 8 cases cover nanoparticle_on_film, waveguide, metasurface, and fitting. To improve parser coverage, add:
+
+1. `golden-09`: Grating structure (Chinese) — covers `PhysicalSystem.grating`
+2. `golden-10`: Dipole source near nanoparticle (English) — covers `ExcitationSource.dipole`
+3. `golden-11`: Coupled oscillator model (Chinese) — covers `SolverMethod.coupled_oscillator`
+4. `golden-12`: Mixed Chinese-English input — tests bilingual robustness
+
+Each case should include `expected_key_fields` and pass both benchmark modes.
+
+**Labels:** `enhancement`
+
+---
+
+### Issue 5: CI integration — run benchmark in GitHub Actions
+
+**Title:** Run golden-case benchmark in CI alongside pytest
+
+**Description:**
+The test workflow (`.github/workflows/test.yml`) runs `pytest` but not the benchmark. Add a step to run `python benchmarks/run_benchmark.py --mode all` in CI so that parser regressions are caught automatically.
+
+This provides a second signal: pytest checks code-level correctness, benchmark checks parser output stability.
+
+**Labels:** `ci`, `good first issue`

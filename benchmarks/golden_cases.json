@@ -1178,6 +1178,7 @@
   },
   {
     "task_id": "golden-05",
+    "expected_key_fields": ["task.task_type", "output.output_observables", "output.postprocess_target"],
     "input": "对实验测得的散射谱进行Lorentzian拟合，数据范围500-900nm，主峰位于680nm附近，提取FWHM和T2退相干时间。用Python scipy做曲线拟合。",
     "output": {
       "task": {
