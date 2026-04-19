@@ -2,9 +2,9 @@
 
 [![Tests](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml/badge.svg)](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml)
 
-> Convert optical simulation requests into validated, solver-ready spec JSON.
+> Convert optical simulation requests into validated, solver-ready spec JSON — and generate Meep scripts.
 
-**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks — ready for downstream solver agents.
+**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks. A Meep adapter preview can convert validated specs into Meep Python scripts for nanoparticle-on-film simulations.
 
 ```
 "用Meep FDTD仿真金纳米球-金膜gap plasmon，扫gap从5到25nm，提取共振波长和FWHM"
@@ -25,9 +25,9 @@ It is **not** a solver. It does not run any simulation tool — it produces the 
 | | |
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
+| **Adapter** | Meep adapter preview: spec JSON → Python script (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
 | **Benchmark** | 16 golden cases, 2 modes (exact regression + key-field extraction) — `python benchmarks/run_benchmark.py --mode all` |
-| **Tests** | 85 passing — `pytest -v` |
-| **Scope** | Rule-based parser + validation only; no solver adapter yet — Meep adapter planned for v0.3 |
+| **Tests** | 99 passing — `pytest -v` |
 
 ## Why this project?
 
@@ -38,12 +38,14 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.1)
+## Current scope (v0.2)
 
-The v0.1 closed loop:
+The v0.2 closed loop:
 
 ```
 Natural language  →  Rule-based parser  →  Structured spec JSON  →  Validation
+                                                               ↓ (if Meep + nanoparticle_on_film)
+                                                    Meep Python script (.py)
 ```
 
 **What works:**
@@ -53,11 +55,13 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Per-field provenance tracking: confirmed / inferred / missing
 - Pydantic v2 validation with task-type-aware rules
 - CLI, FastAPI, and Python SDK interfaces
+- Meep adapter preview: validated spec → Meep Python script for nanoparticle_on_film + plane_wave + scattering_spectrum
+- Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
 - Real LLM integration (only a placeholder parser exists)
-- Solver execution — no solver adapters exist yet (see Roadmap)
-- Parameter file generation (`.ctl`, `.lsf`, `.mph`)
+- Solver execution or result parsing — Meep adapter generates scripts but does not run them
+- Adapters for other solvers (MPB, Gmsh, Elmer, Optiland) — not yet implemented
 - Visualization or plotting pipeline
 
 ## Install
@@ -93,7 +97,7 @@ optical-spec schema -o schema.json
 # Or use python -m
 python -m optical_spec_agent parse "..."
 
-# Generate Meep script from a spec (v0.3 preview)
+# Generate Meep script from a spec
 optical-spec parse "用Meep FDTD仿真金纳米球-金膜gap plasmon..." -o spec.json
 optical-spec meep-generate spec.json -o sim.py
 ```
@@ -257,7 +261,7 @@ print(OpticalSpec.export_json_schema())
 ## Testing
 
 ```bash
-pytest -v                      # 85 tests
+pytest -v                      # 99 tests
 pytest --cov=optical_spec_agent # with coverage
 ```
 
@@ -265,6 +269,7 @@ Test coverage includes:
 - Model construction and serialization
 - Parser: 6 Chinese inputs, 2 English inputs, inference rules
 - Validator: required fields, consistency, physical system rules
+- Meep adapter: script generation, rejection, missing field handling
 - API endpoints: parse, validate, schema
 - Service integration
 
@@ -320,8 +325,14 @@ optical-spec-agent/
 │   │   ├── routes.py                # /health, /parse, /validate, /schema
 │   │   └── __init__.py
 │   ├── cli/
-│   │   ├── main.py                  # parse, validate, schema, example
+│   │   ├── main.py                  # parse, validate, schema, example, meep-generate
 │   │   └── __init__.py
+│   ├── adapters/
+│   │   ├── base.py                  # BaseAdapter ABC + AdapterResult
+│   │   └── meep/                    # Meep adapter (nanoparticle_on_film → script)
+│   │       ├── models.py            # MeepInputModel
+│   │       ├── translator.py        # OpticalSpec → MeepInputModel
+│   │       └── template.py          # MeepInputModel → Python script
 │   └── utils/
 │       ├── format.py                # JSON + human-readable summary
 │       └── __init__.py
@@ -330,6 +341,7 @@ optical-spec-agent/
 │   ├── test_models.py
 │   ├── test_parser.py               # 38 parser tests
 │   ├── test_validator.py
+│   ├── test_meep_adapter.py        # Meep adapter tests
 │   ├── test_service.py
 │   └── test_api.py
 ├── examples/
@@ -338,11 +350,13 @@ optical-spec-agent/
 │   ├── example_03_lumerical_fdtd_scattering.py
 │   ├── example_04_comsol_mode_analysis.py
 │   ├── example_05_lorentzian_fitting.py
+│   ├── example_06_meep_nanoparticle.py
 │   └── outputs/
 │       ├── README.md
 │       ├── demo_gap_plasmon_sweep.json
 │       ├── demo_asymmetric_cross.json
-│       └── demo_comsol_waveguide.json
+│       ├── demo_comsol_waveguide.json
+│       └── meep_nanoparticle_on_film.py
 ├── benchmarks/
 │   ├── README.md
 │   ├── golden_cases.json
@@ -350,6 +364,8 @@ optical-spec-agent/
 ├── docs/
 │   ├── open_source_stack.md              # Tool-stack rationale and per-tool specs
 │   ├── open_source_integration_focus.md  # Adapter priority tiers and Meep-first rationale
+│   ├── meep_adapter_v0.md               # Meep adapter scope and limitations
+│   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
 │   ├── demo_output.md
 │   ├── tool_mapping.md
@@ -366,8 +382,8 @@ optical-spec-agent/
 | Version | Goal | Adapter Target | Status |
 |---------|------|---------------|--------|
 | **v0.1** | NL → spec JSON + validation (rule-based) | — | **Done** |
-| v0.2 | Spec hardening: expand benchmarks, improve validation | — | Planned |
-| v0.3 | Spec → runnable solver script | **Meep** (FDTD) | Planned |
+| **v0.2** | Spec hardening + Meep adapter preview | **Meep** (script gen only) | **Current** |
+| v0.3 | Meep adapter: execution + result parsing | **Meep** (FDTD) | Planned |
 | v0.4 | Spec → photonic band structure script | **MPB** (eigenmode) | Planned |
 | v0.5 | Spec → geometry mesh + FEM input | **Gmsh** + **Elmer** (FEM) | Planned |
 | v0.6 | Spec → imaging optics definition | **Optiland** / **RayOptics** | Planned |

@@ -1,5 +1,9 @@
 """Tests for the Meep adapter (nanoparticle_on_film script generation)."""
 
+import py_compile
+import tempfile
+from pathlib import Path
+
 from optical_spec_agent.models.base import (
     BoundaryConditionSetting,
     GeometryDefinition,
@@ -98,6 +102,48 @@ class TestMeepAdapterSuccess:
         assert "find_peaks" in result.content
         assert "FWHM" in result.content
         assert "Resonance wavelength" in result.content
+
+    def test_generated_script_passes_py_compile(self):
+        """Generated script must be valid Python syntax."""
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    def test_generated_script_has_no_syntax_errors(self):
+        """Parse the script as AST to confirm no syntax errors."""
+        import ast
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec)
+        tree = ast.parse(result.content)
+        top_imports = [
+            n.names[0].name for n in ast.walk(tree) if isinstance(n, ast.Import)
+        ]
+        assert "meep" in top_imports
+        assert "numpy" in top_imports
+
+    def test_golden_output_deterministic(self):
+        """Same spec input must produce identical output across calls."""
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result1 = adapter.generate(spec)
+        result2 = adapter.generate(spec)
+        assert result1.content == result2.content
+
+    def test_cli_golden_output_matches_stored(self):
+        """Generated output for the standard spec must match stored golden file."""
+        golden_path = Path(__file__).parent.parent / "examples" / "outputs" / "meep_nanoparticle_on_film.py"
+        if not golden_path.exists():
+            return  # skip if golden file not present
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec)
+        golden_content = golden_path.read_text(encoding="utf-8")
+        assert result.content == golden_content
 
 
 class TestMeepAdapterRejection:
