@@ -154,3 +154,150 @@ def _run_single_example(key: str, text: str, output_dir: Path) -> None:
 
 if __name__ == "__main__":
     app()
+
+
+# ---- meep-generate ----
+
+@app.command("meep-generate")
+def meep_generate(
+    spec_file: Path = typer.Argument(..., help="Path to spec JSON file"),
+    output: Path = typer.Option(None, "-o", "--output", help="Output .py script path"),
+):
+    """Generate a Meep Python script from a validated spec JSON."""
+    if not spec_file.exists():
+        console.print(f"[red]File not found: {spec_file}[/red]")
+        raise typer.Exit(1)
+
+    from optical_spec_agent.adapters.meep import MeepAdapter, AdapterError
+
+    data = json.loads(spec_file.read_text(encoding="utf-8"))
+
+    # Handle flat-dict format (from to_flat_dict) and raw OpticalSpec format
+    if "task" in data and isinstance(data["task"], dict):
+        # Check if it's flat-dict format (section fields contain {value, status, note})
+        task_fields = data["task"]
+        has_status = any(
+            isinstance(v, dict) and "status" in v
+            for v in task_fields.values()
+        )
+        if has_status:
+            spec = _reconstruct_spec(data)
+        else:
+            spec = OpticalSpec.model_validate(data)
+    else:
+        console.print("[red]Invalid spec format: missing 'task' section[/red]")
+        raise typer.Exit(1)
+
+    adapter = MeepAdapter()
+
+    if not adapter.can_handle(spec):
+        console.print("[red]This spec is not compatible with the Meep adapter.[/red]")
+        console.print("[dim]Required: physical_system=nanoparticle_on_film, "
+                       "solver_method=fdtd, software_tool=meep[/dim]")
+        raise typer.Exit(1)
+
+    try:
+        result = adapter.generate(spec)
+    except AdapterError as e:
+        console.print(f"[red]Adapter error: {e}[/red]")
+        raise typer.Exit(1)
+
+    if output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(result.content, encoding="utf-8")
+        console.print(f"[green]Meep script written to {output}[/green]")
+    else:
+        console.print(result.content)
+
+
+def _reconstruct_spec(flat: dict) -> OpticalSpec:
+    """Reconstruct an OpticalSpec from a flat-dict (to_flat_dict output).
+
+    The flat-dict format has sections with {value, status, note} StatusField entries.
+    Structured sub-models (SourceSetting, ParticleInfo, etc.) are serialized as dicts
+    and need to be deserialized back to their Pydantic types.
+    """
+    from optical_spec_agent.models.base import (
+        StatusField,
+        BoundaryConditionSetting,
+        GeometryDefinition,
+        MaterialEntry,
+        MaterialSystem,
+        MeshSetting,
+        MonitorSetting,
+        ParticleInfo,
+        PostprocessTargetSpec,
+        SourceSetting,
+        StabilitySetting,
+        SubstrateOrFilmInfo,
+        SweepPlan,
+        SymmetrySetting,
+        confirmed,
+        inferred,
+        missing,
+    )
+
+    # Map field dotted paths to their Pydantic model classes
+    _STRUCTURED_FIELDS = {
+        "geometry_material.geometry_definition": GeometryDefinition,
+        "geometry_material.material_system": MaterialSystem,
+        "geometry_material.substrate_or_film_info": SubstrateOrFilmInfo,
+        "geometry_material.particle_info": ParticleInfo,
+        "simulation.sweep_plan": SweepPlan,
+        "simulation.source_setting": SourceSetting,
+        "simulation.boundary_condition": BoundaryConditionSetting,
+        "simulation.symmetry_setting": SymmetrySetting,
+        "simulation.mesh_setting": MeshSetting,
+        "simulation.stability_setting": StabilitySetting,
+        "simulation.monitor_setting": MonitorSetting,
+    }
+
+    spec = OpticalSpec()
+
+    section_fields = {
+        "task": ["task_name", "task_type", "research_goal"],
+        "physics": ["physical_system", "physical_mechanism", "model_dimension", "structure_type"],
+        "geometry_material": [
+            "geometry_definition", "material_system", "material_model",
+            "substrate_or_film_info", "particle_info", "gap_medium", "key_parameters",
+        ],
+        "simulation": [
+            "solver_method", "software_tool", "sweep_plan", "excitation_source",
+            "source_setting", "polarization", "incident_direction",
+            "boundary_condition", "symmetry_setting", "mesh_setting",
+            "stability_setting", "monitor_setting",
+        ],
+        "output": ["output_observables", "postprocess_target"],
+    }
+
+    for section_name, field_names in section_fields.items():
+        section_data = flat.get(section_name, {})
+        section = getattr(spec, section_name)
+        for fname in field_names:
+            entry = section_data.get(fname)
+            if entry is None:
+                continue
+
+            if isinstance(entry, dict) and "status" in entry:
+                raw_val = entry["value"]
+
+                # Deserialize structured sub-models from dicts
+                dotted = f"{section_name}.{fname}"
+                model_cls = _STRUCTURED_FIELDS.get(dotted)
+                if model_cls and isinstance(raw_val, dict):
+                    try:
+                        raw_val = model_cls.model_validate(raw_val)
+                    except Exception:
+                        pass  # keep as dict if validation fails
+
+                sf = StatusField(
+                    value=raw_val,
+                    status=entry["status"],
+                    note=entry.get("note", ""),
+                )
+            else:
+                # Plain field (e.g. task_id)
+                sf = entry
+            setattr(section, fname, sf)
+
+    return spec

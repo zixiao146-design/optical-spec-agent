@@ -92,6 +92,10 @@ optical-spec schema -o schema.json
 
 # Or use python -m
 python -m optical_spec_agent parse "..."
+
+# Generate Meep script from a spec (v0.3 preview)
+optical-spec parse "用Meep FDTD仿真金纳米球-金膜gap plasmon..." -o spec.json
+optical-spec meep-generate spec.json -o sim.py
 ```
 
 ### Python SDK
