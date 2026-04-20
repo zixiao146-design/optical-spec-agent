@@ -1,8 +1,14 @@
 """Tests for the Meep adapter (nanoparticle_on_film script generation)."""
 
+import ast
 import py_compile
+import shutil
+import subprocess
+import sys
 import tempfile
 from pathlib import Path
+
+import pytest
 
 from optical_spec_agent.models.base import (
     BoundaryConditionSetting,
@@ -18,6 +24,7 @@ from optical_spec_agent.models.base import (
 )
 from optical_spec_agent.models.spec import OpticalSpec
 from optical_spec_agent.adapters.meep import MeepAdapter, AdapterError
+from optical_spec_agent.adapters.meep.template import render_script
 
 
 def _make_valid_spec() -> OpticalSpec:
@@ -215,3 +222,88 @@ class TestMeepAdapterRejection:
             assert False, "Should have raised AdapterError"
         except AdapterError as e:
             assert "shape" in str(e).lower()
+
+
+# ---------------------------------------------------------------------------
+# Smoke run helpers
+# ---------------------------------------------------------------------------
+
+_meep_cmd: list[str] | None = None
+
+
+def _find_meep_python() -> list[str] | None:
+    """Return a command prefix that can run Python with Meep importable, or None."""
+    global _meep_cmd
+    if _meep_cmd is not None:
+        return _meep_cmd or None
+
+    # 1. Try current interpreter
+    try:
+        import meep  # noqa: F401
+        _meep_cmd = [sys.executable]
+        return _meep_cmd
+    except ImportError:
+        pass
+
+    # 2. Try micromamba env named "meep"
+    if shutil.which("micromamba"):
+        try:
+            r = subprocess.run(
+                ["micromamba", "run", "-n", "meep", "python", "-c", "import meep"],
+                capture_output=True, timeout=30,
+            )
+            if r.returncode == 0:
+                _meep_cmd = ["micromamba", "run", "-n", "meep", "python"]
+                return _meep_cmd
+        except (subprocess.TimeoutExpired, FileNotFoundError):
+            pass
+
+    _meep_cmd = []
+    return None
+
+
+_meep_available = _find_meep_python() is not None
+
+
+class TestMeepSmokeRun:
+    """Generate a minimal Meep script and actually run it.
+
+    These tests are auto-skipped when Meep is not installed locally.
+    """
+
+    @staticmethod
+    def _make_smoke_script() -> str:
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        model = adapter._translate(spec)
+        smoke_model = model.model_copy(update={"smoke": True})
+        return render_script(smoke_model)
+
+    def test_smoke_script_is_valid_python(self):
+        """Smoke script must be syntactically valid Python even without Meep."""
+        script = self._make_smoke_script()
+        ast.parse(script)
+        # Also verify via py_compile (catches some edge cases)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(script)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    @pytest.mark.skipif(not _meep_available, reason="Meep not available locally")
+    def test_smoke_script_runs(self, tmp_path):
+        """Generate and execute smoke script through Meep."""
+        script = self._make_smoke_script()
+
+        script_path = tmp_path / "smoke_test.py"
+        script_path.write_text(script)
+
+        cmd = _find_meep_python() + [str(script_path)]
+        result = subprocess.run(
+            cmd, capture_output=True, timeout=120, cwd=str(tmp_path),
+        )
+        assert result.returncode == 0, (
+            f"Smoke script failed with exit code {result.returncode}.\n"
+            f"stdout: {result.stdout.decode(errors='replace')}\n"
+            f"stderr: {result.stderr.decode(errors='replace')}"
+        )
+        assert b"SMOKE TEST PASSED" in result.stdout

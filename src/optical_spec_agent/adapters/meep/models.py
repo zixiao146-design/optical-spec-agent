@@ -46,3 +46,11 @@ class MeepInputModel(BaseModel):
         default_factory=list,
         description="e.g. ['resonance_wavelength', 'fwhm_extraction']",
     )
+
+    # --- Smoke test mode ---
+    smoke: bool = Field(
+        default=False,
+        description="If True, generate a minimal script for smoke validation: "
+                    "ultra-low resolution, few steps, no plotting, no sweep. "
+                    "NOT for production use.",
+    )
