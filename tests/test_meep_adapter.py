@@ -225,6 +225,163 @@ class TestMeepAdapterRejection:
 
 
 # ---------------------------------------------------------------------------
+# Error categories
+# ---------------------------------------------------------------------------
+
+class TestAdapterErrorCategories:
+    """Verify that AdapterError exposes structured category and field."""
+
+    def _raise(self, *args, **kwargs):
+        raise AdapterError(*args, **kwargs)
+
+    def test_error_has_category_attribute(self):
+        try:
+            self._raise("unsupported_path", "test_field", "detail")
+        except AdapterError as e:
+            assert e.category == "unsupported_path"
+
+    def test_error_has_field_attribute(self):
+        try:
+            self._raise("missing_required_field", "geometry_material.particle_info")
+        except AdapterError as e:
+            assert e.field == "geometry_material.particle_info"
+
+    def test_error_str_format(self):
+        try:
+            self._raise("invalid_adapter_input", "gap_medium", "unknown 'Foo'")
+        except AdapterError as e:
+            msg = str(e)
+            assert msg.startswith("[invalid_adapter_input]")
+            assert "gap_medium" in msg
+            assert "unknown 'Foo'" in msg
+
+    def test_unsupported_path_wrong_system(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.physics.physical_system = confirmed("waveguide")
+        try:
+            adapter.generate(spec)
+            assert False
+        except AdapterError as e:
+            assert e.category == "unsupported_path"
+
+    def test_missing_required_field_particle(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.particle_info = missing("none")
+        try:
+            adapter.generate(spec)
+            assert False
+        except AdapterError as e:
+            assert e.category == "missing_required_field"
+            assert "particle_info" in e.field
+
+    def test_missing_required_field_film_material(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.substrate_or_film_info = confirmed(
+            SubstrateOrFilmInfo(has_film=True, film_material="", film_thickness="100 nm")
+        )
+        try:
+            adapter.generate(spec)
+            assert False
+        except AdapterError as e:
+            assert e.category == "missing_required_field"
+            assert "film_material" in e.field
+
+    def test_invalid_adapter_input_bad_shape(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.particle_info = confirmed(
+            ParticleInfo(particle_type="star", material="Au", dimensions={"直径": "80 nm"})
+        )
+        try:
+            adapter.generate(spec)
+            assert False
+        except AdapterError as e:
+            assert e.category == "unsupported_path"
+            assert "shape" in e.field
+
+    def test_invalid_adapter_input_unknown_gap(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.gap_medium = confirmed("Unobtanium")
+        try:
+            adapter.generate(spec)
+            assert False
+        except AdapterError as e:
+            assert e.category == "invalid_adapter_input"
+            assert "gap_medium" in e.field
+
+    def test_invalid_adapter_input_unparseable_dimensions(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.particle_info = confirmed(
+            ParticleInfo(particle_type="sphere", material="Au", dimensions={"note": "big"})
+        )
+        try:
+            adapter.generate(spec)
+            assert False
+        except AdapterError as e:
+            assert e.category == "invalid_adapter_input"
+            assert "dimensions" in e.field
+
+
+# ---------------------------------------------------------------------------
+# Default value tracking
+# ---------------------------------------------------------------------------
+
+class TestAdapterDefaults:
+    """Verify that defaults are tracked and annotated in generated scripts."""
+
+    def test_full_spec_no_defaults(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        model = adapter._translate(spec)
+        assert model.defaults_applied == []
+
+    def test_missing_gap_medium_tracked(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.gap_medium = missing("none")
+        model = adapter._translate(spec)
+        assert any("gap_medium" in d for d in model.defaults_applied)
+
+    def test_missing_wavelength_tracked(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.simulation.source_setting = confirmed(SourceSetting())
+        spec.simulation.sweep_plan = missing("none")
+        model = adapter._translate(spec)
+        assert any("wavelength_range" in d for d in model.defaults_applied)
+
+    def test_missing_film_thickness_tracked(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.substrate_or_film_info = confirmed(
+            SubstrateOrFilmInfo(has_film=True, film_material="Au", film_thickness="")
+        )
+        model = adapter._translate(spec)
+        assert any("film_thickness" in d for d in model.defaults_applied)
+
+    def test_defaults_annotated_in_script_header(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.gap_medium = missing("none")
+        spec.simulation.source_setting = confirmed(SourceSetting())
+        spec.simulation.sweep_plan = missing("none")
+        result = adapter.generate(spec)
+        assert "Adapter-applied defaults" in result.content
+        assert "gap_medium" in result.content
+
+    def test_no_defaults_annotation_when_all_provided(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec)
+        assert "Adapter-applied defaults" not in result.content
+
+
+# ---------------------------------------------------------------------------
 # Smoke run helpers
 # ---------------------------------------------------------------------------
 

@@ -17,8 +17,36 @@ from .template import render_script
 
 
 class AdapterError(Exception):
-    """Raised when the adapter cannot handle a spec."""
+    """Standardized adapter error.
 
+    Categories:
+    - unsupported_path: spec targets a system/solver/software not supported
+    - missing_required_field: a required spec field is absent or empty
+    - invalid_adapter_input: field value cannot be processed by this adapter
+    """
+
+    def __init__(self, category: str, field: str, detail: str = ""):
+        self.category = category
+        self.field = field
+        self.detail = detail
+        parts = [f"[{category}]", field]
+        if detail:
+            parts.append(detail)
+        super().__init__(" ".join(parts))
+
+
+# --- Centralized adapter defaults ---
+_ADAPTER_DEFAULTS = {
+    "gap_medium": "SiO2",
+    "gap_medium_n": 1.45,
+    "gap_thickness_nm": 5.0,
+    "film_thickness_nm": 100.0,
+    "wavelength_range_nm": (400.0, 900.0),
+    "excitation_source": "plane_wave",
+    "resolution": 50,
+    "pml_thickness_um": 1.0,
+    "freq_points": 200,
+}
 
 # Refractive index lookup for common gap media
 _GAP_N = {
@@ -38,8 +66,8 @@ _GAP_N = {
     "TiO2": 2.4,
 }
 
-# Default film thickness when not specified
-_DEFAULT_FILM_THICKNESS_NM = 100.0
+# Default film thickness when not specified — alias for readability
+_DEFAULT_FILM_THICKNESS_NM = _ADAPTER_DEFAULTS["film_thickness_nm"]
 
 # Supported shapes → Meep geometry type
 _SHAPE_MAP = {
@@ -122,8 +150,8 @@ class MeepAdapter(BaseAdapter):
     def generate(self, spec: OpticalSpec) -> AdapterResult:
         if not self.can_handle(spec):
             raise AdapterError(
-                "Meep adapter only supports: physical_system=nanoparticle_on_film, "
-                "solver_method=fdtd, software_tool=meep"
+                "unsupported_path", "physical_system/solver_method/software_tool",
+                "Meep adapter requires nanoparticle_on_film + fdtd + meep",
             )
 
         model = self._translate(spec)
@@ -135,10 +163,12 @@ class MeepAdapter(BaseAdapter):
         )
 
     def _translate(self, spec: OpticalSpec) -> MeepInputModel:
+        defaults_applied: list[str] = []
+
         # --- Particle info ---
         particle_raw = _get_sf_value(spec, "geometry_material.particle_info")
         if not particle_raw:
-            raise AdapterError("Missing required field: geometry_material.particle_info")
+            raise AdapterError("missing_required_field", "geometry_material.particle_info")
 
         p_type = getattr(particle_raw, "particle_type", "") or ""
         p_mat = getattr(particle_raw, "material", "") or ""
@@ -146,7 +176,10 @@ class MeepAdapter(BaseAdapter):
 
         shape = _SHAPE_MAP.get(p_type)
         if not shape:
-            raise AdapterError(f"Unsupported particle shape: '{p_type}'. Supported: {list(_SHAPE_MAP)}")
+            raise AdapterError(
+                "unsupported_path", "particle_shape",
+                f"unsupported '{p_type}', supported: {list(_SHAPE_MAP)}",
+            )
 
         # Extract radius from dimensions
         diameter_nm = _extract_dimension_nm(p_dims, ["直径", "diameter", "边长"])
@@ -157,19 +190,19 @@ class MeepAdapter(BaseAdapter):
                 diameter_nm = first_dim
             else:
                 raise AdapterError(
-                    "Cannot determine particle size from particle_info.dimensions. "
-                    "Add a '直径' or 'diameter' key, e.g. {'直径': '80 nm'}"
+                    "invalid_adapter_input", "particle_info.dimensions",
+                    "cannot determine particle size; add a '直径' or 'diameter' key",
                 )
         radius_um = (diameter_nm / 2.0) / 1000.0
 
         # --- Film info ---
         film_raw = _get_sf_value(spec, "geometry_material.substrate_or_film_info")
         if not film_raw:
-            raise AdapterError("Missing required field: geometry_material.substrate_or_film_info")
+            raise AdapterError("missing_required_field", "geometry_material.substrate_or_film_info")
 
         film_mat = getattr(film_raw, "film_material", "") or ""
         if not film_mat:
-            raise AdapterError("substrate_or_film_info.film_material is empty")
+            raise AdapterError("missing_required_field", "substrate_or_film_info.film_material")
 
         film_thick_str = getattr(film_raw, "film_thickness", "") or ""
         film_thick_nm = _DEFAULT_FILM_THICKNESS_NM
@@ -177,6 +210,8 @@ class MeepAdapter(BaseAdapter):
             m = re.match(r"([\d.]+)", str(film_thick_str))
             if m:
                 film_thick_nm = float(m.group(1))
+        else:
+            defaults_applied.append(f"film_thickness: {film_thick_nm:.0f} nm")
         film_thick_um = film_thick_nm / 1000.0
 
         # --- Gap medium ---
@@ -185,10 +220,11 @@ class MeepAdapter(BaseAdapter):
         if gap_n is None:
             if gap_name:
                 raise AdapterError(
-                    f"Unknown gap medium '{gap_name}'. "
-                    f"Known: {sorted(_GAP_N.keys())}"
+                    "invalid_adapter_input", "geometry_material.gap_medium",
+                    f"unknown '{gap_name}', known: {sorted(_GAP_N.keys())}",
                 )
-            gap_n = 1.45  # default SiO2
+            gap_n = _ADAPTER_DEFAULTS["gap_medium_n"]
+            defaults_applied.append(f"gap_medium: {_ADAPTER_DEFAULTS['gap_medium']} (n={gap_n})")
 
         # --- Wavelength range ---
         # Try source_setting first, then sweep_plan (wavelength type), then default
@@ -212,12 +248,14 @@ class MeepAdapter(BaseAdapter):
                     wl_range = (sw_start * factor, sw_end * factor)
 
         if not wl_range:
-            # Default wavelength range for visible/near-IR plasmonics
-            wl_range = (0.4, 0.9)  # 400-900 nm
+            wl_min, wl_max = _ADAPTER_DEFAULTS["wavelength_range_nm"]
+            wl_range = (wl_min / 1000.0, wl_max / 1000.0)
+            defaults_applied.append(f"wavelength_range: {wl_min:.0f}–{wl_max:.0f} nm")
             import warnings
             warnings.warn(
-                "Wavelength range not specified in spec. Defaulting to 400-900 nm. "
-                "Set source_setting.wavelength_range explicitly for accurate results."
+                "Wavelength range not specified in spec. Defaulting to "
+                f"{wl_min:.0f}–{wl_max:.0f} nm. Set source_setting.wavelength_range "
+                "explicitly for accurate results."
             )
 
         # --- Sweep plan (gap sweep) ---
@@ -243,7 +281,7 @@ class MeepAdapter(BaseAdapter):
                         sweep_steps = int(round((r_end - r_start) / step)) + 1
 
         # Default gap thickness from sweep or fixed
-        gap_thick_um = sweep_start if sweep_start else 0.005  # default 5nm
+        gap_thick_um = sweep_start if sweep_start else _ADAPTER_DEFAULTS["gap_thickness_nm"] / 1000.0
 
         # --- Postprocess ---
         postprocess: list[str] = []
@@ -273,4 +311,5 @@ class MeepAdapter(BaseAdapter):
             sweep_end_um=sweep_end,
             sweep_steps=sweep_steps,
             postprocess=postprocess,
+            defaults_applied=defaults_applied,
         )

@@ -54,3 +54,10 @@ class MeepInputModel(BaseModel):
                     "ultra-low resolution, few steps, no plotting, no sweep. "
                     "NOT for production use.",
     )
+
+    # --- Translation metadata ---
+    defaults_applied: list[str] = Field(
+        default_factory=list,
+        description="Human-readable list of fields where adapter applied default values, "
+                    "e.g. ['gap_medium: SiO2 (n=1.45)', 'wavelength_range: 400–900 nm']",
+    )
