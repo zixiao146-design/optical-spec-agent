@@ -21,5 +21,74 @@
       {"path": "output.postprocess_target", "contains_target_type": "resonance_wavelength"},
       {"path": "output.postprocess_target", "contains_target_type": "fwhm_extraction"}
     ]
+  },
+  {
+    "task_id": "semantic-core-02-en",
+    "input": "Simulate an 80 nm Au sphere on a 100 nm Au film with a SiO2 gap of 5 nm using Meep FDTD. Plane wave at normal incidence, wavelength range 400-900 nm. Output scattering spectrum and extract resonance wavelength and FWHM.",
+    "checks": [
+      {"path": "task.task_type", "equals": "simulation"},
+      {"path": "physics.physical_system", "equals": "nanoparticle_on_film"},
+      {"path": "physics.structure_type", "equals": "sphere_on_film"},
+      {"path": "geometry_material.particle_info.particle_type", "equals": "sphere"},
+      {"path": "geometry_material.particle_info.material", "equals": "Au"},
+      {"path": "geometry_material.particle_info.dimensions.diameter_nm", "numeric_equals": 80},
+      {"path": "geometry_material.substrate_or_film_info.film_material", "equals": "Au"},
+      {"path": "geometry_material.substrate_or_film_info.film_thickness", "equals": "100 nm"},
+      {"path": "geometry_material.gap_medium", "equals": "SiO2"},
+      {"path": "simulation.solver_method", "equals": "fdtd"},
+      {"path": "simulation.software_tool", "equals": "meep"},
+      {"path": "simulation.excitation_source", "equals": "plane_wave"},
+      {"path": "simulation.source_setting.wavelength_range", "equals": "400-900 nm"},
+      {"path": "output.output_observables", "contains": "scattering_spectrum"},
+      {"path": "output.postprocess_target", "contains_target_type": "resonance_wavelength"},
+      {"path": "output.postprocess_target", "contains_target_type": "fwhm_extraction"}
+    ]
+  },
+  {
+    "task_id": "semantic-gap-sweep-03-zh",
+    "input": "用 Meep FDTD 仿真金纳米球-金膜结构，gap 从 5 到 25 nm，平面波正入射，波长范围 400-900 nm，输出散射谱并提取 FWHM。",
+    "checks": [
+      {"path": "task.task_type", "equals": "simulation"},
+      {"path": "physics.physical_system", "equals": "nanoparticle_on_film"},
+      {"path": "physics.structure_type", "equals": "sphere_on_film"},
+      {"path": "simulation.solver_method", "equals": "fdtd"},
+      {"path": "simulation.software_tool", "equals": "meep"},
+      {"path": "simulation.excitation_source", "equals": "plane_wave"},
+      {"path": "simulation.sweep_plan.variable", "equals": "gap_nm"},
+      {"path": "simulation.sweep_plan.range_start", "numeric_equals": 5},
+      {"path": "simulation.sweep_plan.range_end", "numeric_equals": 25},
+      {"path": "simulation.source_setting.wavelength_range", "equals": "400-900 nm"},
+      {"path": "output.output_observables", "contains": "scattering_spectrum"},
+      {"path": "output.postprocess_target", "contains_target_type": "fwhm_extraction"}
+    ]
+  },
+  {
+    "task_id": "semantic-substrate-04-sio2",
+    "input": "建模非对称金纳米十字结构，两臂长度分别为 120 nm 和 80 nm，宽 40 nm，厚 30 nm，放在 SiO2 基底上。用 Lumerical FDTD 计算偏振相关的散射谱，波长范围 500-1200 nm。",
+    "checks": [
+      {"path": "task.task_type", "equals": "simulation"},
+      {"path": "physics.structure_type", "equals": "cross_structure"},
+      {"path": "geometry_material.substrate_or_film_info.substrate_material", "equals": "SiO2"},
+      {"path": "geometry_material.gap_medium", "is_missing_or_not_equals": "SiO2"},
+      {"path": "simulation.solver_method", "equals": "fdtd"},
+      {"path": "simulation.software_tool", "equals": "lumerical"},
+      {"path": "simulation.source_setting.wavelength_range", "equals": "500-1200 nm"},
+      {"path": "output.output_observables", "contains": "scattering_spectrum"}
+    ]
+  },
+  {
+    "task_id": "semantic-waveguide-05-materials",
+    "input": "COMSOL 模式分析：Si3N4 脊波导，宽 800 nm，高 400 nm，SiO2 下包层，上包层为空气，计算 1.55 μm 波长下的基模有效折射率和模场分布。",
+    "checks": [
+      {"path": "task.task_type", "equals": "simulation"},
+      {"path": "physics.physical_system", "equals": "waveguide"},
+      {"path": "physics.structure_type", "equals": "waveguide"},
+      {"path": "geometry_material.material_system.materials", "contains_material": "Si3N4"},
+      {"path": "geometry_material.material_system.materials", "contains_material": "SiO2"},
+      {"path": "geometry_material.material_system.materials", "not_contains_material": "Si"},
+      {"path": "simulation.solver_method", "equals": "fem"},
+      {"path": "simulation.software_tool", "equals": "comsol"},
+      {"path": "output.output_observables", "contains": "mode_profile"}
+    ]
   }
 ]

@@ -49,7 +49,7 @@ class ValidateResponse(BaseModel):
 
 @router.get("/health")
 def health_check():
-    return {"status": "ok", "version": "0.2.0"}
+    return {"status": "ok", "version": "0.3.0"}
 
 
 @router.post("/parse", response_model=ParseResponse)

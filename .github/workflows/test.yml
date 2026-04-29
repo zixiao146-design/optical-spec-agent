@@ -28,3 +28,9 @@ jobs:
 
       - name: Run tests
         run: pytest -q
+
+      - name: Run key-field benchmark
+        run: python benchmarks/run_benchmark.py --mode key_fields
+
+      - name: Run semantic benchmark
+        run: python benchmarks/run_semantic_benchmark.py

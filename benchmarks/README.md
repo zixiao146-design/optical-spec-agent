@@ -1,8 +1,8 @@
 # Benchmarks
 
 Golden-case regression tests for the rule-based parser + validator pipeline.
-The v0.3 reliability milestone also adds a semantic benchmark for the core
-Meep nanoparticle-on-film parsing path.
+The v0.3 reliability milestone also adds a semantic benchmark for five
+reliability-critical parsing paths.
 
 ## Benchmark modes
 
@@ -12,11 +12,15 @@ Meep nanoparticle-on-film parsing path.
 | `key_fields` | Only core fields must be present with `confirmed`/`inferred` status | Assessing parser extraction quality — resilient to non-breaking output changes |
 | `all` | Runs both modes | Full check |
 
+For v0.3 reliability, the default CI gate should use `pytest`, `key_fields`,
+and the semantic benchmark. `exact` remains a manual regression tool for
+intentional parser-change review, not the default CI gate.
+
 Semantic benchmark:
 
 | Runner | What it checks |
 |--------|----------------|
-| `python benchmarks/run_semantic_benchmark.py` | Core-case semantic fields such as particle diameter, film thickness, gap medium, solver path, and postprocess targets |
+| `python benchmarks/run_semantic_benchmark.py` | Semantic fields for five reliability-critical cases: Chinese + English Meep core cases, gap sweep extraction, SiO2 substrate disambiguation, and Si3N4/SiO2 waveguide materials |
 
 **Key fields** checked in `key_fields` mode: `task.task_type`, `physics.physical_system`, `simulation.solver_method`, `output.output_observables`. Cases can override this list by adding an `expected_key_fields` array to their golden entry.
 
@@ -25,7 +29,7 @@ Semantic benchmark:
 - **Semantic understanding quality** — exact mode checks byte equality, not "best" interpretation
 - **Solver correctness** — no solver is invoked
 - **LLM parsing** — only the rule-based parser is tested
-- **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark currently focuses on one reliability-critical Meep case
+- **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark focuses on 5 reliability-critical material and geometry cases
 
 ## File structure
 
@@ -104,8 +108,9 @@ python benchmarks/run_benchmark.py --update
 The semantic benchmark intentionally avoids full JSON snapshot matching. It checks
 only the meaning-bearing fields that matter for the current milestone:
 
-- `SiO2` must not degrade into `Si`
+- `SiO2` and `Si3N4` must not degrade into `Si`
 - `80 nm` particle size must land in `particle_info.dimensions`
 - `100 nm` film thickness must land in `substrate_or_film_info`
+- `gap from 5 to 25 nm` must not overwrite the actual wavelength range
 - `Meep + FDTD + plane_wave` path must remain stable
 - `resonance_wavelength` and `fwhm_extraction` postprocess targets must be present

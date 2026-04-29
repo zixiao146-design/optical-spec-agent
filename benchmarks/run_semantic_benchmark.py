@@ -27,7 +27,12 @@ def _get_path_value(root: Any, path: str) -> Any:
         if isinstance(current, StatusField):
             current = current.value
 
-        if isinstance(current, dict):
+        if isinstance(current, (list, tuple)) and part.isdigit():
+            index = int(part)
+            if index >= len(current):
+                return None
+            current = current[index]
+        elif isinstance(current, dict):
             current = current.get(part)
         else:
             current = getattr(current, part, None)
@@ -88,6 +93,67 @@ def _check(case_id: str, spec, check: dict[str, Any]) -> tuple[bool, str]:
                     target_types.append(item)
         ok = expected in target_types
         return ok, f"{path}: expected target_type {expected!r}, got {target_types!r}"
+
+    if "is_missing_or_not_equals" in check:
+        unexpected = check["is_missing_or_not_equals"]
+        ok = value is None or value != unexpected
+        return ok, f"{path}: expected missing or not equal to {unexpected!r}, got {value!r}"
+
+    if "contains_name" in check:
+        expected = check["contains_name"]
+        names: list[str] = []
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict) and "name" in item:
+                    names.append(str(item["name"]))
+                else:
+                    item_name = getattr(item, "name", None)
+                    if item_name is not None:
+                        names.append(str(item_name))
+        ok = expected in names
+        return ok, f"{path}: expected name {expected!r}, got {names!r}"
+
+    if "not_contains_name" in check:
+        unexpected = check["not_contains_name"]
+        names: list[str] = []
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict) and "name" in item:
+                    names.append(str(item["name"]))
+                else:
+                    item_name = getattr(item, "name", None)
+                    if item_name is not None:
+                        names.append(str(item_name))
+        ok = unexpected not in names
+        return ok, f"{path}: expected to exclude name {unexpected!r}, got {names!r}"
+
+    if "contains_material" in check:
+        expected = check["contains_material"]
+        names: list[str] = []
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict) and "name" in item:
+                    names.append(str(item["name"]))
+                else:
+                    item_name = getattr(item, "name", None)
+                    if item_name is not None:
+                        names.append(str(item_name))
+        ok = expected in names
+        return ok, f"{path}: expected material {expected!r}, got {names!r}"
+
+    if "not_contains_material" in check:
+        unexpected = check["not_contains_material"]
+        names: list[str] = []
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict) and "name" in item:
+                    names.append(str(item["name"]))
+                else:
+                    item_name = getattr(item, "name", None)
+                    if item_name is not None:
+                        names.append(str(item_name))
+        ok = unexpected not in names
+        return ok, f"{path}: expected to exclude material {unexpected!r}, got {names!r}"
 
     return False, f"{case_id}: unsupported semantic check {check!r}"
 

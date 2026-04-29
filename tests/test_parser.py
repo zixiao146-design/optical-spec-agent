@@ -61,6 +61,20 @@ TEXT_CORE_MEEP_CASE_EN = (
     "scattering spectrum and extract resonance wavelength and FWHM."
 )
 
+TEXT_CORE_MEEP_GAP_SWEEP = (
+    "用 Meep FDTD 仿真 80 nm 金纳米球放在 100 nm 金膜上，中间 SiO2 gap 从 5 到 25 nm，"
+    "平面波正入射，波长范围 400-900 nm，输出散射谱，提取共振波长和 FWHM。"
+)
+
+TEXT_SIO2_SUBSTRATE = (
+    "用 Lumerical FDTD 计算 80 nm 金纳米球放在 SiO2 基底上的散射谱，波长范围 500-900 nm。"
+)
+
+TEXT_SIO2_SUBSTRATE_CROSS = (
+    "建模非对称金纳米十字结构，两臂长度分别为 120 nm 和 80 nm，宽 40 nm，厚 30 nm，"
+    "放在 SiO2 基底上。用 Lumerical FDTD 计算偏振相关的散射谱，波长范围 500-1200 nm。"
+)
+
 
 class TestChineseInput01:
     """金纳米球-金膜 gap 扫描"""
@@ -262,6 +276,39 @@ class TestCoreReliabilityCase:
         assert particle.dimensions["diameter_nm"] == "80"
         assert film.film_thickness == "100 nm"
         assert spec.geometry_material.gap_medium.value == "SiO2"
+
+    def test_gap_sweep_preserves_wavelength_range(self, rule_parser):
+        spec = rule_parser.parse(TEXT_CORE_MEEP_GAP_SWEEP)
+        sweep = spec.simulation.sweep_plan.value
+        source = spec.simulation.source_setting.value
+        assert sweep.variable == "gap_nm"
+        assert sweep.range_start == 5.0
+        assert sweep.range_end == 25.0
+        assert source.wavelength_range == "400-900 nm"
+
+    def test_sio2_substrate_not_marked_as_gap_medium(self, rule_parser):
+        spec = rule_parser.parse(TEXT_SIO2_SUBSTRATE)
+        materials = spec.geometry_material.material_system.value.materials
+        names = [m.name for m in materials]
+        substrate = spec.geometry_material.substrate_or_film_info.value
+        assert "SiO2" in names
+        assert "Si" not in names
+        assert substrate.substrate_material == "SiO2"
+        assert spec.geometry_material.gap_medium.value is None
+
+    def test_substrate_case_preserves_wavelength_range_without_source_type(self, rule_parser):
+        spec = rule_parser.parse(TEXT_SIO2_SUBSTRATE_CROSS)
+        source = spec.simulation.source_setting.value
+        assert source.wavelength_range == "500-1200 nm"
+        assert spec.geometry_material.gap_medium.value is None
+
+    def test_waveguide_materials_do_not_degrade_to_si(self, rule_parser):
+        spec = rule_parser.parse(TEXT_COMSOL_WAVEGUIDE)
+        materials = spec.geometry_material.material_system.value.materials
+        names = [m.name for m in materials]
+        assert "Si3N4" in names
+        assert "SiO2" in names
+        assert "Si" not in names
 
 
 # ═══════════════════════════════════════════════════════════════════════════

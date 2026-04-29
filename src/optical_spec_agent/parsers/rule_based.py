@@ -246,6 +246,12 @@ _GENERIC_SWEEP_EN = re.compile(
 # Wavelength range pattern
 _WL_RANGE = re.compile(r"([\d.]+)\s*[-–到至~]\s*([\d.]+)\s*(nm|μm|um)", re.IGNORECASE)
 
+_WL_RANGE_WITH_KEYWORD = re.compile(
+    r"(?:波长(?:范围)?|wavelength(?:\s+range)?)\s*(?:=|为|是|:)?\s*"
+    r"([\d.]+)\s*[-–到至~]\s*([\d.]+)\s*(nm|μm|um)",
+    re.IGNORECASE,
+)
+
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Helpers
@@ -317,6 +323,29 @@ def _build_dimension_pair(native_key: str, nm_key: str, value: float, unit: str)
         native_key: _format_length(value, unit),
         nm_key: _format_number(_length_to_nm(value, unit)),
     }
+
+
+def _extract_wavelength_range(text: str) -> tuple[float, float, str] | None:
+    """Extract a wavelength range without confusing it with gap/size sweeps."""
+    keyword_match = _WL_RANGE_WITH_KEYWORD.search(text)
+    if keyword_match:
+        return (
+            float(keyword_match.group(1)),
+            float(keyword_match.group(2)),
+            keyword_match.group(3),
+        )
+
+    generic_matches = list(_WL_RANGE.finditer(text))
+    if len(generic_matches) == 1:
+        m = generic_matches[0]
+        return float(m.group(1)), float(m.group(2)), m.group(3)
+
+    for match in generic_matches:
+        context = text[max(0, match.start() - 20):match.start()].lower()
+        if "wave" in context or "波长" in context:
+            return float(match.group(1)), float(match.group(2)), match.group(3)
+
+    return None
 
 
 def _extract_particle_dimensions(text: str, particle_type: str | None) -> dict[str, str]:
@@ -638,11 +667,12 @@ class RuleBasedParser(BaseParser):
                 source.source_type = src_type
                 break
 
-        wl_match = _WL_RANGE.search(text)
+        wl_match = _extract_wavelength_range(text)
         if wl_match:
-            source.wavelength_range = f"{wl_match.group(1)}-{wl_match.group(2)} {wl_match.group(3)}"
+            source.wavelength_range = f"{_format_number(wl_match[0])}-{_format_number(wl_match[1])} {wl_match[2]}"
         if pols:
             source.polarization = pols[0]
+        has_source_setting = bool(source.source_type or source.wavelength_range or source.polarization or source.amplitude)
 
         # ---- BoundaryConditionSetting ----
         bc = BoundaryConditionSetting()
@@ -675,7 +705,7 @@ class RuleBasedParser(BaseParser):
             software_tool=confirmed(softwares[0]) if softwares else missing("未指定软件工具"),
             sweep_plan=confirmed(sweep) if (sweep.sweep_type or sweep.variable) else missing("未指定扫描计划"),
             excitation_source=confirmed(source.source_type) if source.source_type else missing("未指定激励源"),
-            source_setting=confirmed(source) if source.source_type else missing("未指定光源设置"),
+            source_setting=confirmed(source) if has_source_setting else missing("未指定光源设置"),
             polarization=confirmed(pols[0]) if pols else missing("未指定偏振"),
             incident_direction=confirmed(direction) if direction else inferred("正入射", "默认入射方向"),
             boundary_condition=confirmed(bc) if bc.x_min else missing("未指定边界条件"),
@@ -749,13 +779,13 @@ class RuleBasedParser(BaseParser):
 
         # --- Wavelength range (only if no parameter sweep found) ---
         if not sweep.variable:
-            wl = _WL_RANGE.search(text)
+            wl = _extract_wavelength_range(text)
             if wl:
                 sweep.sweep_type = "wavelength"
                 sweep.variable = "wavelength_nm"
-                sweep.range_start = float(wl.group(1))
-                sweep.range_end = float(wl.group(2))
-                sweep.unit = wl.group(3)
+                sweep.range_start = wl[0]
+                sweep.range_end = wl[1]
+                sweep.unit = wl[2]
 
         return sweep
 
