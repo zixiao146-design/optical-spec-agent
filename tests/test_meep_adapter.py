@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from optical_spec_agent.adapters.meep import MeepAdapter, AdapterError
 from optical_spec_agent.models.base import (
     BoundaryConditionSetting,
     GeometryDefinition,
@@ -23,8 +24,13 @@ from optical_spec_agent.models.base import (
     missing,
 )
 from optical_spec_agent.models.spec import OpticalSpec
-from optical_spec_agent.adapters.meep import MeepAdapter, AdapterError
+from optical_spec_agent.services.spec_service import SpecService
 from optical_spec_agent.adapters.meep.template import render_script
+
+CORE_MEEP_CASE = (
+    "用 Meep FDTD 仿真 80 nm 金纳米球放在 100 nm 金膜上，中间 SiO2 gap 为 5 nm，"
+    "平面波正入射，波长范围 400-900 nm，输出散射谱，提取共振波长和 FWHM。"
+)
 
 
 def _make_valid_spec() -> OpticalSpec:
@@ -379,6 +385,25 @@ class TestAdapterDefaults:
         spec = _make_valid_spec()
         result = adapter.generate(spec)
         assert "Adapter-applied defaults" not in result.content
+
+
+class TestAdapterReadiness:
+    def test_validate_ready_rejects_missing_particle_size(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.geometry_material.particle_info = confirmed(
+            ParticleInfo(particle_type="sphere", material="Au", dimensions={})
+        )
+        readiness = adapter.validate_ready(spec)
+        assert readiness.adapter_ready is False
+        assert any("particle size" in error for error in readiness.errors)
+
+    def test_validate_ready_core_case(self):
+        adapter = MeepAdapter()
+        spec = SpecService().process(CORE_MEEP_CASE, task_id="core-readiness")
+        readiness = adapter.validate_ready(spec)
+        assert readiness.adapter_ready is True
+        assert readiness.errors == []
 
 
 # ---------------------------------------------------------------------------

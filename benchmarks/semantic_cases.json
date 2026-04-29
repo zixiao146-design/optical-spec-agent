@@ -1,0 +1,25 @@
+[
+  {
+    "task_id": "semantic-core-01",
+    "input": "用 Meep FDTD 仿真 80 nm 金纳米球放在 100 nm 金膜上，中间 SiO2 gap 为 5 nm，平面波正入射，波长范围 400-900 nm，输出散射谱，提取共振波长和 FWHM。",
+    "checks": [
+      {"path": "task.task_type", "equals": "simulation"},
+      {"path": "physics.physical_system", "equals": "nanoparticle_on_film"},
+      {"path": "physics.structure_type", "equals": "sphere_on_film"},
+      {"path": "geometry_material.particle_info.particle_type", "equals": "sphere"},
+      {"path": "geometry_material.particle_info.material", "equals": "Au"},
+      {"path": "geometry_material.particle_info.dimensions.diameter_nm", "numeric_equals": 80},
+      {"path": "geometry_material.substrate_or_film_info.film_material", "equals": "Au"},
+      {"path": "geometry_material.substrate_or_film_info.film_thickness", "equals": "100 nm"},
+      {"path": "geometry_material.gap_medium", "equals": "SiO2"},
+      {"path": "simulation.solver_method", "equals": "fdtd"},
+      {"path": "simulation.software_tool", "equals": "meep"},
+      {"path": "simulation.excitation_source", "equals": "plane_wave"},
+      {"path": "simulation.incident_direction", "equals_any": ["正入射", "normal", "normal incidence"]},
+      {"path": "simulation.source_setting.wavelength_range", "equals": "400-900 nm"},
+      {"path": "output.output_observables", "contains": "scattering_spectrum"},
+      {"path": "output.postprocess_target", "contains_target_type": "resonance_wavelength"},
+      {"path": "output.postprocess_target", "contains_target_type": "fwhm_extraction"}
+    ]
+  }
+]

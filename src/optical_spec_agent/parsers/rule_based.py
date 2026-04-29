@@ -140,18 +140,27 @@ _DIMENSION_KEYWORDS: dict[str, list[str]] = {
     "axisymmetric": ["轴对称", "axisymmetric", "旋转对称"],
 }
 
-_MATERIAL_KEYWORDS: dict[str, list[str]] = {
-    "Au": ["金", "Au", "gold", "Gold", "AU", "金膜", "金纳米"],
-    "Ag": ["银", "Ag", "silver", "Silver"],
-    "Si": ["硅", "Si", "silicon", "Silicon"],
-    "SiO2": ["二氧化硅", "SiO2", "sio2", "石英", "silica", "quartz"],
-    "Si3N4": ["氮化硅", "Si3N4", "si3n4"],
-    "Al2O3": ["氧化铝", "Al2O3", "alumina"],
-    "TiO2": ["二氧化钛", "TiO2", "titania"],
-    "Glass": ["玻璃", "glass", "Glass"],
-    "Water": ["水", "water", "Water"],
-    "Air": ["空气", "air", "Air"],
+_UNIT_TO_NM = {
+    "nm": 1.0,
+    "um": 1000.0,
+    "μm": 1000.0,
+    "mm": 1_000_000.0,
 }
+
+_MATERIAL_PATTERNS: list[tuple[str, list[str]]] = [
+    ("Si3N4", [r"(?<![A-Za-z0-9])Si3N4(?![A-Za-z0-9])", r"\bsilicon\s+nitride\b", r"氮化硅"]),
+    ("SiO2", [r"(?<![A-Za-z0-9])SiO2(?![A-Za-z0-9])", r"\bsilicon\s+dioxide\b", r"二氧化硅", r"石英", r"\bsilica\b", r"\bquartz\b"]),
+    ("Al2O3", [r"(?<![A-Za-z0-9])Al2O3(?![A-Za-z0-9])", r"氧化铝", r"\balumina\b"]),
+    ("TiO2", [r"(?<![A-Za-z0-9])TiO2(?![A-Za-z0-9])", r"二氧化钛", r"\btitania\b"]),
+    ("Au", [r"(?<![A-Za-z0-9])Au(?![A-Za-z0-9])", r"\bgold\b", r"金"]),
+    ("Ag", [r"(?<![A-Za-z0-9])Ag(?![A-Za-z0-9])", r"\bsilver\b", r"银"]),
+    ("Glass", [r"\bglass\b", r"玻璃"]),
+    ("Water", [r"\bwater\b", r"水"]),
+    ("Air", [r"\bair\b", r"空气"]),
+    ("Si", [r"(?<![A-Za-z0-9])Si(?![A-Za-z0-9])", r"\bsilicon\b(?!\s*(?:dioxide|nitride))", r"(?<!二氧化)(?<!氮化)硅"]),
+]
+
+_GAP_RELEVANT_MATERIALS = ("SiO2", "Si3N4", "Al2O3", "TiO2", "Glass", "Water", "Air", "Si")
 
 _POLARIZATION_KEYWORDS: dict[str, list[str]] = {
     "linear_x": ["x偏振", "x-linear", "x偏光"],
@@ -267,6 +276,136 @@ def _extract_first(text: str, pattern: str) -> str | None:
     return m.group(0).strip() if m else None
 
 
+def _match_materials(text: str) -> list[str]:
+    """Match materials with regex boundaries and long-token priority."""
+    hits: list[str] = []
+    for name, patterns in _MATERIAL_PATTERNS:
+        if any(re.search(pattern, text, re.IGNORECASE) for pattern in patterns):
+            hits.append(name)
+    return hits
+
+
+def _format_number(value: float) -> str:
+    return str(int(value)) if float(value).is_integer() else f"{value:g}"
+
+
+def _normalize_unit(unit: str) -> str:
+    unit_l = unit.lower()
+    if unit_l == "um":
+        return "μm"
+    return unit
+
+
+def _format_length(value: float, unit: str) -> str:
+    return f"{_format_number(value)} {_normalize_unit(unit)}"
+
+
+def _length_to_nm(value: float, unit: str) -> float:
+    return value * _UNIT_TO_NM[unit.lower()]
+
+
+def _extract_length(text: str, patterns: list[str]) -> tuple[float, str] | None:
+    for pattern in patterns:
+        m = re.search(pattern, text, re.IGNORECASE)
+        if m:
+            return float(m.group(1)), m.group(2)
+    return None
+
+
+def _build_dimension_pair(native_key: str, nm_key: str, value: float, unit: str) -> dict[str, str]:
+    return {
+        native_key: _format_length(value, unit),
+        nm_key: _format_number(_length_to_nm(value, unit)),
+    }
+
+
+def _extract_particle_dimensions(text: str, particle_type: str | None) -> dict[str, str]:
+    """Extract particle-specific dimensions without mixing in gap/film values."""
+    dims: dict[str, str] = {}
+
+    sphere_patterns = [
+        r"直径\s*(?:=|为|是|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        r"([\d.]+)\s*(nm|μm|um|mm)\s*(?:金|银|Au|Ag|gold|silver)?\s*(?:纳米)?球",
+        r"([\d.]+)\s*(nm|μm|um|mm)\s*(?:Au|Ag|gold|silver)\s*(?:nano)?sphere\b",
+        r"(?:Au|Ag|gold|silver)?\s*(?:nano)?sphere(?:\s+diameter)?\s*(?:of|=|is|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        r"(?:Au|Ag|gold|silver)?\s*nanosphere(?:\s+diameter)?\s*(?:of|=|is|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+    ]
+    cube_patterns = [
+        r"边长\s*(?:=|为|是|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        r"([\d.]+)\s*(nm|μm|um|mm)\s*(?:金|银|Au|Ag|gold|silver)?\s*(?:纳米)?立方(?:体|块)?",
+        r"([\d.]+)\s*(nm|μm|um|mm)\s*(?:Au|Ag|gold|silver)\s*(?:nano)?cube\b",
+        r"(?:Au|Ag|gold|silver)?\s*(?:nano)?cube(?:\s+edge(?:\s+length)?)?\s*(?:of|=|is|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+    ]
+    rod_diameter_patterns = [
+        r"直径\s*(?:=|为|是|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        r"(?:Au|Ag|gold|silver|金|银)?\s*(?:nano)?rod(?:\s+diameter)?\s*(?:of|=|is|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        r"([\d.]+)\s*(nm|μm|um|mm)\s*(?:Au|Ag|gold|silver|金|银)?\s*(?:纳米)?棒",
+    ]
+
+    if particle_type == "sphere":
+        diameter = _extract_length(text, sphere_patterns)
+        if diameter:
+            dims.update(_build_dimension_pair("直径", "diameter_nm", *diameter))
+    elif particle_type == "cube":
+        edge = _extract_length(text, cube_patterns)
+        if edge:
+            dims.update(_build_dimension_pair("边长", "edge_length_nm", *edge))
+    elif particle_type == "rod":
+        rod_diameter = _extract_length(text, rod_diameter_patterns)
+        if rod_diameter:
+            dims.update(_build_dimension_pair("直径", "diameter_nm", *rod_diameter))
+
+    if not dims:
+        explicit_diameter = _extract_length(text, [r"直径\s*(?:=|为|是|:)?\s*([\d.]+)\s*(nm|μm|um|mm)", r"\bdiameter\s*(?:=|of|is|:)?\s*([\d.]+)\s*(nm|μm|um|mm)"])
+        if explicit_diameter:
+            dims.update(_build_dimension_pair("直径", "diameter_nm", *explicit_diameter))
+
+    return dims
+
+
+def _extract_film_thickness(text: str) -> tuple[float, str] | None:
+    return _extract_length(
+        text,
+        [
+            r"(?:金|Au|gold)\s*(?:膜|film)\s*(?:厚度|thickness)?\s*(?:=|为|是|:|of|is)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+            r"([\d.]+)\s*(nm|μm|um|mm)\s*(?:金|Au|gold)\s*(?:膜|film)(?:上)?",
+            r"(?:Au|gold)\s*film\s*thickness\s*(?:=|of|is|:)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        ],
+    )
+
+
+def _extract_gap_thickness(text: str) -> tuple[float, str] | None:
+    return _extract_length(
+        text,
+        [
+            r"(?:gap|gap thickness|间隙(?:厚度)?|间距)\s*(?:=|为|是|:|of|is)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+            r"间隙填充[^()（）]{0,20}[（(]\s*([\d.]+)\s*(nm|μm|um|mm)\s*[)）]",
+            r"(?:中间\s*)?[^。,.，]{0,20}\bgap\b\s*(?:=|为|是|:|of|is)?\s*([\d.]+)\s*(nm|μm|um|mm)",
+        ],
+    )
+
+
+def _extract_gap_medium(text: str, found_materials: list[str]) -> str | None:
+    if not re.search(r"(gap|间隙|间距)", text, re.IGNORECASE):
+        return None
+
+    for name, patterns in _MATERIAL_PATTERNS:
+        if name not in found_materials or name not in _GAP_RELEVANT_MATERIALS:
+            continue
+        for pattern in patterns:
+            if re.search(rf"{pattern}\s*gap", text, re.IGNORECASE):
+                return name
+            if re.search(rf"间隙填充\s*{pattern}", text, re.IGNORECASE):
+                return name
+            if re.search(rf"(gap|间隙)[^。,.，]{{0,16}}{pattern}", text, re.IGNORECASE):
+                return name
+
+    for material in found_materials:
+        if material not in ("Au", "Ag"):
+            return material
+    return None
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # RuleBasedParser
 # ═══════════════════════════════════════════════════════════════════════════
@@ -355,7 +494,7 @@ class RuleBasedParser(BaseParser):
         )
 
     def _parse_geometry_material(self, text: str) -> GeometryMaterialSection:
-        found_materials = _match_keywords(text, _MATERIAL_KEYWORDS)
+        found_materials = _match_materials(text)
         geom_types = _match_keywords(text, _GEOMETRY_TYPE_KEYWORDS)
 
         # --- GeometryDefinition ---
@@ -374,6 +513,19 @@ class RuleBasedParser(BaseParser):
             val = _extract_first(text, pat)
             if val:
                 extracted_dims[name] = val
+
+        particle_dims = _extract_particle_dimensions(text, geom_types[0] if geom_types else None)
+        film_thickness = _extract_film_thickness(text)
+        gap_thickness = _extract_gap_thickness(text)
+
+        if "直径" in particle_dims:
+            extracted_dims["直径"] = particle_dims["直径"]
+        if "边长" in particle_dims:
+            extracted_dims["边长"] = particle_dims["边长"]
+        if film_thickness:
+            extracted_dims["膜厚"] = _format_length(*film_thickness)
+        if gap_thickness:
+            extracted_dims["gap"] = _format_length(*gap_thickness)
 
         geom_def = GeometryDefinition(
             geometry_type=geom_types[0] if geom_types else None,
@@ -414,6 +566,10 @@ class RuleBasedParser(BaseParser):
             sub_info.has_film = True
             if "Au" in found_materials:
                 sub_info.film_material = "Au"
+            elif "Ag" in found_materials:
+                sub_info.film_material = "Ag"
+        if film_thickness:
+            sub_info.film_thickness = _format_length(*film_thickness)
 
         # --- ParticleInfo ---
         particle = ParticleInfo()
@@ -422,7 +578,8 @@ class RuleBasedParser(BaseParser):
             for m in found_materials:
                 if m in ("Au", "Ag"):
                     particle.material = m
-            particle.dimensions = extracted_dims
+                    break
+            particle.dimensions = particle_dims
 
         # --- Key parameters ---
         param_patterns = [
@@ -439,14 +596,16 @@ class RuleBasedParser(BaseParser):
         for pat in param_patterns:
             for m in re.finditer(pat, text, re.IGNORECASE):
                 key_params.append(m.group(0).strip())
+        if "直径" in particle_dims:
+            key_params.append(f"直径 {particle_dims['直径']}")
+        if film_thickness:
+            key_params.append(f"金膜厚度 {_format_length(*film_thickness)}")
+        if gap_thickness:
+            key_params.append(f"gap {_format_length(*gap_thickness)}")
+        key_params = list(dict.fromkeys(key_params))
 
         # --- gap_medium ---
-        gap_medium_val: str | None = None
-        if any(kw in text.lower() for kw in ("gap", "间隙", "间距")):
-            for m in found_materials:
-                if m not in ("Au", "Ag"):
-                    gap_medium_val = m
-                    break
+        gap_medium_val = _extract_gap_medium(text, found_materials)
 
         return GeometryMaterialSection(
             geometry_definition=confirmed(geom_def) if geom_def.description else missing(),

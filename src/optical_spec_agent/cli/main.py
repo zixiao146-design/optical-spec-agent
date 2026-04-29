@@ -196,6 +196,31 @@ def meep_generate(
                        "solver_method=fdtd, software_tool=meep[/dim]")
         raise typer.Exit(1)
 
+    readiness = adapter.validate_ready(spec)
+
+    if readiness.errors:
+        console.print("[red]Meep adapter readiness check failed.[/red]")
+        for error in readiness.errors:
+            console.print(f"  - {error}")
+        if readiness.defaults_applied:
+            console.print("\n[yellow]Defaults the adapter would need:[/yellow]")
+            for item in readiness.defaults_applied:
+                console.print(f"  - {item}")
+        if readiness.warnings:
+            console.print("\n[yellow]Warnings:[/yellow]")
+            for warning in readiness.warnings:
+                console.print(f"  - {warning}")
+        raise typer.Exit(1)
+
+    if readiness.defaults_applied:
+        console.print("[yellow]Meep adapter defaults in use:[/yellow]")
+        for item in readiness.defaults_applied:
+            console.print(f"  - {item}")
+    if readiness.warnings:
+        console.print("[yellow]Meep adapter warnings:[/yellow]")
+        for warning in readiness.warnings:
+            console.print(f"  - {warning}")
+
     try:
         result = adapter.generate(spec)
     except AdapterError as e:

@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import re
 
+from pydantic import BaseModel, Field
+
 from optical_spec_agent.adapters.base import AdapterResult, BaseAdapter
 from optical_spec_agent.models.spec import OpticalSpec
 
@@ -33,6 +35,15 @@ class AdapterError(Exception):
         if detail:
             parts.append(detail)
         super().__init__(" ".join(parts))
+
+
+class AdapterValidationResult(BaseModel):
+    """Adapter-specific readiness result for Meep script generation."""
+
+    adapter_ready: bool = False
+    errors: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+    defaults_applied: list[str] = Field(default_factory=list)
 
 
 # --- Centralized adapter defaults ---
@@ -76,6 +87,13 @@ _SHAPE_MAP = {
     "rod": "cylinder",
 }
 
+_LENGTH_TO_NM = {
+    "nm": 1.0,
+    "um": 1000.0,
+    "μm": 1000.0,
+    "mm": 1_000_000.0,
+}
+
 
 def _get_sf_value(spec: OpticalSpec, dotted: str):
     """Get StatusField value by dotted path, or None if missing."""
@@ -117,6 +135,22 @@ def _parse_wavelength_range(source_setting) -> tuple[float, float] | None:
     return None
 
 
+def _parse_length_nm(raw_value) -> float | None:
+    """Parse a scalar length-like value into nm."""
+    if raw_value is None:
+        return None
+    if isinstance(raw_value, (int, float)):
+        return float(raw_value)
+
+    m = re.search(r"([\d.]+)\s*(nm|μm|um|mm)?", str(raw_value), re.IGNORECASE)
+    if not m:
+        return None
+
+    value = float(m.group(1))
+    unit = (m.group(2) or "nm").lower()
+    return value * _LENGTH_TO_NM.get(unit, 1.0)
+
+
 def _extract_dimension_nm(dimensions: dict, keys: list[str]) -> float | None:
     """Try to extract a numeric value in nm from a dimensions dict."""
     if not isinstance(dimensions, dict):
@@ -125,11 +159,53 @@ def _extract_dimension_nm(dimensions: dict, keys: list[str]) -> float | None:
         val = dimensions.get(key)
         if val is None:
             continue
-        # Extract first number from the value string (e.g. "直径80nm" → 80)
-        m = re.search(r"([\d.]+)", str(val))
-        if m:
-            return float(m.group(1))
+        parsed = _parse_length_nm(val)
+        if parsed is not None:
+            return parsed
     return None
+
+
+def _extract_gap_thickness_nm(spec: OpticalSpec) -> float | None:
+    """Resolve a fixed gap thickness from geometry_definition or key_parameters."""
+    geom_raw = _get_sf_value(spec, "geometry_material.geometry_definition")
+    if geom_raw:
+        dims = getattr(geom_raw, "dimensions", {}) or {}
+        for key in ("gap_thickness_nm", "gap_nm", "gap", "间隙"):
+            parsed = _parse_length_nm(dims.get(key))
+            if parsed is not None:
+                return parsed
+
+    key_params = _get_sf_value(spec, "geometry_material.key_parameters")
+    if isinstance(key_params, list):
+        for item in key_params:
+            if not isinstance(item, str) or not re.search(r"(gap|间隙|间距)", item, re.IGNORECASE):
+                continue
+            parsed = _parse_length_nm(item)
+            if parsed is not None:
+                return parsed
+
+    return None
+
+
+def _resolve_wavelength_range(spec: OpticalSpec) -> tuple[tuple[float, float] | None, bool]:
+    """Return wavelength range in um and whether adapter default was needed."""
+    source_raw = _get_sf_value(spec, "simulation.source_setting")
+    wl_range = _parse_wavelength_range(source_raw)
+
+    if wl_range and (wl_range[0] < 0.2 or wl_range[1] > 30.0):
+        wl_range = None
+
+    if not wl_range:
+        sweep_raw = _get_sf_value(spec, "simulation.sweep_plan")
+        if sweep_raw and getattr(sweep_raw, "sweep_type", "") == "wavelength":
+            sw_start = getattr(sweep_raw, "range_start", None)
+            sw_end = getattr(sweep_raw, "range_end", None)
+            sw_unit = getattr(sweep_raw, "unit", "nm")
+            if sw_start is not None and sw_end is not None:
+                factor = 0.001 if sw_unit == "nm" else 1.0
+                wl_range = (sw_start * factor, sw_end * factor)
+
+    return wl_range, wl_range is None
 
 
 class MeepAdapter(BaseAdapter):
@@ -147,11 +223,111 @@ class MeepAdapter(BaseAdapter):
             and software == "meep"
         )
 
+    def validate_ready(self, spec: OpticalSpec) -> AdapterValidationResult:
+        """Check whether a spec is ready for Meep script generation."""
+        errors: list[str] = []
+        warnings: list[str] = []
+        defaults_applied: list[str] = []
+
+        phys_sys = _get_sf_value(spec, "physics.physical_system")
+        solver = _get_sf_value(spec, "simulation.solver_method")
+        software = _get_sf_value(spec, "simulation.software_tool")
+        source_type = _get_sf_value(spec, "simulation.excitation_source")
+
+        if phys_sys != "nanoparticle_on_film":
+            errors.append("physics.physical_system 必须为 nanoparticle_on_film")
+        if solver != "fdtd":
+            errors.append("simulation.solver_method 必须为 fdtd")
+        if software != "meep":
+            errors.append("simulation.software_tool 必须为 meep")
+        if source_type and source_type != "plane_wave":
+            errors.append("Meep adapter 当前仅支持 plane_wave 激励")
+        elif not source_type:
+            defaults_applied.append("excitation_source: plane_wave")
+            warnings.append("simulation.excitation_source 缺失，Meep adapter 将按 plane_wave 生成脚本")
+
+        particle_raw = _get_sf_value(spec, "geometry_material.particle_info")
+        if not particle_raw:
+            errors.append("缺少 geometry_material.particle_info")
+        else:
+            p_type = getattr(particle_raw, "particle_type", "") or ""
+            p_mat = getattr(particle_raw, "material", "") or ""
+            p_dims = getattr(particle_raw, "dimensions", {}) or {}
+
+            if p_type not in _SHAPE_MAP:
+                errors.append("particle_info.particle_type 必须是 sphere/cube/rod 之一")
+            if not p_mat:
+                errors.append("缺少 particle_info.material")
+
+            size_keys = ["直径", "diameter_nm", "diameter"]
+            if p_type == "cube":
+                size_keys = ["边长", "edge_length_nm", "edge_length", *size_keys]
+            particle_size_nm = _extract_dimension_nm(p_dims, size_keys)
+            if particle_size_nm is None:
+                errors.append("缺少可解析的 particle size（例如 80 nm 金纳米球 或 直径 80 nm）")
+
+        film_raw = _get_sf_value(spec, "geometry_material.substrate_or_film_info")
+        if not film_raw:
+            errors.append("缺少 geometry_material.substrate_or_film_info")
+        else:
+            film_mat = getattr(film_raw, "film_material", "") or ""
+            if not film_mat:
+                errors.append("缺少 substrate_or_film_info.film_material")
+            film_thick_nm = _parse_length_nm(getattr(film_raw, "film_thickness", "") or "")
+            if film_thick_nm is None:
+                defaults_applied.append(f"film_thickness: {_DEFAULT_FILM_THICKNESS_NM:.0f} nm")
+                warnings.append("film_thickness 缺失，Meep adapter 将使用 100 nm 默认金膜厚度")
+
+        gap_name = _get_sf_value(spec, "geometry_material.gap_medium") or ""
+        if gap_name:
+            if _GAP_N.get(gap_name) is None:
+                errors.append(f"未知 gap_medium: {gap_name}")
+        else:
+            defaults_applied.append(f"gap_medium: {_ADAPTER_DEFAULTS['gap_medium']} (n={_ADAPTER_DEFAULTS['gap_medium_n']})")
+            warnings.append("gap_medium 缺失，Meep adapter 将使用 SiO2 默认间隙介质")
+
+        wl_range, wl_defaulted = _resolve_wavelength_range(spec)
+        if wl_defaulted:
+            wl_min, wl_max = _ADAPTER_DEFAULTS["wavelength_range_nm"]
+            defaults_applied.append(f"wavelength_range: {wl_min:.0f}–{wl_max:.0f} nm")
+            warnings.append("wavelength_range 缺失，Meep adapter 将使用 400–900 nm 默认波长范围")
+
+        gap_thick_nm = _extract_gap_thickness_nm(spec)
+        sweep_raw = _get_sf_value(spec, "simulation.sweep_plan")
+        has_gap_sweep = bool(
+            sweep_raw
+            and getattr(sweep_raw, "sweep_type", "") == "parameter"
+            and "gap" in (getattr(sweep_raw, "variable", "") or "").lower()
+        )
+        if gap_thick_nm is None and not has_gap_sweep:
+            defaults_applied.append(f"gap_thickness: {_ADAPTER_DEFAULTS['gap_thickness_nm']:.0f} nm")
+            warnings.append("gap thickness 缺失，Meep adapter 将使用 5 nm 默认间隙厚度")
+
+        observables = _get_sf_value(spec, "output.output_observables")
+        if isinstance(observables, list) and "scattering_spectrum" not in observables:
+            warnings.append("output.output_observables 未显式包含 scattering_spectrum，生成脚本仍会输出散射谱预览")
+
+        return AdapterValidationResult(
+            adapter_ready=(len(errors) == 0),
+            errors=errors,
+            warnings=warnings,
+            defaults_applied=defaults_applied,
+        )
+
     def generate(self, spec: OpticalSpec) -> AdapterResult:
         if not self.can_handle(spec):
             raise AdapterError(
                 "unsupported_path", "physical_system/solver_method/software_tool",
                 "Meep adapter requires nanoparticle_on_film + fdtd + meep",
+            )
+
+        readiness = self.validate_ready(spec)
+        source_type = _get_sf_value(spec, "simulation.excitation_source")
+        if source_type and source_type != "plane_wave":
+            raise AdapterError(
+                "unsupported_path",
+                "simulation.excitation_source",
+                "Meep adapter currently supports plane_wave only",
             )
 
         model = self._translate(spec)
@@ -182,7 +358,10 @@ class MeepAdapter(BaseAdapter):
             )
 
         # Extract radius from dimensions
-        diameter_nm = _extract_dimension_nm(p_dims, ["直径", "diameter", "边长"])
+        size_keys = ["直径", "diameter_nm", "diameter"]
+        if p_type == "cube":
+            size_keys = ["边长", "edge_length_nm", "edge_length", *size_keys]
+        diameter_nm = _extract_dimension_nm(p_dims, size_keys)
         if diameter_nm is None:
             # fallback: try to find any numeric dimension and halve it
             first_dim = _extract_dimension_nm(p_dims, list(p_dims.keys())[:1]) if p_dims else None
@@ -206,10 +385,9 @@ class MeepAdapter(BaseAdapter):
 
         film_thick_str = getattr(film_raw, "film_thickness", "") or ""
         film_thick_nm = _DEFAULT_FILM_THICKNESS_NM
-        if film_thick_str:
-            m = re.match(r"([\d.]+)", str(film_thick_str))
-            if m:
-                film_thick_nm = float(m.group(1))
+        parsed_film_thickness = _parse_length_nm(film_thick_str)
+        if parsed_film_thickness is not None:
+            film_thick_nm = parsed_film_thickness
         else:
             defaults_applied.append(f"film_thickness: {film_thick_nm:.0f} nm")
         film_thick_um = film_thick_nm / 1000.0
@@ -228,26 +406,8 @@ class MeepAdapter(BaseAdapter):
 
         # --- Wavelength range ---
         # Try source_setting first, then sweep_plan (wavelength type), then default
-        source_raw = _get_sf_value(spec, "simulation.source_setting")
-        wl_range = _parse_wavelength_range(source_raw)
-
-        # Validate that source_setting wavelength is actually a wavelength range
-        # (not a parameter sweep range that got mis-parsed)
-        if wl_range and (wl_range[0] < 0.2 or wl_range[1] > 30.0):
-            wl_range = None  # Unreasonable for optical wavelength — probably a parameter range
-
-        if not wl_range:
-            # Try sweep_plan with wavelength type
-            sweep_raw = _get_sf_value(spec, "simulation.sweep_plan")
-            if sweep_raw and getattr(sweep_raw, "sweep_type", "") == "wavelength":
-                sw_start = getattr(sweep_raw, "range_start", None)
-                sw_end = getattr(sweep_raw, "range_end", None)
-                sw_unit = getattr(sweep_raw, "unit", "nm")
-                if sw_start and sw_end:
-                    factor = 0.001 if sw_unit == "nm" else 1.0
-                    wl_range = (sw_start * factor, sw_end * factor)
-
-        if not wl_range:
+        wl_range, wl_defaulted = _resolve_wavelength_range(spec)
+        if wl_defaulted:
             wl_min, wl_max = _ADAPTER_DEFAULTS["wavelength_range_nm"]
             wl_range = (wl_min / 1000.0, wl_max / 1000.0)
             defaults_applied.append(f"wavelength_range: {wl_min:.0f}–{wl_max:.0f} nm")
@@ -280,8 +440,14 @@ class MeepAdapter(BaseAdapter):
                     if step and step > 0:
                         sweep_steps = int(round((r_end - r_start) / step)) + 1
 
-        # Default gap thickness from sweep or fixed
-        gap_thick_um = sweep_start if sweep_start else _ADAPTER_DEFAULTS["gap_thickness_nm"] / 1000.0
+        # Default gap thickness from explicit geometry, sweep, or fixed fallback
+        explicit_gap_nm = _extract_gap_thickness_nm(spec)
+        if explicit_gap_nm is not None:
+            gap_thick_um = explicit_gap_nm / 1000.0
+        elif sweep_start:
+            gap_thick_um = sweep_start
+        else:
+            gap_thick_um = _ADAPTER_DEFAULTS["gap_thickness_nm"] / 1000.0
 
         # --- Postprocess ---
         postprocess: list[str] = []

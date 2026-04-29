@@ -26,7 +26,7 @@ It is **not** a solver. It does not run any simulation tool — it produces the 
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
 | **Adapter** | Meep adapter preview: spec JSON → Python script (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
-| **Benchmark** | 16 golden cases, 2 modes (exact regression + key-field extraction) — `python benchmarks/run_benchmark.py --mode all` |
+| **Benchmark** | 16 golden cases + semantic benchmark for the core Meep case — `python benchmarks/run_benchmark.py --mode all` and `python benchmarks/run_semantic_benchmark.py` |
 | **Tests** | 99 passing — `pytest -v` |
 
 ## Why this project?
@@ -289,6 +289,13 @@ python benchmarks/run_benchmark.py --mode all         # both
 | `key_fields` | Only core fields (`task_type`, `physical_system`, `solver_method`, `observables`) must be present — resilient to non-breaking output changes |
 
 **What it does NOT test:** semantic understanding scoring, solver correctness, or LLM parsing.
+
+For the v0.3 reliability milestone, an additional semantic benchmark checks the
+core Meep nanoparticle-on-film case at the field level:
+
+```bash
+python benchmarks/run_semantic_benchmark.py
+```
 
 Full details: [`benchmarks/README.md`](benchmarks/README.md)
 
