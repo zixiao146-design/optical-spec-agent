@@ -171,7 +171,9 @@ class TestMeepAdapterSuccess:
         assert "get_flux_data" in result.content
         assert "load_minus_flux_data" in result.content
         assert "scattering_spectrum.csv" in result.content
+        assert "flux_surfaces.csv" in result.content
         assert "postprocess_results.json" in result.content
+        assert "geometry_diagnostics" in result.content
 
     def test_research_preview_script_records_stability_options(self):
         adapter = MeepAdapter()
@@ -304,6 +306,27 @@ class TestMeepAdapterSuccess:
         )
         assert "flux_mode=single_plane" in result.content
         assert "not a scattering cross-section" in result.content
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_top_plane_flux_mode_compiles(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            diagnostic_profile="physical_probe",
+            source_component="Ex",
+            flux_mode="top_plane",
+            stop_strategy="fixed",
+            fixed_run_time=50,
+        )
+        assert "flux_mode=top_plane" in result.content
+        assert "top_plane flux is diagnostic only" in result.content
+        assert "not a closed scattering cross-section" in result.content
         ast.parse(result.content)
         with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
             f.write(result.content)

@@ -181,6 +181,7 @@ except ImportError:
 
 MODE = "research_preview"
 OUTPUT_CSV = "scattering_spectrum.csv"
+OUTPUT_FLUX_SURFACES_CSV = "flux_surfaces.csv"
 OUTPUT_JSON = "postprocess_results.json"
 OUTPUT_PLOT = "scattering_spectrum.png"
 
@@ -242,6 +243,34 @@ cell = mp.Vector3(sx, sy, sz)
 particle_center = mp.Vector3(0, 0, film_thickness + gap_thickness_um + r_particle)
 box_center = particle_center
 box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, 2 * r_particle + 0.12)
+film_bottom_z = 0.0
+film_top_z = film_thickness
+particle_center_z = float(particle_center.z)
+particle_bottom_z = particle_center_z - r_particle
+particle_top_z = particle_center_z + r_particle
+flux_box_center_z = float(box_center.z)
+flux_box_bottom_z = flux_box_center_z - 0.5 * box_size.z
+flux_box_top_z = flux_box_center_z + 0.5 * box_size.z
+flux_box_intersects_film = flux_box_bottom_z < film_top_z and flux_box_top_z > film_bottom_z
+flux_box_intersects_particle = flux_box_bottom_z < particle_top_z and flux_box_top_z > particle_bottom_z
+flux_box_encloses_particle = flux_box_bottom_z <= particle_bottom_z and flux_box_top_z >= particle_top_z
+geometry_diagnostics = {{
+    "film_top_z": film_top_z,
+    "particle_center_z": particle_center_z,
+    "particle_bottom_z": particle_bottom_z,
+    "particle_top_z": particle_top_z,
+    "flux_box_center_z": flux_box_center_z,
+    "flux_box_bottom_z": flux_box_bottom_z,
+    "flux_box_top_z": flux_box_top_z,
+    "flux_box_intersects_film": bool(flux_box_intersects_film),
+    "flux_box_intersects_particle": bool(flux_box_intersects_particle),
+    "flux_box_encloses_particle": bool(flux_box_encloses_particle),
+}}
+diagnostic_warnings = []
+if flux_box_intersects_film:
+    diagnostic_warnings.append("flux box intersects film; closed-box flux may be hard to interpret")
+if not flux_box_encloses_particle:
+    diagnostic_warnings.append("flux box does not fully enclose particle; flux observable may be incomplete")
 top_interior_z = 0.5 * sz - boundary_thickness_um - pml_margin
 desired_source_z = film_thickness + gap_thickness_um + 2 * r_particle + 0.2
 source_z = min(desired_source_z, top_interior_z - 0.05)
@@ -303,58 +332,87 @@ def build_simulation(include_particle: bool):
     )
 
 
-def make_flux_regions(box_center, box_size):
+def make_flux_region_specs(box_center, box_size):
     hx = 0.5 * box_size.x
     hy = 0.5 * box_size.y
     hz = 0.5 * box_size.z
-    if flux_mode == "single_plane":
+    if flux_mode in ("single_plane", "top_plane"):
         # Diagnostic only: not a closed scattering box or cross-section.
         return [
+            (
+                "flux_z_plus",
+                mp.FluxRegion(
+                    center=box_center + mp.Vector3(0, 0, hz),
+                    size=mp.Vector3(box_size.x, box_size.y, 0),
+                    direction=mp.Z,
+                    weight=1.0,
+                ),
+            )
+        ]
+    return [
+        (
+            "flux_x_minus",
+            mp.FluxRegion(
+                center=box_center + mp.Vector3(-hx, 0, 0),
+                size=mp.Vector3(0, box_size.y, box_size.z),
+                direction=mp.X,
+                weight=-1.0,
+            ),
+        ),
+        (
+            "flux_x_plus",
+            mp.FluxRegion(
+                center=box_center + mp.Vector3(hx, 0, 0),
+                size=mp.Vector3(0, box_size.y, box_size.z),
+                direction=mp.X,
+                weight=1.0,
+            ),
+        ),
+        (
+            "flux_y_minus",
+            mp.FluxRegion(
+                center=box_center + mp.Vector3(0, -hy, 0),
+                size=mp.Vector3(box_size.x, 0, box_size.z),
+                direction=mp.Y,
+                weight=-1.0,
+            ),
+        ),
+        (
+            "flux_y_plus",
+            mp.FluxRegion(
+                center=box_center + mp.Vector3(0, hy, 0),
+                size=mp.Vector3(box_size.x, 0, box_size.z),
+                direction=mp.Y,
+                weight=1.0,
+            ),
+        ),
+        (
+            "flux_z_minus",
+            mp.FluxRegion(
+                center=box_center + mp.Vector3(0, 0, -hz),
+                size=mp.Vector3(box_size.x, box_size.y, 0),
+                direction=mp.Z,
+                weight=-1.0,
+            ),
+        ),
+        (
+            "flux_z_plus",
             mp.FluxRegion(
                 center=box_center + mp.Vector3(0, 0, hz),
                 size=mp.Vector3(box_size.x, box_size.y, 0),
                 direction=mp.Z,
                 weight=1.0,
-            )
-        ]
-    return [
-        mp.FluxRegion(
-            center=box_center + mp.Vector3(-hx, 0, 0),
-            size=mp.Vector3(0, box_size.y, box_size.z),
-            direction=mp.X,
-            weight=-1.0,
-        ),
-        mp.FluxRegion(
-            center=box_center + mp.Vector3(hx, 0, 0),
-            size=mp.Vector3(0, box_size.y, box_size.z),
-            direction=mp.X,
-            weight=1.0,
-        ),
-        mp.FluxRegion(
-            center=box_center + mp.Vector3(0, -hy, 0),
-            size=mp.Vector3(box_size.x, 0, box_size.z),
-            direction=mp.Y,
-            weight=-1.0,
-        ),
-        mp.FluxRegion(
-            center=box_center + mp.Vector3(0, hy, 0),
-            size=mp.Vector3(box_size.x, 0, box_size.z),
-            direction=mp.Y,
-            weight=1.0,
-        ),
-        mp.FluxRegion(
-            center=box_center + mp.Vector3(0, 0, -hz),
-            size=mp.Vector3(box_size.x, box_size.y, 0),
-            direction=mp.Z,
-            weight=-1.0,
-        ),
-        mp.FluxRegion(
-            center=box_center + mp.Vector3(0, 0, hz),
-            size=mp.Vector3(box_size.x, box_size.y, 0),
-            direction=mp.Z,
-            weight=1.0,
+            ),
         ),
     ]
+
+
+def make_flux_regions(box_center, box_size):
+    return [region for _name, region in make_flux_region_specs(box_center, box_size)]
+
+
+def flux_surface_names():
+    return [name for name, _region in make_flux_region_specs(box_center, box_size)]
 
 
 def add_closed_box_flux(sim):
@@ -400,7 +458,7 @@ def run_structure(ref_flux_data):
     surface_fluxes = [np.array(mp.get_fluxes(flux_obj)) for flux_obj in flux_scat]
     particle_induced_flux_relative = np.sum(surface_fluxes, axis=0)
     sim_scat.reset_meep()
-    return freqs, particle_induced_flux_relative
+    return freqs, particle_induced_flux_relative, flux_surface_names(), surface_fluxes
 
 
 def write_csv(wavelength_nm, particle_induced_flux_relative):
@@ -409,6 +467,31 @@ def write_csv(wavelength_nm, particle_induced_flux_relative):
         writer.writerow(["wavelength_nm", "particle_induced_flux_relative"])
         for wavelength_nm_value, flux_value in zip(wavelength_nm, particle_induced_flux_relative):
             writer.writerow([float(wavelength_nm_value), float(flux_value)])
+
+
+def write_flux_surfaces_csv(wavelength_nm, surface_names, surface_fluxes, flux_total):
+    canonical_names = [
+        "flux_x_minus",
+        "flux_x_plus",
+        "flux_y_minus",
+        "flux_y_plus",
+        "flux_z_minus",
+        "flux_z_plus",
+    ]
+    surface_lookup = {{
+        name: np.asarray(values, dtype=float)
+        for name, values in zip(surface_names, surface_fluxes)
+    }}
+    with open(OUTPUT_FLUX_SURFACES_CSV, "w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(["wavelength_nm", *canonical_names, "flux_total"])
+        for idx, wavelength_nm_value in enumerate(wavelength_nm):
+            row = [float(wavelength_nm_value)]
+            for name in canonical_names:
+                values = surface_lookup.get(name)
+                row.append(float(values[idx]) if values is not None else "")
+            row.append(float(flux_total[idx]))
+            writer.writerow(row)
 
 
 def save_plot(wavelength_nm, particle_induced_flux_relative):
@@ -494,6 +577,8 @@ def write_results_json(resonance_wavelength_nm, fwhm_nm):
         "fwhm_nm": fwhm_nm,
         "defaults_applied": defaults_applied,
         "limitations": limitations,
+        "warnings": diagnostic_warnings,
+        "geometry_diagnostics": geometry_diagnostics,
     }}
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
@@ -501,12 +586,13 @@ def write_results_json(resonance_wavelength_nm, fwhm_nm):
 
 def main():
     _freqs_ref, ref_flux_data = run_reference()
-    freqs_scat, particle_induced_flux_relative = run_structure(ref_flux_data)
+    freqs_scat, particle_induced_flux_relative, surface_names, surface_fluxes = run_structure(ref_flux_data)
 
     freqs_scat = np.asarray(freqs_scat, dtype=float)
     wavelength_nm = 1000.0 / freqs_scat
 
     write_csv(wavelength_nm, particle_induced_flux_relative)
+    write_flux_surfaces_csv(wavelength_nm, surface_names, surface_fluxes, particle_induced_flux_relative)
     save_plot(wavelength_nm, particle_induced_flux_relative)
 
     resonance_wavelength_nm, fwhm_nm = estimate_resonance_and_fwhm(
@@ -515,6 +601,7 @@ def main():
     write_results_json(resonance_wavelength_nm, fwhm_nm)
 
     print(f"Saved {{OUTPUT_CSV}}")
+    print(f"Saved {{OUTPUT_FLUX_SURFACES_CSV}}")
     print(f"Saved {{OUTPUT_JSON}}")
     print(f"Saved {{OUTPUT_PLOT}}")
     if resonance_wavelength_nm is not None:
@@ -801,6 +888,8 @@ def _research_stability_doc(m: MeepInputModel) -> list[str]:
         notes.append(f"material_mode={m.material_mode} is a mixed-material isolation probe, not a validated physical setup.")
     if m.flux_mode == "single_plane":
         notes.append("flux_mode=single_plane is diagnostic only and not a scattering cross-section.")
+    if m.flux_mode == "top_plane":
+        notes.append("flux_mode=top_plane measures a diagnostic upward plane flux only; it is not a closed scattering cross-section.")
     return notes
 
 
@@ -960,6 +1049,10 @@ def _research_limitations(m: MeepInputModel) -> list[str]:
     if m.flux_mode == "single_plane":
         limitations.append(
             "flux_mode=single_plane is diagnostic only and not a scattering cross-section."
+        )
+    if m.flux_mode == "top_plane":
+        limitations.append(
+            "top_plane flux is diagnostic only and not a closed scattering cross-section."
         )
     if m.sweep_variable:
         limitations.append(

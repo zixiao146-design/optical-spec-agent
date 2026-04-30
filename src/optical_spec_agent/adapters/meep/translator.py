@@ -98,7 +98,7 @@ _SUPPORTED_MATERIAL_MODES = {
 _SUPPORTED_DIAGNOSTIC_PROFILES = {"normal", "low_cost", "physical_probe"}
 _SUPPORTED_SOURCE_COMPONENTS = {"Ex", "Ey", "Ez"}
 _SUPPORTED_STOP_STRATEGIES = {"decay", "fixed"}
-_SUPPORTED_FLUX_MODES = {"closed_box", "single_plane"}
+_SUPPORTED_FLUX_MODES = {"closed_box", "single_plane", "top_plane"}
 
 _LENGTH_TO_NM = {
     "nm": 1.0,
