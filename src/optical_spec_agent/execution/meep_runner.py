@@ -113,9 +113,9 @@ def _utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def _make_run_id() -> str:
+def _make_run_id(prefix: str = "meep") -> str:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
-    return f"meep-{timestamp}-{uuid4().hex[:8]}"
+    return f"{prefix}-{timestamp}-{uuid4().hex[:8]}"
 
 
 def find_meep_python() -> list[str] | None:
@@ -132,6 +132,8 @@ def find_meep_python() -> list[str] | None:
 
 def check_meep_available() -> ExecutionResult:
     """Check whether Meep can be imported without running a simulation."""
+    run_id = _make_run_id(prefix="meep-check")
+    created_at = _utc_now_iso()
     warnings: list[str] = []
     last_command: list[str] = []
     last_returncode: int | None = None
@@ -166,6 +168,8 @@ def check_meep_available() -> ExecutionResult:
                 command=command,
                 workdir=str(Path.cwd()),
                 returncode=result.returncode,
+                run_id=run_id,
+                created_at=created_at,
                 stdout=result.stdout,
                 stderr=result.stderr,
                 warnings=warnings,
@@ -183,6 +187,8 @@ def check_meep_available() -> ExecutionResult:
         command=last_command,
         workdir=str(Path.cwd()),
         returncode=last_returncode,
+        run_id=run_id,
+        created_at=created_at,
         stdout=last_stdout,
         stderr=last_stderr,
         errors=["Meep is not available"],
@@ -243,7 +249,7 @@ def run_meep_script(
     created_at = _utc_now_iso()
     normalized_mode = _normalize_expected_mode(expected_mode)
     if normalized_mode is None:
-        return ExecutionResult(
+        failure = ExecutionResult(
             success=False,
             available=False,
             command=[],
@@ -255,11 +261,13 @@ def run_meep_script(
             expected_mode=expected_mode,
             errors=[f"Unsupported expected_mode: {expected_mode}"],
         )
+        _write_early_failure_artifacts(failure, workdir=workdir, save_artifacts=save_artifacts)
+        return failure
 
     required_outputs = _required_outputs_for_mode(normalized_mode)
     script = Path(script_path).expanduser()
     if not script.exists():
-        return ExecutionResult(
+        failure = ExecutionResult(
             success=False,
             available=False,
             command=[],
@@ -274,6 +282,8 @@ def run_meep_script(
             errors=[f"File not found: {script}"],
             warnings=["Meep availability was not checked because the script file was missing."],
         )
+        _write_early_failure_artifacts(failure, workdir=workdir, save_artifacts=save_artifacts)
+        return failure
 
     script = script.resolve()
     run_dir = Path(workdir).expanduser() if workdir else script.parent
@@ -283,7 +293,7 @@ def run_meep_script(
     meep_python = find_meep_python()
     command = (meep_python or []) + [str(script)]
     if meep_python is None:
-        return ExecutionResult(
+        failure = ExecutionResult(
             success=False,
             available=False,
             command=command,
@@ -297,6 +307,8 @@ def run_meep_script(
             missing_outputs=required_outputs.copy(),
             errors=["Meep is not available"],
         )
+        _write_execution_artifacts(failure, save_artifacts=save_artifacts)
+        return failure
 
     try:
         result = subprocess.run(
@@ -486,3 +498,15 @@ def _write_execution_artifacts(result: ExecutionResult, *, save_artifacts: bool)
         )
     except OSError as exc:
         result.warnings.append(f"Could not write execution artifacts: {exc}")
+
+
+def _write_early_failure_artifacts(
+    result: ExecutionResult,
+    *,
+    workdir: Path | None,
+    save_artifacts: bool,
+) -> None:
+    if workdir is None:
+        return
+    result.workdir = str(Path(workdir).expanduser())
+    _write_execution_artifacts(result, save_artifacts=save_artifacts)

@@ -57,6 +57,9 @@ def _make_valid_spec() -> OpticalSpec:
 def test_check_meep_available_returns_structured_result():
     result = check_meep_available()
     assert isinstance(result, ExecutionResult)
+    assert result.schema_version == "execution_result.v0.1"
+    assert result.run_id.startswith("meep-check-")
+    assert result.created_at.endswith("Z")
     assert isinstance(result.success, bool)
     assert isinstance(result.available, bool)
     assert isinstance(result.command, list)
@@ -74,6 +77,18 @@ def test_run_meep_script_missing_file_returns_error(tmp_path):
     assert any("File not found" in error for error in result.errors)
 
 
+def test_run_meep_script_missing_file_writes_artifacts(tmp_path):
+    run_dir = tmp_path / "run"
+    result = run_meep_script(tmp_path / "missing.py", workdir=run_dir)
+
+    assert result.success is False
+    assert (run_dir / "execution_result.json").exists()
+    assert (run_dir / "run_manifest.json").exists()
+    saved = json.loads((run_dir / "execution_result.json").read_text(encoding="utf-8"))
+    assert saved["success"] is False
+    assert saved["run_id"] == result.run_id
+
+
 def test_run_meep_script_when_meep_unavailable_returns_unavailable(tmp_path, monkeypatch):
     script_path = tmp_path / "noop.py"
     script_path.write_text("print('hello')\n", encoding="utf-8")
@@ -87,6 +102,33 @@ def test_run_meep_script_when_meep_unavailable_returns_unavailable(tmp_path, mon
     assert result.success is False
     assert result.available is False
     assert any("Meep is not available" in error for error in result.errors)
+
+
+def test_run_meep_script_meep_unavailable_writes_artifacts(tmp_path, monkeypatch):
+    script_path = tmp_path / "noop.py"
+    script_path.write_text("print('hello')\n", encoding="utf-8")
+    run_dir = tmp_path / "run"
+    monkeypatch.setattr(
+        "optical_spec_agent.execution.meep_runner.find_meep_python",
+        lambda: None,
+    )
+
+    result = run_meep_script(script_path, workdir=run_dir)
+
+    assert result.success is False
+    assert result.available is False
+    assert (run_dir / "execution_result.json").exists()
+    assert (run_dir / "run_manifest.json").exists()
+
+
+def test_run_meep_script_unsupported_expected_mode_returns_error(tmp_path):
+    script_path = tmp_path / "noop.py"
+    script_path.write_text("print('hello')\n", encoding="utf-8")
+
+    result = run_meep_script(script_path, workdir=tmp_path / "run", expected_mode="paper")
+
+    assert result.success is False
+    assert any("Unsupported expected_mode" in error for error in result.errors)
 
 
 def test_collect_meep_outputs_reads_known_files(tmp_path):
