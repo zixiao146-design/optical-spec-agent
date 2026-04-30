@@ -7,11 +7,18 @@ covering only the nanoparticle_on_film + plane_wave + scattering_spectrum path.
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
 
 
 class MeepInputModel(BaseModel):
     """All parameters needed to render a Meep nanoparticle-on-film script."""
+
+    script_mode: Literal["preview", "research_preview", "smoke"] = Field(
+        default="preview",
+        description="Script generation mode: preview, research_preview, or smoke",
+    )
 
     # --- Particle ---
     particle_material: str = Field(description="e.g. 'Au', 'Ag'")
@@ -23,6 +30,7 @@ class MeepInputModel(BaseModel):
     film_thickness_um: float = Field(description="Film thickness in μm")
 
     # --- Gap ---
+    gap_medium_name: str = Field(description="e.g. 'SiO2', 'Al2O3', 'Air'")
     gap_medium_n: float = Field(description="Refractive index of gap dielectric")
     gap_thickness_um: float = Field(description="Gap thickness in μm")
 

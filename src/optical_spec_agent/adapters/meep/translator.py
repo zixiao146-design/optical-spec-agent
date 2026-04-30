@@ -87,6 +87,8 @@ _SHAPE_MAP = {
     "rod": "cylinder",
 }
 
+_SUPPORTED_SCRIPT_MODES = {"preview", "research_preview", "smoke"}
+
 _LENGTH_TO_NM = {
     "nm": 1.0,
     "um": 1000.0,
@@ -208,6 +210,17 @@ def _resolve_wavelength_range(spec: OpticalSpec) -> tuple[tuple[float, float] | 
     return wl_range, wl_range is None
 
 
+def _normalize_script_mode(script_mode: str) -> str:
+    """Normalize CLI / caller script modes into the internal adapter values."""
+    normalized = (script_mode or "preview").strip().lower().replace("-", "_")
+    if normalized not in _SUPPORTED_SCRIPT_MODES:
+        raise ValueError(
+            f"Unsupported Meep script mode '{script_mode}'. "
+            f"Choose from {sorted(_SUPPORTED_SCRIPT_MODES)}."
+        )
+    return normalized
+
+
 class MeepAdapter(BaseAdapter):
     """Meep FDTD adapter — nanoparticle_on_film → scattering_spectrum script."""
 
@@ -314,7 +327,9 @@ class MeepAdapter(BaseAdapter):
             defaults_applied=defaults_applied,
         )
 
-    def generate(self, spec: OpticalSpec) -> AdapterResult:
+    def generate(self, spec: OpticalSpec, script_mode: str = "preview") -> AdapterResult:
+        normalized_mode = _normalize_script_mode(script_mode)
+
         if not self.can_handle(spec):
             raise AdapterError(
                 "unsupported_path", "physical_system/solver_method/software_tool",
@@ -330,7 +345,7 @@ class MeepAdapter(BaseAdapter):
                 "Meep adapter currently supports plane_wave only",
             )
 
-        model = self._translate(spec)
+        model = self._translate(spec, script_mode=normalized_mode)
         script = render_script(model)
         return AdapterResult(
             tool="meep",
@@ -338,7 +353,8 @@ class MeepAdapter(BaseAdapter):
             language="python",
         )
 
-    def _translate(self, spec: OpticalSpec) -> MeepInputModel:
+    def _translate(self, spec: OpticalSpec, script_mode: str = "preview") -> MeepInputModel:
+        normalized_mode = _normalize_script_mode(script_mode)
         defaults_applied: list[str] = []
 
         # --- Particle info ---
@@ -401,6 +417,7 @@ class MeepAdapter(BaseAdapter):
                     "invalid_adapter_input", "geometry_material.gap_medium",
                     f"unknown '{gap_name}', known: {sorted(_GAP_N.keys())}",
                 )
+            gap_name = _ADAPTER_DEFAULTS["gap_medium"]
             gap_n = _ADAPTER_DEFAULTS["gap_medium_n"]
             defaults_applied.append(f"gap_medium: {_ADAPTER_DEFAULTS['gap_medium']} (n={gap_n})")
 
@@ -463,11 +480,13 @@ class MeepAdapter(BaseAdapter):
                         postprocess.append(item)
 
         return MeepInputModel(
+            script_mode=normalized_mode,
             particle_material=p_mat,
             particle_shape=shape,
             particle_radius_um=radius_um,
             film_material=film_mat,
             film_thickness_um=film_thick_um,
+            gap_medium_name=gap_name,
             gap_medium_n=gap_n,
             gap_thickness_um=gap_thick_um,
             wavelength_min_um=wl_range[0],
@@ -477,5 +496,6 @@ class MeepAdapter(BaseAdapter):
             sweep_end_um=sweep_end,
             sweep_steps=sweep_steps,
             postprocess=postprocess,
+            smoke=(normalized_mode == "smoke"),
             defaults_applied=defaults_applied,
         )

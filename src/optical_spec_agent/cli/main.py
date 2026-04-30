@@ -162,6 +162,11 @@ if __name__ == "__main__":
 def meep_generate(
     spec_file: Path = typer.Argument(..., help="Path to spec JSON file"),
     output: Path = typer.Option(None, "-o", "--output", help="Output .py script path"),
+    mode: str = typer.Option(
+        "preview",
+        "--mode",
+        help="Meep script mode: preview, research-preview, or smoke",
+    ),
 ):
     """Generate a Meep Python script from a validated spec JSON."""
     if not spec_file.exists():
@@ -222,7 +227,10 @@ def meep_generate(
             console.print(f"  - {warning}")
 
     try:
-        result = adapter.generate(spec)
+        result = adapter.generate(spec, script_mode=mode)
+    except ValueError as e:
+        console.print(f"[red]{e}[/red]")
+        raise typer.Exit(1)
     except AdapterError as e:
         console.print(f"[red]Adapter error: {e}[/red]")
         raise typer.Exit(1)
@@ -230,7 +238,7 @@ def meep_generate(
     if output:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(result.content, encoding="utf-8")
-        console.print(f"[green]Meep script written to {output}[/green]")
+        console.print(f"[green]Meep script ({mode}) written to {output}[/green]")
     else:
         console.print(result.content)
 
