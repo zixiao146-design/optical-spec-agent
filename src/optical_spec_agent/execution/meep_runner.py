@@ -12,8 +12,10 @@ import shutil
 import subprocess
 import sys
 from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 
 MEEP_OUTPUT_FILES = (
@@ -25,6 +27,26 @@ RESEARCH_PREVIEW_REQUIRED_OUTPUTS = [
     "scattering_spectrum.csv",
     "postprocess_results.json",
 ]
+EXECUTION_RESULT_SCHEMA_VERSION = "execution_result.v0.1"
+
+
+@dataclass(slots=True)
+class PostprocessResult:
+    """Typed view over research-preview postprocess_results.json."""
+
+    mode: str | None = None
+    resonance_wavelength_nm: float | None = None
+    fwhm_nm: float | None = None
+    gap_thickness_nm: float | None = None
+    wavelength_min_nm: float | None = None
+    wavelength_max_nm: float | None = None
+    defaults_applied: list[str] = field(default_factory=list)
+    limitations: list[str] = field(default_factory=list)
+    raw: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        """Return a JSON-serializable typed postprocess result."""
+        return asdict(self)
 
 
 @dataclass(slots=True)
@@ -36,10 +58,15 @@ class ExecutionResult:
     command: list[str]
     workdir: str
     returncode: int | None
+    schema_version: str = EXECUTION_RESULT_SCHEMA_VERSION
+    run_id: str = ""
+    created_at: str = ""
+    script_path: str = ""
     stdout: str = ""
     stderr: str = ""
     outputs: dict[str, str] = field(default_factory=dict)
     postprocess_results: dict[str, Any] | None = None
+    typed_postprocess_results: dict[str, Any] | None = None
     expected_mode: str = "auto"
     required_outputs: list[str] = field(default_factory=list)
     missing_outputs: list[str] = field(default_factory=list)
@@ -80,6 +107,15 @@ def _normalize_expected_mode(expected_mode: str) -> str | None:
     if normalized in {"auto", "smoke", "preview", "research_preview"}:
         return normalized
     return None
+
+
+def _utc_now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def _make_run_id() -> str:
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    return f"meep-{timestamp}-{uuid4().hex[:8]}"
 
 
 def find_meep_python() -> list[str] | None:
@@ -173,14 +209,38 @@ def collect_meep_outputs(workdir: Path) -> tuple[dict[str, str], dict[str, Any] 
     return outputs, postprocess_results
 
 
+def parse_postprocess_results(workdir: Path) -> Any:
+    """Parse raw postprocess_results.json without compatibility wrapping."""
+    postprocess_path = Path(workdir) / "postprocess_results.json"
+    return json.loads(postprocess_path.read_text(encoding="utf-8"))
+
+
+def parse_typed_postprocess_results(raw: dict[str, Any]) -> PostprocessResult:
+    """Build a typed view over a raw postprocess result dict."""
+    return PostprocessResult(
+        mode=_optional_str(raw.get("mode")),
+        resonance_wavelength_nm=_optional_float(raw.get("resonance_wavelength_nm")),
+        fwhm_nm=_optional_float(raw.get("fwhm_nm")),
+        gap_thickness_nm=_optional_float(raw.get("gap_thickness_nm")),
+        wavelength_min_nm=_optional_float(raw.get("wavelength_min_nm")),
+        wavelength_max_nm=_optional_float(raw.get("wavelength_max_nm")),
+        defaults_applied=_string_list(raw.get("defaults_applied")),
+        limitations=_string_list(raw.get("limitations")),
+        raw=raw,
+    )
+
+
 def run_meep_script(
     script_path: Path,
     workdir: Path | None = None,
     timeout: int = 300,
     expected_mode: str = "auto",
     save_artifacts: bool = True,
+    run_id: str | None = None,
 ) -> ExecutionResult:
     """Run an existing Meep script when Meep is available."""
+    resolved_run_id = run_id or _make_run_id()
+    created_at = _utc_now_iso()
     normalized_mode = _normalize_expected_mode(expected_mode)
     if normalized_mode is None:
         return ExecutionResult(
@@ -189,6 +249,9 @@ def run_meep_script(
             command=[],
             workdir=str(Path(workdir).expanduser() if workdir else Path.cwd()),
             returncode=None,
+            run_id=resolved_run_id,
+            created_at=created_at,
+            script_path=str(Path(script_path).expanduser()),
             expected_mode=expected_mode,
             errors=[f"Unsupported expected_mode: {expected_mode}"],
         )
@@ -202,6 +265,9 @@ def run_meep_script(
             command=[],
             workdir=str(Path(workdir).expanduser() if workdir else Path.cwd()),
             returncode=None,
+            run_id=resolved_run_id,
+            created_at=created_at,
+            script_path=str(script),
             expected_mode=normalized_mode,
             required_outputs=required_outputs,
             missing_outputs=required_outputs.copy(),
@@ -212,6 +278,7 @@ def run_meep_script(
     script = script.resolve()
     run_dir = Path(workdir).expanduser() if workdir else script.parent
     run_dir.mkdir(parents=True, exist_ok=True)
+    script_path_str = str(script)
 
     meep_python = find_meep_python()
     command = (meep_python or []) + [str(script)]
@@ -222,6 +289,9 @@ def run_meep_script(
             command=command,
             workdir=str(run_dir),
             returncode=None,
+            run_id=resolved_run_id,
+            created_at=created_at,
+            script_path=script_path_str,
             expected_mode=normalized_mode,
             required_outputs=required_outputs,
             missing_outputs=required_outputs.copy(),
@@ -245,10 +315,14 @@ def run_meep_script(
             command=command,
             workdir=str(run_dir),
             returncode=None,
+            run_id=resolved_run_id,
+            created_at=created_at,
+            script_path=script_path_str,
             stdout=_decode_process_output(exc.stdout),
             stderr=_decode_process_output(exc.stderr),
             outputs=outputs,
             postprocess_results=postprocess_results,
+            typed_postprocess_results=_typed_postprocess_dict(postprocess_results),
             expected_mode=normalized_mode,
             required_outputs=required_outputs,
             missing_outputs=missing_outputs,
@@ -263,6 +337,9 @@ def run_meep_script(
             command=command,
             workdir=str(run_dir),
             returncode=None,
+            run_id=resolved_run_id,
+            created_at=created_at,
+            script_path=script_path_str,
             expected_mode=normalized_mode,
             required_outputs=required_outputs,
             missing_outputs=required_outputs.copy(),
@@ -271,6 +348,7 @@ def run_meep_script(
 
     warnings: list[str] = []
     errors: list[str] = []
+    typed_postprocess_results: dict[str, Any] | None = None
     try:
         outputs, postprocess_results = collect_meep_outputs(run_dir)
     except (OSError, json.JSONDecodeError) as exc:
@@ -284,8 +362,21 @@ def run_meep_script(
     missing_outputs = _missing_required_outputs(outputs, required_outputs)
     for output_name in missing_outputs:
         errors.append(f"Missing required output for {normalized_mode}: {output_name}")
-    if normalized_mode == "research_preview" and "postprocess_results.json" in outputs and postprocess_results is None:
-        errors.append("Could not parse postprocess_results.json as a JSON object")
+    if normalized_mode == "research_preview" and "postprocess_results.json" in outputs:
+        try:
+            raw_postprocess_results = parse_postprocess_results(run_dir)
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"Could not parse postprocess_results.json: {exc}")
+            postprocess_results = None
+        else:
+            if not isinstance(raw_postprocess_results, dict):
+                errors.append("postprocess_results.json must be a JSON object")
+                postprocess_results = None
+            else:
+                postprocess_results = raw_postprocess_results
+                typed_postprocess_results = parse_typed_postprocess_results(raw_postprocess_results).to_dict()
+    elif isinstance(postprocess_results, dict):
+        typed_postprocess_results = parse_typed_postprocess_results(postprocess_results).to_dict()
 
     execution_result = ExecutionResult(
         success=result.returncode == 0 and not errors,
@@ -293,10 +384,14 @@ def run_meep_script(
         command=command,
         workdir=str(run_dir),
         returncode=result.returncode,
+        run_id=resolved_run_id,
+        created_at=created_at,
+        script_path=script_path_str,
         stdout=result.stdout,
         stderr=result.stderr,
         outputs=outputs,
         postprocess_results=postprocess_results,
+        typed_postprocess_results=typed_postprocess_results,
         expected_mode=normalized_mode,
         required_outputs=required_outputs,
         missing_outputs=missing_outputs,
@@ -317,12 +412,59 @@ def _missing_required_outputs(outputs: dict[str, str], required_outputs: list[st
     return [name for name in required_outputs if name not in outputs]
 
 
+def _optional_str(value: Any) -> str | None:
+    if value is None:
+        return None
+    return str(value)
+
+
+def _optional_float(value: Any) -> float | None:
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _string_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [str(item) for item in value]
+    return [str(value)]
+
+
+def _typed_postprocess_dict(raw: dict[str, Any] | None) -> dict[str, Any] | None:
+    if raw is None:
+        return None
+    return parse_typed_postprocess_results(raw).to_dict()
+
+
 def _safe_collect_outputs(workdir: Path) -> tuple[dict[str, str], dict[str, Any] | None, list[str]]:
     try:
         outputs, postprocess_results = collect_meep_outputs(workdir)
         return outputs, postprocess_results, []
     except (OSError, json.JSONDecodeError) as exc:
         return {}, None, [f"Could not parse Meep outputs: {exc}"]
+
+
+def _run_manifest(result: ExecutionResult) -> dict[str, Any]:
+    return {
+        "schema_version": result.schema_version,
+        "run_id": result.run_id,
+        "created_at": result.created_at,
+        "script_path": result.script_path,
+        "workdir": result.workdir,
+        "expected_mode": result.expected_mode,
+        "command": result.command,
+        "success": result.success,
+        "available": result.available,
+        "returncode": result.returncode,
+        "outputs": result.outputs,
+        "required_outputs": result.required_outputs,
+        "missing_outputs": result.missing_outputs,
+    }
 
 
 def _write_execution_artifacts(result: ExecutionResult, *, save_artifacts: bool) -> None:
@@ -336,6 +478,10 @@ def _write_execution_artifacts(result: ExecutionResult, *, save_artifacts: bool)
         (run_dir / "stderr.txt").write_text(result.stderr, encoding="utf-8")
         (run_dir / "execution_result.json").write_text(
             json.dumps(result.to_dict(), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        (run_dir / "run_manifest.json").write_text(
+            json.dumps(_run_manifest(result), indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
     except OSError as exc:

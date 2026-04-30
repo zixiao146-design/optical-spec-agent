@@ -284,11 +284,12 @@ def meep_run(
         "--expected-mode",
         help="Expected script mode: auto, smoke, preview, or research-preview",
     ),
+    run_id: str | None = typer.Option(None, "--run-id", help="Optional execution run ID"),
     json_output: bool = typer.Option(False, "--json", help="Print structured JSON output"),
     no_save_artifacts: bool = typer.Option(
         False,
         "--no-save-artifacts",
-        help="Do not write stdout.txt, stderr.txt, or execution_result.json",
+        help="Do not write stdout.txt, stderr.txt, execution_result.json, or run_manifest.json",
     ),
 ):
     """Run an existing generated Meep script and collect known outputs."""
@@ -300,6 +301,7 @@ def meep_run(
         timeout=timeout,
         expected_mode=expected_mode,
         save_artifacts=not no_save_artifacts,
+        run_id=run_id,
     )
 
     if json_output:
@@ -321,6 +323,9 @@ def meep_run(
 def _print_execution_result(result) -> None:
     console.print(f"Success: {'yes' if result.success else 'no'}")
     console.print(f"Meep available: {'yes' if result.available else 'no'}")
+    console.print(f"Schema version: {result.schema_version}")
+    console.print(f"Run ID: {result.run_id}")
+    console.print(f"Created at: {result.created_at}")
     console.print(f"Expected mode: {result.expected_mode}")
     console.print(f"Workdir: {result.workdir}")
     if result.command:
@@ -335,6 +340,15 @@ def _print_execution_result(result) -> None:
         console.print("[red]Missing outputs:[/red]")
         for name in result.missing_outputs:
             console.print(f"  - {name}")
+    artifact_paths = [
+        Path(result.workdir) / "execution_result.json",
+        Path(result.workdir) / "run_manifest.json",
+    ]
+    existing_artifacts = [path for path in artifact_paths if path.exists()]
+    if existing_artifacts:
+        console.print("[green]Execution artifacts:[/green]")
+        for path in existing_artifacts:
+            console.print(f"  - {path.name}: {path}")
     if result.errors:
         console.print("[red]Errors:[/red]")
         for error in result.errors:
