@@ -164,12 +164,22 @@ import meep as mp
 import numpy as np
 import matplotlib.pyplot as plt
 
+import csv
+import json
+
+try:
+    from scipy.signal import find_peaks
+except ImportError:
+    find_peaks = None
+
 try:
     from meep.materials import Au, Ag, SiO2, Si3N4, Al2O3
 except ImportError:
     Au = Ag = SiO2 = Si3N4 = Al2O3 = None
 
 MODE = "research_preview"
+OUTPUT_CSV = "scattering_spectrum.csv"
+OUTPUT_JSON = "postprocess_results.json"
 OUTPUT_PLOT = "scattering_spectrum.png"
 
 particle_material_name = {m.particle_material!r}
@@ -372,6 +382,14 @@ def run_structure(ref_flux_data):
     return freqs, particle_induced_flux_relative
 
 
+def write_csv(wavelength_nm, particle_induced_flux_relative):
+    with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(["wavelength_nm", "particle_induced_flux_relative"])
+        for wavelength_nm_value, flux_value in zip(wavelength_nm, particle_induced_flux_relative):
+            writer.writerow([float(wavelength_nm_value), float(flux_value)])
+
+
 def save_plot(wavelength_nm, particle_induced_flux_relative):
     plt.figure(figsize=(8, 5))
     plt.plot(wavelength_nm, particle_induced_flux_relative, "b-")
@@ -387,6 +405,69 @@ def save_plot(wavelength_nm, particle_induced_flux_relative):
     plt.close()
 
 
+def estimate_resonance_and_fwhm(wavelength_nm, flux_values):
+    flux_array = np.asarray(flux_values, dtype=float)
+    if flux_array.size < 3:
+        return None, None
+
+    peak_indices = []
+    if find_peaks is not None:
+        peaks, _props = find_peaks(flux_array)
+        peak_indices = [int(idx) for idx in peaks]
+
+    if not peak_indices:
+        best_idx = int(np.argmax(flux_array))
+        if 0 < best_idx < flux_array.size - 1:
+            if flux_array[best_idx] > flux_array[best_idx - 1] and flux_array[best_idx] >= flux_array[best_idx + 1]:
+                peak_indices = [best_idx]
+
+    if not peak_indices:
+        return None, None
+
+    peak_idx = max(peak_indices, key=lambda idx: flux_array[idx])
+    peak_flux = float(flux_array[peak_idx])
+    if not np.isfinite(peak_flux):
+        return None, None
+
+    resonance_wavelength_nm = float(wavelength_nm[peak_idx])
+    if peak_flux <= 0:
+        return resonance_wavelength_nm, None
+
+    half_max = peak_flux / 2.0
+    left_candidates = np.where(flux_array[:peak_idx] <= half_max)[0]
+    right_candidates = np.where(flux_array[peak_idx:] <= half_max)[0]
+
+    if left_candidates.size == 0 or right_candidates.size == 0:
+        return resonance_wavelength_nm, None
+
+    left_idx = int(left_candidates[-1])
+    right_idx = int(peak_idx + right_candidates[0])
+    if right_idx <= left_idx:
+        return resonance_wavelength_nm, None
+
+    fwhm_nm = float(abs(wavelength_nm[right_idx] - wavelength_nm[left_idx]))
+    return resonance_wavelength_nm, fwhm_nm
+
+
+def write_results_json(resonance_wavelength_nm, fwhm_nm):
+    results = {{
+        "mode": MODE,
+        "particle_material": particle_material_name,
+        "film_material": film_material_name,
+        "gap_medium_name": gap_medium_name,
+        "gap_medium_n": gap_medium_n,
+        "gap_thickness_nm": gap_thickness_um * 1000.0,
+        "wavelength_min_nm": wavelength_min_um * 1000.0,
+        "wavelength_max_nm": wavelength_max_um * 1000.0,
+        "resonance_wavelength_nm": resonance_wavelength_nm,
+        "fwhm_nm": fwhm_nm,
+        "defaults_applied": defaults_applied,
+        "limitations": limitations,
+    }}
+    with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+
+
 def main():
     _freqs_ref, ref_flux_data = run_reference()
     freqs_scat, particle_induced_flux_relative = run_structure(ref_flux_data)
@@ -394,10 +475,25 @@ def main():
     freqs_scat = np.asarray(freqs_scat, dtype=float)
     wavelength_nm = 1000.0 / freqs_scat
 
+    write_csv(wavelength_nm, particle_induced_flux_relative)
     save_plot(wavelength_nm, particle_induced_flux_relative)
 
+    resonance_wavelength_nm, fwhm_nm = estimate_resonance_and_fwhm(
+        wavelength_nm, particle_induced_flux_relative
+    )
+    write_results_json(resonance_wavelength_nm, fwhm_nm)
+
+    print(f"Saved {{OUTPUT_CSV}}")
+    print(f"Saved {{OUTPUT_JSON}}")
     print(f"Saved {{OUTPUT_PLOT}}")
-    print("Research-preview run complete; inspect particle-induced flux before using results.")
+    if resonance_wavelength_nm is not None:
+        print(f"Resonance wavelength: {{resonance_wavelength_nm:.2f}} nm")
+    else:
+        print("Resonance wavelength: null")
+    if fwhm_nm is not None:
+        print(f"FWHM: {{fwhm_nm:.2f}} nm")
+    else:
+        print("FWHM: null")
 
 
 if __name__ == "__main__":
@@ -651,6 +747,7 @@ def _research_limitations(m: MeepInputModel) -> list[str]:
     limitations = [
         "Research-preview only; not production-grade or publication-ready.",
         "Uses particle-induced flux relative to a film/background reference run.",
+        "Peak extraction is heuristic and may return null when no clear resonance is detected.",
         "Gap/background fallback may use a constant-index mp.Medium(epsilon=n**2).",
     ]
     if m.sweep_variable:
