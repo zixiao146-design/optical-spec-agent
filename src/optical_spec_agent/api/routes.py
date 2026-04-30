@@ -7,6 +7,7 @@ from typing import Any
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
+from optical_spec_agent import __version__
 from optical_spec_agent.models.spec import OpticalSpec
 from optical_spec_agent.services.spec_service import SpecService
 from optical_spec_agent.utils.format import spec_to_json, spec_to_summary
@@ -49,7 +50,7 @@ class ValidateResponse(BaseModel):
 
 @router.get("/health")
 def health_check():
-    return {"status": "ok", "version": "0.3.0"}
+    return {"status": "ok", "version": __version__}
 
 
 @router.post("/parse", response_model=ParseResponse)

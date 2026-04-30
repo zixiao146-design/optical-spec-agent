@@ -3,6 +3,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
+from optical_spec_agent import __version__
 from optical_spec_agent.api.app import app
 
 
@@ -16,7 +17,7 @@ def test_health(client):
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "ok"
-    assert data["version"] == "0.3.0"
+    assert data["version"] == __version__
 
 
 def test_parse(client):
