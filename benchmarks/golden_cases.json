@@ -48,7 +48,10 @@
           "value": {
             "geometry_type": "cube",
             "description": "用FDTD仿真一个gap plasmon体系：80nm金纳米立方体放在金膜上，间隙填充SiO2（5 nm），用总场散射场(TFSF)光源正入射，扫间隙厚度从2nm到20nm，步长2nm，计算散射截面和吸收截面",
-            "dimensions": {},
+            "dimensions": {
+              "边长": "80 nm",
+              "gap": "5 nm"
+            },
             "units": "nm"
           },
           "status": "confirmed",
@@ -58,22 +61,15 @@
           "value": {
             "materials": [
               {
-                "name": "Au",
-                "role": "film",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Si",
-                "role": "gap_medium",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
                 "name": "SiO2",
                 "role": "gap_medium",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Au",
+                "role": "film",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -106,21 +102,26 @@
           "value": {
             "particle_type": "cube",
             "material": "Au",
-            "dimensions": {},
+            "dimensions": {
+              "边长": "80 nm",
+              "edge_length_nm": "80"
+            },
             "notes": ""
           },
           "status": "confirmed",
           "note": ""
         },
         "gap_medium": {
-          "value": "Si",
+          "value": "SiO2",
           "status": "confirmed",
           "note": ""
         },
         "key_parameters": {
-          "value": null,
-          "status": "missing",
-          "note": "未提取到关键参数"
+          "value": [
+            "gap 5 nm"
+          ],
+          "status": "confirmed",
+          "note": ""
         }
       },
       "simulation": {
@@ -230,11 +231,14 @@
         "physics.physical_system": "nanoparticle_on_film",
         "physics.physical_mechanism": "gap_plasmon",
         "physics.structure_type": "cube_on_film",
-        "geometry_material.geometry_definition": "geometry_type='cube' description='用FDTD仿真一个gap plasmon体系：80nm金纳米立方体放在金膜上，间隙填充SiO2（5 nm），用总场散射场(TFSF)光源正入射，扫间隙厚度从2nm到20nm，步长2nm，计算散射截面和吸收截面' dimensions={} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='gap_medium', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='gap_medium', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.geometry_definition": "geometry_type='cube' description='用FDTD仿真一个gap plasmon体系：80nm金纳米立方体放在金膜上，间隙填充SiO2（5 nm），用总场散射场(TFSF)光源正入射，扫间隙厚度从2nm到20nm，步长2nm，计算散射截面和吸收截面' dimensions={'边长': '80 nm', 'gap': '5 nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='SiO2', role='gap_medium', model=None, refractive_index=None, notes=''), MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
-        "geometry_material.particle_info": "particle_type='cube' material='Au' dimensions={} notes=''",
-        "geometry_material.gap_medium": "Si",
+        "geometry_material.particle_info": "particle_type='cube' material='Au' dimensions={'边长': '80 nm', 'edge_length_nm': '80'} notes=''",
+        "geometry_material.gap_medium": "SiO2",
+        "geometry_material.key_parameters": [
+          "gap 5 nm"
+        ],
         "simulation.solver_method": "fdtd",
         "simulation.sweep_plan": "sweep_type='parameter' variable='gap_nm' range_start=2.0 range_end=20.0 num_points=None step=2.0 unit='nm' description='间隙厚度从2nm到20nm'",
         "simulation.excitation_source": "tfsf",
@@ -261,7 +265,6 @@
         }
       },
       "missing_fields": [
-        "geometry_material.key_parameters",
         "simulation.software_tool",
         "simulation.polarization",
         "simulation.symmetry_setting",
@@ -282,7 +285,6 @@
           "缺少必填字段: simulation.monitor_setting"
         ],
         "warnings": [
-          "建议补充字段: geometry_material.key_parameters",
           "建议补充字段: simulation.polarization"
         ]
       }
@@ -429,9 +431,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "5-25 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": null,
@@ -526,6 +535,7 @@
         "simulation.solver_method": "fdtd",
         "simulation.software_tool": "meep",
         "simulation.sweep_plan": "sweep_type='parameter' variable='gap_nm' range_start=5.0 range_end=25.0 num_points=None step=None unit='nm' description='gap 从 5 到 25 nm'",
+        "simulation.source_setting": "source_type=None wavelength_range='5-25 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
         "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
         "output.output_observables": [
           "scattering_spectrum",
@@ -579,7 +589,6 @@
         "geometry_material.gap_medium",
         "geometry_material.key_parameters",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.polarization",
         "simulation.symmetry_setting",
         "simulation.mesh_setting",
@@ -597,9 +606,7 @@
         "is_executable": false,
         "errors": [
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
-          "缺少必填字段: simulation.monitor_setting",
-          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
+          "缺少必填字段: simulation.monitor_setting"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters",
@@ -672,22 +679,15 @@
           "value": {
             "materials": [
               {
-                "name": "Au",
-                "role": "particle",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Si",
-                "role": "substrate",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
                 "name": "SiO2",
                 "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Au",
+                "role": "particle",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -720,11 +720,7 @@
           "value": {
             "particle_type": "cross",
             "material": "Au",
-            "dimensions": {
-              "长度": "宽40nm",
-              "宽": "宽40nm",
-              "厚": "厚30nm"
-            },
+            "dimensions": {},
             "notes": ""
           },
           "status": "confirmed",
@@ -772,9 +768,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "500-1200 nm",
+            "polarization": "linear_x",
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": "linear_x",
@@ -841,12 +844,13 @@
         "physics.physical_mechanism": "scattering",
         "physics.structure_type": "cross_structure",
         "geometry_material.geometry_definition": "geometry_type='cross' description='建模非对称金纳米十字结构，两臂长度分别为120nm和80nm，宽40nm，厚30nm，放在SiO2基底上' dimensions={'长度': '宽40nm', '宽': '宽40nm', '厚': '厚30nm'} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
-        "geometry_material.particle_info": "particle_type='cross' material='Au' dimensions={'长度': '宽40nm', '宽': '宽40nm', '厚': '厚30nm'} notes=''",
+        "geometry_material.particle_info": "particle_type='cross' material='Au' dimensions={} notes=''",
         "simulation.solver_method": "fdtd",
         "simulation.software_tool": "lumerical",
         "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=500.0 range_end=1200.0 num_points=None step=None unit='nm' description=''",
+        "simulation.source_setting": "source_type=None wavelength_range='500-1200 nm' polarization='linear_x' incident_angle='0 deg' amplitude=None description=''",
         "simulation.polarization": "linear_x",
         "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
         "output.output_observables": [
@@ -875,7 +879,6 @@
         "geometry_material.gap_medium",
         "geometry_material.key_parameters",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.symmetry_setting",
         "simulation.mesh_setting",
         "simulation.stability_setting",
@@ -892,9 +895,7 @@
         "is_executable": false,
         "errors": [
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
-          "缺少必填字段: simulation.monitor_setting",
-          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
+          "缺少必填字段: simulation.monitor_setting"
         ],
         "warnings": [
           "建议补充字段: geometry_material.key_parameters",
@@ -965,8 +966,8 @@
           "value": {
             "materials": [
               {
-                "name": "Si",
-                "role": "substrate",
+                "name": "Si3N4",
+                "role": "",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -974,13 +975,6 @@
               {
                 "name": "SiO2",
                 "role": "substrate",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Si3N4",
-                "role": "",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -1020,10 +1014,7 @@
           "value": {
             "particle_type": "waveguide",
             "material": "",
-            "dimensions": {
-              "长度": "宽800nm",
-              "宽": "宽800nm"
-            },
+            "dimensions": {},
             "notes": ""
           },
           "status": "confirmed",
@@ -1062,9 +1053,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "",
+            "polarization": "TM",
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": "TM",
@@ -1124,11 +1122,12 @@
         "physics.physical_mechanism": "waveguide",
         "physics.structure_type": "waveguide",
         "geometry_material.geometry_definition": "geometry_type='waveguide' description='COMSOL模式分析：Si3N4脊波导（宽800nm，高400nm，蚀刻深度250nm），SiO2下包层，上包层为空气，计算1' dimensions={'长度': '宽800nm', '宽': '宽800nm'} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si3N4', role='', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Si3N4', role='', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
-        "geometry_material.particle_info": "particle_type='waveguide' material='' dimensions={'长度': '宽800nm', '宽': '宽800nm'} notes=''",
+        "geometry_material.particle_info": "particle_type='waveguide' material='' dimensions={} notes=''",
         "simulation.solver_method": "fem",
         "simulation.software_tool": "comsol",
+        "simulation.source_setting": "source_type=None wavelength_range='' polarization='TM' incident_angle='0 deg' amplitude=None description=''",
         "simulation.polarization": "TM",
         "output.output_observables": [
           "field_distribution",
@@ -1152,7 +1151,6 @@
         "geometry_material.key_parameters",
         "simulation.sweep_plan",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
         "simulation.mesh_setting",
@@ -1168,7 +1166,6 @@
         "is_executable": false,
         "errors": [
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
           "缺少必填字段: simulation.monitor_setting",
           "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
@@ -1296,9 +1293,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "500-900 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": null,
@@ -1379,6 +1383,7 @@
         "geometry_material.geometry_definition": "geometry_type=None description='对实验测得的散射谱进行Lorentzian拟合，数据范围500-900nm，主峰位于680nm附近，提取FWHM和T2退相干时间' dimensions={} units='nm'",
         "simulation.software_tool": "python",
         "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=500.0 range_end=900.0 num_points=None step=None unit='nm' description=''",
+        "simulation.source_setting": "source_type=None wavelength_range='500-900 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
         "output.output_observables": [
           "scattering_spectrum",
           "FWHM"
@@ -1428,7 +1433,6 @@
         "geometry_material.key_parameters",
         "simulation.solver_method",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.polarization",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
@@ -1590,9 +1594,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "400-800 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": null,
@@ -1659,6 +1670,7 @@
         ],
         "simulation.solver_method": "rcwa",
         "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=400.0 range_end=800.0 num_points=None step=None unit='nm' description=''",
+        "simulation.source_setting": "source_type=None wavelength_range='400-800 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
         "output.output_observables": [
           "transmission_spectrum",
           "reflection_spectrum",
@@ -1683,7 +1695,6 @@
         "geometry_material.gap_medium",
         "simulation.software_tool",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.polarization",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
@@ -1701,7 +1712,6 @@
         "errors": [
           "缺少必填字段: simulation.software_tool",
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
           "缺少必填字段: simulation.monitor_setting"
         ],
@@ -1775,13 +1785,6 @@
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
-              },
-              {
-                "name": "Si",
-                "role": "gap_medium",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
               }
             ],
             "description": ""
@@ -1818,9 +1821,9 @@
           "note": ""
         },
         "gap_medium": {
-          "value": "Si",
-          "status": "confirmed",
-          "note": ""
+          "value": null,
+          "status": "missing",
+          "note": "未指定间隙介质"
         },
         "key_parameters": {
           "value": null,
@@ -1859,9 +1862,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "",
+            "polarization": "TE",
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": "TE",
@@ -1946,13 +1956,13 @@
         "physics.physical_mechanism": "gap_plasmon",
         "physics.structure_type": "sphere_on_film",
         "geometry_material.geometry_definition": "geometry_type='sphere' description='Simulate a gold nanosphere-on-film gap plasmon system using Meep FDTD' dimensions={} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='gap_medium', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
         "geometry_material.particle_info": "particle_type='sphere' material='Au' dimensions={} notes=''",
-        "geometry_material.gap_medium": "Si",
         "simulation.solver_method": "fdtd",
         "simulation.software_tool": "meep",
         "simulation.sweep_plan": "sweep_type='parameter' variable='gap_nm' range_start=3.0 range_end=15.0 num_points=None step=None unit='nm' description='Gap varies from 3 to 15 nm'",
+        "simulation.source_setting": "source_type=None wavelength_range='' polarization='TE' incident_angle='0 deg' amplitude=None description=''",
         "simulation.polarization": "TE",
         "simulation.boundary_condition": "x_min='PML' x_max='PML' y_min='PML' y_max='PML' z_min='PML' z_max='PML' description=''",
         "output.output_observables": [
@@ -2000,9 +2010,9 @@
         }
       },
       "missing_fields": [
+        "geometry_material.gap_medium",
         "geometry_material.key_parameters",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.symmetry_setting",
         "simulation.mesh_setting",
         "simulation.stability_setting",
@@ -2019,12 +2029,11 @@
         "is_executable": false,
         "errors": [
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
-          "缺少必填字段: simulation.monitor_setting",
-          "FDTD 仿真缺少关键设置（激励源, 光源设置, 监视器设置），无法生成可执行仿真脚本"
+          "缺少必填字段: simulation.monitor_setting"
         ],
         "warnings": [
-          "建议补充字段: geometry_material.key_parameters"
+          "建议补充字段: geometry_material.key_parameters",
+          "物理系统为 nanoparticle_on_film，建议补充间隙介质"
         ]
       }
     }
@@ -2088,13 +2097,6 @@
           "value": {
             "materials": [
               {
-                "name": "Si",
-                "role": "substrate",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
                 "name": "SiO2",
                 "role": "substrate",
                 "model": null,
@@ -2104,6 +2106,13 @@
               {
                 "name": "Air",
                 "role": "",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Si",
+                "role": "substrate",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -2167,9 +2176,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "",
+            "polarization": "TE",
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": "TE",
@@ -2228,10 +2244,11 @@
         "physics.physical_mechanism": "waveguide",
         "physics.structure_type": "waveguide",
         "geometry_material.geometry_definition": "geometry_type='waveguide' description='COMSOL FEM mode analysis of a silicon ridge waveguide, width 500nm, height 220nm, SiO2 BOX, air top cladding' dimensions={} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.particle_info": "particle_type='waveguide' material='' dimensions={} notes=''",
         "simulation.solver_method": "fem",
         "simulation.software_tool": "comsol",
+        "simulation.source_setting": "source_type=None wavelength_range='' polarization='TE' incident_angle='0 deg' amplitude=None description=''",
         "simulation.polarization": "TE",
         "output.output_observables": [
           "mode_profile"
@@ -2255,7 +2272,6 @@
         "geometry_material.key_parameters",
         "simulation.sweep_plan",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
         "simulation.mesh_setting",
@@ -2271,7 +2287,6 @@
         "is_executable": false,
         "errors": [
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
           "缺少必填字段: simulation.monitor_setting",
           "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
@@ -2332,7 +2347,7 @@
             "geometry_type": "rod",
             "description": "用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM",
             "dimensions": {
-              "直径": "直径40nm"
+              "直径": "40 nm"
             },
             "units": "nm"
           },
@@ -2343,6 +2358,13 @@
           "value": {
             "materials": [
               {
+                "name": "Al2O3",
+                "role": "",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
                 "name": "Au",
                 "role": "film",
                 "model": null,
@@ -2352,13 +2374,6 @@
               {
                 "name": "Ag",
                 "role": "film",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Al2O3",
-                "role": "",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -2390,9 +2405,10 @@
         "particle_info": {
           "value": {
             "particle_type": "rod",
-            "material": "Ag",
+            "material": "Au",
             "dimensions": {
-              "直径": "直径40nm"
+              "直径": "40 nm",
+              "diameter_nm": "40"
             },
             "notes": ""
           },
@@ -2406,7 +2422,8 @@
         },
         "key_parameters": {
           "value": [
-            "直径40nm"
+            "直径40nm",
+            "直径 40 nm"
           ],
           "status": "confirmed",
           "note": ""
@@ -2528,13 +2545,14 @@
         "physics.physical_system": "nanoparticle_on_film",
         "physics.physical_mechanism": "gap_plasmon",
         "physics.structure_type": "rod_on_film",
-        "geometry_material.geometry_definition": "geometry_type='rod' description='用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM' dimensions={'直径': '直径40nm'} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Ag', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Al2O3', role='', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.geometry_definition": "geometry_type='rod' description='用Meep FDTD仿真银纳米棒-金膜gap plasmon体系，棒长100nm直径40nm，间隙填充Al2O3，gap从3nm到12nm，提取散射谱中的共振波长和FWHM' dimensions={'直径': '40 nm'} units='nm'",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='Al2O3', role='', model=None, refractive_index=None, notes=''), MaterialEntry(name='Au', role='film', model=None, refractive_index=None, notes=''), MaterialEntry(name='Ag', role='film', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
-        "geometry_material.particle_info": "particle_type='rod' material='Ag' dimensions={'直径': '直径40nm'} notes=''",
+        "geometry_material.particle_info": "particle_type='rod' material='Au' dimensions={'直径': '40 nm', 'diameter_nm': '40'} notes=''",
         "geometry_material.gap_medium": "Al2O3",
         "geometry_material.key_parameters": [
-          "直径40nm"
+          "直径40nm",
+          "直径 40 nm"
         ],
         "simulation.solver_method": "fdtd",
         "simulation.software_tool": "meep",
@@ -2675,22 +2693,15 @@
           "value": {
             "materials": [
               {
-                "name": "Au",
-                "role": "particle",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Si",
-                "role": "substrate",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
                 "name": "SiO2",
                 "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Au",
+                "role": "particle",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -2838,7 +2849,7 @@
         "physics.physical_mechanism": "diffraction",
         "physics.structure_type": "array",
         "geometry_material.geometry_definition": "geometry_type=None description='用FDTD计算一维亚波长光栅的透射谱和反射谱，光栅周期300nm，金层厚50nm，SiO2基底，波长范围400-1000nm，正入射平面波激励' dimensions={'厚': '厚50nm', '周期': '周期300nm'} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
         "geometry_material.key_parameters": [
           "周期300nm"
@@ -3019,9 +3030,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "",
+            "polarization": "TE",
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": "TE",
@@ -3090,6 +3108,7 @@
         "geometry_material.particle_info": "particle_type='waveguide' material='' dimensions={} notes=''",
         "simulation.solver_method": "fem",
         "simulation.software_tool": "comsol",
+        "simulation.source_setting": "source_type=None wavelength_range='' polarization='TE' incident_angle='0 deg' amplitude=None description=''",
         "simulation.polarization": "TE",
         "output.output_observables": [
           "mode_profile"
@@ -3120,7 +3139,6 @@
         "geometry_material.key_parameters",
         "simulation.sweep_plan",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
         "simulation.mesh_setting",
@@ -3135,7 +3153,6 @@
         "is_executable": false,
         "errors": [
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
           "缺少必填字段: simulation.monitor_setting",
           "FEM 仿真缺少关键设置（边界条件, 监视器设置），无法生成可执行仿真脚本"
@@ -3270,9 +3287,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "500-900 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": null,
@@ -3349,6 +3373,7 @@
         "geometry_material.geometry_definition": "geometry_type=None description='对实验吸收谱数据进行Lorentzian拟合，波长范围500-900nm，共振峰在650nm附近，提取FWHM和Q因子' dimensions={} units='nm'",
         "simulation.software_tool": "python",
         "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=500.0 range_end=900.0 num_points=None step=None unit='nm' description=''",
+        "simulation.source_setting": "source_type=None wavelength_range='500-900 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
         "output.output_observables": [
           "absorption_spectrum",
           "Q_factor",
@@ -3394,7 +3419,6 @@
         "geometry_material.key_parameters",
         "simulation.solver_method",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.polarization",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
@@ -3473,7 +3497,7 @@
             "geometry_type": "sphere",
             "description": "用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面",
             "dimensions": {
-              "直径": "直径80nm"
+              "直径": "80 nm"
             },
             "units": "nm"
           },
@@ -3518,7 +3542,8 @@
             "particle_type": "sphere",
             "material": "Au",
             "dimensions": {
-              "直径": "直径80nm"
+              "直径": "80 nm",
+              "diameter_nm": "80"
             },
             "notes": ""
           },
@@ -3532,7 +3557,8 @@
         },
         "key_parameters": {
           "value": [
-            "直径80nm"
+            "直径80nm",
+            "直径 80 nm"
           ],
           "status": "confirmed",
           "note": ""
@@ -3645,11 +3671,12 @@
         "physics.physical_system": "single_particle",
         "physics.physical_mechanism": "scattering",
         "physics.structure_type": "single_particle",
-        "geometry_material.geometry_definition": "geometry_type='sphere' description='用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面' dimensions={'直径': '直径80nm'} units='nm'",
+        "geometry_material.geometry_definition": "geometry_type='sphere' description='用Meep FDTD仿真金纳米球Mie散射，直径80nm，空气环境，平面波正入射，波长范围300-900nm，计算散射截面、吸收截面和消光截面' dimensions={'直径': '80 nm'} units='nm'",
         "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Air', role='', model=None, refractive_index=None, notes='')] description=''",
-        "geometry_material.particle_info": "particle_type='sphere' material='Au' dimensions={'直径': '直径80nm'} notes=''",
+        "geometry_material.particle_info": "particle_type='sphere' material='Au' dimensions={'直径': '80 nm', 'diameter_nm': '80'} notes=''",
         "geometry_material.key_parameters": [
-          "直径80nm"
+          "直径80nm",
+          "直径 80 nm"
         ],
         "simulation.solver_method": "fdtd",
         "simulation.software_tool": "meep",
@@ -3754,7 +3781,7 @@
             "geometry_type": "waveguide",
             "description": "用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1",
             "dimensions": {
-              "直径": "直径60nm",
+              "直径": "60 nm",
               "长度": "宽450nm",
               "宽": "宽450nm"
             },
@@ -3801,9 +3828,8 @@
             "particle_type": "waveguide",
             "material": "Au",
             "dimensions": {
-              "直径": "直径60nm",
-              "长度": "宽450nm",
-              "宽": "宽450nm"
+              "直径": "60 nm",
+              "diameter_nm": "60"
             },
             "notes": ""
           },
@@ -3818,7 +3844,8 @@
         "key_parameters": {
           "value": [
             "直径60nm",
-            "波长1.55μm"
+            "波长1.55μm",
+            "直径 60 nm"
           ],
           "status": "confirmed",
           "note": ""
@@ -3906,12 +3933,13 @@
         "physics.physical_system": "waveguide",
         "physics.physical_mechanism": "coupling",
         "physics.structure_type": "single_particle",
-        "geometry_material.geometry_definition": "geometry_type='waveguide' description='用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1' dimensions={'直径': '直径60nm', '长度': '宽450nm', '宽': '宽450nm'} units='nm'",
+        "geometry_material.geometry_definition": "geometry_type='waveguide' description='用COMSOL FEM分析Si波导与Au纳米颗粒的耦合体系，波导宽450nm高220nm，颗粒直径60nm距波导表面20nm，计算场分布和耦合效率，波长1' dimensions={'直径': '60 nm', '长度': '宽450nm', '宽': '宽450nm'} units='nm'",
         "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes='')] description=''",
-        "geometry_material.particle_info": "particle_type='waveguide' material='Au' dimensions={'直径': '直径60nm', '长度': '宽450nm', '宽': '宽450nm'} notes=''",
+        "geometry_material.particle_info": "particle_type='waveguide' material='Au' dimensions={'直径': '60 nm', 'diameter_nm': '60'} notes=''",
         "geometry_material.key_parameters": [
           "直径60nm",
-          "波长1.55μm"
+          "波长1.55μm",
+          "直径 60 nm"
         ],
         "simulation.solver_method": "fem",
         "simulation.software_tool": "comsol",
@@ -4028,6 +4056,13 @@
           "value": {
             "materials": [
               {
+                "name": "SiO2",
+                "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
                 "name": "Au",
                 "role": "particle",
                 "model": null,
@@ -4037,20 +4072,6 @@
               {
                 "name": "Ag",
                 "role": "particle",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Si",
-                "role": "substrate",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "SiO2",
-                "role": "substrate",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -4082,7 +4103,7 @@
         "particle_info": {
           "value": {
             "particle_type": "film",
-            "material": "Ag",
+            "material": "Au",
             "dimensions": {},
             "notes": ""
           },
@@ -4131,9 +4152,16 @@
           "note": "未指定激励源"
         },
         "source_setting": {
-          "value": null,
-          "status": "missing",
-          "note": "未指定光源设置"
+          "value": {
+            "source_type": null,
+            "wavelength_range": "400-1600 nm",
+            "polarization": null,
+            "incident_angle": "0 deg",
+            "amplitude": null,
+            "description": ""
+          },
+          "status": "confirmed",
+          "note": ""
         },
         "polarization": {
           "value": null,
@@ -4194,11 +4222,12 @@
         "physics.physical_mechanism": "dielectric",
         "physics.structure_type": "multilayer",
         "geometry_material.geometry_definition": "geometry_type='film' description='设计金属-介质多层膜结构，交替Ag(30nm)和SiO2(50nm)共5对，用RCWA计算透射谱和反射谱，波长范围400-1600nm，正入射' dimensions={} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Ag', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Ag', role='particle', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=False substrate_material='' substrate_thickness='' has_film=True film_material='Au' film_thickness='' notes=''",
-        "geometry_material.particle_info": "particle_type='film' material='Ag' dimensions={} notes=''",
+        "geometry_material.particle_info": "particle_type='film' material='Au' dimensions={} notes=''",
         "simulation.solver_method": "rcwa",
         "simulation.sweep_plan": "sweep_type='wavelength' variable='wavelength_nm' range_start=400.0 range_end=1600.0 num_points=None step=None unit='nm' description=''",
+        "simulation.source_setting": "source_type=None wavelength_range='400-1600 nm' polarization=None incident_angle='0 deg' amplitude=None description=''",
         "simulation.incident_direction": "正入射",
         "output.output_observables": [
           "transmission_spectrum",
@@ -4222,7 +4251,6 @@
         "geometry_material.key_parameters",
         "simulation.software_tool",
         "simulation.excitation_source",
-        "simulation.source_setting",
         "simulation.polarization",
         "simulation.boundary_condition",
         "simulation.symmetry_setting",
@@ -4240,7 +4268,6 @@
         "errors": [
           "缺少必填字段: simulation.software_tool",
           "缺少必填字段: simulation.excitation_source",
-          "缺少必填字段: simulation.source_setting",
           "缺少必填字段: simulation.boundary_condition",
           "缺少必填字段: simulation.monitor_setting"
         ],
@@ -4313,22 +4340,15 @@
           "value": {
             "materials": [
               {
-                "name": "Au",
-                "role": "particle",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
-                "name": "Si",
-                "role": "substrate",
-                "model": null,
-                "refractive_index": null,
-                "notes": ""
-              },
-              {
                 "name": "SiO2",
                 "role": "substrate",
+                "model": null,
+                "refractive_index": null,
+                "notes": ""
+              },
+              {
+                "name": "Au",
+                "role": "particle",
                 "model": null,
                 "refractive_index": null,
                 "notes": ""
@@ -4471,7 +4491,7 @@
         "task.task_type": "simulation",
         "physics.physical_mechanism": "scattering",
         "geometry_material.geometry_definition": "geometry_type=None description='用Meep FDTD仿真V型金纳米天线，两臂各长150nm宽50nm，张角60度，SiO2基底上，平面波激励，x偏振和y偏振都做，波长范围600-1400nm，提取远场辐射方向图和散射谱' dimensions={'长度': '宽50nm', '宽': '宽50nm'} units='nm'",
-        "geometry_material.material_system": "materials=[MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes=''), MaterialEntry(name='Si', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes='')] description=''",
+        "geometry_material.material_system": "materials=[MaterialEntry(name='SiO2', role='substrate', model=None, refractive_index=None, notes=''), MaterialEntry(name='Au', role='particle', model=None, refractive_index=None, notes='')] description=''",
         "geometry_material.substrate_or_film_info": "has_substrate=True substrate_material='SiO2' substrate_thickness='' has_film=False film_material='' film_thickness='' notes=''",
         "simulation.solver_method": "fdtd",
         "simulation.software_tool": "meep",
