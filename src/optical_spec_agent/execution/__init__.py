@@ -1,5 +1,6 @@
 """Execution helpers for optional solver runs."""
 
+from .csv_sanity import CsvSanityResult, check_csv_numeric_sanity
 from .meep_runner import (
     ExecutionResult,
     PostprocessResult,
@@ -12,8 +13,10 @@ from .meep_runner import (
 )
 
 __all__ = [
+    "CsvSanityResult",
     "ExecutionResult",
     "PostprocessResult",
+    "check_csv_numeric_sanity",
     "check_meep_available",
     "collect_meep_outputs",
     "find_meep_python",

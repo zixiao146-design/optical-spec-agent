@@ -23,6 +23,7 @@ def test_local_meep_physical_stability_probe_help():
     assert "--only" in result.stdout
     assert "--dry-run" in result.stdout
     assert "low-cost-dielectric-sanity-control" in result.stdout
+    assert "physical-candidate-v0-6" in result.stdout
 
 
 def test_local_meep_physical_stability_probe_dry_run_low_cost(tmp_path):
@@ -48,3 +49,30 @@ def test_local_meep_physical_stability_probe_dry_run_low_cost(tmp_path):
     assert case["case_name"] == "low-cost-dielectric-sanity-control"
     assert case["diagnostic_profile"] == "low_cost"
     assert case["success"] is None
+
+
+def test_local_meep_physical_stability_probe_dry_run_candidate(tmp_path):
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(PROBE_SCRIPT),
+            "--only",
+            "physical-candidate-v0-6",
+            "--dry-run",
+            "--output-root",
+            str(tmp_path),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 0
+    data = json.loads(result.stdout)
+    assert len(data["cases"]) == 1
+    case = data["cases"][0]
+    assert case["case_name"] == "physical-candidate-v0-6"
+    assert case["source_component"] == "Ex"
+    assert case["boundary_type"] == "absorber"
+    assert case["material_mode"] == "library"
+    assert case["courant"] == 0.1
+    assert case["fixed_run_time"] == 50

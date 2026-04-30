@@ -76,6 +76,22 @@ def _probe_cases() -> list[ProbeCase]:
             physical_interpretation_level="none",
         ),
         ProbeCase(
+            case_name="physical-candidate-v0-6",
+            diagnostic_profile="physical_probe",
+            source_component="Ex",
+            boundary_type="absorber",
+            material_mode="library",
+            flux_mode="closed_box",
+            courant=0.1,
+            eps_averaging=None,
+            resolution=12,
+            freq_points=10,
+            stop_strategy="fixed",
+            fixed_run_time=50,
+            decay_threshold=1e-3,
+            physical_interpretation_level="physical_candidate",
+        ),
+        ProbeCase(
             case_name="source-ex-absorber-library-courant-025-fixed-50",
             diagnostic_profile="physical_probe",
             source_component="Ex",
@@ -207,6 +223,10 @@ def _select_cases(args: argparse.Namespace) -> list[ProbeCase]:
 
 
 def _recommended_next_step(case: ProbeCase, success: bool, errors: list[str]) -> str:
+    if case.case_name == "physical-candidate-v0-6":
+        if success:
+            return "run convergence and repeatability hardening; not production validation"
+        return "candidate blocker: inspect stderr before running hardening matrix"
     if success and case.physical_interpretation_level == "physical_candidate":
         return "repeat this profile once to check reproducibility"
     if success:
