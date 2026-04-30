@@ -234,10 +234,16 @@ film_mat = resolve_metal(film_material_name)
 gap_medium = resolve_gap_medium(gap_medium_name, gap_medium_n)
 
 # Cell and source geometry
-pad = r_particle + 0.6
-sx = 2 * (r_particle + pad)
+# Keep lateral cell dimensions larger than the two PML layers; otherwise Meep
+# can reject the grid with "invalid boundary absorbers for this grid_volume".
+vertical_pad = r_particle + 0.6
+lateral_pad = pml_um + 0.6
+sx = 2 * (r_particle + lateral_pad)
 sy = sx
-sz = film_thickness + gap_thickness_um + 2 * r_particle + 2 * pad + 2 * pml_um
+pml_margin = 0.2
+interior_sx = sx - 2 * pml_um - 2 * pml_margin
+interior_sy = sy - 2 * pml_um - 2 * pml_margin
+sz = film_thickness + gap_thickness_um + 2 * r_particle + 2 * vertical_pad + 2 * pml_um
 cell = mp.Vector3(sx, sy, sz)
 
 particle_center = mp.Vector3(0, 0, film_thickness + gap_thickness_um + r_particle)
@@ -270,7 +276,7 @@ def build_geometry(include_particle: bool) -> list:
         mp.Block(
             material=film_mat,
             center=mp.Vector3(0, 0, film_thickness / 2.0),
-            size=mp.Vector3(mp.inf, mp.inf, film_thickness),
+            size=mp.Vector3(interior_sx, interior_sy, film_thickness),
         ),
     ]
     if include_particle:
@@ -284,7 +290,7 @@ def build_sources() -> list:
             src=mp.GaussianSource(fcen, fwidth=df),
             component=mp.Ez,
             center=source_center,
-            size=mp.Vector3(sx, sy, 0),
+            size=mp.Vector3(interior_sx, interior_sy, 0),
         )
     ]
 
