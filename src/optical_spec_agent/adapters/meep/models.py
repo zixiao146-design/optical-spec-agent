@@ -43,6 +43,24 @@ class MeepInputModel(BaseModel):
     pml_thickness_um: float = Field(default=1.0, description="PML thickness in μm")
     freq_points: int = Field(default=200, description="Frequency points for flux")
 
+    # --- Research-preview stability diagnostics ---
+    boundary_type: Literal["pml", "absorber"] = Field(
+        default="pml",
+        description="Research-preview boundary layer type: pml or absorber",
+    )
+    courant: float | None = Field(
+        default=None,
+        description="Optional Meep Courant factor for research-preview runs",
+    )
+    eps_averaging: bool | None = Field(
+        default=None,
+        description="Optional Meep eps_averaging override for research-preview runs",
+    )
+    material_mode: Literal["library", "dielectric_sanity"] = Field(
+        default="library",
+        description="Research-preview material mode: library or nonphysical dielectric_sanity",
+    )
+
     # --- Sweep (optional) ---
     sweep_variable: str | None = Field(default=None, description="e.g. 'gap_thickness_um'")
     sweep_start_um: float | None = Field(default=None)

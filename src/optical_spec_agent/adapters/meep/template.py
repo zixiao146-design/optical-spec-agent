@@ -141,6 +141,10 @@ def _render_research_preview(m: MeepInputModel) -> str:
     defaults_doc = _doc_bullets(m.defaults_applied, empty="  - none")
     limitations = _research_limitations(m)
     limitations_doc = _doc_bullets(limitations)
+    stability_doc = _doc_bullets(_research_stability_doc(m))
+    material_block = _research_material_block(m)
+    boundary_constructor = "Absorber" if m.boundary_type == "absorber" else "PML"
+    simulation_options_block = _research_simulation_options_block(m)
 
     script = f'''\
 """
@@ -155,6 +159,9 @@ an absolute free-space scattering cross section.
 
 Defaults applied, if any:
 {defaults_doc}
+
+Stability diagnostics:
+{stability_doc}
 
 Known limitations:
 {limitations_doc}
@@ -172,11 +179,6 @@ try:
 except ImportError:
     find_peaks = None
 
-try:
-    from meep.materials import Au, Ag, SiO2, Si3N4, Al2O3
-except ImportError:
-    Au = Ag = SiO2 = Si3N4 = Al2O3 = None
-
 MODE = "research_preview"
 OUTPUT_CSV = "scattering_spectrum.csv"
 OUTPUT_JSON = "postprocess_results.json"
@@ -185,12 +187,15 @@ OUTPUT_PLOT = "scattering_spectrum.png"
 particle_material_name = {m.particle_material!r}
 film_material_name = {m.film_material!r}
 gap_medium_name = {m.gap_medium_name!r}
+boundary_type = {m.boundary_type!r}
+material_mode = {m.material_mode!r}
 
 defaults_applied = {m.defaults_applied!r}
 limitations = {limitations!r}
 
 resolution = {m.resolution}
 pml_um = {m.pml_thickness_um:.6f}
+boundary_thickness_um = pml_um
 wavelength_min_um = {m.wavelength_min_um:.6f}
 wavelength_max_um = {m.wavelength_max_um:.6f}
 gap_medium_n = {m.gap_medium_n:.6f}
@@ -203,35 +208,15 @@ fcen = {(1.0 / ((m.wavelength_min_um + m.wavelength_max_um) / 2.0)):.6f}
 df = {(1.0 / m.wavelength_min_um - 1.0 / m.wavelength_max_um):.6f}
 nfreq = {m.freq_points}
 
+simulation_options = {simulation_options_block}
+
 
 def dielectric_fallback_from_n(n_value: float) -> mp.Medium:
     """Constant-index fallback for dielectric materials only."""
     return mp.Medium(epsilon=n_value ** 2)
 
 
-def resolve_metal(name: str):
-    library = {{"Au": Au, "Ag": Ag}}
-    material = library.get(name)
-    if material is None:
-        raise RuntimeError(
-            f"research-preview requires meep.materials.{{name}} for dispersive metals; "
-            "no placeholder metal fallback is provided."
-        )
-    return material
-
-
-def resolve_gap_medium(name: str, fallback_n: float):
-    library = {{"SiO2": SiO2, "Si3N4": Si3N4, "Al2O3": Al2O3}}
-    material = library.get(name)
-    if material is not None:
-        return material
-    # Fallback only for dielectric/background media when the library material is unavailable.
-    return dielectric_fallback_from_n(fallback_n)
-
-
-particle_mat = resolve_metal(particle_material_name)
-film_mat = resolve_metal(film_material_name)
-gap_medium = resolve_gap_medium(gap_medium_name, gap_medium_n)
+{material_block}
 
 # Cell and source geometry
 # Keep lateral cell dimensions larger than the two PML layers; otherwise Meep
@@ -300,9 +285,10 @@ def build_simulation(include_particle: bool):
         cell_size=cell,
         geometry=build_geometry(include_particle=include_particle),
         sources=build_sources(),
-        boundary_layers=[mp.PML(pml_um)],
+        boundary_layers=[mp.{boundary_constructor}(boundary_thickness_um)],
         default_material=gap_medium,
         resolution=resolution,
+        **simulation_options,
     )
 
 
@@ -749,6 +735,79 @@ def _doc_bullets(items: list[str], *, empty: str = "  - none") -> str:
     return "\n".join(f"  - {item}" for item in items)
 
 
+def _research_stability_doc(m: MeepInputModel) -> list[str]:
+    """Describe research-preview stability diagnostics in the generated header."""
+    courant_note = "Meep default" if m.courant is None else str(m.courant)
+    eps_note = "Meep default" if m.eps_averaging is None else str(m.eps_averaging)
+    notes = [
+        f"boundary_type={m.boundary_type}",
+        f"material_mode={m.material_mode}",
+        f"Courant={courant_note}",
+        f"eps_averaging={eps_note}",
+    ]
+    if m.boundary_type == "absorber":
+        notes.append("Absorber boundary is a diagnostic workaround for possible PML/dispersive-material blow-up.")
+    if m.material_mode == "dielectric_sanity":
+        notes.append("material_mode=dielectric_sanity is nonphysical and only validates execution pipeline.")
+    return notes
+
+
+def _research_material_block(m: MeepInputModel) -> str:
+    """Render research-preview material resolution code."""
+    if m.material_mode == "dielectric_sanity":
+        return """\
+# material_mode=dielectric_sanity is deliberately nonphysical.
+# It replaces metal dispersion with constant dielectric placeholders to validate
+# reference/structure/flux subtraction and CSV/JSON output plumbing.
+particle_mat = mp.Medium(epsilon=2.25)
+film_mat = mp.Medium(epsilon=2.25)
+gap_medium = dielectric_fallback_from_n(gap_medium_n)
+"""
+
+    return """\
+try:
+    from meep.materials import Au, Ag, SiO2, Si3N4, Al2O3
+except ImportError:
+    Au = Ag = SiO2 = Si3N4 = Al2O3 = None
+
+
+def resolve_metal(name: str):
+    library = {"Au": Au, "Ag": Ag}
+    material = library.get(name)
+    if material is None:
+        raise RuntimeError(
+            f"research-preview requires meep.materials.{name} for dispersive metals; "
+            "no placeholder metal fallback is provided."
+        )
+    return material
+
+
+def resolve_gap_medium(name: str, fallback_n: float):
+    library = {"SiO2": SiO2, "Si3N4": Si3N4, "Al2O3": Al2O3}
+    material = library.get(name)
+    if material is not None:
+        return material
+    # Fallback only for dielectric/background media when the library material is unavailable.
+    return dielectric_fallback_from_n(fallback_n)
+
+
+particle_mat = resolve_metal(particle_material_name)
+film_mat = resolve_metal(film_material_name)
+gap_medium = resolve_gap_medium(gap_medium_name, gap_medium_n)
+"""
+
+
+def _research_simulation_options_block(m: MeepInputModel) -> str:
+    """Render optional mp.Simulation kwargs for research-preview diagnostics."""
+    lines = ["{"]
+    if m.courant is not None:
+        lines.append(f'    "Courant": {m.courant!r},')
+    if m.eps_averaging is not None:
+        lines.append(f'    "eps_averaging": {m.eps_averaging!r},')
+    lines.append("}")
+    return "\n".join(lines)
+
+
 def _research_limitations(m: MeepInputModel) -> list[str]:
     limitations = [
         "Research-preview only; not production-grade or publication-ready.",
@@ -756,6 +815,18 @@ def _research_limitations(m: MeepInputModel) -> list[str]:
         "Peak extraction is heuristic and may return null when no clear resonance is detected.",
         "Gap/background fallback may use a constant-index mp.Medium(epsilon=n**2).",
     ]
+    if m.boundary_type == "pml" and m.material_mode == "library":
+        limitations.append(
+            "PML with dispersive library metals may be numerically unstable in some Meep setups."
+        )
+    if m.boundary_type == "absorber":
+        limitations.append(
+            "Absorber boundary is a stability diagnostic workaround and may change quantitative results."
+        )
+    if m.material_mode == "dielectric_sanity":
+        limitations.append(
+            "Dielectric sanity material mode is nonphysical and should not be interpreted as a metal scattering result."
+        )
     if m.sweep_variable:
         limitations.append(
             "If the input spec contains a sweep, this research-preview script renders a single nominal geometry rather than a full automated sweep pipeline."

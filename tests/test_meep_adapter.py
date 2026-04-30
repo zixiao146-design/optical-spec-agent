@@ -172,6 +172,63 @@ class TestMeepAdapterSuccess:
         assert "scattering_spectrum.csv" in result.content
         assert "postprocess_results.json" in result.content
 
+    def test_research_preview_script_records_stability_options(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec, script_mode="research-preview")
+        assert "boundary_type=pml" in result.content
+        assert "material_mode=library" in result.content
+        assert "Courant=Meep default" in result.content
+        assert "eps_averaging=Meep default" in result.content
+
+    def test_research_preview_absorber_boundary_uses_absorber(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            boundary_type="absorber",
+        )
+        assert "boundary_type=absorber" in result.content
+        assert "mp.Absorber(boundary_thickness_um)" in result.content
+        assert "mp.PML(boundary_thickness_um)" not in result.content
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_courant_and_eps_averaging_options(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            courant=0.25,
+            eps_averaging=False,
+        )
+        assert '"Courant": 0.25' in result.content
+        assert '"eps_averaging": False' in result.content
+        ast.parse(result.content)
+
+    def test_research_preview_dielectric_sanity_skips_materials_library(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            material_mode="dielectric_sanity",
+        )
+        assert "material_mode=dielectric_sanity" in result.content
+        assert "dielectric_sanity is deliberately nonphysical" in result.content
+        assert "from meep.materials import" not in result.content
+        assert "particle_mat = mp.Medium(epsilon=2.25)" in result.content
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
     def test_research_preview_script_passes_ast_and_py_compile(self):
         adapter = MeepAdapter()
         spec = _make_valid_spec()

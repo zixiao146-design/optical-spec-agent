@@ -88,6 +88,8 @@ _SHAPE_MAP = {
 }
 
 _SUPPORTED_SCRIPT_MODES = {"preview", "research_preview", "smoke"}
+_SUPPORTED_BOUNDARY_TYPES = {"pml", "absorber"}
+_SUPPORTED_MATERIAL_MODES = {"library", "dielectric_sanity"}
 
 _LENGTH_TO_NM = {
     "nm": 1.0,
@@ -221,6 +223,28 @@ def _normalize_script_mode(script_mode: str) -> str:
     return normalized
 
 
+def _normalize_boundary_type(boundary_type: str) -> str:
+    """Normalize research-preview boundary layer mode."""
+    normalized = (boundary_type or "pml").strip().lower().replace("-", "_")
+    if normalized not in _SUPPORTED_BOUNDARY_TYPES:
+        raise ValueError(
+            f"Unsupported Meep boundary_type '{boundary_type}'. "
+            f"Choose from {sorted(_SUPPORTED_BOUNDARY_TYPES)}."
+        )
+    return normalized
+
+
+def _normalize_material_mode(material_mode: str) -> str:
+    """Normalize research-preview material mode."""
+    normalized = (material_mode or "library").strip().lower().replace("-", "_")
+    if normalized not in _SUPPORTED_MATERIAL_MODES:
+        raise ValueError(
+            f"Unsupported Meep material_mode '{material_mode}'. "
+            f"Choose from {sorted(_SUPPORTED_MATERIAL_MODES)}."
+        )
+    return normalized
+
+
 class MeepAdapter(BaseAdapter):
     """Meep FDTD adapter — nanoparticle_on_film → scattering_spectrum script."""
 
@@ -327,8 +351,19 @@ class MeepAdapter(BaseAdapter):
             defaults_applied=defaults_applied,
         )
 
-    def generate(self, spec: OpticalSpec, script_mode: str = "preview") -> AdapterResult:
+    def generate(
+        self,
+        spec: OpticalSpec,
+        script_mode: str = "preview",
+        *,
+        boundary_type: str = "pml",
+        courant: float | None = None,
+        eps_averaging: bool | None = None,
+        material_mode: str = "library",
+    ) -> AdapterResult:
         normalized_mode = _normalize_script_mode(script_mode)
+        normalized_boundary_type = _normalize_boundary_type(boundary_type)
+        normalized_material_mode = _normalize_material_mode(material_mode)
 
         if not self.can_handle(spec):
             raise AdapterError(
@@ -345,7 +380,14 @@ class MeepAdapter(BaseAdapter):
                 "Meep adapter currently supports plane_wave only",
             )
 
-        model = self._translate(spec, script_mode=normalized_mode)
+        model = self._translate(
+            spec,
+            script_mode=normalized_mode,
+            boundary_type=normalized_boundary_type,
+            courant=courant,
+            eps_averaging=eps_averaging,
+            material_mode=normalized_material_mode,
+        )
         script = render_script(model)
         return AdapterResult(
             tool="meep",
@@ -353,8 +395,19 @@ class MeepAdapter(BaseAdapter):
             language="python",
         )
 
-    def _translate(self, spec: OpticalSpec, script_mode: str = "preview") -> MeepInputModel:
+    def _translate(
+        self,
+        spec: OpticalSpec,
+        script_mode: str = "preview",
+        *,
+        boundary_type: str = "pml",
+        courant: float | None = None,
+        eps_averaging: bool | None = None,
+        material_mode: str = "library",
+    ) -> MeepInputModel:
         normalized_mode = _normalize_script_mode(script_mode)
+        normalized_boundary_type = _normalize_boundary_type(boundary_type)
+        normalized_material_mode = _normalize_material_mode(material_mode)
         defaults_applied: list[str] = []
 
         # --- Particle info ---
@@ -491,6 +544,10 @@ class MeepAdapter(BaseAdapter):
             gap_thickness_um=gap_thick_um,
             wavelength_min_um=wl_range[0],
             wavelength_max_um=wl_range[1],
+            boundary_type=normalized_boundary_type,
+            courant=courant,
+            eps_averaging=eps_averaging,
+            material_mode=normalized_material_mode,
             sweep_variable=sweep_variable,
             sweep_start_um=sweep_start,
             sweep_end_um=sweep_end,
