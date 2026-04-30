@@ -276,7 +276,7 @@ print(OpticalSpec.export_json_schema())
 ## Testing
 
 ```bash
-pytest -v                      # 99 tests
+pytest -q
 pytest --cov=optical_spec_agent # with coverage
 ```
 
@@ -361,7 +361,7 @@ optical-spec-agent/
 ├── tests/
 │   ├── conftest.py
 │   ├── test_models.py
-│   ├── test_parser.py               # 38 parser tests
+│   ├── test_parser.py               # Parser tests
 │   ├── test_validator.py
 │   ├── test_meep_adapter.py        # Meep adapter tests
 │   ├── test_service.py
@@ -382,7 +382,9 @@ optical-spec-agent/
 ├── benchmarks/
 │   ├── README.md
 │   ├── golden_cases.json
-│   └── run_benchmark.py
+│   ├── semantic_cases.json
+│   ├── run_benchmark.py
+│   └── run_semantic_benchmark.py
 ├── docs/
 │   ├── open_source_stack.md              # Tool-stack rationale and per-tool specs
 │   ├── open_source_integration_focus.md  # Adapter priority tiers and Meep-first rationale

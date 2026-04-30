@@ -97,9 +97,9 @@ These are not spec fields — they are fixed by the adapter and do not vary per 
 |-------|--------|
 | `physics.structure_type` | Read but not enforced |
 | `geometry_material.geometry_definition` | Not used — geometry is derived from particle_info + film |
-| `geometry_material.material_system` | Not used — materials are hardcoded Drude |
+| `geometry_material.material_system` | Partially represented through adapter inputs; `preview` uses simplified Drude placeholders, while `research_preview` attempts `meep.materials` for supported materials |
 | `mesh_setting` / resolution hints from spec | Not connected — resolution is adapter-internal |
-| `simulation.time_setting` | Not connected — run time is hardcoded `until=200` |
+| `simulation.time_setting` | Not connected — `preview` uses fixed `until=200`, while `research_preview` uses `stop_when_fields_decayed` |
 | `simulation.convergence` | Not connected |
 | `task.funding_source` / `task.paper_reference` | Not adapter-relevant |
 
@@ -180,6 +180,9 @@ Save scattering_spectrum.png
 The research-preview script is still not production-grade. It improves physical
 credibility versus the preview path, but it is still a generated starting point,
 not a fully validated Meep workflow.
+
+The project does not automatically execute research-preview scripts yet; users
+must run generated scripts manually outside `optical-spec-agent`.
 
 ## Usage
 
