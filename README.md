@@ -120,6 +120,8 @@ optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expect
 # Manual/local Meep integration gates, not default CI gates
 python scripts/local_meep_integration_gate.py --mode smoke
 python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
+python scripts/local_meep_stability_matrix.py --skip-research
+python scripts/local_meep_stability_matrix.py --only absorber-library-courant-025 --timeout-research 300
 ```
 
 ### Meep generation modes
@@ -145,6 +147,14 @@ files.
 The local integration gate is manual by design: smoke can be used for a quick
 local sanity check, while research-preview can be slow and must be requested
 explicitly. Ordinary CI does not require Meep to be installed.
+
+v0.5 also includes a manual/local stability matrix for diagnosing
+research-preview NaN/Inf issues. The matrix can switch between PML and Absorber
+boundaries, lower the Meep Courant factor, and use a nonphysical
+`dielectric_sanity` material mode to test execution plumbing. This diagnostic
+gate is not part of ordinary CI, and `dielectric_sanity` results must not be
+interpreted as physical metal scattering results. See
+[`docs/local_meep_stability_matrix_v0.5.md`](docs/local_meep_stability_matrix_v0.5.md).
 
 ### Python SDK
 
@@ -401,7 +411,8 @@ optical-spec-agent/
 │   ├── test_service.py
 │   └── test_api.py
 ├── scripts/
-│   └── local_meep_integration_gate.py
+│   ├── local_meep_integration_gate.py
+│   └── local_meep_stability_matrix.py
 ├── examples/
 │   ├── example_01_nanoparticle_gap_plasmon.py
 │   ├── example_02_asymmetric_gold_cross.py
@@ -425,6 +436,8 @@ optical-spec-agent/
 │   ├── open_source_stack.md              # Tool-stack rationale and per-tool specs
 │   ├── open_source_integration_focus.md  # Adapter priority tiers and Meep-first rationale
 │   ├── meep_adapter_v0.md               # Meep adapter scope and limitations
+│   ├── local_meep_gate_report_v0.5.md    # Manual local Meep gate evidence
+│   ├── local_meep_stability_matrix_v0.5.md # Manual Meep stability diagnostics
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
 │   ├── demo_output.md

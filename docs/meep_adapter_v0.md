@@ -21,6 +21,7 @@ v0.5 starts a minimal execution harness:
 - `meep-check` checks whether Meep is importable.
 - `meep-run` runs an existing generated script in an explicit workdir.
 - `meep-run` writes auditable artifacts with schema `execution_result.v0.1`.
+- `scripts/local_meep_stability_matrix.py` runs manual/local stability diagnostics.
 - Real Meep execution tests are skipped unless Meep is installed locally.
 
 ## What it does NOT do
@@ -89,11 +90,25 @@ These are not spec fields — they are fixed by the adapter and do not vary per 
 | Gap thickness | 5 nm (or from sweep start) | `_ADAPTER_DEFAULTS` in translator |
 | Cell padding | r_particle + 0.5 μm | template |
 
+Research-preview also exposes internal stability diagnostics. These are not
+spec fields and are intended for local/manual gates:
+
+| Parameter | Values | Purpose |
+|-----------|--------|---------|
+| `boundary_type` | `pml`, `absorber` | Try Absorber as a workaround when PML + dispersive materials show field blow-up |
+| `courant` | `None` or float, e.g. `0.25` | Optionally lower Meep's Courant factor for stability diagnostics |
+| `eps_averaging` | `None`, `true`, `false` | Optionally pass `eps_averaging` to `mp.Simulation` |
+| `material_mode` | `library`, `dielectric_sanity` | Use `meep.materials` or a nonphysical dielectric pipeline sanity mode |
+
+`material_mode=dielectric_sanity` is not physically meaningful. It replaces
+metal materials with constant dielectric placeholders only to test whether the
+reference/structure/flux subtraction and CSV/JSON output plumbing can run.
+
 ### Optional fields (used if present, no default)
 
 | Spec path | Effect |
 |-----------|--------|
-| `simulation.boundary_condition` | Read but not directly mapped (PML always used) |
+| `simulation.boundary_condition` | Read but not directly mapped (`preview` uses PML; research-preview diagnostics can use PML or Absorber internally) |
 | `simulation.monitor_setting` | Read but not directly used |
 | `simulation.sweep_plan` | If `parameter` type with `gap` variable → generates sweep loop |
 | `output.output_observables` | Read for validation, always assumes scattering_spectrum |
@@ -216,6 +231,8 @@ optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expect
 # Manual/local gates, not default CI gates
 python scripts/local_meep_integration_gate.py --mode smoke
 python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
+python scripts/local_meep_stability_matrix.py --skip-research
+python scripts/local_meep_stability_matrix.py --only dielectric-sanity --timeout-research 300
 ```
 
 `meep-run --expected-mode research-preview` treats
@@ -232,6 +249,28 @@ status, return code, outputs, required outputs, and missing outputs. Use
 `postprocess_results.json` dict. It extracts fields such as
 `resonance_wavelength_nm`, `fwhm_nm`, wavelength range, gap thickness, defaults,
 and limitations without replacing the raw result.
+
+## Stability diagnostics
+
+The local stability matrix is a manual diagnostic gate for research-preview
+NaN/Inf and timeout behavior. It is not part of ordinary CI. The matrix covers:
+
+- `smoke`
+- `research_preview_pml_library`
+- `research_preview_absorber_library`
+- `research_preview_absorber_library_courant_025`
+- `research_preview_absorber_dielectric_sanity`
+
+Meep field blow-up can be caused by several setup details, including boundary
+layers interacting with dispersive materials and time-step/resolution choices.
+The Meep FAQ is the primary reference for these classes of runtime stability
+issues: <https://meep.readthedocs.io/en/latest/FAQ/>.
+
+The current local v0.5 evidence is recorded in
+[`local_meep_stability_matrix_v0.5.md`](local_meep_stability_matrix_v0.5.md):
+smoke passes; PML/library and Absorber/library fail with NaN/Inf; Absorber with
+Courant 0.25 and Absorber with `dielectric_sanity` timed out in the short
+diagnostic window without producing the required CSV/JSON outputs.
 
 ## Smoke validation
 
