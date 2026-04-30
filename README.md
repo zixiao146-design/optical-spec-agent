@@ -18,7 +18,9 @@
                      └─────────────────────┘
 ```
 
-It is **not** a solver. It does not run any simulation tool, and it does not run Meep yet. The current Meep adapter is still a script generator, not a full execution or result-parsing pipeline.
+It is **not** a solver. By default it generates specs and scripts. v0.5 starts
+an optional harness that can run an existing generated Meep script when Meep is
+installed, but this is not a full execution or result-parsing pipeline.
 
 ## At a glance
 
@@ -38,7 +40,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.4 research-preview script)
+## Current scope (v0.5 minimal execution harness)
 
 The current loop:
 
@@ -46,6 +48,8 @@ The current loop:
 Natural language  →  Rule-based parser  →  Structured spec JSON  →  Validation
                                                                ↓ (if Meep + nanoparticle_on_film)
                                                     Meep Python script (.py)
+                                                               ↓ (optional explicit command)
+                                                    Meep execution harness
 ```
 
 **What works:**
@@ -61,11 +65,12 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
   `preview` for quick structure/script preview,
   `research-preview` for reference/structure runs plus CSV/JSON outputs,
   `smoke` for structural validation only
+- Minimal Meep execution harness: availability check, explicit script run, and known output collection
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
 - Real LLM integration (only a placeholder parser exists)
-- Solver execution or result parsing pipeline — scripts are generated, but Meep is not run by this project yet
+- Full solver automation or managed result parsing pipeline
 - Adapters for other solvers (MPB, Gmsh, Elmer, Optiland) — not yet implemented
 - Visualization or plotting pipeline
 
@@ -107,6 +112,10 @@ optical-spec parse "用Meep FDTD仿真金纳米球-金膜gap plasmon..." -o spec
 optical-spec meep-generate spec.json -o sim.py
 optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
 optical-spec meep-generate spec.json -o smoke.py --mode smoke
+
+# Optional v0.5 execution harness for an existing generated script
+optical-spec meep-check
+optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300
 ```
 
 ### Meep generation modes
@@ -115,7 +124,10 @@ optical-spec meep-generate spec.json -o smoke.py --mode smoke
 - `research-preview`: 生成更可信的研究预览脚本，包含 reference run、structure run、flux subtraction、CSV 和 JSON 输出。
 - `smoke`: 只验证生成脚本的结构和最小运行路径，不代表物理结果。
 
-These modes still generate scripts only. They do not run Meep, and they do not provide a full result parsing pipeline yet.
+Script generation modes still generate scripts only. v0.5 starts a minimal
+execution harness with `meep-check` and `meep-run`, but this is not a full solver
+automation or result parsing pipeline yet. Real Meep execution tests are skipped
+unless Meep is installed locally.
 
 ### Python SDK
 
@@ -347,7 +359,10 @@ optical-spec-agent/
 │   │   ├── routes.py                # /health, /parse, /validate, /schema
 │   │   └── __init__.py
 │   ├── cli/
-│   │   ├── main.py                  # parse, validate, schema, example, meep-generate
+│   │   ├── main.py                  # parse, validate, schema, example, Meep commands
+│   │   └── __init__.py
+│   ├── execution/
+│   │   ├── meep_runner.py           # Optional Meep availability/run harness
 │   │   └── __init__.py
 │   ├── adapters/
 │   │   ├── base.py                  # BaseAdapter ABC + AdapterResult
@@ -408,8 +423,8 @@ optical-spec-agent/
 | **v0.1** | NL → spec JSON + validation (rule-based) | — | **Done** |
 | v0.2 | Spec hardening + Meep adapter preview | **Meep** (script gen only) | Done |
 | v0.3 | Core Meep reliability + semantic benchmark + adapter readiness | **Meep** (script gen only) | Done |
-| **v0.4** | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | **Current / Done** |
-| v0.5 | Meep execution + result parsing | **Meep** (FDTD) | Planned |
+| v0.4 | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | Done |
+| **v0.5** | Meep execution + result parsing | **Meep** (FDTD) | Started |
 | v0.6 | MPB / Gmsh / Elmer / Optiland adapters | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Planned |
 | v0.7 | LLM parser integration | — | Planned |
 | v0.8 | Multi-agent orchestration | — | Planned |

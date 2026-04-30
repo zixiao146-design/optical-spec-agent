@@ -1,6 +1,7 @@
-# Meep Adapter v0.4 Research-Preview
+# Meep Adapter v0.5 Minimal Execution Harness
 
-> Status: **Script generation only** — no execution, no result parsing pipeline.
+> Status: **Script generation plus optional explicit execution harness** — no
+> full solver automation and no managed result parsing pipeline.
 
 ## What it does
 
@@ -15,9 +16,15 @@ The adapter now supports three script generation modes:
 | `research_preview` | 更可信的研究预览脚本 | reference run + structure run + flux subtraction + CSV/JSON output |
 | `smoke` | 结构性冒烟验证 | 最小材料/分辨率/步数，只验证脚本能否被 Meep 实例化和短步运行 |
 
+v0.5 starts a minimal execution harness:
+
+- `meep-check` checks whether Meep is importable.
+- `meep-run` runs an existing generated script in an explicit workdir.
+- Real Meep execution tests are skipped unless Meep is installed locally.
+
 ## What it does NOT do
 
-- Run simulations or manage execution
+- Automatically generate-and-run simulations as one managed pipeline
 - Parse simulation results into a project-managed pipeline
 - Support all physical systems (only `nanoparticle_on_film`)
 - Support all source types (only `plane_wave`)
@@ -181,8 +188,8 @@ The research-preview script is still not production-grade. It improves physical
 credibility versus the preview path, but it is still a generated starting point,
 not a fully validated Meep workflow.
 
-The project does not automatically execute research-preview scripts yet; users
-must run generated scripts manually outside `optical-spec-agent`.
+The adapter does not execute research-preview scripts during generation.
+Execution is an explicit v0.5 harness step through `optical-spec meep-run`.
 
 ## Usage
 
@@ -199,8 +206,11 @@ optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
 # Generate smoke script
 optical-spec meep-generate spec.json -o smoke.py --mode smoke
 
-# Run manually
-python sim.py
+# Check whether Meep can be imported
+optical-spec meep-check
+
+# Run an existing generated script explicitly
+optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300
 ```
 
 ## Smoke validation
@@ -238,8 +248,8 @@ valid Meep script, not that the physics is correct.**
 
 ## Research-preview limitations
 
-- It still generates scripts only; this project does not run Meep yet.
-- It does not provide a managed result parsing pipeline yet.
+- Script generation still does not execute Meep; execution requires an explicit `meep-run` command.
+- The execution harness is minimal and does not provide a managed result parsing pipeline yet.
 - Peak finding / resonance / FWHM extraction remain heuristic.
 - Closed-box flux subtraction is a research-preview workflow, not a final validated scattering observable definition.
 - Any dielectric fallback using `mp.Medium(epsilon=n**2)` should be treated as an approximation.

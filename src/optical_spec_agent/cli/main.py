@@ -243,6 +243,73 @@ def meep_generate(
         console.print(result.content)
 
 
+# ---- meep execution harness ----
+
+@app.command("meep-check")
+def meep_check():
+    """Check whether Meep is importable in a supported Python environment."""
+    from optical_spec_agent.execution import check_meep_available
+
+    result = check_meep_available()
+    console.print(f"Meep available: {'yes' if result.available else 'no'}")
+    if result.command:
+        console.print(f"Command: {' '.join(result.command)}")
+    if result.errors:
+        console.print("[red]Errors:[/red]")
+        for error in result.errors:
+            console.print(f"  - {error}")
+    if result.warnings:
+        console.print("[yellow]Warnings:[/yellow]")
+        for warning in result.warnings:
+            console.print(f"  - {warning}")
+
+
+@app.command("meep-run")
+def meep_run(
+    script_path: Path = typer.Argument(..., help="Path to an existing Meep Python script"),
+    workdir: Path | None = typer.Option(
+        None,
+        "--workdir",
+        help="Directory where the script runs and output files are collected",
+    ),
+    timeout: int = typer.Option(300, "--timeout", help="Execution timeout in seconds"),
+):
+    """Run an existing generated Meep script and collect known outputs."""
+    from optical_spec_agent.execution import run_meep_script
+
+    result = run_meep_script(script_path=script_path, workdir=workdir, timeout=timeout)
+    _print_execution_result(result)
+
+    if result.postprocess_results is not None:
+        console.print("\n[bold]postprocess_results.json[/bold]")
+        console.print_json(json.dumps(result.postprocess_results, ensure_ascii=False))
+
+    if not result.success:
+        raise typer.Exit(1)
+
+
+def _print_execution_result(result) -> None:
+    console.print(f"Success: {'yes' if result.success else 'no'}")
+    console.print(f"Meep available: {'yes' if result.available else 'no'}")
+    console.print(f"Workdir: {result.workdir}")
+    if result.command:
+        console.print(f"Command: {' '.join(result.command)}")
+    if result.returncode is not None:
+        console.print(f"Return code: {result.returncode}")
+    if result.outputs:
+        console.print("[green]Outputs:[/green]")
+        for name, path in result.outputs.items():
+            console.print(f"  - {name}: {path}")
+    if result.errors:
+        console.print("[red]Errors:[/red]")
+        for error in result.errors:
+            console.print(f"  - {error}")
+    if result.warnings:
+        console.print("[yellow]Warnings:[/yellow]")
+        for warning in result.warnings:
+            console.print(f"  - {warning}")
+
+
 def _reconstruct_spec(flat: dict) -> OpticalSpec:
     """Reconstruct an OpticalSpec from a flat-dict (to_flat_dict output).
 
