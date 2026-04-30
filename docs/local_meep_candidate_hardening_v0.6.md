@@ -205,6 +205,12 @@ The current recommendation from the analyzer is:
 Candidate needs more convergence/sanity work before physical interpretation.
 ```
 
+Follow-up observable diagnostics are recorded in
+[`local_meep_observable_diagnostics_v0.6.md`](local_meep_observable_diagnostics_v0.6.md).
+They show that the current closed flux box intersects the film and that a
+simple top-plane diagnostic does not produce a stronger signal, so the next
+convergence round should first redesign the flux monitor geometry.
+
 ## Recommended Next Step
 
 v0.6 should move from stability hardening to physical sanity checks:

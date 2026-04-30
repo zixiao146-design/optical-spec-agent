@@ -71,6 +71,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Nonphysical low-cost diagnostic research-preview profile that closes the CSV/JSON/PNG artifact loop
 - Manual v0.6 physical-candidate hardening for one library-Au profile
 - Optional local spectrum consistency tooling for candidate-hardening artifacts
+- Local observable diagnostics for flux-monitor geometry and per-surface flux sanity
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
@@ -131,6 +132,7 @@ python scripts/local_meep_stability_matrix.py --skip-research
 python scripts/local_meep_stability_matrix.py --only low-cost-dielectric-sanity --timeout-research 600
 python scripts/local_meep_candidate_hardening.py --timeout 900
 python scripts/local_meep_candidate_convergence.py --latest
+python scripts/local_meep_observable_diagnostics.py --timeout 900
 ```
 
 ### Meep generation modes
@@ -171,6 +173,9 @@ spectrum consistency tooling for candidate-hardening artifacts. These metrics
 are sanity checks only: they help detect repeatability and sensitivity issues,
 but they are not a formal convergence study or production validation. See
 [`docs/local_meep_candidate_hardening_v0.6.md`](docs/local_meep_candidate_hardening_v0.6.md).
+v0.6 also includes local observable diagnostics for flux-monitor geometry and
+per-surface flux sanity; see
+[`docs/local_meep_observable_diagnostics_v0.6.md`](docs/local_meep_observable_diagnostics_v0.6.md).
 
 ### Python SDK
 
@@ -436,7 +441,8 @@ optical-spec-agent/
 │   ├── local_meep_stability_matrix.py
 │   ├── local_meep_physical_stability_probe.py
 │   ├── local_meep_candidate_hardening.py
-│   └── local_meep_candidate_convergence.py
+│   ├── local_meep_candidate_convergence.py
+│   └── local_meep_observable_diagnostics.py
 ├── examples/
 │   ├── example_01_nanoparticle_gap_plasmon.py
 │   ├── example_02_asymmetric_gold_cross.py
@@ -464,6 +470,7 @@ optical-spec-agent/
 │   ├── local_meep_stability_matrix_v0.5.md # Manual Meep stability diagnostics
 │   ├── local_meep_physical_stability_prestudy_v0.6.md # Manual v0.6 physical stability pre-study
 │   ├── local_meep_candidate_hardening_v0.6.md # Manual v0.6 candidate hardening evidence
+│   ├── local_meep_observable_diagnostics_v0.6.md # Manual v0.6 flux observable diagnostics
 │   ├── release_notes_v0.5.0.md
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
