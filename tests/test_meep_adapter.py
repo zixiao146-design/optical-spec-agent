@@ -147,6 +147,48 @@ class TestMeepAdapterSuccess:
         result2 = adapter.generate(spec)
         assert result1.content == result2.content
 
+    def test_preview_mode_keeps_preview_characteristics(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec, script_mode="preview")
+        assert "simplified single-Drude" in result.content
+        assert "scattering_spectrum.png" in result.content
+        assert "postprocess_results.json" not in result.content
+
+    def test_smoke_mode_generates_smoke_script(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec, script_mode="smoke")
+        assert "SMOKE TEST PASSED" in result.content
+        assert "NOT for production" in result.content
+
+    def test_research_preview_mode_generates_research_script(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec, script_mode="research-preview")
+        assert 'Mode: research-preview' in result.content
+        assert "get_flux_data" in result.content
+        assert "load_minus_flux_data" in result.content
+        assert "scattering_spectrum.csv" in result.content
+        assert "postprocess_results.json" in result.content
+
+    def test_research_preview_script_passes_ast_and_py_compile(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(spec, script_mode="research_preview")
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_output_deterministic(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result1 = adapter.generate(spec, script_mode="research_preview")
+        result2 = adapter.generate(spec, script_mode="research_preview")
+        assert result1.content == result2.content
+
     def test_cli_golden_output_matches_stored(self):
         """Generated output for the standard spec must match stored golden file."""
         golden_path = Path(__file__).parent.parent / "examples" / "outputs" / "meep_nanoparticle_on_film.py"
