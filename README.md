@@ -418,7 +418,8 @@ optical-spec-agent/
 ├── scripts/
 │   ├── local_meep_integration_gate.py
 │   ├── local_meep_stability_matrix.py
-│   └── local_meep_physical_stability_probe.py
+│   ├── local_meep_physical_stability_probe.py
+│   └── local_meep_candidate_hardening.py
 ├── examples/
 │   ├── example_01_nanoparticle_gap_plasmon.py
 │   ├── example_02_asymmetric_gold_cross.py
@@ -445,6 +446,7 @@ optical-spec-agent/
 │   ├── local_meep_gate_report_v0.5.md    # Manual local Meep gate evidence
 │   ├── local_meep_stability_matrix_v0.5.md # Manual Meep stability diagnostics
 │   ├── local_meep_physical_stability_prestudy_v0.6.md # Manual v0.6 physical stability pre-study
+│   ├── local_meep_candidate_hardening_v0.6.md # Manual v0.6 candidate hardening evidence
 │   ├── release_notes_v0.5.0.md
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
