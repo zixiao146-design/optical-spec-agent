@@ -30,6 +30,7 @@ htmlcov/
 # Generated outputs (keep directory)
 outputs/*.json
 optical_spec_schema.json
+runs/
 
 # Secrets
 .env
