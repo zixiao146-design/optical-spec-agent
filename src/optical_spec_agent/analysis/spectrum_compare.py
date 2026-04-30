@@ -166,6 +166,42 @@ def summarize_comparisons(comparisons: list[SpectrumComparison]) -> dict:
     }
 
 
+def analyze_flux_signal(spectrum: SpectrumData, *, near_zero_threshold: float = 1e-15) -> dict:
+    """Return lightweight diagnostic signal-strength metrics for one spectrum.
+
+    The default threshold is only a conservative diagnostic heuristic. It is not
+    a physical standard for deciding whether a Meep observable is meaningful.
+    """
+    flux_values = spectrum.flux
+    abs_values = [abs(value) for value in flux_values]
+    max_abs_flux = max(abs_values) if abs_values else 0.0
+    mean_abs_flux = sum(abs_values) / len(abs_values) if abs_values else 0.0
+    integrated_abs_flux = _trapz(spectrum.wavelength_nm, abs_values)
+    integrated_signed_flux = _trapz(spectrum.wavelength_nm, flux_values)
+    nonzero_abs = [value for value in abs_values if value > 0.0]
+    dynamic_range = None
+    if nonzero_abs:
+        min_nonzero_abs = min(nonzero_abs)
+        if min_nonzero_abs > 0:
+            dynamic_range = max_abs_flux / min_nonzero_abs
+    near_zero_signal = (
+        max_abs_flux < near_zero_threshold
+        or integrated_abs_flux is None
+        or integrated_abs_flux < near_zero_threshold
+    )
+    return {
+        "source_path": spectrum.source_path,
+        "n_points": len(spectrum.wavelength_nm),
+        "max_abs_flux": max_abs_flux,
+        "mean_abs_flux": mean_abs_flux,
+        "integrated_abs_flux": integrated_abs_flux,
+        "integrated_signed_flux": integrated_signed_flux,
+        "dynamic_range": dynamic_range,
+        "near_zero_signal": near_zero_signal,
+        "near_zero_threshold": near_zero_threshold,
+    }
+
+
 def _find_flux_column(fieldnames: list[str]) -> str:
     candidates = [
         "particle_induced_flux_relative",

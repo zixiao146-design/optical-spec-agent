@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from optical_spec_agent.analysis import compare_spectra, load_scattering_csv
+from optical_spec_agent.analysis import analyze_flux_signal, compare_spectra, load_scattering_csv
 
 
 def _write_csv(path, rows):
@@ -59,3 +59,23 @@ def test_compare_spectra_shifted_peak_has_nonzero_peak_shift(tmp_path):
     )
     assert comparison.peak_shift_nm == 100.0
     assert comparison.normalized_l2_difference > 0
+
+
+def test_analyze_flux_signal_detects_near_zero_signal(tmp_path):
+    csv_path = tmp_path / "near_zero.csv"
+    _write_csv(csv_path, [(400, 1e-24), (500, -1e-24), (600, 1e-24)])
+
+    metrics = analyze_flux_signal(load_scattering_csv(csv_path))
+
+    assert metrics["near_zero_signal"] is True
+    assert metrics["max_abs_flux"] == pytest.approx(1e-24)
+
+
+def test_analyze_flux_signal_detects_nonzero_signal(tmp_path):
+    csv_path = tmp_path / "nonzero.csv"
+    _write_csv(csv_path, [(400, 0.0), (500, 1.0), (600, 0.25)])
+
+    metrics = analyze_flux_signal(load_scattering_csv(csv_path))
+
+    assert metrics["near_zero_signal"] is False
+    assert metrics["integrated_abs_flux"] > 0

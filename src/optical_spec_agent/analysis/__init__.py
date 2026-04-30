@@ -3,6 +3,7 @@
 from .spectrum_compare import (
     SpectrumComparison,
     SpectrumData,
+    analyze_flux_signal,
     compare_spectra,
     load_scattering_csv,
     summarize_comparisons,
@@ -11,6 +12,7 @@ from .spectrum_compare import (
 __all__ = [
     "SpectrumComparison",
     "SpectrumData",
+    "analyze_flux_signal",
     "compare_spectra",
     "load_scattering_csv",
     "summarize_comparisons",
