@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 from optical_spec_agent.adapters.meep import MeepAdapter, AdapterError
+from optical_spec_agent.adapters.meep.models import MeepInputModel
 from optical_spec_agent.models.base import (
     BoundaryConditionSetting,
     GeometryDefinition,
@@ -250,6 +251,83 @@ class TestMeepAdapterSuccess:
             f.write(result.content)
             f.flush()
             py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_physical_probe_options_model(self):
+        model = MeepInputModel(
+            script_mode="research_preview",
+            particle_material="Au",
+            particle_shape="sphere",
+            particle_radius_um=0.04,
+            film_material="Au",
+            film_thickness_um=0.1,
+            gap_medium_name="SiO2",
+            gap_medium_n=1.45,
+            gap_thickness_um=0.005,
+            wavelength_min_um=0.4,
+            wavelength_max_um=0.9,
+            diagnostic_profile="physical_probe",
+            source_component="Ex",
+            stop_strategy="fixed",
+            fixed_run_time=50,
+            decay_threshold=1e-3,
+            flux_mode="single_plane",
+            material_mode="particle_library_film_dielectric",
+        )
+        assert model.diagnostic_profile == "physical_probe"
+        assert model.source_component == "Ex"
+        assert model.flux_mode == "single_plane"
+
+    def test_research_preview_source_component_affects_script(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        for component in ["Ex", "Ey", "Ez"]:
+            result = adapter.generate(
+                spec,
+                script_mode="research-preview",
+                source_component=component,
+            )
+            assert f"source_component_name = '{component}'" in result.content
+            assert "source_component = getattr(mp, source_component_name)" in result.content
+            ast.parse(result.content)
+
+    def test_research_preview_single_plane_flux_mode_compiles(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            diagnostic_profile="physical_probe",
+            source_component="Ex",
+            flux_mode="single_plane",
+            stop_strategy="fixed",
+            fixed_run_time=50,
+        )
+        assert "flux_mode=single_plane" in result.content
+        assert "not a scattering cross-section" in result.content
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_mixed_material_modes_are_annotated(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result_particle = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            material_mode="particle_library_film_dielectric",
+        )
+        assert "Mixed-material isolation probe: library particle" in result_particle.content
+        assert "not a validated physical model" in result_particle.content
+
+        result_film = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            material_mode="particle_dielectric_film_library",
+        )
+        assert "Mixed-material isolation probe: dielectric placeholder particle" in result_film.content
+        assert "not a validated physical model" in result_film.content
 
     def test_research_preview_script_passes_ast_and_py_compile(self):
         adapter = MeepAdapter()

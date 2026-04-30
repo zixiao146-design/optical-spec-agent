@@ -56,13 +56,38 @@ class MeepInputModel(BaseModel):
         default=None,
         description="Optional Meep eps_averaging override for research-preview runs",
     )
-    material_mode: Literal["library", "dielectric_sanity"] = Field(
+    material_mode: Literal[
+        "library",
+        "dielectric_sanity",
+        "particle_library_film_dielectric",
+        "particle_dielectric_film_library",
+    ] = Field(
         default="library",
-        description="Research-preview material mode: library or nonphysical dielectric_sanity",
+        description="Research-preview material mode for stability diagnostics",
     )
-    diagnostic_profile: Literal["normal", "low_cost"] = Field(
+    diagnostic_profile: Literal["normal", "low_cost", "physical_probe"] = Field(
         default="normal",
-        description="Research-preview diagnostic profile: normal or nonphysical low_cost",
+        description="Research-preview diagnostic profile: normal, low_cost, or physical_probe",
+    )
+    source_component: Literal["Ex", "Ey", "Ez"] = Field(
+        default="Ez",
+        description="Research-preview source field component. Ez preserves legacy behavior.",
+    )
+    stop_strategy: Literal["decay", "fixed"] | None = Field(
+        default=None,
+        description="Research-preview run stopping strategy override",
+    )
+    fixed_run_time: float | None = Field(
+        default=None,
+        description="Fixed run time for fixed stop strategy",
+    )
+    decay_threshold: float | None = Field(
+        default=None,
+        description="Decay threshold for decay stop strategy",
+    )
+    flux_mode: Literal["closed_box", "single_plane"] = Field(
+        default="closed_box",
+        description="Research-preview flux mode. single_plane is diagnostic only.",
     )
 
     # --- Sweep (optional) ---

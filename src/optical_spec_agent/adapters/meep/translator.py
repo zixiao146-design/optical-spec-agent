@@ -89,8 +89,16 @@ _SHAPE_MAP = {
 
 _SUPPORTED_SCRIPT_MODES = {"preview", "research_preview", "smoke"}
 _SUPPORTED_BOUNDARY_TYPES = {"pml", "absorber"}
-_SUPPORTED_MATERIAL_MODES = {"library", "dielectric_sanity"}
-_SUPPORTED_DIAGNOSTIC_PROFILES = {"normal", "low_cost"}
+_SUPPORTED_MATERIAL_MODES = {
+    "library",
+    "dielectric_sanity",
+    "particle_library_film_dielectric",
+    "particle_dielectric_film_library",
+}
+_SUPPORTED_DIAGNOSTIC_PROFILES = {"normal", "low_cost", "physical_probe"}
+_SUPPORTED_SOURCE_COMPONENTS = {"Ex", "Ey", "Ez"}
+_SUPPORTED_STOP_STRATEGIES = {"decay", "fixed"}
+_SUPPORTED_FLUX_MODES = {"closed_box", "single_plane"}
 
 _LENGTH_TO_NM = {
     "nm": 1.0,
@@ -257,6 +265,41 @@ def _normalize_diagnostic_profile(diagnostic_profile: str) -> str:
     return normalized
 
 
+def _normalize_source_component(source_component: str) -> str:
+    """Normalize research-preview source component."""
+    normalized = (source_component or "Ez").strip()
+    if normalized not in _SUPPORTED_SOURCE_COMPONENTS:
+        raise ValueError(
+            f"Unsupported Meep source_component '{source_component}'. "
+            f"Choose from {sorted(_SUPPORTED_SOURCE_COMPONENTS)}."
+        )
+    return normalized
+
+
+def _normalize_stop_strategy(stop_strategy: str | None) -> str | None:
+    """Normalize optional research-preview stop strategy."""
+    if stop_strategy is None:
+        return None
+    normalized = stop_strategy.strip().lower().replace("-", "_")
+    if normalized not in _SUPPORTED_STOP_STRATEGIES:
+        raise ValueError(
+            f"Unsupported Meep stop_strategy '{stop_strategy}'. "
+            f"Choose from {sorted(_SUPPORTED_STOP_STRATEGIES)}."
+        )
+    return normalized
+
+
+def _normalize_flux_mode(flux_mode: str) -> str:
+    """Normalize research-preview flux mode."""
+    normalized = (flux_mode or "closed_box").strip().lower().replace("-", "_")
+    if normalized not in _SUPPORTED_FLUX_MODES:
+        raise ValueError(
+            f"Unsupported Meep flux_mode '{flux_mode}'. "
+            f"Choose from {sorted(_SUPPORTED_FLUX_MODES)}."
+        )
+    return normalized
+
+
 class MeepAdapter(BaseAdapter):
     """Meep FDTD adapter — nanoparticle_on_film → scattering_spectrum script."""
 
@@ -373,11 +416,21 @@ class MeepAdapter(BaseAdapter):
         eps_averaging: bool | None = None,
         material_mode: str = "library",
         diagnostic_profile: str = "normal",
+        source_component: str = "Ez",
+        stop_strategy: str | None = None,
+        fixed_run_time: float | None = None,
+        decay_threshold: float | None = None,
+        flux_mode: str = "closed_box",
+        resolution: int | None = None,
+        freq_points: int | None = None,
     ) -> AdapterResult:
         normalized_mode = _normalize_script_mode(script_mode)
         normalized_boundary_type = _normalize_boundary_type(boundary_type)
         normalized_material_mode = _normalize_material_mode(material_mode)
         normalized_diagnostic_profile = _normalize_diagnostic_profile(diagnostic_profile)
+        normalized_source_component = _normalize_source_component(source_component)
+        normalized_stop_strategy = _normalize_stop_strategy(stop_strategy)
+        normalized_flux_mode = _normalize_flux_mode(flux_mode)
 
         if not self.can_handle(spec):
             raise AdapterError(
@@ -402,6 +455,13 @@ class MeepAdapter(BaseAdapter):
             eps_averaging=eps_averaging,
             material_mode=normalized_material_mode,
             diagnostic_profile=normalized_diagnostic_profile,
+            source_component=normalized_source_component,
+            stop_strategy=normalized_stop_strategy,
+            fixed_run_time=fixed_run_time,
+            decay_threshold=decay_threshold,
+            flux_mode=normalized_flux_mode,
+            resolution=resolution,
+            freq_points=freq_points,
         )
         script = render_script(model)
         return AdapterResult(
@@ -420,21 +480,34 @@ class MeepAdapter(BaseAdapter):
         eps_averaging: bool | None = None,
         material_mode: str = "library",
         diagnostic_profile: str = "normal",
+        source_component: str = "Ez",
+        stop_strategy: str | None = None,
+        fixed_run_time: float | None = None,
+        decay_threshold: float | None = None,
+        flux_mode: str = "closed_box",
+        resolution: int | None = None,
+        freq_points: int | None = None,
     ) -> MeepInputModel:
         normalized_mode = _normalize_script_mode(script_mode)
         normalized_boundary_type = _normalize_boundary_type(boundary_type)
         normalized_material_mode = _normalize_material_mode(material_mode)
         normalized_diagnostic_profile = _normalize_diagnostic_profile(diagnostic_profile)
-        resolution = _ADAPTER_DEFAULTS["resolution"]
+        normalized_source_component = _normalize_source_component(source_component)
+        normalized_stop_strategy = _normalize_stop_strategy(stop_strategy)
+        normalized_flux_mode = _normalize_flux_mode(flux_mode)
+        resolved_resolution = resolution or _ADAPTER_DEFAULTS["resolution"]
         pml_thickness_um = _ADAPTER_DEFAULTS["pml_thickness_um"]
-        freq_points = _ADAPTER_DEFAULTS["freq_points"]
+        resolved_freq_points = freq_points or _ADAPTER_DEFAULTS["freq_points"]
         if normalized_mode == "research_preview" and normalized_diagnostic_profile == "low_cost":
             normalized_boundary_type = "absorber"
             normalized_material_mode = "dielectric_sanity"
             courant = 0.25 if courant is None else courant
-            resolution = 8
+            resolved_resolution = resolution or 8
             pml_thickness_um = 0.5
-            freq_points = 5
+            resolved_freq_points = freq_points or 5
+            normalized_stop_strategy = normalized_stop_strategy or "fixed"
+            fixed_run_time = fixed_run_time or 30
+            decay_threshold = decay_threshold or 1e-3
         defaults_applied: list[str] = []
 
         # --- Particle info ---
@@ -571,14 +644,19 @@ class MeepAdapter(BaseAdapter):
             gap_thickness_um=gap_thick_um,
             wavelength_min_um=wl_range[0],
             wavelength_max_um=wl_range[1],
-            resolution=resolution,
+            resolution=resolved_resolution,
             pml_thickness_um=pml_thickness_um,
-            freq_points=freq_points,
+            freq_points=resolved_freq_points,
             boundary_type=normalized_boundary_type,
             courant=courant,
             eps_averaging=eps_averaging,
             material_mode=normalized_material_mode,
             diagnostic_profile=normalized_diagnostic_profile,
+            source_component=normalized_source_component,
+            stop_strategy=normalized_stop_strategy,
+            fixed_run_time=fixed_run_time,
+            decay_threshold=decay_threshold,
+            flux_mode=normalized_flux_mode,
             sweep_variable=sweep_variable,
             sweep_start_um=sweep_start,
             sweep_end_um=sweep_end,

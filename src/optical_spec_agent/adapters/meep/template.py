@@ -190,6 +190,9 @@ gap_medium_name = {m.gap_medium_name!r}
 boundary_type = {m.boundary_type!r}
 material_mode = {m.material_mode!r}
 diagnostic_profile = {m.diagnostic_profile!r}
+source_component_name = {m.source_component!r}
+stop_strategy = {m.stop_strategy or ("fixed" if m.diagnostic_profile == "low_cost" else "decay")!r}
+flux_mode = {m.flux_mode!r}
 
 defaults_applied = {m.defaults_applied!r}
 limitations = {limitations!r}
@@ -209,10 +212,11 @@ fcen = {(1.0 / ((m.wavelength_min_um + m.wavelength_max_um) / 2.0)):.6f}
 df = {(1.0 / m.wavelength_min_um - 1.0 / m.wavelength_max_um):.6f}
 nfreq = {m.freq_points}
 decay_check_interval = {10 if m.diagnostic_profile == "low_cost" else 50}
-decay_threshold = {1e-3 if m.diagnostic_profile == "low_cost" else 1e-6}
-fixed_run_until = {30 if m.diagnostic_profile == "low_cost" else None}
+decay_threshold = {m.decay_threshold if m.decay_threshold is not None else (1e-3 if m.diagnostic_profile == "low_cost" else 1e-6)}
+fixed_run_until = {m.fixed_run_time if m.fixed_run_time is not None else (30 if m.diagnostic_profile == "low_cost" else None)}
 
 simulation_options = {simulation_options_block}
+source_component = getattr(mp, source_component_name)
 
 
 def dielectric_fallback_from_n(n_value: float) -> mp.Medium:
@@ -280,7 +284,7 @@ def build_sources() -> list:
     return [
         mp.Source(
             src=mp.GaussianSource(fcen, fwidth=df),
-            component=mp.Ez,
+            component=source_component,
             center=source_center,
             size=mp.Vector3(interior_sx, interior_sy, 0),
         )
@@ -303,6 +307,16 @@ def make_flux_regions(box_center, box_size):
     hx = 0.5 * box_size.x
     hy = 0.5 * box_size.y
     hz = 0.5 * box_size.z
+    if flux_mode == "single_plane":
+        # Diagnostic only: not a closed scattering box or cross-section.
+        return [
+            mp.FluxRegion(
+                center=box_center + mp.Vector3(0, 0, hz),
+                size=mp.Vector3(box_size.x, box_size.y, 0),
+                direction=mp.Z,
+                weight=1.0,
+            )
+        ]
     return [
         mp.FluxRegion(
             center=box_center + mp.Vector3(-hx, 0, 0),
@@ -353,8 +367,8 @@ def add_closed_box_flux(sim):
 def run_reference():
     sim_ref = build_simulation(include_particle=False)
     flux_ref = add_closed_box_flux(sim_ref)
-    if fixed_run_until is not None:
-        # low_cost diagnostic profile: fixed short run, not physically converged.
+    if stop_strategy == "fixed":
+        # Diagnostic/probe fixed run: bounded, not necessarily physically converged.
         sim_ref.run(until=fixed_run_until)
     else:
         sim_ref.run(
@@ -373,8 +387,8 @@ def run_structure(ref_flux_data):
     flux_scat = add_closed_box_flux(sim_scat)
     for flux_obj, flux_data in zip(flux_scat, ref_flux_data):
         sim_scat.load_minus_flux_data(flux_obj, flux_data)
-    if fixed_run_until is not None:
-        # low_cost diagnostic profile: fixed short run, not physically converged.
+    if stop_strategy == "fixed":
+        # Diagnostic/probe fixed run: bounded, not necessarily physically converged.
         sim_scat.run(until=fixed_run_until)
     else:
         sim_scat.run(
@@ -462,6 +476,11 @@ def write_results_json(resonance_wavelength_nm, fwhm_nm):
         "diagnostic_profile": diagnostic_profile,
         "boundary_type": boundary_type,
         "material_mode": material_mode,
+        "source_component": source_component_name,
+        "stop_strategy": stop_strategy,
+        "fixed_run_time": fixed_run_until,
+        "decay_threshold": decay_threshold,
+        "flux_mode": flux_mode,
         "resolution": resolution,
         "freq_points": nfreq,
         "particle_material": particle_material_name,
@@ -763,6 +782,9 @@ def _research_stability_doc(m: MeepInputModel) -> list[str]:
         f"diagnostic_profile={m.diagnostic_profile}",
         f"boundary_type={m.boundary_type}",
         f"material_mode={m.material_mode}",
+        f"source_component={m.source_component}",
+        f"stop_strategy={m.stop_strategy or ('fixed' if m.diagnostic_profile == 'low_cost' else 'decay')}",
+        f"flux_mode={m.flux_mode}",
         f"resolution={m.resolution}",
         f"freq_points={m.freq_points}",
         f"Courant={courant_note}",
@@ -775,6 +797,10 @@ def _research_stability_doc(m: MeepInputModel) -> list[str]:
         notes.append("Absorber boundary is a diagnostic workaround for possible PML/dispersive-material blow-up.")
     if m.material_mode == "dielectric_sanity":
         notes.append("material_mode=dielectric_sanity is nonphysical and only validates execution pipeline.")
+    if m.material_mode in ("particle_library_film_dielectric", "particle_dielectric_film_library"):
+        notes.append(f"material_mode={m.material_mode} is a mixed-material isolation probe, not a validated physical setup.")
+    if m.flux_mode == "single_plane":
+        notes.append("flux_mode=single_plane is diagnostic only and not a scattering cross-section.")
     return notes
 
 
@@ -788,6 +814,72 @@ def _research_material_block(m: MeepInputModel) -> str:
 particle_mat = mp.Medium(epsilon=2.25)
 film_mat = mp.Medium(epsilon=2.25)
 gap_medium = dielectric_fallback_from_n(gap_medium_n)
+"""
+
+    if m.material_mode == "particle_library_film_dielectric":
+        return """\
+try:
+    from meep.materials import Au, Ag, SiO2, Si3N4, Al2O3
+except ImportError:
+    Au = Ag = SiO2 = Si3N4 = Al2O3 = None
+
+
+def resolve_metal(name: str):
+    library = {"Au": Au, "Ag": Ag}
+    material = library.get(name)
+    if material is None:
+        raise RuntimeError(
+            f"research-preview requires meep.materials.{name} for dispersive metals; "
+            "no placeholder metal fallback is provided."
+        )
+    return material
+
+
+def resolve_gap_medium(name: str, fallback_n: float):
+    library = {"SiO2": SiO2, "Si3N4": Si3N4, "Al2O3": Al2O3}
+    material = library.get(name)
+    if material is not None:
+        return material
+    return dielectric_fallback_from_n(fallback_n)
+
+
+# Mixed-material isolation probe: library particle, dielectric placeholder film.
+particle_mat = resolve_metal(particle_material_name)
+film_mat = mp.Medium(epsilon=2.25)
+gap_medium = resolve_gap_medium(gap_medium_name, gap_medium_n)
+"""
+
+    if m.material_mode == "particle_dielectric_film_library":
+        return """\
+try:
+    from meep.materials import Au, Ag, SiO2, Si3N4, Al2O3
+except ImportError:
+    Au = Ag = SiO2 = Si3N4 = Al2O3 = None
+
+
+def resolve_metal(name: str):
+    library = {"Au": Au, "Ag": Ag}
+    material = library.get(name)
+    if material is None:
+        raise RuntimeError(
+            f"research-preview requires meep.materials.{name} for dispersive metals; "
+            "no placeholder metal fallback is provided."
+        )
+    return material
+
+
+def resolve_gap_medium(name: str, fallback_n: float):
+    library = {"SiO2": SiO2, "Si3N4": Si3N4, "Al2O3": Al2O3}
+    material = library.get(name)
+    if material is not None:
+        return material
+    return dielectric_fallback_from_n(fallback_n)
+
+
+# Mixed-material isolation probe: dielectric placeholder particle, library film.
+particle_mat = mp.Medium(epsilon=2.25)
+film_mat = resolve_metal(film_material_name)
+gap_medium = resolve_gap_medium(gap_medium_name, gap_medium_n)
 """
 
     return """\
@@ -853,9 +945,21 @@ def _research_limitations(m: MeepInputModel) -> list[str]:
         limitations.append(
             "Dielectric sanity material mode is nonphysical and should not be interpreted as a metal scattering result."
         )
+    if m.material_mode in ("particle_library_film_dielectric", "particle_dielectric_film_library"):
+        limitations.append(
+            f"{m.material_mode} is a mixed-material stability isolation probe and is not a validated physical model."
+        )
     if m.diagnostic_profile == "low_cost":
         limitations.append(
             "diagnostic_profile=low_cost uses low resolution, few frequency points, and fixed short runs; it validates execution plumbing only."
+        )
+    if m.diagnostic_profile == "physical_probe":
+        limitations.append(
+            "diagnostic_profile=physical_probe is a v0.6 pre-study setting, not production validation."
+        )
+    if m.flux_mode == "single_plane":
+        limitations.append(
+            "flux_mode=single_plane is diagnostic only and not a scattering cross-section."
         )
     if m.sweep_variable:
         limitations.append(
