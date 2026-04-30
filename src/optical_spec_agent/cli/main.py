@@ -246,11 +246,17 @@ def meep_generate(
 # ---- meep execution harness ----
 
 @app.command("meep-check")
-def meep_check():
+def meep_check(
+    json_output: bool = typer.Option(False, "--json", help="Print structured JSON output"),
+):
     """Check whether Meep is importable in a supported Python environment."""
     from optical_spec_agent.execution import check_meep_available
 
     result = check_meep_available()
+    if json_output:
+        console.print_json(json.dumps(result.to_dict(), ensure_ascii=False))
+        return
+
     console.print(f"Meep available: {'yes' if result.available else 'no'}")
     if result.command:
         console.print(f"Command: {' '.join(result.command)}")
@@ -273,11 +279,35 @@ def meep_run(
         help="Directory where the script runs and output files are collected",
     ),
     timeout: int = typer.Option(300, "--timeout", help="Execution timeout in seconds"),
+    expected_mode: str = typer.Option(
+        "auto",
+        "--expected-mode",
+        help="Expected script mode: auto, smoke, preview, or research-preview",
+    ),
+    json_output: bool = typer.Option(False, "--json", help="Print structured JSON output"),
+    no_save_artifacts: bool = typer.Option(
+        False,
+        "--no-save-artifacts",
+        help="Do not write stdout.txt, stderr.txt, or execution_result.json",
+    ),
 ):
     """Run an existing generated Meep script and collect known outputs."""
     from optical_spec_agent.execution import run_meep_script
 
-    result = run_meep_script(script_path=script_path, workdir=workdir, timeout=timeout)
+    result = run_meep_script(
+        script_path=script_path,
+        workdir=workdir,
+        timeout=timeout,
+        expected_mode=expected_mode,
+        save_artifacts=not no_save_artifacts,
+    )
+
+    if json_output:
+        console.print_json(json.dumps(result.to_dict(), ensure_ascii=False))
+        if not result.success:
+            raise typer.Exit(1)
+        return
+
     _print_execution_result(result)
 
     if result.postprocess_results is not None:
@@ -291,6 +321,7 @@ def meep_run(
 def _print_execution_result(result) -> None:
     console.print(f"Success: {'yes' if result.success else 'no'}")
     console.print(f"Meep available: {'yes' if result.available else 'no'}")
+    console.print(f"Expected mode: {result.expected_mode}")
     console.print(f"Workdir: {result.workdir}")
     if result.command:
         console.print(f"Command: {' '.join(result.command)}")
@@ -300,6 +331,10 @@ def _print_execution_result(result) -> None:
         console.print("[green]Outputs:[/green]")
         for name, path in result.outputs.items():
             console.print(f"  - {name}: {path}")
+    if result.missing_outputs:
+        console.print("[red]Missing outputs:[/red]")
+        for name in result.missing_outputs:
+            console.print(f"  - {name}")
     if result.errors:
         console.print("[red]Errors:[/red]")
         for error in result.errors:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -111,6 +112,127 @@ def test_collect_meep_outputs_reads_known_files(tmp_path):
         "postprocess_results.json",
     }
     assert postprocess_results == expected_json
+
+
+def test_research_preview_missing_required_outputs_fails(tmp_path, monkeypatch):
+    script_path = tmp_path / "noop.py"
+    script_path.write_text("print('done')\n", encoding="utf-8")
+    monkeypatch.setattr(
+        "optical_spec_agent.execution.meep_runner.find_meep_python",
+        lambda: [sys.executable],
+    )
+
+    result = run_meep_script(
+        script_path,
+        workdir=tmp_path / "run",
+        expected_mode="research_preview",
+    )
+
+    assert result.success is False
+    assert result.expected_mode == "research_preview"
+    assert result.required_outputs == [
+        "scattering_spectrum.csv",
+        "postprocess_results.json",
+    ]
+    assert "scattering_spectrum.csv" in result.missing_outputs
+    assert "postprocess_results.json" in result.missing_outputs
+
+
+def test_research_preview_required_outputs_pass(tmp_path, monkeypatch):
+    script_path = tmp_path / "write_outputs.py"
+    script_path.write_text(
+        "\n".join(
+            [
+                "from pathlib import Path",
+                "Path('scattering_spectrum.csv').write_text('wavelength_nm,particle_induced_flux_relative\\n500,1.0\\n')",
+                "Path('postprocess_results.json').write_text('{\"mode\": \"research_preview\", \"fwhm_nm\": null}')",
+                "print('done')",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "optical_spec_agent.execution.meep_runner.find_meep_python",
+        lambda: [sys.executable],
+    )
+
+    result = run_meep_script(
+        script_path,
+        workdir=tmp_path / "run",
+        expected_mode="research-preview",
+    )
+
+    assert result.success is True
+    assert result.expected_mode == "research_preview"
+    assert result.missing_outputs == []
+    assert result.postprocess_results == {
+        "mode": "research_preview",
+        "fwhm_nm": None,
+    }
+
+
+def test_research_preview_invalid_postprocess_json_fails(tmp_path, monkeypatch):
+    script_path = tmp_path / "bad_json.py"
+    script_path.write_text(
+        "\n".join(
+            [
+                "from pathlib import Path",
+                "Path('scattering_spectrum.csv').write_text('wavelength_nm,particle_induced_flux_relative\\n500,1.0\\n')",
+                "Path('postprocess_results.json').write_text('{not valid json')",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        "optical_spec_agent.execution.meep_runner.find_meep_python",
+        lambda: [sys.executable],
+    )
+
+    result = run_meep_script(
+        script_path,
+        workdir=tmp_path / "run",
+        expected_mode="research_preview",
+    )
+
+    assert result.success is False
+    assert any("Could not parse" in error for error in result.errors)
+
+
+def test_run_meep_script_writes_artifact_files(tmp_path, monkeypatch):
+    script_path = tmp_path / "artifacts.py"
+    script_path.write_text(
+        "import sys\nprint('stdout marker')\nsys.stderr.write('stderr marker\\n')\n",
+        encoding="utf-8",
+    )
+    run_dir = tmp_path / "run"
+    monkeypatch.setattr(
+        "optical_spec_agent.execution.meep_runner.find_meep_python",
+        lambda: [sys.executable],
+    )
+
+    result = run_meep_script(script_path, workdir=run_dir, expected_mode="preview")
+
+    assert result.success is True
+    assert (run_dir / "stdout.txt").read_text(encoding="utf-8").strip() == "stdout marker"
+    assert (run_dir / "stderr.txt").read_text(encoding="utf-8").strip() == "stderr marker"
+    saved = json.loads((run_dir / "execution_result.json").read_text(encoding="utf-8"))
+    assert saved["success"] is True
+    assert saved["expected_mode"] == "preview"
+
+
+def test_smoke_mode_does_not_require_outputs(tmp_path, monkeypatch):
+    script_path = tmp_path / "smoke_like.py"
+    script_path.write_text("print('smoke done')\n", encoding="utf-8")
+    monkeypatch.setattr(
+        "optical_spec_agent.execution.meep_runner.find_meep_python",
+        lambda: [sys.executable],
+    )
+
+    result = run_meep_script(script_path, workdir=tmp_path / "run", expected_mode="smoke")
+
+    assert result.success is True
+    assert result.required_outputs == []
+    assert result.missing_outputs == []
 
 
 _meep_available = find_meep_python() is not None

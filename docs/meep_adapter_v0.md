@@ -207,11 +207,17 @@ optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
 optical-spec meep-generate spec.json -o smoke.py --mode smoke
 
 # Check whether Meep can be imported
-optical-spec meep-check
+optical-spec meep-check --json
 
 # Run an existing generated script explicitly
-optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300
+optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview
 ```
+
+`meep-run --expected-mode research-preview` treats
+`scattering_spectrum.csv` and `postprocess_results.json` as required outputs.
+It writes `stdout.txt`, `stderr.txt`, and `execution_result.json` to the run
+directory by default. Use `--json` for machine-readable CLI output, or
+`--no-save-artifacts` to disable artifact files.
 
 ## Smoke validation
 

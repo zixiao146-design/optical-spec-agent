@@ -21,6 +21,10 @@ MEEP_OUTPUT_FILES = (
     "postprocess_results.json",
     "scattering_spectrum.png",
 )
+RESEARCH_PREVIEW_REQUIRED_OUTPUTS = [
+    "scattering_spectrum.csv",
+    "postprocess_results.json",
+]
 
 
 @dataclass(slots=True)
@@ -36,6 +40,9 @@ class ExecutionResult:
     stderr: str = ""
     outputs: dict[str, str] = field(default_factory=dict)
     postprocess_results: dict[str, Any] | None = None
+    expected_mode: str = "auto"
+    required_outputs: list[str] = field(default_factory=list)
+    missing_outputs: list[str] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
@@ -66,6 +73,13 @@ def _probe_meep_import(command_prefix: list[str]) -> subprocess.CompletedProcess
         text=True,
         timeout=30,
     )
+
+
+def _normalize_expected_mode(expected_mode: str) -> str | None:
+    normalized = expected_mode.strip().lower().replace("-", "_")
+    if normalized in {"auto", "smoke", "preview", "research_preview"}:
+        return normalized
+    return None
 
 
 def find_meep_python() -> list[str] | None:
@@ -163,8 +177,23 @@ def run_meep_script(
     script_path: Path,
     workdir: Path | None = None,
     timeout: int = 300,
+    expected_mode: str = "auto",
+    save_artifacts: bool = True,
 ) -> ExecutionResult:
     """Run an existing Meep script when Meep is available."""
+    normalized_mode = _normalize_expected_mode(expected_mode)
+    if normalized_mode is None:
+        return ExecutionResult(
+            success=False,
+            available=False,
+            command=[],
+            workdir=str(Path(workdir).expanduser() if workdir else Path.cwd()),
+            returncode=None,
+            expected_mode=expected_mode,
+            errors=[f"Unsupported expected_mode: {expected_mode}"],
+        )
+
+    required_outputs = _required_outputs_for_mode(normalized_mode)
     script = Path(script_path).expanduser()
     if not script.exists():
         return ExecutionResult(
@@ -173,6 +202,9 @@ def run_meep_script(
             command=[],
             workdir=str(Path(workdir).expanduser() if workdir else Path.cwd()),
             returncode=None,
+            expected_mode=normalized_mode,
+            required_outputs=required_outputs,
+            missing_outputs=required_outputs.copy(),
             errors=[f"File not found: {script}"],
             warnings=["Meep availability was not checked because the script file was missing."],
         )
@@ -190,6 +222,9 @@ def run_meep_script(
             command=command,
             workdir=str(run_dir),
             returncode=None,
+            expected_mode=normalized_mode,
+            required_outputs=required_outputs,
+            missing_outputs=required_outputs.copy(),
             errors=["Meep is not available"],
         )
 
@@ -202,8 +237,9 @@ def run_meep_script(
             timeout=timeout,
         )
     except subprocess.TimeoutExpired as exc:
-        outputs, postprocess_results = _safe_collect_outputs(run_dir)
-        return ExecutionResult(
+        outputs, postprocess_results, collect_errors = _safe_collect_outputs(run_dir)
+        missing_outputs = _missing_required_outputs(outputs, required_outputs)
+        timeout_result = ExecutionResult(
             success=False,
             available=True,
             command=command,
@@ -213,8 +249,13 @@ def run_meep_script(
             stderr=_decode_process_output(exc.stderr),
             outputs=outputs,
             postprocess_results=postprocess_results,
-            errors=[f"Meep script timed out after {timeout} seconds"],
+            expected_mode=normalized_mode,
+            required_outputs=required_outputs,
+            missing_outputs=missing_outputs,
+            errors=[f"Meep script timed out after {timeout} seconds", *collect_errors],
         )
+        _write_execution_artifacts(timeout_result, save_artifacts=save_artifacts)
+        return timeout_result
     except FileNotFoundError as exc:
         return ExecutionResult(
             success=False,
@@ -222,23 +263,32 @@ def run_meep_script(
             command=command,
             workdir=str(run_dir),
             returncode=None,
+            expected_mode=normalized_mode,
+            required_outputs=required_outputs,
+            missing_outputs=required_outputs.copy(),
             errors=[str(exc)],
         )
 
     warnings: list[str] = []
+    errors: list[str] = []
     try:
         outputs, postprocess_results = collect_meep_outputs(run_dir)
     except (OSError, json.JSONDecodeError) as exc:
         outputs = {}
         postprocess_results = None
-        warnings.append(f"Could not collect Meep outputs: {exc}")
+        errors.append(f"Could not parse Meep outputs: {exc}")
 
-    errors: list[str] = []
     if result.returncode != 0:
         errors.append(f"Meep script failed with return code {result.returncode}")
 
-    return ExecutionResult(
-        success=result.returncode == 0,
+    missing_outputs = _missing_required_outputs(outputs, required_outputs)
+    for output_name in missing_outputs:
+        errors.append(f"Missing required output for {normalized_mode}: {output_name}")
+    if normalized_mode == "research_preview" and "postprocess_results.json" in outputs and postprocess_results is None:
+        errors.append("Could not parse postprocess_results.json as a JSON object")
+
+    execution_result = ExecutionResult(
+        success=result.returncode == 0 and not errors,
         available=True,
         command=command,
         workdir=str(run_dir),
@@ -247,13 +297,46 @@ def run_meep_script(
         stderr=result.stderr,
         outputs=outputs,
         postprocess_results=postprocess_results,
+        expected_mode=normalized_mode,
+        required_outputs=required_outputs,
+        missing_outputs=missing_outputs,
         errors=errors,
         warnings=warnings,
     )
+    _write_execution_artifacts(execution_result, save_artifacts=save_artifacts)
+    return execution_result
 
 
-def _safe_collect_outputs(workdir: Path) -> tuple[dict[str, str], dict[str, Any] | None]:
+def _required_outputs_for_mode(expected_mode: str) -> list[str]:
+    if expected_mode == "research_preview":
+        return RESEARCH_PREVIEW_REQUIRED_OUTPUTS.copy()
+    return []
+
+
+def _missing_required_outputs(outputs: dict[str, str], required_outputs: list[str]) -> list[str]:
+    return [name for name in required_outputs if name not in outputs]
+
+
+def _safe_collect_outputs(workdir: Path) -> tuple[dict[str, str], dict[str, Any] | None, list[str]]:
     try:
-        return collect_meep_outputs(workdir)
-    except (OSError, json.JSONDecodeError):
-        return {}, None
+        outputs, postprocess_results = collect_meep_outputs(workdir)
+        return outputs, postprocess_results, []
+    except (OSError, json.JSONDecodeError) as exc:
+        return {}, None, [f"Could not parse Meep outputs: {exc}"]
+
+
+def _write_execution_artifacts(result: ExecutionResult, *, save_artifacts: bool) -> None:
+    if not save_artifacts:
+        return
+
+    run_dir = Path(result.workdir)
+    try:
+        run_dir.mkdir(parents=True, exist_ok=True)
+        (run_dir / "stdout.txt").write_text(result.stdout, encoding="utf-8")
+        (run_dir / "stderr.txt").write_text(result.stderr, encoding="utf-8")
+        (run_dir / "execution_result.json").write_text(
+            json.dumps(result.to_dict(), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+    except OSError as exc:
+        result.warnings.append(f"Could not write execution artifacts: {exc}")

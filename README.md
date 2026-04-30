@@ -114,8 +114,8 @@ optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
 optical-spec meep-generate spec.json -o smoke.py --mode smoke
 
 # Optional v0.5 execution harness for an existing generated script
-optical-spec meep-check
-optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300
+optical-spec meep-check --json
+optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview
 ```
 
 ### Meep generation modes
@@ -128,6 +128,13 @@ Script generation modes still generate scripts only. v0.5 starts a minimal
 execution harness with `meep-check` and `meep-run`, but this is not a full solver
 automation or result parsing pipeline yet. Real Meep execution tests are skipped
 unless Meep is installed locally.
+
+`meep-run` supports `--expected-mode smoke|preview|research-preview`. In
+`research-preview` mode, successful execution requires both
+`scattering_spectrum.csv` and `postprocess_results.json`. By default it writes
+`stdout.txt`, `stderr.txt`, and `execution_result.json` into the run directory;
+use `--json` for machine-readable CLI output or `--no-save-artifacts` to skip
+artifact files.
 
 ### Python SDK
 
