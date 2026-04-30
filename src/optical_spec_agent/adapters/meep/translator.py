@@ -90,6 +90,7 @@ _SHAPE_MAP = {
 _SUPPORTED_SCRIPT_MODES = {"preview", "research_preview", "smoke"}
 _SUPPORTED_BOUNDARY_TYPES = {"pml", "absorber"}
 _SUPPORTED_MATERIAL_MODES = {"library", "dielectric_sanity"}
+_SUPPORTED_DIAGNOSTIC_PROFILES = {"normal", "low_cost"}
 
 _LENGTH_TO_NM = {
     "nm": 1.0,
@@ -245,6 +246,17 @@ def _normalize_material_mode(material_mode: str) -> str:
     return normalized
 
 
+def _normalize_diagnostic_profile(diagnostic_profile: str) -> str:
+    """Normalize research-preview diagnostic profile."""
+    normalized = (diagnostic_profile or "normal").strip().lower().replace("-", "_")
+    if normalized not in _SUPPORTED_DIAGNOSTIC_PROFILES:
+        raise ValueError(
+            f"Unsupported Meep diagnostic_profile '{diagnostic_profile}'. "
+            f"Choose from {sorted(_SUPPORTED_DIAGNOSTIC_PROFILES)}."
+        )
+    return normalized
+
+
 class MeepAdapter(BaseAdapter):
     """Meep FDTD adapter — nanoparticle_on_film → scattering_spectrum script."""
 
@@ -360,10 +372,12 @@ class MeepAdapter(BaseAdapter):
         courant: float | None = None,
         eps_averaging: bool | None = None,
         material_mode: str = "library",
+        diagnostic_profile: str = "normal",
     ) -> AdapterResult:
         normalized_mode = _normalize_script_mode(script_mode)
         normalized_boundary_type = _normalize_boundary_type(boundary_type)
         normalized_material_mode = _normalize_material_mode(material_mode)
+        normalized_diagnostic_profile = _normalize_diagnostic_profile(diagnostic_profile)
 
         if not self.can_handle(spec):
             raise AdapterError(
@@ -387,6 +401,7 @@ class MeepAdapter(BaseAdapter):
             courant=courant,
             eps_averaging=eps_averaging,
             material_mode=normalized_material_mode,
+            diagnostic_profile=normalized_diagnostic_profile,
         )
         script = render_script(model)
         return AdapterResult(
@@ -404,10 +419,22 @@ class MeepAdapter(BaseAdapter):
         courant: float | None = None,
         eps_averaging: bool | None = None,
         material_mode: str = "library",
+        diagnostic_profile: str = "normal",
     ) -> MeepInputModel:
         normalized_mode = _normalize_script_mode(script_mode)
         normalized_boundary_type = _normalize_boundary_type(boundary_type)
         normalized_material_mode = _normalize_material_mode(material_mode)
+        normalized_diagnostic_profile = _normalize_diagnostic_profile(diagnostic_profile)
+        resolution = _ADAPTER_DEFAULTS["resolution"]
+        pml_thickness_um = _ADAPTER_DEFAULTS["pml_thickness_um"]
+        freq_points = _ADAPTER_DEFAULTS["freq_points"]
+        if normalized_mode == "research_preview" and normalized_diagnostic_profile == "low_cost":
+            normalized_boundary_type = "absorber"
+            normalized_material_mode = "dielectric_sanity"
+            courant = 0.25 if courant is None else courant
+            resolution = 8
+            pml_thickness_um = 0.5
+            freq_points = 5
         defaults_applied: list[str] = []
 
         # --- Particle info ---
@@ -544,10 +571,14 @@ class MeepAdapter(BaseAdapter):
             gap_thickness_um=gap_thick_um,
             wavelength_min_um=wl_range[0],
             wavelength_max_um=wl_range[1],
+            resolution=resolution,
+            pml_thickness_um=pml_thickness_um,
+            freq_points=freq_points,
             boundary_type=normalized_boundary_type,
             courant=courant,
             eps_averaging=eps_averaging,
             material_mode=normalized_material_mode,
+            diagnostic_profile=normalized_diagnostic_profile,
             sweep_variable=sweep_variable,
             sweep_start_um=sweep_start,
             sweep_end_um=sweep_end,

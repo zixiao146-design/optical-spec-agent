@@ -189,6 +189,7 @@ film_material_name = {m.film_material!r}
 gap_medium_name = {m.gap_medium_name!r}
 boundary_type = {m.boundary_type!r}
 material_mode = {m.material_mode!r}
+diagnostic_profile = {m.diagnostic_profile!r}
 
 defaults_applied = {m.defaults_applied!r}
 limitations = {limitations!r}
@@ -207,6 +208,9 @@ particle_shape = {m.particle_shape!r}
 fcen = {(1.0 / ((m.wavelength_min_um + m.wavelength_max_um) / 2.0)):.6f}
 df = {(1.0 / m.wavelength_min_um - 1.0 / m.wavelength_max_um):.6f}
 nfreq = {m.freq_points}
+decay_check_interval = {10 if m.diagnostic_profile == "low_cost" else 50}
+decay_threshold = {1e-3 if m.diagnostic_profile == "low_cost" else 1e-6}
+fixed_run_until = {30 if m.diagnostic_profile == "low_cost" else None}
 
 simulation_options = {simulation_options_block}
 
@@ -234,7 +238,10 @@ cell = mp.Vector3(sx, sy, sz)
 particle_center = mp.Vector3(0, 0, film_thickness + gap_thickness_um + r_particle)
 box_center = particle_center
 box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, 2 * r_particle + 0.12)
-source_center = mp.Vector3(0, 0, film_thickness + gap_thickness_um + 2 * r_particle + pml_um + 0.4)
+top_interior_z = 0.5 * sz - boundary_thickness_um - pml_margin
+desired_source_z = film_thickness + gap_thickness_um + 2 * r_particle + 0.2
+source_z = min(desired_source_z, top_interior_z - 0.05)
+source_center = mp.Vector3(0, 0, source_z)
 
 
 def build_particle():
@@ -346,11 +353,15 @@ def add_closed_box_flux(sim):
 def run_reference():
     sim_ref = build_simulation(include_particle=False)
     flux_ref = add_closed_box_flux(sim_ref)
-    sim_ref.run(
-        until_after_sources=mp.stop_when_fields_decayed(
-            50, mp.Ez, box_center, 1e-6
+    if fixed_run_until is not None:
+        # low_cost diagnostic profile: fixed short run, not physically converged.
+        sim_ref.run(until=fixed_run_until)
+    else:
+        sim_ref.run(
+            until_after_sources=mp.stop_when_fields_decayed(
+                decay_check_interval, mp.Ez, box_center, decay_threshold
+            )
         )
-    )
     ref_flux_data = [sim_ref.get_flux_data(flux_obj) for flux_obj in flux_ref]
     freqs = mp.get_flux_freqs(flux_ref[0])
     sim_ref.reset_meep()
@@ -362,11 +373,15 @@ def run_structure(ref_flux_data):
     flux_scat = add_closed_box_flux(sim_scat)
     for flux_obj, flux_data in zip(flux_scat, ref_flux_data):
         sim_scat.load_minus_flux_data(flux_obj, flux_data)
-    sim_scat.run(
-        until_after_sources=mp.stop_when_fields_decayed(
-            50, mp.Ez, box_center, 1e-6
+    if fixed_run_until is not None:
+        # low_cost diagnostic profile: fixed short run, not physically converged.
+        sim_scat.run(until=fixed_run_until)
+    else:
+        sim_scat.run(
+            until_after_sources=mp.stop_when_fields_decayed(
+                decay_check_interval, mp.Ez, box_center, decay_threshold
+            )
         )
-    )
     freqs = mp.get_flux_freqs(flux_scat[0])
     surface_fluxes = [np.array(mp.get_fluxes(flux_obj)) for flux_obj in flux_scat]
     particle_induced_flux_relative = np.sum(surface_fluxes, axis=0)
@@ -444,6 +459,11 @@ def estimate_resonance_and_fwhm(wavelength_nm, flux_values):
 def write_results_json(resonance_wavelength_nm, fwhm_nm):
     results = {{
         "mode": MODE,
+        "diagnostic_profile": diagnostic_profile,
+        "boundary_type": boundary_type,
+        "material_mode": material_mode,
+        "resolution": resolution,
+        "freq_points": nfreq,
         "particle_material": particle_material_name,
         "film_material": film_material_name,
         "gap_medium_name": gap_medium_name,
@@ -740,11 +760,17 @@ def _research_stability_doc(m: MeepInputModel) -> list[str]:
     courant_note = "Meep default" if m.courant is None else str(m.courant)
     eps_note = "Meep default" if m.eps_averaging is None else str(m.eps_averaging)
     notes = [
+        f"diagnostic_profile={m.diagnostic_profile}",
         f"boundary_type={m.boundary_type}",
         f"material_mode={m.material_mode}",
+        f"resolution={m.resolution}",
+        f"freq_points={m.freq_points}",
         f"Courant={courant_note}",
         f"eps_averaging={eps_note}",
     ]
+    if m.diagnostic_profile == "low_cost":
+        notes.append("low_cost uses a fixed short run and relaxed settings; results are diagnostic only.")
+        notes.append("low_cost output is nonphysical and not valid for physical interpretation.")
     if m.boundary_type == "absorber":
         notes.append("Absorber boundary is a diagnostic workaround for possible PML/dispersive-material blow-up.")
     if m.material_mode == "dielectric_sanity":
@@ -826,6 +852,10 @@ def _research_limitations(m: MeepInputModel) -> list[str]:
     if m.material_mode == "dielectric_sanity":
         limitations.append(
             "Dielectric sanity material mode is nonphysical and should not be interpreted as a metal scattering result."
+        )
+    if m.diagnostic_profile == "low_cost":
+        limitations.append(
+            "diagnostic_profile=low_cost uses low resolution, few frequency points, and fixed short runs; it validates execution plumbing only."
         )
     if m.sweep_variable:
         limitations.append(

@@ -229,6 +229,28 @@ class TestMeepAdapterSuccess:
             f.flush()
             py_compile.compile(f.name, doraise=True)
 
+    def test_research_preview_low_cost_diagnostic_script(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            diagnostic_profile="low_cost",
+        )
+        assert "diagnostic_profile=low_cost" in result.content
+        assert "material_mode=dielectric_sanity" in result.content
+        assert "nonphysical" in result.content
+        assert "diagnostic only" in result.content
+        assert "fixed short run" in result.content
+        assert "resolution = 8" in result.content
+        assert "nfreq = 5" in result.content
+        assert '"Courant": 0.25' in result.content
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
     def test_research_preview_script_passes_ast_and_py_compile(self):
         adapter = MeepAdapter()
         spec = _make_valid_spec()

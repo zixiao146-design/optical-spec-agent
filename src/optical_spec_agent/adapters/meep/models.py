@@ -60,6 +60,10 @@ class MeepInputModel(BaseModel):
         default="library",
         description="Research-preview material mode: library or nonphysical dielectric_sanity",
     )
+    diagnostic_profile: Literal["normal", "low_cost"] = Field(
+        default="normal",
+        description="Research-preview diagnostic profile: normal or nonphysical low_cost",
+    )
 
     # --- Sweep (optional) ---
     sweep_variable: str | None = Field(default=None, description="e.g. 'gap_thickness_um'")
