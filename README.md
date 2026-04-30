@@ -4,7 +4,7 @@
 
 > Convert optical simulation requests into validated, solver-ready spec JSON — and generate Meep scripts.
 
-**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks. A Meep adapter preview can convert validated specs into Meep Python scripts for nanoparticle-on-film simulations.
+**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks. Its Meep adapter can generate preview-oriented Python scripts for nanoparticle-on-film simulations.
 
 ```
 "用Meep FDTD仿真金纳米球-金膜gap plasmon，扫gap从5到25nm，提取共振波长和FWHM"
@@ -18,14 +18,14 @@
                      └─────────────────────┘
 ```
 
-It is **not** a solver. It does not run any simulation tool, and it does not run Meep yet. The current Meep adapter is still a preview script generator.
+It is **not** a solver. It does not run any simulation tool, and it does not run Meep yet. The current Meep adapter is still a script generator, not a full execution or result-parsing pipeline.
 
 ## At a glance
 
 | | |
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
-| **Adapter** | Meep adapter preview: spec JSON → Python script (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
+| **Adapter** | Meep script generator with `preview`, `research-preview`, and `smoke` modes (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
 | **Benchmark** | 16 golden cases + 5 semantic benchmark cases for Meep reliability — `python benchmarks/run_benchmark.py --mode all` and `python benchmarks/run_semantic_benchmark.py` |
 | **Tests** | `pytest -q` |
 
@@ -38,9 +38,9 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.3 reliability)
+## Current scope (v0.4 research-preview script)
 
-The v0.3 reliability loop:
+The current loop:
 
 ```
 Natural language  →  Rule-based parser  →  Structured spec JSON  →  Validation
@@ -57,12 +57,15 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - CLI, FastAPI, and Python SDK interfaces
 - Semantic benchmark coverage for five reliability-critical parsing cases
 - Meep adapter readiness checks + CLI readiness reporting before script generation
-- Meep adapter preview: validated spec → Meep Python script for nanoparticle_on_film + plane_wave + scattering_spectrum
+- Meep adapter script modes:
+  `preview` for quick structure/script preview,
+  `research-preview` for reference/structure runs plus CSV/JSON outputs,
+  `smoke` for structural validation only
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
 - Real LLM integration (only a placeholder parser exists)
-- Solver execution or result parsing — Meep adapter generates preview scripts but does not run Meep yet
+- Solver execution or result parsing pipeline — scripts are generated, but Meep is not run by this project yet
 - Adapters for other solvers (MPB, Gmsh, Elmer, Optiland) — not yet implemented
 - Visualization or plotting pipeline
 
@@ -102,7 +105,17 @@ python -m optical_spec_agent parse "..."
 # Generate Meep script from a spec
 optical-spec parse "用Meep FDTD仿真金纳米球-金膜gap plasmon..." -o spec.json
 optical-spec meep-generate spec.json -o sim.py
+optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
+optical-spec meep-generate spec.json -o smoke.py --mode smoke
 ```
+
+### Meep generation modes
+
+- `preview`: 快速脚本预览，保留当前 smoke/preview 路径，不保证物理严谨。
+- `research-preview`: 生成更可信的研究预览脚本，包含 reference run、structure run、flux subtraction、CSV 和 JSON 输出。
+- `smoke`: 只验证生成脚本的结构和最小运行路径，不代表物理结果。
+
+These modes still generate scripts only. They do not run Meep, and they do not provide a full result parsing pipeline yet.
 
 ### Python SDK
 
@@ -392,8 +405,8 @@ optical-spec-agent/
 |---------|------|---------------|--------|
 | **v0.1** | NL → spec JSON + validation (rule-based) | — | **Done** |
 | v0.2 | Spec hardening + Meep adapter preview | **Meep** (script gen only) | Done |
-| **v0.3** | Core Meep reliability + semantic benchmark + adapter readiness | **Meep** (script gen only) | **Current** |
-| v0.4 | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | Planned |
+| v0.3 | Core Meep reliability + semantic benchmark + adapter readiness | **Meep** (script gen only) | Done |
+| **v0.4** | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | **Current / Done** |
 | v0.5 | Meep execution + result parsing | **Meep** (FDTD) | Planned |
 | v0.6 | MPB / Gmsh / Elmer / Optiland adapters | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Planned |
 | v0.7 | LLM parser integration | — | Planned |

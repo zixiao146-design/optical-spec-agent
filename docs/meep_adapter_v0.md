@@ -1,20 +1,29 @@
-# Meep Adapter v0.1
+# Meep Adapter v0.4 Research-Preview
 
-> Status: **Script generation only** — no execution, no result parsing.
+> Status: **Script generation only** — no execution, no result parsing pipeline.
 
 ## What it does
 
 Converts a validated `OpticalSpec` JSON into a Meep Python script (`.py`) that
 can be run manually by the user.
 
+The adapter now supports three script generation modes:
+
+| Mode | Purpose | Output characteristics |
+|------|---------|------------------------|
+| `preview` | 快速脚本预览 | 保留当前简化 preview 路径，帮助检查几何、参数和基本脚本结构 |
+| `research_preview` | 更可信的研究预览脚本 | reference run + structure run + flux subtraction + CSV/JSON output |
+| `smoke` | 结构性冒烟验证 | 最小材料/分辨率/步数，只验证脚本能否被 Meep 实例化和短步运行 |
+
 ## What it does NOT do
 
 - Run simulations or manage execution
-- Parse simulation results
+- Parse simulation results into a project-managed pipeline
 - Support all physical systems (only `nanoparticle_on_film`)
 - Support all source types (only `plane_wave`)
 - Support all observables (only `scattering_spectrum`-related)
 - Handle arbitrary geometries
+- Claim production-grade or publication-ready physical fidelity
 
 ## Input contract
 
@@ -120,6 +129,8 @@ model-level parameters. No magic numbers are scattered in the translation logic.
 
 ## Generated script structure
 
+### Preview mode
+
 ```
 import meep as mp, numpy, matplotlib
   ↓
@@ -138,14 +149,52 @@ Simulation.run()
 Post-processing: spectrum plot, optional peak finding / FWHM
 ```
 
+### Research-preview mode
+
+```
+Import Meep + materials library + CSV/JSON helpers
+  ↓
+Resolve Au/Ag from meep.materials
+  ↓
+Resolve dielectric gap medium from library or constant-index fallback
+  ↓
+Build geometry(include_particle=False)  # reference run
+  ↓
+Closed flux box / multi-surface flux regions
+  ↓
+get_flux_data() on reference run
+  ↓
+Build geometry(include_particle=True)   # structure run
+  ↓
+load_minus_flux_data() on structure run
+  ↓
+Aggregate particle-induced flux
+  ↓
+Save scattering_spectrum.csv
+  ↓
+Save postprocess_results.json
+  ↓
+Save scattering_spectrum.png
+```
+
+The research-preview script is still not production-grade. It improves physical
+credibility versus the preview path, but it is still a generated starting point,
+not a fully validated Meep workflow.
+
 ## Usage
 
 ```bash
 # Generate a spec first
 optical-spec parse "用Meep FDTD仿真金纳米球-金膜gap plasmon..." -o spec.json
 
-# Generate Meep script
+# Generate Meep preview script
 optical-spec meep-generate spec.json -o sim.py
+
+# Generate research-preview script
+optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
+
+# Generate smoke script
+optical-spec meep-generate spec.json -o smoke.py --mode smoke
 
 # Run manually
 python sim.py
@@ -183,6 +232,14 @@ that generates a stripped-down version of the simulation script:
 
 In other words: **passing the smoke test means the adapter produces a structurally
 valid Meep script, not that the physics is correct.**
+
+## Research-preview limitations
+
+- It still generates scripts only; this project does not run Meep yet.
+- It does not provide a managed result parsing pipeline yet.
+- Peak finding / resonance / FWHM extraction remain heuristic.
+- Closed-box flux subtraction is a research-preview workflow, not a final validated scattering observable definition.
+- Any dielectric fallback using `mp.Medium(epsilon=n**2)` should be treated as an approximation.
 
 ### Running the smoke test
 
