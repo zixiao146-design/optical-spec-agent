@@ -99,10 +99,14 @@ spec fields and are intended for local/manual gates:
 | `courant` | `None` or float, e.g. `0.25` | Optionally lower Meep's Courant factor for stability diagnostics |
 | `eps_averaging` | `None`, `true`, `false` | Optionally pass `eps_averaging` to `mp.Simulation` |
 | `material_mode` | `library`, `dielectric_sanity` | Use `meep.materials` or a nonphysical dielectric pipeline sanity mode |
+| `diagnostic_profile` | `normal`, `low_cost` | Use low-cost, fixed-run, nonphysical settings to validate execution artifacts |
 
 `material_mode=dielectric_sanity` is not physically meaningful. It replaces
 metal materials with constant dielectric placeholders only to test whether the
 reference/structure/flux subtraction and CSV/JSON output plumbing can run.
+`diagnostic_profile=low_cost` forces Absorber + dielectric sanity + Courant 0.25
+with low resolution and few frequency points; it is only an execution-pipeline
+diagnostic.
 
 ### Optional fields (used if present, no default)
 
@@ -232,7 +236,7 @@ optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expect
 python scripts/local_meep_integration_gate.py --mode smoke
 python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
 python scripts/local_meep_stability_matrix.py --skip-research
-python scripts/local_meep_stability_matrix.py --only dielectric-sanity --timeout-research 300
+python scripts/local_meep_stability_matrix.py --only low-cost-dielectric-sanity --timeout-research 600
 ```
 
 `meep-run --expected-mode research-preview` treats
@@ -260,6 +264,7 @@ NaN/Inf and timeout behavior. It is not part of ordinary CI. The matrix covers:
 - `research_preview_absorber_library`
 - `research_preview_absorber_library_courant_025`
 - `research_preview_absorber_dielectric_sanity`
+- `research_preview_low_cost_dielectric_sanity`
 
 Meep field blow-up can be caused by several setup details, including boundary
 layers interacting with dispersive materials and time-step/resolution choices.
@@ -268,9 +273,11 @@ issues: <https://meep.readthedocs.io/en/latest/FAQ/>.
 
 The current local v0.5 evidence is recorded in
 [`local_meep_stability_matrix_v0.5.md`](local_meep_stability_matrix_v0.5.md):
-smoke passes; PML/library and Absorber/library fail with NaN/Inf; Absorber with
-Courant 0.25 and Absorber with `dielectric_sanity` timed out in the short
-diagnostic window without producing the required CSV/JSON outputs.
+smoke passes; PML/library and Absorber/library fail with NaN/Inf; normal
+Absorber + Courant 0.25 and normal Absorber + `dielectric_sanity` timed out in
+the short diagnostic window; `research_preview_low_cost_dielectric_sanity`
+successfully produced CSV/JSON/PNG plus execution artifacts. The low-cost result
+is nonphysical and only validates the execution/result contract.
 
 ## Smoke validation
 

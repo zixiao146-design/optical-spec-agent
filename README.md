@@ -121,7 +121,7 @@ optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expect
 python scripts/local_meep_integration_gate.py --mode smoke
 python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
 python scripts/local_meep_stability_matrix.py --skip-research
-python scripts/local_meep_stability_matrix.py --only absorber-library-courant-025 --timeout-research 300
+python scripts/local_meep_stability_matrix.py --only low-cost-dielectric-sanity --timeout-research 600
 ```
 
 ### Meep generation modes
@@ -151,9 +151,10 @@ explicitly. Ordinary CI does not require Meep to be installed.
 v0.5 also includes a manual/local stability matrix for diagnosing
 research-preview NaN/Inf issues. The matrix can switch between PML and Absorber
 boundaries, lower the Meep Courant factor, and use a nonphysical
-`dielectric_sanity` material mode to test execution plumbing. This diagnostic
-gate is not part of ordinary CI, and `dielectric_sanity` results must not be
-interpreted as physical metal scattering results. See
+`diagnostic_profile=low_cost` + `dielectric_sanity` path to test execution
+plumbing. This diagnostic gate is not part of ordinary CI, and low-cost
+`dielectric_sanity` results must not be interpreted as physical metal
+scattering results. See
 [`docs/local_meep_stability_matrix_v0.5.md`](docs/local_meep_stability_matrix_v0.5.md).
 
 ### Python SDK
