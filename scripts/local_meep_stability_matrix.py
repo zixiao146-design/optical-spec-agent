@@ -40,8 +40,12 @@ class StabilityCase:
     expected_mode: str
     boundary_type: str = "pml"
     material_mode: str = "library"
+    diagnostic_profile: str = "normal"
     courant: float | None = None
     eps_averaging: bool | None = None
+    resolution: int = 50
+    freq_points: int = 200
+    physical_interpretation: bool = False
     timeout_kind: str = "research"
 
 
@@ -64,6 +68,7 @@ def _matrix_cases() -> list[StabilityCase]:
             expected_mode="research-preview",
             boundary_type="pml",
             material_mode="library",
+            physical_interpretation=True,
         ),
         StabilityCase(
             case_id="research_preview_absorber_library",
@@ -71,6 +76,7 @@ def _matrix_cases() -> list[StabilityCase]:
             expected_mode="research-preview",
             boundary_type="absorber",
             material_mode="library",
+            physical_interpretation=True,
         ),
         StabilityCase(
             case_id="research_preview_absorber_library_courant_025",
@@ -79,6 +85,7 @@ def _matrix_cases() -> list[StabilityCase]:
             boundary_type="absorber",
             material_mode="library",
             courant=0.25,
+            physical_interpretation=True,
         ),
         StabilityCase(
             case_id="research_preview_absorber_dielectric_sanity",
@@ -86,6 +93,17 @@ def _matrix_cases() -> list[StabilityCase]:
             expected_mode="research-preview",
             boundary_type="absorber",
             material_mode="dielectric_sanity",
+        ),
+        StabilityCase(
+            case_id="research_preview_low_cost_dielectric_sanity",
+            script_mode="research-preview",
+            expected_mode="research-preview",
+            boundary_type="absorber",
+            material_mode="dielectric_sanity",
+            diagnostic_profile="low_cost",
+            courant=0.25,
+            resolution=8,
+            freq_points=5,
         ),
     ]
 
@@ -101,6 +119,7 @@ def _select_cases(args: argparse.Namespace) -> list[StabilityCase]:
             "absorber-library": "research_preview_absorber_library",
             "absorber-library-courant-025": "research_preview_absorber_library_courant_025",
             "dielectric-sanity": "research_preview_absorber_dielectric_sanity",
+            "low-cost-dielectric-sanity": "research_preview_low_cost_dielectric_sanity",
         }
         selected_id = aliases[args.only]
         cases = [case for case in cases if case.case_id == selected_id]
@@ -138,6 +157,7 @@ def main(argv: list[str] | None = None) -> int:
             "absorber-library",
             "absorber-library-courant-025",
             "dielectric-sanity",
+            "low-cost-dielectric-sanity",
         ],
         help="Run one selected matrix case.",
     )
@@ -187,6 +207,7 @@ def main(argv: list[str] | None = None) -> int:
             courant=case.courant,
             eps_averaging=case.eps_averaging,
             material_mode=case.material_mode,
+            diagnostic_profile=case.diagnostic_profile,
         ).content
         script_path = case_dir / "generated_script.py"
         script_path.write_text(script, encoding="utf-8")
@@ -206,18 +227,23 @@ def main(argv: list[str] | None = None) -> int:
         summary["cases"].append(
             {
                 "case_id": case.case_id,
+                "case_name": case.case_id,
                 "script_mode": case.script_mode,
+                "diagnostic_profile": case.diagnostic_profile,
                 "expected_mode": case.expected_mode,
                 "boundary_type": case.boundary_type,
                 "material_mode": case.material_mode,
                 "courant": case.courant,
                 "eps_averaging": case.eps_averaging,
+                "resolution": case.resolution,
+                "freq_points": case.freq_points,
                 "timeout_seconds": _case_timeout(
                     case,
                     timeout_smoke=args.timeout_smoke,
                     timeout_research=args.timeout_research,
                 ),
                 "workdir": str(case_dir),
+                "artifact_dir": str(case_dir),
                 "success": result.success,
                 "available": result.available,
                 "returncode": result.returncode,
@@ -225,6 +251,10 @@ def main(argv: list[str] | None = None) -> int:
                 "missing_outputs": result.missing_outputs,
                 "errors": result.errors,
                 "warnings": result.warnings,
+                "physical_interpretation": case.physical_interpretation,
+                "recommended_for_execution_pipeline_debug": (
+                    case.diagnostic_profile == "low_cost" and result.success
+                ),
             }
         )
         _write_summary(summary_path, summary)

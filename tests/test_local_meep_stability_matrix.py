@@ -21,3 +21,4 @@ def test_local_meep_stability_matrix_help():
     assert "--timeout-research" in result.stdout
     assert "--skip-research" in result.stdout
     assert "--strict" in result.stdout
+    assert "low-cost-dielectric-sanity" in result.stdout
