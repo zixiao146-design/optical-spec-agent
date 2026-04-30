@@ -41,7 +41,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 execution harness + diagnostic pipeline)
+## Current scope (v0.5 execution harness + v0.6 local diagnostics)
 
 The current loop:
 
@@ -69,12 +69,15 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Optional Meep execution harness: availability check, explicit script run, known output collection, and auditable artifacts
 - Execution artifacts: `stdout.txt`, `stderr.txt`, `execution_result.json`, and `run_manifest.json`
 - Nonphysical low-cost diagnostic research-preview profile that closes the CSV/JSON/PNG artifact loop
+- Manual v0.6 physical-candidate hardening for one library-Au profile
+- Optional local spectrum consistency tooling for candidate-hardening artifacts
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
 - Real LLM integration (only a placeholder parser exists)
 - Full solver automation or production-grade result interpretation
 - Physically validated stable Au library research-preview runs; those remain manual diagnostics and may fail with NaN/Inf or timeout
+- Formal convergence proof for the v0.6 physical candidate
 - Adapters for other solvers (MPB, Gmsh, Elmer, Optiland) — not yet implemented
 - Visualization or plotting pipeline
 
@@ -126,6 +129,8 @@ python scripts/local_meep_integration_gate.py --mode smoke
 python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
 python scripts/local_meep_stability_matrix.py --skip-research
 python scripts/local_meep_stability_matrix.py --only low-cost-dielectric-sanity --timeout-research 600
+python scripts/local_meep_candidate_hardening.py --timeout 900
+python scripts/local_meep_candidate_convergence.py --latest
 ```
 
 ### Meep generation modes
@@ -160,6 +165,12 @@ plumbing. This diagnostic gate is not part of ordinary CI, and low-cost
 `dielectric_sanity` results must not be interpreted as physical metal
 scattering results. See
 [`docs/local_meep_stability_matrix_v0.5.md`](docs/local_meep_stability_matrix_v0.5.md).
+
+v0.6 local diagnostics add a bounded library-Au physical candidate and optional
+spectrum consistency tooling for candidate-hardening artifacts. These metrics
+are sanity checks only: they help detect repeatability and sensitivity issues,
+but they are not a formal convergence study or production validation. See
+[`docs/local_meep_candidate_hardening_v0.6.md`](docs/local_meep_candidate_hardening_v0.6.md).
 
 ### Python SDK
 
@@ -396,6 +407,9 @@ optical-spec-agent/
 │   ├── execution/
 │   │   ├── meep_runner.py           # Optional Meep availability/run harness
 │   │   └── __init__.py
+│   ├── analysis/
+│   │   ├── spectrum_compare.py      # Local spectrum consistency metrics
+│   │   └── __init__.py
 │   ├── adapters/
 │   │   ├── base.py                  # BaseAdapter ABC + AdapterResult
 │   │   └── meep/                    # Meep adapter (nanoparticle_on_film → script)
@@ -412,6 +426,8 @@ optical-spec-agent/
 │   ├── test_validator.py
 │   ├── test_meep_adapter.py         # Meep adapter tests
 │   ├── test_meep_runner.py          # Optional Meep execution harness tests
+│   ├── test_spectrum_compare.py
+│   ├── test_local_meep_candidate_convergence.py
 │   ├── test_local_meep_integration_gate.py
 │   ├── test_service.py
 │   └── test_api.py
@@ -419,7 +435,8 @@ optical-spec-agent/
 │   ├── local_meep_integration_gate.py
 │   ├── local_meep_stability_matrix.py
 │   ├── local_meep_physical_stability_probe.py
-│   └── local_meep_candidate_hardening.py
+│   ├── local_meep_candidate_hardening.py
+│   └── local_meep_candidate_convergence.py
 ├── examples/
 │   ├── example_01_nanoparticle_gap_plasmon.py
 │   ├── example_02_asymmetric_gold_cross.py
@@ -469,13 +486,14 @@ optical-spec-agent/
 | v0.3 | Core Meep reliability + semantic benchmark + adapter readiness | **Meep** (script gen only) | Done |
 | v0.4 | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | Done |
 | **v0.5** | Meep execution harness + auditable artifacts + low-cost diagnostic pipeline | **Meep** (FDTD) | **Done** |
-| v0.6 | MPB / Gmsh / Elmer / Optiland adapters | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Planned |
-| v0.7 | LLM parser integration | — | Planned |
-| v0.8 | Multi-agent orchestration | — | Planned |
+| v0.6 | Meep physical-candidate hardening + spectrum sanity metrics | **Meep** (FDTD) | Current |
+| v0.7 | MPB / Gmsh / Elmer / Optiland adapters | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Planned |
+| v0.8 | LLM parser integration | — | Planned |
+| v0.9 | Multi-agent orchestration | — | Planned |
 
 **Why Meep first:** Pure Python API, spec fields map 1:1 to Meep objects, and a working adapter proves the full NL → spec → simulation chain. See [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for the prioritization rationale.
 
-**Adapter vs LLM:** Adapter work (v0.3–v0.6) ships before LLM integration (v0.7) because real solver feedback must stabilize the spec schema first. The rule-based parser + golden cases become the evaluation baseline for any future LLM parser.
+**Adapter vs LLM:** Adapter and execution work (v0.3–v0.7) ships before LLM integration (v0.8) because real solver feedback must stabilize the spec schema first. The rule-based parser + golden cases become the evaluation baseline for any future LLM parser.
 
 See [`docs/open_source_stack.md`](docs/open_source_stack.md) for per-tool details and [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for priority tiers.
 

@@ -141,6 +141,70 @@ The v0.6 candidate is substantially stronger than the initial pre-study result:
 However, it remains a candidate, not production validation. v0.6 can focus on
 convergence and physical sanity checks rather than basic execution stability.
 
+## Spectrum Consistency Metrics
+
+After the hardening matrix completed, the local/manual convergence analyzer was
+run against the latest artifacts:
+
+```bash
+python scripts/local_meep_candidate_convergence.py --latest
+```
+
+Generated summary:
+
+```text
+runs/candidate-hardening/candidate-hardening-20260430-122152-bac76336/candidate_convergence_summary.json
+```
+
+The baseline case was `repeat-1`. The default sanity thresholds were:
+
+- `peak_shift_threshold_nm = 50`
+- `l2_threshold = 0.5`
+- `integrated_flux_threshold = 0.5`
+
+| Case | Peak shift nm | Normalized L2 | Integrated flux relative diff | Threshold pass | Notes |
+|------|---------------|---------------|-------------------------------|----------------|-------|
+| `repeat-2` | `0.0` | `null` | `null` | no | finite spectrum, but baseline flux is near zero |
+| `repeat-3` | `0.0` | `null` | `null` | no | finite spectrum, but baseline flux is near zero |
+| `runtime-100` | `0.0` | `null` | `null` | no | finite spectrum, but baseline flux is near zero |
+| `runtime-200` | `0.0` | `null` | `null` | no | finite spectrum, but baseline flux is near zero |
+| `resolution-16-freq-10` | `-146.1659` | `null` | `null` | no | peak location changes and flux scale changes strongly |
+| `resolution-12-freq-20` | `0.0` | `null` | `null` | no | finite spectrum, but baseline flux is near zero |
+| `resolution-16-freq-20` | `-146.1659` | `null` | `null` | no | peak location changes and flux scale changes strongly |
+| `polarization-ey` | `0.0` | `null` | `null` | no | finite spectrum, but baseline flux is near zero |
+
+All compared CSV files were finite and contained no NaN or Inf values. However,
+the baseline integrated flux was approximately `3.10e-24`, so normalized
+difference and integrated relative-difference metrics are not meaningful for
+most comparisons. The analyzer therefore reports `null` for those metrics and
+conservatively marks every case as failing the threshold gate.
+
+This should not be interpreted as a Meep execution failure. It is a physical
+sanity warning: the current candidate can run and produce artifacts, but the
+scattering signal is too close to zero in the baseline configuration to support
+strong physical interpretation or convergence claims.
+
+### Convergence Interpretation
+
+- Repeatability: `repeat-1/2/3` have zero peak shift and finite outputs, but the
+  flux amplitude is near zero, so repeatability is only an execution-level
+  observation.
+- Runtime: `fixed_run_time=100` and `fixed_run_time=200` have zero peak shift
+  relative to `fixed_run_time=50`, but the same near-zero flux limitation
+  prevents a meaningful L2 or integrated-flux convergence statement.
+- Resolution/frequency: increasing resolution to `16` changes the apparent peak
+  by about `146 nm` and increases the flux scale, so the candidate is not
+  resolution-stable yet.
+- Polarization: `Ey` completes with finite output and zero peak shift relative
+  to the `Ex` baseline, but near-zero flux again prevents a strong symmetry or
+  physical interpretation claim.
+
+The current recommendation from the analyzer is:
+
+```text
+Candidate needs more convergence/sanity work before physical interpretation.
+```
+
 ## Recommended Next Step
 
 v0.6 should move from stability hardening to physical sanity checks:
