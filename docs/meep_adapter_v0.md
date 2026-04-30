@@ -20,6 +20,7 @@ v0.5 starts a minimal execution harness:
 
 - `meep-check` checks whether Meep is importable.
 - `meep-run` runs an existing generated script in an explicit workdir.
+- `meep-run` writes auditable artifacts with schema `execution_result.v0.1`.
 - Real Meep execution tests are skipped unless Meep is installed locally.
 
 ## What it does NOT do
@@ -210,14 +211,27 @@ optical-spec meep-generate spec.json -o smoke.py --mode smoke
 optical-spec meep-check --json
 
 # Run an existing generated script explicitly
-optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview
+optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview --run-id demo-001
+
+# Manual/local gates, not default CI gates
+python scripts/local_meep_integration_gate.py --mode smoke
+python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
 ```
 
 `meep-run --expected-mode research-preview` treats
 `scattering_spectrum.csv` and `postprocess_results.json` as required outputs.
-It writes `stdout.txt`, `stderr.txt`, and `execution_result.json` to the run
-directory by default. Use `--json` for machine-readable CLI output, or
+It writes `stdout.txt`, `stderr.txt`, `execution_result.json`, and
+`run_manifest.json` to the run directory by default. `execution_result.json`
+uses schema version `execution_result.v0.1`; `run_manifest.json` records the
+run ID, creation time, script path, workdir, command, expected mode, success
+status, return code, outputs, required outputs, and missing outputs. Use
+`--json` for machine-readable CLI output, `--run-id` for a stable audit ID, or
 `--no-save-artifacts` to disable artifact files.
+
+`typed_postprocess_results` is an early typed view over the raw
+`postprocess_results.json` dict. It extracts fields such as
+`resonance_wavelength_nm`, `fwhm_nm`, wavelength range, gap thickness, defaults,
+and limitations without replacing the raw result.
 
 ## Smoke validation
 
@@ -256,6 +270,7 @@ valid Meep script, not that the physics is correct.**
 
 - Script generation still does not execute Meep; execution requires an explicit `meep-run` command.
 - The execution harness is minimal and does not provide a managed result parsing pipeline yet.
+- Research-preview integration is a manual/local gate, not a default CI requirement.
 - Peak finding / resonance / FWHM extraction remain heuristic.
 - Closed-box flux subtraction is a research-preview workflow, not a final validated scattering observable definition.
 - Any dielectric fallback using `mp.Medium(epsilon=n**2)` should be treated as an approximation.

@@ -115,7 +115,11 @@ optical-spec meep-generate spec.json -o smoke.py --mode smoke
 
 # Optional v0.5 execution harness for an existing generated script
 optical-spec meep-check --json
-optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview
+optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview --run-id demo-001
+
+# Manual/local Meep integration gates, not default CI gates
+python scripts/local_meep_integration_gate.py --mode smoke
+python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
 ```
 
 ### Meep generation modes
@@ -132,9 +136,15 @@ unless Meep is installed locally.
 `meep-run` supports `--expected-mode smoke|preview|research-preview`. In
 `research-preview` mode, successful execution requires both
 `scattering_spectrum.csv` and `postprocess_results.json`. By default it writes
-`stdout.txt`, `stderr.txt`, and `execution_result.json` into the run directory;
-use `--json` for machine-readable CLI output or `--no-save-artifacts` to skip
-artifact files.
+`stdout.txt`, `stderr.txt`, `execution_result.json`, and `run_manifest.json`
+into the run directory. `execution_result.json` uses schema version
+`execution_result.v0.1`. Use `--json` for machine-readable CLI output,
+`--run-id` for a stable audit ID, or `--no-save-artifacts` to skip artifact
+files.
+
+The local integration gate is manual by design: smoke can be used for a quick
+local sanity check, while research-preview can be slow and must be requested
+explicitly. Ordinary CI does not require Meep to be installed.
 
 ### Python SDK
 
@@ -385,9 +395,13 @@ optical-spec-agent/
 │   ├── test_models.py
 │   ├── test_parser.py               # Parser tests
 │   ├── test_validator.py
-│   ├── test_meep_adapter.py        # Meep adapter tests
+│   ├── test_meep_adapter.py         # Meep adapter tests
+│   ├── test_meep_runner.py          # Optional Meep execution harness tests
+│   ├── test_local_meep_integration_gate.py
 │   ├── test_service.py
 │   └── test_api.py
+├── scripts/
+│   └── local_meep_integration_gate.py
 ├── examples/
 │   ├── example_01_nanoparticle_gap_plasmon.py
 │   ├── example_02_asymmetric_gold_cross.py
