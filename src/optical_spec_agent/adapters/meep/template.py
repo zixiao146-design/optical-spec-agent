@@ -241,13 +241,65 @@ sz = film_thickness + gap_thickness_um + 2 * r_particle + 2 * vertical_pad + 2 *
 cell = mp.Vector3(sx, sy, sz)
 
 particle_center = mp.Vector3(0, 0, film_thickness + gap_thickness_um + r_particle)
-box_center = particle_center
-box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, 2 * r_particle + 0.12)
 film_bottom_z = 0.0
 film_top_z = film_thickness
 particle_center_z = float(particle_center.z)
 particle_bottom_z = particle_center_z - r_particle
 particle_top_z = particle_center_z + r_particle
+grid_size_um = 1.0 / resolution
+grid_size_nm = 1000.0 / resolution
+gap_thickness_nm = gap_thickness_um * 1000.0
+particle_radius_nm = r_particle * 1000.0
+film_thickness_nm = film_thickness * 1000.0
+min_recommended_gap_cells = 5.0
+gap_cells = gap_thickness_nm / grid_size_nm
+particle_radius_cells = particle_radius_nm / grid_size_nm
+film_thickness_cells = film_thickness_nm / grid_size_nm
+recommended_resolution_for_5_gap_cells = min_recommended_gap_cells * 1000.0 / gap_thickness_nm
+gap_under_resolved = gap_cells < min_recommended_gap_cells
+mesh_diagnostics = {{
+    "resolution_px_per_um": resolution,
+    "grid_size_nm": grid_size_nm,
+    "gap_thickness_nm": gap_thickness_nm,
+    "gap_cells": gap_cells,
+    "particle_radius_nm": particle_radius_nm,
+    "particle_radius_cells": particle_radius_cells,
+    "film_thickness_nm": film_thickness_nm,
+    "film_thickness_cells": film_thickness_cells,
+    "gap_under_resolved": bool(gap_under_resolved),
+    "min_recommended_gap_cells": min_recommended_gap_cells,
+    "recommended_resolution_for_5_gap_cells": recommended_resolution_for_5_gap_cells,
+}}
+nominal_box_center = particle_center
+nominal_box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, 2 * r_particle + 0.12)
+box_center = nominal_box_center
+box_size = nominal_box_size
+effective_flux_mode = flux_mode
+gap_clearance_box_feasible = False
+if flux_mode == "gap_clearance_box":
+    # The gap-clearance box only makes numerical sense when the gap has at
+    # least roughly one grid cell. This is a diagnostic guardrail, not a
+    # physical convergence criterion.
+    gap_clearance_box_feasible = gap_cells >= 1.0 and particle_bottom_z > film_top_z
+    if gap_clearance_box_feasible:
+        bottom_z = film_top_z + 0.5 * (particle_bottom_z - film_top_z)
+        top_z = particle_top_z + 0.06
+        box_center = mp.Vector3(0, 0, 0.5 * (bottom_z + top_z))
+        box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, top_z - bottom_z)
+    else:
+        # Do not hard-generate an invalid gap-clearance box. Fall back to a
+        # top-plane diagnostic so the script can still produce evidence.
+        effective_flux_mode = "top_plane"
+elif flux_mode == "upper_hemibox":
+    # Diagnostic only: avoids the film but is not a closed scattering surface.
+    bottom_z = max(particle_center_z, film_top_z + 0.02)
+    top_z = particle_top_z + 0.06
+    box_center = mp.Vector3(0, 0, 0.5 * (bottom_z + top_z))
+    box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, top_z - bottom_z)
+if effective_flux_mode in ("single_plane", "top_plane"):
+    plane_z = particle_top_z + 0.06
+    box_center = mp.Vector3(0, 0, plane_z)
+    box_size = mp.Vector3(2 * r_particle + 0.12, 2 * r_particle + 0.12, 0.0)
 flux_box_center_z = float(box_center.z)
 flux_box_bottom_z = flux_box_center_z - 0.5 * box_size.z
 flux_box_top_z = flux_box_center_z + 0.5 * box_size.z
@@ -265,8 +317,13 @@ geometry_diagnostics = {{
     "flux_box_intersects_film": bool(flux_box_intersects_film),
     "flux_box_intersects_particle": bool(flux_box_intersects_particle),
     "flux_box_encloses_particle": bool(flux_box_encloses_particle),
+    "requested_flux_mode": flux_mode,
+    "effective_flux_mode": effective_flux_mode,
+    "gap_clearance_box_feasible": bool(gap_clearance_box_feasible),
 }}
 diagnostic_warnings = []
+if gap_under_resolved:
+    diagnostic_warnings.append("gap is under-resolved at current resolution; spectra are not physically validated")
 if flux_box_intersects_film:
     diagnostic_warnings.append("flux box intersects film; closed-box flux may be hard to interpret")
 if not flux_box_encloses_particle:
@@ -336,7 +393,7 @@ def make_flux_region_specs(box_center, box_size):
     hx = 0.5 * box_size.x
     hy = 0.5 * box_size.y
     hz = 0.5 * box_size.z
-    if flux_mode in ("single_plane", "top_plane"):
+    if effective_flux_mode in ("single_plane", "top_plane"):
         # Diagnostic only: not a closed scattering box or cross-section.
         return [
             (
@@ -348,6 +405,55 @@ def make_flux_region_specs(box_center, box_size):
                     weight=1.0,
                 ),
             )
+        ]
+    if effective_flux_mode == "upper_hemibox":
+        # Diagnostic only: an open upper box that avoids cutting through the film.
+        return [
+            (
+                "flux_x_minus",
+                mp.FluxRegion(
+                    center=box_center + mp.Vector3(-hx, 0, 0),
+                    size=mp.Vector3(0, box_size.y, box_size.z),
+                    direction=mp.X,
+                    weight=-1.0,
+                ),
+            ),
+            (
+                "flux_x_plus",
+                mp.FluxRegion(
+                    center=box_center + mp.Vector3(hx, 0, 0),
+                    size=mp.Vector3(0, box_size.y, box_size.z),
+                    direction=mp.X,
+                    weight=1.0,
+                ),
+            ),
+            (
+                "flux_y_minus",
+                mp.FluxRegion(
+                    center=box_center + mp.Vector3(0, -hy, 0),
+                    size=mp.Vector3(box_size.x, 0, box_size.z),
+                    direction=mp.Y,
+                    weight=-1.0,
+                ),
+            ),
+            (
+                "flux_y_plus",
+                mp.FluxRegion(
+                    center=box_center + mp.Vector3(0, hy, 0),
+                    size=mp.Vector3(box_size.x, 0, box_size.z),
+                    direction=mp.Y,
+                    weight=1.0,
+                ),
+            ),
+            (
+                "flux_z_plus",
+                mp.FluxRegion(
+                    center=box_center + mp.Vector3(0, 0, hz),
+                    size=mp.Vector3(box_size.x, box_size.y, 0),
+                    direction=mp.Z,
+                    weight=1.0,
+                ),
+            ),
         ]
     return [
         (
@@ -564,6 +670,7 @@ def write_results_json(resonance_wavelength_nm, fwhm_nm):
         "fixed_run_time": fixed_run_until,
         "decay_threshold": decay_threshold,
         "flux_mode": flux_mode,
+        "effective_flux_mode": effective_flux_mode,
         "resolution": resolution,
         "freq_points": nfreq,
         "particle_material": particle_material_name,
@@ -578,6 +685,7 @@ def write_results_json(resonance_wavelength_nm, fwhm_nm):
         "defaults_applied": defaults_applied,
         "limitations": limitations,
         "warnings": diagnostic_warnings,
+        "mesh_diagnostics": mesh_diagnostics,
         "geometry_diagnostics": geometry_diagnostics,
     }}
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
@@ -890,6 +998,10 @@ def _research_stability_doc(m: MeepInputModel) -> list[str]:
         notes.append("flux_mode=single_plane is diagnostic only and not a scattering cross-section.")
     if m.flux_mode == "top_plane":
         notes.append("flux_mode=top_plane measures a diagnostic upward plane flux only; it is not a closed scattering cross-section.")
+    if m.flux_mode == "gap_clearance_box":
+        notes.append("flux_mode=gap_clearance_box attempts to keep the bottom monitor plane inside the gap.")
+    if m.flux_mode == "upper_hemibox":
+        notes.append("flux_mode=upper_hemibox avoids the film but is diagnostic only, not a closed scattering cross-section.")
     return notes
 
 
@@ -1016,12 +1128,18 @@ def _research_simulation_options_block(m: MeepInputModel) -> str:
 
 
 def _research_limitations(m: MeepInputModel) -> list[str]:
+    grid_size_nm = 1000.0 / m.resolution if m.resolution > 0 else float("inf")
+    gap_cells = (m.gap_thickness_um * 1000.0) / grid_size_nm if grid_size_nm else 0.0
     limitations = [
         "Research-preview only; not production-grade or publication-ready.",
         "Uses particle-induced flux relative to a film/background reference run.",
         "Peak extraction is heuristic and may return null when no clear resonance is detected.",
         "Gap/background fallback may use a constant-index mp.Medium(epsilon=n**2).",
     ]
+    if gap_cells < 5.0:
+        limitations.append(
+            "gap is under-resolved at current resolution; spectra are not physically validated."
+        )
     if m.boundary_type == "pml" and m.material_mode == "library":
         limitations.append(
             "PML with dispersive library metals may be numerically unstable in some Meep setups."
@@ -1053,6 +1171,14 @@ def _research_limitations(m: MeepInputModel) -> list[str]:
     if m.flux_mode == "top_plane":
         limitations.append(
             "top_plane flux is diagnostic only and not a closed scattering cross-section."
+        )
+    if m.flux_mode == "gap_clearance_box":
+        limitations.append(
+            "gap_clearance_box is only feasible when the gap has enough numerical clearance; otherwise the script falls back to a diagnostic top-plane monitor."
+        )
+    if m.flux_mode == "upper_hemibox":
+        limitations.append(
+            "upper_hemibox is diagnostic only, not a closed scattering cross-section."
         )
     if m.sweep_variable:
         limitations.append(

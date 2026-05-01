@@ -174,6 +174,9 @@ class TestMeepAdapterSuccess:
         assert "flux_surfaces.csv" in result.content
         assert "postprocess_results.json" in result.content
         assert "geometry_diagnostics" in result.content
+        assert "mesh_diagnostics" in result.content
+        assert "gap_under_resolved" in result.content
+        assert "gap is under-resolved at current resolution" in result.content
 
     def test_research_preview_script_records_stability_options(self):
         adapter = MeepAdapter()
@@ -332,6 +335,45 @@ class TestMeepAdapterSuccess:
             f.write(result.content)
             f.flush()
             py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_upper_hemibox_flux_mode_compiles(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            diagnostic_profile="physical_probe",
+            source_component="Ex",
+            flux_mode="upper_hemibox",
+            stop_strategy="fixed",
+            fixed_run_time=50,
+        )
+        assert "flux_mode=upper_hemibox" in result.content
+        assert "upper_hemibox is diagnostic only" in result.content
+        assert "effective_flux_mode == \"upper_hemibox\"" in result.content
+        ast.parse(result.content)
+        with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+            f.write(result.content)
+            f.flush()
+            py_compile.compile(f.name, doraise=True)
+
+    def test_research_preview_gap_clearance_infeasible_logic_is_represented(self):
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        result = adapter.generate(
+            spec,
+            script_mode="research-preview",
+            diagnostic_profile="physical_probe",
+            source_component="Ex",
+            flux_mode="gap_clearance_box",
+            stop_strategy="fixed",
+            fixed_run_time=50,
+            resolution=12,
+        )
+        assert "flux_mode=gap_clearance_box" in result.content
+        assert "gap_clearance_box_feasible" in result.content
+        assert 'effective_flux_mode = "top_plane"' in result.content
+        ast.parse(result.content)
 
     def test_research_preview_mixed_material_modes_are_annotated(self):
         adapter = MeepAdapter()

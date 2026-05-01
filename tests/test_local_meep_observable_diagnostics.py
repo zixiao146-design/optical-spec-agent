@@ -20,6 +20,8 @@ def test_local_meep_observable_diagnostics_help():
     )
     assert result.returncode == 0
     assert "--only" in result.stdout
+    assert "gap-clearance-box" in result.stdout
+    assert "upper-hemibox" in result.stdout
     assert "top-plane" in result.stdout
     assert "--dry-run" in result.stdout
 
@@ -42,6 +44,8 @@ def test_local_meep_observable_diagnostics_dry_run(tmp_path):
     assert data["dry_run"] is True
     case_names = [case["case_name"] for case in data["cases"]]
     assert "closed-box-baseline" in case_names
+    assert "gap-clearance-box" in case_names
+    assert "upper-hemibox" in case_names
     assert "top-plane" in case_names
     unsupported = [
         case for case in data["cases"]

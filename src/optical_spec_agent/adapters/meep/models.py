@@ -85,9 +85,15 @@ class MeepInputModel(BaseModel):
         default=None,
         description="Decay threshold for decay stop strategy",
     )
-    flux_mode: Literal["closed_box", "single_plane", "top_plane"] = Field(
+    flux_mode: Literal[
+        "closed_box",
+        "gap_clearance_box",
+        "upper_hemibox",
+        "single_plane",
+        "top_plane",
+    ] = Field(
         default="closed_box",
-        description="Research-preview flux mode. single_plane/top_plane are diagnostic only.",
+        description="Research-preview flux/monitor preset. Non-closed modes are diagnostic only.",
     )
 
     # --- Sweep (optional) ---

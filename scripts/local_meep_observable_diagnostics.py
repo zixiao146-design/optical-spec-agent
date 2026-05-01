@@ -58,6 +58,8 @@ def _make_run_id() -> str:
 def _observable_cases() -> list[ObservableCase]:
     return [
         ObservableCase(case_name="closed-box-baseline", flux_mode="closed_box"),
+        ObservableCase(case_name="gap-clearance-box", flux_mode="gap_clearance_box"),
+        ObservableCase(case_name="upper-hemibox", flux_mode="upper_hemibox"),
         ObservableCase(case_name="top-plane", flux_mode="top_plane"),
         ObservableCase(
             case_name="closed-box-larger-clearance",
@@ -140,6 +142,7 @@ def _summarize_successful_case(case: ObservableCase, case_dir: Path, result) -> 
     spectrum_path = case_dir / "scattering_spectrum.csv"
     postprocess = _read_postprocess(case_dir)
     geometry = postprocess.get("geometry_diagnostics", {})
+    mesh = postprocess.get("mesh_diagnostics", {})
     flux_signal = {}
     if spectrum_path.exists():
         try:
@@ -163,9 +166,13 @@ def _summarize_successful_case(case: ObservableCase, case_dir: Path, result) -> 
         "flux_signal": flux_signal,
         "has_flux_surfaces_csv": (case_dir / "flux_surfaces.csv").exists(),
         "flux_surfaces": _analyze_flux_surfaces(case_dir / "flux_surfaces.csv"),
+        "mesh_diagnostics": mesh,
+        "monitor_preset": case.flux_mode,
+        "effective_flux_mode": postprocess.get("effective_flux_mode"),
         "flux_box_intersects_film": geometry.get("flux_box_intersects_film"),
         "flux_box_intersects_particle": geometry.get("flux_box_intersects_particle"),
         "flux_box_encloses_particle": geometry.get("flux_box_encloses_particle"),
+        "gap_clearance_box_feasible": geometry.get("gap_clearance_box_feasible"),
         "geometry_diagnostics": geometry,
     }
 
@@ -186,7 +193,11 @@ def _unsupported_summary(case: ObservableCase, case_dir: Path, timeout: int) -> 
         "integrated_signed_flux": None,
         "flux_total_near_zero": None,
         "has_flux_surfaces_csv": False,
+        "mesh_diagnostics": {},
+        "monitor_preset": case.flux_mode,
+        "effective_flux_mode": None,
         "flux_box_intersects_film": None,
+        "gap_clearance_box_feasible": None,
     }
 
 
