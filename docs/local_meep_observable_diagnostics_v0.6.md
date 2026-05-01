@@ -24,8 +24,8 @@ python scripts/local_meep_observable_diagnostics.py --timeout 900
 Environment:
 
 - Meep command: `micromamba run -n meep python -c "import meep"`
-- Matrix run ID: `observable-diagnostics-20260430-161213-bbd2719a`
-- Artifact root: `runs/observable-diagnostics/observable-diagnostics-20260430-161213-bbd2719a/`
+- Latest mesh/monitor matrix run ID: `observable-diagnostics-20260501-045806-82b41774`
+- Artifact root: `runs/observable-diagnostics/observable-diagnostics-20260501-045806-82b41774/`
 
 The run generated `observable_diagnostics_summary.json` under the artifact root.
 The artifact directory is local evidence only and is not committed to the repo.
@@ -48,6 +48,8 @@ All supported cases used the current physical-candidate settings:
 | Case | Flux mode | Status |
 |------|-----------|--------|
 | `closed-box-baseline` | `closed_box` | ran |
+| `gap-clearance-box` | `gap_clearance_box` | infeasible, fell back to top-plane |
+| `upper-hemibox` | `upper_hemibox` | ran |
 | `top-plane` | `top_plane` | ran |
 | `closed-box-larger-clearance` | `closed_box` | unsupported until flux box padding/scale is exposed |
 | `single-plane` | `single_plane` | ran |
@@ -57,8 +59,10 @@ All supported cases used the current physical-candidate settings:
 | Case | Success | `max_abs_flux` | `integrated_abs_flux` | Near zero | `flux_surfaces.csv` | Intersects film |
 |------|---------|----------------|-----------------------|-----------|---------------------|-----------------|
 | `closed-box-baseline` | yes | `1.36e-26` | `3.10e-24` | yes | yes | yes |
-| `top-plane` | yes | `1.11e-27` | `2.56e-25` | yes | yes | yes |
-| `single-plane` | yes | `1.11e-27` | `2.56e-25` | yes | yes | yes |
+| `gap-clearance-box` | yes | `1.11e-27` | `2.56e-25` | yes | yes | no |
+| `upper-hemibox` | yes | `5.98e-27` | `1.37e-24` | yes | yes | no |
+| `top-plane` | yes | `1.11e-27` | `2.56e-25` | yes | yes | no |
+| `single-plane` | yes | `1.11e-27` | `2.56e-25` | yes | yes | no |
 
 All supported cases generated:
 
@@ -96,6 +100,13 @@ script records the warning:
 flux box intersects film; closed-box flux may be hard to interpret
 ```
 
+The generated script also writes `mesh_diagnostics`. At the current candidate
+settings, `resolution=12 px/um` means `grid_size_nm≈83.33`; the `5 nm` gap is
+only `0.06` cells. The JSON records `gap_under_resolved=true` and recommends
+approximately `1000 px/um` for five gap cells. This is a diagnostic heuristic,
+not a formal convergence rule, but it confirms the current candidate is not
+physically resolved.
+
 ## Per-Surface Flux
 
 The generated research-preview script now writes `flux_surfaces.csv`.
@@ -122,12 +133,16 @@ optional `flux_surfaces.csv`, but their signal was weaker than the closed-box
 baseline:
 
 - `closed_box max_abs_flux`: `1.36e-26`
+- `upper_hemibox max_abs_flux`: `5.98e-27`
 - `top_plane max_abs_flux`: `1.11e-27`
 - `single_plane max_abs_flux`: `1.11e-27`
 
 Therefore, `top_plane` is useful as a diagnostic observable, but it is not a
 stronger candidate for the next convergence matrix. It is also not a scattering
 cross-section.
+
+`upper_hemibox` avoids the film and is stronger than `top_plane`, but it is
+still near zero and is also not a closed scattering cross-section.
 
 ## Interpretation
 
@@ -138,16 +153,17 @@ This diagnostic pass shifts the likely blocker:
 - `flux_surfaces.csv` does not show strong surface cancellation.
 - The closed-box monitor intersects the film, which makes the observable hard
   to interpret.
+- The gap is severely under-resolved at the current mesh.
 - A simple top-plane diagnostic does not produce a stronger signal.
+- `upper_hemibox` avoids the film but is still near-zero.
 
-The next v0.6 step should redesign the monitor geometry before running larger
-convergence matrices. In particular, expose and test a flux-box clearance or
-padding parameter so the closed box can enclose the particle without cutting
-through the film, then rerun observable diagnostics and spectrum consistency.
+The next v0.6 step should resolve mesh and monitor geometry before running
+larger convergence matrices. See
+[`local_meep_mesh_monitor_diagnostics_v0.6.md`](local_meep_mesh_monitor_diagnostics_v0.6.md).
 
 ## Recommendation
 
-Do not use the current closed-box or top-plane spectra for physical
-interpretation. For the next convergence round, prefer an adjusted closed-box
-observable with explicit clearance from both the particle and film, plus the
-same `geometry_diagnostics` and `flux_surfaces.csv` checks.
+Do not use the current closed-box, upper-hemibox, or top-plane spectra for
+physical interpretation. The next round should either simplify the geometry or
+run a higher-resolution local case with a smaller domain and monitor geometry
+that avoids the film.

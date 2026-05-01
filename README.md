@@ -72,6 +72,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Manual v0.6 physical-candidate hardening for one library-Au profile
 - Optional local spectrum consistency tooling for candidate-hardening artifacts
 - Local observable diagnostics for flux-monitor geometry and per-surface flux sanity
+- Mesh sanity diagnostics for under-resolved gaps and monitor presets
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
@@ -176,6 +177,10 @@ but they are not a formal convergence study or production validation. See
 v0.6 also includes local observable diagnostics for flux-monitor geometry and
 per-surface flux sanity; see
 [`docs/local_meep_observable_diagnostics_v0.6.md`](docs/local_meep_observable_diagnostics_v0.6.md).
+Mesh/monitor diagnostics currently show the v0.6 physical candidate is
+execution-stable but gap-under-resolved: `resolution=12 px/um` corresponds to
+about `83 nm` grid spacing, so a `5 nm` gap is not physically resolved. See
+[`docs/local_meep_mesh_monitor_diagnostics_v0.6.md`](docs/local_meep_mesh_monitor_diagnostics_v0.6.md).
 
 ### Python SDK
 
@@ -414,6 +419,7 @@ optical-spec-agent/
 │   │   └── __init__.py
 │   ├── analysis/
 │   │   ├── spectrum_compare.py      # Local spectrum consistency metrics
+│   │   ├── mesh_sanity.py           # Local mesh-resolution diagnostics
 │   │   └── __init__.py
 │   ├── adapters/
 │   │   ├── base.py                  # BaseAdapter ABC + AdapterResult
@@ -471,6 +477,7 @@ optical-spec-agent/
 │   ├── local_meep_physical_stability_prestudy_v0.6.md # Manual v0.6 physical stability pre-study
 │   ├── local_meep_candidate_hardening_v0.6.md # Manual v0.6 candidate hardening evidence
 │   ├── local_meep_observable_diagnostics_v0.6.md # Manual v0.6 flux observable diagnostics
+│   ├── local_meep_mesh_monitor_diagnostics_v0.6.md # Manual v0.6 mesh/monitor diagnostics
 │   ├── release_notes_v0.5.0.md
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
