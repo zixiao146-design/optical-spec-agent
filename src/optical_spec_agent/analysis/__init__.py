@@ -1,5 +1,6 @@
 """Analysis helpers for local/manual diagnostics."""
 
+from .mesh_sanity import MeshSanityResult, analyze_mesh_resolution
 from .spectrum_compare import (
     SpectrumComparison,
     SpectrumData,
@@ -12,7 +13,9 @@ from .spectrum_compare import (
 __all__ = [
     "SpectrumComparison",
     "SpectrumData",
+    "MeshSanityResult",
     "analyze_flux_signal",
+    "analyze_mesh_resolution",
     "compare_spectra",
     "load_scattering_csv",
     "summarize_comparisons",
