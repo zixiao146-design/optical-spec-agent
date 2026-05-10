@@ -1,106 +1,156 @@
 # Repository Metadata
 
-Copy-paste-ready content for GitHub settings and first issues.
+Copy-paste-ready content for GitHub settings and focused follow-up issues.
 
 ---
 
-## GitHub About (sidebar)
+## GitHub About
 
 **Description:**
 
-```
-NL → structured spec JSON for optical simulation tasks. Rule-based parser + Pydantic validation with provenance tracking.
+```text
+NL optical task → validated spec JSON → Meep script → optional local execution artifacts.
 ```
 
-**Website:** *(leave empty for now — point to docs site when available)*
+**Website:** leave empty until a docs site exists.
 
 **Topics:**
 
-```
+```text
 optics
 photonics
-parser
+meep
+fdtd
 pydantic
 scientific-computing
 simulation
 specification
-open-source-optics
-meep
-fdtd
-fem
 python
+open-source-optics
 ```
 
 ---
 
-## First Issues
+## Suggested Issues
 
-### Issue 1: Key-field benchmark with per-case threshold
+### Issue 1: Add a README hero workflow transcript
 
-**Title:** Add per-case key-field lists to all golden_cases.json entries
+**Title:** Add a checked-in transcript for the README hero workflow
 
 **Description:**
-Current `key_fields` mode uses a shared `CORE_KEY_FIELDS` list. Each golden case should define its own `expected_key_fields` in `golden_cases.json` so that fitting tasks (golden-05) don't require `physical_system`, and simulation tasks can require more fields.
+The README now documents the main product path:
 
-Steps:
-- Add `expected_key_fields` to all 8 golden cases (golden-05 already has one)
-- Document the expected list in `benchmarks/README.md`
-- Verify with `python benchmarks/run_benchmark.py --mode key_fields`
+```text
+natural language optical task -> validated spec JSON -> Meep script -> optional execution artifacts
+```
 
-**Labels:** `enhancement`, `good first issue`
+Add a small checked-in transcript or example output under `examples/outputs/` that shows the
+commands and key output files from the hero workflow without requiring Meep to be installed.
+
+Acceptance criteria:
+
+- Shows `optical-spec parse ... --output outputs/hero_spec.json`
+- Shows `optical-spec validate outputs/hero_spec.json`
+- Shows `optical-spec meep-generate ... --mode research-preview`
+- Clearly marks `meep-run` as optional/local
+
+**Labels:** `documentation`, `good first issue`
 
 ---
 
-### Issue 2: CLI `--format summary` human-readable output
+### Issue 2: Add a docs index for Meep local diagnostics
 
-**Title:** Add `--format summary` to CLI parse output
+**Title:** Add a short index page for local Meep diagnostic reports
 
 **Description:**
-Currently `optical-spec parse` outputs raw JSON. Add a `--format summary` option that prints a concise human-readable table (field, value, status) similar to the demo tables in README.
+There are several local/manual Meep diagnostic reports for v0.5 and v0.6. Add one short index
+page that explains which report to read first and what each report proves or does not prove.
 
-This would make CLI demos more compelling and help users quickly scan parsed specs.
+Suggested file:
 
-**Labels:** `enhancement`
+```text
+docs/meep_diagnostics_index.md
+```
+
+Acceptance criteria:
+
+- Links to the v0.5 local gate report
+- Links to stability matrix, physical pre-study, candidate hardening, observable diagnostics,
+  and mesh/monitor diagnostics
+- Repeats that these are local/manual diagnostics, not production validation
+
+**Labels:** `documentation`, `meep`
 
 ---
 
-### Issue 3: Add Meep-focused golden case
+### Issue 3: Document exact snapshot review workflow
 
-**Title:** Add a golden case specifically targeting Meep FDTD output fields
+**Title:** Document the exact benchmark snapshot review workflow
 
 **Description:**
-Most golden cases reference unspecified or commercial software. Add a new golden case (`golden-09`) where the input explicitly specifies Meep FDTD with full parameter detail (TFSF source, PML, mesh resolution, monitor placement), so the parsed spec is `is_executable: true` with all required simulation fields filled.
+The CI gate intentionally runs key-field and semantic benchmarks, not automatic snapshot
+updates. Add a short section to `benchmarks/README.md` explaining how to review exact snapshot
+drift safely.
 
-This would demonstrate that the parser can produce a Meep-ready spec and serve as the first test case for the v0.3 Meep adapter.
+Acceptance criteria:
 
-**Labels:** `enhancement`, `meep-adapter`
+- Shows `python benchmarks/run_benchmark.py --mode exact`
+- Says not to run `--update` until drift is reviewed
+- Explains that snapshot refreshes should be separate, explicit commits
+
+**Labels:** `documentation`, `benchmark`
 
 ---
 
-### Issue 4: Expand golden cases to 12
+### Issue 4: Add a no-Meep smoke check for generated research-preview scripts
 
-**Title:** Add 3 more golden cases: grating, coupled oscillator, bilingual edge case
+**Title:** Add a no-Meep syntax smoke check command for generated scripts
 
 **Description:**
-Current 8 cases cover nanoparticle_on_film, waveguide, metasurface, and fitting. To improve parser coverage, add:
+The project can generate Meep scripts even when Meep is not installed. Add a documented command
+or helper that validates generated script syntax with `py_compile` without attempting to import
+or run Meep.
 
-1. `golden-10`: Grating structure (Chinese) — covers `PhysicalSystem.grating`
-2. `golden-11`: Coupled oscillator model (Chinese) — covers `SolverMethod.coupled_oscillator`
-3. `golden-12`: Mixed Chinese-English input — tests bilingual robustness
+Acceptance criteria:
 
-Each case should include `expected_key_fields` and pass both benchmark modes.
+- Does not require Meep
+- Does not execute a simulation
+- Fits the hero workflow as a lightweight confidence check
 
-**Labels:** `enhancement`
+**Labels:** `developer-experience`, `meep`
 
 ---
 
-### Issue 5: CI integration — run benchmark in GitHub Actions
+### Issue 5: Keep GitHub metadata aligned with current release status
 
-**Title:** Run golden-case benchmark in CI alongside pytest
+**Title:** Review GitHub About and README release status before v0.6 release
 
 **Description:**
-The test workflow (`.github/workflows/test.yml`) runs `pytest` but not the benchmark. Add a step to run `python benchmarks/run_benchmark.py --mode all` in CI so that parser regressions are caught automatically.
+Before cutting a future v0.6 release, review the GitHub About description, README current scope,
+and release notes so they distinguish:
 
-This provides a second signal: pytest checks code-level correctness, benchmark checks parser output stability.
+- v0.5.0 released execution harness
+- v0.6 local/manual diagnostics
+- what is still not production-grade solver automation
 
-**Labels:** `ci`, `good first issue`
+**Labels:** `release`, `documentation`
+
+---
+
+### Issue 6: Clean existing Ruff lint debt
+
+**Title:** Clean existing Ruff findings and promote `make lint` to a required gate
+
+**Description:**
+`make lint` now runs `ruff check src/ tests/`, but the repository has pre-existing Ruff
+findings such as unused imports, unused local variables, and a few unnecessary f-string
+prefixes. Clean these in a focused PR without changing parser behavior or Meep physics.
+
+Acceptance criteria:
+
+- `make lint` passes
+- No parser benchmark snapshots are changed
+- `make check` still passes
+- CONTRIBUTING can promote lint back to a required PR checklist item
+
+**Labels:** `cleanup`, `developer-experience`

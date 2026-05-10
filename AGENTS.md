@@ -42,27 +42,31 @@ natural language input
 
 Do not expand scope unless explicitly asked.
 
-The current development priority is v0.3 reliability:
+The current development priority is productization around the strongest hero path:
 
-- improve semantic extraction for one trusted Meep nanoparticle-on-film case
-- fix material parsing, especially SiO2 vs Si
-- fix dimension extraction, especially particle diameter, film thickness, and gap thickness
-- add semantic benchmark
-- add adapter-level readiness checks
-- keep Meep script generation honest about defaults and limitations
+- natural language optical task
+- → validated, provenance-aware `OpticalSpec`
+- → Meep script generation for supported nanoparticle-on-film specs
+- → optional local Meep execution artifacts when Meep is installed
+
+The released baseline is v0.5.0. Current v0.6 work is local/manual diagnostics
+for physical-candidate stability, spectrum consistency, mesh sanity, and monitor
+geometry. Keep these diagnostics honest: they are not production validation.
 
 ## 当前优先级
 
 除非被明确要求，否则不要主动扩 scope。
 
-当前开发重点是 v0.3 reliability：
+当前开发重点是围绕最强主链路做 productization：
 
-- 把一个可信的 Meep nanoparticle-on-film 核心案例语义提取做稳
-- 修复材料解析，重点是 `SiO2` 和 `Si`
-- 修复尺寸提取，重点是粒子直径、金膜厚度、gap 厚度
-- 增加 semantic benchmark
-- 增加 adapter-level readiness checks
-- 让 Meep 脚本生成对默认值和限制保持诚实
+- 自然语言光学任务
+- → 带 provenance 的结构化 `OpticalSpec`
+- → 对受支持的 nanoparticle-on-film spec 生成 Meep 脚本
+- → 如果本地安装 Meep，则可选生成 execution artifacts
+
+已发布基线是 v0.5.0。当前 v0.6 工作是 local/manual diagnostics，包括
+physical-candidate stability、spectrum consistency、mesh sanity 和 monitor geometry。
+这些诊断必须保持诚实：它们不是 production validation。
 
 ## Important files
 
@@ -73,7 +77,11 @@ The current development priority is v0.3 reliability:
 - `src/optical_spec_agent/services/spec_service.py`
 - `src/optical_spec_agent/adapters/meep/translator.py`
 - `src/optical_spec_agent/adapters/meep/template.py`
+- `src/optical_spec_agent/execution/meep_runner.py`
+- `src/optical_spec_agent/analysis/`
 - `src/optical_spec_agent/cli/main.py`
+- `scripts/`
+- `docs/`
 - `benchmarks/`
 - `tests/`
 

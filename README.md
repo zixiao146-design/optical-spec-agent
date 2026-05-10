@@ -23,6 +23,9 @@ an optional harness that can run an existing generated Meep script when Meep is
 installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
+Release status: the packaged baseline is `v0.5.0`. The `v0.6` material in this
+repo is current local/manual diagnostic work, not a production simulation claim.
+
 ## At a glance
 
 | | |
@@ -30,7 +33,7 @@ automation or production-grade physical validation.
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
 | **Adapter** | Meep script generator with `preview`, `research-preview`, and `smoke` modes (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
 | **Benchmark** | 16 golden cases + 5 semantic benchmark cases for Meep reliability — `python benchmarks/run_benchmark.py --mode all` and `python benchmarks/run_semantic_benchmark.py` |
-| **Tests** | `pytest -q` |
+| **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
 
 ## Why this project?
 
@@ -41,7 +44,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 execution harness + v0.6 local diagnostics)
+## Current scope (v0.5 release + v0.6 local diagnostics)
 
 The current loop:
 
@@ -93,6 +96,36 @@ pip install -e ".[dev]"
 Requires Python 3.11+.
 
 ## Quick start
+
+### Hero workflow
+
+This is the shortest first-run path through the project’s core value:
+
+```bash
+# 1. Natural language optical task -> validated spec JSON
+optical-spec parse \
+  "用 Meep FDTD 仿真 80 nm 金纳米球放在 100 nm 金膜上，中间 SiO2 gap 为 5 nm，平面波正入射，波长范围 400-900 nm，输出散射谱，提取共振波长和 FWHM。" \
+  --output outputs/hero_spec.json
+
+# 2. Re-validate the saved spec
+optical-spec validate outputs/hero_spec.json
+
+# 3. Validated spec JSON -> Meep script
+optical-spec meep-generate outputs/hero_spec.json \
+  --mode research-preview \
+  --output outputs/hero_meep_research.py
+
+# 4. Optional: if Meep is installed locally, run the generated script
+optical-spec meep-check
+optical-spec meep-run outputs/hero_meep_research.py \
+  --workdir runs/hero \
+  --expected-mode research-preview \
+  --timeout 300
+```
+
+The optional `meep-run` step writes auditable artifacts such as `stdout.txt`,
+`stderr.txt`, `execution_result.json`, and `run_manifest.json`. It is a local
+execution harness, not a production solver pipeline.
 
 ### CLI
 
@@ -341,6 +374,7 @@ print(OpticalSpec.export_json_schema())
 ## Testing
 
 ```bash
+make check
 pytest -q
 pytest --cov=optical_spec_agent # with coverage
 ```
@@ -350,6 +384,8 @@ Test coverage includes:
 - Parser: 6 Chinese inputs, 2 English inputs, inference rules
 - Validator: required fields, consistency, physical system rules
 - Meep adapter: script generation, rejection, missing field handling
+- Optional Meep execution harness contract tests
+- Local diagnostic helper tests that do not require real Meep
 - API endpoints: parse, validate, schema
 - Service integration
 
@@ -370,8 +406,7 @@ python benchmarks/run_benchmark.py --mode all         # both
 
 **What it does NOT test:** semantic understanding scoring, solver correctness, or LLM parsing.
 
-For the v0.3 reliability milestone, an additional semantic benchmark checks
-five reliability-critical cases at the field level:
+The semantic benchmark checks five reliability-critical cases at the field level:
 
 ```bash
 python benchmarks/run_semantic_benchmark.py
@@ -437,9 +472,14 @@ optical-spec-agent/
 │   ├── test_validator.py
 │   ├── test_meep_adapter.py         # Meep adapter tests
 │   ├── test_meep_runner.py          # Optional Meep execution harness tests
+│   ├── test_mesh_sanity.py
 │   ├── test_spectrum_compare.py
 │   ├── test_local_meep_candidate_convergence.py
+│   ├── test_local_meep_candidate_hardening.py
 │   ├── test_local_meep_integration_gate.py
+│   ├── test_local_meep_observable_diagnostics.py
+│   ├── test_local_meep_physical_stability_probe.py
+│   ├── test_local_meep_stability_matrix.py
 │   ├── test_service.py
 │   └── test_api.py
 ├── scripts/

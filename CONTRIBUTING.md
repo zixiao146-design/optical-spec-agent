@@ -25,23 +25,27 @@ pip install -e ".[dev]"
 
 2. Make your changes. Follow existing code style (line-length 100, type hints where practical).
 
-3. Run tests and lint:
+3. Run the standard validation gate:
 
    ```bash
-   make test          # pytest -v
-   make lint          # ruff check src/ tests/
+   make check         # pytest + key-field benchmark + semantic benchmark
    ```
 
-4. If you changed parser behavior, update golden cases:
+   `make lint` is available for lint-focused cleanup work, but it is not the
+   current CI gate. The repo still has pre-existing Ruff cleanup debt.
+
+4. If you changed parser behavior, inspect exact benchmark drift before changing snapshots:
+
+   ```bash
+   python benchmarks/run_benchmark.py --mode exact
+   ```
+
+   Only refresh `benchmarks/golden_cases.json` after the parser drift is intentional and
+   reviewable. Snapshot refreshes should be small, explicit commits:
 
    ```bash
    python benchmarks/run_benchmark.py --update
-   ```
-
-   Then verify:
-
-   ```bash
-   python benchmarks/run_benchmark.py
+   python benchmarks/run_benchmark.py --mode exact
    ```
 
 5. Commit and push, then open a Pull Request against `main`.
@@ -51,7 +55,11 @@ pip install -e ".[dev]"
 - All tests live under `tests/`.
 - Use `pytest -v` for verbose output.
 - Use `pytest --cov=optical_spec_agent` for coverage.
-- CI runs on Python 3.11 and 3.12. Make sure your change passes on both.
+- CI runs on Python 3.11 and 3.12.
+- CI runs `pytest -q`, `python benchmarks/run_benchmark.py --mode key_fields`, and
+  `python benchmarks/run_semantic_benchmark.py`.
+- Real Meep execution is a manual/local gate. Ordinary CI does not require Meep.
+- `make lint` runs Ruff. Treat existing lint cleanup as a separate, focused change.
 
 ## What to contribute
 
@@ -61,12 +69,14 @@ pip install -e ".[dev]"
 - New golden cases for uncovered physical systems (e.g. grating, metasurface details)
 - Validation rule improvements
 - Documentation fixes and examples
+- First-run and CLI documentation polish
+- Local diagnostic report updates that do not change solver behavior
 
 **Needs discussion first (open an issue):**
 
 - New structured sub-models or enum values
 - LLM parser integration
-- Solver adapter work (Meep, MPB, Elmer, Optiland)
+- New solver adapters or major Meep physics/template changes
 - Breaking schema changes
 
 ## Commit style
@@ -76,9 +86,10 @@ pip install -e ".[dev]"
 
 ## PR checklist
 
-- [ ] Tests pass (`make test`)
-- [ ] Lint clean (`make lint`)
-- [ ] Golden cases updated if parser behavior changed
+- [ ] Standard validation passes (`make check`)
+- [ ] Lint checked if the PR is lint-focused (`make lint`)
+- [ ] Exact benchmark drift reviewed if parser behavior changed
+- [ ] Golden snapshots updated only when intentionally approved
 - [ ] New code has tests
 - [ ] No unnecessary changes outside the scope of the PR
 

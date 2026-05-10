@@ -1,4 +1,4 @@
-.PHONY: install dev test lint example api schema clean
+.PHONY: install dev test check bench-key bench-semantic test-cov lint example api schema clean tree
 
 PYTHON ?= python
 PIP ?= pip
@@ -11,6 +11,17 @@ dev:
 
 test:
 	pytest -v
+
+check:
+	pytest
+	$(PYTHON) benchmarks/run_benchmark.py --mode key_fields
+	$(PYTHON) benchmarks/run_semantic_benchmark.py
+
+bench-key:
+	$(PYTHON) benchmarks/run_benchmark.py --mode key_fields
+
+bench-semantic:
+	$(PYTHON) benchmarks/run_semantic_benchmark.py
 
 test-cov:
 	pytest --cov=optical_spec_agent --cov-report=term-missing
