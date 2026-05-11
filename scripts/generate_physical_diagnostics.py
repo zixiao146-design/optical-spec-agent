@@ -13,9 +13,7 @@ SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from optical_spec_agent.analysis import CORE_HERO_TASK, generate_physical_diagnostics
-from optical_spec_agent.services.spec_service import SpecService
-from optical_spec_agent.utils.format import spec_to_json
+from optical_spec_agent.analysis import generate_physical_diagnostics, prepare_diagnostic_spec
 
 
 def parse_args() -> argparse.Namespace:
@@ -28,7 +26,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--spec", type=Path, default=Path("outputs/my_spec.json"))
     parser.add_argument("--output-dir", type=Path, default=Path("outputs"))
-    parser.add_argument("--artifact-dir", type=Path, default=None)
+    parser.add_argument("--artifact-dir", "--run-dir", dest="artifact_dir", type=Path, default=None)
     parser.add_argument("--execution-result", type=Path, default=None)
     parser.add_argument("--spectrum", type=Path, default=None)
     parser.add_argument("--flux-surfaces", type=Path, default=None)
@@ -53,18 +51,15 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    spec_path = args.spec
-    if not spec_path.exists():
-        if not args.create_demo_spec_if_missing:
-            print(
-                f"Spec file not found: {spec_path}. "
-                "Pass --create-demo-spec-if-missing for a traceable demo spec.",
-                file=sys.stderr,
-            )
-            return 1
-        spec_path.parent.mkdir(parents=True, exist_ok=True)
-        spec = SpecService().process(CORE_HERO_TASK, task_id="diagnostic-demo")
-        spec_path.write_text(spec_to_json(spec), encoding="utf-8")
+    try:
+        spec_path, created_demo = prepare_diagnostic_spec(
+            args.spec,
+            create_demo_spec_if_missing=args.create_demo_spec_if_missing,
+        )
+    except FileNotFoundError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    if created_demo:
         print(f"Created demo spec from core hero task: {spec_path}", file=sys.stderr)
 
     result = generate_physical_diagnostics(

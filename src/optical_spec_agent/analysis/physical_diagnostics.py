@@ -60,9 +60,12 @@ class PhysicalDiagnosticsResult:
     """Top-level JSON-serializable diagnostics result."""
 
     schema_version: str
+    generated_at: str
     created_at: str
     spec_path: str
     output_dir: str
+    run_dir: str | None
+    status: str
     generated_outputs: dict[str, str]
     task: dict[str, Any]
     extracted_config: dict[str, Any]
@@ -71,6 +74,11 @@ class PhysicalDiagnosticsResult:
     execution_diagnostics: dict[str, Any]
     warnings: list[str]
     errors: list[str]
+    missing_artifacts: list[str]
+    nan_detected: bool
+    inf_detected: bool
+    timeout_detected: bool
+    notes: list[str]
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -141,6 +149,7 @@ def generate_physical_diagnostics(
     )
     warnings.extend(execution_diagnostics.get("warnings_detected", []))
     errors.extend(execution_diagnostics.get("errors_detected", []))
+    missing_artifacts = execution_diagnostics.get("missing_artifacts", [])
 
     generated_outputs: dict[str, str] = {}
     mesh_report_path = output_dir / "mesh_report.csv"
@@ -162,19 +171,35 @@ def generate_physical_diagnostics(
         if preview_warning:
             warnings.append(preview_warning)
 
+    warnings = _dedupe(warnings)
+    errors = _dedupe(errors)
+    status = _diagnostic_status(errors=errors, warnings=warnings, missing_artifacts=missing_artifacts)
+    generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
     result = PhysicalDiagnosticsResult(
         schema_version=DIAGNOSTICS_SCHEMA_VERSION,
-        created_at=datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        generated_at=generated_at,
+        created_at=generated_at,
         spec_path=str(spec_path),
         output_dir=str(output_dir),
+        run_dir=str(artifact_dir) if artifact_dir else None,
+        status=status,
         generated_outputs=generated_outputs,
         task=config["task"],
         extracted_config=config,
         mesh_diagnostics=mesh_result.to_dict() if mesh_result else None,
         flux_diagnostics=[summary.to_dict() for summary in flux_summaries],
         execution_diagnostics=execution_diagnostics,
-        warnings=_dedupe(warnings),
-        errors=_dedupe(errors),
+        warnings=warnings,
+        errors=errors,
+        missing_artifacts=missing_artifacts,
+        nan_detected=bool(execution_diagnostics.get("nan_detected")),
+        inf_detected=bool(execution_diagnostics.get("inf_detected")),
+        timeout_detected=bool(execution_diagnostics.get("timeout_detected")),
+        notes=[
+            "Post-hoc diagnostics only; not production-grade physical validation.",
+            "diagnostic_preview.png is a readability artifact, not a scientific figure.",
+        ],
     )
 
     diagnostics_path = output_dir / "execution_diagnostics.json"
@@ -188,6 +213,30 @@ def generate_physical_diagnostics(
         encoding="utf-8",
     )
     return result
+
+
+def prepare_diagnostic_spec(
+    spec_path: Path,
+    *,
+    create_demo_spec_if_missing: bool,
+) -> tuple[Path, bool]:
+    """Ensure a diagnostics spec exists, optionally creating the core demo spec."""
+    spec_path = Path(spec_path)
+    if spec_path.exists():
+        return spec_path, False
+    if not create_demo_spec_if_missing:
+        raise FileNotFoundError(
+            f"Spec file not found: {spec_path}. "
+            "Pass --create-demo-spec-if-missing for a traceable demo spec."
+        )
+
+    from optical_spec_agent.services.spec_service import SpecService
+    from optical_spec_agent.utils.format import spec_to_json
+
+    spec_path.parent.mkdir(parents=True, exist_ok=True)
+    spec = SpecService().process(CORE_HERO_TASK, task_id="diagnostic-demo")
+    spec_path.write_text(spec_to_json(spec), encoding="utf-8")
+    return spec_path, True
 
 
 def load_optical_spec(path: Path) -> OpticalSpec:
@@ -337,13 +386,17 @@ def analyze_execution_artifacts(
     """Read execution_result/stdout/stderr artifacts and detect runtime anomalies."""
     diagnostics: dict[str, Any] = {
         "execution_result_path": str(execution_result_path) if execution_result_path else None,
+        "run_dir": str(artifact_dir) if artifact_dir else None,
         "success": None,
         "available": None,
         "returncode": None,
         "run_id": None,
         "outputs": {},
+        "nan_detected": False,
+        "inf_detected": False,
         "nan_or_inf_detected": False,
         "timeout_detected": False,
+        "missing_artifacts": _missing_run_artifacts(artifact_dir),
         "stderr_excerpt": "",
         "stdout_excerpt": "",
         "warnings_detected": [],
@@ -390,9 +443,15 @@ def analyze_execution_artifacts(
             stderr_text = stderr_path.read_text(encoding="utf-8", errors="replace")
             diagnostics["stderr_excerpt"] = stderr_text[-1000:]
             text_blobs.append(stderr_text)
+        if diagnostics["missing_artifacts"]:
+            diagnostics["warnings_detected"].append(
+                "Missing execution artifacts: " + ", ".join(diagnostics["missing_artifacts"])
+            )
 
     combined = "\n".join(text_blobs).lower()
-    if re.search(r"\b(nan|inf)\b", combined):
+    diagnostics["nan_detected"] = bool(re.search(r"\bnan\b", combined))
+    diagnostics["inf_detected"] = bool(re.search(r"\binf\b", combined))
+    if diagnostics["nan_detected"] or diagnostics["inf_detected"]:
         diagnostics["nan_or_inf_detected"] = True
         diagnostics["warnings_detected"].append("NaN/Inf detected in execution logs or errors.")
     if "timeout" in combined or "timed out" in combined:
@@ -412,8 +471,9 @@ def write_mesh_report(
     if mesh_result is None:
         rows.append(
             {
-                "metric": "mesh_diagnostics",
+                "check_name": "mesh_diagnostics",
                 "value": "",
+                "threshold": "",
                 "unit": "",
                 "status": "error",
                 "message": "mesh diagnostics unavailable",
@@ -424,10 +484,14 @@ def write_mesh_report(
         for metric, value in data.items():
             if metric == "warnings":
                 continue
+            threshold = ""
+            if metric == "gap_cells":
+                threshold = f">= {mesh_result.min_recommended_gap_cells}"
             rows.append(
                 {
-                    "metric": metric,
+                    "check_name": metric,
                     "value": value,
+                    "threshold": threshold,
                     "unit": _mesh_unit(metric),
                     "status": "warn"
                     if metric == "gap_cells" and not mesh_result.physically_resolved
@@ -439,21 +503,27 @@ def write_mesh_report(
             )
     rows.append(
         {
-            "metric": "resolution_source",
+            "check_name": "resolution_source",
             "value": config["mesh"]["resolution_source"],
+            "threshold": "",
             "unit": "",
             "status": "info",
             "message": "source of resolution used for diagnostics",
         }
     )
-    _write_csv(path, ["metric", "value", "unit", "status", "message"], rows)
+    _write_csv(path, ["check_name", "value", "threshold", "unit", "status", "message"], rows)
 
 
 def write_flux_report(path: Path, summaries: list[FluxMonitorSummary]) -> None:
     """Write per-monitor flux report."""
     rows = [
         {
-            "monitor": item.monitor,
+            "monitor_name": _monitor_base_name(item.monitor),
+            "surface": _monitor_surface_name(item.monitor),
+            "value": item.max_abs_flux,
+            "unit": "relative_flux",
+            "status": "warn" if item.anomaly else "ok",
+            "message": "; ".join(item.notes),
             "n_points": item.n_points,
             "mean_flux": item.mean_flux,
             "max_abs_flux": item.max_abs_flux,
@@ -461,14 +531,18 @@ def write_flux_report(path: Path, summaries: list[FluxMonitorSummary]) -> None:
             "integrated_signed_flux": item.integrated_signed_flux,
             "near_zero_signal": item.near_zero_signal,
             "anomaly": item.anomaly,
-            "notes": "; ".join(item.notes),
         }
         for item in summaries
     ]
     _write_csv(
         path,
         [
-            "monitor",
+            "monitor_name",
+            "surface",
+            "value",
+            "unit",
+            "status",
+            "message",
             "n_points",
             "mean_flux",
             "max_abs_flux",
@@ -476,7 +550,6 @@ def write_flux_report(path: Path, summaries: list[FluxMonitorSummary]) -> None:
             "integrated_signed_flux",
             "near_zero_signal",
             "anomaly",
-            "notes",
         ],
         rows,
     )
@@ -792,6 +865,38 @@ def _mesh_unit(metric: str) -> str:
     if metric.endswith("_cells"):
         return "cells"
     return ""
+
+
+def _missing_run_artifacts(artifact_dir: Path | None) -> list[str]:
+    if artifact_dir is None:
+        return []
+    required = ["stdout.txt", "stderr.txt", "execution_result.json", "run_manifest.json"]
+    return [name for name in required if not (artifact_dir / name).exists()]
+
+
+def _diagnostic_status(
+    *,
+    errors: list[str],
+    warnings: list[str],
+    missing_artifacts: list[str],
+) -> str:
+    if errors:
+        return "error"
+    if warnings or missing_artifacts:
+        return "warning"
+    return "success"
+
+
+def _monitor_base_name(name: str) -> str:
+    if name.startswith("flux_"):
+        return "flux"
+    return name
+
+
+def _monitor_surface_name(name: str) -> str:
+    if name.startswith("flux_"):
+        return name.removeprefix("flux_")
+    return name
 
 
 def _dedupe(values: list[str]) -> list[str]:

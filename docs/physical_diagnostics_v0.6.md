@@ -13,13 +13,38 @@ natural language optical task
 The diagnostics layer is intentionally post-hoc. It does not run Meep, does not
 change the parser, and does not claim production-grade physical validation.
 
-## Command
+## Recommended CLI
+
+```bash
+optical-spec diagnose outputs/my_spec.json \
+  --output-dir outputs \
+  --run-dir runs/demo \
+  --create-demo-spec-if-missing
+```
+
+`diagnose` is the stable user-facing entry point. It reads an `OpticalSpec`
+JSON and optionally links it to an existing `meep-run` directory. It does not
+generate a Meep script and does not run Meep.
+
+Supported options:
+
+- `SPEC_PATH` positional argument, for example `outputs/my_spec.json`
+- `--spec <path>` as an explicit alternative to the positional path
+- `--output-dir <path>` for reports, default `outputs`
+- `--run-dir <path>` for existing Meep execution artifacts
+- `--create-demo-spec-if-missing` to create a traceable core demo spec
+- `--json` for machine-readable CLI output
+
+## Backward-Compatible Script
+
+The script wrapper remains available for automation and backwards
+compatibility. It calls the same core implementation as the CLI:
 
 ```bash
 python scripts/generate_physical_diagnostics.py \
   --spec outputs/my_spec.json \
   --output-dir outputs \
-  --artifact-dir runs/observable-diagnostics/<matrix_run_id>/closed-box-baseline \
+  --run-dir runs/observable-diagnostics/<matrix_run_id>/closed-box-baseline \
   --create-demo-spec-if-missing
 ```
 
@@ -36,10 +61,11 @@ scattering spectrum, resonance wavelength, and FWHM.
 
 All reports are written under `outputs/`:
 
-- `mesh_report.csv`: grid size, gap cells, particle/film cells, recommended
-  resolution, and warning status.
-- `flux_report.csv`: per-monitor mean flux, max absolute flux, integrated
-  absolute/signed flux, near-zero flags, and notes.
+- `mesh_report.csv`: `check_name`, `value`, `threshold`, `unit`, `status`, and
+  `message` rows for grid size, gap cells, particle/film cells, and recommended
+  resolution.
+- `flux_report.csv`: `monitor_name`, `surface`, `value`, `unit`, `status`, and
+  `message` rows plus per-monitor aggregate metrics.
 - `execution_diagnostics.json`: traceable JSON summary of spec fields,
   provenance, mesh diagnostics, flux diagnostics, execution-result excerpts,
   warnings, and errors.
@@ -83,10 +109,22 @@ Near-zero signals are flagged conservatively. This is a diagnostic heuristic,
 not a physical standard. It is meant to catch cases where the observable is too
 weak or too cancellation-prone for meaningful convergence metrics.
 
-## Execution Log Checks
+## Execution Artifact Checks
+
+When `--run-dir` is provided, diagnostics look for the standard artifacts from
+`optical-spec meep-run`:
+
+- `stdout.txt`
+- `stderr.txt`
+- `execution_result.json`
+- `run_manifest.json`
+
+Missing files do not crash the command. They are recorded in
+`execution_diagnostics.json` as `missing_artifacts` and turn the report status
+into `warning`.
 
 The diagnostics read `execution_result.json`, plus `stdout.txt` and `stderr.txt`
-when an artifact directory is provided. They flag:
+when available. They flag:
 
 - `NaN` / `Inf`
 - timeout text
@@ -95,6 +133,22 @@ when an artifact directory is provided. They flag:
 
 The result is written into `execution_diagnostics.json` so the diagnostic chain
 is auditable after the run.
+
+The top-level JSON includes at least:
+
+- `schema_version`
+- `spec_path`
+- `output_dir`
+- `run_dir`
+- `generated_at`
+- `status`
+- `warnings`
+- `errors`
+- `missing_artifacts`
+- `nan_detected`
+- `inf_detected`
+- `timeout_detected`
+- `notes`
 
 ## Benchmark Report
 

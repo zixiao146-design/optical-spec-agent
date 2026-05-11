@@ -162,6 +162,12 @@ optical-spec meep-generate spec.json -o smoke.py --mode smoke
 optical-spec meep-check --json
 optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview --run-id demo-001
 
+# Recommended v0.6 post-hoc diagnostics entry point
+optical-spec diagnose outputs/my_spec.json \
+  --output-dir outputs \
+  --run-dir runs/demo \
+  --create-demo-spec-if-missing
+
 # Manual/local Meep integration gates, not default CI gates
 python scripts/local_meep_integration_gate.py --mode smoke
 python scripts/local_meep_integration_gate.py --mode research-preview --timeout 3600
@@ -171,10 +177,11 @@ python scripts/local_meep_candidate_hardening.py --timeout 900
 python scripts/local_meep_candidate_convergence.py --latest
 python scripts/local_meep_observable_diagnostics.py --timeout 900
 
-# Post-hoc physical diagnostics for a spec and optional execution artifacts
+# Script wrapper remains available for automation/backward compatibility
 python scripts/generate_physical_diagnostics.py \
   --spec outputs/my_spec.json \
   --output-dir outputs \
+  --run-dir runs/demo \
   --create-demo-spec-if-missing
 ```
 
@@ -224,8 +231,8 @@ execution-stable but gap-under-resolved: `resolution=12 px/um` corresponds to
 about `83 nm` grid spacing, so a `5 nm` gap is not physically resolved. See
 [`docs/local_meep_mesh_monitor_diagnostics_v0.6.md`](docs/local_meep_mesh_monitor_diagnostics_v0.6.md).
 
-For a compact artifact-oriented report, run
-`python scripts/generate_physical_diagnostics.py --create-demo-spec-if-missing`.
+For a compact artifact-oriented report, prefer
+`optical-spec diagnose outputs/my_spec.json --output-dir outputs --create-demo-spec-if-missing`.
 It reads `outputs/my_spec.json`, optional Meep artifacts, and writes
 `mesh_report.csv`, `flux_report.csv`, `execution_diagnostics.json`, and
 `diagnostic_preview.png` under `outputs/`. See

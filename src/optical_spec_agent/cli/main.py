@@ -320,6 +320,112 @@ def meep_run(
         raise typer.Exit(1)
 
 
+@app.command("diagnose")
+def diagnose(
+    spec_file: Path | None = typer.Argument(
+        None,
+        help="Path to an OpticalSpec JSON file. Defaults to --spec or outputs/my_spec.json.",
+    ),
+    spec_option: Path | None = typer.Option(
+        None,
+        "--spec",
+        help="Path to an OpticalSpec JSON file.",
+    ),
+    output_dir: Path = typer.Option(
+        Path("outputs"),
+        "--output-dir",
+        help="Directory for mesh_report.csv, flux_report.csv, execution_diagnostics.json, and diagnostic_preview.png",
+    ),
+    run_dir: Path | None = typer.Option(
+        None,
+        "--run-dir",
+        help="Optional directory containing Meep execution artifacts from meep-run",
+    ),
+    create_demo_spec_if_missing: bool = typer.Option(
+        False,
+        "--create-demo-spec-if-missing",
+        help="Create a traceable core Meep demo spec if the spec path is missing.",
+    ),
+    json_output: bool = typer.Option(False, "--json", help="Print structured JSON output"),
+):
+    """Generate post-hoc physical diagnostics for a spec and optional Meep artifacts."""
+    from optical_spec_agent.analysis import generate_physical_diagnostics, prepare_diagnostic_spec
+
+    requested_spec = spec_option or spec_file or Path("outputs/my_spec.json")
+    try:
+        spec_path, created_demo = prepare_diagnostic_spec(
+            requested_spec,
+            create_demo_spec_if_missing=create_demo_spec_if_missing,
+        )
+    except FileNotFoundError as exc:
+        if json_output:
+            console.print_json(
+                json.dumps(
+                    {
+                        "status": "error",
+                        "errors": [str(exc)],
+                        "warnings": [],
+                        "spec_path": str(requested_spec),
+                        "output_dir": str(output_dir),
+                    },
+                    ensure_ascii=False,
+                )
+            )
+        else:
+            console.print(f"[red]Error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    result = generate_physical_diagnostics(
+        spec_path=spec_path,
+        output_dir=output_dir,
+        artifact_dir=run_dir,
+    )
+
+    if created_demo:
+        result.warnings.append(f"Created demo spec from core hero task: {spec_path}")
+        result.status = "warning" if result.status == "success" else result.status
+
+    if json_output:
+        console.print_json(json.dumps(result.to_dict(), ensure_ascii=False))
+        if result.status == "error":
+            raise typer.Exit(1)
+        return
+
+    _print_diagnostics_result(result)
+    if result.status == "error":
+        raise typer.Exit(1)
+
+
+def _print_diagnostics_result(result) -> None:
+    status_style = {
+        "success": "green",
+        "warning": "yellow",
+        "error": "red",
+    }.get(result.status, "white")
+    console.print(f"[{status_style}]Status: {result.status}[/{status_style}]")
+    console.print(f"Schema version: {result.schema_version}")
+    console.print(f"Generated at: {result.generated_at}")
+    console.print(f"Spec: {result.spec_path}")
+    console.print(f"Output dir: {result.output_dir}")
+    if result.run_dir:
+        console.print(f"Run dir: {result.run_dir}")
+    console.print("[green]Generated artifacts:[/green]")
+    for name, path in result.generated_outputs.items():
+        console.print(f"  - {name}: {path}")
+    if result.missing_artifacts:
+        console.print("[yellow]Missing run artifacts:[/yellow]")
+        for item in result.missing_artifacts:
+            console.print(f"  - {item}")
+    if result.warnings:
+        console.print("[yellow]Warnings:[/yellow]")
+        for warning in result.warnings:
+            console.print(f"  - {warning}")
+    if result.errors:
+        console.print("[red]Errors:[/red]")
+        for error in result.errors:
+            console.print(f"  - {error}")
+
+
 def _print_execution_result(result) -> None:
     console.print(f"Success: {'yes' if result.success else 'no'}")
     console.print(f"Meep available: {'yes' if result.available else 'no'}")

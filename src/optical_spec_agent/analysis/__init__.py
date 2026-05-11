@@ -11,6 +11,7 @@ from .physical_diagnostics import (
     extract_diagnostic_config,
     generate_physical_diagnostics,
     load_optical_spec,
+    prepare_diagnostic_spec,
 )
 from .spectrum_compare import (
     SpectrumComparison,
@@ -38,5 +39,6 @@ __all__ = [
     "generate_physical_diagnostics",
     "load_scattering_csv",
     "load_optical_spec",
+    "prepare_diagnostic_spec",
     "summarize_comparisons",
 ]
