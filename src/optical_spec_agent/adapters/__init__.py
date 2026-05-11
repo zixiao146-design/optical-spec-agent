@@ -1,7 +1,15 @@
-"""Solver adapters — convert validated OpticalSpec into solver-native input.
+"""Solver adapters — convert validated OpticalSpec into solver-native input."""
 
-Available adapters:
-  - meep: nanoparticle_on_film → Python script (v0.1)
+from optical_spec_agent.adapters.base import (
+    AdapterMetadata,
+    AdapterReadiness,
+    AdapterResult,
+    BaseAdapter,
+)
 
-See docs/adapter_architecture.md for the full design rationale.
-"""
+__all__ = [
+    "AdapterMetadata",
+    "AdapterReadiness",
+    "AdapterResult",
+    "BaseAdapter",
+]

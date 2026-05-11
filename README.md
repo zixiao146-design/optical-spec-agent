@@ -2,9 +2,9 @@
 
 [![Tests](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml/badge.svg)](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml)
 
-> Convert optical simulation requests into validated, solver-ready spec JSON — and generate Meep scripts.
+> Convert optical simulation requests into validated, solver-ready spec JSON — and generate solver-native input scaffolds.
 
-**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks. Its Meep adapter can generate preview-oriented Python scripts for nanoparticle-on-film simulations.
+**optical-spec-agent** is a compilation layer between human language and optical solvers. You describe a simulation task in plain text (Chinese or English), and it produces a single structured, validated JSON spec — with typed fields, provenance tracking, and completeness checks. Its strongest workflow is still Meep nanoparticle-on-film script generation, and v0.7 adds a small multi-solver adapter foundation for MPB, Gmsh, Elmer, and Optiland preview scaffolds.
 
 ```
 "用Meep FDTD仿真金纳米球-金膜gap plasmon，扫gap从5到25nm，提取共振波长和FWHM"
@@ -31,8 +31,8 @@ repo is current local/manual diagnostic work, not a production simulation claim.
 | | |
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
-| **Adapter** | Meep script generator with `preview`, `research-preview`, and `smoke` modes (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
-| **Benchmark** | 16 golden cases + 15 semantic benchmark cases for Meep reliability — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
+| **Adapter** | Meep script generator plus v0.7 MVP preview adapters for MPB, Gmsh, Elmer, and Optiland — see [adapter doc](docs/adapter_mvp_v0.7.md) |
+| **Benchmark** | 16 golden cases + 27 semantic benchmark cases for Meep reliability and v0.7 adapter intent routing — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
 | **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
 
 ## Why this project?
@@ -44,15 +44,17 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 release + v0.6 local diagnostics)
+## Current scope (v0.5 release + v0.6 diagnostics + v0.7 adapter foundation)
 
 The current loop:
 
 ```
 Natural language  →  Rule-based parser  →  Structured spec JSON  →  Validation
-                                                               ↓ (if Meep + nanoparticle_on_film)
-                                                    Meep Python script (.py)
-                                                               ↓ (optional explicit command)
+                                                               ↓
+                                              adapter-generate / meep-generate
+                                                               ↓
+                                  Meep / MPB / Gmsh / Elmer / Optiland input
+                                                               ↓ (Meep only, optional explicit command)
                                                     Meep execution harness
 ```
 
@@ -63,7 +65,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Per-field provenance tracking: confirmed / inferred / missing
 - Pydantic v2 validation with task-type-aware rules
 - CLI, FastAPI, and Python SDK interfaces
-- Semantic benchmark coverage for fifteen reliability-critical parsing cases,
+- Semantic benchmark coverage for 27 reliability-critical parsing cases,
   including material, gap, source, boundary, and waveguide checks
 - Meep adapter readiness checks + CLI readiness reporting before script generation
 - Meep adapter script modes:
@@ -79,6 +81,9 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Mesh sanity diagnostics for under-resolved gaps and monitor presets
 - Post-hoc physical diagnostics reports under `outputs/`: mesh CSV, flux CSV,
   execution diagnostics JSON, and a diagnostic preview PNG
+- Generic v0.7 adapter registry and CLI:
+  `adapter-list` and `adapter-generate`
+- MVP preview/scaffold adapters for MPB, Gmsh, Elmer, and Optiland
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
@@ -86,7 +91,8 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Full solver automation or production-grade result interpretation
 - Physically validated stable Au library research-preview runs; those remain manual diagnostics and may fail with NaN/Inf or timeout
 - Formal convergence proof for the v0.6 physical candidate
-- Adapters for other solvers (MPB, Gmsh, Elmer, Optiland) — not yet implemented
+- Running MPB, Gmsh, Elmer, or Optiland; v0.7 adapters generate input only
+- Production-ready MPB/Gmsh/Elmer/Optiland inputs; current outputs are annotated MVP scaffolds
 - Production-grade visualization or plotting pipeline
 
 ## Install
@@ -158,6 +164,16 @@ optical-spec meep-generate spec.json -o sim.py
 optical-spec meep-generate spec.json -o sim_research.py --mode research-preview
 optical-spec meep-generate spec.json -o smoke.py --mode smoke
 
+# Generic v0.7 adapter registry and scaffold generation
+optical-spec adapter-list
+optical-spec adapter-list --json
+
+optical-spec adapter-generate spec.json --tool auto --output outputs/generated_input.py
+optical-spec adapter-generate spec.json --tool mpb --output outputs/mpb_band.py
+optical-spec adapter-generate spec.json --tool gmsh --output outputs/geometry.geo
+optical-spec adapter-generate spec.json --tool elmer --mesh outputs/geometry.msh --output outputs/case.sif
+optical-spec adapter-generate spec.json --tool optiland --output outputs/optiland_design.py
+
 # Optional v0.5 execution harness for an existing generated script
 optical-spec meep-check --json
 optical-spec meep-run sim_research.py --workdir runs/demo --timeout 300 --expected-mode research-preview --run-id demo-001
@@ -189,6 +205,26 @@ python scripts/generate_physical_diagnostics.py \
   --run-dir runs/demo \
   --create-demo-spec-if-missing
 ```
+
+### Generic adapter generation
+
+`adapter-generate` is the v0.7 solver-input scaffold entry point. It does not
+run external solvers. It selects an adapter from the spec (`--tool auto`) or an
+explicit tool name:
+
+| Tool | Output | Status |
+|------|--------|--------|
+| `meep` | `.py` | Existing specialized nanoparticle-on-film script path |
+| `mpb` | `.py` | MVP band/eigenmode preview scaffold |
+| `gmsh` | `.geo` | MVP geometry/mesh scaffold |
+| `elmer` | `.sif` | MVP FEM solver-input scaffold, optionally with `--mesh` |
+| `optiland` | `.py` | MVP imaging/ray-tracing scaffold |
+
+Use `--strict` when missing adapter-required fields should fail generation.
+Without `--strict`, MVP adapters may still write an annotated scaffold with
+clear `missing_required`, warnings, defaults, and limitations. `meep-generate`
+remains the backward-compatible Meep-specific command with script modes and
+readiness reporting.
 
 ### Meep generation modes
 
@@ -473,7 +509,7 @@ python benchmarks/run_benchmark.py --mode all         # both
 
 **What it does NOT test:** semantic understanding scoring, solver correctness, or LLM parsing.
 
-The semantic benchmark checks fifteen reliability-critical cases at the field level:
+The semantic benchmark checks 27 reliability-critical cases at the field level:
 
 ```bash
 python benchmarks/run_semantic_benchmark.py
@@ -526,11 +562,17 @@ optical-spec-agent/
 │   │   ├── physical_diagnostics.py  # Spec/artifact diagnostics report generation
 │   │   └── __init__.py
 │   ├── adapters/
-│   │   ├── base.py                  # BaseAdapter ABC + AdapterResult
-│   │   └── meep/                    # Meep adapter (nanoparticle_on_film → script)
+│   │   ├── base.py                  # BaseAdapter ABC + AdapterResult/readiness metadata
+│   │   ├── registry.py              # v0.7 adapter registry and dispatch
+│   │   ├── utils.py                 # Shared adapter field helpers
+│   │   ├── meep/                    # Meep adapter (nanoparticle_on_film → script)
 │   │       ├── models.py            # MeepInputModel
 │   │       ├── translator.py        # OpticalSpec → MeepInputModel
 │   │       └── template.py          # MeepInputModel → Python script
+│   │   ├── mpb/                     # MPB preview script adapter
+│   │   ├── gmsh/                    # Gmsh .geo scaffold adapter
+│   │   ├── elmer/                   # Elmer .sif scaffold adapter
+│   │   └── optiland/                # Optiland Python scaffold adapter
 │   └── utils/
 │       ├── format.py                # JSON + human-readable summary
 │       └── __init__.py
@@ -540,6 +582,12 @@ optical-spec-agent/
 │   ├── test_parser.py               # Parser tests
 │   ├── test_validator.py
 │   ├── test_meep_adapter.py         # Meep adapter tests
+│   ├── test_adapter_registry.py
+│   ├── test_adapter_cli.py
+│   ├── test_mpb_adapter.py
+│   ├── test_gmsh_adapter.py
+│   ├── test_elmer_adapter.py
+│   ├── test_optiland_adapter.py
 │   ├── test_meep_runner.py          # Optional Meep execution harness tests
 │   ├── test_mesh_sanity.py
 │   ├── test_physical_diagnostics.py
@@ -591,6 +639,9 @@ optical-spec-agent/
 │   ├── local_meep_mesh_monitor_diagnostics_v0.6.md # Manual v0.6 mesh/monitor diagnostics
 │   ├── physical_diagnostics_v0.6.md # Post-hoc outputs/ diagnostics reports
 │   ├── release_notes_v0.5.0.md
+│   ├── adapter_mvp_v0.7.md             # v0.7 adapter MVP scope and examples
+│   ├── release_readiness_v0.7.md       # v0.7 readiness checklist
+│   ├── release_notes_v0.7.0.md         # Draft v0.7 release notes
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
 │   ├── demo_output.md
@@ -612,8 +663,8 @@ optical-spec-agent/
 | v0.3 | Core Meep reliability + semantic benchmark + adapter readiness | **Meep** (script gen only) | Done |
 | v0.4 | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | Done |
 | **v0.5** | Meep execution harness + auditable artifacts + low-cost diagnostic pipeline | **Meep** (FDTD) | **Done** |
-| v0.6 | Meep physical-candidate hardening + spectrum sanity metrics | **Meep** (FDTD) | Current |
-| v0.7 | MPB / Gmsh / Elmer / Optiland adapters | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Planned |
+| v0.6 | Meep physical-candidate hardening + spectrum sanity metrics | **Meep** (FDTD) | Done / local evidence |
+| v0.7 | Multi-solver adapter foundation + MPB/Gmsh/Elmer/Optiland MVP scaffolds | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Current |
 | v0.8 | LLM parser integration | — | Planned |
 | v0.9 | Multi-agent orchestration | — | Planned |
 

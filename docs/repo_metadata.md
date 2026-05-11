@@ -9,7 +9,7 @@ Copy-paste-ready content for GitHub settings and focused follow-up issues.
 **Description:**
 
 ```text
-NL optical task → validated spec JSON → Meep script → optional local execution artifacts.
+NL optical task → validated spec JSON → solver input scaffolds → optional Meep artifacts.
 ```
 
 **Website:** leave empty until a docs site exists.
@@ -21,6 +21,10 @@ optics
 photonics
 meep
 fdtd
+mpb
+gmsh
+elmer
+ray-tracing
 pydantic
 scientific-computing
 simulation

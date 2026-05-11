@@ -310,6 +310,29 @@ class MeepAdapter(BaseAdapter):
     """Meep FDTD adapter — nanoparticle_on_film → scattering_spectrum script."""
 
     tool_name = "meep"
+    display_name = "Meep FDTD"
+    solver_family = "FDTD"
+    output_language = "python"
+    output_extension = ".py"
+    supported_solver_methods = ["fdtd"]
+    supported_physical_systems = ["nanoparticle_on_film"]
+    current_status = "preview"
+    limitations = [
+        "Specialized nanoparticle-on-film adapter.",
+        "Generates scripts only; Meep execution is explicit via meep-run.",
+        "Research-preview scripts are not production-grade physical validation.",
+    ]
+    _consumes = [
+        "physics.physical_system",
+        "geometry_material.particle_info",
+        "geometry_material.substrate_or_film_info",
+        "geometry_material.gap_medium",
+        "simulation.solver_method",
+        "simulation.software_tool",
+        "simulation.source_setting",
+        "output.output_observables",
+        "output.postprocess_target",
+    ]
 
     def can_handle(self, spec: OpticalSpec) -> bool:
         phys_sys = _get_sf_value(spec, "physics.physical_system")
@@ -474,6 +497,11 @@ class MeepAdapter(BaseAdapter):
             tool="meep",
             content=script,
             language="python",
+            metadata=self.metadata().model_dump(),
+            warnings=readiness.warnings,
+            errors=readiness.errors,
+            defaults_applied=model.defaults_applied,
+            limitations=self.limitations,
         )
 
     def _translate(

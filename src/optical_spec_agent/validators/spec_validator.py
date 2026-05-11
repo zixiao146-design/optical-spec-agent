@@ -207,6 +207,12 @@ class SpecValidator:
                 "waveguide": {"waveguide"},
                 "grating": {"gratings"},
                 "metasurface": {"metasurface", "array"},
+                "photonic_crystal": {"photonic_crystal", "periodic_structure", "array"},
+                "periodic_structure": {"photonic_crystal", "periodic_structure", "array"},
+                "lens": {"lens", "imaging_system"},
+                "imaging_system": {"lens", "imaging_system"},
+                "optical_system": {"lens", "imaging_system", "other"},
+                "ray_tracing": {"lens", "imaging_system", "other"},
                 "particle_array": {"array"},
                 "thin_film": {"film"},
                 "multilayer": {"multilayer"},
@@ -279,7 +285,17 @@ def _solver_sw_warnings(solver: str, software: str, warnings: list[str]) -> None
     """Emit warnings for solver-software mismatches."""
     pairs: dict[str, set[str]] = {
         "fdtd": {"meep", "lumerical"},
-        "fem": {"comsol"},
+        "fem": {"comsol", "elmer", "gmsh"},
+        "mesh": {"gmsh"},
+        "geometry": {"gmsh"},
+        "band_structure": {"mpb"},
+        "band_diagram": {"mpb"},
+        "mode_solver": {"mpb"},
+        "eigenmode": {"mpb"},
+        "frequency_domain": {"mpb"},
+        "ray_trace": {"optiland"},
+        "raytracing": {"optiland"},
+        "geometric_optics": {"optiland"},
         "rcwa": {"python", "matlab", "custom"},
     }
     expected = pairs.get(solver)

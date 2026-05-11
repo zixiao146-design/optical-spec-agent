@@ -320,6 +320,140 @@ def meep_run(
         raise typer.Exit(1)
 
 
+@app.command("adapter-list")
+def adapter_list(
+    json_output: bool = typer.Option(False, "--json", help="Print adapter metadata as JSON"),
+):
+    """List registered solver-input adapters."""
+    from optical_spec_agent.adapters.registry import list_adapters
+
+    adapters = [metadata.model_dump() for metadata in list_adapters()]
+    if json_output:
+        typer.echo(json.dumps({"adapters": adapters}, indent=2, ensure_ascii=False))
+        return
+
+    console.print("[bold]Registered adapters[/bold]")
+    for metadata in adapters:
+        console.print(
+            f"- [cyan]{metadata['tool_name']}[/cyan] "
+            f"({metadata['display_name']}): {metadata['current_status']}, "
+            f"*{metadata['output_extension']}"
+        )
+        console.print(f"  Solver family: {metadata['solver_family']}")
+        console.print(
+            "  Methods: "
+            + (", ".join(metadata["supported_solver_methods"]) or "not specified")
+        )
+        if metadata["limitations"]:
+            console.print(f"  Limitation: {metadata['limitations'][0]}")
+
+
+@app.command("adapter-generate")
+def adapter_generate(
+    spec_file: Path = typer.Argument(..., help="Path to a spec JSON file"),
+    tool: str = typer.Option(
+        "auto",
+        "--tool",
+        help="Adapter tool: auto, meep, mpb, gmsh, elmer, or optiland",
+    ),
+    output: Path | None = typer.Option(None, "--output", "-o", help="Output file path"),
+    mesh: Path | None = typer.Option(None, "--mesh", help="Mesh path for Elmer scaffolds"),
+    json_output: bool = typer.Option(False, "--json", help="Print structured JSON output"),
+    allow_preview_defaults: bool = typer.Option(
+        False,
+        "--allow-preview-defaults",
+        help="Acknowledge that MVP adapters may apply scaffold defaults",
+    ),
+    strict: bool = typer.Option(
+        False,
+        "--strict",
+        help="Fail if adapter readiness reports errors or missing required fields",
+    ),
+):
+    """Generate solver-native input using the generic adapter registry."""
+    from optical_spec_agent.adapters.registry import AdapterRegistryError, dispatch_adapter
+
+    try:
+        spec = _load_spec_file(spec_file)
+        adapter = dispatch_adapter(spec, preferred_tool=tool)
+    except (AdapterRegistryError, FileNotFoundError, ValueError) as exc:
+        payload = _adapter_error_payload(str(exc), spec_file=spec_file, tool=tool)
+        if json_output:
+            typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    readiness = _adapter_readiness(adapter, spec, mesh=mesh)
+    missing_required = list(getattr(readiness, "missing_required", []) or [])
+    readiness_errors = list(getattr(readiness, "errors", []) or [])
+    readiness_warnings = list(getattr(readiness, "warnings", []) or [])
+    defaults_applied = list(getattr(readiness, "defaults_applied", []) or [])
+
+    if strict and (readiness_errors or missing_required):
+        payload = _adapter_report_payload(
+            status="error",
+            adapter=adapter,
+            output=output,
+            result=None,
+            missing_required=missing_required,
+            warnings=readiness_warnings,
+            errors=readiness_errors or ["Strict mode blocked generation."],
+            defaults_applied=defaults_applied,
+            allow_preview_defaults=allow_preview_defaults,
+        )
+        if json_output:
+            typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        else:
+            _print_adapter_generation_summary(payload)
+        raise typer.Exit(1)
+
+    try:
+        if adapter.tool_name == "elmer":
+            result = adapter.generate(spec, mesh_path=mesh)
+        else:
+            result = adapter.generate(spec)
+    except Exception as exc:
+        payload = _adapter_error_payload(str(exc), spec_file=spec_file, tool=adapter.tool_name)
+        if json_output:
+            typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Adapter error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    if output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(result.content, encoding="utf-8")
+        result.generated_files["primary"] = str(output)
+
+    status = "warning" if (missing_required or readiness_warnings or result.warnings) else "success"
+    payload = _adapter_report_payload(
+        status=status,
+        adapter=adapter,
+        output=output,
+        result=result,
+        missing_required=missing_required or result.missing_required,
+        warnings=[*readiness_warnings, *result.warnings],
+        errors=[*readiness_errors, *result.errors],
+        defaults_applied=[*defaults_applied, *result.defaults_applied],
+        allow_preview_defaults=allow_preview_defaults,
+    )
+
+    if not output:
+        payload["generated_content"] = result.content
+
+    if json_output:
+        typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        return
+
+    _print_adapter_generation_summary(payload)
+    if output:
+        console.print(f"[green]Generated input written to {output}[/green]")
+    else:
+        console.print("\n[bold]Generated content[/bold]")
+        console.print(result.content)
+
+
 @app.command("diagnose")
 def diagnose(
     spec_file: Path | None = typer.Argument(
@@ -425,6 +559,111 @@ def _diagnose_error_payload(*, error: str, spec_path: Path, output_dir: Path) ->
         "timeout_detected": False,
         "notes": ["Diagnostics did not run."],
     }
+
+
+def _load_spec_file(path: Path) -> OpticalSpec:
+    """Load raw OpticalSpec JSON or flat to_flat_dict JSON from disk."""
+    if not path.exists():
+        raise FileNotFoundError(f"File not found: {path}")
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if "task" not in data or not isinstance(data["task"], dict):
+        raise ValueError("Invalid spec format: missing 'task' section")
+
+    task_fields = data["task"]
+    has_status = any(
+        isinstance(value, dict) and "status" in value
+        for value in task_fields.values()
+    )
+    if has_status:
+        return _reconstruct_spec(data)
+    return OpticalSpec.model_validate(data)
+
+
+def _adapter_readiness(adapter, spec: OpticalSpec, *, mesh: Path | None):
+    """Call adapter validate_ready with optional mesh when supported."""
+    try:
+        return adapter.validate_ready(spec, mesh_path=mesh)
+    except TypeError:
+        return adapter.validate_ready(spec)
+
+
+def _adapter_error_payload(error: str, *, spec_file: Path, tool: str) -> dict:
+    return {
+        "status": "error",
+        "selected_adapter": tool,
+        "spec_file": str(spec_file),
+        "output_path": None,
+        "language": None,
+        "missing_required": [],
+        "warnings": [],
+        "errors": [error],
+        "defaults_applied": [],
+        "limitations": [],
+    }
+
+
+def _adapter_report_payload(
+    *,
+    status: str,
+    adapter,
+    output: Path | None,
+    result,
+    missing_required: list[str],
+    warnings: list[str],
+    errors: list[str],
+    defaults_applied: list[str],
+    allow_preview_defaults: bool,
+) -> dict:
+    metadata = adapter.metadata().model_dump()
+    return {
+        "status": status,
+        "selected_adapter": adapter.tool_name,
+        "display_name": metadata["display_name"],
+        "output_path": str(output) if output else None,
+        "language": metadata["output_language"],
+        "output_extension": metadata["output_extension"],
+        "missing_required": missing_required,
+        "warnings": list(dict.fromkeys(warnings)),
+        "errors": errors,
+        "defaults_applied": list(dict.fromkeys(defaults_applied)),
+        "limitations": metadata["limitations"],
+        "allow_preview_defaults": allow_preview_defaults,
+        "generated_files": result.generated_files if result else {},
+    }
+
+
+def _print_adapter_generation_summary(payload: dict) -> None:
+    status_style = {
+        "success": "green",
+        "warning": "yellow",
+        "error": "red",
+    }.get(payload["status"], "white")
+    console.print(f"[{status_style}]Status: {payload['status']}[/{status_style}]")
+    console.print(f"Selected adapter: {payload['selected_adapter']}")
+    console.print(f"Language: {payload['language']}")
+    if payload.get("output_path"):
+        console.print(f"Output path: {payload['output_path']}")
+    if payload["missing_required"]:
+        console.print("[yellow]Missing required:[/yellow]")
+        for item in payload["missing_required"]:
+            console.print(f"  - {item}")
+    if payload["defaults_applied"]:
+        console.print("[yellow]Defaults / placeholders:[/yellow]")
+        for item in payload["defaults_applied"]:
+            console.print(f"  - {item}")
+    if payload["warnings"]:
+        console.print("[yellow]Warnings:[/yellow]")
+        for warning in payload["warnings"]:
+            console.print(f"  - {warning}")
+    if payload["errors"]:
+        console.print("[red]Errors:[/red]")
+        for error in payload["errors"]:
+            console.print(f"  - {error}")
+    if payload["limitations"]:
+        console.print("[dim]Limitations:[/dim]")
+        for limitation in payload["limitations"]:
+            console.print(f"  - {limitation}")
 
 
 def _print_diagnostics_result(result) -> None:

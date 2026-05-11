@@ -441,6 +441,35 @@ class TestGeneral:
         assert spec.task.task_id != ""
 
 
+class TestV07AdapterKeywords:
+    def test_mpb_band_diagram_keywords(self, rule_parser):
+        spec = rule_parser.parse("用 MPB 计算二维光子晶体的 band diagram，输出前 8 条能带。")
+        assert spec.simulation.software_tool.value == "mpb"
+        assert spec.simulation.solver_method.value == "band_structure"
+        assert spec.physics.physical_system.value == "photonic_crystal"
+        assert "band_diagram" in spec.output.output_observables.value
+
+    def test_gmsh_mesh_keywords(self, rule_parser):
+        spec = rule_parser.parse("用 Gmsh 为 Si3N4 脊波导生成 FEM 网格。")
+        assert spec.simulation.software_tool.value == "gmsh"
+        assert spec.simulation.solver_method.value == "fem"
+        assert spec.physics.physical_system.value == "waveguide"
+
+    def test_elmer_fem_keywords(self, rule_parser):
+        spec = rule_parser.parse("用 Elmer 做 Si3N4 波导 FEM 模式分析，输出有效折射率。")
+        assert spec.simulation.software_tool.value == "elmer"
+        assert spec.simulation.solver_method.value == "fem"
+        assert "effective_index" in spec.output.output_observables.value
+
+    def test_optiland_ray_tracing_keywords(self, rule_parser):
+        spec = rule_parser.parse("用 Optiland 设计一个简单单透镜成像系统，计算 spot diagram 和 MTF。")
+        assert spec.simulation.software_tool.value == "optiland"
+        assert spec.simulation.solver_method.value == "ray_trace"
+        assert spec.physics.physical_system.value == "lens"
+        assert "spot_diagram" in spec.output.output_observables.value
+        assert "mtf" in spec.output.output_observables.value
+
+
 class TestMockLLMParser:
     def test_placeholder_returns_spec(self, llm_parser):
         spec = llm_parser.parse("test text")

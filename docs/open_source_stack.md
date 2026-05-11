@@ -1,7 +1,8 @@
 # optical-spec-agent 开源工具栈技术选型
 
-> **状态**: 路线规划文档，不反映当前仓库已实现的功能。
-> 所有工具均尚未接入 optical-spec-agent，本文档定义未来方向。
+> **状态**: 工具栈路线文档。Meep 已实现专用 adapter；v0.7 增加
+> MPB / Gmsh / Elmer / Optiland 的 MVP input-generation adapters。本文档仍主要
+> 说明选型理由，不代表这些工具已被项目自动执行。
 
 ---
 
@@ -301,7 +302,7 @@ README roadmap 已按开源主线调整。变更要点：
 
 - v0.4 和 v0.5 不再是 Lumerical / COMSOL adapter，改为 MPB 和 Gmsh+Elmer
 - 新增 v0.6 Optiland / RayOptics 成像光学方向
-- LLM parser 推迟到 v0.7，优先完成 spec hardening 和第一个 solver adapter
+- LLM parser 推迟到 v0.8+，优先完成 spec hardening、Meep hero workflow 和多 solver adapter foundation
 - v0.8 才开始 multi-agent orchestration
 
 详见 [README.md Roadmap](../README.md#roadmap)。

@@ -31,6 +31,9 @@ htmlcov/
 outputs/*.json
 outputs/*.csv
 outputs/*.png
+outputs/*.py
+outputs/*.geo
+outputs/*.sif
 optical_spec_schema.json
 runs/
 

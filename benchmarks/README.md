@@ -1,9 +1,9 @@
 # Benchmarks
 
 Golden-case regression tests for the rule-based parser + validator pipeline.
-The semantic benchmark now covers fifteen reliability-critical parsing paths,
+The semantic benchmark now covers 27 reliability-critical parsing paths,
 including the core Meep nanoparticle-on-film case plus material, gap, source,
-boundary, single-particle, and waveguide variations.
+boundary, single-particle, waveguide, and v0.7 adapter-target routing scenarios.
 
 ## Benchmark modes
 
@@ -21,7 +21,7 @@ Semantic benchmark:
 
 | Runner | What it checks |
 |--------|----------------|
-| `python benchmarks/run_semantic_benchmark.py` | Semantic fields for fifteen reliability-critical cases: Chinese + English Meep core cases, gap sweep extraction, SiO2 substrate disambiguation, Si3N4/SiO2 waveguide materials, oxide gaps, air/water gaps, TFSF/dipole/plane-wave sources, oblique incidence, periodic boundaries, and a Si single-particle case |
+| `python benchmarks/run_semantic_benchmark.py` | Semantic fields for 27 reliability-critical cases: Chinese + English Meep core cases, gap sweep extraction, SiO2 substrate disambiguation, Si3N4/SiO2 waveguide materials, oxide gaps, air/water gaps, TFSF/dipole/plane-wave sources, oblique incidence, periodic boundaries, Si single-particle, and MPB/Gmsh/Elmer/Optiland adapter-intent cases |
 | `python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json` | Same benchmark plus a machine-readable pass/fail report for each semantic check |
 
 **Key fields** checked in `key_fields` mode: `task.task_type`, `physics.physical_system`, `simulation.solver_method`, `output.output_observables`. Cases can override this list by adding an `expected_key_fields` array to their golden entry.
@@ -31,7 +31,7 @@ Semantic benchmark:
 - **Semantic understanding quality** — exact mode checks byte equality, not "best" interpretation
 - **Solver correctness** — no solver is invoked
 - **LLM parsing** — only the rule-based parser is tested
-- **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark focuses on 15 reliability-critical material, geometry, source, and boundary cases
+- **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark focuses on 27 reliability-critical material, geometry, source, boundary, and adapter-intent cases
 
 ## File structure
 
@@ -121,3 +121,4 @@ only meaning-bearing fields:
 - `TFSF`, `dipole`, oblique-incidence, and periodic-boundary descriptions should stay stable
 - `Air`, `Water`, `Al2O3`, and `TiO2` gap/material mentions should not be silently dropped or split into shorter tokens
 - `resonance_wavelength` and `fwhm_extraction` postprocess targets must be present
+- `MPB`, `Gmsh`, `Elmer`, and `Optiland` requests should route to the intended software/solver fields without adding external solver dependencies

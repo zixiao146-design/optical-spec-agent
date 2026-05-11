@@ -47,7 +47,7 @@ from optical_spec_agent.parsers.base import BaseParser
 # ═══════════════════════════════════════════════════════════════════════════
 
 _TASK_KEYWORDS: dict[str, list[str]] = {
-    "simulation": ["仿真", "simulation", "FDTD", "FEM", "RCWA", "模拟", "计算"],
+    "simulation": ["仿真", "simulation", "simulate", "compute", "calculate", "create", "generate", "FDTD", "FEM", "RCWA", "模拟", "计算", "生成"],
     "modeling": ["建模", "modeling", "建立模型", "构建"],
     "fitting": ["拟合", "fitting", "fit", "Lorentzian", "洛伦兹", "曲线拟合"],
     "data_analysis": ["分析", "analysis", "数据处理", "提取", "研究"],
@@ -57,7 +57,12 @@ _TASK_KEYWORDS: dict[str, list[str]] = {
 
 _SOLVER_KEYWORDS: dict[str, list[str]] = {
     "fdtd": ["FDTD", "fdtd", "时域有限差分"],
-    "fem": ["FEM", "fem", "有限元", "COMSOL"],
+    "fem": ["FEM", "fem", "有限元", "COMSOL", "Elmer", "elmer", "finite element"],
+    "mode_solver": ["mode solver", "eigenmode", "本征模", "特征模", "模式求解"],
+    "band_structure": ["band structure", "band diagram", "能带", "能带图"],
+    "mesh": ["Gmsh", "gmsh", "mesh", "meshing", "网格", "剖分"],
+    "ray_trace": ["ray tracing", "ray trace", "raytracing", "光线追迹", "光线追踪"],
+    "geometric_optics": ["geometric optics", "几何光学"],
     "rcwa": ["RCWA", "rcwa", "严格耦合波"],
     "analytical": ["解析", "analytical", "解析解", "Mie"],
     "coupled_oscillator": ["耦合振子", "coupled oscillator", "coupled_oscillator", "耦合振子模型"],
@@ -65,6 +70,10 @@ _SOLVER_KEYWORDS: dict[str, list[str]] = {
 
 _SOFTWARE_KEYWORDS: dict[str, list[str]] = {
     "meep": ["Meep", "meep", "MEEP"],
+    "mpb": ["MPB", "mpb"],
+    "elmer": ["Elmer", "elmer", "ElmerSolver"],
+    "gmsh": ["Gmsh", "gmsh", "GMSH"],
+    "optiland": ["Optiland", "optiland"],
     "lumerical": ["Lumerical", "lumerical", "LUMERICAL"],
     "comsol": ["COMSOL", "comsol"],
     "matlab": ["MATLAB", "matlab"],
@@ -89,10 +98,13 @@ _MECHANISM_KEYWORDS: dict[str, list[str]] = {
     "diffraction": ["衍射", "diffraction", "光栅"],
     "scattering": ["散射", "scattering", "Mie"],
     "waveguide": ["波导", "waveguide"],
+    "ray_tracing": ["ray tracing", "ray trace", "光线追迹", "spot diagram", "MTF"],
     "resonance": ["共振", "谐振", "resonance", "resonant"],
 }
 
 _PHYSICAL_SYSTEM_KEYWORDS: dict[str, list[str]] = {
+    "photonic_crystal": ["光子晶体", "photonic crystal", "PhC"],
+    "periodic_structure": ["周期结构", "periodic structure", "periodic slab", "periodic.*slab", "周期平板"],
     "nanoparticle_on_film": [
         "gap plasmon", "纳米.*膜", "颗粒.*膜", "nanoparticle.*film",
         "sphere.*film", "球.*膜", "立方体.*膜", "rod.*film", "棒.*膜",
@@ -105,10 +117,16 @@ _PHYSICAL_SYSTEM_KEYWORDS: dict[str, list[str]] = {
     "waveguide": ["波导", "waveguide", "脊波导"],
     "grating": ["光栅", "grating"],
     "metasurface": ["超表面", "metasurface"],
+    "lens": ["透镜", "单透镜", "lens", "singlet"],
+    "imaging_system": ["成像系统", "imaging system"],
+    "optical_system": ["optical system", "光学系统"],
+    "ray_tracing": ["ray tracing", "光线追迹", "spot diagram", "MTF"],
     "coupled_system": ["耦合体系", "coupled system"],
 }
 
 _STRUCTURE_KEYWORDS: dict[str, list[str]] = {
+    "photonic_crystal": ["光子晶体", "photonic crystal", "PhC"],
+    "periodic_structure": ["周期结构", "periodic structure", "periodic slab", "periodic.*slab", "周期平板"],
     "sphere_on_film": [
         "球.*膜", "球-.*膜", "纳米球.*膜", "sphere.*on.*film",
         "金纳米球.*膜", "球.*金膜",
@@ -132,6 +150,8 @@ _STRUCTURE_KEYWORDS: dict[str, list[str]] = {
     "gratings": ["光栅", "grating"],
     "waveguide": ["波导", "waveguide", "脊波导"],
     "metasurface": ["超表面", "metasurface"],
+    "lens": ["透镜", "单透镜", "lens", "singlet"],
+    "imaging_system": ["成像系统", "imaging system"],
 }
 
 _DIMENSION_KEYWORDS: dict[str, list[str]] = {
@@ -174,6 +194,10 @@ _POLARIZATION_KEYWORDS: dict[str, list[str]] = {
 }
 
 _OUTPUT_KEYWORDS: dict[str, list[str]] = {
+    "band_diagram": ["band diagram", "band structure", "能带", "能带图"],
+    "effective_index": ["有效折射率", "effective index", "neff"],
+    "mtf": ["MTF", "modulation transfer function"],
+    "spot_diagram": ["spot diagram", "点列图"],
     "scattering_spectrum": [
         "散射谱", "scattering spectrum", "散射光谱",
     ],
@@ -209,6 +233,8 @@ _POSTPROCESS_KEYWORDS: dict[str, list[str]] = {
     "lorentzian_fit": ["Lorentzian", "洛伦兹拟合", "洛伦兹"],
     "peak_finding": ["找峰", "peak finding"],
     "band_diagram": ["能带", "band diagram", "色散"],
+    "mtf": ["MTF", "modulation transfer function"],
+    "spot_diagram": ["spot diagram", "点列图"],
     "S_parameter": ["S参数", "S parameter", "S11", "S21"],
 }
 
@@ -219,6 +245,8 @@ _BOUNDARY_KEYWORDS: dict[str, list[str]] = {
 }
 
 _GEOMETRY_TYPE_KEYWORDS: dict[str, list[str]] = {
+    "lens": ["透镜", "单透镜", "lens", "singlet"],
+    "photonic_crystal": ["光子晶体", "photonic crystal", "PhC"],
     "sphere": ["球", "sphere", "nanosphere", "纳米球"],
     "cube": ["立方体", "cube", "nanocube", "纳米立方"],
     "rod": ["棒", "rod", "nanorod", "纳米棒"],
@@ -491,7 +519,18 @@ class RuleBasedParser(BaseParser):
 
         # Prefer the most specific physical_system
         ps_val = None
-        for preferred in ("nanoparticle_on_film", "waveguide", "metasurface", "grating"):
+        for preferred in (
+            "nanoparticle_on_film",
+            "photonic_crystal",
+            "periodic_structure",
+            "waveguide",
+            "metasurface",
+            "grating",
+            "lens",
+            "imaging_system",
+            "optical_system",
+            "ray_tracing",
+        ):
             if preferred in phys_systems:
                 ps_val = preferred
                 break
@@ -504,9 +543,13 @@ class RuleBasedParser(BaseParser):
                 "rod_on_film": "nanoparticle_on_film",
                 "cube_on_film": "nanoparticle_on_film",
                 "cross_structure": "nanoparticle_on_film",
+                "photonic_crystal": "photonic_crystal",
+                "periodic_structure": "periodic_structure",
                 "waveguide": "waveguide",
                 "gratings": "grating",
                 "metasurface": "metasurface",
+                "lens": "lens",
+                "imaging_system": "imaging_system",
             }
             ps_val = _struct_to_sys.get(structures[0])
             if not ps_val:
@@ -833,6 +876,26 @@ class RuleBasedParser(BaseParser):
                 and spec.physics.physical_system.value == "nanoparticle_on_film"):
             spec.physics.model_dimension = inferred(
                 "3d", "nanoparticle_on_film 通常需要 3D 仿真",
+            )
+
+        # Rule 4b: Optiland / lens tasks imply ray tracing if the solver is not explicit.
+        if (
+            spec.simulation.solver_method.status == "missing"
+            and spec.simulation.software_tool.status == "confirmed"
+            and spec.simulation.software_tool.value == "optiland"
+        ):
+            spec.simulation.solver_method = inferred(
+                "ray_trace", "Optiland 成像光学任务通常使用 sequential ray tracing",
+            )
+
+        # Rule 4c: MPB without an explicit solver phrase defaults to band-structure preview.
+        if (
+            spec.simulation.solver_method.status == "missing"
+            and spec.simulation.software_tool.status == "confirmed"
+            and spec.simulation.software_tool.value == "mpb"
+        ):
+            spec.simulation.solver_method = inferred(
+                "band_structure", "MPB 通常用于 photonic band / eigenmode 求解",
             )
 
         # Rule 5: if output has scattering/absorption keywords but observables
