@@ -28,20 +28,151 @@ def parse(
     task_id: str = typer.Option("", "--task-id", "-t", help="Optional task ID"),
     output: Path = typer.Option(None, "--output", "-o", help="Write JSON to file"),
     show_json: bool = typer.Option(False, "--json", help="Print raw JSON to stdout"),
+    parser_name: str = typer.Option(
+        "rule",
+        "--parser",
+        help="Parser mode: rule, llm, or hybrid",
+    ),
+    llm_provider: str = typer.Option(
+        "mock",
+        "--llm-provider",
+        help="LLM provider for llm/hybrid parser modes: mock or disabled",
+    ),
+    llm_model: str = typer.Option(
+        "mock-optical-parser",
+        "--llm-model",
+        help="Model name recorded in parser reports",
+    ),
+    llm_temperature: float = typer.Option(
+        0.0,
+        "--llm-temperature",
+        help="LLM temperature recorded in parser config",
+    ),
+    no_llm_repair: bool = typer.Option(
+        False,
+        "--no-llm-repair",
+        help="Disable common JSON repair for LLM responses",
+    ),
+    no_llm_fallback: bool = typer.Option(
+        False,
+        "--no-llm-fallback",
+        help="Disable fallback to the rule-based parser on LLM failure",
+    ),
+    show_parser_report: bool = typer.Option(
+        False,
+        "--show-parser-report",
+        help="Print parser report in human-readable mode",
+    ),
+    parser_report_output: Path | None = typer.Option(
+        None,
+        "--parser-report-output",
+        help="Write parser report JSON to a file",
+    ),
 ):
     """Parse natural language into a validated spec."""
-    svc = SpecService()
-    spec = svc.process(text, task_id=task_id)
+    from optical_spec_agent.parsers.llm import LLMParserConfig, LLMProviderError
+    from optical_spec_agent.parsers.registry import ParserRegistryError
+
+    if show_json and show_parser_report and parser_report_output is None:
+        typer.echo("--show-parser-report cannot be mixed with --json unless --parser-report-output is set.")
+        raise typer.Exit(1)
+
+    llm_config = LLMParserConfig(
+        provider=llm_provider,
+        model=llm_model,
+        temperature=llm_temperature,
+        allow_repair=not no_llm_repair,
+        fallback_to_rule_based=not no_llm_fallback,
+        parser_mode="hybrid" if parser_name == "hybrid" else "llm",
+    )
+    try:
+        svc = SpecService(parser=parser_name, llm_config=llm_config)
+        spec = svc.process(text, task_id=task_id)
+    except (ParserRegistryError, LLMProviderError, Exception) as exc:
+        if show_json:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Parser error:[/red] {exc}")
+        raise typer.Exit(1)
 
     if show_json:
-        console.print_json(spec_to_json(spec))
+        typer.echo(spec_to_json(spec))
     else:
         console.print(spec_to_summary(spec))
+        if show_parser_report and svc.last_parser_report is not None:
+            console.print("\n[bold]Parser report[/bold]")
+            console.print_json(json.dumps(svc.last_parser_report.model_dump(), ensure_ascii=False))
 
     if output:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(spec_to_json(spec), encoding="utf-8")
-        console.print(f"\n[dim]JSON written to {output}[/dim]")
+        if not show_json:
+            console.print(f"\n[dim]JSON written to {output}[/dim]")
+
+    if parser_report_output and svc.last_parser_report is not None:
+        parser_report_output.parent.mkdir(parents=True, exist_ok=True)
+        parser_report_output.write_text(
+            json.dumps(svc.last_parser_report.model_dump(), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        if not show_json:
+            console.print(f"[dim]Parser report written to {parser_report_output}[/dim]")
+
+
+@app.command("llm-eval")
+def llm_eval(
+    benchmark_file: Path = typer.Argument(..., help="Path to LLM benchmark JSON cases"),
+    parser_name: str = typer.Option(
+        "hybrid",
+        "--parser",
+        help="Parser mode: llm or hybrid",
+    ),
+    llm_provider: str = typer.Option("mock", "--llm-provider", help="LLM provider: mock or disabled"),
+    llm_model: str = typer.Option(
+        "mock-optical-parser",
+        "--llm-model",
+        help="Model name recorded in the report",
+    ),
+    report: Path | None = typer.Option(None, "--report", help="Write JSON report"),
+    summary_csv: Path | None = typer.Option(None, "--summary-csv", help="Write CSV summary"),
+    json_output: bool = typer.Option(False, "--json", help="Print JSON report to stdout"),
+):
+    """Run deterministic LLM parser evaluation cases."""
+    from optical_spec_agent.parsers.llm.evaluator import run_llm_evaluation
+
+    try:
+        result = run_llm_evaluation(
+            cases_path=benchmark_file,
+            parser_mode=parser_name,
+            llm_provider=llm_provider,
+            llm_model=llm_model,
+            report_path=report,
+            summary_csv_path=summary_csv,
+        )
+    except Exception as exc:
+        if json_output:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]LLM eval error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    if json_output:
+        typer.echo(json.dumps(result, indent=2, ensure_ascii=False))
+        if result["failed_cases"]:
+            raise typer.Exit(1)
+        return
+
+    console.print("[bold]LLM eval[/bold]")
+    console.print(f"Parser: {result['parser_mode']}")
+    console.print(f"Provider: {result['provider']}")
+    console.print(f"Cases: {result['passed_cases']}/{result['total_cases']} passed")
+    console.print(f"Field accuracy: {result['field_accuracy']:.3f}")
+    if report:
+        console.print(f"[dim]Report written to {report}[/dim]")
+    if summary_csv:
+        console.print(f"[dim]CSV summary written to {summary_csv}[/dim]")
+    if result["failed_cases"]:
+        raise typer.Exit(1)
 
 
 # ---- validate ----
@@ -746,20 +877,15 @@ def _reconstruct_spec(flat: dict) -> OpticalSpec:
         StatusField,
         BoundaryConditionSetting,
         GeometryDefinition,
-        MaterialEntry,
         MaterialSystem,
         MeshSetting,
         MonitorSetting,
         ParticleInfo,
-        PostprocessTargetSpec,
         SourceSetting,
         StabilitySetting,
         SubstrateOrFilmInfo,
         SweepPlan,
         SymmetrySetting,
-        confirmed,
-        inferred,
-        missing,
     )
 
     # Map field dotted paths to their Pydantic model classes

@@ -2,13 +2,14 @@
 
 from fastapi import FastAPI
 
+from optical_spec_agent import __version__
 from optical_spec_agent.api.routes import router
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title="optical-spec-agent",
-        version="0.1.0",
+        version=__version__,
         description="Convert natural language optical task descriptions into validated specs.",
     )
     app.include_router(router)

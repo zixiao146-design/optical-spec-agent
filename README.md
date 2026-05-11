@@ -24,10 +24,11 @@ installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
 Release status: the packaged baseline in `pyproject.toml` is `v0.5.0`.
-The main branch also contains v0.6 local/manual diagnostics and a v0.7
-multi-solver adapter MVP release candidate. The formal GitHub release may lag
-behind main; treat unreleased main-branch capabilities as preview/scaffold work,
-not production simulation claims.
+The main branch also contains v0.6 local/manual diagnostics, a v0.7
+multi-solver adapter MVP release candidate, and v0.8 LLM parser foundation work.
+The formal GitHub release may lag behind main; treat unreleased main-branch
+capabilities as preview/scaffold/evaluation work, not production simulation
+claims.
 
 ## At a glance
 
@@ -36,6 +37,7 @@ not production simulation claims.
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
 | **Adapter** | Meep script generator plus v0.7 MVP preview adapters for MPB, Gmsh, Elmer, and Optiland — see [adapter doc](docs/adapter_mvp_v0.7.md) |
 | **Generic adapter CLI** | `optical-spec adapter-list` and `optical-spec adapter-generate` route specs to solver-native input scaffolds; adapters do not run external solvers |
+| **Parser modes** | `rule` remains default; v0.8 adds provider-agnostic `llm` and conservative `hybrid` modes with deterministic `mock` provider |
 | **Benchmark** | 16 golden cases + 27 semantic benchmark cases for Meep reliability and v0.7 adapter intent routing — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
 | **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
 
@@ -48,12 +50,13 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 packaged baseline + v0.6 diagnostics + v0.7 adapter MVP on main)
+## Current scope (v0.5 packaged baseline + v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
-additional open-source tools. Both are reviewable engineering aids, not
-production-grade physical validation.
+additional open-source tools. `v0.8` adds a provider-agnostic LLM parser
+foundation with deterministic mock evaluation and conservative hybrid fallback.
+These are reviewable engineering aids, not production-grade physical validation.
 
 The current loop:
 
@@ -94,16 +97,21 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
   `adapter-list` and `adapter-generate`
 - Adapter metadata and readiness reporting for strict/non-strict scaffold generation
 - MVP preview/scaffold adapters for MPB, Gmsh, Elmer, and Optiland
+- v0.8 parser registry with `rule`, `llm`, and `hybrid` parser modes
+- Deterministic mock LLM provider for tests, demos, and no-external-API evaluation
+- Schema-guided LLM prompt builder, JSON extraction/repair, rule fallback, parser reports, and LLM benchmark report
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
-- Real LLM integration (only a placeholder parser exists)
+- Mandatory or production external LLM provider integration
+- LLM-based physical correctness validation; LLM parsing only extracts candidate specs
 - Full solver automation or production-grade result interpretation
 - Physically validated stable Au library research-preview runs; those remain manual diagnostics and may fail with NaN/Inf or timeout
 - Formal convergence proof for the v0.6 physical candidate
 - Running MPB, Gmsh, Elmer, or Optiland; v0.7 adapters generate input only
 - Production-ready MPB/Gmsh/Elmer/Optiland inputs; current outputs are annotated MVP scaffolds
 - Production-grade visualization or plotting pipeline
+- Solver result interpretation by LLM
 - Optiland is scaffold-level because `OpticalSpec` does not yet encode a full sequential lens prescription
 - Gmsh/Elmer need richer FEM geometry, material, mesh, and boundary-condition schema before production use
 
@@ -153,6 +161,19 @@ execution harness, not a production solver pipeline.
 ```bash
 # Parse a task description
 optical-spec parse "研究金纳米球-金膜体系中gap从5到25nm变化对散射谱主峰线宽和退相位时间的影响，使用Meep FDTD，提取共振波长、FWHM和T2。"
+
+# Parser modes: rule remains default; mock LLM is deterministic and local
+optical-spec parse "..." --parser rule
+optical-spec parse "..." --parser llm --llm-provider mock
+optical-spec parse "..." --parser hybrid --llm-provider mock
+optical-spec parse "..." --parser hybrid --llm-provider mock \
+  --parser-report-output outputs/parser_report.json
+
+# Deterministic v0.8 LLM parser evaluation
+optical-spec llm-eval benchmarks/llm_cases.json \
+  --parser hybrid \
+  --llm-provider mock \
+  --report outputs/llm_eval_report.json
 
 # Save output to file
 optical-spec parse "..." -o outputs/my_spec.json
@@ -295,6 +316,7 @@ It reads `outputs/my_spec.json`, optional Meep artifacts, and writes
 
 ```python
 from optical_spec_agent.services.spec_service import SpecService
+from optical_spec_agent.parsers.llm import LLMParserConfig, MockLLMClient
 
 svc = SpecService()
 spec = svc.process(
@@ -306,6 +328,14 @@ print(spec.confirmed_fields)    # {"task.task_type": "simulation", ...}
 print(spec.inferred_fields)     # {"task.research_goal": {...}, ...}
 print(spec.missing_fields)      # ["simulation.polarization", ...]
 print(spec.validation_status)   # ValidationStatus(is_executable=False, ...)
+
+hybrid_svc = SpecService(
+    parser="hybrid",
+    llm_config=LLMParserConfig(provider="mock"),
+    llm_client=MockLLMClient(),
+)
+hybrid_spec = hybrid_svc.process("用 MPB 计算二维光子晶体 band diagram...")
+print(hybrid_svc.last_parser_report)
 ```
 
 Complex sweep / gap-plasmon example:
@@ -360,6 +390,10 @@ Example parse request:
 curl -X POST "http://localhost:8000/parse" \
   -H "Content-Type: application/json" \
   -d '{"text":"用 Meep FDTD 仿真 80 nm 金纳米球在 100 nm 金膜上，SiO2 gap 为 5 nm，波长范围 400-900 nm，输出散射谱。","task_id":"api-gap-demo"}'
+
+curl -X POST "http://localhost:8000/parse" \
+  -H "Content-Type: application/json" \
+  -d '{"text":"用 MPB 计算二维光子晶体 band diagram。","parser":"hybrid","llm_provider":"mock","parser_report":true}'
 ```
 
 ## Demo gallery
@@ -550,7 +584,16 @@ optical-spec-agent/
 │   ├── parsers/
 │   │   ├── base.py                  # BaseParser ABC
 │   │   ├── rule_based.py            # Keyword/regex parser (default)
-│   │   ├── llm_placeholder.py       # LLM stub
+│   │   ├── registry.py              # rule / llm / hybrid parser registry
+│   │   ├── llm/                     # v0.8 provider-agnostic LLM parser foundation
+│   │   │   ├── client.py            # BaseLLMClient, MockLLMClient, disabled external stub
+│   │   │   ├── config.py            # LLMParserConfig, reports, client result
+│   │   │   ├── prompt.py            # schema-guided prompt builder
+│   │   │   ├── repair.py            # JSON extraction / repair / normalization
+│   │   │   ├── merge.py             # conservative hybrid merge helpers
+│   │   │   ├── parser.py            # LLMParser and HybridParser
+│   │   │   └── evaluator.py         # deterministic LLM benchmark runner
+│   │   ├── llm_placeholder.py       # Backward-compatible historical stub
 │   │   └── __init__.py
 │   ├── validators/
 │   │   ├── spec_validator.py        # Task-type-aware validation
@@ -592,6 +635,17 @@ optical-spec-agent/
 │   ├── conftest.py
 │   ├── test_models.py
 │   ├── test_parser.py               # Parser tests
+│   ├── test_parser_registry.py
+│   ├── test_llm_client.py
+│   ├── test_llm_prompt.py
+│   ├── test_llm_json_repair.py
+│   ├── test_llm_parser.py
+│   ├── test_hybrid_parser.py
+│   ├── test_cli_llm_parse.py
+│   ├── test_cli_llm_eval.py
+│   ├── test_api_llm_parse.py
+│   ├── test_llm_benchmark.py
+│   ├── test_llm_guardrails.py
 │   ├── test_validator.py
 │   ├── test_meep_adapter.py         # Meep adapter tests
 │   ├── test_adapter_registry.py
@@ -637,8 +691,10 @@ optical-spec-agent/
 │   ├── README.md
 │   ├── golden_cases.json
 │   ├── semantic_cases.json
+│   ├── llm_cases.json
 │   ├── run_benchmark.py
-│   └── run_semantic_benchmark.py
+│   ├── run_semantic_benchmark.py
+│   └── run_llm_benchmark.py
 ├── docs/
 │   ├── open_source_stack.md              # Tool-stack rationale and per-tool specs
 │   ├── open_source_integration_focus.md  # Adapter priority tiers and Meep-first rationale
@@ -654,6 +710,11 @@ optical-spec-agent/
 │   ├── adapter_mvp_v0.7.md             # v0.7 adapter MVP scope and examples
 │   ├── release_readiness_v0.7.md       # v0.7 readiness checklist
 │   ├── release_notes_v0.7.0.md         # Draft v0.7 release notes
+│   ├── llm_parser_v0.8.md              # v0.8 parser architecture
+│   ├── llm_eval_v0.8.md                # v0.8 deterministic parser eval
+│   ├── provenance_policy_v0.8.md       # Parser provenance policy
+│   ├── release_readiness_v0.8.md       # v0.8 readiness checklist
+│   ├── release_notes_v0.8.0.md         # Draft v0.8 release notes
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
 │   ├── demo_output.md
@@ -677,12 +738,12 @@ optical-spec-agent/
 | **v0.5** | Meep execution harness + auditable artifacts + low-cost diagnostic pipeline | **Meep** (FDTD) | **Done** |
 | v0.6 | Meep physical-candidate hardening + spectrum sanity metrics | **Meep** (FDTD) | Done / local evidence |
 | v0.7 | Multi-solver adapter foundation + MPB/Gmsh/Elmer/Optiland MVP scaffolds | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Main branch MVP / release candidate |
-| v0.8 | LLM parser integration | — | Planned |
+| v0.8 | LLM parser foundation + mock provider + hybrid evaluation | — | Current / main branch foundation |
 | v0.9 | Multi-agent orchestration | — | Planned |
 
 **Why Meep first:** Pure Python API, spec fields map 1:1 to Meep objects, and a working adapter proves the full NL → spec → simulation chain. See [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for the prioritization rationale.
 
-**Adapter vs LLM:** Adapter and execution work (v0.3–v0.7) ships before LLM integration (v0.8) because real solver feedback must stabilize the spec schema first. The rule-based parser + golden cases become the evaluation baseline for any future LLM parser.
+**Adapter vs LLM:** Adapter and execution work (v0.3–v0.7) shipped before LLM integration (v0.8) because real solver feedback must stabilize the spec schema first. The rule-based parser + golden cases remain the evaluation baseline for the v0.8 mock/hybrid parser foundation and any future external provider.
 
 See [`docs/open_source_stack.md`](docs/open_source_stack.md) for per-tool details and [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for priority tiers.
 

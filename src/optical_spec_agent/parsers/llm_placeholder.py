@@ -6,7 +6,7 @@ LLM call (e.g. Claude / GPT) when ready.
 
 from __future__ import annotations
 
-from optical_spec_agent.models.base import StatusField, missing
+from optical_spec_agent.models.base import StatusField
 from optical_spec_agent.models.spec import OpticalSpec
 
 from optical_spec_agent.parsers.base import BaseParser

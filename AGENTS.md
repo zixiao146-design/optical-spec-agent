@@ -42,31 +42,39 @@ natural language input
 
 Do not expand scope unless explicitly asked.
 
-The current development priority is productization around the strongest hero path:
+The current development priority is productization around the strongest hero path
+and safe parser evolution:
 
 - natural language optical task
 - → validated, provenance-aware `OpticalSpec`
 - → Meep script generation for supported nanoparticle-on-film specs
 - → optional local Meep execution artifacts when Meep is installed
+- → v0.8 rule / llm / hybrid parser modes, with rule still the default
+- → deterministic local mock LLM provider for tests and demos; no external API required
 
 The released baseline is v0.5.0. Current v0.6 work is local/manual diagnostics
 for physical-candidate stability, spectrum consistency, mesh sanity, and monitor
-geometry. Keep these diagnostics honest: they are not production validation.
+geometry. Current v0.7/v0.8 main-branch work adds adapter scaffolds and LLM
+parser foundation. Keep these capabilities honest: they are not production
+validation.
 
 ## 当前优先级
 
 除非被明确要求，否则不要主动扩 scope。
 
-当前开发重点是围绕最强主链路做 productization：
+当前开发重点是围绕最强主链路和安全 parser 演进做 productization：
 
 - 自然语言光学任务
 - → 带 provenance 的结构化 `OpticalSpec`
 - → 对受支持的 nanoparticle-on-film spec 生成 Meep 脚本
 - → 如果本地安装 Meep，则可选生成 execution artifacts
+- → v0.8 增加 rule / llm / hybrid parser 模式，但默认仍然是 rule-based
+- → LLM 测试和 demo 使用确定性的本地 mock provider，不需要外部 API
 
 已发布基线是 v0.5.0。当前 v0.6 工作是 local/manual diagnostics，包括
 physical-candidate stability、spectrum consistency、mesh sanity 和 monitor geometry。
-这些诊断必须保持诚实：它们不是 production validation。
+当前 v0.7/v0.8 main branch 工作增加 adapter scaffolds 和 LLM parser foundation。
+这些能力必须保持诚实：它们不是 production validation。
 
 ## Important files
 
@@ -89,7 +97,7 @@ physical-candidate stability、spectrum consistency、mesh sanity 和 monitor ge
 
 - Prefer small, reviewable changes.
 - Do not rewrite the entire parser.
-- Do not add LLM parsing yet.
+- Keep LLM parsing provider-agnostic and mock-testable; do not require external APIs.
 - Do not add new solver adapters yet.
 - Do not add UI work yet.
 - Do not silently hide missing physical parameters behind defaults.
@@ -100,7 +108,7 @@ physical-candidate stability、spectrum consistency、mesh sanity 和 monitor ge
 
 - 优先做小范围、容易 review 的修改。
 - 不要重写整个 parser。
-- 先不要接入 LLM parsing。
+- LLM parsing 必须 provider-agnostic 且可用 mock 测试；不要要求外部 API。
 - 先不要新增其他 solver adapter。
 - 先不要做 UI。
 - 不要用默认值静默掩盖缺失的物理参数。

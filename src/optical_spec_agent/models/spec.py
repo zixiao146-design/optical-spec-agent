@@ -3,27 +3,13 @@
 from __future__ import annotations
 
 import json
-from typing import Any, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
 from optical_spec_agent.models.base import (
-    BoundaryConditionSetting,
-    GeometryDefinition,
-    MaterialSystem,
-    MeshSetting,
-    MonitorSetting,
-    ParticleInfo,
-    PostprocessTargetSpec,
-    SourceSetting,
-    StabilitySetting,
     StatusField,
-    SubstrateOrFilmInfo,
-    SweepPlan,
-    SymmetrySetting,
     ValidationStatus,
-    confirmed,
-    inferred,
     missing,
 )
 
@@ -241,6 +227,7 @@ class OpticalSpec(BaseModel):
 
     def collect_assumptions(self) -> list[str]:
         """Collect notes from all inferred fields."""
+        existing = list(self.assumption_log)
         assumptions: list[str] = []
         for section_name in self._SECTION_NAMES:
             section = getattr(self, section_name)
@@ -248,6 +235,9 @@ class OpticalSpec(BaseModel):
                 sf = getattr(section, field_name)
                 if isinstance(sf, StatusField) and sf.status == "inferred" and sf.note:
                     assumptions.append(f"[{section_name}.{field_name}] {sf.note}")
+        for item in existing:
+            if item not in assumptions:
+                assumptions.append(item)
         self.assumption_log = assumptions
         return assumptions
 

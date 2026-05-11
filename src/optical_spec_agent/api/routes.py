@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from optical_spec_agent import __version__
 from optical_spec_agent.models.spec import OpticalSpec
 from optical_spec_agent.services.spec_service import SpecService
-from optical_spec_agent.utils.format import spec_to_json, spec_to_summary
+from optical_spec_agent.utils.format import spec_to_summary
 
 
 router = APIRouter()
@@ -21,6 +21,10 @@ router = APIRouter()
 class ParseRequest(BaseModel):
     text: str = Field(..., description="Natural language optical task description")
     task_id: str = Field("", description="Optional task ID (auto-generated if empty)")
+    parser: str = Field("rule", description="Parser mode: rule, llm, or hybrid")
+    llm_provider: str = Field("mock", description="LLM provider for llm/hybrid modes")
+    llm_model: str | None = Field(None, description="Optional LLM model label")
+    parser_report: bool = Field(False, description="Include parser report when available")
 
 
 class ParseResponse(BaseModel):
@@ -31,6 +35,7 @@ class ParseResponse(BaseModel):
     missing_fields: list[str]
     assumption_log: list[str]
     validation_status: dict[str, Any]
+    parser_report: dict[str, Any] | None = None
 
 
 class ValidateRequest(BaseModel):
@@ -55,8 +60,20 @@ def health_check():
 
 @router.post("/parse", response_model=ParseResponse)
 def parse(req: ParseRequest):
-    svc = SpecService()
-    spec = svc.process(req.text, task_id=req.task_id)
+    from optical_spec_agent.parsers.llm import LLMParserConfig, LLMParserError
+    from optical_spec_agent.parsers.llm.client import LLMProviderError
+    from optical_spec_agent.parsers.registry import ParserRegistryError
+
+    config = LLMParserConfig(
+        provider=req.llm_provider,
+        model=req.llm_model or "mock-optical-parser",
+        parser_mode="hybrid" if req.parser == "hybrid" else "llm",
+    )
+    try:
+        svc = SpecService(parser=req.parser, llm_config=config)
+        spec = svc.process(req.text, task_id=req.task_id)
+    except (ParserRegistryError, LLMProviderError, LLMParserError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     return ParseResponse(
         spec_json=spec.to_flat_dict(),
         summary=spec_to_summary(spec),
@@ -65,6 +82,7 @@ def parse(req: ParseRequest):
         missing_fields=spec.missing_fields,
         assumption_log=spec.assumption_log,
         validation_status=spec.validation_status.model_dump(),
+        parser_report=svc.last_parser_report.model_dump() if req.parser_report and svc.last_parser_report else None,
     )
 
 

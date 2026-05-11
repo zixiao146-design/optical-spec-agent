@@ -1,4 +1,4 @@
-.PHONY: install dev test check bench-key bench-semantic diagnostics test-cov lint example api schema clean tree
+.PHONY: install dev test check bench-key bench-semantic llm-check diagnostics test-cov lint example api schema clean tree
 
 PYTHON ?= python
 PIP ?= pip
@@ -22,6 +22,9 @@ bench-key:
 
 bench-semantic:
 	$(PYTHON) benchmarks/run_semantic_benchmark.py
+
+llm-check:
+	$(PYTHON) benchmarks/run_llm_benchmark.py --cases benchmarks/llm_cases.json --parser hybrid --llm-provider mock --report outputs/llm_eval_report.json
 
 diagnostics:
 	$(PYTHON) scripts/generate_physical_diagnostics.py --create-demo-spec-if-missing

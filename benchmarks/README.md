@@ -4,6 +4,8 @@ Golden-case regression tests for the rule-based parser + validator pipeline.
 The semantic benchmark now covers 27 reliability-critical parsing paths,
 including the core Meep nanoparticle-on-film case plus material, gap, source,
 boundary, single-particle, waveguide, and v0.7 adapter-target routing scenarios.
+v0.8 also adds a deterministic LLM parser benchmark that uses the local `mock`
+provider only; it does not call external APIs.
 
 ## Benchmark modes
 
@@ -24,13 +26,20 @@ Semantic benchmark:
 | `python benchmarks/run_semantic_benchmark.py` | Semantic fields for 27 reliability-critical cases: Chinese + English Meep core cases, gap sweep extraction, SiO2 substrate disambiguation, Si3N4/SiO2 waveguide materials, oxide gaps, air/water gaps, TFSF/dipole/plane-wave sources, oblique incidence, periodic boundaries, Si single-particle, and MPB/Gmsh/Elmer/Optiland adapter-intent cases |
 | `python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json` | Same benchmark plus a machine-readable pass/fail report for each semantic check |
 
+LLM parser benchmark:
+
+| Runner | What it checks |
+|--------|----------------|
+| `python benchmarks/run_llm_benchmark.py --cases benchmarks/llm_cases.json --parser hybrid --llm-provider mock --report outputs/llm_eval_report.json` | Deterministic v0.8 parser-mode evaluation for `llm` / `hybrid` with mock provider, field accuracy, repair/fallback reporting, and ambiguous-case missing-field handling |
+
 **Key fields** checked in `key_fields` mode: `task.task_type`, `physics.physical_system`, `simulation.solver_method`, `output.output_observables`. Cases can override this list by adding an `expected_key_fields` array to their golden entry.
 
 ## What this does NOT benchmark
 
 - **Semantic understanding quality** — exact mode checks byte equality, not "best" interpretation
 - **Solver correctness** — no solver is invoked
-- **LLM parsing** — only the rule-based parser is tested
+- **Real external LLM parsing** — v0.8 LLM cases use deterministic mock parsing
+- **External LLM quality** — the v0.8 LLM benchmark uses deterministic mock output only
 - **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark focuses on 27 reliability-critical material, geometry, source, boundary, and adapter-intent cases
 
 ## File structure
@@ -41,7 +50,9 @@ benchmarks/
 ├── golden_cases.json      # 16 golden test cases with input + expected output
 ├── run_benchmark.py       # Runner with exact / key_fields / all modes
 ├── semantic_cases.json    # Semantic assertions for reliability-critical cases
-└── run_semantic_benchmark.py
+├── run_semantic_benchmark.py
+├── llm_cases.json         # Deterministic v0.8 LLM parser evaluation cases
+└── run_llm_benchmark.py
 ```
 
 ## Case format
@@ -91,6 +102,14 @@ python benchmarks/run_semantic_benchmark.py
 # Semantic benchmark report
 python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json
 
+# LLM parser benchmark with deterministic mock provider
+python benchmarks/run_llm_benchmark.py \
+  --cases benchmarks/llm_cases.json \
+  --parser hybrid \
+  --llm-provider mock \
+  --report outputs/llm_eval_report.json \
+  --summary-csv outputs/llm_eval_summary.csv
+
 # Update golden snapshots after intentional parser changes
 python benchmarks/run_benchmark.py --update
 ```
@@ -122,3 +141,20 @@ only meaning-bearing fields:
 - `Air`, `Water`, `Al2O3`, and `TiO2` gap/material mentions should not be silently dropped or split into shorter tokens
 - `resonance_wavelength` and `fwhm_extraction` postprocess targets must be present
 - `MPB`, `Gmsh`, `Elmer`, and `Optiland` requests should route to the intended software/solver fields without adding external solver dependencies
+
+## v0.8 LLM benchmark focus
+
+The LLM benchmark checks whether `llm` / `hybrid` parser modes can preserve the
+same structured extraction contract under deterministic mock conditions. It
+records:
+
+- case pass/fail
+- field accuracy
+- parser mode/provider/model
+- repair and fallback usage
+- conflict count
+- warnings and errors
+- ambiguous-case missing-field handling
+
+It does not test real external LLM providers, solver execution, or physical
+correctness.
