@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import sys
+import argparse
 from pathlib import Path
 from typing import Any
 
@@ -158,23 +159,72 @@ def _check(case_id: str, spec, check: dict[str, Any]) -> tuple[bool, str]:
     return False, f"{case_id}: unsupported semantic check {check!r}"
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run semantic key-field benchmark cases.")
+    parser.add_argument(
+        "--report",
+        type=Path,
+        default=None,
+        help="Optional path for a JSON benchmark report.",
+    )
+    return parser.parse_args()
+
+
 def main() -> None:
+    args = parse_args()
     svc = SpecService()
     cases = load_cases()
     all_ok = True
+    report_cases: list[dict[str, Any]] = []
 
     print(f"[semantic benchmark] {len(cases)} case(s)")
     for case in cases:
         spec = svc.process(case["input"], task_id=case["task_id"])
         case_ok = True
+        check_results: list[dict[str, Any]] = []
         for check in case.get("checks", []):
             ok, message = _check(case["task_id"], spec, check)
+            check_results.append(
+                {
+                    "path": check.get("path"),
+                    "check": {key: value for key, value in check.items() if key != "path"},
+                    "passed": ok,
+                    "message": message,
+                }
+            )
             if not ok:
                 print(f"  FAIL {case['task_id']}: {message}")
                 case_ok = False
         if case_ok:
             print(f"  PASS {case['task_id']}: {len(case.get('checks', []))} semantic checks OK")
         all_ok = all_ok and case_ok
+        report_cases.append(
+            {
+                "task_id": case["task_id"],
+                "passed": case_ok,
+                "check_count": len(case.get("checks", [])),
+                "checks": check_results,
+            }
+        )
+
+    if args.report:
+        args.report.parent.mkdir(parents=True, exist_ok=True)
+        args.report.write_text(
+            json.dumps(
+                {
+                    "schema_version": "semantic_benchmark_report.v0.1",
+                    "case_count": len(cases),
+                    "passed_count": sum(1 for item in report_cases if item["passed"]),
+                    "failed_count": sum(1 for item in report_cases if not item["passed"]),
+                    "all_passed": all_ok,
+                    "cases": report_cases,
+                },
+                indent=2,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+        print(f"[semantic benchmark] report written to {args.report}")
 
     sys.exit(0 if all_ok else 1)
 

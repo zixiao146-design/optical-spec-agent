@@ -63,7 +63,8 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Per-field provenance tracking: confirmed / inferred / missing
 - Pydantic v2 validation with task-type-aware rules
 - CLI, FastAPI, and Python SDK interfaces
-- Semantic benchmark coverage for five reliability-critical parsing cases
+- Semantic benchmark coverage for fifteen reliability-critical parsing cases,
+  including material, gap, source, boundary, and waveguide checks
 - Meep adapter readiness checks + CLI readiness reporting before script generation
 - Meep adapter script modes:
   `preview` for quick structure/script preview,
@@ -76,6 +77,8 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Optional local spectrum consistency tooling for candidate-hardening artifacts
 - Local observable diagnostics for flux-monitor geometry and per-surface flux sanity
 - Mesh sanity diagnostics for under-resolved gaps and monitor presets
+- Post-hoc physical diagnostics reports under `outputs/`: mesh CSV, flux CSV,
+  execution diagnostics JSON, and a diagnostic preview PNG
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
@@ -84,7 +87,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Physically validated stable Au library research-preview runs; those remain manual diagnostics and may fail with NaN/Inf or timeout
 - Formal convergence proof for the v0.6 physical candidate
 - Adapters for other solvers (MPB, Gmsh, Elmer, Optiland) — not yet implemented
-- Visualization or plotting pipeline
+- Production-grade visualization or plotting pipeline
 
 ## Install
 
@@ -167,6 +170,12 @@ python scripts/local_meep_stability_matrix.py --only low-cost-dielectric-sanity 
 python scripts/local_meep_candidate_hardening.py --timeout 900
 python scripts/local_meep_candidate_convergence.py --latest
 python scripts/local_meep_observable_diagnostics.py --timeout 900
+
+# Post-hoc physical diagnostics for a spec and optional execution artifacts
+python scripts/generate_physical_diagnostics.py \
+  --spec outputs/my_spec.json \
+  --output-dir outputs \
+  --create-demo-spec-if-missing
 ```
 
 ### Meep generation modes
@@ -215,6 +224,13 @@ execution-stable but gap-under-resolved: `resolution=12 px/um` corresponds to
 about `83 nm` grid spacing, so a `5 nm` gap is not physically resolved. See
 [`docs/local_meep_mesh_monitor_diagnostics_v0.6.md`](docs/local_meep_mesh_monitor_diagnostics_v0.6.md).
 
+For a compact artifact-oriented report, run
+`python scripts/generate_physical_diagnostics.py --create-demo-spec-if-missing`.
+It reads `outputs/my_spec.json`, optional Meep artifacts, and writes
+`mesh_report.csv`, `flux_report.csv`, `execution_diagnostics.json`, and
+`diagnostic_preview.png` under `outputs/`. See
+[`docs/physical_diagnostics_v0.6.md`](docs/physical_diagnostics_v0.6.md).
+
 ### Python SDK
 
 ```python
@@ -232,6 +248,37 @@ print(spec.missing_fields)      # ["simulation.polarization", ...]
 print(spec.validation_status)   # ValidationStatus(is_executable=False, ...)
 ```
 
+Complex sweep / gap-plasmon example:
+
+```python
+from optical_spec_agent.adapters.meep import MeepAdapter
+from optical_spec_agent.services.spec_service import SpecService
+
+text = (
+    "用 Meep FDTD 仿真 80 nm 金纳米球放在 100 nm 金膜上，"
+    "中间 SiO2 gap 从 5 到 25 nm，平面波正入射，"
+    "波长范围 400-900 nm，输出散射谱并提取 FWHM。"
+)
+
+spec = SpecService().process(text, task_id="gap-sweep-demo")
+readiness = MeepAdapter().validate_ready(spec)
+print(readiness.adapter_ready, readiness.errors, readiness.warnings)
+```
+
+### Provenance and Inference
+
+Every high-level field is wrapped in a provenance-aware `StatusField`:
+
+- `confirmed`: directly extracted from the user request.
+- `inferred`: added by conservative post-hoc rules, with a note explaining why.
+- `missing`: not available yet, and therefore visible to validators/adapters.
+
+Examples include `nanoparticle_on_film -> 3d`, `FWHM -> lorentzian_fit`, and
+gap-plasmon wording that implies FDTD-style simulation. Physical-candidate
+hardening is separate from parsing provenance: it is local Meep evidence that a
+bounded profile can produce auditable CSV/JSON/PNG artifacts, not proof of a
+production-grade plasmon simulation.
+
 ### API
 
 ```bash
@@ -246,6 +293,14 @@ uvicorn optical_spec_agent.api.app:app --reload --port 8000
 | `GET` | `/schema` | Export JSON Schema |
 
 Interactive docs at `http://localhost:8000/docs`.
+
+Example parse request:
+
+```bash
+curl -X POST "http://localhost:8000/parse" \
+  -H "Content-Type: application/json" \
+  -d '{"text":"用 Meep FDTD 仿真 80 nm 金纳米球在 100 nm 金膜上，SiO2 gap 为 5 nm，波长范围 400-900 nm，输出散射谱。","task_id":"api-gap-demo"}'
+```
 
 ## Demo gallery
 
@@ -406,10 +461,11 @@ python benchmarks/run_benchmark.py --mode all         # both
 
 **What it does NOT test:** semantic understanding scoring, solver correctness, or LLM parsing.
 
-The semantic benchmark checks five reliability-critical cases at the field level:
+The semantic benchmark checks fifteen reliability-critical cases at the field level:
 
 ```bash
 python benchmarks/run_semantic_benchmark.py
+python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json
 ```
 
 Full details: [`benchmarks/README.md`](benchmarks/README.md)
@@ -455,6 +511,7 @@ optical-spec-agent/
 │   ├── analysis/
 │   │   ├── spectrum_compare.py      # Local spectrum consistency metrics
 │   │   ├── mesh_sanity.py           # Local mesh-resolution diagnostics
+│   │   ├── physical_diagnostics.py  # Spec/artifact diagnostics report generation
 │   │   └── __init__.py
 │   ├── adapters/
 │   │   ├── base.py                  # BaseAdapter ABC + AdapterResult
@@ -473,6 +530,7 @@ optical-spec-agent/
 │   ├── test_meep_adapter.py         # Meep adapter tests
 │   ├── test_meep_runner.py          # Optional Meep execution harness tests
 │   ├── test_mesh_sanity.py
+│   ├── test_physical_diagnostics.py
 │   ├── test_spectrum_compare.py
 │   ├── test_local_meep_candidate_convergence.py
 │   ├── test_local_meep_candidate_hardening.py
@@ -488,7 +546,8 @@ optical-spec-agent/
 │   ├── local_meep_physical_stability_probe.py
 │   ├── local_meep_candidate_hardening.py
 │   ├── local_meep_candidate_convergence.py
-│   └── local_meep_observable_diagnostics.py
+│   ├── local_meep_observable_diagnostics.py
+│   └── generate_physical_diagnostics.py
 ├── examples/
 │   ├── example_01_nanoparticle_gap_plasmon.py
 │   ├── example_02_asymmetric_gold_cross.py
@@ -518,6 +577,7 @@ optical-spec-agent/
 │   ├── local_meep_candidate_hardening_v0.6.md # Manual v0.6 candidate hardening evidence
 │   ├── local_meep_observable_diagnostics_v0.6.md # Manual v0.6 flux observable diagnostics
 │   ├── local_meep_mesh_monitor_diagnostics_v0.6.md # Manual v0.6 mesh/monitor diagnostics
+│   ├── physical_diagnostics_v0.6.md # Post-hoc outputs/ diagnostics reports
 │   ├── release_notes_v0.5.0.md
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md

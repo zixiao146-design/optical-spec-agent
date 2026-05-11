@@ -29,6 +29,8 @@ htmlcov/
 
 # Generated outputs (keep directory)
 outputs/*.json
+outputs/*.csv
+outputs/*.png
 optical_spec_schema.json
 runs/
 

@@ -1,8 +1,9 @@
 # Benchmarks
 
 Golden-case regression tests for the rule-based parser + validator pipeline.
-The v0.3 reliability milestone also adds a semantic benchmark for five
-reliability-critical parsing paths.
+The semantic benchmark now covers fifteen reliability-critical parsing paths,
+including the core Meep nanoparticle-on-film case plus material, gap, source,
+boundary, single-particle, and waveguide variations.
 
 ## Benchmark modes
 
@@ -20,7 +21,8 @@ Semantic benchmark:
 
 | Runner | What it checks |
 |--------|----------------|
-| `python benchmarks/run_semantic_benchmark.py` | Semantic fields for five reliability-critical cases: Chinese + English Meep core cases, gap sweep extraction, SiO2 substrate disambiguation, and Si3N4/SiO2 waveguide materials |
+| `python benchmarks/run_semantic_benchmark.py` | Semantic fields for fifteen reliability-critical cases: Chinese + English Meep core cases, gap sweep extraction, SiO2 substrate disambiguation, Si3N4/SiO2 waveguide materials, oxide gaps, air/water gaps, TFSF/dipole/plane-wave sources, oblique incidence, periodic boundaries, and a Si single-particle case |
+| `python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json` | Same benchmark plus a machine-readable pass/fail report for each semantic check |
 
 **Key fields** checked in `key_fields` mode: `task.task_type`, `physics.physical_system`, `simulation.solver_method`, `output.output_observables`. Cases can override this list by adding an `expected_key_fields` array to their golden entry.
 
@@ -29,7 +31,7 @@ Semantic benchmark:
 - **Semantic understanding quality** — exact mode checks byte equality, not "best" interpretation
 - **Solver correctness** — no solver is invoked
 - **LLM parsing** — only the rule-based parser is tested
-- **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark focuses on 5 reliability-critical material and geometry cases
+- **Edge case robustness** — the snapshot benchmark covers 16 common regression cases, while the semantic benchmark focuses on 15 reliability-critical material, geometry, source, and boundary cases
 
 ## File structure
 
@@ -83,8 +85,11 @@ python benchmarks/run_benchmark.py --mode key_fields
 # Both modes
 python benchmarks/run_benchmark.py --mode all
 
-# Semantic benchmark for the core Meep case
+# Semantic benchmark for reliability-critical cases
 python benchmarks/run_semantic_benchmark.py
+
+# Semantic benchmark report
+python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json
 
 # Update golden snapshots after intentional parser changes
 python benchmarks/run_benchmark.py --update
@@ -103,14 +108,16 @@ python benchmarks/run_benchmark.py --update
 4. Optionally add `expected_key_fields` to customize which fields to check in key_fields mode
 5. Run `python benchmarks/run_benchmark.py --mode all` to verify
 
-## v0.3 reliability focus
+## Semantic reliability focus
 
 The semantic benchmark intentionally avoids full JSON snapshot matching. It checks
-only the meaning-bearing fields that matter for the current milestone:
+only meaning-bearing fields:
 
 - `SiO2` and `Si3N4` must not degrade into `Si`
 - `80 nm` particle size must land in `particle_info.dimensions`
 - `100 nm` film thickness must land in `substrate_or_film_info`
 - `gap from 5 to 25 nm` must not overwrite the actual wavelength range
 - `Meep + FDTD + plane_wave` path must remain stable
+- `TFSF`, `dipole`, oblique-incidence, and periodic-boundary descriptions should stay stable
+- `Air`, `Water`, `Al2O3`, and `TiO2` gap/material mentions should not be silently dropped or split into shorter tokens
 - `resonance_wavelength` and `fwhm_extraction` postprocess targets must be present
