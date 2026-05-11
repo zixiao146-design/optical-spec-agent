@@ -23,8 +23,11 @@ an optional harness that can run an existing generated Meep script when Meep is
 installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
-Release status: the packaged baseline is `v0.5.0`. The `v0.6` material in this
-repo is current local/manual diagnostic work, not a production simulation claim.
+Release status: the packaged baseline in `pyproject.toml` is `v0.5.0`.
+The main branch also contains v0.6 local/manual diagnostics and a v0.7
+multi-solver adapter MVP release candidate. The formal GitHub release may lag
+behind main; treat unreleased main-branch capabilities as preview/scaffold work,
+not production simulation claims.
 
 ## At a glance
 
@@ -32,6 +35,7 @@ repo is current local/manual diagnostic work, not a production simulation claim.
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
 | **Adapter** | Meep script generator plus v0.7 MVP preview adapters for MPB, Gmsh, Elmer, and Optiland — see [adapter doc](docs/adapter_mvp_v0.7.md) |
+| **Generic adapter CLI** | `optical-spec adapter-list` and `optical-spec adapter-generate` route specs to solver-native input scaffolds; adapters do not run external solvers |
 | **Benchmark** | 16 golden cases + 27 semantic benchmark cases for Meep reliability and v0.7 adapter intent routing — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
 | **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
 
@@ -44,7 +48,12 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 release + v0.6 diagnostics + v0.7 adapter foundation)
+## Current scope (v0.5 packaged baseline + v0.6 diagnostics + v0.7 adapter MVP on main)
+
+`v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
+artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
+additional open-source tools. Both are reviewable engineering aids, not
+production-grade physical validation.
 
 The current loop:
 
@@ -83,6 +92,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
   execution diagnostics JSON, and a diagnostic preview PNG
 - Generic v0.7 adapter registry and CLI:
   `adapter-list` and `adapter-generate`
+- Adapter metadata and readiness reporting for strict/non-strict scaffold generation
 - MVP preview/scaffold adapters for MPB, Gmsh, Elmer, and Optiland
 - Schema stability policy: 20+ core fields frozen for 0.x
 
@@ -94,6 +104,8 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Running MPB, Gmsh, Elmer, or Optiland; v0.7 adapters generate input only
 - Production-ready MPB/Gmsh/Elmer/Optiland inputs; current outputs are annotated MVP scaffolds
 - Production-grade visualization or plotting pipeline
+- Optiland is scaffold-level because `OpticalSpec` does not yet encode a full sequential lens prescription
+- Gmsh/Elmer need richer FEM geometry, material, mesh, and boundary-condition schema before production use
 
 ## Install
 
@@ -664,7 +676,7 @@ optical-spec-agent/
 | v0.4 | Meep research-preview script: normalization run, CSV output, postprocess JSON | **Meep** (script gen only) | Done |
 | **v0.5** | Meep execution harness + auditable artifacts + low-cost diagnostic pipeline | **Meep** (FDTD) | **Done** |
 | v0.6 | Meep physical-candidate hardening + spectrum sanity metrics | **Meep** (FDTD) | Done / local evidence |
-| v0.7 | Multi-solver adapter foundation + MPB/Gmsh/Elmer/Optiland MVP scaffolds | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Current |
+| v0.7 | Multi-solver adapter foundation + MPB/Gmsh/Elmer/Optiland MVP scaffolds | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Main branch MVP / release candidate |
 | v0.8 | LLM parser integration | — | Planned |
 | v0.9 | Multi-agent orchestration | — | Planned |
 

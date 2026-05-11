@@ -11,6 +11,13 @@
 - MPB, Gmsh, Elmer, and Optiland MVP adapters.
 - Semantic benchmark coverage for adapter-intent parsing.
 
+## Non-goals
+
+- Running MPB, Gmsh, Elmer, Optiland, or Meep through the generic adapter CLI.
+- Production-ready solver decks.
+- Formal convergence or physical-validation claims.
+- LLM parsing or schema redesign.
+
 ## Commands
 
 ```bash
@@ -27,6 +34,11 @@ optical-spec adapter-generate spec.json --tool optiland --output outputs/optilan
 Use `--strict` to fail when adapter readiness reports missing required fields.
 Without `--strict`, adapters can generate annotated scaffolds that clearly list
 warnings, missing fields, defaults, and limitations.
+
+Use `--json` when automation needs a machine-readable report. The JSON payload
+includes the selected adapter, output path, missing required fields, warnings,
+errors, defaults, limitations, and generated files. Human-readable mode is meant
+for review, not shell parsing.
 
 ## Adapter Scopes
 

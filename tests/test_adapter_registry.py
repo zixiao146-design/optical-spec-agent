@@ -36,6 +36,20 @@ def test_auto_dispatch_meep_like_spec():
     assert dispatch_adapter(spec).tool_name == "meep"
 
 
+@pytest.mark.parametrize(
+    ("text", "expected_tool"),
+    [
+        ("用 MPB 计算二维光子晶体的 band diagram，输出前 8 条能带。", "mpb"),
+        ("用 Gmsh 为 Si3N4 脊波导横截面生成 FEM 网格。", "gmsh"),
+        ("用 Elmer 做 Si3N4 波导 FEM 模式分析。", "elmer"),
+        ("用 Optiland 设计一个简单单透镜成像系统，计算 spot diagram 和 MTF。", "optiland"),
+    ],
+)
+def test_auto_dispatch_v07_adapter_intents(text, expected_tool):
+    spec = SpecService().process(text)
+    assert dispatch_adapter(spec).tool_name == expected_tool
+
+
 def test_forced_dispatch_for_new_adapters():
     spec = SpecService().process("计算一个普通光学结构。")
     assert dispatch_adapter(spec, preferred_tool="mpb").tool_name == "mpb"

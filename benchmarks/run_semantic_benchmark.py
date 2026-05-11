@@ -201,6 +201,7 @@ def main() -> None:
         report_cases.append(
             {
                 "task_id": case["task_id"],
+                "case_name": case.get("name", case["task_id"]),
                 "passed": case_ok,
                 "check_count": len(case.get("checks", [])),
                 "checks": check_results,

@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 
+import pytest
 from typer.testing import CliRunner
 
 from optical_spec_agent.cli.main import app
@@ -35,6 +36,20 @@ def test_adapter_list_json_output():
     data = json.loads(result.output)
     tools = {item["tool_name"] for item in data["adapters"]}
     assert {"meep", "mpb", "gmsh", "elmer", "optiland"} <= tools
+    required_metadata = {
+        "tool_name",
+        "display_name",
+        "solver_family",
+        "output_language",
+        "output_extension",
+        "supported_solver_methods",
+        "supported_physical_systems",
+        "current_status",
+        "limitations",
+        "consumed_fields",
+    }
+    for item in data["adapters"]:
+        assert required_metadata <= set(item)
 
 
 def test_adapter_generate_mpb_writes_file(tmp_path):
@@ -100,6 +115,52 @@ def test_adapter_generate_json_outputs_valid_json(tmp_path):
     assert "generated_content" in data
 
 
+def test_adapter_generate_json_with_output_reports_contract_fields(tmp_path):
+    spec_path = _write_spec(
+        tmp_path,
+        "Use MPB to compute a photonic crystal band diagram.",
+    )
+    output = tmp_path / "mpb_band.py"
+    result = runner.invoke(
+        app,
+        ["adapter-generate", str(spec_path), "--tool", "mpb", "--output", str(output), "--json"],
+    )
+    assert result.exit_code == 0
+    data = json.loads(result.output)
+    required_fields = {
+        "status",
+        "selected_adapter",
+        "output_path",
+        "language",
+        "output_extension",
+        "missing_required",
+        "warnings",
+        "errors",
+        "defaults_applied",
+        "limitations",
+        "generated_files",
+    }
+    assert required_fields <= set(data)
+    assert data["status"] == "success"
+    assert data["selected_adapter"] == "mpb"
+    assert data["output_path"] == str(output)
+    assert data["generated_files"]["primary"] == str(output)
+    assert output.exists()
+
+
+def test_adapter_generate_strict_json_fails_with_pure_json(tmp_path):
+    spec_path = _write_spec(tmp_path, "用 Optiland 设计一个成像系统，计算 MTF。")
+    result = runner.invoke(
+        app,
+        ["adapter-generate", str(spec_path), "--tool", "optiland", "--strict", "--json"],
+    )
+    assert result.exit_code != 0
+    data = json.loads(result.output)
+    assert data["status"] == "error"
+    assert data["selected_adapter"] == "optiland"
+    assert data["missing_required"]
+
+
 def test_adapter_generate_strict_fails_on_missing_required(tmp_path):
     spec_path = _write_spec(tmp_path, "用 Optiland 设计一个成像系统，计算 MTF。")
     result = runner.invoke(app, ["adapter-generate", str(spec_path), "--tool", "optiland", "--strict"])
@@ -113,6 +174,45 @@ def test_adapter_generate_non_strict_allows_preview_scaffold(tmp_path):
     assert result.exit_code == 0
     assert "Generated content" in result.output
     assert "Optiland MVP scaffold" in result.output
+
+
+@pytest.mark.parametrize(
+    ("text", "expected_tool", "output_name", "marker"),
+    [
+        (
+            "用 MPB 计算二维光子晶体的 band diagram，扫 Γ-X-M-Γ k 点，输出前 8 条能带。",
+            "mpb",
+            "mpb_band.py",
+            "mpb.ModeSolver",
+        ),
+        (
+            "用 Gmsh 为 Si3N4 脊波导横截面生成 FEM 网格，波长 1550 nm，SiO2 下包层，空气上包层。",
+            "gmsh",
+            "waveguide.geo",
+            'SetFactory("OpenCASCADE")',
+        ),
+        (
+            "用 Elmer 做 Si3N4 波导 FEM 模式分析，输入 mesh 为 waveguide.msh，输出有效折射率和模场。",
+            "elmer",
+            "case.sif",
+            "Simulation",
+        ),
+        (
+            "用 Optiland 设计一个简单单透镜成像系统，计算 spot diagram 和 MTF。",
+            "optiland",
+            "optiland_design.py",
+            "Optiland MVP scaffold",
+        ),
+    ],
+)
+def test_adapter_generate_auto_dispatches_v07_tools(tmp_path, text, expected_tool, output_name, marker):
+    spec_path = _write_spec(tmp_path, text)
+    output = tmp_path / output_name
+    result = runner.invoke(app, ["adapter-generate", str(spec_path), "--tool", "auto", "--output", str(output)])
+    assert result.exit_code == 0
+    assert f"Selected adapter: {expected_tool}" in result.output
+    assert output.exists()
+    assert marker in output.read_text(encoding="utf-8")
 
 
 def test_existing_meep_generate_still_works(tmp_path):

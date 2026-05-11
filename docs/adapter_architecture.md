@@ -79,6 +79,12 @@ optical-spec adapter-generate spec.json --tool optiland --output outputs/optilan
 fields. Without `--strict`, MVP adapters may still generate annotated scaffolds
 with warnings and limitations.
 
+`--json` emits a pure machine-readable payload containing at least `status`,
+`selected_adapter`, `output_path`, `language`, `output_extension`,
+`missing_required`, `warnings`, `errors`, `defaults_applied`, `limitations`, and
+`generated_files`. If `--output` is omitted, the JSON payload carries
+`generated_content` instead of mixing generated solver input with rich text.
+
 `meep-generate` remains the backward-compatible Meep-specific command because it
 exposes Meep script modes and dedicated readiness reporting.
 

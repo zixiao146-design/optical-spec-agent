@@ -44,3 +44,4 @@ def test_semantic_benchmark_report_output(tmp_path):
     assert report["all_passed"] is True
     assert report["case_count"] >= 15
     assert all("checks" in case for case in report["cases"])
+    assert all("case_name" in case for case in report["cases"])

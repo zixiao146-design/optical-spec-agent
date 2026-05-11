@@ -2,6 +2,16 @@
 
 > This is a readiness note for the main branch, not a GitHub release or tag.
 
+## Version and Release Status
+
+- `pyproject.toml` currently advertises the packaged baseline as `0.5.0`.
+- Main branch contains v0.6 diagnostics and v0.7 adapter MVP work that may be
+  ahead of the latest formal GitHub release.
+- This document is a release-candidate checklist only. Do not infer that a
+  GitHub release or tag has been created.
+- Before publishing v0.7, decide whether to publish an intermediate v0.6
+  release or bump directly from `0.5.0` to `0.7.0`.
+
 ## Achieved
 
 - Adapter registry for `meep`, `mpb`, `gmsh`, `elmer`, and `optiland`.
@@ -33,9 +43,21 @@ Manual smoke:
 ```bash
 optical-spec adapter-list
 optical-spec adapter-list --json
+
+optical-spec parse "用 MPB 计算二维光子晶体的 band diagram，扫 Γ-X-M-Γ k 点，输出前 8 条能带。" \
+  --output outputs/mpb_spec.json
 optical-spec adapter-generate outputs/mpb_spec.json --tool mpb --output outputs/mpb_band.py
+
+optical-spec parse "用 Gmsh 为 Si3N4 脊波导横截面生成 FEM 网格，波长 1550 nm，SiO2 下包层，空气上包层。" \
+  --output outputs/gmsh_spec.json
 optical-spec adapter-generate outputs/gmsh_spec.json --tool gmsh --output outputs/waveguide.geo
+
+optical-spec parse "用 Elmer 做 Si3N4 波导 FEM 模式分析，输入 mesh 为 waveguide.msh，输出有效折射率和模场。" \
+  --output outputs/elmer_spec.json
 optical-spec adapter-generate outputs/elmer_spec.json --tool elmer --mesh outputs/waveguide.msh --output outputs/case.sif
+
+optical-spec parse "用 Optiland 设计一个简单单透镜成像系统，计算 spot diagram 和 MTF。" \
+  --output outputs/optiland_spec.json
 optical-spec adapter-generate outputs/optiland_spec.json --tool optiland --output outputs/optiland_design.py
 ```
 
@@ -57,3 +79,14 @@ optical-spec adapter-generate outputs/optiland_spec.json --tool optiland --outpu
   first.
 - Review generated scaffold wording for any accidental production-ready claims.
 - Confirm CI remains solver-install-free.
+
+## Recommended Release Checklist
+
+1. Re-run the verification commands above on a clean checkout.
+2. Review `README.md`, this readiness note, and
+   `docs/release_notes_v0.7.0.md` for version/status consistency.
+3. Confirm no generated `outputs/` or `runs/` artifacts are committed unless
+   intentionally included as small examples.
+4. Decide the version bump strategy and update `pyproject.toml`,
+   `src/optical_spec_agent/__init__.py`, and API health expectations together.
+5. Only after review, create the GitHub release/tag outside this readiness pass.

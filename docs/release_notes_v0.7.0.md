@@ -1,6 +1,7 @@
 # Draft Release Notes v0.7.0
 
-> Draft only. No GitHub release or tag has been created.
+> Draft only. No GitHub release or tag has been created. The packaged version
+> may still be `0.5.0` until release owners choose the v0.7 version-bump path.
 
 ## Summary
 
@@ -38,6 +39,8 @@ Gmsh, Elmer, and Optiland.
 - No production-grade physical validation or formal convergence proof is claimed.
 - Optiland support is scaffold-level until the schema can represent sequential
   lens prescriptions.
+- Gmsh/Elmer support remains preview-level until the schema carries richer FEM
+  geometry, material, mesh, boundary-condition, and monitor definitions.
 
 ## Suggested Verification
 
