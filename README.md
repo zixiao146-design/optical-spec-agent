@@ -30,6 +30,9 @@ and v0.9 synchronous workflow orchestration foundation work.
 The formal GitHub release may lag behind main; treat unreleased main-branch
 capabilities as preview/scaffold/evaluation work, not production simulation
 claims.
+See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
+[`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
+current release policy and release-readiness matrix.
 
 ## At a glance
 
@@ -41,7 +44,8 @@ claims.
 | **Parser modes** | `rule` remains default; v0.8 adds provider-agnostic `llm` and conservative `hybrid` modes with deterministic `mock` provider |
 | **Workflow orchestration** | v0.9 adds `workflow-plan`, `workflow-run`, `workflow-replay`, and `workflow-report` for auditable local orchestration |
 | **Benchmark** | 16 golden cases + 27 semantic benchmark cases for Meep reliability and v0.7 adapter intent routing — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
-| **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
+| **Release engineering** | Local checks cover CLI surface, docs consistency, artifact contracts, release readiness, LLM mock benchmark, and workflow benchmark |
+| **Validation** | `make check` runs deterministic tests, parser benchmarks, semantic benchmark, mock LLM benchmark, workflow benchmark, docs/CLI checks, and artifact contract checks |
 
 ## Why this project?
 
@@ -209,6 +213,13 @@ optical-spec workflow-replay outputs/workflows/mpb_demo/workflow_run.json \
 
 optical-spec workflow-report outputs/workflows/mpb_demo/workflow_run.json \
   --output outputs/workflows/mpb_demo/report.md
+
+# Release-engineering checks; these do not run external solvers or external LLM APIs
+make check
+python scripts/check_cli_surface.py
+python scripts/check_docs_consistency.py
+python scripts/check_release_readiness.py --report outputs/release_readiness_report.json
+python scripts/check_artifact_contracts.py
 
 # Save output to file
 optical-spec parse "..." -o outputs/my_spec.json
@@ -772,6 +783,15 @@ optical-spec-agent/
 │   ├── workflow_benchmark_v0.9.md      # v0.9 workflow benchmark format
 │   ├── release_readiness_v0.9.md       # v0.9 readiness checklist
 │   ├── release_notes_v0.9.0.md         # Draft v0.9 release notes
+│   ├── versioning_policy.md             # Packaged/main/release status policy
+│   ├── release_readiness_current.md     # Current branch release-readiness matrix
+│   ├── release_notes_current.md         # Current branch draft notes
+│   ├── artifact_contracts.md            # Generated artifact schemas/contracts
+│   ├── security_and_robustness.md       # Local/default safety posture
+│   ├── api_contract.md                  # FastAPI endpoint contract
+│   ├── cli_contract.md                  # CLI surface and exit-code contract
+│   ├── benchmark_contract.md            # Benchmark/report contracts
+│   ├── demo_artifacts.md                # Deterministic demo artifact regeneration
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
 │   ├── demo_output.md
@@ -797,6 +817,7 @@ optical-spec-agent/
 | v0.7 | Multi-solver adapter foundation + MPB/Gmsh/Elmer/Optiland MVP scaffolds | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Main branch MVP / release candidate |
 | v0.8 | LLM parser foundation + mock provider + hybrid evaluation | — | Main branch foundation |
 | v0.9 | Synchronous local workflow orchestration + replay/report/benchmark | — | Current / main branch foundation |
+| v1.0 | Release hardening, stable public contracts, packaging, CI, and documentation trust | — | Planned |
 
 **Why Meep first:** Pure Python API, spec fields map 1:1 to Meep objects, and a working adapter proves the full NL → spec → simulation chain. See [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for the prioritization rationale.
 

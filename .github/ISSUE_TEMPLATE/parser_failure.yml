@@ -1,0 +1,35 @@
+name: Parser failure
+description: Report a rule, LLM, or hybrid parser extraction problem.
+title: "[Parser] "
+labels: ["parser", "bug"]
+body:
+  - type: dropdown
+    id: parser
+    attributes:
+      label: Parser mode
+      options:
+        - rule
+        - llm
+        - hybrid
+        - unknown
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Input text
+      description: Paste the exact natural-language request.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected fields
+      description: Which OpticalSpec fields should have been extracted?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+      description: Paste relevant JSON or parser report excerpts.

@@ -28,8 +28,13 @@ pip install -e ".[dev]"
 3. Run the standard validation gate:
 
    ```bash
-   make check         # pytest + key-field benchmark + semantic benchmark
+   make check
    ```
+
+   `make check` is deterministic and local-only: pytest, key-field benchmark,
+   semantic benchmark, mock LLM benchmark, workflow benchmark, docs/CLI checks,
+   and artifact contract checks. It does not require Meep, MPB, Gmsh, Elmer,
+   Optiland, or an external LLM provider.
 
    `make lint` is available for lint-focused cleanup work, but it is not the
    current CI gate. The repo still has pre-existing Ruff cleanup debt.
@@ -56,10 +61,30 @@ pip install -e ".[dev]"
 - Use `pytest -v` for verbose output.
 - Use `pytest --cov=optical_spec_agent` for coverage.
 - CI runs on Python 3.11 and 3.12.
-- CI runs `pytest -q`, `python benchmarks/run_benchmark.py --mode key_fields`, and
-  `python benchmarks/run_semantic_benchmark.py`.
+- CI runs deterministic tests, parser benchmarks, semantic benchmark, and release
+  engineering checks. Extended benchmark workflows remain local/mock-only.
 - Real Meep execution is a manual/local gate. Ordinary CI does not require Meep.
+- External MPB/Gmsh/Elmer/Optiland solver execution is not part of default CI.
+- External LLM providers are not part of default CI; use the deterministic mock
+  provider for parser tests.
 - `make lint` runs Ruff. Treat existing lint cleanup as a separate, focused change.
+
+## Release engineering checks
+
+Use these when touching docs, CLI contracts, artifacts, or release notes:
+
+```bash
+make docs-check
+make cli-check
+make release-check
+make artifact-check
+python -m build
+twine check dist/*
+```
+
+Do not create GitHub releases or tags from routine PR work. See
+[`docs/versioning_policy.md`](docs/versioning_policy.md) and
+[`docs/release_readiness_current.md`](docs/release_readiness_current.md).
 
 ## What to contribute
 
@@ -71,6 +96,7 @@ pip install -e ".[dev]"
 - Documentation fixes and examples
 - First-run and CLI documentation polish
 - Local diagnostic report updates that do not change solver behavior
+- Release engineering checks, artifact contracts, and CI documentation
 
 **Needs discussion first (open an issue):**
 
@@ -78,6 +104,7 @@ pip install -e ".[dev]"
 - LLM parser integration
 - New solver adapters or major Meep physics/template changes
 - Breaking schema changes
+- Any claim that generated artifacts are production physical validation
 
 ## Commit style
 
@@ -91,6 +118,9 @@ pip install -e ".[dev]"
 - [ ] Exact benchmark drift reviewed if parser behavior changed
 - [ ] Golden snapshots updated only when intentionally approved
 - [ ] New code has tests
+- [ ] Docs updated if CLI/artifact/release behavior changed
+- [ ] Default tests do not require external solvers or external LLM providers
+- [ ] No production validation claim was introduced
 - [ ] No unnecessary changes outside the scope of the PR
 
 ## Code of conduct

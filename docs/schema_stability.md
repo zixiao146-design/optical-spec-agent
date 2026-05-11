@@ -1,12 +1,19 @@
 # Schema Stability Policy
 
-> Version: 0.1.x — applies until v0.2.0
+> Current policy: stable 0.x core surface. The original v0.1 surface remains the
+> compatibility baseline, while later main-branch preview features add optional
+> fields and reports without renaming the core paths below.
 
-This document defines the **stable surface** of the optical-spec-agent schema: the set of fields whose names, paths, and semantics downstream consumers (solver adapters, benchmark runners, external tools) can rely on across 0.1.x patch releases.
+This document defines the **stable surface** of the optical-spec-agent schema:
+the set of fields whose names, paths, and semantics downstream consumers
+(solver adapters, benchmark runners, external tools) can rely on across the 0.x
+series unless release notes explicitly announce a breaking change.
 
-## Stable fields (v0.1 core surface)
+## Stable fields (0.x core surface)
 
-The following dotted paths are **frozen** for the 0.1.x series. They will not be renamed, relocated, or have their value semantics changed without a minor-version bump.
+The following dotted paths are **frozen** as the core surface. They will not be
+renamed, relocated, or have their value semantics changed without an explicit
+minor-version release note.
 
 ### Task section
 
@@ -73,13 +80,15 @@ The following are **not** frozen and may evolve within 0.1.x:
 - `simulation.symmetry_setting` — may be restructured
 - All `description` free-text fields within structured sub-models
 
-## Compatibility principles for 0.1.x
+## Compatibility principles for 0.x
 
 1. **Append-only for new fields.** New StatusField paths will be added under existing sections. Existing paths will not be renamed or removed.
 2. **Enum members are append-only.** New enum values may be added; existing values will not be renamed.
 3. **Structured sub-model fields are append-only.** New optional fields may be added to `SweepPlan`, `SourceSetting`, etc. Existing fields keep their names and types.
 4. **`validation_status` structure is stable.** The three fields (`is_executable`, `errors`, `warnings`) will not change. New top-level fields (e.g., `info`) may be added.
-5. **Breaking changes require v0.2.0.** Any rename, removal, or semantic change to a stable field will bump the minor version.
+5. **Breaking changes require a minor release note.** Any rename, removal, or
+   semantic change to a stable field requires an explicit versioned migration
+   note and release-readiness review.
 
 ## How to use this document
 

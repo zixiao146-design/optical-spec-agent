@@ -1,4 +1,4 @@
-.PHONY: install dev test check bench-key bench-semantic llm-check workflow-check diagnostics test-cov lint example api schema clean tree
+.PHONY: install dev test benchmark semantic-check check bench-key bench-semantic llm-check workflow-check diagnostics docs-check cli-check release-check artifact-check build twine-check smoke test-cov lint example api schema clean tree
 
 PYTHON ?= python
 PIP ?= pip
@@ -10,12 +10,24 @@ dev:
 	$(PIP) install -e ".[dev]"
 
 test:
-	pytest -v
+	pytest -q
+
+benchmark:
+	$(PYTHON) benchmarks/run_benchmark.py --mode key_fields
+
+semantic-check:
+	$(PYTHON) benchmarks/run_semantic_benchmark.py
+	$(PYTHON) benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json
 
 check:
-	pytest
-	$(PYTHON) benchmarks/run_benchmark.py --mode key_fields
-	$(PYTHON) benchmarks/run_semantic_benchmark.py
+	$(MAKE) test
+	$(MAKE) benchmark
+	$(MAKE) semantic-check
+	$(MAKE) llm-check
+	$(MAKE) workflow-check
+	$(MAKE) docs-check
+	$(MAKE) cli-check
+	$(MAKE) artifact-check
 
 bench-key:
 	$(PYTHON) benchmarks/run_benchmark.py --mode key_fields
@@ -31,6 +43,33 @@ workflow-check:
 
 diagnostics:
 	$(PYTHON) scripts/generate_physical_diagnostics.py --create-demo-spec-if-missing
+
+docs-check:
+	$(PYTHON) scripts/check_docs_consistency.py
+
+cli-check:
+	$(PYTHON) scripts/check_cli_surface.py
+
+release-check:
+	$(PYTHON) scripts/check_release_readiness.py --report outputs/release_readiness_report.json
+
+artifact-check:
+	$(PYTHON) scripts/check_artifact_contracts.py --report outputs/artifact_contract_report.json
+
+build:
+	$(PYTHON) -m build
+
+twine-check:
+	twine check dist/*
+
+smoke:
+	optical-spec --help
+	optical-spec parse "用 Meep FDTD 仿真金纳米球-金膜 gap plasmon，输出散射谱和 FWHM。" --output outputs/smoke_spec.json
+	optical-spec validate outputs/smoke_spec.json
+	optical-spec schema --output outputs/schema.json
+	optical-spec meep-generate outputs/smoke_spec.json --mode preview --output outputs/smoke_meep.py
+	optical-spec meep-check --json
+	optical-spec diagnose outputs/smoke_spec.json --output-dir outputs --create-demo-spec-if-missing --json
 
 test-cov:
 	pytest --cov=optical_spec_agent --cov-report=term-missing

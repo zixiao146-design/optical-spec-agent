@@ -1,0 +1,28 @@
+name: Physical validation warning
+description: Report a diagnostics, convergence, or physical interpretation concern.
+title: "[Physical warning] "
+labels: ["diagnostics", "physical-validation"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What artifact, diagnostic report, or generated script raised concern?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Include paths, warnings, NaN/Inf/timeout messages, or convergence metrics.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Scope acknowledgement
+      options:
+        - label: I understand current diagnostics are not production-grade physical validation.
+          required: true
+        - label: I included artifact paths or logs when available.
+          required: true

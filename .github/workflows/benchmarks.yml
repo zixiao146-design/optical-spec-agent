@@ -1,0 +1,38 @@
+name: Benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deterministic-benchmarks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run parser benchmarks
+        run: |
+          python benchmarks/run_benchmark.py --mode all
+          python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json
+
+      - name: Run mock LLM benchmark
+        run: python benchmarks/run_llm_benchmark.py --cases benchmarks/llm_cases.json --parser hybrid --llm-provider mock --report outputs/llm_eval_report.json
+
+      - name: Run workflow benchmark
+        run: python benchmarks/run_workflow_benchmark.py --cases benchmarks/workflow_cases.json --output-dir outputs/workflow_benchmark --report outputs/workflow_benchmark_report.json
+
+      - name: Upload benchmark reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-reports
+          path: outputs/*.json
