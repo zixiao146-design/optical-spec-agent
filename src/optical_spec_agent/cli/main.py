@@ -349,9 +349,15 @@ def diagnose(
     json_output: bool = typer.Option(False, "--json", help="Print structured JSON output"),
 ):
     """Generate post-hoc physical diagnostics for a spec and optional Meep artifacts."""
-    from optical_spec_agent.analysis import generate_physical_diagnostics, prepare_diagnostic_spec
+    from optical_spec_agent.analysis import (
+        generate_physical_diagnostics,
+        prepare_diagnostic_spec,
+    )
 
     requested_spec = spec_option or spec_file or Path("outputs/my_spec.json")
+    initial_warnings: list[str] = []
+    if spec_option is not None and spec_file is not None:
+        initial_warnings.append("--spec was provided; it takes precedence over positional SPEC_PATH.")
     try:
         spec_path, created_demo = prepare_diagnostic_spec(
             requested_spec,
@@ -359,34 +365,38 @@ def diagnose(
         )
     except FileNotFoundError as exc:
         if json_output:
-            console.print_json(
-                json.dumps(
-                    {
-                        "status": "error",
-                        "errors": [str(exc)],
-                        "warnings": [],
-                        "spec_path": str(requested_spec),
-                        "output_dir": str(output_dir),
-                    },
-                    ensure_ascii=False,
-                )
-            )
+            typer.echo(json.dumps(_diagnose_error_payload(
+                error=str(exc),
+                spec_path=requested_spec,
+                output_dir=output_dir,
+            ), indent=2, ensure_ascii=False))
         else:
             console.print(f"[red]Error:[/red] {exc}")
         raise typer.Exit(1)
 
-    result = generate_physical_diagnostics(
-        spec_path=spec_path,
-        output_dir=output_dir,
-        artifact_dir=run_dir,
-    )
-
     if created_demo:
-        result.warnings.append(f"Created demo spec from core hero task: {spec_path}")
-        result.status = "warning" if result.status == "success" else result.status
+        initial_warnings.append(f"Created demo spec from core hero task: {spec_path}")
+
+    try:
+        result = generate_physical_diagnostics(
+            spec_path=spec_path,
+            output_dir=output_dir,
+            artifact_dir=run_dir,
+            initial_warnings=initial_warnings,
+        )
+    except Exception as exc:
+        if json_output:
+            typer.echo(json.dumps(_diagnose_error_payload(
+                error=f"Could not generate diagnostics: {exc}",
+                spec_path=spec_path,
+                output_dir=output_dir,
+            ), indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Error:[/red] Could not generate diagnostics: {exc}")
+        raise typer.Exit(1)
 
     if json_output:
-        console.print_json(json.dumps(result.to_dict(), ensure_ascii=False))
+        typer.echo(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))
         if result.status == "error":
             raise typer.Exit(1)
         return
@@ -394,6 +404,27 @@ def diagnose(
     _print_diagnostics_result(result)
     if result.status == "error":
         raise typer.Exit(1)
+
+
+def _diagnose_error_payload(*, error: str, spec_path: Path, output_dir: Path) -> dict:
+    from optical_spec_agent.analysis import DIAGNOSTICS_SCHEMA_VERSION
+
+    return {
+        "schema_version": DIAGNOSTICS_SCHEMA_VERSION,
+        "status": "error",
+        "spec_path": str(spec_path),
+        "output_dir": str(output_dir),
+        "run_dir": None,
+        "generated_at": "",
+        "generated_outputs": {},
+        "warnings": [],
+        "errors": [error],
+        "missing_artifacts": [],
+        "nan_detected": False,
+        "inf_detected": False,
+        "timeout_detected": False,
+        "notes": ["Diagnostics did not run."],
+    }
 
 
 def _print_diagnostics_result(result) -> None:

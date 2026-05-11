@@ -94,10 +94,11 @@ def generate_physical_diagnostics(
     flux_surfaces_path: Path | None = None,
     resolution_px_per_um: float = 12.0,
     create_preview: bool = True,
+    initial_warnings: list[str] | None = None,
 ) -> PhysicalDiagnosticsResult:
     """Generate mesh, flux, execution, and preview diagnostics under ``output_dir``."""
     output_dir.mkdir(parents=True, exist_ok=True)
-    warnings: list[str] = []
+    warnings: list[str] = list(initial_warnings or [])
     errors: list[str] = []
 
     spec = load_optical_spec(spec_path)
@@ -199,14 +200,11 @@ def generate_physical_diagnostics(
         notes=[
             "Post-hoc diagnostics only; not production-grade physical validation.",
             "diagnostic_preview.png is a readability artifact, not a scientific figure.",
+            *execution_diagnostics.get("notes", []),
         ],
     )
 
     diagnostics_path = output_dir / "execution_diagnostics.json"
-    diagnostics_path.write_text(
-        json.dumps(result.to_dict(), indent=2, ensure_ascii=False),
-        encoding="utf-8",
-    )
     result.generated_outputs["execution_diagnostics.json"] = str(diagnostics_path)
     diagnostics_path.write_text(
         json.dumps(result.to_dict(), indent=2, ensure_ascii=False),
@@ -399,6 +397,7 @@ def analyze_execution_artifacts(
         "missing_artifacts": _missing_run_artifacts(artifact_dir),
         "stderr_excerpt": "",
         "stdout_excerpt": "",
+        "notes": [],
         "warnings_detected": [],
         "errors_detected": [],
     }
@@ -407,13 +406,17 @@ def analyze_execution_artifacts(
         try:
             data = json.loads(execution_result_path.read_text(encoding="utf-8"))
         except json.JSONDecodeError as exc:
-            diagnostics["errors_detected"].append(f"Could not parse execution_result.json: {exc}")
+            diagnostics["warnings_detected"].append(
+                f"Could not parse execution_result.json: {exc}"
+            )
         else:
+            success = data.get("success")
+            returncode = data.get("returncode")
             diagnostics.update(
                 {
-                    "success": data.get("success"),
+                    "success": success,
                     "available": data.get("available"),
-                    "returncode": data.get("returncode"),
+                    "returncode": returncode,
                     "run_id": data.get("run_id"),
                     "outputs": data.get("outputs", {}),
                     "errors": data.get("errors", []),
@@ -429,8 +432,21 @@ def analyze_execution_artifacts(
                     " ".join(str(item) for item in data.get("warnings", [])),
                 ]
             )
+            if returncode not in (None, 0):
+                diagnostics["warnings_detected"].append(
+                    f"execution_result.json reports nonzero returncode: {returncode}"
+                )
+            if success is False:
+                diagnostics["warnings_detected"].append(
+                    "execution_result.json reports success=false"
+                )
     else:
-        diagnostics["warnings_detected"].append("execution_result.json was not found.")
+        if artifact_dir is None:
+            diagnostics["notes"].append(
+                "No run_dir provided; execution artifact checks were limited to available output files."
+            )
+        else:
+            diagnostics["warnings_detected"].append("execution_result.json was not found.")
 
     if artifact_dir:
         stdout_path = artifact_dir / "stdout.txt"
@@ -449,12 +465,16 @@ def analyze_execution_artifacts(
             )
 
     combined = "\n".join(text_blobs).lower()
-    diagnostics["nan_detected"] = bool(re.search(r"\bnan\b", combined))
-    diagnostics["inf_detected"] = bool(re.search(r"\binf\b", combined))
+    diagnostics["nan_detected"] = bool(
+        re.search(r"(?<![a-z0-9_])nan(?![a-z0-9_])", combined)
+    )
+    diagnostics["inf_detected"] = bool(
+        re.search(r"(?<![a-z0-9_])(?:inf|infinity)(?![a-z0-9_])", combined)
+    )
     if diagnostics["nan_detected"] or diagnostics["inf_detected"]:
         diagnostics["nan_or_inf_detected"] = True
         diagnostics["warnings_detected"].append("NaN/Inf detected in execution logs or errors.")
-    if "timeout" in combined or "timed out" in combined:
+    if re.search(r"(?<![a-z0-9_])(?:timeout|timed\s*out)(?![a-z0-9_])", combined):
         diagnostics["timeout_detected"] = True
         diagnostics["warnings_detected"].append("Timeout detected in execution logs or errors.")
 

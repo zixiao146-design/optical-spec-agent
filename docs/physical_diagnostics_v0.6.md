@@ -30,10 +30,43 @@ Supported options:
 
 - `SPEC_PATH` positional argument, for example `outputs/my_spec.json`
 - `--spec <path>` as an explicit alternative to the positional path
+- If both `SPEC_PATH` and `--spec` are provided, `--spec` takes precedence and
+  the report records a warning.
 - `--output-dir <path>` for reports, default `outputs`
 - `--run-dir <path>` for existing Meep execution artifacts
 - `--create-demo-spec-if-missing` to create a traceable core demo spec
 - `--json` for machine-readable CLI output
+
+Machine-readable output:
+
+```bash
+optical-spec diagnose outputs/my_spec.json \
+  --output-dir outputs \
+  --run-dir runs/demo \
+  --json
+```
+
+Example JSON shape:
+
+```json
+{
+  "schema_version": "physical_diagnostics.v0.1",
+  "status": "warning",
+  "spec_path": "outputs/my_spec.json",
+  "output_dir": "outputs",
+  "run_dir": "runs/demo",
+  "generated_outputs": {
+    "mesh_report.csv": "outputs/mesh_report.csv",
+    "flux_report.csv": "outputs/flux_report.csv",
+    "diagnostic_preview.png": "outputs/diagnostic_preview.png",
+    "execution_diagnostics.json": "outputs/execution_diagnostics.json"
+  },
+  "missing_artifacts": [],
+  "nan_detected": false,
+  "inf_detected": false,
+  "timeout_detected": false
+}
+```
 
 ## Backward-Compatible Script
 
@@ -131,6 +164,9 @@ when available. They flag:
 - nonzero return code
 - missing execution artifacts
 
+`NaN` and `Inf` detection uses token-style matching so ordinary words like
+`information` do not trigger `inf_detected`.
+
 The result is written into `execution_diagnostics.json` so the diagnostic chain
 is auditable after the run.
 
@@ -149,6 +185,31 @@ The top-level JSON includes at least:
 - `inf_detected`
 - `timeout_detected`
 - `notes`
+
+## Acceptance Checklist
+
+The v0.6 diagnostics acceptance path is:
+
+```bash
+optical-spec diagnose outputs/my_spec.json \
+  --output-dir outputs \
+  --run-dir runs/demo \
+  --create-demo-spec-if-missing \
+  --json
+```
+
+Expected behavior:
+
+- Missing spec + `--create-demo-spec-if-missing` creates a traceable demo spec.
+- Missing spec without the flag returns a nonzero exit code.
+- Missing `stdout.txt`, `stderr.txt`, `execution_result.json`, or
+  `run_manifest.json` is recorded in `missing_artifacts` and does not crash.
+- Corrupted `execution_result.json` is reported as a warning.
+- Nonzero `returncode` or `success=false` in `execution_result.json` makes the
+  report status at least `warning`.
+- `mesh_report.csv`, `flux_report.csv`, `execution_diagnostics.json`, and
+  `diagnostic_preview.png` are always written when the spec can be loaded.
+- No test requires Meep to be installed locally.
 
 ## Benchmark Report
 

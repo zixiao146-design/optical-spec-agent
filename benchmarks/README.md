@@ -13,9 +13,9 @@ boundary, single-particle, and waveguide variations.
 | `key_fields` | Only core fields must be present with `confirmed`/`inferred` status | Assessing parser extraction quality — resilient to non-breaking output changes |
 | `all` | Runs both modes | Full check |
 
-For v0.3 reliability, the default CI gate should use `pytest`, `key_fields`,
-and the semantic benchmark. `exact` remains a manual regression tool for
-intentional parser-change review, not the default CI gate.
+The default CI gate should use `pytest`, `key_fields`, and the semantic
+benchmark. `exact` remains a manual regression tool for intentional
+parser-change review, not the default CI gate.
 
 Semantic benchmark:
 

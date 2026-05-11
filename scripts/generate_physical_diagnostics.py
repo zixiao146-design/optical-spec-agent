@@ -61,17 +61,25 @@ def main() -> int:
         return 1
     if created_demo:
         print(f"Created demo spec from core hero task: {spec_path}", file=sys.stderr)
-
-    result = generate_physical_diagnostics(
-        spec_path=spec_path,
-        output_dir=args.output_dir,
-        artifact_dir=args.artifact_dir,
-        execution_result_path=args.execution_result,
-        spectrum_path=args.spectrum,
-        flux_surfaces_path=args.flux_surfaces,
-        resolution_px_per_um=args.resolution,
-        create_preview=not args.no_preview,
+    initial_warnings = (
+        [f"Created demo spec from core hero task: {spec_path}"] if created_demo else []
     )
+
+    try:
+        result = generate_physical_diagnostics(
+            spec_path=spec_path,
+            output_dir=args.output_dir,
+            artifact_dir=args.artifact_dir,
+            execution_result_path=args.execution_result,
+            spectrum_path=args.spectrum,
+            flux_surfaces_path=args.flux_surfaces,
+            resolution_px_per_um=args.resolution,
+            create_preview=not args.no_preview,
+            initial_warnings=initial_warnings,
+        )
+    except Exception as exc:
+        print(f"Could not generate diagnostics: {exc}", file=sys.stderr)
+        return 1
 
     if args.json:
         print(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))

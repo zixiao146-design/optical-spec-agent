@@ -32,7 +32,7 @@ repo is current local/manual diagnostic work, not a production simulation claim.
 |---|---|
 | **Demo outputs** | 3 real parser outputs — [gap plasmon](examples/outputs/demo_gap_plasmon_sweep.json), [gold cross](examples/outputs/demo_asymmetric_cross.json), [waveguide mode](examples/outputs/demo_comsol_waveguide.json) |
 | **Adapter** | Meep script generator with `preview`, `research-preview`, and `smoke` modes (nanoparticle_on_film only) — see [adapter doc](docs/meep_adapter_v0.md) |
-| **Benchmark** | 16 golden cases + 5 semantic benchmark cases for Meep reliability — `python benchmarks/run_benchmark.py --mode all` and `python benchmarks/run_semantic_benchmark.py` |
+| **Benchmark** | 16 golden cases + 15 semantic benchmark cases for Meep reliability — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
 | **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
 
 ## Why this project?
@@ -167,6 +167,11 @@ optical-spec diagnose outputs/my_spec.json \
   --output-dir outputs \
   --run-dir runs/demo \
   --create-demo-spec-if-missing
+
+optical-spec diagnose outputs/my_spec.json \
+  --output-dir outputs \
+  --run-dir runs/demo \
+  --json
 
 # Manual/local Meep integration gates, not default CI gates
 python scripts/local_meep_integration_gate.py --mode smoke
