@@ -51,12 +51,13 @@ and safe parser evolution:
 - → optional local Meep execution artifacts when Meep is installed
 - → v0.8 rule / llm / hybrid parser modes, with rule still the default
 - → deterministic local mock LLM provider for tests and demos; no external API required
+- → v0.9 synchronous workflow orchestration with auditable artifacts and replay
 
 The released baseline is v0.5.0. Current v0.6 work is local/manual diagnostics
 for physical-candidate stability, spectrum consistency, mesh sanity, and monitor
-geometry. Current v0.7/v0.8 main-branch work adds adapter scaffolds and LLM
-parser foundation. Keep these capabilities honest: they are not production
-validation.
+geometry. Current v0.7/v0.8/v0.9 main-branch work adds adapter scaffolds, LLM
+parser foundation, and local workflow orchestration. Keep these capabilities
+honest: they are not production validation.
 
 ## 当前优先级
 
@@ -70,10 +71,12 @@ validation.
 - → 如果本地安装 Meep，则可选生成 execution artifacts
 - → v0.8 增加 rule / llm / hybrid parser 模式，但默认仍然是 rule-based
 - → LLM 测试和 demo 使用确定性的本地 mock provider，不需要外部 API
+- → v0.9 同步 workflow orchestration，输出可审计 artifacts 并支持 replay
 
 已发布基线是 v0.5.0。当前 v0.6 工作是 local/manual diagnostics，包括
 physical-candidate stability、spectrum consistency、mesh sanity 和 monitor geometry。
-当前 v0.7/v0.8 main branch 工作增加 adapter scaffolds 和 LLM parser foundation。
+当前 v0.7/v0.8/v0.9 main branch 工作增加 adapter scaffolds、LLM parser foundation
+和 local workflow orchestration。
 这些能力必须保持诚实：它们不是 production validation。
 
 ## Important files

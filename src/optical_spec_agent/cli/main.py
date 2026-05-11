@@ -671,6 +671,191 @@ def diagnose(
         raise typer.Exit(1)
 
 
+# ---- workflow orchestration ----
+
+@app.command("workflow-plan")
+def workflow_plan(
+    text: str = typer.Argument(..., help="Natural language task description"),
+    parser_name: str = typer.Option("rule", "--parser", help="Parser mode: rule, llm, or hybrid"),
+    llm_provider: str = typer.Option("mock", "--llm-provider", help="LLM provider: mock or disabled"),
+    tool: str = typer.Option("auto", "--tool", help="Adapter tool: auto, meep, mpb, gmsh, elmer, optiland"),
+    output: Path | None = typer.Option(None, "--output", help="Write workflow_plan.json"),
+    json_output: bool = typer.Option(False, "--json", help="Print plan as JSON"),
+):
+    """Plan a synchronous local workflow without generating solver input."""
+    from optical_spec_agent.workflows import plan_workflow
+
+    try:
+        plan = plan_workflow(
+            text,
+            parser=parser_name,
+            llm_provider=llm_provider,
+            tool=tool,
+            output=output,
+        )
+    except Exception as exc:
+        if json_output:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Workflow plan error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    payload = plan.model_dump(mode="json")
+    if json_output:
+        typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        return
+
+    console.print("[bold]Workflow plan[/bold]")
+    console.print(f"Parser: {plan.parser_mode}")
+    console.print(f"Selected tool: {plan.selected_tool}")
+    console.print("Planned steps: " + ", ".join(plan.planned_steps))
+    console.print("Expected artifacts:")
+    for item in plan.expected_artifacts:
+        console.print(f"  - {item}")
+    if output:
+        console.print(f"[dim]Plan written to {output}[/dim]")
+    if plan.warnings:
+        console.print("[yellow]Warnings:[/yellow]")
+        for warning in plan.warnings:
+            console.print(f"  - {warning}")
+
+
+@app.command("workflow-run")
+def workflow_run(
+    text: str = typer.Argument(..., help="Natural language task description"),
+    parser_name: str = typer.Option("rule", "--parser", help="Parser mode: rule, llm, or hybrid"),
+    llm_provider: str = typer.Option("mock", "--llm-provider", help="LLM provider: mock or disabled"),
+    tool: str = typer.Option("auto", "--tool", help="Adapter tool: auto, meep, mpb, gmsh, elmer, optiland"),
+    output_dir: Path = typer.Option(Path("outputs/workflows/demo"), "--output-dir", help="Workflow output directory"),
+    no_execute: bool = typer.Option(False, "--no-execute", help="Do not execute solvers; this is the default"),
+    execute_meep: bool = typer.Option(False, "--execute-meep", help="Allow optional local Meep execution"),
+    strict: bool = typer.Option(False, "--strict", help="Stop on step errors"),
+    strict_execution: bool = typer.Option(False, "--strict-execution", help="Treat Meep execution failure as an error"),
+    continue_on_warning: bool = typer.Option(True, "--continue-on-warning/--fail-on-warning", help="Continue when a step warns"),
+    run_diagnostics: bool = typer.Option(True, "--run-diagnostics/--no-diagnostics", help="Run post-hoc diagnostics when applicable"),
+    run_eval: bool = typer.Option(False, "--run-eval", help="Run lightweight workflow evaluation"),
+    json_output: bool = typer.Option(False, "--json", help="Print workflow_run.json as JSON"),
+):
+    """Run a synchronous local workflow and write workflow_run.json."""
+    from optical_spec_agent.workflows import WorkflowRunner, WorkflowRunnerConfig
+
+    allow_execute = bool(execute_meep and not no_execute)
+    config = WorkflowRunnerConfig(
+        parser=parser_name,
+        llm_provider=llm_provider,
+        tool=tool,
+        output_dir=output_dir,
+        allow_execute=allow_execute,
+        strict=strict,
+        strict_execution=strict_execution,
+        continue_on_warning=continue_on_warning,
+        run_diagnostics=run_diagnostics,
+        run_eval=run_eval,
+    )
+    try:
+        result = WorkflowRunner(config).run(text)
+    except Exception as exc:
+        if json_output:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Workflow run error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    payload = result.model_dump(mode="json")
+    if json_output:
+        typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        if result.status == "error":
+            raise typer.Exit(1)
+        return
+
+    _print_workflow_run_summary(payload)
+    if result.status == "error":
+        raise typer.Exit(1)
+
+
+@app.command("workflow-replay")
+def workflow_replay(
+    workflow_run_json: Path = typer.Argument(..., help="Path to workflow_run.json"),
+    output_dir: Path = typer.Option(Path("outputs/workflows/replay"), "--output-dir", help="Replay output directory"),
+    json_output: bool = typer.Option(False, "--json", help="Print replay report JSON"),
+):
+    """Replay a workflow_run.json with deterministic local settings."""
+    from optical_spec_agent.workflows import replay_workflow
+
+    try:
+        report = replay_workflow(workflow_run_json, output_dir=output_dir)
+    except Exception as exc:
+        if json_output:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Workflow replay error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    payload = report.model_dump(mode="json")
+    if json_output:
+        typer.echo(json.dumps(payload, indent=2, ensure_ascii=False))
+        return
+    console.print("[bold]Workflow replay[/bold]")
+    console.print(f"Original run: {report.original_run_id}")
+    console.print(f"Replay run: {report.replay_run_id}")
+    console.print(f"Deterministic match: {'yes' if report.deterministic_match else 'no'}")
+    console.print(f"[dim]Replay report written under {output_dir / 'replay' / 'replay_report.json'}[/dim]")
+
+
+@app.command("workflow-report")
+def workflow_report(
+    workflow_run_json: Path = typer.Argument(..., help="Path to workflow_run.json"),
+    report_format: str = typer.Option("markdown", "--format", help="Report format: markdown or json"),
+    output: Path | None = typer.Option(None, "--output", help="Write report to file"),
+    json_output: bool = typer.Option(False, "--json", help="Print report payload as JSON"),
+):
+    """Render a workflow_run.json as Markdown or JSON."""
+    from optical_spec_agent.workflows import load_workflow_run, render_workflow_report, write_workflow_report
+
+    try:
+        workflow = load_workflow_run(workflow_run_json)
+        rendered = render_workflow_report(workflow, fmt=report_format)
+        if output:
+            write_workflow_report(workflow_run_json, output=output, fmt=report_format)
+    except Exception as exc:
+        if json_output:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Workflow report error:[/red] {exc}")
+        raise typer.Exit(1)
+
+    if json_output:
+        typer.echo(json.dumps(rendered, indent=2, ensure_ascii=False) if isinstance(rendered, dict) else json.dumps({"report": rendered}, indent=2, ensure_ascii=False))
+        return
+    if output:
+        console.print(f"[green]Workflow report written to {output}[/green]")
+    else:
+        console.print_json(json.dumps(rendered, ensure_ascii=False)) if isinstance(rendered, dict) else console.print(rendered)
+
+
+def _print_workflow_run_summary(payload: dict) -> None:
+    status_style = {"success": "green", "warning": "yellow", "error": "red"}.get(
+        payload["status"],
+        "white",
+    )
+    console.print(f"[{status_style}]Status: {payload['status']}[/{status_style}]")
+    console.print(f"Run ID: {payload['run_id']}")
+    console.print(f"Parser: {payload['parser_mode']}")
+    console.print(f"Selected tool: {payload['selected_tool']}")
+    console.print(f"Output dir: {payload['output_dir']}")
+    console.print("[green]Artifacts:[/green]")
+    for name, artifact in payload.get("artifacts", {}).items():
+        console.print(f"  - {name}: {artifact['path']}")
+    if payload.get("warnings"):
+        console.print("[yellow]Warnings:[/yellow]")
+        for warning in payload["warnings"]:
+            console.print(f"  - {warning}")
+    if payload.get("errors"):
+        console.print("[red]Errors:[/red]")
+        for error in payload["errors"]:
+            console.print(f"  - {error}")
+
+
 def _diagnose_error_payload(*, error: str, spec_path: Path, output_dir: Path) -> dict:
     from optical_spec_agent.analysis import DIAGNOSTICS_SCHEMA_VERSION
 

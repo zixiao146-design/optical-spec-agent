@@ -110,6 +110,12 @@ python benchmarks/run_llm_benchmark.py \
   --report outputs/llm_eval_report.json \
   --summary-csv outputs/llm_eval_summary.csv
 
+# Workflow orchestration benchmark
+python benchmarks/run_workflow_benchmark.py \
+  --cases benchmarks/workflow_cases.json \
+  --output-dir outputs/workflow_benchmark \
+  --report outputs/workflow_benchmark_report.json
+
 # Update golden snapshots after intentional parser changes
 python benchmarks/run_benchmark.py --update
 ```
@@ -158,3 +164,16 @@ records:
 
 It does not test real external LLM providers, solver execution, or physical
 correctness.
+
+## v0.9 workflow benchmark focus
+
+The workflow benchmark checks synchronous local orchestration completeness:
+
+- expected workflow steps are present;
+- expected artifacts such as `workflow_run.json`, `spec.json`, generated input,
+  diagnostics, and review checklists are written;
+- default workflows do not claim external solvers were executed;
+- workflow runs remain deterministic with the mock parser provider.
+
+It does not test async orchestration, cloud execution, external solvers, or
+production-grade physical validation.

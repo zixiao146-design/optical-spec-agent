@@ -25,7 +25,8 @@ automation or production-grade physical validation.
 
 Release status: the packaged baseline in `pyproject.toml` is `v0.5.0`.
 The main branch also contains v0.6 local/manual diagnostics, a v0.7
-multi-solver adapter MVP release candidate, and v0.8 LLM parser foundation work.
+multi-solver adapter MVP release candidate, v0.8 LLM parser foundation work,
+and v0.9 synchronous workflow orchestration foundation work.
 The formal GitHub release may lag behind main; treat unreleased main-branch
 capabilities as preview/scaffold/evaluation work, not production simulation
 claims.
@@ -38,6 +39,7 @@ claims.
 | **Adapter** | Meep script generator plus v0.7 MVP preview adapters for MPB, Gmsh, Elmer, and Optiland — see [adapter doc](docs/adapter_mvp_v0.7.md) |
 | **Generic adapter CLI** | `optical-spec adapter-list` and `optical-spec adapter-generate` route specs to solver-native input scaffolds; adapters do not run external solvers |
 | **Parser modes** | `rule` remains default; v0.8 adds provider-agnostic `llm` and conservative `hybrid` modes with deterministic `mock` provider |
+| **Workflow orchestration** | v0.9 adds `workflow-plan`, `workflow-run`, `workflow-replay`, and `workflow-report` for auditable local orchestration |
 | **Benchmark** | 16 golden cases + 27 semantic benchmark cases for Meep reliability and v0.7 adapter intent routing — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
 | **Validation** | `make check` runs pytest + key-field benchmark + semantic benchmark |
 
@@ -50,12 +52,15 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 packaged baseline + v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation)
+## Current scope (v0.5 packaged baseline + v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
 additional open-source tools. `v0.8` adds a provider-agnostic LLM parser
 foundation with deterministic mock evaluation and conservative hybrid fallback.
+`v0.9` adds synchronous local workflow orchestration around those existing
+capabilities, with auditable step artifacts, replay, reports, human-review
+checklists, and workflow benchmarks.
 These are reviewable engineering aids, not production-grade physical validation.
 
 The current loop:
@@ -65,9 +70,11 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
                                                                ↓
                                               adapter-generate / meep-generate
                                                                ↓
-                                  Meep / MPB / Gmsh / Elmer / Optiland input
+                                 Meep / MPB / Gmsh / Elmer / Optiland input
                                                                ↓ (Meep only, optional explicit command)
                                                     Meep execution harness
+                                                               ↓
+                                      workflow_run.json / report / replay / review checklist
 ```
 
 **What works:**
@@ -100,9 +107,16 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - v0.8 parser registry with `rule`, `llm`, and `hybrid` parser modes
 - Deterministic mock LLM provider for tests, demos, and no-external-API evaluation
 - Schema-guided LLM prompt builder, JSON extraction/repair, rule fallback, parser reports, and LLM benchmark report
+- v0.9 synchronous workflow orchestration:
+  `workflow-plan`, `workflow-run`, `workflow-replay`, and `workflow-report`
+- Workflow artifacts: `workflow_run.json`, `workflow_plan.json`,
+  step JSON files, generated input, diagnostics, `human_review_checklist.md`,
+  and workflow summaries
+- Deterministic workflow benchmark for local orchestration completeness checks
 - Schema stability policy: 20+ core fields frozen for 0.x
 
 **What does NOT work yet:**
+- Async/background orchestration, cloud execution, or long-running worker queues
 - Mandatory or production external LLM provider integration
 - LLM-based physical correctness validation; LLM parsing only extracts candidate specs
 - Full solver automation or production-grade result interpretation
@@ -112,6 +126,7 @@ Natural language  →  Rule-based parser  →  Structured spec JSON  →  Valida
 - Production-ready MPB/Gmsh/Elmer/Optiland inputs; current outputs are annotated MVP scaffolds
 - Production-grade visualization or plotting pipeline
 - Solver result interpretation by LLM
+- Workflow output is orchestration/scaffolding/evaluation, not scientific proof
 - Optiland is scaffold-level because `OpticalSpec` does not yet encode a full sequential lens prescription
 - Gmsh/Elmer need richer FEM geometry, material, mesh, and boundary-condition schema before production use
 
@@ -174,6 +189,26 @@ optical-spec llm-eval benchmarks/llm_cases.json \
   --parser hybrid \
   --llm-provider mock \
   --report outputs/llm_eval_report.json
+
+# v0.9 synchronous local workflow orchestration
+optical-spec workflow-plan \
+  "用 Meep FDTD 仿真金纳米球-金膜 gap plasmon，扫 gap 5 到 25 nm，输出散射谱和 FWHM。" \
+  --parser rule \
+  --tool auto
+
+optical-spec workflow-run \
+  "用 MPB 计算二维光子晶体 band diagram，扫 Γ-X-M-Γ k 点，输出前 8 条能带。" \
+  --parser hybrid \
+  --llm-provider mock \
+  --tool mpb \
+  --output-dir outputs/workflows/mpb_demo \
+  --no-execute
+
+optical-spec workflow-replay outputs/workflows/mpb_demo/workflow_run.json \
+  --output-dir outputs/workflows/mpb_demo_replay
+
+optical-spec workflow-report outputs/workflows/mpb_demo/workflow_run.json \
+  --output outputs/workflows/mpb_demo/report.md
 
 # Save output to file
 optical-spec parse "..." -o outputs/my_spec.json
@@ -611,6 +646,14 @@ optical-spec-agent/
 │   ├── execution/
 │   │   ├── meep_runner.py           # Optional Meep availability/run harness
 │   │   └── __init__.py
+│   ├── workflows/                   # v0.9 synchronous local workflow orchestration
+│   │   ├── models.py                # WorkflowRun, WorkflowPlan, artifacts, step results
+│   │   ├── planner.py               # workflow-plan implementation
+│   │   ├── runner.py                # workflow-run orchestration
+│   │   ├── replay.py                # workflow-replay support
+│   │   ├── reports.py               # workflow-report rendering
+│   │   ├── registry.py              # default agent registry
+│   │   └── agents/                  # intake, parse, validate, generate, diagnose, report
 │   ├── analysis/
 │   │   ├── spectrum_compare.py      # Local spectrum consistency metrics
 │   │   ├── mesh_sanity.py           # Local mesh-resolution diagnostics
@@ -646,6 +689,14 @@ optical-spec-agent/
 │   ├── test_api_llm_parse.py
 │   ├── test_llm_benchmark.py
 │   ├── test_llm_guardrails.py
+│   ├── test_workflow_models.py
+│   ├── test_workflow_agents.py
+│   ├── test_workflow_runner.py
+│   ├── test_workflow_cli.py
+│   ├── test_workflow_api.py
+│   ├── test_workflow_replay.py
+│   ├── test_workflow_reports.py
+│   ├── test_workflow_benchmark.py
 │   ├── test_validator.py
 │   ├── test_meep_adapter.py         # Meep adapter tests
 │   ├── test_adapter_registry.py
@@ -692,9 +743,11 @@ optical-spec-agent/
 │   ├── golden_cases.json
 │   ├── semantic_cases.json
 │   ├── llm_cases.json
+│   ├── workflow_cases.json
 │   ├── run_benchmark.py
 │   ├── run_semantic_benchmark.py
-│   └── run_llm_benchmark.py
+│   ├── run_llm_benchmark.py
+│   └── run_workflow_benchmark.py
 ├── docs/
 │   ├── open_source_stack.md              # Tool-stack rationale and per-tool specs
 │   ├── open_source_integration_focus.md  # Adapter priority tiers and Meep-first rationale
@@ -715,6 +768,10 @@ optical-spec-agent/
 │   ├── provenance_policy_v0.8.md       # Parser provenance policy
 │   ├── release_readiness_v0.8.md       # v0.8 readiness checklist
 │   ├── release_notes_v0.8.0.md         # Draft v0.8 release notes
+│   ├── workflow_orchestration_v0.9.md  # v0.9 workflow architecture and CLI/API/SDK
+│   ├── workflow_benchmark_v0.9.md      # v0.9 workflow benchmark format
+│   ├── release_readiness_v0.9.md       # v0.9 readiness checklist
+│   ├── release_notes_v0.9.0.md         # Draft v0.9 release notes
 │   ├── schema_stability.md              # Stable field surface for 0.x
 │   ├── adapter_architecture.md
 │   ├── demo_output.md
@@ -738,8 +795,8 @@ optical-spec-agent/
 | **v0.5** | Meep execution harness + auditable artifacts + low-cost diagnostic pipeline | **Meep** (FDTD) | **Done** |
 | v0.6 | Meep physical-candidate hardening + spectrum sanity metrics | **Meep** (FDTD) | Done / local evidence |
 | v0.7 | Multi-solver adapter foundation + MPB/Gmsh/Elmer/Optiland MVP scaffolds | **MPB** / **Gmsh** / **Elmer** / **Optiland** | Main branch MVP / release candidate |
-| v0.8 | LLM parser foundation + mock provider + hybrid evaluation | — | Current / main branch foundation |
-| v0.9 | Multi-agent orchestration | — | Planned |
+| v0.8 | LLM parser foundation + mock provider + hybrid evaluation | — | Main branch foundation |
+| v0.9 | Synchronous local workflow orchestration + replay/report/benchmark | — | Current / main branch foundation |
 
 **Why Meep first:** Pure Python API, spec fields map 1:1 to Meep objects, and a working adapter proves the full NL → spec → simulation chain. See [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for the prioritization rationale.
 

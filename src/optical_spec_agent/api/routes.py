@@ -51,6 +51,29 @@ class ValidateResponse(BaseModel):
     missing_fields: list[str]
 
 
+class WorkflowPlanRequest(BaseModel):
+    text: str
+    parser: str = "rule"
+    llm_provider: str = "mock"
+    tool: str = "auto"
+
+
+class WorkflowRunRequest(BaseModel):
+    text: str
+    parser: str = "rule"
+    llm_provider: str = "mock"
+    tool: str = "auto"
+    output_dir: str = "outputs/workflows/api"
+    allow_execute: bool = False
+    run_diagnostics: bool = True
+    strict: bool = False
+
+
+class WorkflowReportRequest(BaseModel):
+    workflow_run: dict[str, Any]
+    format: str = "markdown"
+
+
 # ---- Routes ----
 
 @router.get("/health")
@@ -117,3 +140,57 @@ def validate(req: ValidateRequest):
 def get_schema():
     """Export the JSON Schema for the OpticalSpec model."""
     return OpticalSpec.export_json_schema_dict()
+
+
+@router.post("/workflow/plan")
+def workflow_plan(req: WorkflowPlanRequest):
+    """Plan a synchronous local workflow. Does not run solvers."""
+    from optical_spec_agent.parsers.llm.client import LLMProviderError
+    from optical_spec_agent.workflows import plan_workflow
+
+    try:
+        return plan_workflow(
+            req.text,
+            parser=req.parser,
+            llm_provider=req.llm_provider,
+            tool=req.tool,
+        ).model_dump(mode="json")
+    except LLMProviderError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/workflow/run")
+def workflow_run(req: WorkflowRunRequest):
+    """Run a synchronous local workflow. API defaults to no solver execution."""
+    from pathlib import Path
+
+    from optical_spec_agent.parsers.llm.client import LLMProviderError
+    from optical_spec_agent.workflows import WorkflowRunner, WorkflowRunnerConfig
+
+    try:
+        config = WorkflowRunnerConfig(
+            parser=req.parser,
+            llm_provider=req.llm_provider,
+            tool=req.tool,
+            output_dir=Path(req.output_dir),
+            allow_execute=req.allow_execute,
+            run_diagnostics=req.run_diagnostics,
+            strict=req.strict,
+        )
+        return WorkflowRunner(config).run(req.text).model_dump(mode="json")
+    except LLMProviderError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/workflow/report")
+def workflow_report(req: WorkflowReportRequest):
+    """Render a workflow report from a workflow_run object."""
+    from optical_spec_agent.workflows import render_workflow_report
+    from optical_spec_agent.workflows.models import WorkflowRun
+
+    try:
+        workflow = WorkflowRun.model_validate(req.workflow_run)
+        content = render_workflow_report(workflow, fmt=req.format)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"format": req.format, "content": content}
