@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import subprocess
 import sys
@@ -10,6 +11,15 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _load_docs_check_module():
+    path = ROOT / "scripts" / "check_docs_consistency.py"
+    spec = importlib.util.spec_from_file_location("check_docs_consistency_for_tests", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _run(args: list[str]) -> subprocess.CompletedProcess[str]:
@@ -80,6 +90,62 @@ def test_docs_consistency_check_runs():
     report = json.loads(result.stdout)
     assert report["schema_version"] == "docs_consistency_check.v0.1"
     assert report["errors"] == []
+
+
+def test_bilingual_readme_contract_present():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_zh = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+    assert "README.zh-CN.md" in readme
+    assert "README.md" in readme_zh
+    assert "0.9.0rc1" in readme_zh
+    assert "不是求解器" in readme_zh
+    assert "不提供 production-grade physical validation" in readme_zh
+    assert "MVP/scaffold" in readme_zh
+    assert "workflow" in readme_zh
+    assert "本地同步" in readme_zh
+
+
+def test_docs_consistency_detects_missing_chinese_readme(tmp_path, monkeypatch):
+    module = _load_docs_check_module()
+    docs = tmp_path / "docs"
+    src = tmp_path / "src" / "optical_spec_agent"
+    docs.mkdir()
+    src.mkdir(parents=True)
+    (tmp_path / "README.md").write_text(
+        """
+# optical-spec-agent
+
+Release status: current package version is 0.9.0rc1 release candidate.
+
+## Current scope
+## What works
+## What does NOT work yet
+## Quick start
+## Roadmap
+## License
+""".strip(),
+        encoding="utf-8",
+    )
+    (tmp_path / "pyproject.toml").write_text(
+        """
+[project]
+name = "optical-spec-agent"
+version = "0.9.0rc1"
+""".strip(),
+        encoding="utf-8",
+    )
+    (docs / "versioning_policy.md").write_text("policy\n", encoding="utf-8")
+    (docs / "release_readiness_current.md").write_text("0.9.0rc1\n", encoding="utf-8")
+
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    monkeypatch.setattr(module, "README", tmp_path / "README.md")
+    monkeypatch.setattr(module, "README_ZH", tmp_path / "README.zh-CN.md")
+    monkeypatch.setattr(module, "DOCS", docs)
+    monkeypatch.setattr(module, "SRC", src)
+
+    report = module.build_report()
+    assert report["status"] == "blocked"
+    assert "README.zh-CN.md is missing." in report["errors"]
 
 
 def test_release_readiness_report_schema(tmp_path):

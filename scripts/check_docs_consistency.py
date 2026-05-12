@@ -13,6 +13,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
+README_ZH = ROOT / "README.zh-CN.md"
 DOCS = ROOT / "docs"
 SRC = ROOT / "src" / "optical_spec_agent"
 
@@ -59,6 +60,15 @@ NEGATION_HINTS = [
     "contradict",
     "imply",
     "must not",
+    "不是",
+    "不提供",
+    "不运行",
+    "不默认",
+    "不能",
+    "不会",
+    "限制",
+    "已知限制",
+    "不是最终",
 ]
 
 
@@ -69,7 +79,9 @@ def _line_is_negated(line: str) -> bool:
 
 def _scan_misleading_claims() -> list[str]:
     findings: list[str] = []
-    for path in [README, *sorted(DOCS.glob("*.md"))]:
+    for path in [README, README_ZH, *sorted(DOCS.glob("*.md"))]:
+        if not path.exists():
+            continue
         lines = path.read_text(encoding="utf-8").splitlines()
         for lineno, line in enumerate(lines, start=1):
             lowered = line.lower()
@@ -114,9 +126,39 @@ def build_report() -> dict[str, Any]:
     else:
         readme_text = README.read_text(encoding="utf-8")
 
+    if not README_ZH.exists():
+        errors.append("README.zh-CN.md is missing.")
+        readme_zh_text = ""
+    else:
+        readme_zh_text = README_ZH.read_text(encoding="utf-8")
+
     for phrase in README_REQUIRED_PHRASES:
         if phrase not in readme_text:
             errors.append(f"README.md must include `{phrase}`.")
+
+    if "README.zh-CN.md" not in readme_text:
+        errors.append("README.md must link to README.zh-CN.md.")
+    if "README.md" not in readme_zh_text:
+        errors.append("README.zh-CN.md must link back to README.md.")
+
+    bilingual_requirements = [
+        ("0.9.0rc1", "README.zh-CN.md must mention 0.9.0rc1."),
+        ("release candidate", "README.zh-CN.md must mention release candidate status."),
+        ("不是求解器", "README.zh-CN.md must state that the project is not a solver."),
+        (
+            "不提供 production-grade physical validation",
+            "README.zh-CN.md must state no production-grade physical validation.",
+        ),
+        ("adapter outputs", "README.zh-CN.md must discuss adapter outputs."),
+        ("MVP/scaffold", "README.zh-CN.md must discuss MVP/scaffold limitations."),
+        ("workflow", "README.zh-CN.md must discuss workflow scope."),
+        ("本地同步", "README.zh-CN.md must state workflow is local/synchronous."),
+    ]
+    for needle, message in bilingual_requirements:
+        if needle not in readme_zh_text:
+            errors.append(message)
+    if "release candidate" not in readme_text:
+        errors.append("README.md must mention release candidate status.")
 
     if (DOCS / "llm_parser_v0.8.md").exists() and "parser" not in readme_text.lower():
         errors.append("README.md should mention parser modes because LLM parser docs exist.")
@@ -148,6 +190,10 @@ def build_report() -> dict[str, Any]:
             )
             if version and version not in readme_text:
                 errors.append(f"README.md does not mention current pyproject version {version}.")
+            if version and version not in readme_zh_text:
+                errors.append(
+                    f"README.zh-CN.md does not mention current pyproject version {version}."
+                )
             if version and version not in current_text:
                 errors.append(
                     f"release_readiness_current.md does not mention current pyproject version {version}."

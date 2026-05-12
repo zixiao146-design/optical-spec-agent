@@ -33,6 +33,9 @@ auditable scaffolds before they become formal releases.
 - Adapter scaffolds, diagnostics, workflow reports, and mock LLM evaluation must
   not be described as production solver results.
 - Release notes must say "Draft" unless a tag/release has actually been created.
+- `README.md` is the English default entrypoint. `README.zh-CN.md` is the
+  complete Simplified Chinese entrypoint. Both README files must keep release
+  status, limitations, and release-candidate language consistent.
 
 ## Version Bump Options
 

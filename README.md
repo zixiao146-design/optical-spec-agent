@@ -1,5 +1,7 @@
 # optical-spec-agent
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 [![Tests](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml/badge.svg)](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml)
 
 > Convert optical simulation requests into validated, solver-ready spec JSON — and generate solver-native input scaffolds.
@@ -36,6 +38,15 @@ See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 current release policy and release-readiness matrix. Use
 [`docs/release_decision_matrix.md`](docs/release_decision_matrix.md) to decide
 how the `0.9.0rc1` candidate was chosen and what remains manual.
+
+## 中文概览
+
+optical-spec-agent 是一个面向光学仿真的规格编译层：它把中英文自然语言
+仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
+Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前版本
+`v0.9.0rc1` 是 release candidate，不是最终稳定版。本项目不是求解器，也
+不提供 production-grade physical validation。完整中文文档见
+[README.zh-CN.md](README.zh-CN.md)。
 
 ## At a glance
 

@@ -29,6 +29,15 @@ This release candidate packages the current main-branch engineering surface:
 - Release engineering quality gates for tests, benchmarks, docs consistency,
   CLI surface, artifact contracts, package build, and release dry-runs.
 
+## 中文简介
+
+`v0.9.0rc1` 是 optical-spec-agent 的 release candidate，不是最终稳定
+`1.0`。它把中英文自然语言光学仿真需求转换为经过校验的 OpticalSpec JSON，
+并可生成 Meep / MPB / Gmsh / Elmer / Optiland 的 solver-native input
+scaffold。本项目不是求解器，不提供 production-grade physical validation，也
+不提供 formal convergence proof。外部 solver 默认不运行，外部 LLM 默认不
+需要；workflow 是本地同步 preview。完整中文说明见 `README.zh-CN.md`。
+
 ## What Changed
 
 - Added `optical-spec diagnose` for post-hoc diagnostics.

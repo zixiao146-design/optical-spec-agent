@@ -9,6 +9,9 @@ maintainer after review.
 - Confirm `src/optical_spec_agent/__init__.py` has `__version__ = "0.9.0rc1"`.
 - Confirm README describes `0.9.0rc1` as a release candidate, not final stable
   `1.0`.
+- Confirm `README.md` has a language switch.
+- Confirm `README.zh-CN.md` exists.
+- Confirm Chinese README release status matches English README.
 - Confirm `python scripts/check_release_readiness.py` reports ready.
 - Confirm `make check` passed.
 - Confirm `python -m build` and `twine check dist/*` passed.

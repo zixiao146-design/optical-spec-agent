@@ -23,6 +23,7 @@ This document describes the current `main` branch. It is not a release tag.
 | MPB/Gmsh/Elmer/Optiland adapters | RC MVP scaffold generation | Do not run external solvers |
 | LLM parser foundation | RC preview | Mock provider is deterministic |
 | Workflow orchestration | RC preview | Local and synchronous |
+| Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 
 ## Quality Gates
 
@@ -59,6 +60,10 @@ manual tag/GitHub release only after maintainer approval.
 - Confirm that default CI remains free of external solver and external LLM
   requirements.
 - Confirm that `0.9.0rc1` should precede final `0.9.0`.
+- Confirm bilingual README support:
+  - `README.md` has a language switch.
+  - `README.zh-CN.md` exists.
+  - Chinese README release status matches the English README.
 
 ## Known Limitations
 
