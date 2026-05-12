@@ -644,6 +644,30 @@ class TestAdapterDefaults:
         assert "Adapter-applied defaults" in result.content
         assert "gap_medium" in result.content
 
+    def test_research_preview_missing_wavelength_golden_regression(self):
+        """Golden regression for local-only defaults; generation must not execute Meep."""
+        adapter = MeepAdapter()
+        spec = _make_valid_spec()
+        spec.simulation.source_setting = confirmed(SourceSetting())
+        spec.simulation.sweep_plan = missing("none")
+
+        with pytest.warns(UserWarning, match="Wavelength range not specified"):
+            result = adapter.generate(spec, script_mode="research-preview")
+
+        assert result.tool == "meep"
+        assert result.language == "python"
+        assert result.metadata["current_status"] == "preview"
+        assert "Generates scripts only; Meep execution is explicit via meep-run." in result.metadata["limitations"]
+        assert "Defaults applied, if any:" in result.content
+        assert "  - wavelength_range: 400–900 nm" in result.content
+        assert "wavelength_min_um = 0.400000" in result.content
+        assert "wavelength_max_um = 0.900000" in result.content
+        assert "defaults_applied = ['wavelength_range: 400–900 nm']" in result.content
+        assert "Research-preview only; not production-grade or publication-ready." in result.content
+        assert "subprocess.run" not in result.content
+        assert "os.system" not in result.content
+        assert any("默认波长范围" in warning for warning in result.warnings)
+
     def test_no_defaults_annotation_when_all_provided(self):
         adapter = MeepAdapter()
         spec = _make_valid_spec()

@@ -20,6 +20,18 @@ fi
 
 echo "Release smoke venv: ${OSA_SMOKE_VENV}"
 echo "Python executable: ${OSA_SMOKE_PYTHON}"
+"${OSA_SMOKE_PYTHON}" --version
+
+PROJECT_VERSION="$("${OSA_SMOKE_PYTHON}" - <<'PY'
+import tomllib
+from pathlib import Path
+
+with Path("pyproject.toml").open("rb") as handle:
+    data = tomllib.load(handle)
+print(data["project"]["version"])
+PY
+)"
+echo "Project version: ${PROJECT_VERSION}"
 
 rm -rf "${OSA_SMOKE_VENV}"
 "${OSA_SMOKE_PYTHON}" -m venv "${OSA_SMOKE_VENV}"
@@ -27,16 +39,38 @@ rm -rf "${OSA_SMOKE_VENV}"
 # shellcheck source=/dev/null
 source "${OSA_SMOKE_VENV}/bin/activate"
 
+echo "Venv Python: $(python --version)"
 python -m pip install --upgrade pip build
 python -m pip install -e ".[test]"
+
+python - <<'PY'
+import importlib.metadata
+import optical_spec_agent
+
+print(f"Installed package version: {importlib.metadata.version('optical-spec-agent')}")
+print(f"Package __version__: {optical_spec_agent.__version__}")
+PY
 
 python -m pytest
 echo "pytest passed"
 
+rm -rf dist build *.egg-info src/*.egg-info
 python -m build
 echo "build passed"
 
 CLI_STATUS="CLI not applicable"
+PROJECT_SCRIPTS="$(python - <<'PY'
+import json
+import tomllib
+from pathlib import Path
+
+with Path("pyproject.toml").open("rb") as handle:
+    data = tomllib.load(handle)
+print(json.dumps(data.get("project", {}).get("scripts", {}), sort_keys=True))
+PY
+)"
+echo "project.scripts: ${PROJECT_SCRIPTS}"
+
 if python - <<'PY'
 import tomllib
 from pathlib import Path
@@ -56,6 +90,21 @@ fi
 
 echo "dist artifacts:"
 ls -lh dist/
+
+python - "${PROJECT_VERSION}" <<'PY'
+import sys
+from pathlib import Path
+
+version = sys.argv[1]
+expected = [
+    Path("dist") / f"optical_spec_agent-{version}-py3-none-any.whl",
+    Path("dist") / f"optical_spec_agent-{version}.tar.gz",
+]
+missing = [str(path) for path in expected if not path.exists()]
+if missing:
+    raise SystemExit(f"ERROR: missing expected dist artifacts for {version}: {missing}")
+print(f"dist version check passed for {version}")
+PY
 
 cat <<EOF
 

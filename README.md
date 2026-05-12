@@ -26,28 +26,29 @@ installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
 Release status: the current package version in `pyproject.toml` is
-`v0.9.0rc2`. This is a release-candidate draft, not a final stable `1.0`
-release.
+`v0.9.0rc2`. This is a verified GitHub pre-release candidate, not a final
+stable `1.0` release.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
-The `v0.9.0rc1` git tag and GitHub pre-release were created after maintainer
-review. `v0.9.0rc2` is being prepared to include the post-release test
-dependency fix; do not treat this repository state as a PyPI publication or
-final stable release by itself.
+The `v0.9.0rc2` git tag and GitHub pre-release were created after maintainer
+review and supersede `v0.9.0rc1` as the current release candidate. PyPI remains
+unpublished, and this repository state is not a final stable release by itself.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
-[`docs/release_decision_matrix.md`](docs/release_decision_matrix.md) to decide
-how the `0.9.0rc1` candidate was chosen and what remains manual.
+[`docs/release_engineering_playbook.md`](docs/release_engineering_playbook.md)
+for the repeatable RC procedure and
+[`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
+the current RC line toward `v1.0`.
 
 ## 中文概览
 
 optical-spec-agent 是一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前 package version
-`v0.9.0rc2` 是 release-candidate draft，不是最终稳定版。本项目不是求解器，也
-不提供 production-grade physical validation。完整中文文档见
+`v0.9.0rc2` 是已经验证的 GitHub pre-release candidate，不是最终稳定版。本项目
+不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
 ## At a glance
@@ -63,9 +64,9 @@ Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前 package versio
 | **Release engineering** | Local checks cover CLI surface, docs consistency, artifact contracts, release readiness, LLM mock benchmark, and workflow benchmark |
 | **Validation** | `make check` runs deterministic tests, parser benchmarks, semantic benchmark, mock LLM benchmark, workflow benchmark, docs/CLI checks, and artifact contract checks |
 
-For `v0.9.0rc1`, maintainers created the GitHub pre-release through the manual
-workflow. `v0.9.0rc2` should use a new tag and pre-release after readiness
-checks pass; do not move the `v0.9.0rc1` tag.
+For `v0.9.0rc2`, maintainers created the GitHub pre-release after release
+smoke validation. Do not move the `v0.9.0rc1` or `v0.9.0rc2` tags; use a new
+candidate tag for future post-release fixes.
 
 ## Why this project?
 
@@ -76,7 +77,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (0.9.0rc2 draft: v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
+## Current scope (0.9.0rc2 RC: v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -197,6 +198,35 @@ execution harness, not a production solver pipeline.
 
 ### CLI
 
+Minimal no-network CLI quickstart:
+
+```bash
+# Inspect the local command surface
+optical-spec --help
+
+# Export schema without contacting any external service
+optical-spec schema --output outputs/schema.json
+
+# Parse and validate with the default rule-based parser
+optical-spec parse \
+  "用 Meep FDTD 仿真金纳米球-金膜 gap plasmon，输出散射谱和 FWHM。" \
+  --output outputs/quickstart_spec.json
+optical-spec validate outputs/quickstart_spec.json
+
+# List adapter scaffolds without running external solvers
+optical-spec adapter-list --json
+
+# Plan a local workflow without executing solvers
+optical-spec workflow-plan \
+  "用 MPB 计算二维光子晶体 band diagram，输出前 8 条能带。" \
+  --parser hybrid \
+  --llm-provider mock \
+  --tool mpb
+```
+
+These examples use local deterministic paths only. External solvers and
+external LLM providers are optional and are not required by default.
+
 ```bash
 # Parse a task description
 optical-spec parse "研究金纳米球-金膜体系中gap从5到25nm变化对散射谱主峰线宽和退相位时间的影响，使用Meep FDTD，提取共振波长、FWHM和T2。"
@@ -235,6 +265,7 @@ optical-spec workflow-report outputs/workflows/mpb_demo/workflow_run.json \
   --output outputs/workflows/mpb_demo/report.md
 
 # Release-engineering checks; these do not run external solvers or external LLM APIs
+OSA_SMOKE_VENV=/tmp/osa-smoke-0.9.0rc2 ./scripts/smoke_release.sh
 make check
 python scripts/check_cli_surface.py
 python scripts/check_docs_consistency.py

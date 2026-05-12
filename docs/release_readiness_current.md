@@ -5,8 +5,12 @@ This document describes the current `main` branch. It is not a release tag.
 ## Current State
 
 - `pyproject.toml` package version: `0.9.0rc2`
-- Status: preparing `0.9.0rc2` release-candidate draft
-- Formal GitHub release/tag: `v0.9.0rc1` exists; `v0.9.0rc2` is not tagged
+- Current release candidate: `v0.9.0rc2`
+- GitHub pre-release created: yes
+- Release verified: yes
+- Post-release status doc: `docs/post_release_status_v0.9.0rc2.md`
+- Latest release-status commit: `0a49fda`
+- PyPI published: no
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
   - v0.7 multi-solver adapter MVP scaffolds
@@ -31,6 +35,7 @@ Run these before proposing a release:
 
 ```bash
 pip install -e ".[dev]"
+OSA_SMOKE_VENV=/tmp/osa-smoke-current ./scripts/smoke_release.sh
 pytest -q
 python benchmarks/run_benchmark.py --mode key_fields
 python benchmarks/run_semantic_benchmark.py
@@ -48,24 +53,20 @@ twine check dist/*
 
 ## Recommended Version Action
 
-Current recommendation: review the prepared `0.9.0rc2` draft, run the release
-smoke test, and create a new tag/GitHub pre-release only after maintainer
-approval.
+Current recommendation: treat `v0.9.0rc2` as the active verified release
+candidate, keep PyPI unpublished, and proceed with `v0.9.0rc3` planning plus
+`v1.0` readiness hardening.
 
 ## Release Blockers
 
-- Human decision needed on whether to tag/publish the prepared `0.9.0rc2` RC.
-- Confirm whether workflow orchestration should be included in the manually
-  published release candidate notes.
-- Confirm that generated adapter scaffolds are still presented as MVP inputs.
-- Confirm that default CI remains free of external solver and external LLM
-  requirements.
-- Confirm that `0.9.0rc2` should supersede `0.9.0rc1` for users who need the
-  post-release test dependency fix.
-- Confirm bilingual README support:
-  - `README.md` has a language switch.
-  - `README.zh-CN.md` exists.
-  - Chinese README release status matches the English README.
+- No hard release blocker is currently recorded for `v0.9.0rc2`.
+- Do not move `v0.9.0rc1` or `v0.9.0rc2`.
+- Do not publish PyPI yet.
+- Keep generated adapter scaffolds presented as MVP inputs.
+- Keep default CI free of external solver and external LLM requirements.
+- Next blocker class: any `v0.9.0rc3` candidate must pass the release smoke
+  script, full tests, build, docs checks, and release readiness checks before a
+  new tag is considered.
 
 ## Known Limitations
 
@@ -80,10 +81,9 @@ approval.
 
 ## Manual Release Checklist
 
-1. Run all quality gates above.
-2. Review `docs/release_notes_current.md`.
-3. Confirm `0.9.0rc2` is the desired candidate version.
-4. Build with `python -m build`.
-5. Check distributions with `twine check dist/*`.
-6. Create a release branch or tag manually.
-7. Publish GitHub/PyPI artifacts manually after review.
+1. Use `docs/post_release_status_v0.9.0rc2.md` as the rc2 source of truth.
+2. Use `docs/v1_0_readiness_plan.md` for the next hardening priorities.
+3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
+4. Prepare `v0.9.0rc3` only if the next hardening patch needs a release
+   candidate.
+5. Keep PyPI unpublished unless explicitly approved.

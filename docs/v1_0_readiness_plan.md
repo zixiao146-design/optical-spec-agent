@@ -1,0 +1,90 @@
+# v1.0 Readiness Plan
+
+## Current baseline
+
+- Current release candidate: `v0.9.0rc2`
+- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc2
+- Release verified: yes
+- Post-release status: `docs/post_release_status_v0.9.0rc2.md`
+- Latest post-release status commit: `0a49fda`
+- PyPI published: no
+
+## What v0.9.0rc2 already proves
+
+- Clean install with the test extra passed: `python -m pip install -e ".[test]"`.
+- Test suite passed: `pytest: 331 passed, 4 warnings`.
+- Build passed and produced wheel/sdist artifacts.
+- `optical-spec --help` passed.
+- Release smoke automation exists: `scripts/smoke_release.sh`.
+- GitHub pre-release was verified with `draft=false` and `prerelease=true`.
+
+These prove the release-candidate engineering path is reproducible enough for
+early adopters. They do not prove physical correctness of generated simulations.
+
+## Remaining limitations
+
+- No PyPI publish has been performed.
+- No production-grade physical validation is claimed.
+- No formal convergence proof is provided.
+- External solvers are not run by default.
+- External LLM providers are not required by default.
+- Adapter outputs remain MVP/scaffold unless separately validated.
+- Workflow orchestration is a local/synchronous preview.
+- The RC is not final `1.0` stability.
+
+## Recommended path to v0.9.0rc3
+
+`v0.9.0rc3` should be a hardening candidate, not a feature expansion. Recommended
+goals:
+
+- Stronger adapter golden-output regression tests.
+- Better workflow replay and dry-run smoke coverage.
+- Clearer CLI quickstart examples for local/no-network usage.
+- Stronger release engineering playbook coverage.
+- Optional external solver validation path documented, but not made default.
+- Physical validation status clarified without overclaiming.
+- PyPI remains unpublished unless explicitly approved.
+
+## Recommended path to v1.0.0
+
+Before `v1.0.0`, maintainers should decide and document:
+
+- Stable public API and CLI contract.
+- Supported adapters and their stability levels.
+- Unsupported assumptions, missing fields, and non-goals.
+- Reproducible release procedure and rollback policy.
+- Production-grade validation plan, or an explicit non-production disclaimer.
+- Versioning policy for previews, RCs, and final releases.
+- PyPI publication decision.
+- Security and token-handling guidance for release operations.
+
+## Immediate engineering priorities
+
+### P0
+
+- Release closure verification.
+- Tag sync verification.
+- Release status visibility.
+- Smoke script reliability.
+
+### P1
+
+- CLI quickstart examples.
+- Adapter golden-output tests.
+- Workflow replay smoke tests.
+- Release playbook.
+
+### P2
+
+- TestPyPI evaluation only with explicit approval.
+- Optional external solver gate.
+- Expanded physical validation examples.
+
+## Explicit non-goals
+
+- Do not publish PyPI yet.
+- Do not move `v0.9.0rc1` or `v0.9.0rc2` tags.
+- Do not create `v0.9.0rc3` yet.
+- Do not claim production-grade physical validation.
+- Do not claim formal convergence proof.
+- Do not require external solver or external LLM by default.
