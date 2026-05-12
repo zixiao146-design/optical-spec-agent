@@ -5,7 +5,9 @@
 - Git tag: `v0.9.0rc1`
 - Tag commit: `3b4cfa83ca74a0c0bcab981614b86bf876974059`
 - Tag commit message: `Add Chinese README support`
+- Release verified: yes
 - GitHub pre-release: created
+- GitHub prerelease flag verified: yes
 - Release title: `optical-spec-agent v0.9.0rc1`
 - Release URL: <https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc1>
 - Release notes source: `docs/github_release_draft_v0.9.0rc1.md`
@@ -37,11 +39,13 @@
 
 ## Verification Notes
 
-- Local `gh` CLI was unavailable during verification.
-- GitHub REST release API was rate-limited from the local network.
-- The public GitHub releases Atom feed showed `v0.9.0rc1` with title
-  `optical-spec-agent v0.9.0rc1` and release notes from
-  `docs/github_release_draft_v0.9.0rc1.md`, including the `中文简介` section.
+- Verification method: GitHub CLI with token authentication.
+- GitHub CLI verification result:
+  - `tagName`: `v0.9.0rc1`
+  - `name`: `optical-spec-agent v0.9.0rc1`
+  - `isDraft`: `false`
+  - `isPrerelease`: `true`
+  - `url`: <https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc1>
 
 ## Remaining Limitations
 
