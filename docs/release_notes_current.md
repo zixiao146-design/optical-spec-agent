@@ -1,7 +1,7 @@
 # Current Draft Release Notes
 
 Draft only. This document summarizes current `main` branch work since the
-the previous `0.5.0` packaged baseline. It prepares `0.9.0rc1` as a release
+previous `0.5.0` packaged baseline. It prepares `0.9.0rc1` as a release
 candidate, pending manual tag/release approval.
 
 ## Summary

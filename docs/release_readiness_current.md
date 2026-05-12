@@ -5,6 +5,7 @@ This document describes the current `main` branch. It is not a release tag.
 ## Current State
 
 - `pyproject.toml` package version: `0.9.0rc1`
+- Status: ready for `0.9.0rc1` manual release-candidate review
 - Formal GitHub release/tag: pending manual maintainer approval
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
