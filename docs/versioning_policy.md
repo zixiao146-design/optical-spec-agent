@@ -36,9 +36,9 @@ auditable scaffolds before they become formal releases.
 
 ## Version Bump Options
 
-- Option A: keep `pyproject.toml` at `0.5.0` and label v0.6-v0.9 work as
-  unreleased main-branch preview. This is conservative and avoids implying a
-  formal release has shipped.
+- Option A: keep package metadata at the historical `0.5.0` baseline and label
+  v0.6-v0.9 work as unreleased main-branch preview. This was the conservative
+  option before `0.9.0rc1` was prepared.
 - Option B: bump to `0.8.0` when parser foundation is the next intended package
   release. This highlights the LLM parser milestone but leaves workflow work as
   preview.

@@ -4,7 +4,9 @@
 
 ## Version and Release Status
 
-- `pyproject.toml` currently advertises the packaged baseline as `0.5.0`.
+- Historical note: when this v0.7 draft was written, the packaged baseline was
+  `0.5.0`. For the current package version, use
+  `docs/release_readiness_current.md`.
 - Main branch contains v0.6 diagnostics and v0.7 adapter MVP work that may be
   ahead of the latest formal GitHub release.
 - This document is a release-candidate checklist only. Do not infer that a

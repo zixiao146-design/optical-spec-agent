@@ -50,8 +50,10 @@ optical-spec workflow-report outputs/workflows/mpb_demo/workflow_run.json --outp
 
 ## Version Note
 
-`pyproject.toml` remains at the packaged baseline `0.5.0`. A formal v0.9 release
-would need an explicit version bump decision and release/tag process.
+Historical note: before the `0.9.0rc1` candidate was prepared, the packaged
+baseline was `0.5.0`. The current release-candidate package metadata is tracked
+in `docs/release_readiness_current.md`; a GitHub tag/release still requires a
+separate manual maintainer action.
 
 ## Release Blockers
 

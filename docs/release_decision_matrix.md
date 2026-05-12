@@ -14,11 +14,12 @@ Do not claim `1.0`, production automation, production-grade physical validation,
 or production-ready solver input. v0.9 is an orchestration and engineering
 readiness milestone, not a scientific validation claim.
 
-## Option A: Keep `0.5.0` Packaged Baseline
+## Option A: Keep Historical `0.5.0` Packaged Baseline
 
 ### Meaning
 
-Keep `pyproject.toml` at `0.5.0` and describe v0.6-v0.9 work as unreleased
+Before Option C was selected, this option would have kept package metadata at
+the historical `0.5.0` baseline and described v0.6-v0.9 work as unreleased
 main-branch preview capability.
 
 ### Pros
@@ -37,7 +38,8 @@ main-branch preview capability.
 
 ### README Impact
 
-README must keep stating that `pyproject.toml` is `0.5.0` and v0.6-v0.9 are
+If maintainers had chosen this option, README would have stated that package
+metadata remained at the historical `0.5.0` baseline and v0.6-v0.9 were
 main-branch preview/scaffold/evaluation capabilities.
 
 ### GitHub Release Impact
@@ -46,8 +48,8 @@ No new GitHub release or tag is created.
 
 ### User Install Impact
 
-Editable/main-branch installs expose v0.6-v0.9 preview capability, while formal
-package metadata remains `0.5.0`.
+Editable/main-branch installs would have exposed v0.6-v0.9 preview capability
+while formal package metadata remained at `0.5.0`.
 
 ### Main Branch Preview Impact
 
