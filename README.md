@@ -26,14 +26,15 @@ installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
 Release status: the current package version in `pyproject.toml` is
-`v0.9.0rc1`. This is a release candidate, not a final stable `1.0` release.
+`v0.9.0rc2`. This is a release-candidate draft, not a final stable `1.0`
+release.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
-The `v0.9.0rc1` git tag has been created after maintainer review. The GitHub
-pre-release can be created through the manual GitHub Actions workflow or the
-GitHub UI; do not treat this repository state as a PyPI publication or final
-stable release by itself.
+The `v0.9.0rc1` git tag and GitHub pre-release were created after maintainer
+review. `v0.9.0rc2` is being prepared to include the post-release test
+dependency fix; do not treat this repository state as a PyPI publication or
+final stable release by itself.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -44,8 +45,8 @@ how the `0.9.0rc1` candidate was chosen and what remains manual.
 
 optical-spec-agent 是一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
-Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前版本
-`v0.9.0rc1` 是 release candidate，不是最终稳定版。本项目不是求解器，也
+Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前 package version
+`v0.9.0rc2` 是 release-candidate draft，不是最终稳定版。本项目不是求解器，也
 不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
@@ -62,9 +63,9 @@ Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前版本
 | **Release engineering** | Local checks cover CLI surface, docs consistency, artifact contracts, release readiness, LLM mock benchmark, and workflow benchmark |
 | **Validation** | `make check` runs deterministic tests, parser benchmarks, semantic benchmark, mock LLM benchmark, workflow benchmark, docs/CLI checks, and artifact contract checks |
 
-For `v0.9.0rc1`, maintainers can create the GitHub pre-release through the
-manual **Create v0.9.0rc1 Pre-release** GitHub Actions workflow. It does not
-publish PyPI, does not upload `dist/`, and does not create or move the tag.
+For `v0.9.0rc1`, maintainers created the GitHub pre-release through the manual
+workflow. `v0.9.0rc2` should use a new tag and pre-release after readiness
+checks pass; do not move the `v0.9.0rc1` tag.
 
 ## Why this project?
 
@@ -75,7 +76,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (0.9.0rc1 candidate: v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
+## Current scope (0.9.0rc2 draft: v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for

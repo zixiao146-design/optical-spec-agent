@@ -4,9 +4,9 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version: `0.9.0rc1`
-- Status: ready for `0.9.0rc1` manual release-candidate review
-- Formal GitHub release/tag: pending manual maintainer approval
+- `pyproject.toml` package version: `0.9.0rc2`
+- Status: preparing `0.9.0rc2` release-candidate draft
+- Formal GitHub release/tag: `v0.9.0rc1` exists; `v0.9.0rc2` is not tagged
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
   - v0.7 multi-solver adapter MVP scaffolds
@@ -48,18 +48,20 @@ twine check dist/*
 
 ## Recommended Version Action
 
-Current recommendation: review the prepared `0.9.0rc1` candidate and create a
-manual tag/GitHub release only after maintainer approval.
+Current recommendation: review the prepared `0.9.0rc2` draft, run the release
+smoke test, and create a new tag/GitHub pre-release only after maintainer
+approval.
 
 ## Release Blockers
 
-- Human decision needed on whether to tag/publish the prepared RC.
+- Human decision needed on whether to tag/publish the prepared `0.9.0rc2` RC.
 - Confirm whether workflow orchestration should be included in the manually
   published release candidate notes.
 - Confirm that generated adapter scaffolds are still presented as MVP inputs.
 - Confirm that default CI remains free of external solver and external LLM
   requirements.
-- Confirm that `0.9.0rc1` should precede final `0.9.0`.
+- Confirm that `0.9.0rc2` should supersede `0.9.0rc1` for users who need the
+  post-release test dependency fix.
 - Confirm bilingual README support:
   - `README.md` has a language switch.
   - `README.zh-CN.md` exists.
@@ -80,7 +82,7 @@ manual tag/GitHub release only after maintainer approval.
 
 1. Run all quality gates above.
 2. Review `docs/release_notes_current.md`.
-3. Confirm `0.9.0rc1` is the desired candidate version.
+3. Confirm `0.9.0rc2` is the desired candidate version.
 4. Build with `python -m build`.
 5. Check distributions with `twine check dist/*`.
 6. Create a release branch or tag manually.

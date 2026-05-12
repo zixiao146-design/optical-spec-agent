@@ -31,7 +31,7 @@ physical validation。
 
 ## 发布状态
 
-当前 package version 是 `v0.9.0rc1`。这是 release candidate，不是 final
+当前 package version 是 `v0.9.0rc2`。这是 release-candidate draft，不是 final
 stable `1.0`。
 
 `v0.6` 到 `v0.9` 的能力属于 preview/scaffold/evaluation capabilities：
@@ -41,9 +41,10 @@ stable `1.0`。
 - `v0.8`: LLM parser foundation，默认使用 deterministic mock provider。
 - `v0.9`: 本地同步 workflow orchestration。
 
-`v0.9.0rc1` tag 已由维护者确认后创建。GitHub pre-release 可通过手动
-GitHub Actions workflow 或 GitHub UI 创建。PyPI 发布不在当前 release
-candidate 准备任务范围内，除非后续单独批准。
+`v0.9.0rc1` tag 和 GitHub pre-release 已由维护者确认后创建。`v0.9.0rc2`
+用于纳入 rc1 发布后的测试依赖修复；如发布，应创建新的 tag 和 GitHub
+pre-release，不要移动 `v0.9.0rc1`。PyPI 发布不在当前 release candidate
+准备任务范围内，除非后续单独批准。
 
 ## 快速概览
 

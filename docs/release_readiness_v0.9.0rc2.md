@@ -7,7 +7,7 @@ post-release smoke test found a missing test dependency declaration.
 
 - Include post-release dependency fix from `730f6b6 Add httpx test dependency`.
 - Include smoke test status documentation from
-  `bcfe673 Record v0.9.0rc1 smoke test results`, once pushed.
+  `bcfe673 Record v0.9.0rc1 smoke test results`.
 - Validate clean install with the test extra: `python -m pip install -e ".[test]"`.
 - Validate `pytest`.
 - Validate `python -m build`.
@@ -24,14 +24,37 @@ post-release smoke test found a missing test dependency declaration.
 ## v0.9.0rc2 Release Checklist
 
 - `git status` is clean.
+- `origin/main` contains `39fb14f`.
 - `origin/main` contains `bcfe673`.
 - `origin/main` contains `730f6b6`.
 - `scripts/smoke_release.sh` passes.
+- `pytest` passes: 331 passed, 4 warnings.
 - `python -m build` passes.
 - `optical-spec --help` passes.
 - Documentation is updated.
 - GitHub release draft is prepared.
 - PyPI decision is explicitly recorded.
+
+## Current Draft Status
+
+- `origin/main` contains `39fb14f Add release smoke test automation`.
+- `origin/main` contains `bcfe673 Record v0.9.0rc1 smoke test results`.
+- `origin/main` contains `730f6b6 Add httpx test dependency`.
+- `scripts/smoke_release.sh`: passed.
+- `pytest`: 331 passed, 4 warnings.
+- `python -m build`: passed.
+- `optical-spec --help`: passed.
+- PyPI decision: not published unless explicitly approved.
+
+## Next Required Step
+
+After this draft preparation commit lands on `main`, the next release step is:
+
+1. Run a final smoke test from a clean environment.
+2. Confirm build artifacts use version `0.9.0rc2`.
+3. Create a new `v0.9.0rc2` tag from the approved `main` commit.
+4. Create the GitHub pre-release for `v0.9.0rc2`.
+5. Do not publish PyPI unless separately approved.
 
 ## Smoke Test Command
 
