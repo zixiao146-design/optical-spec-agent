@@ -4,8 +4,8 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` packaged version: `0.5.0`
-- Formal GitHub release: may lag behind `main`
+- `pyproject.toml` package version: `0.9.0rc1`
+- Formal GitHub release/tag: pending manual maintainer approval
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
   - v0.7 multi-solver adapter MVP scaffolds
@@ -17,11 +17,11 @@ This document describes the current `main` branch. It is not a release tag.
 | Area | Main branch status | Release note |
 |---|---|---|
 | Rule parser | Stable baseline | Default parser |
-| Diagnostics | Main branch preview | Does not run Meep |
+| Diagnostics | RC preview | Does not run Meep |
 | Meep execution harness | Optional local/manual | Meep not required in CI |
-| MPB/Gmsh/Elmer/Optiland adapters | MVP scaffold generation | Do not run external solvers |
-| LLM parser foundation | Main branch preview | Mock provider is deterministic |
-| Workflow orchestration | Main branch preview | Local and synchronous |
+| MPB/Gmsh/Elmer/Optiland adapters | RC MVP scaffold generation | Do not run external solvers |
+| LLM parser foundation | RC preview | Mock provider is deterministic |
+| Workflow orchestration | RC preview | Local and synchronous |
 
 ## Quality Gates
 
@@ -46,18 +46,18 @@ twine check dist/*
 
 ## Recommended Version Action
 
-Current recommendation: keep `pyproject.toml` at `0.5.0` until a human release
-decision is made. If the next formal package should include v0.6-v0.9 work, use
-`docs/versioning_policy.md` to choose between a `0.8.0` or `0.9.0` release.
+Current recommendation: review the prepared `0.9.0rc1` candidate and create a
+manual tag/GitHub release only after maintainer approval.
 
 ## Release Blockers
 
-- Human decision needed on next version number.
-- Confirm whether workflow orchestration should ship in the next formal package
-  or remain main-branch preview.
+- Human decision needed on whether to tag/publish the prepared RC.
+- Confirm whether workflow orchestration should be included in the manually
+  published release candidate notes.
 - Confirm that generated adapter scaffolds are still presented as MVP inputs.
 - Confirm that default CI remains free of external solver and external LLM
   requirements.
+- Confirm that `0.9.0rc1` should precede final `0.9.0`.
 
 ## Known Limitations
 
@@ -74,10 +74,8 @@ decision is made. If the next formal package should include v0.6-v0.9 work, use
 
 1. Run all quality gates above.
 2. Review `docs/release_notes_current.md`.
-3. Decide the next version number.
-4. Update `pyproject.toml` and `src/optical_spec_agent/__init__.py` only after
-   that decision.
-5. Build with `python -m build`.
-6. Check distributions with `twine check dist/*`.
-7. Create a release branch or tag manually.
-8. Publish GitHub/PyPI artifacts manually after review.
+3. Confirm `0.9.0rc1` is the desired candidate version.
+4. Build with `python -m build`.
+5. Check distributions with `twine check dist/*`.
+6. Create a release branch or tag manually.
+7. Publish GitHub/PyPI artifacts manually after review.

@@ -23,16 +23,19 @@ an optional harness that can run an existing generated Meep script when Meep is
 installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
-Release status: the packaged baseline in `pyproject.toml` is `v0.5.0`.
-The main branch also contains v0.6 local/manual diagnostics, a v0.7
-multi-solver adapter MVP release candidate, v0.8 LLM parser foundation work,
-and v0.9 synchronous workflow orchestration foundation work.
-The formal GitHub release may lag behind main; treat unreleased main-branch
-capabilities as preview/scaffold/evaluation work, not production simulation
-claims.
+Release status: the current package version in `pyproject.toml` is
+`v0.9.0rc1`. This is a release candidate, not a final stable `1.0` release.
+It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
+scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
+orchestration foundation work as preview/scaffold/evaluation capabilities.
+The formal GitHub release/tag may still be created manually after maintainer
+approval; do not treat this repository state as a published GitHub release by
+itself.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
-current release policy and release-readiness matrix.
+current release policy and release-readiness matrix. Use
+[`docs/release_decision_matrix.md`](docs/release_decision_matrix.md) to decide
+how the `0.9.0rc1` candidate was chosen and what remains manual.
 
 ## At a glance
 
@@ -56,7 +59,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (v0.5 packaged baseline + v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
+## Current scope (0.9.0rc1 candidate: v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for

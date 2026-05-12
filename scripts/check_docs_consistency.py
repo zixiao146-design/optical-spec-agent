@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import tomllib
 from pathlib import Path
 from typing import Any
 
@@ -53,6 +54,11 @@ NEGATION_HINTS = [
     "only",
     "scaffold",
     "doesn't",
+    "block",
+    "blocker",
+    "contradict",
+    "imply",
+    "must not",
 ]
 
 
@@ -67,7 +73,7 @@ def _scan_misleading_claims() -> list[str]:
         lines = path.read_text(encoding="utf-8").splitlines()
         for lineno, line in enumerate(lines, start=1):
             lowered = line.lower()
-            context = " ".join(lines[max(0, lineno - 3) : lineno + 1])
+            context = " ".join(lines[max(0, lineno - 5) : lineno + 2])
             for phrase in MISLEADING_PATTERNS:
                 if phrase.lower() in lowered and not _line_is_negated(context):
                     findings.append(f"{path.relative_to(ROOT)}:{lineno}: {phrase}")
@@ -135,8 +141,17 @@ def build_report() -> dict[str, Any]:
     readiness = DOCS / "release_readiness_current.md"
     if readiness.exists():
         current_text = readiness.read_text(encoding="utf-8").lower()
-        if "0.5.0" in readme_text and "0.5.0" not in current_text:
-            errors.append("README packaged version and release_readiness_current.md are inconsistent.")
+        pyproject = ROOT / "pyproject.toml"
+        if pyproject.exists():
+            version = tomllib.loads(pyproject.read_text(encoding="utf-8")).get("project", {}).get(
+                "version"
+            )
+            if version and version not in readme_text:
+                errors.append(f"README.md does not mention current pyproject version {version}.")
+            if version and version not in current_text:
+                errors.append(
+                    f"release_readiness_current.md does not mention current pyproject version {version}."
+                )
 
     return {
         "schema_version": "docs_consistency_check.v0.1",

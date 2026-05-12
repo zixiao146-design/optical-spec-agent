@@ -42,7 +42,7 @@ auditable scaffolds before they become formal releases.
 - Option B: bump to `0.8.0` when parser foundation is the next intended package
   release. This highlights the LLM parser milestone but leaves workflow work as
   preview.
-- Option C: bump to `0.9.0` when workflow orchestration is intended to ship as
-  the next formal release and all release-readiness gates are accepted.
+- Option C: bump to `0.9.0rc1` when workflow orchestration is ready for public
+  release-candidate testing but should not yet be called final `0.9.0`.
 
 Do not create release tags or GitHub releases from automation in this repo.

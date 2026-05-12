@@ -3,7 +3,7 @@
 This changelog distinguishes formal packaged releases from draft main-branch
 work. See `docs/versioning_policy.md` for status definitions.
 
-## Current main branch draft
+## 0.9.0rc1 candidate
 
 - v0.6-style local diagnostics via `optical-spec diagnose`.
 - v0.7-style adapter registry and MPB/Gmsh/Elmer/Optiland MVP scaffold
@@ -15,7 +15,8 @@ work. See `docs/versioning_policy.md` for status definitions.
 - Release-engineering checks for CLI surface, docs consistency, artifact
   contracts, and release readiness.
 
-This section is draft-only until a tag/release is created.
+This candidate has not been tagged or published yet. It remains pending manual
+maintainer approval for a GitHub release and any PyPI publication.
 
 ## v0.5.0
 
