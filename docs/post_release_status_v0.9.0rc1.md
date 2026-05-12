@@ -1,19 +1,15 @@
 # Post-release Status: v0.9.0rc1
 
-This document records the current public status for the `v0.9.0rc1` release
-candidate. At the time of this update, the git tag exists, but the GitHub
-pre-release is still pending manual creation through the GitHub Actions
-workflow or GitHub UI.
-
 ## Release State
 
 - Git tag: `v0.9.0rc1`
 - Tag commit: `3b4cfa83ca74a0c0bcab981614b86bf876974059`
 - Tag commit message: `Add Chinese README support`
-- Tag pushed to origin: yes
-- Tag moved or overwritten: no
-- GitHub pre-release: pending; use the `Create v0.9.0rc1 Pre-release`
-  workflow or manual GitHub UI.
+- GitHub pre-release: created
+- Release title: `optical-spec-agent v0.9.0rc1`
+- Release URL: <https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc1>
+- Release notes source: `docs/github_release_draft_v0.9.0rc1.md`
+- Release notes include Chinese summary: yes
 - PyPI published: no
 - Final stable `1.0`: no
 
@@ -24,8 +20,6 @@ workflow or GitHub UI.
 - Chinese release summary: yes
 
 ## Validation Summary
-
-Latest known validation before the pre-release workflow was added:
 
 - `pytest -q`: 331 passed, 4 warnings
 - key_fields benchmark: 16/16 passed
@@ -41,40 +35,13 @@ Latest known validation before the pre-release workflow was added:
 - `twine check dist/*`: passed
 - CLI smoke: passed
 
-The new `Create v0.9.0rc1 Pre-release` workflow should be run manually from the
-GitHub Actions page to create the GitHub pre-release. If the release already
-exists, the workflow prints its state and exits successfully.
+## Verification Notes
 
-## Manual GitHub Release Options
-
-Option A, recommended:
-
-```text
-GitHub → Actions → Create v0.9.0rc1 Pre-release → Run workflow
-```
-
-Option B:
-
-```text
-GitHub → Releases → Draft a new release
-Tag: v0.9.0rc1
-Title: optical-spec-agent v0.9.0rc1
-Notes: docs/github_release_draft_v0.9.0rc1.md
-Mark as pre-release
-```
-
-Option C:
-
-```bash
-gh release create v0.9.0rc1 \
-  --title "optical-spec-agent v0.9.0rc1" \
-  --notes-file docs/github_release_draft_v0.9.0rc1.md \
-  --prerelease \
-  --latest=false
-```
-
-Do not upload `dist/` unless maintainers explicitly decide to do so. Do not
-publish PyPI unless separately approved.
+- Local `gh` CLI was unavailable during verification.
+- GitHub REST release API was rate-limited from the local network.
+- The public GitHub releases Atom feed showed `v0.9.0rc1` with title
+  `optical-spec-agent v0.9.0rc1` and release notes from
+  `docs/github_release_draft_v0.9.0rc1.md`, including the `中文简介` section.
 
 ## Remaining Limitations
 
@@ -85,11 +52,10 @@ publish PyPI unless separately approved.
 - External LLM providers are not required by default.
 - Adapter outputs remain MVP/scaffold.
 - Workflow orchestration is local/synchronous preview.
-- `v0.9.0rc1` is not final `1.0` stability.
+- RC is not final `1.0` stability.
 
 ## Recommended Next Action
 
-- Run the manual GitHub Actions pre-release workflow.
 - Observe early user feedback.
 - Do not publish PyPI yet.
 - Consider Chinese docs deep localization.
