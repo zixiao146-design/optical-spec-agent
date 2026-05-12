@@ -30,9 +30,10 @@ Release status: the current package version in `pyproject.toml` is
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
-The formal GitHub release/tag may still be created manually after maintainer
-approval; do not treat this repository state as a published GitHub release by
-itself.
+The `v0.9.0rc1` git tag has been created after maintainer review. The GitHub
+pre-release can be created through the manual GitHub Actions workflow or the
+GitHub UI; do not treat this repository state as a PyPI publication or final
+stable release by itself.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -60,6 +61,10 @@ Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前版本
 | **Benchmark** | 16 golden cases + 27 semantic benchmark cases for Meep reliability and v0.7 adapter intent routing — `python benchmarks/run_benchmark.py --mode all`, `python benchmarks/run_semantic_benchmark.py`, and optional `--report` |
 | **Release engineering** | Local checks cover CLI surface, docs consistency, artifact contracts, release readiness, LLM mock benchmark, and workflow benchmark |
 | **Validation** | `make check` runs deterministic tests, parser benchmarks, semantic benchmark, mock LLM benchmark, workflow benchmark, docs/CLI checks, and artifact contract checks |
+
+For `v0.9.0rc1`, maintainers can create the GitHub pre-release through the
+manual **Create v0.9.0rc1 Pre-release** GitHub Actions workflow. It does not
+publish PyPI, does not upload `dist/`, and does not create or move the tag.
 
 ## Why this project?
 

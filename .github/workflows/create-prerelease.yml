@@ -1,0 +1,72 @@
+name: Create v0.9.0rc1 Pre-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag"
+        required: true
+        default: "v0.9.0rc1"
+      title:
+        description: "Release title"
+        required: true
+        default: "optical-spec-agent v0.9.0rc1"
+
+permissions:
+  contents: write
+
+jobs:
+  create-prerelease:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_TAG: ${{ inputs.tag }}
+      RELEASE_TITLE: ${{ inputs.title }}
+      RELEASE_NOTES: docs/github_release_draft_v0.9.0rc1.md
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch tags
+        run: git fetch --tags --prune
+
+      - name: Verify release candidate inputs
+        run: |
+          set -euo pipefail
+
+          git rev-parse -q --verify "refs/tags/${RELEASE_TAG}"
+          grep -n 'version = "0.9.0rc1"' pyproject.toml
+          grep -n '__version__ = "0.9.0rc1"' src/optical_spec_agent/__init__.py
+          grep -n "README.zh-CN.md" README.md
+          test -f README.zh-CN.md
+          test -f "${RELEASE_NOTES}"
+
+      - name: Check whether release already exists
+        id: release
+        run: |
+          set -euo pipefail
+
+          if gh release view "${RELEASE_TAG}" --json tagName,name,isPrerelease,url; then
+            echo "exists=true" >> "${GITHUB_OUTPUT}"
+            echo "Release ${RELEASE_TAG} already exists; no duplicate release will be created."
+          else
+            echo "exists=false" >> "${GITHUB_OUTPUT}"
+            echo "Release ${RELEASE_TAG} does not exist yet; creating pre-release."
+          fi
+
+      - name: Create GitHub pre-release
+        if: steps.release.outputs.exists != 'true'
+        run: |
+          set -euo pipefail
+
+          gh release create "${RELEASE_TAG}" \
+            --title "${RELEASE_TITLE}" \
+            --notes-file "${RELEASE_NOTES}" \
+            --prerelease \
+            --latest=false
+
+      - name: Verify GitHub pre-release
+        run: gh release view "${RELEASE_TAG}" --json tagName,name,isPrerelease,url

@@ -41,7 +41,8 @@ stable `1.0`。
 - `v0.8`: LLM parser foundation，默认使用 deterministic mock provider。
 - `v0.9`: 本地同步 workflow orchestration。
 
-GitHub pre-release 和 tag 需要维护者手动创建。PyPI 发布不在当前 release
+`v0.9.0rc1` tag 已由维护者确认后创建。GitHub pre-release 可通过手动
+GitHub Actions workflow 或 GitHub UI 创建。PyPI 发布不在当前 release
 candidate 准备任务范围内，除非后续单独批准。
 
 ## 快速概览
@@ -443,6 +444,10 @@ twine check dist/*
 GitHub Actions 覆盖 deterministic local gates、docs checks、manual benchmarks 和
 release dry-run。默认 CI 不依赖外部 solver 或外部 LLM。
 
+`v0.9.0rc1` 的 GitHub pre-release 可以通过手动 GitHub Actions workflow
+**Create v0.9.0rc1 Pre-release** 创建。该 workflow 不发布 PyPI、不上传
+`dist/`，也不创建或移动 tag。
+
 ## Roadmap
 
 - v0.5: packaged baseline / Meep execution harness。
@@ -457,7 +462,8 @@ release dry-run。默认 CI 不依赖外部 solver 或外部 LLM。
 `v0.9.0rc1` 是 release candidate：
 
 - 不是 final stable `1.0`。
-- GitHub pre-release / tag 需要维护者手动创建。
+- GitHub pre-release 可以通过手动 GitHub Actions workflow 创建；tag 已由维护者
+  单独确认后创建。
 - PyPI 发布需要单独批准。
 - Release draft: `docs/github_release_draft_v0.9.0rc1.md`
 - Manual checklist: `docs/manual_release_checklist_v0.9.0rc1.md`

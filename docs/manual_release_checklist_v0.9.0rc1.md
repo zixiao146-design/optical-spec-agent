@@ -30,6 +30,33 @@ git push origin v0.9.0rc1
 
 ## GitHub Release
 
+Recommended path:
+
+- Option A: use the manual GitHub Actions workflow
+  `.github/workflows/create-prerelease.yml`.
+- Option B: manually create the release in the GitHub UI.
+- Option C: use a local `gh` CLI if it is installed and authenticated.
+
+Option A is preferred because local network access and local `gh` availability
+have been unreliable during the release-candidate preparation.
+
+### Option A: GitHub Actions Workflow
+
+1. Open GitHub Actions.
+2. Select **Create v0.9.0rc1 Pre-release**.
+3. Click **Run workflow**.
+4. Use:
+   - `tag = v0.9.0rc1`
+   - `title = optical-spec-agent v0.9.0rc1`
+5. Confirm the workflow exits successfully.
+6. Check the Releases page.
+
+The workflow does not publish PyPI, does not upload `dist/`, and does not create
+or move the tag. If the GitHub release already exists, it prints the existing
+release state and exits successfully.
+
+### Option B: GitHub UI
+
 - Use `docs/github_release_draft_v0.9.0rc1.md`.
 - Mark the GitHub release as a pre-release.
 - Do not mark it as the latest stable release if the GitHub UI allows avoiding
@@ -37,6 +64,18 @@ git push origin v0.9.0rc1
 - Attach optional reports only if desired.
 - Do not attach local `dist/` artifacts unless maintainers decide to do so.
 - PyPI publishing requires separate approval.
+
+### Option C: Local `gh` CLI
+
+Run only if `gh` is installed and authenticated:
+
+```bash
+gh release create v0.9.0rc1 \
+  --title "optical-spec-agent v0.9.0rc1" \
+  --notes-file docs/github_release_draft_v0.9.0rc1.md \
+  --prerelease \
+  --latest=false
+```
 
 ## After Release
 

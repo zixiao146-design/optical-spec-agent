@@ -1,58 +1,96 @@
-# Post-Tag Status: v0.9.0rc1
+# Post-release Status: v0.9.0rc1
 
-This document records the public status after the `v0.9.0rc1` tag was created.
-It is intentionally separate from `docs/final_rc_gate_v0.9.0rc1.md` because the
-tag points at the already-verified release-candidate commit.
+This document records the current public status for the `v0.9.0rc1` release
+candidate. At the time of this update, the git tag exists, but the GitHub
+pre-release is still pending manual creation through the GitHub Actions
+workflow or GitHub UI.
 
-## Tag Status
+## Release State
 
-- Tag: `v0.9.0rc1`
+- Git tag: `v0.9.0rc1`
 - Tag commit: `3b4cfa83ca74a0c0bcab981614b86bf876974059`
 - Tag commit message: `Add Chinese README support`
 - Tag pushed to origin: yes
 - Tag moved or overwritten: no
+- GitHub pre-release: pending; use the `Create v0.9.0rc1 Pre-release`
+  workflow or manual GitHub UI.
+- PyPI published: no
+- Final stable `1.0`: no
 
-## GitHub Pre-Release Status
+## Bilingual README
 
-- GitHub pre-release created: no
-- Reason: `gh` CLI was not installed in the local release environment.
-- Manual release draft: `docs/github_release_draft_v0.9.0rc1.md`
-- Release must be marked as a pre-release.
-- PyPI publication remains out of scope and requires separate approval.
+- `README.md` language switch: yes
+- `README.zh-CN.md`: yes
+- Chinese release summary: yes
 
-## Verification Snapshot
+## Validation Summary
 
-- `pyproject.toml`: `version = "0.9.0rc1"`
-- `src/optical_spec_agent/__init__.py`: `__version__ = "0.9.0rc1"`
-- `README.md`: includes the English / Simplified Chinese language switch.
-- `README.zh-CN.md`: exists and documents the release candidate in Chinese.
-- Latest local gates before tagging: passed.
-- Latest public Actions observed through the GitHub API for commit `3b4cfa8`:
-  `CI` success and `Tests` success.
+Latest known validation before the pre-release workflow was added:
 
-## Manual GitHub Release Steps
+- `pytest -q`: 331 passed, 4 warnings
+- key_fields benchmark: 16/16 passed
+- semantic benchmark: 27/27 passed
+- LLM benchmark: 40/40 passed
+- workflow benchmark: 12/12 passed
+- `make check`: passed
+- docs consistency: ready
+- CLI surface: ready
+- release readiness: ready
+- artifact contracts: ready
+- `python -m build`: passed
+- `twine check dist/*`: passed
+- CLI smoke: passed
+
+The new `Create v0.9.0rc1 Pre-release` workflow should be run manually from the
+GitHub Actions page to create the GitHub pre-release. If the release already
+exists, the workflow prints its state and exits successfully.
+
+## Manual GitHub Release Options
+
+Option A, recommended:
+
+```text
+GitHub → Actions → Create v0.9.0rc1 Pre-release → Run workflow
+```
+
+Option B:
+
+```text
+GitHub → Releases → Draft a new release
+Tag: v0.9.0rc1
+Title: optical-spec-agent v0.9.0rc1
+Notes: docs/github_release_draft_v0.9.0rc1.md
+Mark as pre-release
+```
+
+Option C:
 
 ```bash
-# Already completed:
-git tag v0.9.0rc1
-git push origin v0.9.0rc1
-
-# Still manual:
-# 1. Open GitHub Releases.
-# 2. Draft a new release for tag v0.9.0rc1.
-# 3. Title: optical-spec-agent v0.9.0rc1.
-# 4. Notes: use docs/github_release_draft_v0.9.0rc1.md.
-# 5. Mark the release as a pre-release.
-# 6. Do not publish PyPI unless separately approved.
+gh release create v0.9.0rc1 \
+  --title "optical-spec-agent v0.9.0rc1" \
+  --notes-file docs/github_release_draft_v0.9.0rc1.md \
+  --prerelease \
+  --latest=false
 ```
+
+Do not upload `dist/` unless maintainers explicitly decide to do so. Do not
+publish PyPI unless separately approved.
 
 ## Remaining Limitations
 
+- No PyPI publish.
 - No production-grade physical validation.
 - No formal convergence proof.
-- No full solver automation.
 - External solvers are not run by default.
 - External LLM providers are not required by default.
 - Adapter outputs remain MVP/scaffold.
 - Workflow orchestration is local/synchronous preview.
 - `v0.9.0rc1` is not final `1.0` stability.
+
+## Recommended Next Action
+
+- Run the manual GitHub Actions pre-release workflow.
+- Observe early user feedback.
+- Do not publish PyPI yet.
+- Consider Chinese docs deep localization.
+- Consider v1.0 API stabilization after RC feedback.
