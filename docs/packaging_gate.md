@@ -1,19 +1,21 @@
 # Packaging Gate
 
-Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
+Version scope: current `main` development after the verified `v0.9.0rc2`
+pre-release.
 
 ## Current package baseline
 
 - Package name: `optical-spec-agent`
-- Current version on main: `0.9.0rc2`
+- Current main development version: `0.9.0rc3.dev0`
 - Current public pre-release: `v0.9.0rc2`
+- `v0.9.0rc2` tag remains unchanged.
 - PyPI status: not published
 - TestPyPI status: not published
 - Build backend: `hatchling`
 - Console script: `optical-spec`
-- Current smoke/build artifacts:
-  - `optical_spec_agent-0.9.0rc2-py3-none-any.whl`
-  - `optical_spec_agent-0.9.0rc2.tar.gz`
+- Expected build artifacts for current main:
+  - `optical_spec_agent-0.9.0rc3.dev0-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc3.dev0.tar.gz`
 
 ## Packaging checks required before publication
 
@@ -23,6 +25,7 @@ Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
 - `python -m pip install -e ".[test]"` works in a clean venv.
 - `pytest` passes.
 - `optical-spec --help` passes.
+- README and README.zh-CN describe current release/development state accurately.
 - README renders acceptably for GitHub/PyPI.
 - Package metadata is complete enough for the intended audience:
   - `project.name`
@@ -36,15 +39,16 @@ Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
   - license metadata
   - project URLs and classifiers, if maintainers decide to publish on PyPI
 - Release notes exist for the candidate.
-- Post-release status plan exists for recording the verified state.
+- Post-release status doc is created only after release creation and verification.
 
 ## TestPyPI gate
 
 - TestPyPI should be used before PyPI.
-- TestPyPI requires explicit maintainer approval.
+- TestPyPI upload requires explicit maintainer approval.
 - TestPyPI upload must not be part of the default smoke script.
 - TestPyPI verification should include clean install from TestPyPI and
   `optical-spec --help`.
+- If TestPyPI is skipped, the skip decision must be explicitly documented.
 - If TestPyPI fails, publish a new candidate or fix main; do not reuse an
   already-published version.
 
@@ -55,6 +59,7 @@ Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
   recorded decision to skip TestPyPI.
 - PyPI release must not be performed by accidental script execution.
 - Yanking/rollback policy should be documented before the first PyPI release.
+- PyPI remains unpublished for now.
 
 ## Non-goals
 
@@ -62,3 +67,4 @@ Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
 - No TestPyPI upload now.
 - No automatic package publishing from `scripts/smoke_release.sh`.
 - No claim of production-grade physical validation.
+- No claim of formal convergence proof.

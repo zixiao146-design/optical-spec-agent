@@ -1,3 +1,3 @@
 """optical-spec-agent: Natural language → validated optical simulation spec."""
 
-__version__ = "0.9.0rc2"
+__version__ = "0.9.0rc3.dev0"

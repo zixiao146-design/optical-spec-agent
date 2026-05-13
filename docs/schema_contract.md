@@ -1,6 +1,7 @@
 # Schema and API Contract
 
-Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
+Version scope: current `main` development version `0.9.0rc3.dev0` after the
+verified public `v0.9.0rc2` pre-release. `0.9.0rc3.dev0` is not a release.
 
 ## Public spec model
 

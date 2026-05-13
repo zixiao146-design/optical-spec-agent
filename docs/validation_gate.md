@@ -1,6 +1,7 @@
 # Validation Gate
 
-Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
+Version scope: current `main` development after the verified `v0.9.0rc2`
+pre-release. Current main package version: `0.9.0rc3.dev0`.
 
 ## What must pass before a new RC
 
@@ -13,6 +14,7 @@ Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
 - Adapter support matrix tests
 - Workflow preview contract tests
 - Release engineering checks
+- Wheel install smoke if enabled
 
 If wheel installation verification is enabled, run:
 
@@ -41,6 +43,8 @@ maintainers.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
 - Keep PyPI unpublished unless explicitly approved.
+- Do not cut `v0.9.0rc3` until `project.version` is changed from
+  `0.9.0rc3.dev0` to `0.9.0rc3` and final smoke passes.
 
 ## v1.0 validation target
 
@@ -50,3 +54,5 @@ maintainers.
 - Define supported adapter set.
 - Define public API/CLI stability guarantees.
 - Define what remains preview/scaffold after `v1.0`.
+- Define release rollback policy.
+- Define PyPI publication policy.

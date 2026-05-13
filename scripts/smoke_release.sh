@@ -115,12 +115,21 @@ if [[ "${OSA_SMOKE_VERIFY_WHEEL}" == "1" ]]; then
   "${OSA_SMOKE_PYTHON}" -m venv "${OSA_SMOKE_WHEEL_VENV}"
   "${OSA_SMOKE_WHEEL_VENV}/bin/python" -m pip install --upgrade pip
   "${OSA_SMOKE_WHEEL_VENV}/bin/python" -m pip install "dist/optical_spec_agent-${PROJECT_VERSION}-py3-none-any.whl"
-  "${OSA_SMOKE_WHEEL_VENV}/bin/python" - <<'PY'
+  "${OSA_SMOKE_WHEEL_VENV}/bin/python" - "${PROJECT_VERSION}" <<'PY'
 import importlib.metadata
+import sys
 import optical_spec_agent
 
-print(f"Wheel-installed package version: {importlib.metadata.version('optical-spec-agent')}")
-print(f"Wheel-installed __version__: {optical_spec_agent.__version__}")
+expected = sys.argv[1]
+metadata_version = importlib.metadata.version("optical-spec-agent")
+package_version = optical_spec_agent.__version__
+print(f"Wheel-installed package version: {metadata_version}")
+print(f"Wheel-installed __version__: {package_version}")
+if metadata_version != expected or package_version != expected:
+    raise SystemExit(
+        f"ERROR: wheel install version mismatch: expected {expected}, "
+        f"metadata={metadata_version}, __version__={package_version}"
+    )
 PY
   "${OSA_SMOKE_WHEEL_VENV}/bin/optical-spec" --help >/dev/null
   WHEEL_STATUS="wheel install smoke passed"

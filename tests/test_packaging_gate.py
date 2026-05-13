@@ -16,7 +16,7 @@ def _pyproject() -> dict:
 def test_pyproject_core_packaging_metadata_present():
     project = _pyproject()["project"]
     assert project["name"] == "optical-spec-agent"
-    assert project["version"]
+    assert project["version"] == "0.9.0rc3.dev0"
     assert project["description"]
     assert project["readme"] == "README.md"
     assert project["requires-python"].startswith(">=3.11")
@@ -36,7 +36,8 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     pypi_decision = (ROOT / "docs" / "pypi_publication_decision.md").read_text(encoding="utf-8")
     assert "PyPI status: not published" in packaging_gate
     assert "TestPyPI status: not published" in packaging_gate
-    assert "TestPyPI requires explicit maintainer approval" in packaging_gate
+    assert "Current main development version: `0.9.0rc3.dev0`" in packaging_gate
+    assert "TestPyPI upload requires explicit maintainer approval" in packaging_gate
     assert "No automatic package publishing" in packaging_gate
     assert "PyPI published: no" in pypi_decision
     assert "explicit maintainer approval" in pypi_decision

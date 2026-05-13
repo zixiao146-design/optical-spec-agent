@@ -25,15 +25,16 @@ an optional harness that can run an existing generated Meep script when Meep is
 installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
-Release status: the current package version in `pyproject.toml` is
-`v0.9.0rc2`. This is a verified GitHub pre-release candidate, not a final
-stable `1.0` release.
+Release status: the current public pre-release is `v0.9.0rc2`, while the
+current package version on `main` is `0.9.0rc3.dev0`. The `main` version is
+post-rc2 development toward a possible `v0.9.0rc3`; it is not a public release,
+and no `v0.9.0rc3` tag has been created.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
 The `v0.9.0rc2` git tag and GitHub pre-release were created after maintainer
 review and supersede `v0.9.0rc1` as the current release candidate. PyPI remains
-unpublished, and this repository state is not a final stable release by itself.
+unpublished, and this repository state is not a final stable `1.0` release.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -58,9 +59,10 @@ Validation, packaging, and optional-provider policies are tracked in
 
 optical-spec-agent 是一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
-Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前 package version
-`v0.9.0rc2` 是已经验证的 GitHub pre-release candidate，不是最终稳定版。本项目
-不是求解器，也不提供 production-grade physical validation。完整中文文档见
+Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
+pre-release 是 `v0.9.0rc2`，当前 `main` package version 是
+`0.9.0rc3.dev0`，属于 post-rc2 development，不是公开 release，也不是最终稳定版。
+本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
 ## At a glance
@@ -89,7 +91,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (0.9.0rc2 RC: v0.6 diagnostics + v0.7 adapters + v0.8 parser foundation + v0.9 workflow orchestration)
+## Current scope (main `0.9.0rc3.dev0`: post-v0.9.0rc2 hardening)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -277,7 +279,7 @@ optical-spec workflow-report outputs/workflows/mpb_demo/workflow_run.json \
   --output outputs/workflows/mpb_demo/report.md
 
 # Release-engineering checks; these do not run external solvers or external LLM APIs
-OSA_SMOKE_VENV=/tmp/osa-smoke-0.9.0rc2 ./scripts/smoke_release.sh
+OSA_SMOKE_VENV=/tmp/osa-smoke-rc3-dev ./scripts/smoke_release.sh
 make check
 python scripts/check_cli_surface.py
 python scripts/check_docs_consistency.py

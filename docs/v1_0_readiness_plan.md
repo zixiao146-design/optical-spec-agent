@@ -2,7 +2,10 @@
 
 ## Current baseline
 
-- Current release candidate: `v0.9.0rc2`
+- Current public pre-release: `v0.9.0rc2`
+- Current main development version: `0.9.0rc3.dev0`
+- `0.9.0rc3.dev0` is not a public release.
+- `v0.9.0rc3` tag created: no
 - Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc2
 - Release verified: yes
 - Post-release status: `docs/post_release_status_v0.9.0rc2.md`
@@ -97,6 +100,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Do not publish PyPI yet.
 - Do not move `v0.9.0rc1` or `v0.9.0rc2` tags.
 - Do not create `v0.9.0rc3` yet.
+- Do not treat `0.9.0rc3.dev0` as a release artifact.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.

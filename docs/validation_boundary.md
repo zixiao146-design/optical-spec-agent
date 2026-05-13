@@ -3,6 +3,9 @@
 This document states what current tests and diagnostics validate, and what they
 do not validate.
 
+Version scope: current `main` development version `0.9.0rc3.dev0` after the
+verified public `v0.9.0rc2` pre-release. `0.9.0rc3.dev0` is not a release.
+
 ## What current tests validate
 
 - `OpticalSpec` model serialization, schema export, and status-field behavior.

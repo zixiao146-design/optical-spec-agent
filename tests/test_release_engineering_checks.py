@@ -111,6 +111,32 @@ def test_pypi_publication_decision_requires_explicit_approval():
     assert "explicit maintainer approval" in text
 
 
+def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
+    required_docs = [
+        "packaging_gate.md",
+        "validation_gate.md",
+        "external_solver_policy.md",
+        "external_llm_policy.md",
+        "pypi_publication_decision.md",
+        "validation_boundary.md",
+        "release_engineering_playbook.md",
+    ]
+    for name in required_docs:
+        assert (ROOT / "docs" / name).exists()
+
+    combined = "\n".join(
+        (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
+    )
+    assert "PyPI published: no" in combined or "PyPI status: not published" in combined
+    assert "TestPyPI upload requires explicit maintainer approval" in combined
+    assert "No production-grade physical validation" in combined
+    assert "No formal convergence proof" in combined
+    assert "External solvers are not run by default" in combined
+    assert "External LLM access is not required by default" in combined
+    assert "Never move existing tags" in combined
+    assert "No automatic package publishing" in combined
+
+
 def test_external_solver_policy_keeps_solver_validation_optional():
     text = (ROOT / "docs" / "external_solver_policy.md").read_text(encoding="utf-8")
     assert "External solvers are not run by default" in text
