@@ -46,6 +46,11 @@ release candidate supersede `v0.9.0rc1`。不要移动 `v0.9.0rc1` 或
 `v0.9.0rc2` tag；未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布，
 除非后续单独批准。
 
+面向 `v1.0` 的公共契约边界见：
+`docs/cli_contract.md`、`docs/schema_contract.md`、
+`docs/adapter_support_matrix.md`、`docs/workflow_preview_contract.md`、
+`docs/validation_boundary.md` 和 `docs/pypi_publication_decision.md`。
+
 ## 快速概览
 
 | 能力 | 当前状态 |

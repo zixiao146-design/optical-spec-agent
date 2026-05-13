@@ -28,6 +28,7 @@ This document describes the current `main` branch. It is not a release tag.
 | LLM parser foundation | RC preview | Mock provider is deterministic |
 | Workflow orchestration | RC preview | Local and synchronous |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
+| Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 
 ## Quality Gates
 
@@ -57,6 +58,17 @@ Current recommendation: treat `v0.9.0rc2` as the active verified release
 candidate, keep PyPI unpublished, and proceed with `v0.9.0rc3` planning plus
 `v1.0` readiness hardening.
 
+Current main contract artifacts:
+
+- `docs/cli_contract.md`
+- `docs/schema_contract.md`
+- `docs/adapter_support_matrix.md`
+- `docs/workflow_preview_contract.md`
+- `docs/validation_boundary.md`
+- `docs/pypi_publication_decision.md`
+- `docs/release_engineering_playbook.md`
+- `docs/v1_0_readiness_plan.md`
+
 ## Release Blockers
 
 - No hard release blocker is currently recorded for `v0.9.0rc2`.
@@ -84,6 +96,8 @@ candidate, keep PyPI unpublished, and proceed with `v0.9.0rc3` planning plus
 1. Use `docs/post_release_status_v0.9.0rc2.md` as the rc2 source of truth.
 2. Use `docs/v1_0_readiness_plan.md` for the next hardening priorities.
 3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
-4. Prepare `v0.9.0rc3` only if the next hardening patch needs a release
+4. Review the public contract docs before changing CLI, schema, adapter, or
+   workflow behavior.
+5. Prepare `v0.9.0rc3` only if the next hardening patch needs a release
    candidate.
-5. Keep PyPI unpublished unless explicitly approved.
+6. Keep PyPI unpublished unless explicitly approved.

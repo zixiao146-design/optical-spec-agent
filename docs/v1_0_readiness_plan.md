@@ -12,7 +12,8 @@
 ## What v0.9.0rc2 already proves
 
 - Clean install with the test extra passed: `python -m pip install -e ".[test]"`.
-- Test suite passed: `pytest: 331 passed, 4 warnings`.
+- Test suite passed at release time: `pytest: 331 passed, 4 warnings`.
+- Current main hardening baseline after `40ed807`: `pytest: 332 passed, 4 warnings`.
 - Build passed and produced wheel/sdist artifacts.
 - `optical-spec --help` passed.
 - Release smoke automation exists: `scripts/smoke_release.sh`.
@@ -49,30 +50,35 @@ goals:
 
 Before `v1.0.0`, maintainers should decide and document:
 
-- Stable public API and CLI contract.
-- Supported adapters and their stability levels.
-- Unsupported assumptions, missing fields, and non-goals.
+- Stable public API and CLI contract: `docs/cli_contract.md` and
+  `docs/schema_contract.md`.
+- Supported adapters and their stability levels:
+  `docs/adapter_support_matrix.md`.
+- Workflow preview boundaries: `docs/workflow_preview_contract.md`.
+- Unsupported assumptions, validation limits, and non-goals:
+  `docs/validation_boundary.md`.
 - Reproducible release procedure and rollback policy.
 - Production-grade validation plan, or an explicit non-production disclaimer.
 - Versioning policy for previews, RCs, and final releases.
-- PyPI publication decision.
+- PyPI publication decision: `docs/pypi_publication_decision.md`.
 - Security and token-handling guidance for release operations.
 
 ## Immediate engineering priorities
 
 ### P0
 
-- Release closure verification.
-- Tag sync verification.
-- Release status visibility.
-- Smoke script reliability.
+- Release closure verification. Completed for `v0.9.0rc2`.
+- Tag sync verification. Completed locally for `v0.9.0rc2`; repeat before any new tag.
+- Release status visibility. Completed through post-release status docs.
+- Smoke script reliability. Strengthened after `40ed807`.
+- Public contract docs and regression tests. Added in current main.
 
 ### P1
 
-- CLI quickstart examples.
-- Adapter golden-output tests.
-- Workflow replay smoke tests.
-- Release playbook.
+- Additional CLI examples around failure/strict modes.
+- Adapter golden-output tests for non-Meep scaffold adapters.
+- Workflow replay smoke tests for Meep/no-execute diagnostics.
+- Release rollback playbook.
 
 ### P2
 

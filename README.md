@@ -41,6 +41,13 @@ current release policy and release-readiness matrix. Use
 for the repeatable RC procedure and
 [`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
 the current RC line toward `v1.0`.
+Public contract boundaries are tracked in
+[`docs/cli_contract.md`](docs/cli_contract.md),
+[`docs/schema_contract.md`](docs/schema_contract.md),
+[`docs/adapter_support_matrix.md`](docs/adapter_support_matrix.md),
+[`docs/workflow_preview_contract.md`](docs/workflow_preview_contract.md),
+[`docs/validation_boundary.md`](docs/validation_boundary.md), and
+[`docs/pypi_publication_decision.md`](docs/pypi_publication_decision.md).
 
 ## 中文概览
 

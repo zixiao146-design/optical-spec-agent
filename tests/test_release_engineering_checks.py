@@ -92,6 +92,25 @@ def test_docs_consistency_check_runs():
     assert report["errors"] == []
 
 
+def test_validation_boundary_docs_keep_non_overclaiming_contract():
+    text = (ROOT / "docs" / "validation_boundary.md").read_text(encoding="utf-8")
+    required = [
+        "No production-grade physical validation",
+        "No formal convergence proof",
+        "External solver validation is optional/manual",
+        "do not require Meep, MPB, Gmsh, Elmer, Optiland, or external LLM providers",
+    ]
+    for phrase in required:
+        assert phrase in text
+
+
+def test_pypi_publication_decision_requires_explicit_approval():
+    text = (ROOT / "docs" / "pypi_publication_decision.md").read_text(encoding="utf-8")
+    assert "PyPI published: no" in text
+    assert "Do not publish automatically" in text
+    assert "explicit maintainer approval" in text
+
+
 def test_bilingual_readme_contract_present():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_zh = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")

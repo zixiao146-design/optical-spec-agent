@@ -1,51 +1,82 @@
 # CLI Contract
 
-The `optical-spec` CLI is the primary local interface.
+Version scope: current `main` after the verified `v0.9.0rc2` pre-release.
 
-## Stable Commands
+The `optical-spec` console script is the supported command-line entry point:
 
-- `parse`
-- `validate`
-- `schema`
-- `example`
-- `meep-generate`
-- `meep-check`
-- `meep-run`
-- `diagnose`
-- `adapter-list`
-- `adapter-generate`
-- `llm-eval`
-- `workflow-plan`
-- `workflow-run`
-- `workflow-replay`
-- `workflow-report`
+```toml
+[project.scripts]
+optical-spec = "optical_spec_agent.cli.main:app"
+```
 
-## Exit Code Policy
+## Supported command list
 
-- Success: `0`
-- Warning but completed: `0` unless a command exposes and receives `--strict`
-- Missing input file: nonzero
-- Validation or generation failure: nonzero
-- Unsupported parser/provider/tool: nonzero
-- Optional solver unavailable: command-specific warning or unavailable status
+| Command | Purpose | Stability |
+|---|---|---|
+| `parse` | Parse natural language into an `OpticalSpec` JSON document. | Public |
+| `validate` | Validate an existing spec JSON file. | Public |
+| `schema` | Export the `OpticalSpec` JSON Schema. | Public |
+| `example` | Run built-in examples. | Public demo utility |
+| `meep-generate` | Generate Meep Python input from a validated spec. | Research-preview |
+| `meep-check` | Check whether Meep is importable locally. | Local/manual utility |
+| `meep-run` | Run an existing generated Meep script explicitly. | Optional local harness |
+| `adapter-list` | List registered solver-input adapters. | Public |
+| `adapter-generate` | Generate solver-native input scaffolds through the adapter registry. | Public scaffold interface |
+| `diagnose` | Generate post-hoc diagnostics for a spec and optional Meep artifacts. | Preview diagnostics |
+| `llm-eval` | Run deterministic mock-provider LLM parser evaluation cases. | Evaluation utility |
+| `workflow-plan` | Plan a synchronous local workflow. | Preview workflow |
+| `workflow-run` | Run a synchronous local workflow and write `workflow_run.json`. | Preview workflow |
+| `workflow-replay` | Replay an existing workflow run with deterministic local settings. | Preview workflow |
+| `workflow-report` | Render workflow artifacts as Markdown or JSON. | Preview workflow |
 
-## JSON Output Policy
+## Stable arguments and options
 
-When a command exposes `--json`, stdout should contain machine-readable JSON
-without mixed Rich/plain text summaries.
+- `parse TEXT` supports `--output`, `--json`, `--parser`, `--llm-provider`,
+  `--llm-model`, `--llm-temperature`, `--no-llm-repair`, `--no-llm-fallback`,
+  `--show-parser-report`, and `--parser-report-output`.
+- `validate PATH` takes a spec JSON path.
+- `schema` supports `--output`.
+- `adapter-list` supports `--json`.
+- `adapter-generate PATH` supports `--tool`, `--output`, `--json`, `--strict`,
+  and adapter-specific options such as `--mesh` where documented by help text.
+- `workflow-plan TEXT` supports `--parser`, `--llm-provider`, `--tool`,
+  `--output`, and `--json`.
+- `workflow-run TEXT` supports parser/tool selection, `--output-dir`,
+  `--no-execute`, `--execute-meep`, diagnostics flags, strictness flags, and
+  `--json`.
 
-## External Execution Policy
+The help text is the source of truth for incidental wording. Contract tests
+assert stable fragments rather than full rich-formatted help snapshots.
 
-- `parse`, `validate`, `schema`, `diagnose`, `adapter-list`,
-  `adapter-generate`, `llm-eval`, and `workflow-*` do not run MPB/Gmsh/Elmer or
-  Optiland.
-- `meep-run` can run an existing Meep script only when explicitly invoked.
-- `workflow-run` defaults to no solver execution.
+## Output expectations
 
-## Contract Check
+- `--json` output must be parseable JSON and must not include rich console text.
+- `schema --output` writes JSON Schema to the requested path.
+- `parse --output` writes an `OpticalSpec` JSON file.
+- `adapter-list --json` returns a top-level object with an `adapters` array.
+- `workflow-plan --json` returns a `workflow_plan.v0.9` compatible object.
+- Workflow commands write artifacts under the requested output directory.
 
-Run:
+## Research-preview commands
+
+`meep-generate`, `meep-run`, `diagnose`, and `workflow-*` are engineering aids.
+They do not imply production-grade physical validation or a formal convergence
+proof. `adapter-generate` outputs for MPB, Gmsh, Elmer, and Optiland are
+MVP/scaffold outputs unless separately validated.
+
+## Default offline behavior
+
+Default CLI paths must not require external LLM providers or external solvers.
+The mock LLM provider is deterministic and local. External solver execution is
+manual and explicit, currently only through `meep-run` or external commands run
+by the user.
+
+## Offline examples
 
 ```bash
-python scripts/check_cli_surface.py
+optical-spec --help
+optical-spec schema --output outputs/schema.json
+optical-spec parse "用 Meep FDTD 仿真金纳米球散射。" --parser rule --json
+optical-spec adapter-list --json
+optical-spec workflow-plan "用 MPB 计算二维光子晶体 band diagram。" --parser hybrid --llm-provider mock --tool mpb --json
 ```
