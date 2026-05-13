@@ -20,10 +20,10 @@ def _load_manifest() -> dict:
 
 def test_public_contract_manifest_baseline_and_package_metadata():
     manifest = _load_manifest()
-    assert manifest["version_scope"] == "0.9.0rc4"
-    assert manifest["current_public_prerelease"] == "v0.9.0rc3"
+    assert manifest["version_scope"] == "0.9.0rc5.dev0"
+    assert manifest["current_public_prerelease"] == "v0.9.0rc4"
     assert manifest["release_state"]["v1_0_0_released"] is False
-    assert manifest["release_state"]["v0_9_0rc4_tag_created"] is False
+    assert manifest["release_state"]["v0_9_0rc5_tag_created"] is False
     assert manifest["release_state"]["pypi_published"] is False
     assert manifest["release_state"]["testpypi_uploaded"] is False
     assert manifest["package"]["name"] == "optical-spec-agent"

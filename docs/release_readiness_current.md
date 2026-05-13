@@ -4,22 +4,22 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc4`
-- Current public prerelease: `v0.9.0rc3`
-- Current main release draft: `0.9.0rc4`
-- Main branch state: `v0.9.0rc4` release draft for maintainer review
+- `pyproject.toml` package version on `main`: `0.9.0rc5.dev0`
+- Current public prerelease: `v0.9.0rc4`
+- Current main development version: `0.9.0rc5.dev0`
+- Main branch state: `v0.9.0rc5.dev0` development version for maintainer review
 - Product positioning: open-source-solver-first
-- `v0.9.0rc4` GitHub release has not been created
-- `v0.9.0rc4` tag has not been created
+- `v0.9.0rc5` GitHub release has not been created
+- `v0.9.0rc5` tag has not been created
 - GitHub release: not created
 - GitHub pre-release created: yes
 - Release verified: yes
-- Post-release status doc: `docs/post_release_status_v0.9.0rc3.md`
-- Latest release-status commit: `4d2991f`
+- Post-release status doc: `docs/post_release_status_v0.9.0rc4.md`
+- Latest release-status commit: `d26df1b`
 - PyPI published: no
 - TestPyPI uploaded: no
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc4.md`
+  `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`
 - TestPyPI upload approval status: pending
 - TestPyPI upload authorized: no
 - PyPI publication approval: not granted
@@ -56,8 +56,9 @@ Run these before proposing a release:
 
 ```bash
 pip install -e ".[dev]"
+./scripts/run_quality_gates.sh
 OSA_SMOKE_VENV=/tmp/osa-smoke-current ./scripts/smoke_release.sh
-pytest -q
+python -m pytest
 python benchmarks/run_benchmark.py --mode key_fields
 python benchmarks/run_semantic_benchmark.py
 python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json
@@ -69,15 +70,15 @@ python scripts/check_release_readiness.py --report outputs/release_readiness_rep
 python scripts/check_artifact_contracts.py
 make check
 python -m build
-twine check dist/*
+python -m twine check dist/*
 ```
 
 ## Recommended Version Action
 
-Current recommendation: treat `v0.9.0rc3` as the active verified public
-prerelease until `v0.9.0rc4` is tagged and a GitHub prerelease is created. The
-`main` branch now builds as the `0.9.0rc4` release draft and packages
-post-`v0.9.0rc3` hardening changes for maintainer review. Keep PyPI/TestPyPI
+Current recommendation: treat `v0.9.0rc4` as the active verified public
+prerelease until `v0.9.0rc5` is tagged and a GitHub prerelease is created. The
+`main` branch now builds as the `0.9.0rc5.dev0` development version and packages
+post-`v0.9.0rc4` hardening changes for maintainer review. Keep PyPI/TestPyPI
 unpublished unless explicitly approved.
 
 Current main contract artifacts:
@@ -105,7 +106,11 @@ Current main contract artifacts:
 - `docs/external_llm_policy.md`
 - `docs/release_engineering_playbook.md`
 - `docs/v1_0_readiness_plan.md`
-- `docs/release_readiness_v0.9.0rc4.md`
+- `docs/quality_gates.md`
+- `docs/v1_0_readiness_scorecard.md`
+- `docs/maintainer_decision_log.md`
+- `docs/README.md`
+- `docs/release_readiness_v0.9.0rc5.md`
 - `docs/testpypi_dry_run_gate.md`
 - `docs/v1_0_stability_gate.md`
 - `docs/schema_compatibility_policy.md`
@@ -144,13 +149,13 @@ Current v1.0 evidence artifacts:
 
 ## Release Blockers
 
-- No hard release blocker is currently recorded for `v0.9.0rc3`.
-- Do not move `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3`.
+- No hard release blocker is currently recorded for `0.9.0rc5.dev0` development.
+- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, or `v0.9.0rc4`.
 - Do not publish PyPI yet.
 - Do not upload TestPyPI yet.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
-- Next blocker class: any `v0.9.0rc4` candidate must pass the release smoke
+- Next blocker class: any `v0.9.0rc5` candidate must pass the release smoke
   script, full tests, build, docs checks, and release readiness checks before a
   new tag is considered.
 
@@ -167,12 +172,12 @@ Current v1.0 evidence artifacts:
 
 ## Manual Release Checklist
 
-1. Use `docs/post_release_status_v0.9.0rc3.md` as the rc3 source of truth.
+1. Use `docs/post_release_status_v0.9.0rc4.md` as the rc4 source of truth.
 2. Use `docs/v1_0_readiness_plan.md` for the next hardening priorities.
 3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
 4. Review the public contract docs before changing CLI, schema, adapter, or
    workflow behavior.
 5. Run the packaging and validation gates before any future RC.
-6. Confirm `v0.9.0rc4` tag is absent locally and remotely before tag creation.
-7. Create an annotated `v0.9.0rc4` tag only after final maintainer approval.
+6. Confirm `v0.9.0rc5` tag is absent locally and remotely before tag creation.
+7. Create an annotated `v0.9.0rc5` tag only after final maintainer approval.
 8. Keep PyPI/TestPyPI unpublished unless explicitly approved.

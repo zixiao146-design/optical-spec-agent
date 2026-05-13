@@ -1,0 +1,56 @@
+# optical-spec-agent Docs
+
+Current public prerelease: v0.9.0rc4.
+Current main development version: 0.9.0rc5.dev0.
+
+## Release / Readiness
+
+- [Current release readiness](release_readiness_current.md)
+- [v0.9.0rc5 development readiness](release_readiness_v0.9.0rc5.md)
+- [v0.9.0rc4 post-release status](post_release_status_v0.9.0rc4.md)
+
+## Quality / Packaging
+
+- [Quality gates](quality_gates.md)
+- [Packaging gate](packaging_gate.md)
+- [TestPyPI dry-run gate](testpypi_dry_run_gate.md)
+- [PyPI publication decision](pypi_publication_decision.md)
+- [TestPyPI upload approval for 0.9.0rc5.dev0](testpypi_upload_approval_v0.9.0rc5.dev0.md)
+
+## Contracts
+
+- [CLI contract](cli_contract.md)
+- [Schema contract](schema_contract.md)
+- [Schema compatibility policy](schema_compatibility_policy.md)
+- [v1.0 compatibility policy](v1_0_compatibility_policy.md)
+- [v1.0 public contract freeze](v1_0_public_contract_freeze.md)
+- [Public contract change checklist](public_contract_change_checklist.md)
+- [Public contract manifest](public_contract_manifest.json)
+
+## Validation / Evidence
+
+- [Validation gate](validation_gate.md)
+- [Validation boundary](validation_boundary.md)
+- [Validation evidence manifest](validation_evidence_manifest.md)
+- [Open-source solver validation plan](open_source_solver_validation_plan.md)
+- [Offline user journey](offline_user_journey.md)
+- [Error model](error_model.md)
+- [Pre-v1 migration notes](migration_notes_pre_v1.md)
+
+## Strategy
+
+- [Open-source solver strategy](open_source_solver_strategy.md)
+- [Proprietary solver policy](proprietary_solver_policy.md)
+- [External solver policy](external_solver_policy.md)
+- [External LLM policy](external_llm_policy.md)
+
+## Examples
+
+- [Examples README](../examples/README.md)
+- [E2E examples README](../examples/e2e/README.md)
+- [Examples manifest](../examples/examples_manifest.json)
+
+## Decisions
+
+- [Maintainer decision log](maintainer_decision_log.md)
+- [v1.0 readiness scorecard](v1_0_readiness_scorecard.md)

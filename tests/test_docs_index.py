@@ -1,0 +1,52 @@
+"""Documentation index checks."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_docs_index_exists_and_links_major_docs():
+    index = ROOT / "docs" / "README.md"
+    assert index.exists()
+    text = index.read_text(encoding="utf-8")
+    required = [
+        "Current public prerelease: v0.9.0rc4",
+        "Current main development version: 0.9.0rc5.dev0",
+        "release_readiness_current.md",
+        "release_readiness_v0.9.0rc5.md",
+        "post_release_status_v0.9.0rc4.md",
+        "quality_gates.md",
+        "packaging_gate.md",
+        "testpypi_dry_run_gate.md",
+        "pypi_publication_decision.md",
+        "testpypi_upload_approval_v0.9.0rc5.dev0.md",
+        "cli_contract.md",
+        "schema_contract.md",
+        "schema_compatibility_policy.md",
+        "v1_0_compatibility_policy.md",
+        "v1_0_public_contract_freeze.md",
+        "public_contract_change_checklist.md",
+        "public_contract_manifest.json",
+        "validation_gate.md",
+        "validation_boundary.md",
+        "validation_evidence_manifest.md",
+        "open_source_solver_validation_plan.md",
+        "offline_user_journey.md",
+        "error_model.md",
+        "migration_notes_pre_v1.md",
+        "open_source_solver_strategy.md",
+        "proprietary_solver_policy.md",
+        "external_solver_policy.md",
+        "external_llm_policy.md",
+        "../examples/README.md",
+        "../examples/e2e/README.md",
+        "../examples/examples_manifest.json",
+        "maintainer_decision_log.md",
+        "v1_0_readiness_scorecard.md",
+    ]
+    for phrase in required:
+        assert phrase in text
+

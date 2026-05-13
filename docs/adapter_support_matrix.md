@@ -1,9 +1,9 @@
 # Adapter Support Matrix
 
-Version scope: current public prerelease `v0.9.0rc3`; current `main`
-development version `0.9.0rc4`. `v0.9.0rc4` is not a release, the
-`v0.9.0rc4` tag has not been created, and PyPI/TestPyPI remain unpublished.
-Continue v1.0 readiness engineering and prepare a `v0.9.0rc4` release draft
+Version scope: current public prerelease `v0.9.0rc4`; current `main`
+development version `0.9.0rc5.dev0`. `v0.9.0rc5.dev0` is not a release, the
+`v0.9.0rc5` tag has not been created, and PyPI/TestPyPI remain unpublished.
+Continue v1.0 readiness engineering and prepare a `v0.9.0rc5.dev0` development version
 only when accumulated changes should be published as another RC.
 Compatibility evidence is tracked in `docs/v1_0_compatibility_policy.md`,
 `docs/validation_evidence_manifest.md`, and `examples/examples_manifest.json`.

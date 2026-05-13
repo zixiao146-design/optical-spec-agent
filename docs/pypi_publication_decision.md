@@ -4,17 +4,18 @@
 
 - PyPI published: no.
 - TestPyPI uploaded: no.
-- Current public prerelease: `v0.9.0rc3`.
-- Current main release draft: `0.9.0rc4`.
-- `v0.9.0rc4` GitHub release has not been created.
-- `v0.9.0rc4` tag has not been created.
+- Current public prerelease: `v0.9.0rc4`.
+- Current main development version: `0.9.0rc5.dev0`.
+- `v0.9.0rc5` GitHub release has not been created.
+- `v0.9.0rc5` tag has not been created.
 - Package build smoke: passed for the RC line.
 - Packaging gate: `docs/packaging_gate.md`.
 - Validation gate: `docs/validation_gate.md`.
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`.
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`.
+- One-command quality gate script: `scripts/run_quality_gates.sh`.
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc4.md`.
+  `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`.
 - TestPyPI upload approval status: pending.
 - TestPyPI upload authorized: no.
 - PyPI publication approval: not granted.

@@ -31,15 +31,15 @@ Default quickstart and release validation do not require Zemax, Lumerical,
 COMSOL, or proprietary Ansys tools. External solvers are optional and not run by
 default. External LLM access is optional and not required by default.
 
-Release status: the current public release candidate is `v0.9.0rc3`, while the
-current `main` release draft is `0.9.0rc4`. `main` contains post-`v0.9.0rc3`
-hardening changes prepared for maintainer review. The `v0.9.0rc4` tag and
+Release status: the current public release candidate is `v0.9.0rc4`, while the
+current `main` development version is `0.9.0rc5.dev0`. `main` contains post-`v0.9.0rc4`
+hardening changes prepared for maintainer review. The `v0.9.0rc5` tag and
 GitHub release have not been created.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
-The `v0.9.0rc3` git tag and GitHub pre-release were created after maintainer
-review and supersede `v0.9.0rc2` as the current release candidate. PyPI remains
+The `v0.9.0rc4` git tag and GitHub pre-release were created after maintainer
+review and supersede `v0.9.0rc3` as the current release candidate. PyPI remains
 unpublished, TestPyPI has not been uploaded, and this repository state is not a
 final stable `1.0` release. PyPI/TestPyPI remain unpublished/not uploaded.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
@@ -49,10 +49,16 @@ current release policy and release-readiness matrix. Use
 for the repeatable RC procedure and
 [`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
 the current RC line toward `v1.0`.
-Current rc4 release draft readiness and publication gates are tracked in
-[`docs/release_readiness_v0.9.0rc4.md`](docs/release_readiness_v0.9.0rc4.md),
+Current rc5 development readiness and publication gates are tracked in
+[`docs/release_readiness_v0.9.0rc5.md`](docs/release_readiness_v0.9.0rc5.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
+The local one-command quality gate is documented in
+[`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
+readiness scorecard, and maintainer decisions are tracked in
+[`docs/README.md`](docs/README.md),
+[`docs/v1_0_readiness_scorecard.md`](docs/v1_0_readiness_scorecard.md), and
+[`docs/maintainer_decision_log.md`](docs/maintainer_decision_log.md).
 Local package publication preflight is available through
 [`scripts/testpypi_preflight.sh`](scripts/testpypi_preflight.sh); it performs
 build, metadata, wheel install, and CLI checks without uploading anything.
@@ -89,9 +95,9 @@ optical-spec-agent 是一个开源仿真工具链优先的光学仿真工作流 
 一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
-pre-release 是 `v0.9.0rc3`，当前 `main` package version 是 `0.9.0rc4`。
-`main` 可能包含 post-`v0.9.0rc3` hardening changes；`v0.9.0rc4` 不是公开
-release，`v0.9.0rc4` tag 尚未创建，也不是最终稳定版。
+pre-release 是 `v0.9.0rc4`，当前 `main` package version 是 `0.9.0rc5.dev0`。
+`main` 可能包含 post-`v0.9.0rc4` hardening changes；`v0.9.0rc5.dev0` 不是公开
+release，`v0.9.0rc5` tag 尚未创建，也不是最终稳定版。
 本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
@@ -119,8 +125,8 @@ Policy docs:
 [`optional open-source solver validation plan`](docs/open_source_solver_validation_plan.md),
 and [`examples manifest`](examples/examples_manifest.json).
 
-For `v0.9.0rc3`, maintainers created the GitHub pre-release after release
-smoke validation. Do not move the `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3`
+For `v0.9.0rc4`, maintainers created the GitHub pre-release after release
+smoke validation. Do not move the `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, or `v0.9.0rc4`
 tags; use a new candidate tag for future post-release fixes.
 
 ## Why this project?
@@ -132,7 +138,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (main `0.9.0rc4`: post-v0.9.0rc3 hardening)
+## Current scope (main `0.9.0rc5.dev0`: post-v0.9.0rc4 hardening)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -231,8 +237,8 @@ no-proprietary-solver flow, see
 [`examples/e2e/README.md`](examples/e2e/README.md).
 
 The checked-in fixtures under [`examples/`](examples/README.md) are the
-canonical no-network examples for the current `0.9.0rc4` main branch and
-the public `v0.9.0rc3` RC line:
+canonical no-network examples for the current `0.9.0rc5.dev0` main branch and
+the public `v0.9.0rc4` RC line:
 
 ```bash
 optical-spec validate examples/specs/minimal_nanoparticle.json

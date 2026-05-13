@@ -129,7 +129,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_compatibility_policy.md",
         "validation_evidence_manifest.md",
         "open_source_solver_validation_plan.md",
-        "testpypi_upload_approval_v0.9.0rc4.md",
+        "testpypi_upload_approval_v0.9.0rc5.dev0.md",
+        "release_readiness_v0.9.0rc5.md",
+        "quality_gates.md",
+        "v1_0_readiness_scorecard.md",
+        "README.md",
+        "maintainer_decision_log.md",
         "offline_user_journey.md",
         "error_model.md",
         "migration_notes_pre_v1.md",
@@ -143,6 +148,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "e2e" / "README.md").exists()
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
+    assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -159,8 +165,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v1.0 compatibility" in combined
     assert "Validation Evidence Manifest" in combined
     assert "Open-source Solver Validation Plan" in combined
-    assert "0.9.0rc4" in combined
-    assert "v0.9.0rc3" in combined
+    assert "0.9.0rc5.dev0" in combined
+    assert "v0.9.0rc4" in combined
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
     assert "scripts/testpypi_preflight.sh" in combined
@@ -173,6 +179,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Pre-v1 Migration Notes" in combined
     assert "v1.0 Public Contract Freeze Candidate" in combined
     assert "Public Contract Change Checklist" in combined
+    assert "Quality Gates" in combined
+    assert "v1.0 Readiness Scorecard" in combined
+    assert "Maintainer Decision Log" in combined
     assert "no proprietary" in combined.lower()
 
 
@@ -180,6 +189,7 @@ def test_release_and_preflight_scripts_do_not_publish():
     scripts = [
         ROOT / "scripts" / "smoke_release.sh",
         ROOT / "scripts" / "testpypi_preflight.sh",
+        ROOT / "scripts" / "run_quality_gates.sh",
     ]
     forbidden = [
         "twine upload",
@@ -207,8 +217,8 @@ def test_adapter_support_matrix_covers_registered_adapter_families():
     assert "open-source-solver-first" in text
     assert "Proprietary/export-only future target" in text
     assert "not registered adapters unless" in text
-    assert "0.9.0rc4" in text
-    assert "v0.9.0rc3" in text
+    assert "0.9.0rc5.dev0" in text
+    assert "v0.9.0rc4" in text
     assert "PyPI/TestPyPI remain unpublished" in text
 
 
@@ -230,9 +240,9 @@ def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
         "proprietary",
         "PyPI/TestPyPI remain unpublished",
         "not uploaded",
-        "0.9.0rc4",
+        "0.9.0rc5.dev0",
         "GitHub release",
-        "v0.9.0rc4",
+        "v0.9.0rc5",
         "not created",
     ]
     for phrase in required:
@@ -255,8 +265,8 @@ def test_offline_user_journey_release_artifacts_are_tracked():
     assert "no external LLM" in journey
     assert "no proprietary software" in journey
     assert "PyPI/TestPyPI: not published / not uploaded" in journey
-    assert "Current main release draft: 0.9.0rc4" in journey
-    assert "Current public prerelease: v0.9.0rc3" in journey
+    assert "Current main development version: 0.9.0rc5.dev0" in journey
+    assert "Current public prerelease: v0.9.0rc4" in journey
 
 
 def test_public_contract_freeze_artifacts_are_tracked():
@@ -264,10 +274,10 @@ def test_public_contract_freeze_artifacts_are_tracked():
     manifest = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
     checklist = (ROOT / "docs" / "public_contract_change_checklist.md").read_text(encoding="utf-8")
     assert "v1.0.0 not released" in freeze
-    assert "v0.9.0rc4 tag not created" in freeze
+    assert "v0.9.0rc5 tag not created" in freeze
     assert "PyPI/TestPyPI not published/uploaded" in freeze
-    assert manifest["version_scope"] == "0.9.0rc4"
-    assert manifest["current_public_prerelease"] == "v0.9.0rc3"
+    assert manifest["version_scope"] == "0.9.0rc5.dev0"
+    assert manifest["current_public_prerelease"] == "v0.9.0rc4"
     assert manifest["release_state"]["pypi_published"] is False
     assert manifest["release_state"]["testpypi_uploaded"] is False
     assert "external solver" in checklist

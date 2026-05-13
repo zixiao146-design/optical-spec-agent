@@ -16,7 +16,7 @@ def _pyproject() -> dict:
 def test_pyproject_core_packaging_metadata_present():
     project = _pyproject()["project"]
     assert project["name"] == "optical-spec-agent"
-    assert project["version"] == "0.9.0rc4"
+    assert project["version"] == "0.9.0rc5.dev0"
     assert project["description"]
     assert project["readme"] == "README.md"
     assert project["requires-python"].startswith(">=3.11")
@@ -36,9 +36,9 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     pypi_decision = (ROOT / "docs" / "pypi_publication_decision.md").read_text(encoding="utf-8")
     assert "PyPI status: not published" in packaging_gate
     assert "TestPyPI status: not published" in packaging_gate
-    assert "Current package version on `main`: `0.9.0rc4`" in packaging_gate
-    assert "Current public prerelease: `v0.9.0rc3`" in packaging_gate
-    assert "`v0.9.0rc4` tag: not created" in packaging_gate
+    assert "Current package version on `main`: `0.9.0rc5.dev0`" in packaging_gate
+    assert "Current public prerelease: `v0.9.0rc4`" in packaging_gate
+    assert "`v0.9.0rc5` tag: not created" in packaging_gate
     assert "docs/testpypi_dry_run_gate.md" in packaging_gate
     assert "scripts/testpypi_preflight.sh" in packaging_gate
     assert "python -m twine check dist/*" in packaging_gate
@@ -49,7 +49,7 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     assert "Do not publish automatically from release scripts" in packaging_gate
     assert "PyPI published: no" in pypi_decision
     assert "TestPyPI uploaded: no" in pypi_decision
-    assert "Current main release draft: `0.9.0rc4`" in pypi_decision
+    assert "Current main development version: `0.9.0rc5.dev0`" in pypi_decision
     assert "explicit maintainer approval" in pypi_decision
 
 

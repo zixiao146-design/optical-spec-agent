@@ -17,8 +17,8 @@ VALID_SPEC = ROOT / "examples" / "specs" / "minimal_nanoparticle.json"
 def test_schema_compatibility_policy_exists_and_sets_boundaries():
     text = (ROOT / "docs" / "schema_compatibility_policy.md").read_text(encoding="utf-8")
     for phrase in [
-        "Current main release draft: `0.9.0rc4`",
-        "Current public prerelease: `v0.9.0rc3`",
+        "Current main development version: `0.9.0rc5.dev0`",
+        "Current public prerelease: `v0.9.0rc4`",
         "Public fields",
         "Preview/scaffold fields",
         "Migration notes",

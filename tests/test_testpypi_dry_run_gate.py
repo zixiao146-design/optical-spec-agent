@@ -12,12 +12,12 @@ def test_testpypi_dry_run_gate_doc_exists_and_requires_manual_approval():
     text = (ROOT / "docs" / "testpypi_dry_run_gate.md").read_text(encoding="utf-8")
     assert "TestPyPI uploaded: no" in text
     assert "PyPI published: no" in text
-    assert "Current public prerelease: v0.9.0rc3" in text
-    assert "Current main release draft: 0.9.0rc4" in text
+    assert "Current public prerelease: v0.9.0rc4" in text
+    assert "Current main development version: 0.9.0rc5.dev0" in text
     assert "explicit maintainer approval" in text
     assert "does not authorize upload" in text
     assert "scripts/testpypi_preflight.sh" in text
-    assert "docs/testpypi_upload_approval_v0.9.0rc4.md" in text
+    assert "docs/testpypi_upload_approval_v0.9.0rc5.dev0.md" in text
     assert "TestPyPI upload approval status: pending" in text
     assert "TestPyPI upload authorized: no" in text
     assert "PyPI publication approval: not granted" in text
