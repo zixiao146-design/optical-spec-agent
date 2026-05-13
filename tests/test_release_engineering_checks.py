@@ -132,9 +132,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "testpypi_upload_approval_v0.9.0rc5.dev0.md",
         "release_readiness_v0.9.0rc5.md",
         "quality_gates.md",
+        "ci_quality_gate_parity.md",
+        "release_dry_run_operations.md",
+        "secrets_and_token_hygiene.md",
         "v1_0_readiness_scorecard.md",
         "README.md",
         "maintainer_decision_log.md",
+        "maintainer_operations_checklist.md",
         "offline_user_journey.md",
         "error_model.md",
         "migration_notes_pre_v1.md",
@@ -180,9 +184,15 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v1.0 Public Contract Freeze Candidate" in combined
     assert "Public Contract Change Checklist" in combined
     assert "Quality Gates" in combined
+    assert "CI and Quality Gate Parity" in combined
+    assert "Release Dry-run Operations" in combined
+    assert "Secrets and Token Hygiene" in combined
+    assert "Maintainer Operations Checklist" in combined
     assert "v1.0 Readiness Scorecard" in combined
     assert "Maintainer Decision Log" in combined
     assert "no proprietary" in combined.lower()
+    assert "Never paste tokens into chat" in combined
+    assert "no GitHub release creation" in combined
 
 
 def test_release_and_preflight_scripts_do_not_publish():
@@ -190,6 +200,7 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "smoke_release.sh",
         ROOT / "scripts" / "testpypi_preflight.sh",
         ROOT / "scripts" / "run_quality_gates.sh",
+        ROOT / "Makefile",
     ]
     forbidden = [
         "twine upload",

@@ -1,4 +1,4 @@
-.PHONY: install dev test benchmark semantic-check check bench-key bench-semantic llm-check workflow-check diagnostics docs-check cli-check release-check artifact-check build twine-check smoke test-cov lint example api schema clean tree
+.PHONY: install dev test benchmark semantic-check check bench-key bench-semantic llm-check workflow-check diagnostics docs-check cli-check release-check artifact-check build twine-check smoke quality testpypi-preflight test-cov lint example api schema clean tree
 
 PYTHON ?= python
 PIP ?= pip
@@ -70,6 +70,12 @@ smoke:
 	optical-spec meep-generate outputs/smoke_spec.json --mode preview --output outputs/smoke_meep.py
 	optical-spec meep-check --json
 	optical-spec diagnose outputs/smoke_spec.json --output-dir outputs --create-demo-spec-if-missing --json
+
+quality:
+	./scripts/run_quality_gates.sh
+
+testpypi-preflight:
+	./scripts/testpypi_preflight.sh
 
 test-cov:
 	pytest --cov=optical_spec_agent --cov-report=term-missing

@@ -70,6 +70,10 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。
+CI/local gate parity、release dry-run、secrets/token hygiene 和 maintainer
+operations checklist 见 `docs/ci_quality_gate_parity.md`、
+`docs/release_dry_run_operations.md`、`docs/secrets_and_token_hygiene.md` 和
+`docs/maintainer_operations_checklist.md`。
 本地 package publication preflight 脚本为 `scripts/testpypi_preflight.sh`；
 它只做 build、metadata、wheel install 和 CLI 检查，不上传任何 artifact。
 

@@ -35,6 +35,13 @@ does not create GitHub releases. It prints `NO UPLOAD PERFORMED`.
 `scripts/run_quality_gates.sh` includes this preflight as the first local gate
 unless `OSA_SKIP_PREFLIGHT=1` is set.
 
+Related operations docs:
+
+- `docs/ci_quality_gate_parity.md`
+- `docs/release_dry_run_operations.md`
+- `docs/secrets_and_token_hygiene.md`
+- `docs/maintainer_operations_checklist.md`
+
 ## Required dry-run checks
 
 - `python -m build` passes.

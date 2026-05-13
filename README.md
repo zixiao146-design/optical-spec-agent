@@ -59,6 +59,12 @@ readiness scorecard, and maintainer decisions are tracked in
 [`docs/README.md`](docs/README.md),
 [`docs/v1_0_readiness_scorecard.md`](docs/v1_0_readiness_scorecard.md), and
 [`docs/maintainer_decision_log.md`](docs/maintainer_decision_log.md).
+Operations parity, release dry-run rules, token hygiene, and maintainer
+checklists are tracked in
+[`docs/ci_quality_gate_parity.md`](docs/ci_quality_gate_parity.md),
+[`docs/release_dry_run_operations.md`](docs/release_dry_run_operations.md),
+[`docs/secrets_and_token_hygiene.md`](docs/secrets_and_token_hygiene.md), and
+[`docs/maintainer_operations_checklist.md`](docs/maintainer_operations_checklist.md).
 Local package publication preflight is available through
 [`scripts/testpypi_preflight.sh`](scripts/testpypi_preflight.sh); it performs
 build, metadata, wheel install, and CLI checks without uploading anything.

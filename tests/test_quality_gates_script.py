@@ -23,6 +23,9 @@ def test_quality_gates_script_exists_and_runs_expected_local_gates():
     assert "optical-spec --help" in text
     assert "optical-spec adapter-list --json" in text
     assert "optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json" in text
+    assert (ROOT / "docs" / "quality_gates.md").exists()
+    assert (ROOT / "docs" / "ci_quality_gate_parity.md").exists()
+    assert (ROOT / "docs" / "release_dry_run_operations.md").exists()
 
 
 def test_quality_gates_script_contains_no_publish_tag_or_release_commands():
@@ -37,3 +40,10 @@ def test_quality_gates_script_contains_no_publish_tag_or_release_commands():
     for phrase in forbidden:
         assert phrase not in text
 
+
+def test_makefile_exposes_no_upload_quality_targets():
+    makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
+    assert "quality:" in makefile
+    assert "./scripts/run_quality_gates.sh" in makefile
+    assert "testpypi-preflight:" in makefile
+    assert "./scripts/testpypi_preflight.sh" in makefile

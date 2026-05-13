@@ -14,6 +14,10 @@
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`.
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`.
 - One-command quality gate script: `scripts/run_quality_gates.sh`.
+- CI/local quality parity: `docs/ci_quality_gate_parity.md`.
+- Release dry-run operations: `docs/release_dry_run_operations.md`.
+- Secrets and token hygiene: `docs/secrets_and_token_hygiene.md`.
+- Maintainer operations checklist: `docs/maintainer_operations_checklist.md`.
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`.
 - TestPyPI upload approval status: pending.
@@ -48,7 +52,8 @@ not upload, publish, create tags, or create GitHub releases.
 - `twine check dist/*` passes.
 - Dist filenames match the candidate version.
 - Release notes and post-release status docs are prepared.
-- Token handling follows `docs/release_engineering_playbook.md`.
+- Token handling follows `docs/release_engineering_playbook.md` and
+  `docs/secrets_and_token_hygiene.md`.
 - No token is printed or committed.
 - TestPyPI upload/install is evaluated first, unless maintainers explicitly
   waive it.

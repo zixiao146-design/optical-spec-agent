@@ -15,6 +15,10 @@
 - `smoke_release.sh`.
 - TestPyPI no-upload preflight.
 - Quality gates.
+- CI and quality gate parity.
+- Release dry-run operations.
+- Secrets and token hygiene.
+- Maintainer operations checklist.
 - Open-source-solver-first strategy.
 - Proprietary solver non-default policy.
 - CLI contract.
@@ -37,9 +41,9 @@
 - Adapter outputs may still be MVP/scaffold.
 - Workflow remains local/synchronous preview.
 - v1.0 compatibility freeze not finalized.
-- Optional no-upload GitHub Actions quality gate workflow was not added in this
-  sprint because the repository already has multiple CI/release-dry-run
-  workflows; keep that as a future consolidation task.
+- No new GitHub Actions workflow was added during operations readiness because
+  existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
+  reviewed and documented instead of duplicating automation.
 
 ## Recommended Next Decisions
 

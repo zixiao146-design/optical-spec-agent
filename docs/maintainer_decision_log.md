@@ -14,6 +14,11 @@
 - Do not require external solver or external LLM by default.
 - Do not publish PyPI without explicit approval.
 - Do not upload TestPyPI without explicit approval.
+- Use `docs/ci_quality_gate_parity.md` to compare local and CI quality gates.
+- Use `docs/release_dry_run_operations.md` for no-upload release rehearsal.
+- Follow `docs/secrets_and_token_hygiene.md` before any token-mediated action.
+- Follow `docs/maintainer_operations_checklist.md` before RC, TestPyPI, or PyPI
+  transitions.
 
 ## Safety Notes
 

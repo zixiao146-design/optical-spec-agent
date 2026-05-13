@@ -12,10 +12,13 @@ Current main development version: 0.9.0rc5.dev0.
 ## Quality / Packaging
 
 - [Quality gates](quality_gates.md)
+- [CI and quality gate parity](ci_quality_gate_parity.md)
+- [Release dry-run operations](release_dry_run_operations.md)
 - [Packaging gate](packaging_gate.md)
 - [TestPyPI dry-run gate](testpypi_dry_run_gate.md)
 - [PyPI publication decision](pypi_publication_decision.md)
 - [TestPyPI upload approval for 0.9.0rc5.dev0](testpypi_upload_approval_v0.9.0rc5.dev0.md)
+- [Secrets and token hygiene](secrets_and_token_hygiene.md)
 
 ## Contracts
 
@@ -53,4 +56,5 @@ Current main development version: 0.9.0rc5.dev0.
 ## Decisions
 
 - [Maintainer decision log](maintainer_decision_log.md)
+- [Maintainer operations checklist](maintainer_operations_checklist.md)
 - [v1.0 readiness scorecard](v1_0_readiness_scorecard.md)

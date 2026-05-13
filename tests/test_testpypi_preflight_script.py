@@ -34,6 +34,8 @@ def test_testpypi_preflight_script_contains_no_upload_or_secret_handling():
         "__token__",
         "gh_token",
         "github_token",
+        "pypi_token",
+        "testpypi_token",
         "upload.pypi.org",
         "test.pypi.org/legacy",
         "pypi.org/legacy",

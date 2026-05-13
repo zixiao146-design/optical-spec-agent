@@ -14,6 +14,13 @@ are not run by default, external LLM access is not required by default, and
 commercial/proprietary solver validation must be explicit, manual, and
 non-default.
 
+Operations references:
+
+- CI/local gate parity: `docs/ci_quality_gate_parity.md`
+- Release dry-run operations: `docs/release_dry_run_operations.md`
+- Secrets and token hygiene: `docs/secrets_and_token_hygiene.md`
+- Maintainer operations checklist: `docs/maintainer_operations_checklist.md`
+
 ## Release phases
 
 1. Readiness preparation: update release notes, readiness docs, and known limitations.
@@ -64,6 +71,13 @@ The preflight performs a local build, `python -m twine check dist/*`, dist
 filename checks, clean wheel installation, version import checks, and
 `optical-spec --help`. It prints `NO UPLOAD PERFORMED`. It must not upload,
 publish, create tags, create GitHub releases, print tokens, or commit tokens.
+
+Makefile convenience targets are available for local operations:
+
+```bash
+make quality
+make testpypi-preflight
+```
 
 ## Required verification
 

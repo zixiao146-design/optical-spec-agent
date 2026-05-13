@@ -18,6 +18,16 @@ future release-candidate preparation.
 ./scripts/run_quality_gates.sh
 ```
 
+Makefile convenience target:
+
+```bash
+make quality
+```
+
+CI parity and workflow boundaries are documented in
+[`ci_quality_gate_parity.md`](ci_quality_gate_parity.md). Release dry-runs are
+documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
+
 ## Gate Components
 
 - TestPyPI no-upload preflight.
@@ -37,6 +47,7 @@ future release-candidate preparation.
 - No external solver by default.
 - No external LLM by default.
 - No proprietary solver by default.
+- No token is required for the default local quality gate.
 
 ## When To Run
 
@@ -44,3 +55,4 @@ future release-candidate preparation.
 - Before tag creation.
 - Before TestPyPI approval decision.
 - After major docs, contract, schema, adapter, or workflow changes.
+- Before changing release automation or CI workflow behavior.

@@ -107,8 +107,12 @@ Current main contract artifacts:
 - `docs/release_engineering_playbook.md`
 - `docs/v1_0_readiness_plan.md`
 - `docs/quality_gates.md`
+- `docs/ci_quality_gate_parity.md`
+- `docs/release_dry_run_operations.md`
+- `docs/secrets_and_token_hygiene.md`
 - `docs/v1_0_readiness_scorecard.md`
 - `docs/maintainer_decision_log.md`
+- `docs/maintainer_operations_checklist.md`
 - `docs/README.md`
 - `docs/release_readiness_v0.9.0rc5.md`
 - `docs/testpypi_dry_run_gate.md`
