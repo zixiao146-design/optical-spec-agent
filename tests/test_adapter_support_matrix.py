@@ -22,6 +22,9 @@ def test_adapter_support_matrix_mentions_registered_adapters():
         assert metadata.current_status in text
     assert "external solvers are not run by default" in text
     assert "production-grade physical validation" in text
+    assert "open-source-solver-first" in text
+    assert "proprietary/export-only future target" in text
+    assert "not registered adapters unless" in text
 
 
 def test_adapter_list_json_matches_registry_tools():
@@ -30,6 +33,7 @@ def test_adapter_list_json_matches_registry_tools():
     cli_tools = {item["tool_name"] for item in json.loads(result.output)["adapters"]}
     registry_tools = {metadata.tool_name for metadata in list_adapters()}
     assert cli_tools == registry_tools == {"meep", "mpb", "gmsh", "elmer", "optiland"}
+    assert cli_tools.isdisjoint({"zemax", "lumerical", "comsol", "ansys"})
 
 
 def test_adapter_metadata_declares_no_default_external_execution():

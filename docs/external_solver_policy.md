@@ -1,6 +1,8 @@
 # External Solver Policy
 
-External solvers are not run by default.
+External solvers are not run by default. optical-spec-agent is
+open-source-solver-first: the default route is local artifact preview and
+offline evidence, not automatic solver execution.
 
 Current public prerelease: `v0.9.0rc3`. Current main development version:
 `0.9.0rc4.dev0`. `v0.9.0rc4.dev0` is not a release, the `v0.9.0rc4` tag has
@@ -12,12 +14,28 @@ changes should be published as another RC.
 
 - Default tests do not require Meep, MPB, Gmsh, Elmer, or Optiland.
 - Default CI should remain offline with respect to external solver execution.
+- No solver, open-source or proprietary, is run by default in smoke or release
+  validation.
+- No proprietary license is required for tests, examples, smoke, or release
+  validation.
 - Adapters may generate scripts/configs for external solvers, but generation is
   not execution.
 - Adapter family evidence fixtures cover local scaffold generation for Meep,
   Gmsh, Elmer, MPB, and Optiland; they do not execute those solvers.
 - Generated artifacts are preview/scaffold unless solver-backed validation is
   performed and recorded.
+
+## Open-source optional solvers vs proprietary tools
+
+Open-source optional solvers may be used for optional/manual validation if they
+are installed by the user. Current open-source-first adapter families are Meep,
+MPB, Gmsh, Elmer, and Optiland.
+
+Proprietary commercial tools, including Zemax, Lumerical, COMSOL, and
+proprietary Ansys optics tools, are not default targets. Closed-source
+commercial solver validation must be explicit, manual, non-default, and
+separately documented. Future proprietary support, if any, should be
+export-only by default and must not imply solver-backed correctness.
 
 ## Optional solver validation
 

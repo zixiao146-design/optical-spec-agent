@@ -2,12 +2,13 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-> 将中英文光学仿真需求编译为经过校验的 OpticalSpec JSON，并生成
-> solver-native input scaffold。
+> 开源仿真工具链优先的光学仿真工作流 agent：将中英文光学仿真需求编译为
+> 经过校验的 OpticalSpec JSON，并生成 solver-native input scaffold。
 
 ## 项目定位
 
-**optical-spec-agent** 是一个连接“自然语言光学仿真需求”和“可执行光学
+**optical-spec-agent** 是一个开源仿真工具链优先的光学仿真工作流 agent，
+也是一个连接“自然语言光学仿真需求”和“可执行光学
 求解器输入”的规格编译层。用户可以用中文或英文描述仿真任务，项目会生成
 结构化、经过校验的 OpticalSpec JSON，并可进一步生成 Meep 脚本或
 MPB/Gmsh/Elmer/Optiland 的 solver-native input scaffold。
@@ -15,6 +16,10 @@ MPB/Gmsh/Elmer/Optiland 的 solver-native input scaffold。
 它不是求解器。默认情况下，它生成 spec、脚本、adapter scaffold、诊断报告和
 workflow artifact；它不会默认运行外部 solver，也不提供 production-grade
 physical validation。
+
+默认 quickstart 不要求 Zemax、Lumerical、COMSOL 或 proprietary Ansys tools。
+外部 solver 是可选项，默认不运行；外部 LLM 也是可选项，默认不需要。
+PyPI/TestPyPI 仍未发布/上传。
 
 核心主线：
 
@@ -52,6 +57,7 @@ TestPyPI 仍未上传，除非后续单独批准。PyPI/TestPyPI remain unpublis
 `docs/cli_contract.md`、`docs/schema_contract.md`、
 `docs/adapter_support_matrix.md`、`docs/workflow_preview_contract.md`、
 `docs/validation_boundary.md`、`docs/validation_gate.md`、`docs/packaging_gate.md`、
+`docs/open_source_solver_strategy.md`、`docs/proprietary_solver_policy.md`、
 `docs/external_solver_policy.md`、`docs/external_llm_policy.md` 和
 `docs/pypi_publication_decision.md`。
 当前 rc4 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc4.md`、

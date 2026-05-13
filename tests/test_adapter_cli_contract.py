@@ -54,4 +54,8 @@ def test_adapter_cli_listing_is_offline_contract():
     assert "External LLM" in matrix
     assert "no production-grade physical validation" in matrix.lower()
     assert "PyPI/TestPyPI remain unpublished" in matrix
-
+    assert "open-source-solver-first" in matrix
+    assert "Proprietary/export-only future target" in matrix
+    assert "not registered adapters unless" in matrix
+    for name in ["Zemax", "Lumerical", "COMSOL", "proprietary Ansys optics tools"]:
+        assert name in matrix

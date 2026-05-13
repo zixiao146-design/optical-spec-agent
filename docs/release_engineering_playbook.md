@@ -8,6 +8,12 @@ Current main development version: `0.9.0rc4.dev0`.
 `v0.9.0rc4.dev0` is not a public release, and the `v0.9.0rc4` tag has not
 been created. PyPI/TestPyPI remain unpublished.
 
+Release engineering is open-source-solver-first. Default tests, smoke, examples,
+and release validation require no proprietary solver license. External solvers
+are not run by default, external LLM access is not required by default, and
+commercial/proprietary solver validation must be explicit, manual, and
+non-default.
+
 ## Release phases
 
 1. Readiness preparation: update release notes, readiness docs, and known limitations.
@@ -41,6 +47,8 @@ anything.
 
 Wheel smoke remains local only. The smoke script must not publish, upload to
 TestPyPI/PyPI, create tags, or create GitHub releases.
+It must not require Zemax, Lumerical, COMSOL, proprietary Ansys tools, or any
+other proprietary commercial solver.
 
 ## Required verification
 

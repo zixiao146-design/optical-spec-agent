@@ -6,6 +6,10 @@ development version `0.9.0rc4.dev0`. `v0.9.0rc4.dev0` is not a release, the
 Continue v1.0 readiness engineering and prepare a `v0.9.0rc4` release draft
 only when accumulated changes should be published as another RC.
 
+The validation strategy is open-source-solver-first. Proprietary solvers are not
+default dependencies, and no proprietary license is required for default tests,
+smoke, examples, or release validation.
+
 ## What must pass before a new RC
 
 - `scripts/smoke_release.sh`
@@ -60,6 +64,7 @@ maintainers.
   smoke, wheel smoke, build, `make check`, and CLI examples pass.
 - Adapter family evidence does not replace optional/manual external solver
   validation.
+- No proprietary solver validation is part of the default gate.
 
 ## v1.0 validation target
 

@@ -6,6 +6,8 @@
 - PyPI published: no
 - Current public prerelease: v0.9.0rc3
 - Current main development version: 0.9.0rc4.dev0
+- Product positioning: open-source-solver-first
+- Proprietary solvers are not default dependencies
 
 ## Purpose
 
@@ -27,6 +29,9 @@ approved. It does not authorize upload.
 - License metadata is acceptable.
 - Dependencies are reasonable.
 - Package imports cleanly after wheel install.
+- No proprietary license is required.
+- External solvers are not run by default.
+- External LLM access is not required by default.
 
 ## Manual approval requirement
 

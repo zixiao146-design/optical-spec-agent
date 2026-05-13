@@ -9,6 +9,7 @@ verified public `v0.9.0rc3` prerelease.
 - Current package version on `main`: `0.9.0rc4.dev0`
 - Current main development version: `0.9.0rc4.dev0`
 - Current public prerelease: `v0.9.0rc3`
+- Product positioning: open-source-solver-first
 - `v0.9.0rc1`, `v0.9.0rc2`, and `v0.9.0rc3` tags remain unchanged.
 - `v0.9.0rc4.dev0` is not a public release.
 - `v0.9.0rc4` tag: not created
@@ -16,6 +17,8 @@ verified public `v0.9.0rc3` prerelease.
 - TestPyPI status: not published
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
+- Open-source solver strategy doc: `docs/open_source_solver_strategy.md`
+- Proprietary solver policy doc: `docs/proprietary_solver_policy.md`
 - Build backend: `hatchling`
 - Console script: `optical-spec`
 - Expected build artifacts for current main:
@@ -35,6 +38,8 @@ verified public `v0.9.0rc3` prerelease.
   - `optical-spec parse examples/specs/minimal_nanoparticle.json --json`
   - `optical-spec workflow-plan examples/workflows/local_preview_request.json --json`
 - README and README.zh-CN describe current release/development state accurately.
+- No proprietary license is required for packaging checks, default tests, smoke,
+  examples, or release validation.
 - README renders acceptably for GitHub/PyPI.
 - Package metadata is complete enough for the intended audience:
   - `project.name`

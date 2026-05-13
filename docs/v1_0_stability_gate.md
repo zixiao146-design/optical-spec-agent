@@ -22,11 +22,15 @@ behavior is stable enough for downstream users.
 
 - Current public prerelease: v0.9.0rc3
 - Current main development version: 0.9.0rc4.dev0
+- Product positioning: open-source-solver-first
 - v1.0.0 not ready yet
 - Production-grade physical validation not claimed
 - Formal convergence proof not claimed
 - External solver validation is optional/manual
 - External LLM is optional and not required by default
+- Proprietary solvers are not default dependencies
+- No proprietary license is required for default tests, smoke, examples, or
+  release validation
 
 ## Minimum v1.0 exit criteria
 

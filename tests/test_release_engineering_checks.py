@@ -124,6 +124,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "testpypi_dry_run_gate.md",
         "v1_0_stability_gate.md",
         "schema_compatibility_policy.md",
+        "open_source_solver_strategy.md",
+        "proprietary_solver_policy.md",
     ]
     for name in required_docs:
         assert (ROOT / "docs" / name).exists()
@@ -138,6 +140,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "No formal convergence proof" in combined
     assert "External solvers are not run by default" in combined
     assert "External LLM access is not required by default" in combined
+    assert "open-source-solver-first" in combined
+    assert "not default dependencies" in combined
+    assert "No proprietary license is required" in combined
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
 
@@ -152,6 +157,9 @@ def test_adapter_support_matrix_covers_registered_adapter_families():
     assert "External solvers are not run by default" in text
     assert "External LLM providers are not required" in text
     assert "no production-grade physical validation" in text.lower()
+    assert "open-source-solver-first" in text
+    assert "Proprietary/export-only future target" in text
+    assert "not registered adapters unless" in text
     assert "0.9.0rc4.dev0" in text
     assert "v0.9.0rc3" in text
     assert "PyPI/TestPyPI remain unpublished" in text
@@ -188,6 +196,9 @@ def test_external_solver_policy_keeps_solver_validation_optional():
     assert "External solvers are not run by default" in text
     assert "Optional solver validation may be run manually" in text
     assert "No production-grade physical validation is claimed" in text
+    assert "open-source-solver-first" in text
+    assert "Proprietary commercial tools" in text
+    assert "No proprietary license is required" in text
 
 
 def test_external_llm_policy_keeps_network_llm_optional_and_tokens_safe():

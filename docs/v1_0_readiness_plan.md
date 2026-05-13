@@ -33,6 +33,10 @@ early adopters. They do not prove physical correctness of generated simulations.
 - No formal convergence proof is provided.
 - External solvers are not run by default.
 - External LLM providers are not required by default.
+- Project positioning is open-source-solver-first.
+- Proprietary solvers are not default dependencies.
+- No proprietary license is required for default tests, smoke, examples, or
+  release validation.
 - Adapter outputs remain MVP/scaffold unless separately validated.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
@@ -71,6 +75,10 @@ Before `v1.0.0`, maintainers should decide and document:
 - Schema compatibility policy: `docs/schema_compatibility_policy.md`.
 - Supported adapters and their stability levels:
   `docs/adapter_support_matrix.md`.
+- Open-source-solver-first strategy:
+  `docs/open_source_solver_strategy.md`.
+- Proprietary solver boundary:
+  `docs/proprietary_solver_policy.md`.
 - Workflow preview boundaries: `docs/workflow_preview_contract.md`.
 - Unsupported assumptions, validation limits, and non-goals:
   `docs/validation_boundary.md`.

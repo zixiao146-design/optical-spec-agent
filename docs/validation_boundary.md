@@ -9,6 +9,10 @@ development version `0.9.0rc4.dev0`. `v0.9.0rc4.dev0` is not a release, the
 Continue v1.0 readiness engineering and prepare a `v0.9.0rc4` release draft
 only when accumulated changes should be published as another RC.
 
+The project is open-source-solver-first. Proprietary solvers are not default
+dependencies, and no proprietary license is required for default tests, smoke,
+examples, or release validation.
+
 ## What current tests validate
 
 - `OpticalSpec` model serialization, schema export, and status-field behavior.
@@ -35,6 +39,8 @@ only when accumulated changes should be published as another RC.
 - Full material model correctness.
 - Full CAD, FEM, lens, or mesh prescription correctness.
 - Real external LLM model quality.
+- Commercial/proprietary solver-backed validation unless explicitly documented
+  as manual and non-default.
 - Cloud or background orchestration behavior.
 
 ## Physical diagnostics status

@@ -8,6 +8,7 @@ This document describes the current `main` branch. It is not a release tag.
 - Current public prerelease: `v0.9.0rc3`
 - Current main development version: `0.9.0rc4.dev0`
 - Main branch state: post-`v0.9.0rc3` development toward `v0.9.0rc4`
+- Product positioning: open-source-solver-first
 - `v0.9.0rc4.dev0` is not a release
 - `v0.9.0rc4` tag has not been created
 - GitHub pre-release created: yes
@@ -16,6 +17,9 @@ This document describes the current `main` branch. It is not a release tag.
 - Latest release-status commit: `4d2991f`
 - PyPI published: no
 - TestPyPI uploaded: no
+- Proprietary solvers are not default dependencies.
+- No proprietary license is required for default tests, smoke, examples, or
+  release validation.
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
   - v0.7 multi-solver adapter MVP scaffolds
@@ -73,6 +77,8 @@ Current main contract artifacts:
 - `docs/adapter_support_matrix.md`
 - `docs/workflow_preview_contract.md`
 - `docs/validation_boundary.md`
+- `docs/open_source_solver_strategy.md`
+- `docs/proprietary_solver_policy.md`
 - `docs/pypi_publication_decision.md`
 - `docs/packaging_gate.md`
 - `docs/validation_gate.md`
