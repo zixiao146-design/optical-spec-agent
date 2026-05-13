@@ -4,16 +4,18 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc3`
-- Current public pre-release: `v0.9.0rc2`
-- Main branch state: `v0.9.0rc3` release draft prepared
-- `v0.9.0rc3` tag created: no
-- `v0.9.0rc3` GitHub release created: no
+- `pyproject.toml` package version on `main`: `0.9.0rc4.dev0`
+- Current public prerelease: `v0.9.0rc3`
+- Current main development version: `0.9.0rc4.dev0`
+- Main branch state: post-`v0.9.0rc3` development toward `v0.9.0rc4`
+- `v0.9.0rc4.dev0` is not a release
+- `v0.9.0rc4` tag has not been created
 - GitHub pre-release created: yes
 - Release verified: yes
-- Post-release status doc: `docs/post_release_status_v0.9.0rc2.md`
-- Latest release-status commit: `0a49fda`
+- Post-release status doc: `docs/post_release_status_v0.9.0rc3.md`
+- Latest release-status commit: `4d2991f`
 - PyPI published: no
+- TestPyPI uploaded: no
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
   - v0.7 multi-solver adapter MVP scaffolds
@@ -57,11 +59,12 @@ twine check dist/*
 
 ## Recommended Version Action
 
-Current recommendation: treat `v0.9.0rc2` as the active verified public
-pre-release until `v0.9.0rc3` is manually tagged and published as a GitHub
-pre-release. The `main` branch now contains the `v0.9.0rc3` release draft.
-Run final readiness checks, then create a tag/release only with maintainer
-approval. Keep PyPI/TestPyPI unpublished unless explicitly approved.
+Current recommendation: treat `v0.9.0rc3` as the active verified public
+prerelease. The `main` branch now builds as `0.9.0rc4.dev0` and may contain
+post-`v0.9.0rc3` hardening changes. Continue v1.0 readiness engineering and
+prepare a `v0.9.0rc4` release draft only when accumulated changes should be
+published as another RC. Keep PyPI/TestPyPI unpublished unless explicitly
+approved.
 
 Current main contract artifacts:
 
@@ -77,15 +80,19 @@ Current main contract artifacts:
 - `docs/external_llm_policy.md`
 - `docs/release_engineering_playbook.md`
 - `docs/v1_0_readiness_plan.md`
+- `docs/release_readiness_v0.9.0rc4.md`
+- `docs/testpypi_dry_run_gate.md`
+- `docs/v1_0_stability_gate.md`
 
 ## Release Blockers
 
-- No hard release blocker is currently recorded for `v0.9.0rc2`.
-- Do not move `v0.9.0rc1` or `v0.9.0rc2`.
+- No hard release blocker is currently recorded for `v0.9.0rc3`.
+- Do not move `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3`.
 - Do not publish PyPI yet.
+- Do not upload TestPyPI yet.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
-- Next blocker class: any `v0.9.0rc3` candidate must pass the release smoke
+- Next blocker class: any `v0.9.0rc4` candidate must pass the release smoke
   script, full tests, build, docs checks, and release readiness checks before a
   new tag is considered.
 
@@ -102,12 +109,12 @@ Current main contract artifacts:
 
 ## Manual Release Checklist
 
-1. Use `docs/post_release_status_v0.9.0rc2.md` as the rc2 source of truth.
+1. Use `docs/post_release_status_v0.9.0rc3.md` as the rc3 source of truth.
 2. Use `docs/v1_0_readiness_plan.md` for the next hardening priorities.
 3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
 4. Review the public contract docs before changing CLI, schema, adapter, or
    workflow behavior.
 5. Run the packaging and validation gates before any future RC.
-6. Confirm `v0.9.0rc3` tag is absent locally and remotely before tag creation.
-7. Create an annotated `v0.9.0rc3` tag only after final maintainer approval.
+6. Confirm `v0.9.0rc4` tag is absent locally and remotely before tag creation.
+7. Create an annotated `v0.9.0rc4` tag only after final maintainer approval.
 8. Keep PyPI/TestPyPI unpublished unless explicitly approved.

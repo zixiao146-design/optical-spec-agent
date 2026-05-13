@@ -1,23 +1,26 @@
 # Packaging Gate
 
-Version scope: current `main` `v0.9.0rc3` release draft after the verified
-`v0.9.0rc2` pre-release.
+Version scope: current `main` development version `0.9.0rc4.dev0` after the
+verified public `v0.9.0rc3` prerelease.
 
 ## Current package baseline
 
 - Package name: `optical-spec-agent`
-- Current package version on `main`: `0.9.0rc3`
-- Current main release draft: `v0.9.0rc3`
-- Current public pre-release: `v0.9.0rc2`
-- `v0.9.0rc2` tag remains unchanged.
-- `v0.9.0rc3` tag: not created
+- Current package version on `main`: `0.9.0rc4.dev0`
+- Current main development version: `0.9.0rc4.dev0`
+- Current public prerelease: `v0.9.0rc3`
+- `v0.9.0rc1`, `v0.9.0rc2`, and `v0.9.0rc3` tags remain unchanged.
+- `v0.9.0rc4.dev0` is not a public release.
+- `v0.9.0rc4` tag: not created
 - PyPI status: not published
 - TestPyPI status: not published
+- TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
+- v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
 - Build backend: `hatchling`
 - Console script: `optical-spec`
 - Expected build artifacts for current main:
-  - `optical_spec_agent-0.9.0rc3-py3-none-any.whl`
-  - `optical_spec_agent-0.9.0rc3.tar.gz`
+  - `optical_spec_agent-0.9.0rc4.dev0-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc4.dev0.tar.gz`
 
 ## Packaging checks required before publication
 
@@ -48,6 +51,8 @@ Version scope: current `main` `v0.9.0rc3` release draft after the verified
 - TestPyPI should be used before PyPI.
 - TestPyPI upload requires explicit maintainer approval.
 - TestPyPI upload must not be part of the default smoke script.
+- Wheel smoke remains local only.
+- Smoke script must not publish or upload packages.
 - TestPyPI verification should include clean install from TestPyPI and
   `optical-spec --help`.
 - If TestPyPI is skipped, the skip decision must be explicitly documented.
@@ -68,5 +73,6 @@ Version scope: current `main` `v0.9.0rc3` release draft after the verified
 - No PyPI publish now.
 - No TestPyPI upload now.
 - No automatic package publishing from `scripts/smoke_release.sh`.
+- Do not publish automatically from release scripts.
 - No claim of production-grade physical validation.
 - No claim of formal convergence proof.

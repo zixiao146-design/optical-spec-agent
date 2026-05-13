@@ -2,15 +2,16 @@
 
 ## Current baseline
 
-- Current public pre-release: `v0.9.0rc2`
-- Current main release draft version: `0.9.0rc3`
-- `v0.9.0rc3` release draft prepared: yes
-- `v0.9.0rc3` tag created: no
-- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc2
+- Current public prerelease: `v0.9.0rc3`
+- Current main development version: `0.9.0rc4.dev0`
+- `v0.9.0rc4.dev0` is not a release
+- `v0.9.0rc4` tag has not been created
+- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc3
 - Release verified: yes
-- Post-release status: `docs/post_release_status_v0.9.0rc2.md`
-- Latest post-release status commit: `0a49fda`
+- Post-release status: `docs/post_release_status_v0.9.0rc3.md`
+- Latest post-release status commit: `4d2991f`
 - PyPI published: no
+- TestPyPI uploaded: no
 
 ## What v0.9.0rc2 already proves
 
@@ -36,11 +37,15 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path to v0.9.0rc3
+## Recommended path to v0.9.0rc4
 
-`v0.9.0rc3` should be a hardening candidate, not a feature expansion. Recommended
-goals:
+`v0.9.0rc4` should be prepared only when accumulated post-rc3 hardening changes
+should be published as another RC. Recommended goals:
 
+- TestPyPI gate dry-run foundation.
+- Packaging metadata hardening.
+- Wheel install smoke reliability.
+- v1.0 stability gate.
 - Stronger adapter golden-output regression tests.
 - Better workflow replay and dry-run smoke coverage.
 - Clearer CLI quickstart examples for local/no-network usage.
@@ -48,6 +53,7 @@ goals:
 - Optional external solver validation path documented, but not made default.
 - Physical validation status clarified without overclaiming.
 - PyPI remains unpublished unless explicitly approved.
+- TestPyPI remains not uploaded unless explicitly approved.
 
 ## Recommended path to v1.0.0
 
@@ -81,6 +87,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Public contract docs and regression tests. Added in current main.
 - Packaging and validation gates. Added in current main.
 - Optional external solver/LLM policy docs. Added in current main.
+- Continue v1.0 readiness engineering from `0.9.0rc4.dev0`.
 
 ### P1
 
@@ -98,9 +105,10 @@ Before `v1.0.0`, maintainers should decide and document:
 ## Explicit non-goals
 
 - Do not publish PyPI yet.
-- Do not move `v0.9.0rc1` or `v0.9.0rc2` tags.
-- Do not create the `v0.9.0rc3` tag until final readiness checks and maintainer approval.
-- Do not treat the checked-in `v0.9.0rc3` draft as a published release.
+- Do not upload TestPyPI yet.
+- Do not move `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3` tags.
+- Do not create the `v0.9.0rc4` tag until final readiness checks and maintainer approval.
+- Do not treat `v0.9.0rc4.dev0` as a published release.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.

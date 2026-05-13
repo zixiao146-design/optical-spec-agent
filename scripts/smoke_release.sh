@@ -6,6 +6,11 @@ OSA_SMOKE_PYTHON="${OSA_SMOKE_PYTHON:-python3}"
 OSA_SMOKE_VERIFY_WHEEL="${OSA_SMOKE_VERIFY_WHEEL:-0}"
 OSA_SMOKE_WHEEL_VENV="${OSA_SMOKE_WHEEL_VENV:-/tmp/osa-smoke-wheel}"
 
+if [[ "${OSA_SMOKE_ALLOW_PUBLISH:-0}" != "0" ]]; then
+  echo "ERROR: release smoke is local-only and cannot publish or upload artifacts." >&2
+  exit 1
+fi
+
 if ! "${OSA_SMOKE_PYTHON}" - <<'PY' >/dev/null 2>&1
 import sys
 raise SystemExit(0 if sys.version_info >= (3, 11) else 1)

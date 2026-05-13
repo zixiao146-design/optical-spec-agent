@@ -1,11 +1,12 @@
 # Release Engineering Playbook
 
-This playbook captures the release process hardened during the `v0.9.0rc1` and
-`v0.9.0rc2` release candidates.
+This playbook captures the release process hardened during the `v0.9.0rc1`,
+`v0.9.0rc2`, and `v0.9.0rc3` release candidates.
 
-Current `main` may carry release-draft versions such as `0.9.0rc3`. A release
-draft is not a public release until an annotated tag is pushed and a GitHub
-pre-release is created after final smoke/build gates pass.
+Current public prerelease: `v0.9.0rc3`.
+Current main development version: `0.9.0rc4.dev0`.
+`v0.9.0rc4.dev0` is not a public release, and the `v0.9.0rc4` tag has not
+been created. PyPI/TestPyPI remain unpublished.
 
 ## Release phases
 
@@ -38,6 +39,9 @@ This installs the generated wheel into a second clean virtual environment and
 checks import/version metadata plus `optical-spec --help`. It does not upload
 anything.
 
+Wheel smoke remains local only. The smoke script must not publish, upload to
+TestPyPI/PyPI, create tags, or create GitHub releases.
+
 ## Required verification
 
 - `git status` is clean before tagging.
@@ -56,7 +60,7 @@ anything.
 
 - Use annotated tags for RC releases.
 - Never move existing tags.
-- Never re-tag `v0.9.0rc1` or `v0.9.0rc2`.
+- Never re-tag `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3`.
 - Create a new RC tag for post-release fixes.
 - GitHub pre-releases must have `draft=false` and `prerelease=true`.
 - Release notes should match `docs/github_release_draft_<version>.md`.
@@ -85,3 +89,7 @@ anything.
 - Never publish during release engineering smoke without explicit approval.
 - Follow `docs/packaging_gate.md` and `docs/pypi_publication_decision.md` before
   any TestPyPI or PyPI operation.
+- TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`.
+- v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
+- TestPyPI/PyPI upload requires explicit approval.
+- Do not publish automatically from release scripts.

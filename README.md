@@ -25,16 +25,17 @@ an optional harness that can run an existing generated Meep script when Meep is
 installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
-Release status: the current public pre-release is `v0.9.0rc2`, while the
-current package version on `main` is `0.9.0rc3`. The `main` branch is prepared
-as a `v0.9.0rc3` release draft, but no `v0.9.0rc3` tag or GitHub release has
-been created yet.
+Release status: the current public release candidate is `v0.9.0rc3`, while the
+current `main` development version is `0.9.0rc4.dev0`. `main` may contain
+post-`v0.9.0rc3` hardening changes. `v0.9.0rc4.dev0` is not a public release,
+and the `v0.9.0rc4` tag has not been created.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
-The `v0.9.0rc2` git tag and GitHub pre-release were created after maintainer
-review and supersede `v0.9.0rc1` as the current release candidate. PyPI remains
-unpublished, and this repository state is not a final stable `1.0` release.
+The `v0.9.0rc3` git tag and GitHub pre-release were created after maintainer
+review and supersede `v0.9.0rc2` as the current release candidate. PyPI remains
+unpublished, TestPyPI has not been uploaded, and this repository state is not a
+final stable `1.0` release. PyPI/TestPyPI remain unpublished/not uploaded.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -42,6 +43,10 @@ current release policy and release-readiness matrix. Use
 for the repeatable RC procedure and
 [`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
 the current RC line toward `v1.0`.
+Current rc4 development readiness and publication gates are tracked in
+[`docs/release_readiness_v0.9.0rc4.md`](docs/release_readiness_v0.9.0rc4.md),
+[`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
+[`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
 Public contract boundaries are tracked in
 [`docs/cli_contract.md`](docs/cli_contract.md),
 [`docs/schema_contract.md`](docs/schema_contract.md),
@@ -60,9 +65,9 @@ Validation, packaging, and optional-provider policies are tracked in
 optical-spec-agent 是一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
-pre-release 是 `v0.9.0rc2`，当前 `main` package version 是 `0.9.0rc3`。
-`main` 已准备为 `v0.9.0rc3` release draft，但 tag / GitHub release 尚未创建，
-也不是最终稳定版。
+pre-release 是 `v0.9.0rc3`，当前 `main` package version 是 `0.9.0rc4.dev0`。
+`main` 可能包含 post-`v0.9.0rc3` hardening changes；`v0.9.0rc4.dev0` 不是公开
+release，`v0.9.0rc4` tag 尚未创建，也不是最终稳定版。
 本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
@@ -79,9 +84,9 @@ pre-release 是 `v0.9.0rc2`，当前 `main` package version 是 `0.9.0rc3`。
 | **Release engineering** | Local checks cover CLI surface, docs consistency, artifact contracts, release readiness, LLM mock benchmark, and workflow benchmark |
 | **Validation** | `make check` runs deterministic tests, parser benchmarks, semantic benchmark, mock LLM benchmark, workflow benchmark, docs/CLI checks, and artifact contract checks |
 
-For `v0.9.0rc2`, maintainers created the GitHub pre-release after release
-smoke validation. Do not move the `v0.9.0rc1` or `v0.9.0rc2` tags; use a new
-candidate tag for future post-release fixes.
+For `v0.9.0rc3`, maintainers created the GitHub pre-release after release
+smoke validation. Do not move the `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3`
+tags; use a new candidate tag for future post-release fixes.
 
 ## Why this project?
 
@@ -92,7 +97,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (main `0.9.0rc3`: release draft after post-v0.9.0rc2 hardening)
+## Current scope (main `0.9.0rc4.dev0`: post-v0.9.0rc3 hardening)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -102,6 +107,8 @@ foundation with deterministic mock evaluation and conservative hybrid fallback.
 capabilities, with auditable step artifacts, replay, reports, human-review
 checklists, and workflow benchmarks.
 These are reviewable engineering aids, not production-grade physical validation.
+External solvers and external LLM providers are optional and not required by
+default.
 
 The current loop:
 

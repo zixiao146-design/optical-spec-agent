@@ -3,12 +3,16 @@
 ## Current status
 
 - PyPI published: no.
-- GitHub pre-release candidate: `v0.9.0rc2`.
-- Current main release draft version: `0.9.0rc3`.
-- `v0.9.0rc3` tag and GitHub pre-release have not been created yet.
+- TestPyPI uploaded: no.
+- Current public prerelease: `v0.9.0rc3`.
+- Current main development version: `0.9.0rc4.dev0`.
+- `v0.9.0rc4.dev0` is not a public release.
+- `v0.9.0rc4` tag has not been created.
 - Package build smoke: passed for the RC line.
 - Packaging gate: `docs/packaging_gate.md`.
 - Validation gate: `docs/validation_gate.md`.
+- TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`.
+- v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
 
 ## Recommendation
 
@@ -24,6 +28,7 @@ maintainer approval.
 - Package version in `pyproject.toml` and `__version__` match.
 - `scripts/smoke_release.sh` passes in a clean environment.
 - Optional wheel install smoke passes with `OSA_SMOKE_VERIFY_WHEEL=1`.
+- Wheel smoke remains local only and must not upload artifacts.
 - `pytest` passes.
 - `python -m build` passes.
 - `twine check dist/*` passes.
@@ -46,3 +51,4 @@ remove the artifact from all caches.
 - Do not publish automatically from GitHub release creation.
 - Do not publish as part of default CI.
 - Do not publish without separate approval.
+- Do not publish automatically from release scripts.

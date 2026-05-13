@@ -1,7 +1,10 @@
 # Validation Gate
 
-Version scope: current `main` `v0.9.0rc3` release draft after the verified
-`v0.9.0rc2` pre-release. Current main package version: `0.9.0rc3`.
+Version scope: current public prerelease `v0.9.0rc3`; current `main`
+development version `0.9.0rc4.dev0`. `v0.9.0rc4.dev0` is not a release, the
+`v0.9.0rc4` tag has not been created, and PyPI/TestPyPI remain unpublished.
+Continue v1.0 readiness engineering and prepare a `v0.9.0rc4` release draft
+only when accumulated changes should be published as another RC.
 
 ## What must pass before a new RC
 
@@ -36,14 +39,17 @@ production validation.
 External solver validation remains optional/manual unless explicitly enabled by
 maintainers.
 
-## v0.9.0rc3 validation target
+## v0.9.0rc4 validation target
 
 - Include contract tests from `d567660`.
 - Include packaging gate tests from this sprint.
+- Include TestPyPI dry-run gate checks.
+- Include v1.0 stability gate checks.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
 - Keep PyPI unpublished unless explicitly approved.
-- Do not create the `v0.9.0rc3` tag until project/version consistency, final
+- Keep TestPyPI not uploaded unless explicitly approved.
+- Do not create the `v0.9.0rc4` tag until project/version consistency, final
   smoke, wheel smoke, build, `make check`, and CLI examples pass.
 
 ## v1.0 validation target
