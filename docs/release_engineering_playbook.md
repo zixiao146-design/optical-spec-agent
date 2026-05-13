@@ -50,6 +50,21 @@ TestPyPI/PyPI, create tags, or create GitHub releases.
 It must not require Zemax, Lumerical, COMSOL, proprietary Ansys tools, or any
 other proprietary commercial solver.
 
+## TestPyPI no-upload preflight
+
+Before asking for approval to upload to TestPyPI, run:
+
+```bash
+OSA_TESTPYPI_PREFLIGHT_VENV=/tmp/osa-testpypi-preflight \
+OSA_TESTPYPI_WHEEL_VENV=/tmp/osa-testpypi-preflight-wheel \
+./scripts/testpypi_preflight.sh
+```
+
+The preflight performs a local build, `python -m twine check dist/*`, dist
+filename checks, clean wheel installation, version import checks, and
+`optical-spec --help`. It prints `NO UPLOAD PERFORMED`. It must not upload,
+publish, create tags, create GitHub releases, print tokens, or commit tokens.
+
 ## Required verification
 
 - `git status` is clean before tagging.
@@ -98,6 +113,7 @@ other proprietary commercial solver.
 - Follow `docs/packaging_gate.md` and `docs/pypi_publication_decision.md` before
   any TestPyPI or PyPI operation.
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`.
+- TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`.
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
 - TestPyPI/PyPI upload requires explicit approval.
 - Do not publish automatically from release scripts.

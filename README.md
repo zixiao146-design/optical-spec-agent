@@ -53,6 +53,9 @@ Current rc4 development readiness and publication gates are tracked in
 [`docs/release_readiness_v0.9.0rc4.md`](docs/release_readiness_v0.9.0rc4.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
+Local package publication preflight is available through
+[`scripts/testpypi_preflight.sh`](scripts/testpypi_preflight.sh); it performs
+build, metadata, wheel install, and CLI checks without uploading anything.
 Public contract boundaries are tracked in
 [`docs/cli_contract.md`](docs/cli_contract.md),
 [`docs/schema_contract.md`](docs/schema_contract.md),

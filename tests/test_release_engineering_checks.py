@@ -134,6 +134,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         assert (ROOT / "docs" / name).exists()
     assert (ROOT / "examples" / "README.md").exists()
     assert (ROOT / "examples" / "examples_manifest.json").exists()
+    assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -154,6 +155,26 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v0.9.0rc3" in combined
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
+    assert "scripts/testpypi_preflight.sh" in combined
+    assert "NO UPLOAD PERFORMED" in combined
+
+
+def test_release_and_preflight_scripts_do_not_publish():
+    scripts = [
+        ROOT / "scripts" / "smoke_release.sh",
+        ROOT / "scripts" / "testpypi_preflight.sh",
+    ]
+    forbidden = [
+        "twine upload",
+        "python -m twine upload",
+        "gh release create",
+        "git push",
+        "pypi upload",
+    ]
+    for path in scripts:
+        text = path.read_text(encoding="utf-8").lower()
+        for phrase in forbidden:
+            assert phrase not in text, f"{path} contains forbidden publishing command: {phrase}"
 
 
 def test_adapter_support_matrix_covers_registered_adapter_families():

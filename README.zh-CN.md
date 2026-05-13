@@ -65,6 +65,8 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 和 `examples/examples_manifest.json`。
 当前 rc4 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc4.md`、
 `docs/testpypi_dry_run_gate.md` 和 `docs/v1_0_stability_gate.md`。
+本地 package publication preflight 脚本为 `scripts/testpypi_preflight.sh`；
+它只做 build、metadata、wheel install 和 CLI 检查，不上传任何 artifact。
 
 ## 快速概览
 

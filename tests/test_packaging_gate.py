@@ -40,6 +40,9 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     assert "Current public prerelease: `v0.9.0rc3`" in packaging_gate
     assert "`v0.9.0rc4` tag: not created" in packaging_gate
     assert "docs/testpypi_dry_run_gate.md" in packaging_gate
+    assert "scripts/testpypi_preflight.sh" in packaging_gate
+    assert "python -m twine check dist/*" in packaging_gate
+    assert "does not upload, publish, create tags, or create" in packaging_gate
     assert "docs/v1_0_stability_gate.md" in packaging_gate
     assert "TestPyPI upload requires explicit maintainer approval" in packaging_gate
     assert "No automatic package publishing" in packaging_gate
@@ -63,3 +66,18 @@ def test_smoke_release_script_never_uploads_or_creates_releases():
         assert phrase not in lowered
     assert "OSA_SMOKE_VERIFY_WHEEL" in script
     assert "OSA_SMOKE_ALLOW_PUBLISH" in script
+
+
+def test_testpypi_preflight_script_never_uploads_or_creates_releases():
+    script = (ROOT / "scripts" / "testpypi_preflight.sh").read_text(encoding="utf-8")
+    lowered = script.lower()
+    forbidden = [
+        "twine upload",
+        "gh release create",
+        "git push",
+        "pypi upload",
+    ]
+    for phrase in forbidden:
+        assert phrase not in lowered
+    assert "python -m twine check dist/*" in script
+    assert "NO UPLOAD PERFORMED" in script

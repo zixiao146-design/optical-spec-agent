@@ -16,6 +16,7 @@ verified public `v0.9.0rc3` prerelease.
 - PyPI status: not published
 - TestPyPI status: not published
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
+- TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
 - Open-source solver strategy doc: `docs/open_source_solver_strategy.md`
 - Proprietary solver policy doc: `docs/proprietary_solver_policy.md`
@@ -28,7 +29,9 @@ verified public `v0.9.0rc3` prerelease.
 ## Packaging checks required before publication
 
 - `python -m build` passes.
+- `scripts/testpypi_preflight.sh` passes for no-upload local publication readiness.
 - Wheel and sdist filenames match the package version.
+- `python -m twine check dist/*` passes.
 - `pip install` from the generated wheel works in a clean venv.
 - `python -m pip install -e ".[test]"` works in a clean venv.
 - `pytest` passes.
@@ -58,6 +61,11 @@ verified public `v0.9.0rc3` prerelease.
 ## TestPyPI gate
 
 - TestPyPI should be used before PyPI.
+- The no-upload preflight performs local build, metadata checks, README/render
+  checks through `twine check`, wheel install smoke, version import checks, and
+  console script validation.
+- The no-upload preflight does not upload, publish, create tags, or create
+  GitHub releases.
 - TestPyPI upload requires explicit maintainer approval.
 - TestPyPI upload must not be part of the default smoke script.
 - Wheel smoke remains local only.
@@ -76,11 +84,13 @@ verified public `v0.9.0rc3` prerelease.
 - PyPI release must not be performed by accidental script execution.
 - Yanking/rollback policy should be documented before the first PyPI release.
 - PyPI remains unpublished for now.
+- No token should be printed or committed.
 
 ## Non-goals
 
 - No PyPI publish now.
 - No TestPyPI upload now.
+- No upload from `scripts/testpypi_preflight.sh`.
 - No automatic package publishing from `scripts/smoke_release.sh`.
 - Do not publish automatically from release scripts.
 - No claim of production-grade physical validation.
