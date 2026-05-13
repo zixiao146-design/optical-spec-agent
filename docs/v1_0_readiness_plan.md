@@ -64,6 +64,10 @@ Before `v1.0.0`, maintainers should decide and document:
 - Offline examples and fixtures: `examples/README.md`,
   `examples/specs/minimal_nanoparticle.json`, and
   `examples/workflows/local_preview_request.json`.
+- Adapter family evidence has been expanded with offline golden/evidence
+  fixtures for Gmsh, Elmer, MPB, and Optiland. This evidence covers local
+  artifact/scaffold generation only; it does not imply production-grade
+  physical validation.
 - Schema compatibility policy: `docs/schema_compatibility_policy.md`.
 - Supported adapters and their stability levels:
   `docs/adapter_support_matrix.md`.
@@ -100,6 +104,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Workflow replay smoke tests for Meep/no-execute diagnostics.
 - Release rollback playbook.
 - Expand evidence fixtures across all adapter families.
+- Optional/manual external solver validation remains a separate future gate.
 
 ### P2
 

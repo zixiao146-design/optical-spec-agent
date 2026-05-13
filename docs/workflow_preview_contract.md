@@ -58,6 +58,9 @@ size where available.
   workflow-plan fixture.
 - `tests/fixtures/workflow_preview/local_preview_expected_keys.json` records the
   stable top-level evidence keys for plan/run/replay checks.
+- `tests/test_workflow_adapter_evidence.py` verifies that workflow planning
+  includes adapter generation artifacts while remaining preview/no-execute by
+  default.
 
 ## Non-goals
 

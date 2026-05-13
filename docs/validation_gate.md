@@ -47,7 +47,9 @@ maintainers.
 - Include v1.0 stability gate checks.
 - Include offline examples evidence from `examples/README.md`.
 - Include adapter evidence fixtures for preview/scaffold outputs.
+- Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
+- Include workflow-to-adapter planning evidence with no-execute behavior.
 - Include schema compatibility policy checks.
 - Include failure-mode regression for documented invalid inputs.
 - Include optional wheel install smoke.
@@ -56,6 +58,8 @@ maintainers.
 - Keep TestPyPI not uploaded unless explicitly approved.
 - Do not create the `v0.9.0rc4` tag until project/version consistency, final
   smoke, wheel smoke, build, `make check`, and CLI examples pass.
+- Adapter family evidence does not replace optional/manual external solver
+  validation.
 
 ## v1.0 validation target
 

@@ -93,11 +93,17 @@ Current v1.0 evidence artifacts:
   `examples/workflows/local_preview_request.json`.
 - Adapter evidence fixtures:
   `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt`.
+- Expanded adapter family evidence fixtures:
+  `tests/fixtures/adapter_golden/gmsh/`, `tests/fixtures/adapter_golden/elmer/`,
+  `tests/fixtures/adapter_golden/mpb/`, and
+  `tests/fixtures/adapter_golden/optiland/`.
 - Workflow evidence fixtures:
   `tests/fixtures/workflow_preview/local_preview_expected_keys.json`.
 - Failure-mode regression: `tests/test_failure_mode_regression.py`.
 - Schema compatibility evidence: `docs/schema_compatibility_policy.md` and
   `tests/test_schema_compatibility_policy.py`.
+- Workflow-to-adapter planning evidence:
+  `tests/test_workflow_adapter_evidence.py`.
 
 ## Release Blockers
 

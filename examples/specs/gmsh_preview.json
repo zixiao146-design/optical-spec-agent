@@ -1,0 +1,51 @@
+{
+  "text": "Use Gmsh to generate a local FEM mesh scaffold for a Si3N4 waveguide cross-section on SiO2.",
+  "parser": "rule",
+  "task": {
+    "task_id": "example-gmsh-preview",
+    "task_name": {"value": "Gmsh waveguide mesh preview", "status": "confirmed", "note": "Offline adapter evidence"},
+    "task_type": {"value": "simulation", "status": "confirmed", "note": "Offline adapter evidence"},
+    "research_goal": {"value": "Generate a local Gmsh .geo scaffold without running gmsh.", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "physics": {
+    "physical_system": {"value": "waveguide", "status": "confirmed", "note": "Offline adapter evidence"},
+    "physical_mechanism": {"value": "waveguide", "status": "confirmed", "note": "Offline adapter evidence"},
+    "model_dimension": {"value": "3d", "status": "confirmed", "note": "Offline adapter evidence"},
+    "structure_type": {"value": "waveguide", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {
+        "geometry_type": "waveguide",
+        "description": "Si3N4 ridge waveguide cross-section on SiO2 lower cladding",
+        "dimensions": {"core_width": "800 nm", "core_height": "400 nm", "cladding": "SiO2"},
+        "units": "nm"
+      },
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    },
+    "material_system": {
+      "value": {
+        "materials": [
+          {"name": "Si3N4", "role": "core", "model": null, "refractive_index": 2.0, "notes": "Preview fixture"},
+          {"name": "SiO2", "role": "cladding", "model": null, "refractive_index": 1.45, "notes": "Preview fixture"}
+        ],
+        "description": "Si3N4/SiO2 waveguide mesh preview"
+      },
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "simulation": {
+    "solver_method": {"value": "mesh", "status": "confirmed", "note": "Offline adapter evidence"},
+    "software_tool": {"value": "gmsh", "status": "confirmed", "note": "Offline adapter evidence"},
+    "mesh_setting": {
+      "value": {"mesh_type": "auto", "global_mesh_accuracy": 2, "min_mesh_size": "20 nm", "max_mesh_size": "100 nm", "mesh_override_regions": [], "description": "Preview mesh only"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "output": {
+    "output_observables": {"value": ["mesh"], "status": "confirmed", "note": "Offline adapter evidence"}
+  }
+}

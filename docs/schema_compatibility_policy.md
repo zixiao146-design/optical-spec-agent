@@ -23,5 +23,10 @@ Default schema validation must not require an external solver. External solver
 or external LLM evidence may be added as optional/manual gates, but those gates
 must not become default test dependencies.
 
+Adapter family evidence fixtures for Gmsh, Elmer, MPB, and Optiland are local
+scaffold compatibility evidence. They help stabilize generated artifact shape,
+metadata, warnings, and defaults, but they do not assert solver-backed physical
+correctness.
+
 PyPI/TestPyPI remain unpublished/not uploaded. `v0.9.0rc4.dev0` is not a public
 release, and the `v0.9.0rc4` tag has not been created.

@@ -14,6 +14,8 @@ changes should be published as another RC.
 - Default CI should remain offline with respect to external solver execution.
 - Adapters may generate scripts/configs for external solvers, but generation is
   not execution.
+- Adapter family evidence fixtures cover local scaffold generation for Meep,
+  Gmsh, Elmer, MPB, and Optiland; they do not execute those solvers.
 - Generated artifacts are preview/scaffold unless solver-backed validation is
   performed and recorded.
 

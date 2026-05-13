@@ -20,6 +20,8 @@ only when accumulated changes should be published as another RC.
 - Workflow plan/run/replay/report artifact structure.
 - Offline examples, adapter evidence fixtures, workflow evidence fixtures,
   schema compatibility policy, and failure-mode regression checks.
+- Expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland local
+  scaffold generation.
 - Benchmark routing and deterministic mock evaluation.
 - Release engineering checks for docs, CLI surface, artifacts, build, and
   smoke install/test behavior.
@@ -29,6 +31,7 @@ only when accumulated changes should be published as another RC.
 - No production-grade physical validation.
 - No formal convergence proof.
 - Numerical accuracy of external solver results.
+- Solver-backed validation of Gmsh, ElmerSolver, MPB, or Optiland outputs.
 - Full material model correctness.
 - Full CAD, FEM, lens, or mesh prescription correctness.
 - Real external LLM model quality.

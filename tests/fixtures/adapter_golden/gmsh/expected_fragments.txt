@@ -1,0 +1,6 @@
+Adapter: Gmsh MVP preview
+This .geo file is an annotated scaffold
+Physical system: waveguide
+SetFactory("OpenCASCADE");
+Physical Surface("waveguide_cross_section")
+Physical Volume("domain")

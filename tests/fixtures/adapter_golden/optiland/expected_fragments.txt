@@ -1,0 +1,7 @@
+Adapter: Optiland MVP scaffold
+This is not a completed lens design
+Scaffold only; does not run Optiland.
+try:
+except ImportError
+lens_surface_sequence
+Optiland scaffold created; complete TODOs before execution.

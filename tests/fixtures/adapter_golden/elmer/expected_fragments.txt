@@ -1,0 +1,7 @@
+Adapter: Elmer MVP preview
+This SIF is a scaffold
+Mesh path: examples/meshes/waveguide.msh
+Header
+Simulation
+Solver 1
+Boundary Condition 1

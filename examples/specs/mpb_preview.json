@@ -1,0 +1,41 @@
+{
+  "text": "Use MPB to calculate a 2D photonic crystal band diagram for the first 8 bands.",
+  "parser": "hybrid",
+  "llm_provider": "mock",
+  "task": {
+    "task_id": "example-mpb-preview",
+    "task_name": {"value": "MPB photonic crystal band preview", "status": "confirmed", "note": "Offline adapter evidence"},
+    "task_type": {"value": "simulation", "status": "confirmed", "note": "Offline adapter evidence"},
+    "research_goal": {"value": "Generate a local MPB Python scaffold without running MPB.", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "physics": {
+    "physical_system": {"value": "photonic_crystal", "status": "confirmed", "note": "Offline adapter evidence"},
+    "physical_mechanism": {"value": "band_structure", "status": "confirmed", "note": "Offline adapter evidence"},
+    "model_dimension": {"value": "2d", "status": "confirmed", "note": "Offline adapter evidence"},
+    "structure_type": {"value": "photonic_crystal", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {"geometry_type": "periodic_lattice", "description": "2D square-lattice photonic crystal preview", "dimensions": {"period": "1 a", "hole_radius": "0.2 a"}, "units": "a"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    },
+    "material_system": {
+      "value": {"materials": [{"name": "Si", "role": "dielectric", "model": null, "refractive_index": 3.45, "notes": "Preview fixture"}, {"name": "Air", "role": "holes", "model": null, "refractive_index": 1.0, "notes": "Preview fixture"}], "description": "Si/air photonic crystal preview"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "simulation": {
+    "solver_method": {"value": "band_structure", "status": "confirmed", "note": "Offline adapter evidence"},
+    "software_tool": {"value": "mpb", "status": "confirmed", "note": "Offline adapter evidence"},
+    "source_setting": {
+      "value": {"source_type": "mode_source", "wavelength_range": "", "polarization": "TE", "incident_angle": "0 deg", "amplitude": null, "description": "Band structure preview"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "output": {
+    "output_observables": {"value": ["band_diagram"], "status": "confirmed", "note": "Offline adapter evidence"}
+  }
+}

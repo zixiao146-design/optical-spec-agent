@@ -1,0 +1,7 @@
+Adapter: MPB MVP preview
+This script is a scaffold for MPB band/mode analysis
+Preview scaffold only; does not run MPB.
+from meep import mpb
+mpb.ModeSolver
+k_points: Gamma-X-M-Gamma path
+num_bands = 8

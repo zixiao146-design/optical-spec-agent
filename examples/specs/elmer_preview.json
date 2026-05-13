@@ -1,0 +1,46 @@
+{
+  "text": "Use Elmer FEM for a local waveguide mode scaffold and output effective index and field profile.",
+  "parser": "rule",
+  "task": {
+    "task_id": "example-elmer-preview",
+    "task_name": {"value": "Elmer waveguide FEM preview", "status": "confirmed", "note": "Offline adapter evidence"},
+    "task_type": {"value": "simulation", "status": "confirmed", "note": "Offline adapter evidence"},
+    "research_goal": {"value": "Generate a local Elmer SIF scaffold without running ElmerSolver.", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "physics": {
+    "physical_system": {"value": "waveguide", "status": "confirmed", "note": "Offline adapter evidence"},
+    "physical_mechanism": {"value": "waveguide", "status": "confirmed", "note": "Offline adapter evidence"},
+    "model_dimension": {"value": "2d", "status": "confirmed", "note": "Offline adapter evidence"},
+    "structure_type": {"value": "waveguide", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "geometry_material": {
+    "material_system": {
+      "value": {
+        "materials": [
+          {"name": "Si3N4", "role": "core", "model": null, "refractive_index": 2.0, "notes": "Preview fixture"},
+          {"name": "SiO2", "role": "cladding", "model": null, "refractive_index": 1.45, "notes": "Preview fixture"}
+        ],
+        "description": "Waveguide FEM preview materials"
+      },
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "simulation": {
+    "solver_method": {"value": "fem", "status": "confirmed", "note": "Offline adapter evidence"},
+    "software_tool": {"value": "elmer", "status": "confirmed", "note": "Offline adapter evidence"},
+    "boundary_condition": {
+      "value": {"x_min": "PEC", "x_max": "PEC", "y_min": "PML", "y_max": "PML", "z_min": null, "z_max": null, "description": "Placeholder FEM boundaries"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    },
+    "monitor_setting": {
+      "value": {"monitor_type": "field_profile", "locations": [{"name": "mode_plane"}], "frequency_points": 1, "description": "Mode field output"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "output": {
+    "output_observables": {"value": ["effective_index", "mode_profile"], "status": "confirmed", "note": "Offline adapter evidence"}
+  }
+}

@@ -120,6 +120,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "pypi_publication_decision.md",
         "validation_boundary.md",
         "release_engineering_playbook.md",
+        "adapter_support_matrix.md",
         "testpypi_dry_run_gate.md",
         "v1_0_stability_gate.md",
         "schema_compatibility_policy.md",
@@ -139,6 +140,21 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "External LLM access is not required by default" in combined
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
+
+
+def test_adapter_support_matrix_covers_registered_adapter_families():
+    from optical_spec_agent.adapters.registry import list_adapters
+
+    text = (ROOT / "docs" / "adapter_support_matrix.md").read_text(encoding="utf-8")
+    for metadata in list_adapters():
+        assert f"`{metadata.tool_name}`" in text
+        assert metadata.current_status in text
+    assert "External solvers are not run by default" in text
+    assert "External LLM providers are not required" in text
+    assert "no production-grade physical validation" in text.lower()
+    assert "0.9.0rc4.dev0" in text
+    assert "v0.9.0rc3" in text
+    assert "PyPI/TestPyPI remain unpublished" in text
 
 
 def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():

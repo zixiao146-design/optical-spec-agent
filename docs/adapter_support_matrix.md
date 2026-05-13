@@ -7,15 +7,20 @@ Continue v1.0 readiness engineering and prepare a `v0.9.0rc4` release draft
 only when accumulated changes should be published as another RC.
 
 Adapter outputs are local generated artifacts. They do not run external solvers
-by default and do not claim production-grade physical validation.
+by default and do not claim production-grade physical validation. Adapter
+listing and evidence tests do not require external LLM providers or network
+access.
 
-| Adapter | Status | Generated artifact | External solver required to generate? | External solver run by default? | Test coverage | v1.0 readiness |
-|---|---|---|---|---|---|---|
-| `meep` | `preview` / research-preview | Python script | No | No | Unit, CLI, smoke, defaults, diagnostics | Needs clearer production-validation boundary |
-| `mpb` | MVP scaffold | Python scaffold | No | No | Unit, CLI, workflow, benchmark | Needs richer periodic geometry schema |
-| `gmsh` | MVP scaffold | `.geo` scaffold | No | No | Unit, CLI, workflow, benchmark | Needs richer CAD/mesh schema |
-| `elmer` | MVP scaffold | `.sif` scaffold | No | No | Unit, CLI, workflow, benchmark | Needs explicit mesh and FEM boundary contract |
-| `optiland` | MVP scaffold | Python scaffold | No | No | Unit, CLI, workflow, benchmark | Needs lens prescription/schema extension |
+Registry `current_status` values are `preview` for Meep and `mvp` for MPB,
+Gmsh, Elmer, and Optiland. No production-grade physical validation is claimed.
+
+| Adapter | Registry/CLI visible | Status | Local artifact generation | External solver required to execute? | External solver run by default? | Evidence fixture/test | Known limitations | v1.0 readiness |
+|---|---:|---|---|---|---|---|---|---|
+| `meep` | Yes | `preview` / research-preview | Python script | Yes, only for explicit `meep-run` execution | No | Yes: `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt`, `tests/test_adapter_evidence_fixtures.py` | Specialized nanoparticle-on-film adapter; scripts are preview/research-preview and not production-grade validation | Needs solver-backed validation standard before stable claims |
+| `mpb` | Yes | MVP scaffold | Python scaffold | Yes, to execute MPB externally | No | Yes: `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py` | Uses default lattice, k-points, resolution, and num_bands when missing; geometry is schematic | Needs richer periodic geometry schema and optional solver validation |
+| `gmsh` | Yes | MVP scaffold | `.geo` scaffold | Yes, to mesh externally | No | Yes: `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py` | Geometry is schematic unless OpticalSpec carries explicit dimensions; physical groups are placeholders | Needs richer CAD/mesh schema and optional gmsh validation |
+| `elmer` | Yes | MVP scaffold | `.sif` scaffold | Yes, to execute `ElmerSolver` externally | No | Yes: `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py` | Requires a real mesh prepared outside this adapter; equation and boundary sections are placeholders | Needs explicit mesh/FEM boundary contract and optional solver validation |
+| `optiland` | Yes | MVP scaffold | Python scaffold | Yes, to execute Optiland externally | No | Yes: `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py` | OpticalSpec lacks full lens surface sequence and glass catalog mapping | Needs lens prescription schema extension before stable claims |
 
 ## Registry contract
 
@@ -36,7 +41,9 @@ The adapter registry currently exposes:
 
 - External solvers are not run by default.
 - External solver installation is not required for default tests.
+- External LLM providers are not required for adapter evidence tests.
 - MPB/Gmsh/Elmer/Optiland outputs are scaffold/MVP unless separately validated.
 - Meep execution remains optional/local and must be explicitly requested.
 - Adapter warnings and defaults are part of the auditable output contract.
 - Physical correctness is not claimed as production-grade.
+- Workflow-to-adapter planning is preview/no-execute by default.

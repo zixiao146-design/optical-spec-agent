@@ -28,6 +28,19 @@ optical-spec adapter-generate examples/specs/missing_wavelength_meep_preview.jso
 This fixture intentionally omits an explicit wavelength range so the Meep
 adapter records its preview default. It does not run Meep.
 
+Additional adapter preview fixtures are local artifact previews, not
+solver-backed validation:
+
+```bash
+optical-spec adapter-generate examples/specs/gmsh_preview.json --tool gmsh --json
+optical-spec adapter-generate examples/specs/elmer_preview.json --tool elmer --mesh examples/meshes/waveguide.msh --json
+optical-spec adapter-generate examples/specs/mpb_preview.json --tool mpb --json
+optical-spec adapter-generate examples/specs/optiland_preview.json --tool optiland --json
+```
+
+These commands generate `.geo`, `.sif`, or Python scaffold text. They do not
+run Gmsh, ElmerSolver, MPB, or Optiland.
+
 ## Workflow preview
 
 ```bash

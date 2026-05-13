@@ -1,0 +1,36 @@
+{
+  "text": "Use Optiland for ray tracing of a simple singlet imaging system and calculate spot diagram and MTF.",
+  "parser": "rule",
+  "task": {
+    "task_id": "example-optiland-preview",
+    "task_name": {"value": "Optiland singlet scaffold preview", "status": "confirmed", "note": "Offline adapter evidence"},
+    "task_type": {"value": "simulation", "status": "confirmed", "note": "Offline adapter evidence"},
+    "research_goal": {"value": "Generate a local Optiland ray-tracing scaffold without running Optiland.", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "physics": {
+    "physical_system": {"value": "imaging_system", "status": "confirmed", "note": "Offline adapter evidence"},
+    "physical_mechanism": {"value": "ray_tracing", "status": "confirmed", "note": "Offline adapter evidence"},
+    "model_dimension": {"value": "3d", "status": "confirmed", "note": "Offline adapter evidence"},
+    "structure_type": {"value": "lens", "status": "confirmed", "note": "Offline adapter evidence"}
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {"geometry_type": "singlet_lens", "description": "Placeholder singlet lens; full surface sequence intentionally absent", "dimensions": {"focal_length": "50 mm"}, "units": "mm"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "simulation": {
+    "solver_method": {"value": "ray_trace", "status": "confirmed", "note": "Offline adapter evidence"},
+    "software_tool": {"value": "optiland", "status": "confirmed", "note": "Offline adapter evidence"},
+    "source_setting": {
+      "value": {"source_type": "field_points", "wavelength_range": "486-656 nm", "polarization": null, "incident_angle": "0 deg", "amplitude": null, "description": "Visible wavelength ray trace preview"},
+      "status": "confirmed",
+      "note": "Offline adapter evidence"
+    }
+  },
+  "output": {
+    "output_observables": {"value": ["spot_diagram", "mtf"], "status": "confirmed", "note": "Offline adapter evidence"},
+    "postprocess_target": {"value": [{"target_type": "spot_diagram", "parameters": {}, "description": "Preview only"}, {"target_type": "mtf", "parameters": {}, "description": "Preview only"}], "status": "confirmed", "note": "Offline adapter evidence"}
+  }
+}
