@@ -61,6 +61,10 @@ Before `v1.0.0`, maintainers should decide and document:
 
 - Stable public API and CLI contract: `docs/cli_contract.md` and
   `docs/schema_contract.md`.
+- Offline examples and fixtures: `examples/README.md`,
+  `examples/specs/minimal_nanoparticle.json`, and
+  `examples/workflows/local_preview_request.json`.
+- Schema compatibility policy: `docs/schema_compatibility_policy.md`.
 - Supported adapters and their stability levels:
   `docs/adapter_support_matrix.md`.
 - Workflow preview boundaries: `docs/workflow_preview_contract.md`.
@@ -95,6 +99,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Adapter golden-output tests for non-Meep scaffold adapters.
 - Workflow replay smoke tests for Meep/no-execute diagnostics.
 - Release rollback playbook.
+- Expand evidence fixtures across all adapter families.
 
 ### P2
 

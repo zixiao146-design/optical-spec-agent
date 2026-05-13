@@ -140,6 +140,20 @@ pip install -e ".[dev]"
 
 ## 快速开始
 
+## 离线示例
+
+`examples/` 目录中的 fixture 是当前 `0.9.0rc4.dev0` main 和公开
+`v0.9.0rc3` RC 线的本地示例证据：
+
+```bash
+optical-spec validate examples/specs/minimal_nanoparticle.json
+optical-spec parse examples/specs/minimal_nanoparticle.json --json
+optical-spec workflow-plan examples/workflows/local_preview_request.json --json
+```
+
+这些命令不需要网络，不运行外部 solver，不调用外部 LLM，也不上传
+PyPI/TestPyPI artifact。
+
 ```bash
 optical-spec parse \
   "用 Meep FDTD 仿真 80 nm 金纳米球放在 100 nm 金膜上，中间 SiO2 gap 为 5 nm，平面波正入射，波长范围 400-900 nm，输出散射谱，提取共振波长和 FWHM。" \

@@ -1,0 +1,11 @@
+{
+  "text": "Use MPB to calculate a 2D photonic crystal band diagram for the first 8 bands using a local preview workflow.",
+  "parser": "hybrid",
+  "llm_provider": "mock",
+  "tool": "mpb",
+  "notes": [
+    "Offline deterministic workflow-plan fixture.",
+    "Does not run external solvers.",
+    "Does not call external LLM providers."
+  ]
+}

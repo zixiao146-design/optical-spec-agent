@@ -73,6 +73,18 @@ def parse(
     from optical_spec_agent.parsers.llm import LLMParserConfig, LLMProviderError
     from optical_spec_agent.parsers.registry import ParserRegistryError
 
+    try:
+        text, request_options = _resolve_text_request(text)
+        parser_name = request_options.get("parser", parser_name)
+        llm_provider = request_options.get("llm_provider", llm_provider)
+        llm_model = request_options.get("llm_model", llm_model)
+    except ValueError as exc:
+        if show_json:
+            typer.echo(json.dumps({"status": "error", "errors": [str(exc)]}, indent=2, ensure_ascii=False))
+        else:
+            console.print(f"[red]Parser input error:[/red] {exc}")
+        raise typer.Exit(1)
+
     if show_json and show_parser_report and parser_report_output is None:
         typer.echo("--show-parser-report cannot be mixed with --json unless --parser-report-output is set.")
         raise typer.Exit(1)
@@ -686,6 +698,10 @@ def workflow_plan(
     from optical_spec_agent.workflows import plan_workflow
 
     try:
+        text, request_options = _resolve_text_request(text)
+        parser_name = request_options.get("parser", parser_name)
+        llm_provider = request_options.get("llm_provider", llm_provider)
+        tool = request_options.get("tool", tool)
         plan = plan_workflow(
             text,
             parser=parser_name,
@@ -894,6 +910,44 @@ def _load_spec_file(path: Path) -> OpticalSpec:
     if has_status:
         return _reconstruct_spec(data)
     return OpticalSpec.model_validate(data)
+
+
+def _resolve_text_request(value: str) -> tuple[str, dict]:
+    """Resolve a CLI text argument or a local request fixture file.
+
+    JSON fixture files may provide `text` plus optional parser settings. Plain
+    text files are read as the prompt body. Non-path arguments keep the original
+    CLI behavior.
+    """
+    path = Path(value)
+    if not path.exists():
+        return value, {}
+
+    raw = path.read_text(encoding="utf-8")
+    if path.suffix.lower() != ".json":
+        text = raw.strip()
+        if not text:
+            raise ValueError(f"Input file is empty: {path}")
+        return text, {}
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"Invalid JSON request file {path}: {exc}") from exc
+
+    if not isinstance(data, dict):
+        raise ValueError(f"JSON request file must contain an object: {path}")
+
+    text = data.get("text") or data.get("request") or data.get("description")
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError(f"JSON request file must contain a non-empty text field: {path}")
+
+    options = {
+        key: data[key]
+        for key in ("parser", "llm_provider", "llm_model", "tool")
+        if isinstance(data.get(key), str) and data[key]
+    }
+    return text.strip(), options
 
 
 def _adapter_readiness(adapter, spec: OpticalSpec, *, mesh: Path | None):

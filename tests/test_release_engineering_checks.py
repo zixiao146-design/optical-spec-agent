@@ -120,9 +120,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "pypi_publication_decision.md",
         "validation_boundary.md",
         "release_engineering_playbook.md",
+        "testpypi_dry_run_gate.md",
+        "v1_0_stability_gate.md",
+        "schema_compatibility_policy.md",
     ]
     for name in required_docs:
         assert (ROOT / "docs" / name).exists()
+    assert (ROOT / "examples" / "README.md").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -135,6 +139,32 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "External LLM access is not required by default" in combined
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
+
+
+def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
+    paths = [
+        ROOT / "examples" / "README.md",
+        ROOT / "docs" / "release_readiness_current.md",
+        ROOT / "docs" / "schema_compatibility_policy.md",
+        ROOT / "docs" / "testpypi_dry_run_gate.md",
+        ROOT / "docs" / "v1_0_stability_gate.md",
+        ROOT / "docs" / "validation_gate.md",
+        ROOT / "docs" / "packaging_gate.md",
+    ]
+    combined = "\n".join(path.read_text(encoding="utf-8") for path in paths)
+    required = [
+        "offline by default",
+        "no external solver",
+        "external LLM",
+        "PyPI/TestPyPI remain unpublished",
+        "not uploaded",
+        "0.9.0rc4.dev0",
+        "not a public release",
+        "v0.9.0rc4",
+        "not created",
+    ]
+    for phrase in required:
+        assert phrase in combined
 
 
 def test_external_solver_policy_keeps_solver_validation_optional():

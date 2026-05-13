@@ -188,6 +188,21 @@ Requires Python 3.11+.
 
 ## Quick start
 
+## Offline examples
+
+The checked-in fixtures under [`examples/`](examples/README.md) are the
+canonical no-network examples for the current `0.9.0rc4.dev0` main branch and
+the public `v0.9.0rc3` RC line:
+
+```bash
+optical-spec validate examples/specs/minimal_nanoparticle.json
+optical-spec parse examples/specs/minimal_nanoparticle.json --json
+optical-spec workflow-plan examples/workflows/local_preview_request.json --json
+```
+
+These commands do not run external solvers, do not call external LLM providers,
+and do not upload PyPI/TestPyPI artifacts.
+
 ### Hero workflow
 
 This is the shortest first-run path through the project’s core value:

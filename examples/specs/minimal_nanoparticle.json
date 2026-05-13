@@ -1,0 +1,265 @@
+{
+  "text": "Use Meep FDTD to simulate an 80 nm gold nanoparticle on a 100 nm gold film with a 5 nm SiO2 gap, normal-incidence plane wave from 400-900 nm, and report the scattering spectrum.",
+  "parser": "rule",
+  "task": {
+    "task_id": "example-minimal-nanoparticle",
+    "task_name": {
+      "value": "Minimal nanoparticle-on-film FDTD preview",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "task_type": {
+      "value": "simulation",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "research_goal": {
+      "value": "Generate and validate a local nanoparticle-on-film optical simulation specification.",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    }
+  },
+  "physics": {
+    "physical_system": {
+      "value": "nanoparticle_on_film",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "physical_mechanism": {
+      "value": "plasmon",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "model_dimension": {
+      "value": "3d",
+      "status": "confirmed",
+      "note": "Nanoparticle-on-film preview"
+    },
+    "structure_type": {
+      "value": "sphere_on_film",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    }
+  },
+  "geometry_material": {
+    "geometry_definition": {
+      "value": {
+        "geometry_type": "sphere_on_film",
+        "description": "80 nm Au sphere above a 100 nm Au film with a 5 nm SiO2 gap",
+        "dimensions": {
+          "particle_diameter": "80 nm",
+          "film_thickness": "100 nm",
+          "gap": "5 nm"
+        },
+        "units": "nm"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "material_system": {
+      "value": {
+        "materials": [
+          {
+            "name": "Au",
+            "role": "particle",
+            "model": "Johnson-Christy",
+            "refractive_index": null,
+            "notes": "Preview fixture only"
+          },
+          {
+            "name": "Au",
+            "role": "film",
+            "model": "Johnson-Christy",
+            "refractive_index": null,
+            "notes": "Preview fixture only"
+          },
+          {
+            "name": "SiO2",
+            "role": "gap",
+            "model": null,
+            "refractive_index": 1.45,
+            "notes": "Preview fixture only"
+          }
+        ],
+        "description": "Au nanoparticle, Au film, SiO2 gap"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "material_model": {
+      "value": "Johnson-Christy",
+      "status": "confirmed",
+      "note": "Preview fixture only"
+    },
+    "substrate_or_film_info": {
+      "value": {
+        "has_substrate": false,
+        "substrate_material": "",
+        "substrate_thickness": "",
+        "has_film": true,
+        "film_material": "Au",
+        "film_thickness": "100 nm",
+        "notes": "Preview fixture only"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "particle_info": {
+      "value": {
+        "particle_type": "sphere",
+        "material": "Au",
+        "dimensions": {
+          "diameter": "80 nm"
+        },
+        "notes": "Preview fixture only"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "gap_medium": {
+      "value": "SiO2",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "key_parameters": {
+      "value": [
+        "particle_diameter=80 nm",
+        "film_thickness=100 nm",
+        "gap=5 nm"
+      ],
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    }
+  },
+  "simulation": {
+    "solver_method": {
+      "value": "fdtd",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "software_tool": {
+      "value": "meep",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "sweep_plan": {
+      "value": {
+        "sweep_type": "wavelength",
+        "variable": "wavelength_nm",
+        "range_start": 400.0,
+        "range_end": 900.0,
+        "num_points": 101,
+        "step": null,
+        "unit": "nm",
+        "description": "400-900 nm wavelength sweep"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "excitation_source": {
+      "value": "plane_wave",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "source_setting": {
+      "value": {
+        "source_type": "plane_wave",
+        "wavelength_range": "400-900 nm",
+        "polarization": "linear_x",
+        "incident_angle": "0 deg",
+        "amplitude": 1.0,
+        "description": "Normal-incidence plane wave"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "polarization": {
+      "value": "linear_x",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "incident_direction": {
+      "value": "normal",
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "boundary_condition": {
+      "value": {
+        "x_min": "PML",
+        "x_max": "PML",
+        "y_min": "PML",
+        "y_max": "PML",
+        "z_min": "PML",
+        "z_max": "PML",
+        "description": "PML boundaries for local preview"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "symmetry_setting": {
+      "value": {
+        "symmetry_type": "none",
+        "description": "No symmetry in the minimal fixture"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "mesh_setting": {
+      "value": {
+        "mesh_type": "auto",
+        "global_mesh_accuracy": 2,
+        "min_mesh_size": "2 nm",
+        "max_mesh_size": "20 nm",
+        "mesh_override_regions": [],
+        "description": "Preview mesh settings only"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "stability_setting": {
+      "value": {
+        "time_step": "auto",
+        "auto_shutoff": "1e-6",
+        "simulation_time": "200 fs",
+        "description": "Preview settings only"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "monitor_setting": {
+      "value": {
+        "monitor_type": "frequency_domain",
+        "locations": [
+          {
+            "name": "scattering_box",
+            "region": "around_particle"
+          }
+        ],
+        "frequency_points": 101,
+        "description": "Frequency-domain scattering monitor"
+      },
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    }
+  },
+  "output": {
+    "output_observables": {
+      "value": [
+        "scattering_spectrum"
+      ],
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    },
+    "postprocess_target": {
+      "value": [
+        {
+          "target_type": "resonance_wavelength",
+          "parameters": {},
+          "description": "Preview resonance estimate"
+        }
+      ],
+      "status": "confirmed",
+      "note": "Offline example fixture"
+    }
+  }
+}

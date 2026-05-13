@@ -83,6 +83,21 @@ Current main contract artifacts:
 - `docs/release_readiness_v0.9.0rc4.md`
 - `docs/testpypi_dry_run_gate.md`
 - `docs/v1_0_stability_gate.md`
+- `docs/schema_compatibility_policy.md`
+- `examples/README.md`
+
+Current v1.0 evidence artifacts:
+
+- Offline examples: `examples/specs/minimal_nanoparticle.json`,
+  `examples/specs/missing_wavelength_meep_preview.json`, and
+  `examples/workflows/local_preview_request.json`.
+- Adapter evidence fixtures:
+  `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt`.
+- Workflow evidence fixtures:
+  `tests/fixtures/workflow_preview/local_preview_expected_keys.json`.
+- Failure-mode regression: `tests/test_failure_mode_regression.py`.
+- Schema compatibility evidence: `docs/schema_compatibility_policy.md` and
+  `tests/test_schema_compatibility_policy.py`.
 
 ## Release Blockers
 

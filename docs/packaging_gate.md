@@ -30,6 +30,10 @@ verified public `v0.9.0rc3` prerelease.
 - `python -m pip install -e ".[test]"` works in a clean venv.
 - `pytest` passes.
 - `optical-spec --help` passes.
+- Offline documented examples pass:
+  - `optical-spec validate examples/specs/minimal_nanoparticle.json`
+  - `optical-spec parse examples/specs/minimal_nanoparticle.json --json`
+  - `optical-spec workflow-plan examples/workflows/local_preview_request.json --json`
 - README and README.zh-CN describe current release/development state accurately.
 - README renders acceptably for GitHub/PyPI.
 - Package metadata is complete enough for the intended audience:

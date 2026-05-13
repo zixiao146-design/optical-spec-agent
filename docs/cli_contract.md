@@ -80,7 +80,12 @@ by the user.
 ```bash
 optical-spec --help
 optical-spec schema --output outputs/schema.json
-optical-spec parse "用 Meep FDTD 仿真金纳米球散射。" --parser rule --json
+optical-spec validate examples/specs/minimal_nanoparticle.json
+optical-spec parse examples/specs/minimal_nanoparticle.json --json
 optical-spec adapter-list --json
-optical-spec workflow-plan "用 MPB 计算二维光子晶体 band diagram。" --parser hybrid --llm-provider mock --tool mpb --json
+optical-spec workflow-plan examples/workflows/local_preview_request.json --json
 ```
+
+The JSON example fixtures are documented in `examples/README.md` and tested by
+`tests/test_documented_examples.py`. They do not require network access,
+external solvers, or external LLM providers.

@@ -1,0 +1,26 @@
+{
+  "workflow_plan": [
+    "schema_version",
+    "parser_mode",
+    "selected_tool",
+    "execute_policy",
+    "planned_steps",
+    "expected_artifacts",
+    "limitations"
+  ],
+  "workflow_run": [
+    "schema_version",
+    "run_id",
+    "parser_mode",
+    "llm_provider",
+    "selected_tool",
+    "status",
+    "artifacts",
+    "limitations"
+  ],
+  "required_artifacts": [
+    "execution_skip.json",
+    "diagnostics_not_applicable.json",
+    "generated_input"
+  ]
+}

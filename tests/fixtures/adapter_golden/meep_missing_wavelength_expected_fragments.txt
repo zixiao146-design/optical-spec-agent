@@ -1,0 +1,6 @@
+wavelength_range: 400–900 nm
+source:   plane wave, 400-900nm
+NOTE: Material model is SIMPLIFIED
+For production use, replace
+mp.Simulation
+scattering_spectrum.png

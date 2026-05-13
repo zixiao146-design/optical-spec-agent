@@ -45,6 +45,11 @@ maintainers.
 - Include packaging gate tests from this sprint.
 - Include TestPyPI dry-run gate checks.
 - Include v1.0 stability gate checks.
+- Include offline examples evidence from `examples/README.md`.
+- Include adapter evidence fixtures for preview/scaffold outputs.
+- Include workflow evidence fixtures for deterministic local replay.
+- Include schema compatibility policy checks.
+- Include failure-mode regression for documented invalid inputs.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
 - Keep PyPI unpublished unless explicitly approved.

@@ -29,6 +29,11 @@ optical-spec schema --output outputs/schema.json
 GET /schema
 ```
 
+Compatibility policy is tracked in `docs/schema_compatibility_policy.md`.
+The fixed valid spec `examples/specs/minimal_nanoparticle.json` and deterministic
+invalid-spec regression tests provide v1.0-readiness evidence without external
+solvers or external LLM providers.
+
 ## Minimum expectations
 
 An executable simulation spec generally needs:

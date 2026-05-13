@@ -18,6 +18,8 @@ only when accumulated changes should be published as another RC.
 - Adapter registry and scaffold generation for Meep, MPB, Gmsh, Elmer, and
   Optiland.
 - Workflow plan/run/replay/report artifact structure.
+- Offline examples, adapter evidence fixtures, workflow evidence fixtures,
+  schema compatibility policy, and failure-mode regression checks.
 - Benchmark routing and deterministic mock evaluation.
 - Release engineering checks for docs, CLI surface, artifacts, build, and
   smoke install/test behavior.

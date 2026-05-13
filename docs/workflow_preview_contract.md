@@ -54,6 +54,10 @@ size where available.
 - No external LLM provider is required by default.
 - `hybrid` workflows may use the deterministic mock provider.
 - Workflow output is an auditable engineering artifact, not a scientific proof.
+- `examples/workflows/local_preview_request.json` is the canonical offline
+  workflow-plan fixture.
+- `tests/fixtures/workflow_preview/local_preview_expected_keys.json` records the
+  stable top-level evidence keys for plan/run/replay checks.
 
 ## Non-goals
 
