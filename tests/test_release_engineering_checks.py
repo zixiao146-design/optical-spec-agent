@@ -129,6 +129,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_compatibility_policy.md",
         "validation_evidence_manifest.md",
         "open_source_solver_validation_plan.md",
+        "open_solver_validation_harness.md",
+        "manual_solver_validation_report_template.md",
+        "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc5.dev0.md",
         "release_readiness_v0.9.0rc5.md",
         "quality_gates.md",
@@ -153,6 +156,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
+    assert (ROOT / "scripts" / "open_solver_validation_preflight.sh").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -169,6 +173,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v1.0 compatibility" in combined
     assert "Validation Evidence Manifest" in combined
     assert "Open-source Solver Validation Plan" in combined
+    assert "Open-source Solver Validation Harness" in combined
+    assert "Manual Solver Validation Report Template" in combined
+    assert "Pytest Marker Policy" in combined
     assert "0.9.0rc5.dev0" in combined
     assert "v0.9.0rc4" in combined
     assert "Never move existing tags" in combined
@@ -193,6 +200,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "no proprietary" in combined.lower()
     assert "Never paste tokens into chat" in combined
     assert "no GitHub release creation" in combined
+    assert "NO SOLVER EXECUTION PERFORMED" in (
+        ROOT / "scripts" / "open_solver_validation_preflight.sh"
+    ).read_text(encoding="utf-8")
 
 
 def test_release_and_preflight_scripts_do_not_publish():

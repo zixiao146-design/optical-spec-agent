@@ -3,12 +3,14 @@ set -euo pipefail
 
 OSA_QUALITY_PREFIX="${OSA_QUALITY_PREFIX:-/tmp/osa-quality}"
 OSA_SKIP_PREFLIGHT="${OSA_SKIP_PREFLIGHT:-0}"
+OSA_SKIP_SOLVER_PREFLIGHT="${OSA_SKIP_SOLVER_PREFLIGHT:-0}"
 OSA_SKIP_SMOKE="${OSA_SKIP_SMOKE:-0}"
 OSA_SKIP_PYTEST="${OSA_SKIP_PYTEST:-0}"
 OSA_SKIP_BUILD="${OSA_SKIP_BUILD:-0}"
 OSA_SKIP_MAKE_CHECK="${OSA_SKIP_MAKE_CHECK:-0}"
 
 PREFLIGHT_STATUS="skipped"
+SOLVER_PREFLIGHT_STATUS="skipped"
 SMOKE_STATUS="skipped"
 WHEEL_SMOKE_STATUS="skipped"
 PYTEST_STATUS="skipped"
@@ -44,6 +46,13 @@ if [[ "${OSA_SKIP_PREFLIGHT}" != "1" ]]; then
     OSA_TESTPYPI_WHEEL_VENV="${OSA_QUALITY_PREFIX}-testpypi-wheel" \
     ./scripts/testpypi_preflight.sh
   PREFLIGHT_STATUS="passed"
+fi
+
+if [[ "${OSA_SKIP_SOLVER_PREFLIGHT}" != "1" ]]; then
+  run_step "Open-source solver validation preflight" env \
+    OSA_SOLVER_PREFLIGHT_JSON="${OSA_QUALITY_PREFIX}-open-solver-preflight.json" \
+    ./scripts/open_solver_validation_preflight.sh
+  SOLVER_PREFLIGHT_STATUS="passed"
 fi
 
 if [[ "${OSA_SKIP_SMOKE}" != "1" ]]; then
@@ -86,6 +95,7 @@ CLI_STATUS="passed"
 echo
 echo "Quality gate summary:"
 echo "- TestPyPI no-upload preflight: ${PREFLIGHT_STATUS}"
+echo "- open-source solver preflight: ${SOLVER_PREFLIGHT_STATUS}"
 echo "- smoke: ${SMOKE_STATUS}"
 echo "- wheel smoke: ${WHEEL_SMOKE_STATUS}"
 echo "- pytest: ${PYTEST_STATUS}"
@@ -93,8 +103,10 @@ echo "- build: ${BUILD_STATUS}"
 echo "- make check: ${MAKE_CHECK_STATUS}"
 echo "- CLI examples: ${CLI_STATUS}"
 echo "- NO UPLOAD PERFORMED"
+echo "- NO SOLVER EXECUTION PERFORMED"
 echo "- NO TAG CREATED"
 echo "- NO RELEASE CREATED"
 echo "NO UPLOAD PERFORMED"
+echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO TAG CREATED"
 echo "NO RELEASE CREATED"

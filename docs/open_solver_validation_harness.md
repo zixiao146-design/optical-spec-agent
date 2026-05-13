@@ -1,0 +1,57 @@
+# Open-source Solver Validation Harness
+
+## Purpose
+
+This harness prepares optional manual solver-backed validation without making
+external solvers default requirements.
+
+## Current Scope
+
+- Current public prerelease: v0.9.0rc4
+- Current main development version: 0.9.0rc5.dev0
+- PyPI/TestPyPI: not published / not uploaded
+- v0.9.0rc5 tag: not created
+
+## What The Preflight Does
+
+`scripts/open_solver_validation_preflight.sh`:
+
+- detects candidate open-source solver commands
+- reports availability
+- writes an optional JSON report when `OSA_SOLVER_PREFLIGHT_JSON` is set
+- does not run solvers
+- does not create tags or releases
+- does not upload packages
+- does not require proprietary tools
+
+## Candidate Open-source Solver Families
+
+- Meep: current preview adapter and optional explicit local execution harness.
+- MPB: current MVP/scaffold band-structure input preview.
+- Gmsh: current MVP/scaffold geometry and mesh artifact preview.
+- Elmer: current MVP/scaffold FEM input preview.
+- Optiland: current MVP/scaffold optical-design preview.
+
+Candidate availability does not mean validation was run. An installed solver
+does not imply production-grade correctness.
+An unavailable solver does not fail default tests. Unavailable solvers also do
+not fail smoke, quality gates, or release dry-runs.
+
+## Future Manual Validation Path
+
+Future manual solver validation should follow this pattern:
+
+- enable an explicit environment variable or manual command
+- run a solver-specific manual check outside the default gates
+- compare high-level diagnostics rather than brittle full-output snapshots
+- record the result in a manual validation report
+- keep default CI and smoke no-solver
+
+## Non-goals
+
+- no default solver execution
+- no production-grade physical validation claim
+- no formal convergence proof
+- no proprietary solver validation
+- no TestPyPI/PyPI upload
+- no release creation

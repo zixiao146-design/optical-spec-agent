@@ -28,6 +28,7 @@ The local one-command gate is:
 It is expected to cover:
 
 - TestPyPI no-upload preflight
+- open-source solver availability preflight without solver execution
 - `smoke_release.sh`
 - wheel smoke
 - `pytest`
@@ -52,6 +53,8 @@ individual jobs shorter where appropriate:
 - never upload PyPI/TestPyPI
 - never create tags or GitHub releases from default CI
 - never require external solver, external LLM, or proprietary optical software
+- optional solver availability checks may run, but solver commands must not be
+  executed by default CI
 
 ## Current Workflow Inventory
 

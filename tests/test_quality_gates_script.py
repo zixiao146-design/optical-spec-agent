@@ -13,9 +13,11 @@ def test_quality_gates_script_exists_and_runs_expected_local_gates():
     assert script.exists()
     text = script.read_text(encoding="utf-8")
     assert "NO UPLOAD PERFORMED" in text
+    assert "NO SOLVER EXECUTION PERFORMED" in text
     assert "NO TAG CREATED" in text
     assert "NO RELEASE CREATED" in text
     assert "testpypi_preflight.sh" in text
+    assert "open_solver_validation_preflight.sh" in text
     assert "smoke_release.sh" in text
     assert "python -m pytest" in text
     assert "python -m build" in text
@@ -26,6 +28,7 @@ def test_quality_gates_script_exists_and_runs_expected_local_gates():
     assert (ROOT / "docs" / "quality_gates.md").exists()
     assert (ROOT / "docs" / "ci_quality_gate_parity.md").exists()
     assert (ROOT / "docs" / "release_dry_run_operations.md").exists()
+    assert (ROOT / "docs" / "open_solver_validation_harness.md").exists()
 
 
 def test_quality_gates_script_contains_no_publish_tag_or_release_commands():

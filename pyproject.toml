@@ -44,7 +44,9 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 markers = [
     "meep: tests that require a local Meep installation",
+    "solver_optional: optional open-source solver validation, skipped by default unless explicitly enabled",
     "external_solver: tests that require an external solver installation",
+    "manual_validation: manual validation only, not part of default CI or smoke",
     "external_llm: tests that require an external LLM provider or network access",
     "slow: tests that are intentionally longer-running local diagnostics",
 ]

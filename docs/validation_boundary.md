@@ -61,6 +61,11 @@ Default tests do not require Meep, MPB, Gmsh, Elmer, Optiland, or external LLM p
 Optional open-source solver validation is documented in
 `docs/open_source_solver_validation_plan.md`; those checks remain manual,
 skipped by default, and non-blocking for default smoke/release validation.
+`scripts/open_solver_validation_preflight.sh` may detect whether open-source
+solver commands are available, but availability detection is not solver-backed
+validation and does not imply production-grade physical correctness.
+Manual validation evidence should be recorded with
+`docs/manual_solver_validation_report_template.md`.
 
 ## Requirements for production-grade validation
 

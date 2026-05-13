@@ -51,6 +51,9 @@ future automated optional gate is added, it should document:
 The optional open-source solver validation path is tracked in
 `docs/open_source_solver_validation_plan.md`. That plan does not make Meep,
 Gmsh, Elmer, MPB, Optiland, or any other solver a default dependency.
+The availability harness in `scripts/open_solver_validation_preflight.sh` only
+uses command detection and does not execute solvers. Manual validation reports
+should use `docs/manual_solver_validation_report_template.md`.
 
 ## Claims policy
 
@@ -65,6 +68,8 @@ particular:
 
 External solver gates should be opt-in, clearly marked, and safe to skip in
 default release engineering checks.
+Pytest marker policy for optional solver validation is documented in
+`docs/pytest_marker_policy.md`; default `pytest` remains no-solver.
 
 ## Offline journey and error handling
 

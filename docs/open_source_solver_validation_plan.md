@@ -8,6 +8,11 @@ open-source tools without making external solvers default release blockers.
 The default path remains local artifact preview, offline evidence, and no
 external solver execution by default.
 
+The optional availability preflight is
+`scripts/open_solver_validation_preflight.sh`. It detects candidate solver
+commands and can write an availability JSON report, but it does not execute
+Meep, MPB, Gmsh, Elmer, Optiland, or any other solver.
+
 ## Candidate open-source solver families
 
 - Meep: current research-preview adapter and optional explicit local execution
@@ -23,11 +28,14 @@ external solver execution by default.
 Future optional solver-backed validation should follow this pattern:
 
 - User installs the solver manually.
+- `scripts/open_solver_validation_preflight.sh` records availability only.
 - An environment variable enables solver-backed validation.
 - Tests are skipped by default unless enabled.
 - Generated artifacts are compared against expected high-level diagnostics.
 - Failures do not block default smoke unless explicitly configured.
 - Release notes state whether solver-backed validation was actually run.
+- Manual results are recorded with
+  `docs/manual_solver_validation_report_template.md`.
 
 ## Required guardrails
 
@@ -41,9 +49,10 @@ Future optional solver-backed validation should follow this pattern:
 
 ## Future optional test naming
 
-- Tests should use solver-specific markers such as `meep_solver`, `gmsh_solver`,
-  `elmer_solver`, `mpb_solver`, or `optiland_solver`.
+- Tests should use `solver_optional`, `external_solver`, and
+  `manual_validation` markers, with optional solver-specific markers if needed.
 - Tests should be skipped unless an environment variable is set.
 - Tests should not be part of default `pytest`.
 - Tests should not be part of default `scripts/smoke_release.sh`.
 - Tests should not require proprietary tools or proprietary licenses.
+- Marker policy is documented in `docs/pytest_marker_policy.md`.

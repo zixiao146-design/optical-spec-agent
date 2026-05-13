@@ -27,6 +27,8 @@
   schema contract tests.
 - Failure-mode regression tests: `tests/test_failure_mode_regression.py` and
   adapter failure-mode checks.
+- Open-source solver availability preflight:
+  `scripts/open_solver_validation_preflight.sh`.
 - `scripts/smoke_release.sh`: clean install, test, build, dist filename, and CLI
   smoke verification.
 - Wheel install smoke: optional local wheel installation check.
@@ -46,6 +48,7 @@
 - No-network default examples.
 - No external solver/LLM default path.
 - No proprietary solver default path.
+- Optional solver availability detection without solver execution.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -57,6 +60,7 @@
 - No production-grade physical validation.
 - No formal convergence proof.
 - No solver-backed correctness claim by default.
+- No solver execution claim from availability preflight alone.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
 
@@ -84,3 +88,7 @@
 - `tests/test_v1_0_compatibility_policy.py`
 - `tests/test_validation_evidence_manifest.py`
 - `scripts/smoke_release.sh`
+- `scripts/open_solver_validation_preflight.sh`
+- `docs/open_solver_validation_harness.md`
+- `docs/manual_solver_validation_report_template.md`
+- `docs/pytest_marker_policy.md`

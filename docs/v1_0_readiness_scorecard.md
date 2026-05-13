@@ -19,6 +19,9 @@
 - Release dry-run operations.
 - Secrets and token hygiene.
 - Maintainer operations checklist.
+- Optional open-source solver availability preflight.
+- Manual solver validation report template.
+- Pytest marker policy for optional/manual validation.
 - Open-source-solver-first strategy.
 - Proprietary solver non-default policy.
 - CLI contract.
@@ -36,6 +39,8 @@
 - No production-grade physical validation.
 - No formal convergence proof.
 - No solver-backed validation by default.
+- Open-source solver preflight detects availability only and does not execute
+  solvers.
 - TestPyPI upload not approved/exercised.
 - PyPI publication not approved.
 - Adapter outputs may still be MVP/scaffold.

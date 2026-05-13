@@ -56,6 +56,12 @@ hardening changes justify another public RC. Recommended goals:
 - Clearer CLI quickstart examples for local/no-network usage.
 - Stronger release engineering playbook coverage.
 - Optional external solver validation path documented, but not made default.
+- Open-source solver availability preflight documented and safe by default:
+  `scripts/open_solver_validation_preflight.sh`.
+- Manual solver validation reports use
+  `docs/manual_solver_validation_report_template.md`.
+- Optional solver tests follow `docs/pytest_marker_policy.md` and remain
+  skipped/manual by default.
 - Physical validation status clarified without overclaiming.
 - PyPI remains unpublished unless explicitly approved.
 - TestPyPI remains not uploaded unless explicitly approved.
@@ -94,6 +100,12 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/validation_evidence_manifest.md`.
 - Optional open-source solver validation plan:
   `docs/open_source_solver_validation_plan.md`.
+- Optional open-source solver validation harness:
+  `docs/open_solver_validation_harness.md`.
+- Manual solver validation report template:
+  `docs/manual_solver_validation_report_template.md`.
+- Pytest marker policy for optional solver validation:
+  `docs/pytest_marker_policy.md`.
 - Examples manifest:
   `examples/examples_manifest.json`.
 - Error model:

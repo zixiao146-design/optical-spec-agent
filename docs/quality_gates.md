@@ -31,6 +31,7 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 ## Gate Components
 
 - TestPyPI no-upload preflight.
+- Open-source solver validation preflight, availability detection only.
 - `smoke_release.sh`.
 - Wheel smoke.
 - `pytest`.
@@ -45,6 +46,7 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - No tag creation.
 - No GitHub release creation.
 - No external solver by default.
+- No solver execution in the open-source solver preflight.
 - No external LLM by default.
 - No proprietary solver by default.
 - No token is required for the default local quality gate.
@@ -56,3 +58,4 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - Before TestPyPI approval decision.
 - After major docs, contract, schema, adapter, or workflow changes.
 - Before changing release automation or CI workflow behavior.
+- Before considering optional manual open-source solver validation.

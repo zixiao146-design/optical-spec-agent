@@ -30,6 +30,14 @@ This document describes the current `main` branch. It is not a release tag.
 - Validation evidence manifest exists: `docs/validation_evidence_manifest.md`
 - Optional open-source solver validation plan exists:
   `docs/open_source_solver_validation_plan.md`
+- Open-source solver validation harness exists:
+  `docs/open_solver_validation_harness.md`
+- Open-source solver preflight script:
+  `scripts/open_solver_validation_preflight.sh`
+- Manual solver validation report template:
+  `docs/manual_solver_validation_report_template.md`
+- Pytest marker policy:
+  `docs/pytest_marker_policy.md`
 - Examples manifest exists: `examples/examples_manifest.json`
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
@@ -150,6 +158,11 @@ Current v1.0 evidence artifacts:
   `docs/public_contract_manifest.json`,
   `docs/public_contract_change_checklist.md`, and
   `tests/test_public_contract_manifest.py`.
+- Optional open-source solver validation harness:
+  `scripts/open_solver_validation_preflight.sh`,
+  `docs/open_solver_validation_harness.md`,
+  `docs/manual_solver_validation_report_template.md`, and
+  `docs/pytest_marker_policy.md`.
 
 ## Release Blockers
 

@@ -66,6 +66,9 @@ maintainers.
   `docs/v1_0_public_contract_freeze.md`, `docs/public_contract_manifest.json`,
   and `docs/public_contract_change_checklist.md`.
 - Include optional open-source solver validation plan checks.
+- Include optional open-source solver validation preflight checks that detect
+  solver availability without executing solvers.
+- Keep manual solver validation reports separate from default release gates.
 - Include failure-mode regression for documented invalid inputs.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
@@ -76,6 +79,8 @@ maintainers.
 - Adapter family evidence does not replace optional/manual external solver
   validation.
 - No proprietary solver validation is part of the default gate.
+- `scripts/open_solver_validation_preflight.sh` must remain no-execution and
+  safe when solvers are unavailable.
 - Current public prerelease remains `v0.9.0rc4`, current main development
   version remains `0.9.0rc5.dev0`, the `v0.9.0rc5` tag has not been created,
   and PyPI/TestPyPI remain unpublished/not uploaded.

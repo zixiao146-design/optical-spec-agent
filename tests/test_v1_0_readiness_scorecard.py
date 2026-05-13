@@ -21,3 +21,5 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "TestPyPI upload approval: pending" in text
     assert "Quality gates" in text
     assert "TestPyPI upload not approved/exercised" in text
+    assert "Optional open-source solver availability preflight" in text
+    assert "Open-source solver preflight detects availability only" in text
