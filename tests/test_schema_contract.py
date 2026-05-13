@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from optical_spec_agent.models.base import SourceSetting, confirmed
 from optical_spec_agent.models.spec import OpticalSpec
@@ -38,6 +39,9 @@ def test_schema_contains_documented_public_sections():
         "assumption_log",
         "validation_status",
     } <= set(schema["properties"])
+    contract = Path("docs/schema_contract.md").read_text(encoding="utf-8")
+    for section in ["task", "physics", "geometry_material", "simulation", "output"]:
+        assert f"`{section}`" in contract
 
 
 def test_minimal_executable_spec_validation_contract():
@@ -59,3 +63,11 @@ def test_rule_parser_default_requires_no_external_llm():
     assert data["task"]["task_id"] == "schema-contract"
     assert data["simulation"]["software_tool"]["value"] == "meep"
     assert data["simulation"]["solver_method"]["value"] == "fdtd"
+
+
+def test_schema_export_is_json_schema_object_with_stable_public_keys():
+    schema = OpticalSpec.export_json_schema_dict()
+    assert schema["title"] == "OpticalSpec"
+    assert schema["type"] == "object"
+    assert isinstance(schema["properties"], dict)
+    assert "validation_status" in schema["properties"]

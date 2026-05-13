@@ -1,0 +1,78 @@
+{
+  "version_scope": "0.9.0rc4.dev0",
+  "current_public_prerelease": "v0.9.0rc3",
+  "open_source_solver_first": true,
+  "examples": [
+    {
+      "path": "examples/specs/minimal_nanoparticle.json",
+      "purpose": "minimal valid offline spec",
+      "commands": [
+        "optical-spec validate examples/specs/minimal_nanoparticle.json",
+        "optical-spec parse examples/specs/minimal_nanoparticle.json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    },
+    {
+      "path": "examples/specs/missing_wavelength_meep_preview.json",
+      "purpose": "Meep preview diagnostics for missing wavelength defaults",
+      "commands": [
+        "optical-spec adapter-generate examples/specs/missing_wavelength_meep_preview.json --tool meep --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    },
+    {
+      "path": "examples/workflows/local_preview_request.json",
+      "purpose": "deterministic local workflow-plan preview",
+      "commands": [
+        "optical-spec workflow-plan examples/workflows/local_preview_request.json --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    },
+    {
+      "path": "examples/specs/gmsh_preview.json",
+      "purpose": "Gmsh local artifact preview fixture",
+      "commands": [
+        "optical-spec adapter-generate examples/specs/gmsh_preview.json --tool gmsh --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    },
+    {
+      "path": "examples/specs/elmer_preview.json",
+      "purpose": "Elmer local artifact preview fixture",
+      "commands": [
+        "optical-spec adapter-generate examples/specs/elmer_preview.json --tool elmer --mesh examples/meshes/waveguide.msh --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    },
+    {
+      "path": "examples/specs/mpb_preview.json",
+      "purpose": "MPB local artifact preview fixture",
+      "commands": [
+        "optical-spec adapter-generate examples/specs/mpb_preview.json --tool mpb --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    },
+    {
+      "path": "examples/specs/optiland_preview.json",
+      "purpose": "Optiland scaffold evidence fixture",
+      "commands": [
+        "optical-spec adapter-generate examples/specs/optiland_preview.json --tool optiland --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false
+    }
+  ]
+}

@@ -21,6 +21,11 @@ def test_workflow_plan_documents_no_execute_policy():
     assert plan.execute_policy == "no_execute_by_default"
     assert "artifacts/diagnostics_not_applicable.json" in plan.expected_artifacts
     assert any("No external solver execution" in item for item in plan.limitations)
+    contract = (Path(__file__).resolve().parents[1] / "docs" / "workflow_preview_contract.md").read_text(
+        encoding="utf-8"
+    )
+    assert "workflow-plan" in contract
+    assert "No external solver is run by default" in contract
 
 
 def test_workflow_run_no_execute_artifact_contract(tmp_path: Path):
@@ -51,5 +56,6 @@ def test_workflow_run_no_execute_artifact_contract(tmp_path: Path):
     assert "not mpb" in diagnostics["reason"].lower() or "not" in diagnostics["reason"].lower()
 
     run_data = json.loads((tmp_path / "workflow_run.json").read_text(encoding="utf-8"))
+    assert {"schema_version", "status", "selected_tool", "artifacts"} <= set(run_data)
     assert run_data["artifacts"]["execution_skip.json"]["exists"] is True
     assert run_data["artifacts"]["diagnostics_not_applicable.json"]["exists"] is True

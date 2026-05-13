@@ -20,6 +20,11 @@ This document describes the current `main` branch. It is not a release tag.
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
+- v1.0 compatibility policy exists: `docs/v1_0_compatibility_policy.md`
+- Validation evidence manifest exists: `docs/validation_evidence_manifest.md`
+- Optional open-source solver validation plan exists:
+  `docs/open_source_solver_validation_plan.md`
+- Examples manifest exists: `examples/examples_manifest.json`
 - Main branch capabilities:
   - v0.6 local/manual post-hoc diagnostics
   - v0.7 multi-solver adapter MVP scaffolds
@@ -79,6 +84,9 @@ Current main contract artifacts:
 - `docs/validation_boundary.md`
 - `docs/open_source_solver_strategy.md`
 - `docs/proprietary_solver_policy.md`
+- `docs/v1_0_compatibility_policy.md`
+- `docs/validation_evidence_manifest.md`
+- `docs/open_source_solver_validation_plan.md`
 - `docs/pypi_publication_decision.md`
 - `docs/packaging_gate.md`
 - `docs/validation_gate.md`

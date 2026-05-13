@@ -60,6 +60,9 @@ TestPyPI 仍未上传，除非后续单独批准。PyPI/TestPyPI remain unpublis
 `docs/open_source_solver_strategy.md`、`docs/proprietary_solver_policy.md`、
 `docs/external_solver_policy.md`、`docs/external_llm_policy.md` 和
 `docs/pypi_publication_decision.md`。
+v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
+`docs/validation_evidence_manifest.md`、`docs/open_source_solver_validation_plan.md`
+和 `examples/examples_manifest.json`。
 当前 rc4 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc4.md`、
 `docs/testpypi_dry_run_gate.md` 和 `docs/v1_0_stability_gate.md`。
 

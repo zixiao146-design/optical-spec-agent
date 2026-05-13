@@ -48,6 +48,10 @@ future automated optional gate is added, it should document:
 - Runtime expectations and skip behavior.
 - Clear distinction from default CI.
 
+The optional open-source solver validation path is tracked in
+`docs/open_source_solver_validation_plan.md`. That plan does not make Meep,
+Gmsh, Elmer, MPB, Optiland, or any other solver a default dependency.
+
 ## Claims policy
 
 No solver-specific physical claim should be made without evidence. In

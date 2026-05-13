@@ -79,6 +79,16 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/open_source_solver_strategy.md`.
 - Proprietary solver boundary:
   `docs/proprietary_solver_policy.md`.
+- v1.0 compatibility policy:
+  `docs/v1_0_compatibility_policy.md`.
+- Validation evidence manifest:
+  `docs/validation_evidence_manifest.md`.
+- Optional open-source solver validation plan:
+  `docs/open_source_solver_validation_plan.md`.
+- Examples manifest:
+  `examples/examples_manifest.json`.
+- Compatibility evidence tests for CLI, schema, adapter registry, workflow
+  preview, documented examples, and failure modes.
 - Workflow preview boundaries: `docs/workflow_preview_contract.md`.
 - Unsupported assumptions, validation limits, and non-goals:
   `docs/validation_boundary.md`.

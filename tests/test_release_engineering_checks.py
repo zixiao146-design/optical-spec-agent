@@ -126,10 +126,14 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "schema_compatibility_policy.md",
         "open_source_solver_strategy.md",
         "proprietary_solver_policy.md",
+        "v1_0_compatibility_policy.md",
+        "validation_evidence_manifest.md",
+        "open_source_solver_validation_plan.md",
     ]
     for name in required_docs:
         assert (ROOT / "docs" / name).exists()
     assert (ROOT / "examples" / "README.md").exists()
+    assert (ROOT / "examples" / "examples_manifest.json").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -143,6 +147,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "open-source-solver-first" in combined
     assert "not default dependencies" in combined
     assert "No proprietary license is required" in combined
+    assert "v1.0 compatibility" in combined
+    assert "Validation Evidence Manifest" in combined
+    assert "Open-source Solver Validation Plan" in combined
+    assert "0.9.0rc4.dev0" in combined
+    assert "v0.9.0rc3" in combined
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
 

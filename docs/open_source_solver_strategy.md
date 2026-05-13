@@ -65,6 +65,11 @@ Default release validation must remain:
 - no external solver execution by default
 - no external LLM required by default
 
+Compatibility and validation evidence are tracked in
+`docs/v1_0_compatibility_policy.md`, `docs/validation_evidence_manifest.md`,
+`docs/open_source_solver_validation_plan.md`, and
+`examples/examples_manifest.json`.
+
 ## Why this matters
 
 Open-source-first release engineering supports CI and regression tests, avoids

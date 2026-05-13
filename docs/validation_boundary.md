@@ -24,6 +24,8 @@ examples, or release validation.
 - Workflow plan/run/replay/report artifact structure.
 - Offline examples, adapter evidence fixtures, workflow evidence fixtures,
   schema compatibility policy, and failure-mode regression checks.
+- v1.0 compatibility policy, validation evidence manifest, optional
+  open-source solver validation plan, and examples manifest checks.
 - Expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland local
   scaffold generation.
 - Benchmark routing and deterministic mock evaluation.
@@ -56,6 +58,9 @@ validated.
 External solver validation is optional/manual. Default CI and release smoke do
 not require Meep, MPB, Gmsh, Elmer, Optiland, or external LLM providers.
 Default tests do not require Meep, MPB, Gmsh, Elmer, Optiland, or external LLM providers.
+Optional open-source solver validation is documented in
+`docs/open_source_solver_validation_plan.md`; those checks remain manual,
+skipped by default, and non-blocking for default smoke/release validation.
 
 ## Requirements for production-grade validation
 

@@ -45,6 +45,9 @@ def test_validate_missing_required_field_reports_not_executable(tmp_path: Path):
     assert result.returncode == 0
     assert "NOT EXECUTABLE" in result.stdout
     assert "simulation.source_setting" in result.stdout
+    boundary = (ROOT / "docs" / "validation_boundary.md").read_text(encoding="utf-8")
+    assert "No production-grade physical validation" in boundary
+    assert "External solver validation is optional/manual" in boundary
 
 
 def test_unsupported_adapter_name_returns_structured_error():
@@ -63,6 +66,7 @@ def test_workflow_plan_invalid_local_request_file_fails(tmp_path: Path):
     assert result.returncode != 0
     payload = json.loads(result.stdout)
     assert payload["status"] == "error"
+    assert "errors" in payload
     assert any("text field" in error for error in payload["errors"])
 
 

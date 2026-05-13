@@ -55,6 +55,10 @@ maintainers.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.
 - Include schema compatibility policy checks.
+- Include v1.0 compatibility policy checks.
+- Include validation evidence manifest checks.
+- Include examples manifest checks.
+- Include optional open-source solver validation plan checks.
 - Include failure-mode regression for documented invalid inputs.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
@@ -65,6 +69,9 @@ maintainers.
 - Adapter family evidence does not replace optional/manual external solver
   validation.
 - No proprietary solver validation is part of the default gate.
+- Current public prerelease remains `v0.9.0rc3`, current main development
+  version remains `0.9.0rc4.dev0`, the `v0.9.0rc4` tag has not been created,
+  and PyPI/TestPyPI remain unpublished/not uploaded.
 
 ## v1.0 validation target
 

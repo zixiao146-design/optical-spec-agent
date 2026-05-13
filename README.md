@@ -67,6 +67,11 @@ Validation, packaging, and optional-provider policies are tracked in
 [`docs/proprietary_solver_policy.md`](docs/proprietary_solver_policy.md),
 [`docs/external_solver_policy.md`](docs/external_solver_policy.md), and
 [`docs/external_llm_policy.md`](docs/external_llm_policy.md).
+v1.0 compatibility and evidence tracking lives in
+[`docs/v1_0_compatibility_policy.md`](docs/v1_0_compatibility_policy.md),
+[`docs/validation_evidence_manifest.md`](docs/validation_evidence_manifest.md),
+[`docs/open_source_solver_validation_plan.md`](docs/open_source_solver_validation_plan.md),
+and [`examples/examples_manifest.json`](examples/examples_manifest.json).
 
 ## 中文概览
 
@@ -98,7 +103,11 @@ Policy docs:
 [`proprietary solver policy`](docs/proprietary_solver_policy.md),
 [`adapter support matrix`](docs/adapter_support_matrix.md),
 [`external solver policy`](docs/external_solver_policy.md), and
-[`validation boundary`](docs/validation_boundary.md).
+[`validation boundary`](docs/validation_boundary.md). Compatibility and evidence:
+[`v1.0 compatibility policy`](docs/v1_0_compatibility_policy.md),
+[`validation evidence manifest`](docs/validation_evidence_manifest.md),
+[`optional open-source solver validation plan`](docs/open_source_solver_validation_plan.md),
+and [`examples manifest`](examples/examples_manifest.json).
 
 For `v0.9.0rc3`, maintainers created the GitHub pre-release after release
 smoke validation. Do not move the `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3`

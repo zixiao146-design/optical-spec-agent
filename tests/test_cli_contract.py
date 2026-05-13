@@ -39,6 +39,10 @@ def test_optical_spec_help_lists_public_commands():
     ]:
         assert command in result.stdout
 
+    contract = (ROOT / "docs" / "cli_contract.md").read_text(encoding="utf-8")
+    for command in ["parse", "validate", "schema", "adapter-list", "workflow-plan"]:
+        assert f"`{command}`" in contract
+
 
 def test_documented_help_fragments_remain_available():
     help_checks = {
@@ -66,9 +70,20 @@ def test_offline_json_commands_have_stable_top_level_shape(tmp_path):
     assert adapters.returncode == 0, adapters.stdout + adapters.stderr
     adapter_data = json.loads(adapters.stdout)
     assert "adapters" in adapter_data
+    assert isinstance(adapter_data["adapters"], list)
     assert {"meep", "mpb", "gmsh", "elmer", "optiland"} <= {
         item["tool_name"] for item in adapter_data["adapters"]
     }
+    for item in adapter_data["adapters"]:
+        assert {
+            "tool_name",
+            "display_name",
+            "solver_family",
+            "output_language",
+            "output_extension",
+            "current_status",
+            "limitations",
+        } <= set(item)
 
     plan = _run_cli(
         "workflow-plan",
@@ -83,6 +98,14 @@ def test_offline_json_commands_have_stable_top_level_shape(tmp_path):
     )
     assert plan.returncode == 0, plan.stdout + plan.stderr
     plan_data = json.loads(plan.stdout)
+    assert {
+        "schema_version",
+        "planned_steps",
+        "selected_tool",
+        "execute_policy",
+        "expected_artifacts",
+        "limitations",
+    } <= set(plan_data)
     assert plan_data["schema_version"] == "workflow_plan.v0.9"
     assert plan_data["selected_tool"] == "mpb"
     assert plan_data["execute_policy"] == "no_execute_by_default"
