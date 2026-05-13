@@ -1,0 +1,16 @@
+{
+  "required_top_level_keys": [
+    "schema_version",
+    "parser_mode",
+    "selected_tool",
+    "execute_policy",
+    "planned_steps",
+    "expected_artifacts",
+    "risk_flags",
+    "limitations",
+    "warnings"
+  ],
+  "expected_schema_version": "workflow_plan.v0.9",
+  "expected_execute_policy": "no_execute_by_default",
+  "expected_selected_tool": "mpb"
+}

@@ -130,11 +130,15 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "validation_evidence_manifest.md",
         "open_source_solver_validation_plan.md",
         "testpypi_upload_approval_v0.9.0rc4.dev0.md",
+        "offline_user_journey.md",
+        "error_model.md",
+        "migration_notes_pre_v1.md",
     ]
     for name in required_docs:
         assert (ROOT / "docs" / name).exists()
     assert (ROOT / "examples" / "README.md").exists()
     assert (ROOT / "examples" / "examples_manifest.json").exists()
+    assert (ROOT / "examples" / "e2e" / "README.md").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
 
     combined = "\n".join(
@@ -161,6 +165,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Upload command authorized: no" in combined
     assert "PyPI publication approval: not granted" in combined
     assert "NO UPLOAD PERFORMED" in combined
+    assert "Offline User Journey" in combined
+    assert "Error Model" in combined
+    assert "Pre-v1 Migration Notes" in combined
+    assert "no proprietary" in combined.lower()
 
 
 def test_release_and_preflight_scripts_do_not_publish():
@@ -214,6 +222,7 @@ def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
         "offline by default",
         "no external solver",
         "external LLM",
+        "proprietary",
         "PyPI/TestPyPI remain unpublished",
         "not uploaded",
         "0.9.0rc4.dev0",
@@ -223,6 +232,26 @@ def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
     ]
     for phrase in required:
         assert phrase in combined
+
+
+def test_offline_user_journey_release_artifacts_are_tracked():
+    manifest = json.loads((ROOT / "examples" / "examples_manifest.json").read_text(encoding="utf-8"))
+    paths = {item["path"] for item in manifest["examples"]}
+    assert "examples/e2e/local_optical_workflow.json" in paths
+    assert "examples/e2e/README.md" in paths
+    for item in manifest["examples"]:
+        assert item["requires_network"] is False
+        assert item["requires_external_solver"] is False
+        assert item["requires_external_llm"] is False
+        assert item["requires_proprietary_solver"] is False
+
+    journey = (ROOT / "docs" / "offline_user_journey.md").read_text(encoding="utf-8")
+    assert "no external solver" in journey
+    assert "no external LLM" in journey
+    assert "no proprietary software" in journey
+    assert "PyPI/TestPyPI: not published / not uploaded" in journey
+    assert "Current main development version: 0.9.0rc4.dev0" in journey
+    assert "Current public prerelease: v0.9.0rc3" in journey
 
 
 def test_external_solver_policy_keeps_solver_validation_optional():

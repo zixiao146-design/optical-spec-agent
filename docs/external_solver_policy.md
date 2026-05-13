@@ -65,3 +65,11 @@ particular:
 
 External solver gates should be opt-in, clearly marked, and safe to skip in
 default release engineering checks.
+
+## Offline journey and error handling
+
+The default offline journey in `docs/offline_user_journey.md` and
+`examples/e2e/` does not execute Meep, MPB, Gmsh, Elmer, Optiland, or any
+proprietary solver. Missing optional solvers should not break documented
+default examples. Local failure expectations are documented in
+`docs/error_model.md`.

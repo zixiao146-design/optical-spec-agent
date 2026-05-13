@@ -92,6 +92,9 @@ Current main contract artifacts:
 - `docs/v1_0_compatibility_policy.md`
 - `docs/validation_evidence_manifest.md`
 - `docs/open_source_solver_validation_plan.md`
+- `docs/offline_user_journey.md`
+- `docs/error_model.md`
+- `docs/migration_notes_pre_v1.md`
 - `docs/pypi_publication_decision.md`
 - `docs/packaging_gate.md`
 - `docs/validation_gate.md`
@@ -104,6 +107,7 @@ Current main contract artifacts:
 - `docs/v1_0_stability_gate.md`
 - `docs/schema_compatibility_policy.md`
 - `examples/README.md`
+- `examples/e2e/README.md`
 
 Current v1.0 evidence artifacts:
 
@@ -123,6 +127,12 @@ Current v1.0 evidence artifacts:
   `tests/test_schema_compatibility_policy.py`.
 - Workflow-to-adapter planning evidence:
   `tests/test_workflow_adapter_evidence.py`.
+- Offline user journey evidence:
+  `examples/e2e/`, `docs/offline_user_journey.md`, and
+  `tests/test_offline_user_journey.py`.
+- Error model and pre-v1 migration evidence:
+  `docs/error_model.md`, `docs/migration_notes_pre_v1.md`, and
+  `tests/test_error_model.py`.
 
 ## Release Blockers
 

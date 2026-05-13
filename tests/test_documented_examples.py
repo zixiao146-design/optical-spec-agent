@@ -31,6 +31,10 @@ def test_examples_readme_documents_offline_defaults():
     assert "external LLM" in text
     assert MINIMAL_SPEC in text
     assert WORKFLOW_REQUEST in text
+    e2e = (ROOT / "examples" / "e2e" / "README.md").read_text(encoding="utf-8")
+    assert "optical-spec validate examples/specs/minimal_nanoparticle.json" in e2e
+    assert "optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json" in e2e
+    assert "No proprietary optical software" in e2e
 
 
 def test_documented_minimal_spec_validate_and_parse_examples():
@@ -59,5 +63,14 @@ def test_documented_adapter_list_and_workflow_plan_examples_are_json():
     plan_data = json.loads(plan.stdout)
     assert plan_data["schema_version"] == "workflow_plan.v0.9"
     assert plan_data["parser_mode"] == "hybrid"
+    assert plan_data["selected_tool"] == "mpb"
+    assert plan_data["execute_policy"] == "no_execute_by_default"
+
+
+def test_documented_e2e_workflow_plan_example_is_json():
+    plan = _run("workflow-plan", "examples/e2e/local_optical_workflow.json", "--json")
+    assert plan.returncode == 0, plan.stdout + plan.stderr
+    plan_data = json.loads(plan.stdout)
+    assert plan_data["schema_version"] == "workflow_plan.v0.9"
     assert plan_data["selected_tool"] == "mpb"
     assert plan_data["execute_policy"] == "no_execute_by_default"

@@ -46,3 +46,5 @@ default test, smoke, example, or release-validation dependency.
 - README should keep proprietary tools out of the default quickstart.
 - Commercial names may appear in compatibility, policy, or export-only contexts
   only when the non-default boundary is explicit.
+- The offline user journey in `docs/offline_user_journey.md` and `examples/e2e/`
+  must not require proprietary solver installation or license access.

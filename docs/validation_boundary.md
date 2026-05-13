@@ -75,3 +75,12 @@ A production-grade validation track would need at least:
 - Clear acceptance tolerances and rollback policy.
 
 Until then, the project remains an auditable spec/scaffold/workflow layer.
+
+## Offline user journey boundary
+
+The offline user journey in `docs/offline_user_journey.md` and `examples/e2e/`
+is compatibility evidence for validate, parse, adapter listing, and
+`workflow-plan` preview behavior. It does not require network access, external
+solvers, external LLM providers, or proprietary optical software. The error
+model in `docs/error_model.md` describes deterministic local failures, while
+`docs/migration_notes_pre_v1.md` records pre-v1 compatibility boundaries.

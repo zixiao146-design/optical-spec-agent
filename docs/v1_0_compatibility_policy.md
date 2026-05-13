@@ -25,6 +25,7 @@ created, and PyPI/TestPyPI remain unpublished/not uploaded.
 - Workflow preview output shape, especially top-level plan keys and
   no-execute-by-default policy.
 - Examples paths intended for offline use under `examples/`.
+- Offline end-to-end journey fixtures under `examples/e2e/`.
 - Package metadata and console script name `optical-spec`.
 
 ## Preview / non-stable scopes
@@ -44,6 +45,8 @@ created, and PyPI/TestPyPI remain unpublished/not uploaded.
 - Schema changes should include migration notes if public fields change.
 - Adapter registry name changes should include compatibility notes and updated
   support-matrix tests.
+- Pre-v1 user-visible changes should be summarized in
+  `docs/migration_notes_pre_v1.md`.
 
 ## v1.0 entry criteria
 
@@ -52,6 +55,7 @@ created, and PyPI/TestPyPI remain unpublished/not uploaded.
 - Adapter matrix consistency tests pass.
 - Workflow preview contract tests pass.
 - Documented examples pass.
+- Offline user journey tests pass.
 - Packaging gates pass.
 - Validation boundary docs remain conservative.
 - No external solver or LLM is required by default.

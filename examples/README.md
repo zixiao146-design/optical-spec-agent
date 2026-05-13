@@ -49,3 +49,16 @@ optical-spec workflow-plan examples/workflows/local_preview_request.json --json
 
 The workflow example uses deterministic local settings. It plans a workflow but
 does not execute external solvers or call external LLM providers.
+
+## End-to-end offline journey
+
+`examples/e2e/README.md` documents the local user journey that connects CLI
+inspection, validation, parsing, adapter listing, and workflow planning:
+
+```bash
+optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json
+```
+
+The e2e fixture is preview/diagnostics evidence only. It does not require
+network access, external solvers, external LLM providers, or proprietary optical
+software.

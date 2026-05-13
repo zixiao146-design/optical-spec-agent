@@ -12,7 +12,8 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     },
     {
       "path": "examples/specs/missing_wavelength_meep_preview.json",
@@ -22,7 +23,8 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     },
     {
       "path": "examples/workflows/local_preview_request.json",
@@ -32,7 +34,28 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/e2e/local_optical_workflow.json",
+      "purpose": "offline end-to-end user journey workflow preview evidence",
+      "commands": [
+        "optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json"
+      ],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/e2e/README.md",
+      "purpose": "offline end-to-end user journey documentation",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     },
     {
       "path": "examples/specs/gmsh_preview.json",
@@ -42,7 +65,8 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     },
     {
       "path": "examples/specs/elmer_preview.json",
@@ -52,7 +76,8 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     },
     {
       "path": "examples/specs/mpb_preview.json",
@@ -62,7 +87,8 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     },
     {
       "path": "examples/specs/optiland_preview.json",
@@ -72,7 +98,8 @@
       ],
       "requires_network": false,
       "requires_external_solver": false,
-      "requires_external_llm": false
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     }
   ]
 }

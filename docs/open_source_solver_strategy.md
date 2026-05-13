@@ -68,7 +68,9 @@ Default release validation must remain:
 Compatibility and validation evidence are tracked in
 `docs/v1_0_compatibility_policy.md`, `docs/validation_evidence_manifest.md`,
 `docs/open_source_solver_validation_plan.md`, and
-`examples/examples_manifest.json`.
+`examples/examples_manifest.json`. The offline user journey is tracked in
+`docs/offline_user_journey.md` and `examples/e2e/`; it remains no-network,
+no-external-solver, no-external-LLM, and no-proprietary-solver by default.
 
 ## Why this matters
 

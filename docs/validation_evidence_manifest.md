@@ -14,6 +14,8 @@
   metadata, and release engineering checks.
 - Documented CLI examples: offline examples in `examples/README.md` and
   `examples/examples_manifest.json`.
+- Offline user journey evidence: `docs/offline_user_journey.md` and
+  `examples/e2e/`.
 - Adapter evidence fixtures: stable fragments under
   `tests/fixtures/adapter_golden/`.
 - Workflow preview fixtures: stable keys under
@@ -40,6 +42,9 @@
 - Packaging sanity.
 - No-network default examples.
 - No external solver/LLM default path.
+- No proprietary solver default path.
+- Deterministic offline end-to-end user journey through validate, parse,
+  adapter listing, and workflow planning.
 - Open-source-solver-first release engineering.
 
 ## What this evidence does not support
@@ -54,6 +59,10 @@
 
 - `examples/`
 - `examples/examples_manifest.json`
+- `examples/e2e/`
+- `docs/offline_user_journey.md`
+- `docs/error_model.md`
+- `docs/migration_notes_pre_v1.md`
 - `tests/fixtures/adapter_golden/`
 - `tests/fixtures/workflow_preview/`
 - `tests/test_documented_examples.py`
@@ -61,6 +70,8 @@
 - `tests/test_workflow_evidence_fixtures.py`
 - `tests/test_schema_compatibility_policy.py`
 - `tests/test_failure_mode_regression.py`
+- `tests/test_offline_user_journey.py`
+- `tests/test_error_model.py`
 - `tests/test_v1_0_compatibility_policy.py`
 - `tests/test_validation_evidence_manifest.py`
 - `scripts/smoke_release.sh`

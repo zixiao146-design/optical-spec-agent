@@ -66,8 +66,11 @@ Before `v1.0.0`, maintainers should decide and document:
 - Stable public API and CLI contract: `docs/cli_contract.md` and
   `docs/schema_contract.md`.
 - Offline examples and fixtures: `examples/README.md`,
-  `examples/specs/minimal_nanoparticle.json`, and
-  `examples/workflows/local_preview_request.json`.
+  `examples/specs/minimal_nanoparticle.json`,
+  `examples/workflows/local_preview_request.json`, and `examples/e2e/`.
+- Offline user journey: `docs/offline_user_journey.md` documents the
+  validate -> parse -> adapter-list -> workflow-plan path with no network, no
+  external solver, no external LLM, and no proprietary solver requirement.
 - Adapter family evidence has been expanded with offline golden/evidence
   fixtures for Gmsh, Elmer, MPB, and Optiland. This evidence covers local
   artifact/scaffold generation only; it does not imply production-grade
@@ -87,8 +90,13 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/open_source_solver_validation_plan.md`.
 - Examples manifest:
   `examples/examples_manifest.json`.
+- Error model:
+  `docs/error_model.md`.
+- Pre-v1 migration notes:
+  `docs/migration_notes_pre_v1.md`.
 - Compatibility evidence tests for CLI, schema, adapter registry, workflow
   preview, documented examples, and failure modes.
+- Offline user journey regression tests for documented e2e commands.
 - Workflow preview boundaries: `docs/workflow_preview_contract.md`.
 - Unsupported assumptions, validation limits, and non-goals:
   `docs/validation_boundary.md`.

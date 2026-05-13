@@ -67,3 +67,11 @@ source code explicitly registers them:
 Export-only future support means generating scripts, templates, or configs that a
 user may inspect and run manually. It does not imply solver-backed correctness or
 production-grade physical validation.
+
+## Offline journey linkage
+
+The offline end-to-end journey in `examples/e2e/` uses adapter registry
+visibility and workflow planning as local compatibility evidence. It does not
+execute adapter solvers, does not require external LLM providers, and does not
+require proprietary optical software. Pre-v1 migration boundaries are tracked in
+`docs/migration_notes_pre_v1.md`.

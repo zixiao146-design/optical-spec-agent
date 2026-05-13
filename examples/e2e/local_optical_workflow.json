@@ -1,0 +1,12 @@
+{
+  "text": "Use MPB to calculate a 2D photonic crystal band diagram for the first 8 bands, then keep the result as a local no-execute preview with diagnostics.",
+  "parser": "hybrid",
+  "llm_provider": "mock",
+  "tool": "mpb",
+  "notes": [
+    "Offline end-to-end user journey fixture.",
+    "Does not run external solvers.",
+    "Does not call external LLM providers.",
+    "Does not require proprietary optical software."
+  ]
+}

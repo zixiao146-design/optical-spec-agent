@@ -74,7 +74,11 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/v1_0_compatibility_policy.md`](docs/v1_0_compatibility_policy.md),
 [`docs/validation_evidence_manifest.md`](docs/validation_evidence_manifest.md),
 [`docs/open_source_solver_validation_plan.md`](docs/open_source_solver_validation_plan.md),
-and [`examples/examples_manifest.json`](examples/examples_manifest.json).
+[`docs/offline_user_journey.md`](docs/offline_user_journey.md),
+[`docs/error_model.md`](docs/error_model.md),
+[`docs/migration_notes_pre_v1.md`](docs/migration_notes_pre_v1.md),
+[`examples/e2e/README.md`](examples/e2e/README.md), and
+[`examples/examples_manifest.json`](examples/examples_manifest.json).
 
 ## 中文概览
 
@@ -217,6 +221,11 @@ Requires Python 3.11+.
 ## Quick start
 
 ## Offline examples
+
+For the complete no-network, no-external-solver, no-external-LLM,
+no-proprietary-solver flow, see
+[`docs/offline_user_journey.md`](docs/offline_user_journey.md) and
+[`examples/e2e/README.md`](examples/e2e/README.md).
 
 The checked-in fixtures under [`examples/`](examples/README.md) are the
 canonical no-network examples for the current `0.9.0rc4.dev0` main branch and

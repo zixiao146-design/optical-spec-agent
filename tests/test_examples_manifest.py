@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shlex
 import subprocess
 from pathlib import Path
 
@@ -26,6 +27,8 @@ def test_examples_manifest_lists_existing_offline_examples():
         "examples/specs/minimal_nanoparticle.json",
         "examples/specs/missing_wavelength_meep_preview.json",
         "examples/workflows/local_preview_request.json",
+        "examples/e2e/local_optical_workflow.json",
+        "examples/e2e/README.md",
         "examples/specs/gmsh_preview.json",
         "examples/specs/elmer_preview.json",
         "examples/specs/mpb_preview.json",
@@ -37,24 +40,20 @@ def test_examples_manifest_lists_existing_offline_examples():
         assert item["requires_network"] is False
         assert item["requires_external_solver"] is False
         assert item["requires_external_llm"] is False
+        assert item["requires_proprietary_solver"] is False
 
 
-def test_examples_manifest_commands_are_parseable_and_offline_for_core_examples():
+def test_examples_manifest_commands_are_parseable_and_offline_for_runnable_examples():
     manifest = _load_manifest()
     runnable = [
         command
         for item in manifest["examples"]
         for command in item["commands"]
-        if item["path"]
-        in {
-            "examples/specs/minimal_nanoparticle.json",
-            "examples/workflows/local_preview_request.json",
-        }
     ]
     assert runnable
     for command in runnable:
         result = subprocess.run(
-            command.split(),
+            shlex.split(command),
             cwd=ROOT,
             text=True,
             stdout=subprocess.PIPE,
