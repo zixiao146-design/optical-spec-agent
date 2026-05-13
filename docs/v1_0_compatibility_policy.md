@@ -10,6 +10,11 @@ This policy applies to the current public prerelease `v0.9.0rc3` and current
 `main` development version `0.9.0rc4.dev0`. The `v0.9.0rc4` tag has not been
 created, and PyPI/TestPyPI remain unpublished/not uploaded.
 
+The v1.0 public contract freeze candidate is tracked in
+`docs/v1_0_public_contract_freeze.md`, with machine-readable scope in
+`docs/public_contract_manifest.json` and change review guidance in
+`docs/public_contract_change_checklist.md`.
+
 ## Compatibility scopes
 
 - CLI command names and stable options documented in `docs/cli_contract.md`.
@@ -27,6 +32,7 @@ created, and PyPI/TestPyPI remain unpublished/not uploaded.
 - Examples paths intended for offline use under `examples/`.
 - Offline end-to-end journey fixtures under `examples/e2e/`.
 - Package metadata and console script name `optical-spec`.
+- Public contract manifest entries in `docs/public_contract_manifest.json`.
 
 ## Preview / non-stable scopes
 
@@ -47,6 +53,9 @@ created, and PyPI/TestPyPI remain unpublished/not uploaded.
   support-matrix tests.
 - Pre-v1 user-visible changes should be summarized in
   `docs/migration_notes_pre_v1.md`.
+- Public contract changes should use `docs/public_contract_change_checklist.md`
+  and update `docs/public_contract_manifest.json` when the manifest scope
+  changes.
 
 ## v1.0 entry criteria
 
@@ -56,6 +65,7 @@ created, and PyPI/TestPyPI remain unpublished/not uploaded.
 - Workflow preview contract tests pass.
 - Documented examples pass.
 - Offline user journey tests pass.
+- Public contract manifest tests pass.
 - Packaging gates pass.
 - Validation boundary docs remain conservative.
 - No external solver or LLM is required by default.

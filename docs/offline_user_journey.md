@@ -42,6 +42,7 @@ optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json
 - No proprietary software is required.
 - Output shape is covered by tests.
 - Examples are regression checked.
+- Public contract coverage is tracked in `docs/public_contract_manifest.json`.
 
 ## Non-goals
 

@@ -24,6 +24,9 @@ failures.
 - Missing optional solvers should not break default examples.
 - Missing external LLM should not break the deterministic parser path.
 - Proprietary tools are not default requirements.
+- Changes to stable failure categories/fragments should update
+  `docs/public_contract_manifest.json` if they affect public contract scope and
+  should be noted in `docs/migration_notes_pre_v1.md`.
 
 ## Non-goals
 

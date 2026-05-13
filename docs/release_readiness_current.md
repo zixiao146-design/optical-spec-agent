@@ -90,6 +90,9 @@ Current main contract artifacts:
 - `docs/open_source_solver_strategy.md`
 - `docs/proprietary_solver_policy.md`
 - `docs/v1_0_compatibility_policy.md`
+- `docs/v1_0_public_contract_freeze.md`
+- `docs/public_contract_manifest.json`
+- `docs/public_contract_change_checklist.md`
 - `docs/validation_evidence_manifest.md`
 - `docs/open_source_solver_validation_plan.md`
 - `docs/offline_user_journey.md`
@@ -133,6 +136,11 @@ Current v1.0 evidence artifacts:
 - Error model and pre-v1 migration evidence:
   `docs/error_model.md`, `docs/migration_notes_pre_v1.md`, and
   `tests/test_error_model.py`.
+- Public contract freeze candidate evidence:
+  `docs/v1_0_public_contract_freeze.md`,
+  `docs/public_contract_manifest.json`,
+  `docs/public_contract_change_checklist.md`, and
+  `tests/test_public_contract_manifest.py`.
 
 ## Release Blockers
 

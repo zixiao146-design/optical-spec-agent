@@ -10,6 +10,11 @@ from optical_spec_agent.workflows.planner import plan_workflow
 
 
 def test_workflow_plan_documents_no_execute_policy():
+    manifest = json.loads(
+        (Path(__file__).resolve().parents[1] / "docs" / "public_contract_manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
     plan = plan_workflow(
         "用 MPB 计算二维光子晶体 band diagram。",
         parser="hybrid",
@@ -19,6 +24,9 @@ def test_workflow_plan_documents_no_execute_policy():
     assert plan.schema_version == "workflow_plan.v0.9"
     assert plan.selected_tool == "mpb"
     assert plan.execute_policy == "no_execute_by_default"
+    assert manifest["workflow"]["execute_policy_default"] == "no_execute_by_default"
+    assert manifest["workflow"]["external_solver_required_by_default"] is False
+    assert manifest["workflow"]["external_llm_required_by_default"] is False
     assert "artifacts/diagnostics_not_applicable.json" in plan.expected_artifacts
     assert any("No external solver execution" in item for item in plan.limitations)
     contract = (Path(__file__).resolve().parents[1] / "docs" / "workflow_preview_contract.md").read_text(
@@ -26,6 +34,9 @@ def test_workflow_plan_documents_no_execute_policy():
     )
     assert "workflow-plan" in contract
     assert "No external solver is run by default" in contract
+
+    plan_dict = json.loads(plan.model_dump_json())
+    assert set(manifest["workflow"]["workflow_plan_public_keys"]) <= set(plan_dict)
 
 
 def test_workflow_run_no_execute_artifact_contract(tmp_path: Path):

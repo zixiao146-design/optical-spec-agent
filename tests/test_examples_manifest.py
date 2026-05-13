@@ -19,6 +19,7 @@ def _load_manifest() -> dict:
 
 def test_examples_manifest_lists_existing_offline_examples():
     manifest = _load_manifest()
+    public_contract = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
     assert manifest["version_scope"] == "0.9.0rc4.dev0"
     assert manifest["current_public_prerelease"] == "v0.9.0rc3"
     examples = manifest["examples"]
@@ -35,8 +36,15 @@ def test_examples_manifest_lists_existing_offline_examples():
         "examples/specs/optiland_preview.json",
     }
     assert expected <= listed
+    contract_examples = {item["path"] for item in public_contract["examples"]}
+    assert contract_examples <= listed
     for item in examples:
         assert (ROOT / item["path"]).exists(), item["path"]
+        assert item["requires_network"] is False
+        assert item["requires_external_solver"] is False
+        assert item["requires_external_llm"] is False
+        assert item["requires_proprietary_solver"] is False
+    for item in public_contract["examples"]:
         assert item["requires_network"] is False
         assert item["requires_external_solver"] is False
         assert item["requires_external_llm"] is False

@@ -28,15 +28,19 @@ def test_adapter_support_matrix_mentions_registered_adapters():
 
 
 def test_adapter_list_json_matches_registry_tools():
+    manifest = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
     result = runner.invoke(app, ["adapter-list", "--json"])
     assert result.exit_code == 0
     cli_tools = {item["tool_name"] for item in json.loads(result.output)["adapters"]}
     registry_tools = {metadata.tool_name for metadata in list_adapters()}
-    assert cli_tools == registry_tools == {"meep", "mpb", "gmsh", "elmer", "optiland"}
+    manifest_tools = {item["name"] for item in manifest["adapters"]}
+    assert cli_tools == registry_tools == manifest_tools == {"meep", "mpb", "gmsh", "elmer", "optiland"}
     assert cli_tools.isdisjoint({"zemax", "lumerical", "comsol", "ansys"})
 
 
 def test_adapter_metadata_declares_no_default_external_execution():
+    manifest = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
+    assert all(item["requires_external_solver_by_default"] is False for item in manifest["adapters"])
     for metadata in list_adapters():
         limitations = " ".join(metadata.limitations).lower()
         assert any(

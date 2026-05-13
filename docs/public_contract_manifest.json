@@ -1,0 +1,230 @@
+{
+  "version_scope": "0.9.0rc4.dev0",
+  "current_public_prerelease": "v0.9.0rc3",
+  "release_state": {
+    "v1_0_0_released": false,
+    "v0_9_0rc4_tag_created": false,
+    "pypi_published": false,
+    "testpypi_uploaded": false
+  },
+  "package": {
+    "name": "optical-spec-agent",
+    "import_name": "optical_spec_agent",
+    "console_script": "optical-spec",
+    "version_behavior": "project.version and optical_spec_agent.__version__ match"
+  },
+  "cli": {
+    "commands": [
+      {
+        "name": "optical-spec --help",
+        "stability": "candidate-stable",
+        "json_output": false,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      },
+      {
+        "name": "optical-spec validate examples/specs/minimal_nanoparticle.json",
+        "stability": "candidate-stable",
+        "json_output": false,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      },
+      {
+        "name": "optical-spec parse examples/specs/minimal_nanoparticle.json --json",
+        "stability": "candidate-stable",
+        "json_output": true,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      },
+      {
+        "name": "optical-spec schema",
+        "stability": "candidate-stable",
+        "json_output": false,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      },
+      {
+        "name": "optical-spec adapter-list --json",
+        "stability": "candidate-stable",
+        "json_output": true,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      },
+      {
+        "name": "optical-spec workflow-plan examples/workflows/local_preview_request.json --json",
+        "stability": "preview-public-shape",
+        "json_output": true,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      },
+      {
+        "name": "optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json",
+        "stability": "preview-public-shape",
+        "json_output": true,
+        "requires_network": false,
+        "requires_external_solver": false,
+        "requires_external_llm": false,
+        "requires_proprietary_solver": false
+      }
+    ],
+    "documented_command_names": [
+      "parse",
+      "validate",
+      "schema",
+      "example",
+      "meep-generate",
+      "meep-check",
+      "meep-run",
+      "adapter-list",
+      "adapter-generate",
+      "diagnose",
+      "llm-eval",
+      "workflow-plan",
+      "workflow-run",
+      "workflow-replay",
+      "workflow-report"
+    ],
+    "json_top_level_shapes": {
+      "adapter-list": [
+        "adapters"
+      ],
+      "workflow-plan": [
+        "schema_version",
+        "input_text",
+        "planned_steps",
+        "parser_mode",
+        "selected_tool",
+        "execute_policy",
+        "expected_artifacts",
+        "risk_flags",
+        "limitations",
+        "warnings"
+      ]
+    }
+  },
+  "schema": {
+    "stability": "candidate-stable-public-fields",
+    "public_top_level_fields": [
+      "task",
+      "physics",
+      "geometry_material",
+      "simulation",
+      "output",
+      "confirmed_fields",
+      "inferred_fields",
+      "missing_fields",
+      "assumption_log",
+      "validation_status"
+    ],
+    "default_parser_path": "rule",
+    "external_llm_required_by_default": false,
+    "external_solver_required_for_validation": false
+  },
+  "examples": [
+    {
+      "path": "examples/specs/minimal_nanoparticle.json",
+      "stability": "candidate-stable",
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/workflows/local_preview_request.json",
+      "stability": "candidate-stable-preview-workflow",
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/e2e/local_optical_workflow.json",
+      "stability": "candidate-stable-preview-workflow",
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/e2e/README.md",
+      "stability": "candidate-stable-doc",
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    }
+  ],
+  "adapters": [
+    {
+      "name": "meep",
+      "stability": "preview",
+      "requires_external_solver_by_default": false
+    },
+    {
+      "name": "mpb",
+      "stability": "mvp",
+      "requires_external_solver_by_default": false
+    },
+    {
+      "name": "gmsh",
+      "stability": "mvp",
+      "requires_external_solver_by_default": false
+    },
+    {
+      "name": "elmer",
+      "stability": "mvp",
+      "requires_external_solver_by_default": false
+    },
+    {
+      "name": "optiland",
+      "stability": "mvp",
+      "requires_external_solver_by_default": false
+    }
+  ],
+  "workflow": {
+    "stability": "preview-public-shape",
+    "workflow_plan_public_keys": [
+      "schema_version",
+      "input_text",
+      "planned_steps",
+      "parser_mode",
+      "selected_tool",
+      "execute_policy",
+      "expected_artifacts",
+      "risk_flags",
+      "limitations",
+      "warnings"
+    ],
+    "execute_policy_default": "no_execute_by_default",
+    "external_solver_required_by_default": false,
+    "external_llm_required_by_default": false
+  },
+  "preview_or_unstable_scopes": [
+    "adapter generated-script internals",
+    "scaffold/MVP adapter output details",
+    "solver-backed physical validation",
+    "workflow internal implementation details",
+    "external LLM-assisted parse behavior",
+    "optional external solver validation path",
+    "proprietary export-only future targets"
+  ],
+  "non_goals": [
+    "production-grade physical validation",
+    "formal convergence proof",
+    "default external solver execution",
+    "default external LLM requirement",
+    "default proprietary solver dependency"
+  ]
+}

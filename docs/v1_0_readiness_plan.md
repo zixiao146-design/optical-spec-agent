@@ -84,6 +84,11 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/proprietary_solver_policy.md`.
 - v1.0 compatibility policy:
   `docs/v1_0_compatibility_policy.md`.
+- v1.0 public contract freeze candidate:
+  `docs/v1_0_public_contract_freeze.md`.
+- Public contract manifest and change checklist:
+  `docs/public_contract_manifest.json` and
+  `docs/public_contract_change_checklist.md`.
 - Validation evidence manifest:
   `docs/validation_evidence_manifest.md`.
 - Optional open-source solver validation plan:
@@ -96,6 +101,8 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/migration_notes_pre_v1.md`.
 - Compatibility evidence tests for CLI, schema, adapter registry, workflow
   preview, documented examples, and failure modes.
+- Public contract manifest tests to prevent CLI/schema/adapter/workflow/examples
+  drift before v1.0.
 - Offline user journey regression tests for documented e2e commands.
 - Workflow preview boundaries: `docs/workflow_preview_contract.md`.
 - Unsupported assumptions, validation limits, and non-goals:

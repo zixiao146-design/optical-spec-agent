@@ -16,6 +16,9 @@
   `examples/examples_manifest.json`.
 - Offline user journey evidence: `docs/offline_user_journey.md` and
   `examples/e2e/`.
+- Public contract freeze evidence: `docs/v1_0_public_contract_freeze.md`,
+  `docs/public_contract_manifest.json`, and
+  `docs/public_contract_change_checklist.md`.
 - Adapter evidence fixtures: stable fragments under
   `tests/fixtures/adapter_golden/`.
 - Workflow preview fixtures: stable keys under
@@ -45,6 +48,8 @@
 - No proprietary solver default path.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
+- Candidate-stable public contract tracking for CLI, schema, adapter registry,
+  workflow-plan keys, examples paths, and package metadata.
 - Open-source-solver-first release engineering.
 
 ## What this evidence does not support
@@ -63,6 +68,9 @@
 - `docs/offline_user_journey.md`
 - `docs/error_model.md`
 - `docs/migration_notes_pre_v1.md`
+- `docs/v1_0_public_contract_freeze.md`
+- `docs/public_contract_manifest.json`
+- `docs/public_contract_change_checklist.md`
 - `tests/fixtures/adapter_golden/`
 - `tests/fixtures/workflow_preview/`
 - `tests/test_documented_examples.py`
@@ -72,6 +80,7 @@
 - `tests/test_failure_mode_regression.py`
 - `tests/test_offline_user_journey.py`
 - `tests/test_error_model.py`
+- `tests/test_public_contract_manifest.py`
 - `tests/test_v1_0_compatibility_policy.py`
 - `tests/test_validation_evidence_manifest.py`
 - `scripts/smoke_release.sh`

@@ -11,6 +11,15 @@ from optical_spec_agent.services.spec_service import SpecService
 from optical_spec_agent.validators.spec_validator import SpecValidator
 
 
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def _load_public_contract_manifest() -> dict:
+    path = ROOT / "docs" / "public_contract_manifest.json"
+    assert path.exists()
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def _minimal_executable_spec() -> OpticalSpec:
     spec = OpticalSpec()
     spec.task.task_type = confirmed("simulation")
@@ -26,21 +35,11 @@ def _minimal_executable_spec() -> OpticalSpec:
 
 def test_schema_contains_documented_public_sections():
     schema = OpticalSpec.export_json_schema_dict()
+    manifest = _load_public_contract_manifest()
     assert schema["type"] == "object"
-    assert {
-        "task",
-        "physics",
-        "geometry_material",
-        "simulation",
-        "output",
-        "confirmed_fields",
-        "inferred_fields",
-        "missing_fields",
-        "assumption_log",
-        "validation_status",
-    } <= set(schema["properties"])
+    assert set(manifest["schema"]["public_top_level_fields"]) <= set(schema["properties"])
     contract = Path("docs/schema_contract.md").read_text(encoding="utf-8")
-    for section in ["task", "physics", "geometry_material", "simulation", "output"]:
+    for section in manifest["schema"]["public_top_level_fields"]:
         assert f"`{section}`" in contract
 
 
@@ -67,7 +66,11 @@ def test_rule_parser_default_requires_no_external_llm():
 
 def test_schema_export_is_json_schema_object_with_stable_public_keys():
     schema = OpticalSpec.export_json_schema_dict()
+    manifest = _load_public_contract_manifest()
     assert schema["title"] == "OpticalSpec"
     assert schema["type"] == "object"
     assert isinstance(schema["properties"], dict)
-    assert "validation_status" in schema["properties"]
+    assert set(manifest["schema"]["public_top_level_fields"]) <= set(schema["properties"])
+    assert manifest["schema"]["default_parser_path"] == "rule"
+    assert manifest["schema"]["external_llm_required_by_default"] is False
+    assert manifest["schema"]["external_solver_required_for_validation"] is False

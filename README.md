@@ -77,6 +77,9 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/offline_user_journey.md`](docs/offline_user_journey.md),
 [`docs/error_model.md`](docs/error_model.md),
 [`docs/migration_notes_pre_v1.md`](docs/migration_notes_pre_v1.md),
+[`docs/v1_0_public_contract_freeze.md`](docs/v1_0_public_contract_freeze.md),
+[`docs/public_contract_manifest.json`](docs/public_contract_manifest.json),
+[`docs/public_contract_change_checklist.md`](docs/public_contract_change_checklist.md),
 [`examples/e2e/README.md`](examples/e2e/README.md), and
 [`examples/examples_manifest.json`](examples/examples_manifest.json).
 

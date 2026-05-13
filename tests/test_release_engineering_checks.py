@@ -133,12 +133,15 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "offline_user_journey.md",
         "error_model.md",
         "migration_notes_pre_v1.md",
+        "v1_0_public_contract_freeze.md",
+        "public_contract_change_checklist.md",
     ]
     for name in required_docs:
         assert (ROOT / "docs" / name).exists()
     assert (ROOT / "examples" / "README.md").exists()
     assert (ROOT / "examples" / "examples_manifest.json").exists()
     assert (ROOT / "examples" / "e2e" / "README.md").exists()
+    assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
 
     combined = "\n".join(
@@ -168,6 +171,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Offline User Journey" in combined
     assert "Error Model" in combined
     assert "Pre-v1 Migration Notes" in combined
+    assert "v1.0 Public Contract Freeze Candidate" in combined
+    assert "Public Contract Change Checklist" in combined
     assert "no proprietary" in combined.lower()
 
 
@@ -252,6 +257,22 @@ def test_offline_user_journey_release_artifacts_are_tracked():
     assert "PyPI/TestPyPI: not published / not uploaded" in journey
     assert "Current main development version: 0.9.0rc4.dev0" in journey
     assert "Current public prerelease: v0.9.0rc3" in journey
+
+
+def test_public_contract_freeze_artifacts_are_tracked():
+    freeze = (ROOT / "docs" / "v1_0_public_contract_freeze.md").read_text(encoding="utf-8")
+    manifest = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
+    checklist = (ROOT / "docs" / "public_contract_change_checklist.md").read_text(encoding="utf-8")
+    assert "v1.0.0 not released" in freeze
+    assert "v0.9.0rc4 tag not created" in freeze
+    assert "PyPI/TestPyPI not published/uploaded" in freeze
+    assert manifest["version_scope"] == "0.9.0rc4.dev0"
+    assert manifest["current_public_prerelease"] == "v0.9.0rc3"
+    assert manifest["release_state"]["pypi_published"] is False
+    assert manifest["release_state"]["testpypi_uploaded"] is False
+    assert "external solver" in checklist
+    assert "external LLM" in checklist
+    assert "proprietary solver" in checklist
 
 
 def test_external_solver_policy_keeps_solver_validation_optional():
