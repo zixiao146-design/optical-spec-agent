@@ -17,6 +17,11 @@ verified public `v0.9.0rc3` prerelease.
 - TestPyPI status: not published
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`
+- TestPyPI upload approval record:
+  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`
+- TestPyPI upload approval status: pending
+- TestPyPI upload authorized: no
+- PyPI publication approval: not granted
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
 - Open-source solver strategy doc: `docs/open_source_solver_strategy.md`
 - Proprietary solver policy doc: `docs/proprietary_solver_policy.md`
@@ -67,6 +72,8 @@ verified public `v0.9.0rc3` prerelease.
 - The no-upload preflight does not upload, publish, create tags, or create
   GitHub releases.
 - TestPyPI upload requires explicit maintainer approval.
+- Approval remains pending in
+  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`.
 - TestPyPI upload must not be part of the default smoke script.
 - Wheel smoke remains local only.
 - Smoke script must not publish or upload packages.
@@ -79,6 +86,7 @@ verified public `v0.9.0rc3` prerelease.
 ## PyPI gate
 
 - PyPI publication requires explicit maintainer approval.
+- PyPI publication is not approved by the TestPyPI approval record.
 - PyPI publication should happen only after TestPyPI, or after an explicitly
   recorded decision to skip TestPyPI.
 - PyPI release must not be performed by accidental script execution.

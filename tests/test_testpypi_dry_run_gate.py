@@ -17,6 +17,10 @@ def test_testpypi_dry_run_gate_doc_exists_and_requires_manual_approval():
     assert "explicit maintainer approval" in text
     assert "does not authorize upload" in text
     assert "scripts/testpypi_preflight.sh" in text
+    assert "docs/testpypi_upload_approval_v0.9.0rc4.dev0.md" in text
+    assert "TestPyPI upload approval status: pending" in text
+    assert "TestPyPI upload authorized: no" in text
+    assert "PyPI publication approval: not granted" in text
     assert "NO UPLOAD PERFORMED" in text
     assert "does not upload" in text
     assert "does not create tags" in text

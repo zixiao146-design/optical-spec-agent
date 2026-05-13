@@ -17,6 +17,11 @@ This document describes the current `main` branch. It is not a release tag.
 - Latest release-status commit: `4d2991f`
 - PyPI published: no
 - TestPyPI uploaded: no
+- TestPyPI upload approval record:
+  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`
+- TestPyPI upload approval status: pending
+- TestPyPI upload authorized: no
+- PyPI publication approval: not granted
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.

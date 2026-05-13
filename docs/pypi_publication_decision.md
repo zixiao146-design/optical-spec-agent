@@ -13,6 +13,11 @@
 - Validation gate: `docs/validation_gate.md`.
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`.
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`.
+- TestPyPI upload approval record:
+  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`.
+- TestPyPI upload approval status: pending.
+- TestPyPI upload authorized: no.
+- PyPI publication approval: not granted.
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
 
 ## Recommendation
@@ -29,6 +34,7 @@ not upload, publish, create tags, or create GitHub releases.
 ## Preconditions before any PyPI publication
 
 - Explicit maintainer approval is recorded.
+- The approval record changes from pending to granted.
 - The decision record must include the phrase: explicit maintainer approval.
 - `git status` is clean.
 - Package version in `pyproject.toml` and `__version__` match.

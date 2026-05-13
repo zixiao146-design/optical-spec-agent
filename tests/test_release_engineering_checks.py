@@ -129,6 +129,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_compatibility_policy.md",
         "validation_evidence_manifest.md",
         "open_source_solver_validation_plan.md",
+        "testpypi_upload_approval_v0.9.0rc4.dev0.md",
     ]
     for name in required_docs:
         assert (ROOT / "docs" / name).exists()
@@ -156,6 +157,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
     assert "scripts/testpypi_preflight.sh" in combined
+    assert "TestPyPI upload approval: pending" in combined
+    assert "Upload command authorized: no" in combined
+    assert "PyPI publication approval: not granted" in combined
     assert "NO UPLOAD PERFORMED" in combined
 
 

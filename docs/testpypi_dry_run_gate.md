@@ -10,6 +10,11 @@
 - Proprietary solvers are not default dependencies
 - v0.9.0rc4 tag: not created
 - PyPI/TestPyPI remain unpublished/not uploaded
+- TestPyPI upload approval record:
+  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`
+- TestPyPI upload approval status: pending
+- TestPyPI upload authorized: no
+- PyPI publication approval: not granted
 
 ## Purpose
 
@@ -51,6 +56,8 @@ does not create GitHub releases. It prints `NO UPLOAD PERFORMED`.
 
 - TestPyPI upload requires explicit maintainer approval.
 - PyPI upload requires explicit maintainer approval.
+- The approval record remains pending until a maintainer explicitly grants
+  TestPyPI upload approval.
 - Approval must be recorded in docs or release notes.
 - Default smoke/release scripts must never upload automatically.
 - No token should be printed or committed.
