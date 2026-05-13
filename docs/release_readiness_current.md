@@ -66,6 +66,10 @@ Current main contract artifacts:
 - `docs/workflow_preview_contract.md`
 - `docs/validation_boundary.md`
 - `docs/pypi_publication_decision.md`
+- `docs/packaging_gate.md`
+- `docs/validation_gate.md`
+- `docs/external_solver_policy.md`
+- `docs/external_llm_policy.md`
 - `docs/release_engineering_playbook.md`
 - `docs/v1_0_readiness_plan.md`
 
@@ -98,6 +102,7 @@ Current main contract artifacts:
 3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
 4. Review the public contract docs before changing CLI, schema, adapter, or
    workflow behavior.
-5. Prepare `v0.9.0rc3` only if the next hardening patch needs a release
+5. Run the packaging and validation gates before any future RC.
+6. Prepare `v0.9.0rc3` only if the next hardening patch needs a release
    candidate.
-6. Keep PyPI unpublished unless explicitly approved.
+7. Keep PyPI unpublished unless explicitly approved.

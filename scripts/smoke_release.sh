@@ -3,6 +3,8 @@ set -euo pipefail
 
 OSA_SMOKE_VENV="${OSA_SMOKE_VENV:-/tmp/osa-smoke-release}"
 OSA_SMOKE_PYTHON="${OSA_SMOKE_PYTHON:-python3}"
+OSA_SMOKE_VERIFY_WHEEL="${OSA_SMOKE_VERIFY_WHEEL:-0}"
+OSA_SMOKE_WHEEL_VENV="${OSA_SMOKE_WHEEL_VENV:-/tmp/osa-smoke-wheel}"
 
 if ! "${OSA_SMOKE_PYTHON}" - <<'PY' >/dev/null 2>&1
 import sys
@@ -106,6 +108,25 @@ if missing:
 print(f"dist version check passed for {version}")
 PY
 
+WHEEL_STATUS="wheel install smoke skipped"
+if [[ "${OSA_SMOKE_VERIFY_WHEEL}" == "1" ]]; then
+  echo "Wheel install smoke venv: ${OSA_SMOKE_WHEEL_VENV}"
+  rm -rf "${OSA_SMOKE_WHEEL_VENV}"
+  "${OSA_SMOKE_PYTHON}" -m venv "${OSA_SMOKE_WHEEL_VENV}"
+  "${OSA_SMOKE_WHEEL_VENV}/bin/python" -m pip install --upgrade pip
+  "${OSA_SMOKE_WHEEL_VENV}/bin/python" -m pip install "dist/optical_spec_agent-${PROJECT_VERSION}-py3-none-any.whl"
+  "${OSA_SMOKE_WHEEL_VENV}/bin/python" - <<'PY'
+import importlib.metadata
+import optical_spec_agent
+
+print(f"Wheel-installed package version: {importlib.metadata.version('optical-spec-agent')}")
+print(f"Wheel-installed __version__: {optical_spec_agent.__version__}")
+PY
+  "${OSA_SMOKE_WHEEL_VENV}/bin/optical-spec" --help >/dev/null
+  WHEEL_STATUS="wheel install smoke passed"
+  echo "${WHEEL_STATUS}"
+fi
+
 cat <<EOF
 
 Release smoke summary:
@@ -113,5 +134,6 @@ Release smoke summary:
 - pytest passed
 - build passed
 - ${CLI_STATUS}
+- ${WHEEL_STATUS}
 - dist artifacts listed
 EOF

@@ -24,6 +24,16 @@ The smoke script creates a fresh virtual environment, installs the project with
 the `test` extra, runs `pytest`, builds the package, validates dist filenames,
 and checks `optical-spec --help` when the console script is declared.
 
+Optional wheel install smoke:
+
+```bash
+OSA_SMOKE_VERIFY_WHEEL=1 OSA_SMOKE_WHEEL_VENV=/tmp/osa-smoke-wheel ./scripts/smoke_release.sh
+```
+
+This installs the generated wheel into a second clean virtual environment and
+checks import/version metadata plus `optical-spec --help`. It does not upload
+anything.
+
 ## Required verification
 
 - `git status` is clean before tagging.
@@ -33,6 +43,7 @@ and checks `optical-spec --help` when the console script is declared.
 - `pytest` passes.
 - `python -m build` passes.
 - Dist filenames match the package version.
+- Optional wheel install smoke passes before any packaging publication decision.
 - `optical-spec --help` passes.
 - Release notes source exists.
 - Post-release status doc is created after the GitHub release is verified.
@@ -68,3 +79,5 @@ and checks `optical-spec --help` when the console script is declared.
 - PyPI remains unpublished unless explicitly approved.
 - Prefer TestPyPI first if packaging publication is later approved.
 - Never publish during release engineering smoke without explicit approval.
+- Follow `docs/packaging_gate.md` and `docs/pypi_publication_decision.md` before
+  any TestPyPI or PyPI operation.

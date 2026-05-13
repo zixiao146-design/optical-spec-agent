@@ -5,6 +5,8 @@
 - PyPI published: no.
 - GitHub pre-release candidate: `v0.9.0rc2`.
 - Package build smoke: passed for the RC line.
+- Packaging gate: `docs/packaging_gate.md`.
+- Validation gate: `docs/validation_gate.md`.
 
 ## Recommendation
 
@@ -19,6 +21,7 @@ maintainer approval.
 - `git status` is clean.
 - Package version in `pyproject.toml` and `__version__` match.
 - `scripts/smoke_release.sh` passes in a clean environment.
+- Optional wheel install smoke passes with `OSA_SMOKE_VERIFY_WHEEL=1`.
 - `pytest` passes.
 - `python -m build` passes.
 - `twine check dist/*` passes.

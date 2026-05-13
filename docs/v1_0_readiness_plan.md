@@ -61,6 +61,10 @@ Before `v1.0.0`, maintainers should decide and document:
 - Production-grade validation plan, or an explicit non-production disclaimer.
 - Versioning policy for previews, RCs, and final releases.
 - PyPI publication decision: `docs/pypi_publication_decision.md`.
+- Packaging publication gate: `docs/packaging_gate.md`.
+- Validation gate for RC/v1.0 readiness: `docs/validation_gate.md`.
+- Optional external solver policy: `docs/external_solver_policy.md`.
+- Optional external LLM policy: `docs/external_llm_policy.md`.
 - Security and token-handling guidance for release operations.
 
 ## Immediate engineering priorities
@@ -72,6 +76,8 @@ Before `v1.0.0`, maintainers should decide and document:
 - Release status visibility. Completed through post-release status docs.
 - Smoke script reliability. Strengthened after `40ed807`.
 - Public contract docs and regression tests. Added in current main.
+- Packaging and validation gates. Added in current main.
+- Optional external solver/LLM policy docs. Added in current main.
 
 ### P1
 

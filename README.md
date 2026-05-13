@@ -48,6 +48,11 @@ Public contract boundaries are tracked in
 [`docs/workflow_preview_contract.md`](docs/workflow_preview_contract.md),
 [`docs/validation_boundary.md`](docs/validation_boundary.md), and
 [`docs/pypi_publication_decision.md`](docs/pypi_publication_decision.md).
+Validation, packaging, and optional-provider policies are tracked in
+[`docs/validation_gate.md`](docs/validation_gate.md),
+[`docs/packaging_gate.md`](docs/packaging_gate.md),
+[`docs/external_solver_policy.md`](docs/external_solver_policy.md), and
+[`docs/external_llm_policy.md`](docs/external_llm_policy.md).
 
 ## 中文概览
 

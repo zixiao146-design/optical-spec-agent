@@ -111,6 +111,20 @@ def test_pypi_publication_decision_requires_explicit_approval():
     assert "explicit maintainer approval" in text
 
 
+def test_external_solver_policy_keeps_solver_validation_optional():
+    text = (ROOT / "docs" / "external_solver_policy.md").read_text(encoding="utf-8")
+    assert "External solvers are not run by default" in text
+    assert "Optional solver validation may be run manually" in text
+    assert "No production-grade physical validation is claimed" in text
+
+
+def test_external_llm_policy_keeps_network_llm_optional_and_tokens_safe():
+    text = (ROOT / "docs" / "external_llm_policy.md").read_text(encoding="utf-8")
+    assert "External LLM access is not required by default" in text
+    assert "Default tests must not require network LLM calls" in text
+    assert "Do not print, commit, or store provider tokens" in text
+
+
 def test_bilingual_readme_contract_present():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     readme_zh = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")

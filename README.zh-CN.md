@@ -49,7 +49,9 @@ release candidate supersede `v0.9.0rc1`。不要移动 `v0.9.0rc1` 或
 面向 `v1.0` 的公共契约边界见：
 `docs/cli_contract.md`、`docs/schema_contract.md`、
 `docs/adapter_support_matrix.md`、`docs/workflow_preview_contract.md`、
-`docs/validation_boundary.md` 和 `docs/pypi_publication_decision.md`。
+`docs/validation_boundary.md`、`docs/validation_gate.md`、`docs/packaging_gate.md`、
+`docs/external_solver_policy.md`、`docs/external_llm_policy.md` 和
+`docs/pypi_publication_decision.md`。
 
 ## 快速概览
 
