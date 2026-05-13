@@ -4,10 +4,11 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc3.dev0`
+- `pyproject.toml` package version on `main`: `0.9.0rc3`
 - Current public pre-release: `v0.9.0rc2`
-- Main branch state: post-rc2 development toward a possible `v0.9.0rc3`
+- Main branch state: `v0.9.0rc3` release draft prepared
 - `v0.9.0rc3` tag created: no
+- `v0.9.0rc3` GitHub release created: no
 - GitHub pre-release created: yes
 - Release verified: yes
 - Post-release status doc: `docs/post_release_status_v0.9.0rc2.md`
@@ -57,10 +58,10 @@ twine check dist/*
 ## Recommended Version Action
 
 Current recommendation: treat `v0.9.0rc2` as the active verified public
-pre-release, treat `0.9.0rc3.dev0` on `main` as unreleased development, keep
-PyPI unpublished, and continue `v1.0` readiness hardening. Prepare a
-`v0.9.0rc3` release draft only when the accumulated hardening changes should be
-published as a new public RC.
+pre-release until `v0.9.0rc3` is manually tagged and published as a GitHub
+pre-release. The `main` branch now contains the `v0.9.0rc3` release draft.
+Run final readiness checks, then create a tag/release only with maintainer
+approval. Keep PyPI/TestPyPI unpublished unless explicitly approved.
 
 Current main contract artifacts:
 
@@ -107,8 +108,6 @@ Current main contract artifacts:
 4. Review the public contract docs before changing CLI, schema, adapter, or
    workflow behavior.
 5. Run the packaging and validation gates before any future RC.
-6. Before cutting `v0.9.0rc3`, change `0.9.0rc3.dev0` to `0.9.0rc3` and rerun
-   final smoke/build checks.
-7. Prepare `v0.9.0rc3` only if the next hardening patch needs a release
-   candidate.
-8. Keep PyPI unpublished unless explicitly approved.
+6. Confirm `v0.9.0rc3` tag is absent locally and remotely before tag creation.
+7. Create an annotated `v0.9.0rc3` tag only after final maintainer approval.
+8. Keep PyPI/TestPyPI unpublished unless explicitly approved.

@@ -26,9 +26,9 @@ installed and write auditable execution artifacts, but this is not full solver
 automation or production-grade physical validation.
 
 Release status: the current public pre-release is `v0.9.0rc2`, while the
-current package version on `main` is `0.9.0rc3.dev0`. The `main` version is
-post-rc2 development toward a possible `v0.9.0rc3`; it is not a public release,
-and no `v0.9.0rc3` tag has been created.
+current package version on `main` is `0.9.0rc3`. The `main` branch is prepared
+as a `v0.9.0rc3` release draft, but no `v0.9.0rc3` tag or GitHub release has
+been created yet.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
@@ -60,8 +60,9 @@ Validation, packaging, and optional-provider policies are tracked in
 optical-spec-agent 是一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
-pre-release 是 `v0.9.0rc2`，当前 `main` package version 是
-`0.9.0rc3.dev0`，属于 post-rc2 development，不是公开 release，也不是最终稳定版。
+pre-release 是 `v0.9.0rc2`，当前 `main` package version 是 `0.9.0rc3`。
+`main` 已准备为 `v0.9.0rc3` release draft，但 tag / GitHub release 尚未创建，
+也不是最终稳定版。
 本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
@@ -91,7 +92,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (main `0.9.0rc3.dev0`: post-v0.9.0rc2 hardening)
+## Current scope (main `0.9.0rc3`: release draft after post-v0.9.0rc2 hardening)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for

@@ -32,8 +32,8 @@ physical validation。
 ## 发布状态
 
 当前公开 pre-release 是 `v0.9.0rc2`。当前 `main` 的 package version 是
-`0.9.0rc3.dev0`，这是面向未来 `v0.9.0rc3` 的 post-rc2 development
-状态，不是公开 release，也不是 final stable `1.0`。
+`0.9.0rc3`，已准备为 `v0.9.0rc3` release draft。`v0.9.0rc3` tag 和
+GitHub release 尚未创建；这仍然不是 final stable `1.0`。
 
 `v0.6` 到 `v0.9` 的能力属于 preview/scaffold/evaluation capabilities：
 

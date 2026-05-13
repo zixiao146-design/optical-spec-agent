@@ -3,9 +3,9 @@
 This playbook captures the release process hardened during the `v0.9.0rc1` and
 `v0.9.0rc2` release candidates.
 
-Current `main` may carry post-release development versions such as
-`0.9.0rc3.dev0`. Development versions are not public releases; convert them to
-an RC version such as `0.9.0rc3` only after final smoke/build gates pass.
+Current `main` may carry release-draft versions such as `0.9.0rc3`. A release
+draft is not a public release until an annotated tag is pushed and a GitHub
+pre-release is created after final smoke/build gates pass.
 
 ## Release phases
 

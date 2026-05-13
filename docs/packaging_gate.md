@@ -1,21 +1,23 @@
 # Packaging Gate
 
-Version scope: current `main` development after the verified `v0.9.0rc2`
-pre-release.
+Version scope: current `main` `v0.9.0rc3` release draft after the verified
+`v0.9.0rc2` pre-release.
 
 ## Current package baseline
 
 - Package name: `optical-spec-agent`
-- Current main development version: `0.9.0rc3.dev0`
+- Current package version on `main`: `0.9.0rc3`
+- Current main release draft: `v0.9.0rc3`
 - Current public pre-release: `v0.9.0rc2`
 - `v0.9.0rc2` tag remains unchanged.
+- `v0.9.0rc3` tag: not created
 - PyPI status: not published
 - TestPyPI status: not published
 - Build backend: `hatchling`
 - Console script: `optical-spec`
 - Expected build artifacts for current main:
-  - `optical_spec_agent-0.9.0rc3.dev0-py3-none-any.whl`
-  - `optical_spec_agent-0.9.0rc3.dev0.tar.gz`
+  - `optical_spec_agent-0.9.0rc3-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc3.tar.gz`
 
 ## Packaging checks required before publication
 

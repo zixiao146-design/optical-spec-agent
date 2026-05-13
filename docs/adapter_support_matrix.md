@@ -1,7 +1,8 @@
 # Adapter Support Matrix
 
-Version scope: current `main` development version `0.9.0rc3.dev0` after the
-verified public `v0.9.0rc2` pre-release. `0.9.0rc3.dev0` is not a release.
+Version scope: current `main` release draft version `0.9.0rc3` after the
+verified public `v0.9.0rc2` pre-release. The `v0.9.0rc3` tag has not been
+created yet.
 
 Adapter outputs are local generated artifacts. They do not run external solvers
 by default and do not claim production-grade physical validation.

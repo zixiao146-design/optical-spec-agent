@@ -1,7 +1,7 @@
 # Validation Gate
 
-Version scope: current `main` development after the verified `v0.9.0rc2`
-pre-release. Current main package version: `0.9.0rc3.dev0`.
+Version scope: current `main` `v0.9.0rc3` release draft after the verified
+`v0.9.0rc2` pre-release. Current main package version: `0.9.0rc3`.
 
 ## What must pass before a new RC
 
@@ -43,8 +43,8 @@ maintainers.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
 - Keep PyPI unpublished unless explicitly approved.
-- Do not cut `v0.9.0rc3` until `project.version` is changed from
-  `0.9.0rc3.dev0` to `0.9.0rc3` and final smoke passes.
+- Do not create the `v0.9.0rc3` tag until project/version consistency, final
+  smoke, wheel smoke, build, `make check`, and CLI examples pass.
 
 ## v1.0 validation target
 

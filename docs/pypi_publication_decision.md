@@ -4,8 +4,8 @@
 
 - PyPI published: no.
 - GitHub pre-release candidate: `v0.9.0rc2`.
-- Current main development version: `0.9.0rc3.dev0`.
-- `0.9.0rc3.dev0` is not a release.
+- Current main release draft version: `0.9.0rc3`.
+- `v0.9.0rc3` tag and GitHub pre-release have not been created yet.
 - Package build smoke: passed for the RC line.
 - Packaging gate: `docs/packaging_gate.md`.
 - Validation gate: `docs/validation_gate.md`.
