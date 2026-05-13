@@ -7,7 +7,7 @@ adapter registry, workflow preview, examples, and packaging behavior unless a
 migration note is provided.
 
 This policy applies to the current public prerelease `v0.9.0rc3` and current
-`main` development version `0.9.0rc4.dev0`. The `v0.9.0rc4` tag has not been
+`main` development version `0.9.0rc4`. The `v0.9.0rc4` tag has not been
 created, and PyPI/TestPyPI remain unpublished/not uploaded.
 
 The v1.0 public contract freeze candidate is tracked in

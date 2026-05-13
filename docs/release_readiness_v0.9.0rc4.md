@@ -1,54 +1,74 @@
-# v0.9.0rc4 Development Readiness
+# v0.9.0rc4 Release Readiness
 
 ## Baseline
 
 - Current public prerelease: v0.9.0rc3
 - v0.9.0rc3 release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc3
 - v0.9.0rc3 target commit: acc407df1822db99bed258b6165099f3e5c2e424
-- Current main development version: 0.9.0rc4.dev0
+- v0.9.0rc4 draft version: 0.9.0rc4
 - v0.9.0rc4 tag: not created
+- GitHub release: not created
 - PyPI/TestPyPI: not published / not uploaded
 
-## Why main moved to 0.9.0rc4.dev0
+## Included post-rc3 hardening
 
-`v0.9.0rc3` is already a published GitHub prerelease. Post-release commits on
-`main` should not keep building as `0.9.0rc3`, because that version now refers
-to the verified public candidate at commit `acc407d`.
+- Open-source-solver-first strategy
+- Proprietary solver non-default/export-only policy
+- Expanded adapter evidence fixtures
+- Examples manifest
+- Validation evidence manifest
+- Optional open-source solver validation plan
+- Offline user journey
+- Error model
+- Pre-v1 migration notes
+- Public contract freeze candidate
+- Public contract manifest
+- TestPyPI no-upload preflight
+- TestPyPI upload approval record, still pending
+- Packaging and validation gates
 
-`0.9.0rc4.dev0` marks post-rc3 development toward the next candidate.
-`v0.9.0rc4.dev0` is not itself a public release.
+## Required checks before tag creation
 
-## v0.9.0rc4 development goals
+- `git status` clean
+- `project.version == 0.9.0rc4`
+- `__version__ == 0.9.0rc4`
+- `v0.9.0rc4` tag absent locally/remotely
+- `scripts/testpypi_preflight.sh` passed
+- `scripts/smoke_release.sh` passed
+- Wheel smoke passed
+- `pytest` passed
+- `python -m build` passed
+- `make check` passed
+- CLI examples passed
+- E2E examples passed
+- Dist filenames contain `0.9.0rc4`
+- Release draft exists
+- No PyPI/TestPyPI publication
 
-- TestPyPI gate dry-run foundation
-- Packaging metadata hardening
-- Wheel install smoke reliability
-- v1.0 stability gate
-- Optional external solver policy refinement
-- Optional external LLM policy refinement
-- Stronger offline example verification
-- No PyPI/TestPyPI publication without explicit approval
+## Current verification
 
-## Required checks before future v0.9.0rc4 release draft
+- `scripts/testpypi_preflight.sh`: passed
+- `scripts/smoke_release.sh`: passed
+- Wheel install smoke: passed
+- `pytest`: 429 passed, 4 warnings
+- `python -m build`: passed
+- `make check`: passed
+- CLI examples: passed
+- E2E examples: passed
+- Dist files:
+  - `optical_spec_agent-0.9.0rc4-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc4.tar.gz`
+- PyPI: not published
+- TestPyPI: not uploaded
 
-- `project.version` must be changed from `0.9.0rc4.dev0` to `0.9.0rc4`.
-- `__version__` must match.
-- `scripts/smoke_release.sh` passed.
-- Wheel smoke passed.
-- `pytest` passed.
-- `python -m build` passed.
-- `make check` passed.
-- CLI examples passed.
-- Dist filenames must contain `0.9.0rc4`.
-- Release draft notes must exist.
-- `v0.9.0rc4` tag must be absent before creation.
-- PyPI/TestPyPI decision must be explicit.
+## Next step
 
-## Non-goals
+After maintainer approval:
 
-- Do not publish PyPI now.
-- Do not upload TestPyPI now.
-- Do not create `v0.9.0rc4` tag now.
-- Do not claim production-grade physical validation.
-- Do not claim formal convergence proof.
-- Do not require external solver or external LLM by default.
+1. Create an annotated `v0.9.0rc4` tag.
+2. Push the tag.
+3. Create the GitHub prerelease.
+4. Verify `draft=false` and `prerelease=true`.
+5. Create `docs/post_release_status_v0.9.0rc4.md`.
+
+Do not publish PyPI/TestPyPI unless explicitly approved.

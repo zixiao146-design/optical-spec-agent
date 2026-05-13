@@ -3,8 +3,8 @@
 ## Current baseline
 
 - Current public prerelease: `v0.9.0rc3`
-- Current main development version: `0.9.0rc4.dev0`
-- `v0.9.0rc4.dev0` is not a release
+- Current main release draft: `0.9.0rc4`
+- `v0.9.0rc4` GitHub release has not been created
 - `v0.9.0rc4` tag has not been created
 - Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc3
 - Release verified: yes
@@ -128,7 +128,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Public contract docs and regression tests. Added in current main.
 - Packaging and validation gates. Added in current main.
 - Optional external solver/LLM policy docs. Added in current main.
-- Continue v1.0 readiness engineering from `0.9.0rc4.dev0`.
+- Continue v1.0 readiness engineering from `0.9.0rc4`.
 
 ### P1
 
@@ -151,7 +151,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Do not upload TestPyPI yet.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, or `v0.9.0rc3` tags.
 - Do not create the `v0.9.0rc4` tag until final readiness checks and maintainer approval.
-- Do not treat `v0.9.0rc4.dev0` as a published release.
+- Do not treat `v0.9.0rc4` as a published release.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.

@@ -2,8 +2,8 @@
 
 External LLM access is not required by default.
 
-Current public prerelease: `v0.9.0rc3`. Current main development version:
-`0.9.0rc4.dev0`. `v0.9.0rc4.dev0` is not a release, the `v0.9.0rc4` tag has
+Current public prerelease: `v0.9.0rc3`. Current main release draft:
+`0.9.0rc4`. `v0.9.0rc4` is not a release, the `v0.9.0rc4` tag has
 not been created, and PyPI/TestPyPI remain unpublished. Continue v1.0 readiness
 engineering and prepare a `v0.9.0rc4` release draft only when accumulated
 changes should be published as another RC.

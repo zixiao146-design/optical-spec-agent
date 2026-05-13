@@ -1,24 +1,24 @@
 # Packaging Gate
 
-Version scope: current `main` development version `0.9.0rc4.dev0` after the
+Version scope: current `main` release draft `0.9.0rc4` after the
 verified public `v0.9.0rc3` prerelease.
 
 ## Current package baseline
 
 - Package name: `optical-spec-agent`
-- Current package version on `main`: `0.9.0rc4.dev0`
-- Current main development version: `0.9.0rc4.dev0`
+- Current package version on `main`: `0.9.0rc4`
+- Current main release draft: `0.9.0rc4`
 - Current public prerelease: `v0.9.0rc3`
 - Product positioning: open-source-solver-first
 - `v0.9.0rc1`, `v0.9.0rc2`, and `v0.9.0rc3` tags remain unchanged.
-- `v0.9.0rc4.dev0` is not a public release.
+- `v0.9.0rc4` GitHub release: not created
 - `v0.9.0rc4` tag: not created
 - PyPI status: not published
 - TestPyPI status: not published
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`
+  `docs/testpypi_upload_approval_v0.9.0rc4.md`
 - TestPyPI upload approval status: pending
 - TestPyPI upload authorized: no
 - PyPI publication approval: not granted
@@ -28,8 +28,8 @@ verified public `v0.9.0rc3` prerelease.
 - Build backend: `hatchling`
 - Console script: `optical-spec`
 - Expected build artifacts for current main:
-  - `optical_spec_agent-0.9.0rc4.dev0-py3-none-any.whl`
-  - `optical_spec_agent-0.9.0rc4.dev0.tar.gz`
+  - `optical_spec_agent-0.9.0rc4-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc4.tar.gz`
 
 ## Packaging checks required before publication
 
@@ -73,7 +73,7 @@ verified public `v0.9.0rc3` prerelease.
   GitHub releases.
 - TestPyPI upload requires explicit maintainer approval.
 - Approval remains pending in
-  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`.
+  `docs/testpypi_upload_approval_v0.9.0rc4.md`.
 - TestPyPI upload must not be part of the default smoke script.
 - Wheel smoke remains local only.
 - Smoke script must not publish or upload packages.

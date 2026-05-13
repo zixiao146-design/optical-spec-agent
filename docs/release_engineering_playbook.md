@@ -4,8 +4,8 @@ This playbook captures the release process hardened during the `v0.9.0rc1`,
 `v0.9.0rc2`, and `v0.9.0rc3` release candidates.
 
 Current public prerelease: `v0.9.0rc3`.
-Current main development version: `0.9.0rc4.dev0`.
-`v0.9.0rc4.dev0` is not a public release, and the `v0.9.0rc4` tag has not
+Current main release draft: `0.9.0rc4`.
+`v0.9.0rc4` is not a public release, and the `v0.9.0rc4` tag has not
 been created. PyPI/TestPyPI remain unpublished.
 
 Release engineering is open-source-solver-first. Default tests, smoke, examples,

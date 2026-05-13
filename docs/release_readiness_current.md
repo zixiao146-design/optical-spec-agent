@@ -4,13 +4,14 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc4.dev0`
+- `pyproject.toml` package version on `main`: `0.9.0rc4`
 - Current public prerelease: `v0.9.0rc3`
-- Current main development version: `0.9.0rc4.dev0`
-- Main branch state: post-`v0.9.0rc3` development toward `v0.9.0rc4`
+- Current main release draft: `0.9.0rc4`
+- Main branch state: `v0.9.0rc4` release draft for maintainer review
 - Product positioning: open-source-solver-first
-- `v0.9.0rc4.dev0` is not a release
+- `v0.9.0rc4` GitHub release has not been created
 - `v0.9.0rc4` tag has not been created
+- GitHub release: not created
 - GitHub pre-release created: yes
 - Release verified: yes
 - Post-release status doc: `docs/post_release_status_v0.9.0rc3.md`
@@ -18,7 +19,7 @@ This document describes the current `main` branch. It is not a release tag.
 - PyPI published: no
 - TestPyPI uploaded: no
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc4.dev0.md`
+  `docs/testpypi_upload_approval_v0.9.0rc4.md`
 - TestPyPI upload approval status: pending
 - TestPyPI upload authorized: no
 - PyPI publication approval: not granted
@@ -74,11 +75,10 @@ twine check dist/*
 ## Recommended Version Action
 
 Current recommendation: treat `v0.9.0rc3` as the active verified public
-prerelease. The `main` branch now builds as `0.9.0rc4.dev0` and may contain
-post-`v0.9.0rc3` hardening changes. Continue v1.0 readiness engineering and
-prepare a `v0.9.0rc4` release draft only when accumulated changes should be
-published as another RC. Keep PyPI/TestPyPI unpublished unless explicitly
-approved.
+prerelease until `v0.9.0rc4` is tagged and a GitHub prerelease is created. The
+`main` branch now builds as the `0.9.0rc4` release draft and packages
+post-`v0.9.0rc3` hardening changes for maintainer review. Keep PyPI/TestPyPI
+unpublished unless explicitly approved.
 
 Current main contract artifacts:
 

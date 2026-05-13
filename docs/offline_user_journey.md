@@ -9,7 +9,7 @@ no proprietary software, and no proprietary optical software.
 ## Current version scope
 
 - Current public prerelease: v0.9.0rc3
-- Current main development version: 0.9.0rc4.dev0
+- Current main release draft: 0.9.0rc4
 - PyPI/TestPyPI: not published / not uploaded
 - v0.9.0rc4 tag: not created
 
