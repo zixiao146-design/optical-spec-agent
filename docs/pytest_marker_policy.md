@@ -49,6 +49,10 @@ The MPB optional validation pilot is guarded by
 `OSA_RUN_OPTIONAL_MPB_VALIDATION=1`. Default tests and quality gates must not
 set that variable, and default tests must not require an MPB CLI command.
 
+The Optiland optional validation pilot is guarded by
+`OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1`. Default tests and quality gates must
+not set that variable.
+
 ## Guardrails
 
 - Do not make external solvers a default dependency.

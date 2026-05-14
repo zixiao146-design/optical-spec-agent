@@ -34,6 +34,10 @@
   evidence for one tiny project-owned MPB/PyMeep validation path.
 - MPB Level 3 optional manual validation evidence is recorded but remains
   narrow and non-default. MPB CLI is not required.
+- Optiland optional validation pilot, now with Level 3 optional manual
+  validation evidence for one tiny project-owned Optiland backend path.
+- Optiland Level 3 optional manual validation evidence is recorded but remains
+  narrow and non-default.
 - Manual solver validation report template.
 - Pytest marker policy for optional/manual validation.
 - Open-source-solver-first strategy.
@@ -63,6 +67,9 @@
   physical validation, not a formal convergence proof, and not a default gate.
 - The MPB report is not production-grade physical validation and does not
   require MPB CLI.
+- Optiland Level 3 evidence is narrow and optional; it is not production-grade
+  optical validation, not a formal convergence proof, and not a default gate.
+- The Optiland report is not production-grade optical validation.
 - Open-source solver preflight detects availability only and does not execute
   solvers.
 - MPB CLI absence is acceptable when `meep.mpb` imports successfully; ElmerSolver

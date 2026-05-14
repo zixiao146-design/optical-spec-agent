@@ -133,6 +133,16 @@ Before `v1.0.0`, maintainers should decide and document:
   adapter preview artifact. This does not make MPB a default dependency, does
   not require MPB CLI, and does not support production-grade physical validation
   or a formal convergence proof.
+- Optiland optional validation pilot:
+  `docs/optiland_optional_validation_pilot.md`; it is guarded by
+  `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1` and is not enabled by default.
+- Optiland Level 3 readiness:
+  `docs/optiland_level3_readiness.md` and
+  `validation/optiland/optiland_validation_pilot_2026-05-14.md` record a narrow
+  optional manual validation of a tiny project-owned Optiland backend path
+  generated from an adapter preview artifact. This does not make Optiland a
+  default dependency and does not support production-grade optical validation or
+  a formal convergence proof.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

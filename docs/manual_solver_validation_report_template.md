@@ -36,3 +36,6 @@ The Meep-specific report schema is
 
 The MPB-specific report schema is
 `docs/manual_solver_validation_reports/mpb_validation_report_schema.json`.
+
+The Optiland-specific report schema is
+`docs/manual_solver_validation_reports/optiland_validation_report_schema.json`.

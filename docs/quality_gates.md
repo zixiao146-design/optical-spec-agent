@@ -36,6 +36,7 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - Meep optional validation pilot default preflight, no Meep execution.
 - MPB optional validation pilot default preflight, no MPB execution and no MPB
   CLI requirement.
+- Optiland optional validation pilot default preflight, no Optiland execution.
 - `smoke_release.sh`.
 - Wheel smoke.
 - `pytest`.
@@ -60,6 +61,10 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - No MPB execution in the MPB optional validation pilot default preflight.
 - The recorded MPB Level 3 report is optional manual evidence only, does not
   require MPB CLI, and is not part of the default quality gate.
+- No Optiland execution in the Optiland optional validation pilot default
+  preflight.
+- The recorded Optiland Level 3 report is optional manual evidence only and is
+  not part of the default quality gate.
 - No external LLM by default.
 - No proprietary solver by default.
 - No token is required for the default local quality gate.
@@ -74,3 +79,5 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - Before considering optional manual open-source solver validation.
 - Before considering the Gmsh optional validation pilot with explicit opt-in.
 - Before considering the MPB optional validation pilot with explicit opt-in.
+- Before considering the Optiland optional validation pilot with explicit
+  opt-in.

@@ -31,4 +31,7 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "MPB optional validation pilot" in text
     assert "MPB Level 3 optional manual validation evidence" in text
     assert "MPB CLI is not required" in text
+    assert "Optiland optional validation pilot" in text
+    assert "Optiland Level 3 optional manual validation evidence" in text
     assert "not production-grade physical validation" in text
+    assert "not production-grade optical validation" in text

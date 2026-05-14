@@ -34,6 +34,10 @@
   `scripts/run_optional_mpb_validation.sh`.
 - MPB optional manual validation evidence:
   `validation/mpb/mpb_validation_pilot_2026-05-14.md`.
+- Optiland optional validation pilot default report:
+  `scripts/run_optional_optiland_validation.sh`.
+- Optiland optional manual validation evidence:
+  `validation/optiland/optiland_validation_pilot_2026-05-14.md`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -71,6 +75,9 @@
 - Limited MPB Level 3 optional manual validation evidence for one
   project-owned MPB/PyMeep validation path generated from an adapter preview
   artifact. MPB CLI is not required.
+- Limited Optiland Level 3 optional manual validation evidence for one
+  project-owned Optiland backend path generated from an adapter preview
+  artifact.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -89,6 +96,8 @@
   narrow optional manual validation evidence only.
 - No production-grade MPB physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
+- No production-grade Optiland optical validation; the recorded Level 3 report
+  is narrow optional manual validation evidence only.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
 
@@ -131,5 +140,9 @@
 - `docs/mpb_optional_validation_pilot.md`
 - `docs/mpb_level3_readiness.md`
 - `validation/mpb/mpb_validation_pilot_2026-05-14.md`
+- `scripts/run_optional_optiland_validation.sh`
+- `docs/optiland_optional_validation_pilot.md`
+- `docs/optiland_level3_readiness.md`
+- `validation/optiland/optiland_validation_pilot_2026-05-14.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

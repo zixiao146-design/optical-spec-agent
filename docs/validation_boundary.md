@@ -49,6 +49,10 @@ examples, or release validation.
   validation report for a tiny project-owned MPB/PyMeep path generated from an
   adapter preview artifact, but that report is not production-grade physical
   validation. MPB CLI is not required for that report.
+- Production-grade Optiland optical validation. Optiland has one narrow
+  optional manual validation report for a tiny project-owned Optiland backend
+  path generated from an adapter preview artifact, but that report is not
+  production-grade optical validation.
 - Full material model correctness.
 - Full CAD, FEM, lens, or mesh prescription correctness.
 - Real external LLM model quality.
@@ -98,6 +102,13 @@ The 2026-05-14 MPB report in
 executed a tiny project-owned validation path after explicit opt-in. MPB CLI was
 not required. It does not make MPB part of default pytest, smoke, quality gates,
 CI, or release validation.
+The Optiland optional validation pilot is a manual opt-in path and is not a
+production-grade optical validation claim.
+The 2026-05-14 Optiland report in
+`validation/optiland/optiland_validation_pilot_2026-05-14.md` records that
+Optiland executed a tiny project-owned backend path after explicit opt-in. It
+does not make Optiland part of default pytest, smoke, quality gates, CI, or
+release validation.
 
 ## Requirements for production-grade validation
 

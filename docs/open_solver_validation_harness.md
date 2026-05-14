@@ -70,6 +70,13 @@ documented in `docs/mpb_level3_readiness.md`. This is Level 3 optional manual
 validation evidence for a narrow MPB path only. MPB CLI is not required. It is
 not production-grade physical validation and not a default dependency.
 
+The 2026-05-14 Optiland opt-in pilot generated an Optiland preview artifact and
+executed a tiny project-owned Optiland backend path. It is recorded in
+`validation/optiland/optiland_validation_pilot_2026-05-14.md` and documented in
+`docs/optiland_level3_readiness.md`. This is Level 3 optional manual validation
+evidence for a narrow Optiland path only. It is not production-grade optical
+validation and not a default dependency.
+
 ## Future Manual Validation Path
 
 Future manual solver validation should follow this pattern:

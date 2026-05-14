@@ -8,7 +8,7 @@ only when accumulated changes should be published as another RC.
 Compatibility evidence is tracked in `docs/v1_0_compatibility_policy.md`,
 `docs/validation_evidence_manifest.md`, and `examples/examples_manifest.json`.
 Adapter maturity levels are tracked in `docs/adapter_maturity_model.md`. Gmsh,
-Meep, and MPB have narrow Level 3 optional manual validation evidence recorded
+Meep, MPB, and Optiland have narrow Level 3 optional manual validation evidence recorded
 in their readiness docs and under `validation/`.
 
 optical-spec-agent is open-source-solver-first. Adapter outputs are local
@@ -25,7 +25,7 @@ Gmsh, Elmer, and Optiland. No production-grade physical validation is claimed.
 | `mpb` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold with Level 3 optional manual validation evidence | Python scaffold | Yes, only for explicit opt-in manual validation; MPB CLI is not required when `meep.mpb` is available | No | Yes: `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py`, `validation/mpb/mpb_validation_pilot_2026-05-14.md` | No | Uses default lattice, k-points, resolution, and num_bands when missing; geometry is schematic; Level 3 evidence is narrow and non-production-grade | Needs reproducible benchmark scope before Level 4 or production claims |
 | `gmsh` | Open-source geometry / mesh backend | Optional external open-source mesh tool | Yes | MVP scaffold with Level 3 optional manual validation evidence | `.geo` scaffold | Yes, to mesh externally | No | Yes: `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` | No | Geometry is schematic unless OpticalSpec carries explicit dimensions; physical groups are placeholders | Needs reproducible benchmark scope before Level 4 or production claims |
 | `elmer` | Open-source multiphysics backend | Optional external open-source solver | Yes | MVP scaffold | `.sif` scaffold | Yes, to execute `ElmerSolver` externally | No | Yes: `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py` | No | Requires a real mesh prepared outside this adapter; equation and boundary sections are placeholders | Needs explicit mesh/FEM boundary contract and optional solver validation |
-| `optiland` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold | Python scaffold | Yes, to execute Optiland externally | No | Yes: `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py` | No | OpticalSpec lacks full lens surface sequence and glass catalog mapping | Needs lens prescription schema extension before stable claims |
+| `optiland` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold with Level 3 optional manual validation evidence | Python scaffold | Yes, only for explicit opt-in manual validation | No | Yes: `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py`, `validation/optiland/optiland_validation_pilot_2026-05-14.md` | No | OpticalSpec lacks full lens surface sequence and glass catalog mapping; Level 3 evidence is narrow and non-production-grade | Needs reproducible benchmark scope before Level 4 or production claims |
 
 ## Registry contract
 
@@ -57,6 +57,9 @@ The adapter registry currently exposes:
 - MPB has Level 3 optional manual validation evidence for one MPB/PyMeep path,
   but default tests, smoke, quality gates, and release validation do not run MPB
   and do not require MPB CLI.
+- Optiland has Level 3 optional manual validation evidence for one tiny
+  project-owned backend path, but default tests, smoke, quality gates, and
+  release validation do not run Optiland.
 - Adapter warnings and defaults are part of the auditable output contract.
 - Physical correctness is not claimed as production-grade.
 - Workflow-to-adapter planning is preview/no-execute by default.

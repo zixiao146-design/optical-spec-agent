@@ -56,7 +56,7 @@ from any future production validation claim.
 | Gmsh | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates `.geo` scaffold evidence from fixed fixtures. A narrow opt-in pilot processed the project/adapter `.geo` artifact with Gmsh and recorded manual validation evidence. Default tests, smoke, quality gates, and release validation still do not run Gmsh. | `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `docs/gmsh_optional_validation_pilot.md`, `docs/gmsh_level3_readiness.md`, `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
 | Elmer | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates `.sif` scaffold evidence, with mesh and boundary assumptions still explicit limitations. | `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py` | no | no | no | Define richer FEM mesh/boundary contracts before optional solver validation. |
 | MPB | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates MPB Python scaffold evidence for band-structure style workflows. A narrow opt-in pilot generated the adapter scaffold and executed a tiny project-owned MPB/PyMeep validation path through `meep.mpb`. MPB CLI is not required. | `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py`, `docs/mpb_optional_validation_pilot.md`, `docs/mpb_level3_readiness.md`, `validation/mpb/mpb_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
-| Optiland | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates Optiland scaffold evidence while lens prescription schema remains incomplete. Availability may be detected through Python import. | `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py` | no | no | no | Extend lens prescription schema before solver-backed validation claims. |
+| Optiland | Level 3 - Optional manual backend validation | Registered and CLI-visible; generates Optiland scaffold evidence while lens prescription schema remains incomplete. A narrow opt-in pilot generated the adapter scaffold and executed a tiny project-owned Optiland validation path. | `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py`, `docs/optiland_optional_validation_pilot.md`, `docs/optiland_level3_readiness.md`, `validation/optiland/optiland_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible backend-backed benchmark before considering Level 4. |
 
 ## Non-goals
 
@@ -94,3 +94,15 @@ and after generating an adapter MPB preview artifact. It does not make MPB a
 default dependency, does not require MPB CLI, does not add MPB to default
 pytest, smoke, quality gates, CI, or release validation, and does not claim
 production-grade physical validation or a formal convergence proof.
+
+## Optiland Level 3 Boundary
+
+Optiland Level 3 is limited to the optional manual validation report recorded in
+`validation/optiland/optiland_validation_pilot_2026-05-14.md`. It means Optiland
+executed a tiny project-owned validation path after explicit maintainer opt-in
+and after generating an adapter Optiland preview artifact. It does not make
+Optiland a default dependency, and it does not make Optiland a default
+pytest, smoke, quality gates, CI, or release validation requirement. It does not claim
+production-grade optical validation or a formal convergence proof.
+
+In short: this evidence does not make Optiland a default dependency.

@@ -65,6 +65,12 @@ optional manual MPB/PyMeep validation path only. MPB CLI is not required, and
 the report does not make MPB a default test, smoke, quality-gate, CI, or release
 dependency.
 
+The first Optiland opt-in pilot was run on 2026-05-14 and is recorded in
+`validation/optiland/optiland_validation_pilot_2026-05-14.md` and
+`docs/optiland_level3_readiness.md`. It supports a limited Level 3 claim for an
+optional manual Optiland backend path only. The report does not make Optiland a
+default test, smoke, quality-gate, CI, or release dependency.
+
 For Python-backed stacks, Meep availability can be reported through
 `import meep as mp`, MPB availability can be reported through `from meep import
 mpb`, and Optiland availability can be reported through `import optiland`.
