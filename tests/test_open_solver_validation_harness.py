@@ -24,6 +24,9 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "no production-grade physical validation claim" in harness_text
     assert "Gmsh optional validation pilot" in harness_text
     assert "does not run Gmsh unless explicitly enabled" in harness_text
+    assert "validation/gmsh/gmsh_validation_pilot_2026-05-14.md" in harness_text
+    assert "production-grade physical validation" in harness_text
+    assert "not a default dependency" in harness_text
 
     template_text = template.read_text(encoding="utf-8")
     assert "does not by itself imply production-grade validation" in template_text
@@ -39,5 +42,6 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     plan_text = plan.read_text(encoding="utf-8")
     assert "records availability only" in plan_text
     assert "first pilot-ready candidate is Gmsh" in plan_text
+    assert "docs/gmsh_level3_readiness.md" in plan_text
     assert "Tests should not be part of default `pytest`" in plan_text
     assert "Marker policy is documented in `docs/pytest_marker_policy.md`" in plan_text

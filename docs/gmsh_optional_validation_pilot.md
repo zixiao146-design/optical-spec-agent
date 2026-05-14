@@ -14,6 +14,10 @@ without making Gmsh a default dependency.
 - Default smoke does not run Gmsh.
 - Release validation does not require Gmsh.
 - No production-grade physical validation is claimed.
+- Current pilot status: opt-in validation passed on 2026-05-14 for a narrow
+  project/adapter `.geo` artifact path.
+- Evidence report: `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
+- Level 3 readiness: `docs/gmsh_level3_readiness.md`.
 
 ## Input Fixture
 
@@ -24,6 +28,11 @@ The default local evidence path uses:
 
 These fixtures are for local `.geo` preview evidence. They are not solver-backed
 validation by themselves.
+
+The 2026-05-14 opt-in pilot generated
+`/tmp/osa-gmsh-validation-output/gmsh_preview.geo` from
+`examples/specs/gmsh_preview.json`, then ran Gmsh against that generated
+artifact. The generated mesh output stayed in `/tmp` and is not committed.
 
 ## What Is Validated By Default
 
@@ -69,3 +78,4 @@ executed.
 - No production-grade validation claim.
 - No formal convergence proof.
 - No proprietary solver dependency.
+- No default pytest, smoke, quality gate, or release-gate dependency on Gmsh.

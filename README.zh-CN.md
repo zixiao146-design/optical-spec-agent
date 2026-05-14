@@ -63,6 +63,8 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/validation_evidence_manifest.md`、`docs/adapter_maturity_model.md`、
 `docs/open_source_solver_validation_plan.md`、`docs/open_solver_validation_harness.md`、
 `docs/gmsh_optional_validation_pilot.md`、
+`docs/gmsh_level3_readiness.md`、
+`validation/gmsh/gmsh_validation_pilot_2026-05-14.md`、
 `docs/manual_solver_validation_report_template.md`、`docs/pytest_marker_policy.md`、
 `docs/offline_user_journey.md`、`docs/error_model.md`、
 `docs/migration_notes_pre_v1.md`、`docs/v1_0_public_contract_freeze.md`、

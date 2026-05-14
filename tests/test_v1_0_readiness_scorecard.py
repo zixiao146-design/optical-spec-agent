@@ -25,4 +25,5 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Open-source solver preflight detects availability only" in text
     assert "Adapter maturity model" in text
     assert "Gmsh optional validation pilot" in text
-    assert "has not been run as solver-backed validation" in text
+    assert "Gmsh Level 3 optional manual validation evidence" in text
+    assert "not production-grade physical validation" in text

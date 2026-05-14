@@ -50,6 +50,12 @@ The first pilot-ready path is the Gmsh optional validation pilot in
 availability and fixture presence; it does not run Gmsh unless explicitly enabled
 outside the default gates.
 
+The 2026-05-14 Gmsh opt-in pilot processed a project/adapter-generated `.geo`
+artifact and is recorded in
+`validation/gmsh/gmsh_validation_pilot_2026-05-14.md`. This is Level 3 optional
+manual validation evidence for a narrow artifact path. It is not
+production-grade physical validation and not a default dependency.
+
 ## Future Manual Validation Path
 
 Future manual solver validation should follow this pattern:

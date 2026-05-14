@@ -24,6 +24,8 @@
 - Adapter maturity model: `docs/adapter_maturity_model.md`.
 - Gmsh optional validation pilot default report:
   `scripts/run_optional_gmsh_validation.sh`.
+- Gmsh optional manual validation evidence:
+  `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -53,6 +55,8 @@
 - No proprietary solver default path.
 - Optional solver availability detection without solver execution.
 - Optional Gmsh pilot readiness without default Gmsh execution.
+- Limited Gmsh Level 3 optional manual validation evidence for one
+  project/adapter `.geo` artifact path.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -65,7 +69,8 @@
 - No formal convergence proof.
 - No solver-backed correctness claim by default.
 - No solver execution claim from availability preflight alone.
-- No Gmsh solver-backed validation unless a future manual report records it.
+- No production-grade Gmsh physical validation; the recorded Level 3 report is
+  narrow optional manual validation evidence only.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
 
@@ -98,5 +103,7 @@
 - `docs/open_solver_validation_harness.md`
 - `docs/adapter_maturity_model.md`
 - `docs/gmsh_optional_validation_pilot.md`
+- `docs/gmsh_level3_readiness.md`
+- `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

@@ -45,6 +45,13 @@ The first pilot-ready candidate is Gmsh. Its opt-in guide is
 `scripts/run_optional_gmsh_validation.sh`. Default mode does not run Gmsh; it
 only checks availability, fixture presence, and report metadata.
 
+The first Gmsh opt-in pilot was run on 2026-05-14 and is recorded in
+`validation/gmsh/gmsh_validation_pilot_2026-05-14.md` and
+`docs/gmsh_level3_readiness.md`. It supports a limited Level 3 claim for
+optional manual validation of the project/adapter `.geo` artifact path only.
+It does not make Gmsh a default test, smoke, quality-gate, or release
+dependency.
+
 For Python-backed stacks, Meep availability can be reported through
 `import meep as mp`, MPB availability can be reported through `from meep import
 mpb`, and Optiland availability can be reported through `import optiland`.

@@ -53,7 +53,7 @@ from any future production validation claim.
 | Adapter | Current maturity level | Rationale | Evidence files/tests | External solver required by default | Solver-backed validation run | Production-grade physical validation claimed | Next maturity step |
 |---|---|---|---|---|---|---|---|
 | Meep | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates local Meep Python preview artifacts with diagnostics and fixture coverage. Availability may be detected through Python import even when a CLI command is absent. Explicit Meep execution remains separate and manual. | `tests/test_meep_adapter.py`, `tests/test_adapter_evidence_fixtures.py`, `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt` | no | no for the default rc5.dev0 path | no | Define optional manual solver validation reports without making Meep a release gate. |
-| Gmsh | Level 2 - Golden/evidence fixtures, with pilot path toward Level 3 | Registered and CLI-visible; generates `.geo` scaffold evidence from fixed fixtures. This sprint adds an opt-in Gmsh pilot path, but default tests do not run Gmsh. | `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `docs/gmsh_optional_validation_pilot.md` | no | no | no | Use the optional pilot to record a manual validation report after explicit maintainer opt-in. |
+| Gmsh | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates `.geo` scaffold evidence from fixed fixtures. A narrow opt-in pilot processed the project/adapter `.geo` artifact with Gmsh and recorded manual validation evidence. Default tests, smoke, quality gates, and release validation still do not run Gmsh. | `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `docs/gmsh_optional_validation_pilot.md`, `docs/gmsh_level3_readiness.md`, `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
 | Elmer | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates `.sif` scaffold evidence, with mesh and boundary assumptions still explicit limitations. | `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py` | no | no | no | Define richer FEM mesh/boundary contracts before optional solver validation. |
 | MPB | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates MPB Python scaffold evidence for band-structure style workflows. MPB availability may be detected through `meep.mpb` even when an `mpb` CLI command is absent. | `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py` | no | no | no | Define optional MPB validation fixtures and high-level expected diagnostics. |
 | Optiland | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates Optiland scaffold evidence while lens prescription schema remains incomplete. Availability may be detected through Python import. | `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py` | no | no | no | Extend lens prescription schema before solver-backed validation claims. |
@@ -65,3 +65,12 @@ from any future production validation claim.
 - No formal convergence proof.
 - No proprietary solver default dependency.
 - No PyPI/TestPyPI publication in this task.
+
+## Gmsh Level 3 Boundary
+
+Gmsh Level 3 is limited to the optional manual validation report recorded in
+`validation/gmsh/gmsh_validation_pilot_2026-05-14.md`. It means Gmsh processed a
+project/adapter-generated `.geo` artifact after explicit maintainer opt-in. It
+does not make Gmsh a default dependency, does not add Gmsh to default pytest,
+smoke, quality gates, or release validation, and does not claim production-grade
+physical validation or a formal convergence proof.

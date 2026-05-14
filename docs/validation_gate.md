@@ -54,6 +54,8 @@ maintainers.
 - Track adapter maturity with `docs/adapter_maturity_model.md`.
 - Keep the Gmsh optional validation pilot opt-in only; default validation does
   not run Gmsh.
+- Include the 2026-05-14 Gmsh Level 3 optional manual validation report as
+  narrow evidence only; do not make Gmsh a default gate.
 - Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.

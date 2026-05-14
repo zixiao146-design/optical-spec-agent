@@ -107,6 +107,12 @@ Before `v1.0.0`, maintainers should decide and document:
 - Gmsh optional validation pilot:
   `docs/gmsh_optional_validation_pilot.md`; it is guarded by
   `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1` and is not enabled by default.
+- Gmsh Level 3 readiness:
+  `docs/gmsh_level3_readiness.md` and
+  `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` record a narrow
+  optional manual validation of the project/adapter `.geo` artifact path. This
+  does not make Gmsh a default dependency and does not support
+  production-grade physical validation or a formal convergence proof.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

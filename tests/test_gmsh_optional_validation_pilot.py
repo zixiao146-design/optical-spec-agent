@@ -44,8 +44,11 @@ def test_gmsh_optional_validation_script_default_mode_does_not_execute(tmp_path)
     assert "NO GMSH EXECUTION PERFORMED" in result.stdout
     assert "OPTIONAL VALIDATION NOT ENABLED" in result.stdout
     data = json.loads(report.read_text(encoding="utf-8"))
+    assert data["optional_validation_enabled"] is False
     assert data["gmsh_executed"] is False
+    assert data["level3_achieved"] is False
     assert data["production_grade_validation_claimed"] is False
+    assert data["formal_convergence_proof_claimed"] is False
     assert data["proprietary_required"] is False
 
 
@@ -53,6 +56,9 @@ def test_gmsh_optional_validation_script_has_no_publish_or_release_commands():
     text = (ROOT / "scripts" / "run_optional_gmsh_validation.sh").read_text(encoding="utf-8")
     assert "NO GMSH EXECUTION PERFORMED" in text
     assert "OPTIONAL VALIDATION NOT ENABLED" in text
+    assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION" in text
+    assert "level3_achieved" in text
+    assert "formal_convergence_proof_claimed" in text
     forbidden = [
         "twine upload",
         "python -m twine upload",

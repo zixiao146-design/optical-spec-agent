@@ -22,7 +22,10 @@
 - Optional open-source solver availability preflight.
 - Python-backed solver availability detection for Meep, MPB, and Optiland.
 - Adapter maturity model.
-- Gmsh optional validation pilot in default no-execution mode.
+- Gmsh optional validation pilot, now with Level 3 optional manual validation
+  evidence for one project/adapter `.geo` artifact path.
+- Gmsh Level 3 optional manual validation evidence is recorded but remains
+  narrow and non-default.
 - Manual solver validation report template.
 - Pytest marker policy for optional/manual validation.
 - Open-source-solver-first strategy.
@@ -42,7 +45,9 @@
 - No production-grade physical validation.
 - No formal convergence proof.
 - No solver-backed validation by default.
-- Gmsh optional validation pilot has not been run as solver-backed validation.
+- Gmsh Level 3 evidence is narrow and optional; it is not production-grade
+  physical validation, not a formal convergence proof, and not a default gate.
+- The Gmsh report is not production-grade physical validation.
 - Open-source solver preflight detects availability only and does not execute
   solvers.
 - MPB CLI absence is acceptable when `meep.mpb` imports successfully; ElmerSolver
