@@ -30,6 +30,10 @@
   `scripts/run_optional_meep_validation.sh`.
 - Meep optional manual validation evidence:
   `validation/meep/meep_validation_pilot_2026-05-14.md`.
+- MPB optional validation pilot default report:
+  `scripts/run_optional_mpb_validation.sh`.
+- MPB optional manual validation evidence:
+  `validation/mpb/mpb_validation_pilot_2026-05-14.md`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -64,6 +68,9 @@
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.
+- Limited MPB Level 3 optional manual validation evidence for one
+  project-owned MPB/PyMeep validation path generated from an adapter preview
+  artifact. MPB CLI is not required.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -79,6 +86,8 @@
 - No production-grade Gmsh physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
 - No production-grade Meep physical validation; the recorded Level 3 report is
+  narrow optional manual validation evidence only.
+- No production-grade MPB physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
@@ -118,5 +127,9 @@
 - `docs/meep_optional_validation_pilot.md`
 - `docs/meep_level3_readiness.md`
 - `validation/meep/meep_validation_pilot_2026-05-14.md`
+- `scripts/run_optional_mpb_validation.sh`
+- `docs/mpb_optional_validation_pilot.md`
+- `docs/mpb_level3_readiness.md`
+- `validation/mpb/mpb_validation_pilot_2026-05-14.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

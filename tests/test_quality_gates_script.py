@@ -15,6 +15,7 @@ def test_quality_gates_script_exists_and_runs_expected_local_gates():
     assert "NO UPLOAD PERFORMED" in text
     assert "NO GMSH EXECUTION PERFORMED" in text
     assert "NO MEEP EXECUTION PERFORMED" in text
+    assert "NO MPB EXECUTION PERFORMED" in text
     assert "NO SOLVER EXECUTION PERFORMED" in text
     assert "NO TAG CREATED" in text
     assert "NO RELEASE CREATED" in text
@@ -22,8 +23,10 @@ def test_quality_gates_script_exists_and_runs_expected_local_gates():
     assert "open_solver_validation_preflight.sh" in text
     assert "run_optional_gmsh_validation.sh" in text
     assert "run_optional_meep_validation.sh" in text
+    assert "run_optional_mpb_validation.sh" in text
     assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION=1" not in text
     assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION=1" not in text
+    assert "OSA_RUN_OPTIONAL_MPB_VALIDATION=1" not in text
     assert "smoke_release.sh" in text
     assert "-m pytest" in text
     assert "-m build" in text

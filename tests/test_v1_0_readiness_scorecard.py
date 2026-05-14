@@ -28,4 +28,7 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Gmsh Level 3 optional manual validation evidence" in text
     assert "Meep optional validation pilot" in text
     assert "Meep Level 3 optional manual validation evidence" in text
+    assert "MPB optional validation pilot" in text
+    assert "MPB Level 3 optional manual validation evidence" in text
+    assert "MPB CLI is not required" in text
     assert "not production-grade physical validation" in text

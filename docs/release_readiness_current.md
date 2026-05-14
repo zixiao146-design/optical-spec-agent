@@ -38,6 +38,8 @@ This document describes the current `main` branch. It is not a release tag.
   `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`
 - Meep Level 3 optional manual validation evidence:
   `validation/meep/meep_validation_pilot_2026-05-14.md`
+- MPB Level 3 optional manual validation evidence:
+  `validation/mpb/mpb_validation_pilot_2026-05-14.md`
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`
 - Pytest marker policy:
@@ -56,7 +58,7 @@ This document describes the current `main` branch. It is not a release tag.
 | Rule parser | Stable baseline | Default parser |
 | Diagnostics | RC preview | Does not run Meep |
 | Meep execution harness | Optional local/manual | Meep not required in CI |
-| MPB/Gmsh/Elmer/Optiland adapters | RC MVP scaffold generation | Do not run external solvers |
+| MPB/Gmsh/Elmer/Optiland adapters | RC MVP scaffold generation plus narrow MPB/Gmsh Level 3 optional evidence | Do not run external solvers by default |
 | LLM parser foundation | RC preview | Mock provider is deterministic |
 | Workflow orchestration | RC preview | Local and synchronous |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
@@ -173,6 +175,10 @@ Current v1.0 evidence artifacts:
   `docs/gmsh_optional_validation_pilot.md` and
   `scripts/run_optional_gmsh_validation.sh`; default tests, smoke, quality
   gates, and release validation do not run Gmsh.
+- MPB optional validation pilot:
+  `docs/mpb_optional_validation_pilot.md` and
+  `scripts/run_optional_mpb_validation.sh`; default tests, smoke, quality
+  gates, and release validation do not run MPB or require MPB CLI.
 
 ## Release Blockers
 

@@ -30,6 +30,9 @@ It is expected to cover:
 - TestPyPI no-upload preflight
 - open-source solver availability preflight without solver execution
 - Gmsh optional validation pilot default preflight without Gmsh execution
+- Meep optional validation pilot default preflight without Meep execution
+- MPB optional validation pilot default preflight without MPB execution or MPB
+  CLI requirement
 - `smoke_release.sh`
 - wheel smoke
 - `pytest`
@@ -60,6 +63,8 @@ individual jobs shorter where appropriate:
 - recorded Gmsh Level 3 evidence remains optional/manual and must not become a
   default CI requirement
 - recorded Meep Level 3 evidence remains optional/manual and must not become a
+  default CI requirement
+- recorded MPB Level 3 evidence remains optional/manual and must not become a
   default CI requirement
 
 ## Current Workflow Inventory

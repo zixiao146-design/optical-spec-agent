@@ -7,10 +7,9 @@ Continue v1.0 readiness engineering and prepare a `v0.9.0rc5.dev0` development v
 only when accumulated changes should be published as another RC.
 Compatibility evidence is tracked in `docs/v1_0_compatibility_policy.md`,
 `docs/validation_evidence_manifest.md`, and `examples/examples_manifest.json`.
-Adapter maturity levels are tracked in `docs/adapter_maturity_model.md`. Gmsh
-has narrow Level 3 optional manual validation evidence recorded in
-`docs/gmsh_level3_readiness.md` and
-`validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
+Adapter maturity levels are tracked in `docs/adapter_maturity_model.md`. Gmsh,
+Meep, and MPB have narrow Level 3 optional manual validation evidence recorded
+in their readiness docs and under `validation/`.
 
 optical-spec-agent is open-source-solver-first. Adapter outputs are local
 generated artifacts. They do not run external solvers by default and do not
@@ -23,7 +22,7 @@ Gmsh, Elmer, and Optiland. No production-grade physical validation is claimed.
 | Adapter | Backend category | Openness / dependency class | Registry/CLI visible | Default support level | Local artifact preview | External solver required to execute? | External solver run by default? | Evidence fixture/test | Proprietary dependency required? | Known limitations | v1.0 readiness |
 |---|---|---|---:|---|---|---|---|---|---|---|---|
 | `meep` | Open-source simulation backend | Optional external open-source solver | Yes | `preview` / research-preview with Level 3 optional manual validation evidence | Python script | Yes, only for explicit `meep-run` or opt-in manual validation | No | Yes: `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt`, `tests/test_adapter_evidence_fixtures.py`, `validation/meep/meep_validation_pilot_2026-05-14.md` | No | Specialized nanoparticle-on-film adapter; scripts are preview/research-preview and not production-grade validation | Needs reproducible benchmark scope before Level 4 or production claims |
-| `mpb` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold | Python scaffold | Yes, to execute MPB externally | No | Yes: `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py` | No | Uses default lattice, k-points, resolution, and num_bands when missing; geometry is schematic | Needs richer periodic geometry schema and optional solver validation |
+| `mpb` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold with Level 3 optional manual validation evidence | Python scaffold | Yes, only for explicit opt-in manual validation; MPB CLI is not required when `meep.mpb` is available | No | Yes: `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py`, `validation/mpb/mpb_validation_pilot_2026-05-14.md` | No | Uses default lattice, k-points, resolution, and num_bands when missing; geometry is schematic; Level 3 evidence is narrow and non-production-grade | Needs reproducible benchmark scope before Level 4 or production claims |
 | `gmsh` | Open-source geometry / mesh backend | Optional external open-source mesh tool | Yes | MVP scaffold with Level 3 optional manual validation evidence | `.geo` scaffold | Yes, to mesh externally | No | Yes: `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` | No | Geometry is schematic unless OpticalSpec carries explicit dimensions; physical groups are placeholders | Needs reproducible benchmark scope before Level 4 or production claims |
 | `elmer` | Open-source multiphysics backend | Optional external open-source solver | Yes | MVP scaffold | `.sif` scaffold | Yes, to execute `ElmerSolver` externally | No | Yes: `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py` | No | Requires a real mesh prepared outside this adapter; equation and boundary sections are placeholders | Needs explicit mesh/FEM boundary contract and optional solver validation |
 | `optiland` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold | Python scaffold | Yes, to execute Optiland externally | No | Yes: `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py` | No | OpticalSpec lacks full lens surface sequence and glass catalog mapping | Needs lens prescription schema extension before stable claims |
@@ -55,6 +54,9 @@ The adapter registry currently exposes:
   path, but default tests, smoke, quality gates, and release validation do not
   run Gmsh.
 - Meep execution remains optional/local and must be explicitly requested.
+- MPB has Level 3 optional manual validation evidence for one MPB/PyMeep path,
+  but default tests, smoke, quality gates, and release validation do not run MPB
+  and do not require MPB CLI.
 - Adapter warnings and defaults are part of the auditable output contract.
 - Physical correctness is not claimed as production-grade.
 - Workflow-to-adapter planning is preview/no-execute by default.

@@ -33,6 +33,9 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - TestPyPI no-upload preflight.
 - Open-source solver validation preflight, availability detection only.
 - Gmsh optional validation pilot default preflight, no Gmsh execution.
+- Meep optional validation pilot default preflight, no Meep execution.
+- MPB optional validation pilot default preflight, no MPB execution and no MPB
+  CLI requirement.
 - `smoke_release.sh`.
 - Wheel smoke.
 - `pytest`.
@@ -54,6 +57,9 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - No Meep execution in the Meep optional validation pilot default preflight.
 - The recorded Meep Level 3 report is optional manual evidence only and is not
   part of the default quality gate.
+- No MPB execution in the MPB optional validation pilot default preflight.
+- The recorded MPB Level 3 report is optional manual evidence only, does not
+  require MPB CLI, and is not part of the default quality gate.
 - No external LLM by default.
 - No proprietary solver by default.
 - No token is required for the default local quality gate.
@@ -67,3 +73,4 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - Before changing release automation or CI workflow behavior.
 - Before considering optional manual open-source solver validation.
 - Before considering the Gmsh optional validation pilot with explicit opt-in.
+- Before considering the MPB optional validation pilot with explicit opt-in.

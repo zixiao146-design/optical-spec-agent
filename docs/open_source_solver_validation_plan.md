@@ -58,6 +58,13 @@ The first Meep opt-in pilot was run on 2026-05-14 and is recorded in
 optional manual PyMeep validation path only. It does not make Meep a default
 test, smoke, quality-gate, CI, or release dependency.
 
+The first MPB opt-in pilot was run on 2026-05-14 and is recorded in
+`validation/mpb/mpb_validation_pilot_2026-05-14.md` and
+`docs/mpb_level3_readiness.md`. It supports a limited Level 3 claim for an
+optional manual MPB/PyMeep validation path only. MPB CLI is not required, and
+the report does not make MPB a default test, smoke, quality-gate, CI, or release
+dependency.
+
 For Python-backed stacks, Meep availability can be reported through
 `import meep as mp`, MPB availability can be reported through `from meep import
 mpb`, and Optiland availability can be reported through `import optiland`.

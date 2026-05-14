@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MPB Manual Validation Report",
+  "type": "object",
+  "required": [
+    "date",
+    "maintainer",
+    "project_version",
+    "git_commit",
+    "adapter_family",
+    "solver_name",
+    "solver_version",
+    "solver_available",
+    "validation_enabled",
+    "input_fixture",
+    "generated_artifact",
+    "command_run",
+    "expected_high_level_result",
+    "observed_result",
+    "diagnostics",
+    "passed",
+    "limitations",
+    "production_grade_validation_claimed",
+    "formal_convergence_proof_claimed",
+    "release_note_claim_supported"
+  ],
+  "properties": {
+    "adapter_family": { "const": "mpb" },
+    "solver_name": { "const": "MPB" },
+    "production_grade_validation_claimed": { "const": false },
+    "formal_convergence_proof_claimed": { "const": false }
+  }
+}

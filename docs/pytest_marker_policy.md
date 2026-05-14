@@ -45,6 +45,10 @@ The Meep optional validation pilot is guarded by
 `OSA_RUN_OPTIONAL_MEEP_VALIDATION=1`. Default tests and quality gates must not
 set that variable.
 
+The MPB optional validation pilot is guarded by
+`OSA_RUN_OPTIONAL_MPB_VALIDATION=1`. Default tests and quality gates must not
+set that variable, and default tests must not require an MPB CLI command.
+
 ## Guardrails
 
 - Do not make external solvers a default dependency.

@@ -45,6 +45,10 @@ examples, or release validation.
   manual validation report for a tiny project-owned PyMeep path generated from
   an adapter preview artifact, but that report is not production-grade physical
   validation.
+- Production-grade MPB physical validation. MPB has one narrow optional manual
+  validation report for a tiny project-owned MPB/PyMeep path generated from an
+  adapter preview artifact, but that report is not production-grade physical
+  validation. MPB CLI is not required for that report.
 - Full material model correctness.
 - Full CAD, FEM, lens, or mesh prescription correctness.
 - Real external LLM model quality.
@@ -87,6 +91,13 @@ The 2026-05-14 Meep report in
 executed a tiny project-owned validation path after explicit opt-in. It does
 not make Meep part of default pytest, smoke, quality gates, CI, or release
 validation.
+The MPB optional validation pilot is a manual opt-in path and is not a
+production-grade physical validation claim.
+The 2026-05-14 MPB report in
+`validation/mpb/mpb_validation_pilot_2026-05-14.md` records that MPB/PyMeep
+executed a tiny project-owned validation path after explicit opt-in. MPB CLI was
+not required. It does not make MPB part of default pytest, smoke, quality gates,
+CI, or release validation.
 
 ## Requirements for production-grade validation
 

@@ -26,7 +26,9 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "does not run Gmsh unless explicitly enabled" in harness_text
     assert "validation/gmsh/gmsh_validation_pilot_2026-05-14.md" in harness_text
     assert "validation/meep/meep_validation_pilot_2026-05-14.md" in harness_text
+    assert "validation/mpb/mpb_validation_pilot_2026-05-14.md" in harness_text
     assert "Meep opt-in pilot" in harness_text
+    assert "MPB opt-in pilot" in harness_text
     assert "production-grade physical validation" in harness_text
     assert "not a default dependency" in harness_text
 
@@ -34,6 +36,7 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "does not by itself imply production-grade validation" in template_text
     assert "Manual validation is optional and not part of default CI" in template_text
     assert "gmsh_validation_pilot_template.md" in template_text
+    assert "mpb_validation_report_schema.json" in template_text
 
     marker_text = marker_policy.read_text(encoding="utf-8")
     assert "Default tests must remain offline and no-solver" in marker_text
@@ -41,6 +44,7 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "Proprietary solver tests are not default tests" in marker_text
     assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION=1" in marker_text
     assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION=1" in marker_text
+    assert "OSA_RUN_OPTIONAL_MPB_VALIDATION=1" in marker_text
 
     plan_text = plan.read_text(encoding="utf-8")
     assert "records availability only" in plan_text
@@ -48,5 +52,7 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "docs/gmsh_level3_readiness.md" in plan_text
     assert "docs/meep_level3_readiness.md" in plan_text
     assert "validation/meep/meep_validation_pilot_2026-05-14.md" in plan_text
+    assert "docs/mpb_level3_readiness.md" in plan_text
+    assert "validation/mpb/mpb_validation_pilot_2026-05-14.md" in plan_text
     assert "Tests should not be part of default `pytest`" in plan_text
     assert "Marker policy is documented in `docs/pytest_marker_policy.md`" in plan_text

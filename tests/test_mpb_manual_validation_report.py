@@ -1,0 +1,42 @@
+"""Recorded MPB manual validation evidence checks."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+REPORT = ROOT / "validation" / "mpb" / "mpb_validation_pilot_2026-05-14.md"
+
+
+def test_mpb_manual_validation_report_bounds_level3_claims():
+    assert REPORT.exists()
+    text = REPORT.read_text(encoding="utf-8")
+    assert "Project version: 0.9.0rc5.dev0" in text
+    assert "Adapter family: mpb" in text
+    assert "Solver name: MPB via PyMeep" in text
+    assert "Solver version: 1.33.0" in text
+    assert "Python executable:" in text
+    assert "MPB CLI availability: unavailable; not required" in text
+    assert "Command run:" in text
+    assert "Pass/fail:" in text
+    assert "pass" in text
+    assert "Production-grade validation supported:" in text
+    assert "no" in text
+    assert "Formal convergence proof supported:" in text
+    assert "This is not production-grade physical validation" in text
+    assert "This is not a formal convergence proof" in text
+    assert "This does not make MPB a default dependency" in text
+    assert "This does not require MPB CLI" in text
+
+
+def test_mpb_report_and_maturity_model_are_consistent():
+    maturity = (ROOT / "docs" / "adapter_maturity_model.md").read_text(encoding="utf-8")
+    readiness = (ROOT / "docs" / "mpb_level3_readiness.md").read_text(encoding="utf-8")
+    assert "| MPB | Level 3" in maturity
+    assert "validation/mpb/mpb_validation_pilot_2026-05-14.md" in maturity
+    assert "MPB current maturity: Level 3" in readiness
+    assert "Level 3 achieved: yes" in readiness
+    assert "Default pytest does not run MPB" in readiness
+    assert "This evidence does not claim production-grade physical validation" in readiness
+    assert "This evidence does not claim a formal convergence proof" in readiness

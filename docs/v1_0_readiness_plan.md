@@ -123,6 +123,16 @@ Before `v1.0.0`, maintainers should decide and document:
   an adapter preview artifact. This does not make Meep a default dependency and
   does not support production-grade physical validation or a formal convergence
   proof.
+- MPB optional validation pilot:
+  `docs/mpb_optional_validation_pilot.md`; it is guarded by
+  `OSA_RUN_OPTIONAL_MPB_VALIDATION=1` and is not enabled by default.
+- MPB Level 3 readiness:
+  `docs/mpb_level3_readiness.md` and
+  `validation/mpb/mpb_validation_pilot_2026-05-14.md` record a narrow optional
+  manual validation of a tiny project-owned MPB/PyMeep path generated from an
+  adapter preview artifact. This does not make MPB a default dependency, does
+  not require MPB CLI, and does not support production-grade physical validation
+  or a formal convergence proof.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

@@ -63,6 +63,13 @@ a tiny project-owned PyMeep validation path. It is recorded in
 evidence for a narrow PyMeep path only. It is not production-grade physical
 validation and not a default dependency.
 
+The 2026-05-14 MPB opt-in pilot generated an MPB preview artifact and executed
+a tiny project-owned MPB/PyMeep validation path through `from meep import mpb`.
+It is recorded in `validation/mpb/mpb_validation_pilot_2026-05-14.md` and
+documented in `docs/mpb_level3_readiness.md`. This is Level 3 optional manual
+validation evidence for a narrow MPB path only. MPB CLI is not required. It is
+not production-grade physical validation and not a default dependency.
+
 ## Future Manual Validation Path
 
 Future manual solver validation should follow this pattern:

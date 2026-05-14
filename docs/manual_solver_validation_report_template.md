@@ -33,3 +33,6 @@ The Gmsh-specific pilot template is
 
 The Meep-specific report schema is
 `docs/manual_solver_validation_reports/meep_validation_report_schema.json`.
+
+The MPB-specific report schema is
+`docs/manual_solver_validation_reports/mpb_validation_report_schema.json`.

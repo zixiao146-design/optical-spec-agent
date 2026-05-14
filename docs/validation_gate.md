@@ -60,6 +60,10 @@ maintainers.
   not run Meep.
 - Include the 2026-05-14 Meep Level 3 optional manual validation report as
   narrow evidence only; do not make Meep a default gate.
+- Keep the MPB optional validation pilot opt-in only; default validation does
+  not run MPB and does not require MPB CLI.
+- Include the 2026-05-14 MPB Level 3 optional manual validation report as
+  narrow evidence only; do not make MPB a default gate.
 - Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.
