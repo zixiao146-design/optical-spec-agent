@@ -20,6 +20,7 @@
 - Secrets and token hygiene.
 - Maintainer operations checklist.
 - Optional open-source solver availability preflight.
+- Python-backed solver availability detection for Meep, MPB, and Optiland.
 - Adapter maturity model.
 - Gmsh optional validation pilot in default no-execution mode.
 - Manual solver validation report template.
@@ -44,6 +45,8 @@
 - Gmsh optional validation pilot has not been run as solver-backed validation.
 - Open-source solver preflight detects availability only and does not execute
   solvers.
+- MPB CLI absence is acceptable when `meep.mpb` imports successfully; ElmerSolver
+  remains optional/manual.
 - TestPyPI upload not approved/exercised.
 - PyPI publication not approved.
 - Adapter outputs may still be MVP/scaffold.

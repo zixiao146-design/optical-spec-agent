@@ -16,8 +16,8 @@ external solvers default requirements.
 
 `scripts/open_solver_validation_preflight.sh`:
 
-- detects candidate open-source solver commands
-- reports availability
+- detects candidate open-source solver commands and Python-backed solver modules
+- reports CLI and Python module availability separately
 - writes an optional JSON report when `OSA_SOLVER_PREFLIGHT_JSON` is set
 - does not run solvers
 - does not create tags or releases
@@ -31,6 +31,13 @@ external solvers default requirements.
 - Gmsh: current MVP/scaffold geometry and mesh artifact preview.
 - Elmer: current MVP/scaffold FEM input preview.
 - Optiland: current MVP/scaffold optical-design preview.
+
+Meep may be available through `import meep as mp` even when a `meep` CLI command
+is absent. MPB may be available through `from meep import mpb` even when an
+`mpb` CLI command is absent. Optiland may be available through `import optiland`
+even when an `optiland` CLI command is absent. Gmsh is currently detected by
+`command -v gmsh`; Elmer is detected by `command -v ElmerSolver`, and
+ElmerSolver absence is acceptable for default gates.
 
 Candidate availability does not mean validation was run. An installed solver
 does not imply production-grade correctness.

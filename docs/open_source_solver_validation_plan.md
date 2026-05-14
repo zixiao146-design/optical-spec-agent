@@ -9,9 +9,10 @@ The default path remains local artifact preview, offline evidence, and no
 external solver execution by default.
 
 The optional availability preflight is
-`scripts/open_solver_validation_preflight.sh`. It detects candidate solver
-commands and can write an availability JSON report, but it does not execute
-Meep, MPB, Gmsh, Elmer, Optiland, or any other solver.
+`scripts/open_solver_validation_preflight.sh`. It detects candidate solver CLI
+commands and Python-backed module availability, and can write an availability
+JSON report, but it does not execute Meep, MPB, Gmsh, Elmer, Optiland, or any
+other solver.
 
 ## Candidate open-source solver families
 
@@ -28,7 +29,9 @@ Meep, MPB, Gmsh, Elmer, Optiland, or any other solver.
 Future optional solver-backed validation should follow this pattern:
 
 - User installs the solver manually.
-- `scripts/open_solver_validation_preflight.sh` records availability only.
+- `scripts/open_solver_validation_preflight.sh` records CLI and Python module
+  availability only; it records availability only and does not perform
+  solver-backed validation.
 - An environment variable enables solver-backed validation.
 - Tests are skipped by default unless enabled.
 - Generated artifacts are compared against expected high-level diagnostics.
@@ -41,6 +44,12 @@ The first pilot-ready candidate is Gmsh. Its opt-in guide is
 `docs/gmsh_optional_validation_pilot.md`, and its default script path is
 `scripts/run_optional_gmsh_validation.sh`. Default mode does not run Gmsh; it
 only checks availability, fixture presence, and report metadata.
+
+For Python-backed stacks, Meep availability can be reported through
+`import meep as mp`, MPB availability can be reported through `from meep import
+mpb`, and Optiland availability can be reported through `import optiland`.
+MPB CLI absence is acceptable when `meep.mpb` is available. ElmerSolver remains
+optional/manual and may be unavailable without failing default preflight.
 
 ## Required guardrails
 
