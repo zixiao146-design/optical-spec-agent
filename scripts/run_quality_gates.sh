@@ -5,14 +5,18 @@ OSA_QUALITY_PREFIX="${OSA_QUALITY_PREFIX:-/tmp/osa-quality}"
 OSA_SKIP_PREFLIGHT="${OSA_SKIP_PREFLIGHT:-0}"
 OSA_SKIP_SOLVER_PREFLIGHT="${OSA_SKIP_SOLVER_PREFLIGHT:-0}"
 OSA_SKIP_GMSH_PREFLIGHT="${OSA_SKIP_GMSH_PREFLIGHT:-0}"
+OSA_SKIP_MEEP_PREFLIGHT="${OSA_SKIP_MEEP_PREFLIGHT:-0}"
 OSA_SKIP_SMOKE="${OSA_SKIP_SMOKE:-0}"
 OSA_SKIP_PYTEST="${OSA_SKIP_PYTEST:-0}"
 OSA_SKIP_BUILD="${OSA_SKIP_BUILD:-0}"
 OSA_SKIP_MAKE_CHECK="${OSA_SKIP_MAKE_CHECK:-0}"
+OSA_QUALITY_TEST_VENV="${OSA_QUALITY_TEST_VENV:-${OSA_QUALITY_PREFIX}-test}"
+QUALITY_PYTHON="${OSA_QUALITY_PYTHON:-}"
 
 PREFLIGHT_STATUS="skipped"
 SOLVER_PREFLIGHT_STATUS="skipped"
 GMSH_PREFLIGHT_STATUS="skipped"
+MEEP_PREFLIGHT_STATUS="skipped"
 SMOKE_STATUS="skipped"
 WHEEL_SMOKE_STATUS="skipped"
 PYTEST_STATUS="skipped"
@@ -26,6 +30,30 @@ run_step() {
   echo
   echo "==> ${title}"
   "$@"
+}
+
+prepare_quality_python() {
+  if [[ -n "${QUALITY_PYTHON}" ]]; then
+    echo "Quality Python: ${QUALITY_PYTHON}"
+    return
+  fi
+
+  if python - <<'PY' >/dev/null 2>&1
+import build  # noqa: F401
+import pytest  # noqa: F401
+PY
+  then
+    QUALITY_PYTHON="$(command -v python)"
+  else
+    echo "Current Python is missing build/pytest; creating quality venv: ${OSA_QUALITY_TEST_VENV}"
+    rm -rf "${OSA_QUALITY_TEST_VENV}"
+    python -m venv "${OSA_QUALITY_TEST_VENV}"
+    "${OSA_QUALITY_TEST_VENV}/bin/python" -m pip install --upgrade pip
+    "${OSA_QUALITY_TEST_VENV}/bin/python" -m pip install -e ".[test]" build
+    QUALITY_PYTHON="${OSA_QUALITY_TEST_VENV}/bin/python"
+  fi
+
+  echo "Quality Python: ${QUALITY_PYTHON}"
 }
 
 PROJECT_VERSION="$(python - <<'PY'
@@ -64,6 +92,13 @@ if [[ "${OSA_SKIP_GMSH_PREFLIGHT}" != "1" ]]; then
   GMSH_PREFLIGHT_STATUS="passed"
 fi
 
+if [[ "${OSA_SKIP_MEEP_PREFLIGHT}" != "1" ]]; then
+  run_step "Meep optional validation pilot default preflight" env \
+    OSA_MEEP_VALIDATION_REPORT="${OSA_QUALITY_PREFIX}-meep-validation-default.json" \
+    ./scripts/run_optional_meep_validation.sh
+  MEEP_PREFLIGHT_STATUS="passed"
+fi
+
 if [[ "${OSA_SKIP_SMOKE}" != "1" ]]; then
   run_step "Release smoke" env \
     OSA_SMOKE_VENV="${OSA_QUALITY_PREFIX}-smoke" \
@@ -79,17 +114,23 @@ if [[ "${OSA_SKIP_SMOKE}" != "1" ]]; then
 fi
 
 if [[ "${OSA_SKIP_PYTEST}" != "1" ]]; then
-  run_step "pytest" python -m pytest
+  prepare_quality_python
+  run_step "pytest" "${QUALITY_PYTHON}" -m pytest
   PYTEST_STATUS="passed"
 fi
 
 if [[ "${OSA_SKIP_BUILD}" != "1" ]]; then
-  run_step "build" python -m build
+  prepare_quality_python
+  run_step "build" "${QUALITY_PYTHON}" -m build
   BUILD_STATUS="passed"
 fi
 
 if [[ "${OSA_SKIP_MAKE_CHECK}" != "1" ]]; then
-  run_step "make check" make check
+  prepare_quality_python
+  run_step "make check" env \
+    PATH="$(dirname "${QUALITY_PYTHON}"):${PATH}" \
+    PYTHON="${QUALITY_PYTHON}" \
+    make check
   MAKE_CHECK_STATUS="passed"
 fi
 
@@ -106,6 +147,7 @@ echo "Quality gate summary:"
 echo "- TestPyPI no-upload preflight: ${PREFLIGHT_STATUS}"
 echo "- open-source solver preflight: ${SOLVER_PREFLIGHT_STATUS}"
 echo "- Gmsh optional validation default preflight: ${GMSH_PREFLIGHT_STATUS}"
+echo "- Meep optional validation default preflight: ${MEEP_PREFLIGHT_STATUS}"
 echo "- smoke: ${SMOKE_STATUS}"
 echo "- wheel smoke: ${WHEEL_SMOKE_STATUS}"
 echo "- pytest: ${PYTEST_STATUS}"
@@ -114,11 +156,13 @@ echo "- make check: ${MAKE_CHECK_STATUS}"
 echo "- CLI examples: ${CLI_STATUS}"
 echo "- NO UPLOAD PERFORMED"
 echo "- NO GMSH EXECUTION PERFORMED"
+echo "- NO MEEP EXECUTION PERFORMED"
 echo "- NO SOLVER EXECUTION PERFORMED"
 echo "- NO TAG CREATED"
 echo "- NO RELEASE CREATED"
 echo "NO UPLOAD PERFORMED"
 echo "NO GMSH EXECUTION PERFORMED"
+echo "NO MEEP EXECUTION PERFORMED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO TAG CREATED"
 echo "NO RELEASE CREATED"

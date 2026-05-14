@@ -26,6 +26,10 @@
   `scripts/run_optional_gmsh_validation.sh`.
 - Gmsh optional manual validation evidence:
   `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
+- Meep optional validation pilot default report:
+  `scripts/run_optional_meep_validation.sh`.
+- Meep optional manual validation evidence:
+  `validation/meep/meep_validation_pilot_2026-05-14.md`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -57,6 +61,9 @@
 - Optional Gmsh pilot readiness without default Gmsh execution.
 - Limited Gmsh Level 3 optional manual validation evidence for one
   project/adapter `.geo` artifact path.
+- Limited Meep Level 3 optional manual validation evidence for one
+  project-owned PyMeep validation path generated from an adapter preview
+  artifact.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -70,6 +77,8 @@
 - No solver-backed correctness claim by default.
 - No solver execution claim from availability preflight alone.
 - No production-grade Gmsh physical validation; the recorded Level 3 report is
+  narrow optional manual validation evidence only.
+- No production-grade Meep physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
@@ -105,5 +114,9 @@
 - `docs/gmsh_optional_validation_pilot.md`
 - `docs/gmsh_level3_readiness.md`
 - `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`
+- `scripts/run_optional_meep_validation.sh`
+- `docs/meep_optional_validation_pilot.md`
+- `docs/meep_level3_readiness.md`
+- `validation/meep/meep_validation_pilot_2026-05-14.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

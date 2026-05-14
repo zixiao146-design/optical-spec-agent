@@ -59,6 +59,8 @@ individual jobs shorter where appropriate:
 - default CI must not set `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1`
 - recorded Gmsh Level 3 evidence remains optional/manual and must not become a
   default CI requirement
+- recorded Meep Level 3 evidence remains optional/manual and must not become a
+  default CI requirement
 
 ## Current Workflow Inventory
 

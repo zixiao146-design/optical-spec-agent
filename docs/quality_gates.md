@@ -51,6 +51,9 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - No Gmsh execution in the Gmsh optional validation pilot default preflight.
 - The recorded Gmsh Level 3 report is optional manual evidence only and is not
   part of the default quality gate.
+- No Meep execution in the Meep optional validation pilot default preflight.
+- The recorded Meep Level 3 report is optional manual evidence only and is not
+  part of the default quality gate.
 - No external LLM by default.
 - No proprietary solver by default.
 - No token is required for the default local quality gate.

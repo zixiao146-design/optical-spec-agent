@@ -41,6 +41,10 @@ examples, or release validation.
   Optiland outputs. Gmsh has one narrow optional manual validation report for a
   project/adapter `.geo` artifact path, but that report is not production-grade
   physical validation.
+- Production-grade Meep physical validation. Meep has one narrow optional
+  manual validation report for a tiny project-owned PyMeep path generated from
+  an adapter preview artifact, but that report is not production-grade physical
+  validation.
 - Full material model correctness.
 - Full CAD, FEM, lens, or mesh prescription correctness.
 - Real external LLM model quality.
@@ -75,6 +79,13 @@ The 2026-05-14 Gmsh report in
 `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` records that Gmsh
 processed the project/adapter `.geo` artifact after explicit opt-in. It does
 not make Gmsh part of default pytest, smoke, quality gates, or release
+validation.
+The Meep optional validation pilot is also a manual opt-in path and is not a
+production-grade physical validation claim.
+The 2026-05-14 Meep report in
+`validation/meep/meep_validation_pilot_2026-05-14.md` records that PyMeep
+executed a tiny project-owned validation path after explicit opt-in. It does
+not make Meep part of default pytest, smoke, quality gates, CI, or release
 validation.
 
 ## Requirements for production-grade validation

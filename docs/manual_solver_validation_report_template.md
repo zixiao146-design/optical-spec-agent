@@ -30,3 +30,6 @@ explicitly recorded.
 
 The Gmsh-specific pilot template is
 `docs/manual_solver_validation_reports/gmsh_validation_pilot_template.md`.
+
+The Meep-specific report schema is
+`docs/manual_solver_validation_reports/meep_validation_report_schema.json`.

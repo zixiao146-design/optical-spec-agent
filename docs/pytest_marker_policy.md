@@ -41,6 +41,10 @@ The Gmsh optional validation pilot is guarded by
 `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1`. Default tests and quality gates must not
 set that variable.
 
+The Meep optional validation pilot is guarded by
+`OSA_RUN_OPTIONAL_MEEP_VALIDATION=1`. Default tests and quality gates must not
+set that variable.
+
 ## Guardrails
 
 - Do not make external solvers a default dependency.

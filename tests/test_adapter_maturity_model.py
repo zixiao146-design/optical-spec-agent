@@ -17,8 +17,11 @@ def test_adapter_maturity_model_exists_and_bounds_claims():
     for adapter in ["Meep", "Gmsh", "Elmer", "MPB", "Optiland"]:
         assert adapter in text
     assert "External solver required by default" in text
+    assert "| Meep | Level 3" in text
     assert "| Gmsh | Level 3" in text
+    assert "validation/meep/meep_validation_pilot_2026-05-14.md" in text
     assert "validation/gmsh/gmsh_validation_pilot_2026-05-14.md" in text
+    assert "Default tests, smoke, quality gates, CI, and release validation still do not run Meep" in text
     assert "Default tests, smoke, quality gates, and release validation still do not run Gmsh" in text
     assert "no | no | no" in text
     assert "No production-grade physical validation claim" in text

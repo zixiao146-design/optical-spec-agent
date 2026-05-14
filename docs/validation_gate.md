@@ -56,6 +56,10 @@ maintainers.
   not run Gmsh.
 - Include the 2026-05-14 Gmsh Level 3 optional manual validation report as
   narrow evidence only; do not make Gmsh a default gate.
+- Keep the Meep optional validation pilot opt-in only; default validation does
+  not run Meep.
+- Include the 2026-05-14 Meep Level 3 optional manual validation report as
+  narrow evidence only; do not make Meep a default gate.
 - Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.

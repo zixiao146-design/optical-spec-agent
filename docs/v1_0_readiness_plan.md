@@ -113,6 +113,16 @@ Before `v1.0.0`, maintainers should decide and document:
   optional manual validation of the project/adapter `.geo` artifact path. This
   does not make Gmsh a default dependency and does not support
   production-grade physical validation or a formal convergence proof.
+- Meep optional validation pilot:
+  `docs/meep_optional_validation_pilot.md`; it is guarded by
+  `OSA_RUN_OPTIONAL_MEEP_VALIDATION=1` and is not enabled by default.
+- Meep Level 3 readiness:
+  `docs/meep_level3_readiness.md` and
+  `validation/meep/meep_validation_pilot_2026-05-14.md` record a narrow
+  optional manual validation of a tiny project-owned PyMeep path generated from
+  an adapter preview artifact. This does not make Meep a default dependency and
+  does not support production-grade physical validation or a formal convergence
+  proof.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

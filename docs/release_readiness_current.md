@@ -36,6 +36,8 @@ This document describes the current `main` branch. It is not a release tag.
   `scripts/open_solver_validation_preflight.sh`
 - Gmsh Level 3 optional manual validation evidence:
   `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`
+- Meep Level 3 optional manual validation evidence:
+  `validation/meep/meep_validation_pilot_2026-05-14.md`
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`
 - Pytest marker policy:

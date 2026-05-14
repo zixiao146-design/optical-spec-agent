@@ -25,6 +25,8 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "Gmsh optional validation pilot" in harness_text
     assert "does not run Gmsh unless explicitly enabled" in harness_text
     assert "validation/gmsh/gmsh_validation_pilot_2026-05-14.md" in harness_text
+    assert "validation/meep/meep_validation_pilot_2026-05-14.md" in harness_text
+    assert "Meep opt-in pilot" in harness_text
     assert "production-grade physical validation" in harness_text
     assert "not a default dependency" in harness_text
 
@@ -38,10 +40,13 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "Default `pytest` remains no-solver" in marker_text
     assert "Proprietary solver tests are not default tests" in marker_text
     assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION=1" in marker_text
+    assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION=1" in marker_text
 
     plan_text = plan.read_text(encoding="utf-8")
     assert "records availability only" in plan_text
     assert "first pilot-ready candidate is Gmsh" in plan_text
     assert "docs/gmsh_level3_readiness.md" in plan_text
+    assert "docs/meep_level3_readiness.md" in plan_text
+    assert "validation/meep/meep_validation_pilot_2026-05-14.md" in plan_text
     assert "Tests should not be part of default `pytest`" in plan_text
     assert "Marker policy is documented in `docs/pytest_marker_policy.md`" in plan_text

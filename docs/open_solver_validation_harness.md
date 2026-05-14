@@ -56,6 +56,13 @@ artifact and is recorded in
 manual validation evidence for a narrow artifact path. It is not
 production-grade physical validation and not a default dependency.
 
+The 2026-05-14 Meep opt-in pilot generated a Meep preview artifact and executed
+a tiny project-owned PyMeep validation path. It is recorded in
+`validation/meep/meep_validation_pilot_2026-05-14.md` and documented in
+`docs/meep_level3_readiness.md`. This is Level 3 optional manual validation
+evidence for a narrow PyMeep path only. It is not production-grade physical
+validation and not a default dependency.
+
 ## Future Manual Validation Path
 
 Future manual solver validation should follow this pattern:
