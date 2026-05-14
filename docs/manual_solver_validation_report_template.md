@@ -39,3 +39,6 @@ The MPB-specific report schema is
 
 The Optiland-specific report schema is
 `docs/manual_solver_validation_reports/optiland_validation_report_schema.json`.
+
+The Elmer-specific report schema is
+`docs/manual_solver_validation_reports/elmer_validation_report_schema.json`.

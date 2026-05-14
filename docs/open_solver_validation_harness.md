@@ -77,6 +77,12 @@ executed a tiny project-owned Optiland backend path. It is recorded in
 evidence for a narrow Optiland path only. It is not production-grade optical
 validation and not a default dependency.
 
+Elmer is Level-3-ready but remains Level 2. The readiness path is documented in
+`docs/elmer_optional_validation_pilot.md` and `docs/elmer_level3_readiness.md`;
+`scripts/run_optional_elmer_validation.sh` checks ElmerSolver availability in
+default mode without executing Elmer. ElmerSolver is not installed locally, and
+no completed Elmer manual validation report exists yet.
+
 ## Future Manual Validation Path
 
 Future manual solver validation should follow this pattern:

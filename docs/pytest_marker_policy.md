@@ -53,6 +53,10 @@ The Optiland optional validation pilot is guarded by
 `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1`. Default tests and quality gates must
 not set that variable.
 
+The Elmer optional validation pilot is guarded by
+`OSA_RUN_OPTIONAL_ELMER_VALIDATION=1`. Default tests and quality gates must not
+set that variable, and default tests must not require ElmerSolver.
+
 ## Guardrails
 
 - Do not make external solvers a default dependency.

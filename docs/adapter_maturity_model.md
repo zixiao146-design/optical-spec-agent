@@ -54,7 +54,7 @@ from any future production validation claim.
 |---|---|---|---|---|---|---|---|
 | Meep | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates local Meep Python preview artifacts with diagnostics and fixture coverage. A narrow opt-in pilot generated the adapter preview artifact and executed a tiny project-owned PyMeep validation path. Default tests, smoke, quality gates, CI, and release validation still do not run Meep. | `tests/test_meep_adapter.py`, `tests/test_adapter_evidence_fixtures.py`, `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt`, `docs/meep_optional_validation_pilot.md`, `docs/meep_level3_readiness.md`, `validation/meep/meep_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
 | Gmsh | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates `.geo` scaffold evidence from fixed fixtures. A narrow opt-in pilot processed the project/adapter `.geo` artifact with Gmsh and recorded manual validation evidence. Default tests, smoke, quality gates, and release validation still do not run Gmsh. | `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `docs/gmsh_optional_validation_pilot.md`, `docs/gmsh_level3_readiness.md`, `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
-| Elmer | Level 2 - Golden/evidence fixtures | Registered and CLI-visible; generates `.sif` scaffold evidence, with mesh and boundary assumptions still explicit limitations. | `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py` | no | no | no | Define richer FEM mesh/boundary contracts before optional solver validation. |
+| Elmer | Level 2 - Golden/evidence fixtures, Level-3-ready | Registered and CLI-visible; generates `.sif` scaffold evidence, with mesh and boundary assumptions still explicit limitations. The Level-3-ready path is documented, and the optional Elmer script exists, but ElmerSolver is not installed locally and no completed manual validation report exists yet. | `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py`, `docs/elmer_optional_validation_pilot.md`, `docs/elmer_level3_readiness.md`, `scripts/run_optional_elmer_validation.sh` | no | no | no | Install ElmerSolver later and run explicit opt-in validation before claiming Level 3. |
 | MPB | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates MPB Python scaffold evidence for band-structure style workflows. A narrow opt-in pilot generated the adapter scaffold and executed a tiny project-owned MPB/PyMeep validation path through `meep.mpb`. MPB CLI is not required. | `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py`, `docs/mpb_optional_validation_pilot.md`, `docs/mpb_level3_readiness.md`, `validation/mpb/mpb_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
 | Optiland | Level 3 - Optional manual backend validation | Registered and CLI-visible; generates Optiland scaffold evidence while lens prescription schema remains incomplete. A narrow opt-in pilot generated the adapter scaffold and executed a tiny project-owned Optiland validation path. | `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py`, `docs/optiland_optional_validation_pilot.md`, `docs/optiland_level3_readiness.md`, `validation/optiland/optiland_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible backend-backed benchmark before considering Level 4. |
 
@@ -106,3 +106,17 @@ pytest, smoke, quality gates, CI, or release validation requirement. It does not
 production-grade optical validation or a formal convergence proof.
 
 In short: this evidence does not make Optiland a default dependency.
+
+## Elmer Level-3-ready Boundary
+
+Elmer remains Level 2, but the Level-3-ready path is documented in
+`docs/elmer_optional_validation_pilot.md` and `docs/elmer_level3_readiness.md`.
+The default script `scripts/run_optional_elmer_validation.sh` checks
+`ElmerSolver` availability and fixture presence without executing Elmer.
+ElmerSolver is not installed locally, no completed manual validation report has
+been recorded, and Level 3 is not achieved. This does not make Elmer a default
+dependency, does not add Elmer to default pytest, smoke, quality gates, CI, or
+release validation, and does not claim production-grade physical validation or a
+formal convergence proof.
+
+In short: this evidence does not make Elmer a default dependency.

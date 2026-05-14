@@ -37,6 +37,8 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - MPB optional validation pilot default preflight, no MPB execution and no MPB
   CLI requirement.
 - Optiland optional validation pilot default preflight, no Optiland execution.
+- Elmer optional validation pilot default preflight, no Elmer execution and
+  ElmerSolver unavailable is non-blocking.
 - `smoke_release.sh`.
 - Wheel smoke.
 - `pytest`.
@@ -65,6 +67,9 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
   preflight.
 - The recorded Optiland Level 3 report is optional manual evidence only and is
   not part of the default quality gate.
+- No Elmer execution in the Elmer optional validation pilot default preflight.
+- Elmer remains Level 2 with Level-3-ready documentation until ElmerSolver is
+  installed and an explicit opt-in validation run records a report.
 - No external LLM by default.
 - No proprietary solver by default.
 - No token is required for the default local quality gate.
@@ -81,3 +86,4 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
 - Before considering the MPB optional validation pilot with explicit opt-in.
 - Before considering the Optiland optional validation pilot with explicit
   opt-in.
+- Before considering the Elmer optional validation pilot with explicit opt-in.

@@ -94,6 +94,8 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/optiland_optional_validation_pilot.md`](docs/optiland_optional_validation_pilot.md),
 [`docs/optiland_level3_readiness.md`](docs/optiland_level3_readiness.md),
 [`validation/optiland/optiland_validation_pilot_2026-05-14.md`](validation/optiland/optiland_validation_pilot_2026-05-14.md),
+[`docs/elmer_optional_validation_pilot.md`](docs/elmer_optional_validation_pilot.md),
+[`docs/elmer_level3_readiness.md`](docs/elmer_level3_readiness.md),
 [`docs/gmsh_optional_validation_pilot.md`](docs/gmsh_optional_validation_pilot.md),
 [`docs/gmsh_level3_readiness.md`](docs/gmsh_level3_readiness.md),
 [`validation/gmsh/gmsh_validation_pilot_2026-05-14.md`](validation/gmsh/gmsh_validation_pilot_2026-05-14.md),

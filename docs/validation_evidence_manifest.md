@@ -38,6 +38,11 @@
   `scripts/run_optional_optiland_validation.sh`.
 - Optiland optional manual validation evidence:
   `validation/optiland/optiland_validation_pilot_2026-05-14.md`.
+- Elmer optional validation pilot default report:
+  `scripts/run_optional_elmer_validation.sh`.
+- Elmer Level-3-ready documentation:
+  `docs/elmer_optional_validation_pilot.md` and
+  `docs/elmer_level3_readiness.md`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -78,6 +83,8 @@
 - Limited Optiland Level 3 optional manual validation evidence for one
   project-owned Optiland backend path generated from an adapter preview
   artifact.
+- Elmer Level-3-ready preparation with no default Elmer execution and no
+  completed manual validation report yet.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -98,6 +105,8 @@
   narrow optional manual validation evidence only.
 - No production-grade Optiland optical validation; the recorded Level 3 report
   is narrow optional manual validation evidence only.
+- No Elmer Level 3 solver-backed validation yet; Elmer remains Level 2 pending
+  ElmerSolver installation and explicit opt-in manual validation.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
 
@@ -144,5 +153,10 @@
 - `docs/optiland_optional_validation_pilot.md`
 - `docs/optiland_level3_readiness.md`
 - `validation/optiland/optiland_validation_pilot_2026-05-14.md`
+- `scripts/run_optional_elmer_validation.sh`
+- `docs/elmer_optional_validation_pilot.md`
+- `docs/elmer_level3_readiness.md`
+- `docs/manual_solver_validation_reports/elmer_validation_report_schema.json`
+- `validation/elmer/README.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

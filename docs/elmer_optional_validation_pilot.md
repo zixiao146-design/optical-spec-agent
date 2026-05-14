@@ -1,0 +1,69 @@
+# Elmer Optional Validation Pilot
+
+## Purpose
+
+This pilot defines a safe optional path for manually validating the Elmer
+adapter without making Elmer a default dependency.
+
+## Current Scope
+
+- Current public prerelease: v0.9.0rc4
+- Current main development version: 0.9.0rc5.dev0
+- Adapter: elmer
+- ElmerSolver is not installed locally
+- Default tests do not run Elmer
+- Default smoke does not run Elmer
+- Release validation does not require Elmer
+- No production-grade physical validation is claimed
+- No formal convergence proof is claimed
+
+## Input Fixture
+
+- `examples/specs/elmer_preview.json`
+- `tests/fixtures/adapter_golden/elmer/`
+
+## What Is Validated By Default
+
+Default checks cover only:
+
+- adapter registration
+- adapter-list visibility
+- local Elmer `.sif` preview artifact generation
+- expected fragments and metadata
+- diagnostics
+- no external solver execution
+
+## Optional Manual Validation Path
+
+DO NOT RUN BY DEFAULT.
+
+Future manual validation may:
+
+1. Install Elmer manually.
+2. Check `ElmerSolver` availability.
+3. Generate a local `.sif` preview artifact.
+4. Run `ElmerSolver` only after explicit maintainer opt-in.
+5. Record the result using the manual validation report template.
+6. Avoid production-grade validation claims unless scope is separately reviewed.
+
+## Explicit Opt-in
+
+Optional Elmer execution may only be enabled with:
+
+```bash
+OSA_RUN_OPTIONAL_ELMER_VALIDATION=1
+```
+
+Default:
+
+`OSA_RUN_OPTIONAL_ELMER_VALIDATION` is unset, so no `ElmerSolver` command is
+executed.
+
+## Non-goals
+
+- No automatic Elmer execution.
+- No CI Elmer requirement.
+- No release gate Elmer requirement.
+- No production-grade validation claim.
+- No formal convergence proof.
+- No proprietary solver dependency.

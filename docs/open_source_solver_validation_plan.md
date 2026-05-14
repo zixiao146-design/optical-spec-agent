@@ -71,6 +71,13 @@ The first Optiland opt-in pilot was run on 2026-05-14 and is recorded in
 optional manual Optiland backend path only. The report does not make Optiland a
 default test, smoke, quality-gate, CI, or release dependency.
 
+Elmer is prepared for a future Level 3 pilot but remains Level 2. Its opt-in
+guide is `docs/elmer_optional_validation_pilot.md`, readiness checklist is
+`docs/elmer_level3_readiness.md`, and default script is
+`scripts/run_optional_elmer_validation.sh`. Default mode only checks
+ElmerSolver availability and fixture presence; ElmerSolver unavailable is
+non-blocking, and no Elmer execution or completed report exists yet.
+
 For Python-backed stacks, Meep availability can be reported through
 `import meep as mp`, MPB availability can be reported through `from meep import
 mpb`, and Optiland availability can be reported through `import optiland`.

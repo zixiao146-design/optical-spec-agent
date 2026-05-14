@@ -34,6 +34,8 @@ It is expected to cover:
 - MPB optional validation pilot default preflight without MPB execution or MPB
   CLI requirement
 - Optiland optional validation pilot default preflight without Optiland execution
+- Elmer optional validation pilot default preflight without Elmer execution;
+  ElmerSolver unavailable is non-blocking
 - `smoke_release.sh`
 - wheel smoke
 - `pytest`
@@ -69,6 +71,8 @@ individual jobs shorter where appropriate:
   default CI requirement
 - recorded Optiland Level 3 evidence remains optional/manual and must not
   become a default CI requirement
+- Elmer Level-3-ready checks remain no-execution by default and must not require
+  ElmerSolver in default CI
 
 ## Current Workflow Inventory
 

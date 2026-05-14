@@ -143,6 +143,14 @@ Before `v1.0.0`, maintainers should decide and document:
   generated from an adapter preview artifact. This does not make Optiland a
   default dependency and does not support production-grade optical validation or
   a formal convergence proof.
+- Elmer optional validation pilot:
+  `docs/elmer_optional_validation_pilot.md`; it is guarded by
+  `OSA_RUN_OPTIONAL_ELMER_VALIDATION=1` and is not enabled by default.
+- Elmer Level 3 readiness:
+  `docs/elmer_level3_readiness.md` and
+  `scripts/run_optional_elmer_validation.sh` prepare a default no-execution
+  availability check. Elmer remains Level 2 until ElmerSolver is installed and
+  an explicit opt-in manual validation report is recorded.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

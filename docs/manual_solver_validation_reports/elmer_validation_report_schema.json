@@ -1,0 +1,37 @@
+{
+  "adapter_family": "elmer",
+  "solver_name": "Elmer",
+  "required_fields": [
+    "date",
+    "maintainer",
+    "project_version",
+    "git_commit",
+    "adapter_family",
+    "solver_name",
+    "solver_version",
+    "solver_available",
+    "validation_enabled",
+    "input_fixture",
+    "generated_artifact",
+    "command_run",
+    "expected_high_level_result",
+    "observed_result",
+    "diagnostics",
+    "passed",
+    "limitations",
+    "production_grade_validation_claimed",
+    "formal_convergence_proof_claimed",
+    "release_note_claim_supported"
+  ],
+  "defaults": {
+    "adapter_family": "elmer",
+    "solver_name": "Elmer",
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "notes": [
+    "Elmer reports are optional manual validation evidence only.",
+    "A completed report does not automatically imply production-grade physical validation.",
+    "Default tests and quality gates must not require ElmerSolver."
+  ]
+}

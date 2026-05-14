@@ -8,6 +8,7 @@ OSA_SKIP_GMSH_PREFLIGHT="${OSA_SKIP_GMSH_PREFLIGHT:-0}"
 OSA_SKIP_MEEP_PREFLIGHT="${OSA_SKIP_MEEP_PREFLIGHT:-0}"
 OSA_SKIP_MPB_PREFLIGHT="${OSA_SKIP_MPB_PREFLIGHT:-0}"
 OSA_SKIP_OPTILAND_PREFLIGHT="${OSA_SKIP_OPTILAND_PREFLIGHT:-0}"
+OSA_SKIP_ELMER_PREFLIGHT="${OSA_SKIP_ELMER_PREFLIGHT:-0}"
 OSA_SKIP_SMOKE="${OSA_SKIP_SMOKE:-0}"
 OSA_SKIP_PYTEST="${OSA_SKIP_PYTEST:-0}"
 OSA_SKIP_BUILD="${OSA_SKIP_BUILD:-0}"
@@ -21,6 +22,7 @@ GMSH_PREFLIGHT_STATUS="skipped"
 MEEP_PREFLIGHT_STATUS="skipped"
 MPB_PREFLIGHT_STATUS="skipped"
 OPTILAND_PREFLIGHT_STATUS="skipped"
+ELMER_PREFLIGHT_STATUS="skipped"
 SMOKE_STATUS="skipped"
 WHEEL_SMOKE_STATUS="skipped"
 PYTEST_STATUS="skipped"
@@ -117,6 +119,13 @@ if [[ "${OSA_SKIP_OPTILAND_PREFLIGHT}" != "1" ]]; then
   OPTILAND_PREFLIGHT_STATUS="passed"
 fi
 
+if [[ "${OSA_SKIP_ELMER_PREFLIGHT}" != "1" ]]; then
+  run_step "Elmer optional validation pilot default preflight" env \
+    OSA_ELMER_VALIDATION_REPORT="${OSA_QUALITY_PREFIX}-elmer-validation-default.json" \
+    ./scripts/run_optional_elmer_validation.sh
+  ELMER_PREFLIGHT_STATUS="passed"
+fi
+
 if [[ "${OSA_SKIP_SMOKE}" != "1" ]]; then
   run_step "Release smoke" env \
     OSA_SMOKE_VENV="${OSA_QUALITY_PREFIX}-smoke" \
@@ -168,6 +177,7 @@ echo "- Gmsh optional validation default preflight: ${GMSH_PREFLIGHT_STATUS}"
 echo "- Meep optional validation default preflight: ${MEEP_PREFLIGHT_STATUS}"
 echo "- MPB optional validation default preflight: ${MPB_PREFLIGHT_STATUS}"
 echo "- Optiland optional validation default preflight: ${OPTILAND_PREFLIGHT_STATUS}"
+echo "- Elmer optional validation default preflight: ${ELMER_PREFLIGHT_STATUS}"
 echo "- smoke: ${SMOKE_STATUS}"
 echo "- wheel smoke: ${WHEEL_SMOKE_STATUS}"
 echo "- pytest: ${PYTEST_STATUS}"
@@ -179,6 +189,7 @@ echo "- NO GMSH EXECUTION PERFORMED"
 echo "- NO MEEP EXECUTION PERFORMED"
 echo "- NO MPB EXECUTION PERFORMED"
 echo "- NO OPTILAND EXECUTION PERFORMED"
+echo "- NO ELMER EXECUTION PERFORMED"
 echo "- NO SOLVER EXECUTION PERFORMED"
 echo "- NO TAG CREATED"
 echo "- NO RELEASE CREATED"
@@ -187,6 +198,7 @@ echo "NO GMSH EXECUTION PERFORMED"
 echo "NO MEEP EXECUTION PERFORMED"
 echo "NO MPB EXECUTION PERFORMED"
 echo "NO OPTILAND EXECUTION PERFORMED"
+echo "NO ELMER EXECUTION PERFORMED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO TAG CREATED"
 echo "NO RELEASE CREATED"

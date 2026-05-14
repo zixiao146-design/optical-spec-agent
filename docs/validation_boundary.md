@@ -109,6 +109,11 @@ The 2026-05-14 Optiland report in
 Optiland executed a tiny project-owned backend path after explicit opt-in. It
 does not make Optiland part of default pytest, smoke, quality gates, CI, or
 release validation.
+The Elmer optional validation pilot is a Level-3-ready manual path only.
+`scripts/run_optional_elmer_validation.sh` checks ElmerSolver availability in
+default mode without executing Elmer. ElmerSolver is not installed locally, no
+completed Elmer report exists, and Elmer remains Level 2 pending explicit
+manual validation.
 
 ## Requirements for production-grade validation
 

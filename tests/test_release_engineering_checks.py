@@ -139,11 +139,14 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "mpb_level3_readiness.md",
         "optiland_optional_validation_pilot.md",
         "optiland_level3_readiness.md",
+        "elmer_optional_validation_pilot.md",
+        "elmer_level3_readiness.md",
         "manual_solver_validation_report_template.md",
         "manual_solver_validation_reports/gmsh_validation_pilot_template.md",
         "manual_solver_validation_reports/meep_validation_report_schema.json",
         "manual_solver_validation_reports/mpb_validation_report_schema.json",
         "manual_solver_validation_reports/optiland_validation_report_schema.json",
+        "manual_solver_validation_reports/elmer_validation_report_schema.json",
         "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc5.dev0.md",
         "release_readiness_v0.9.0rc5.md",
@@ -174,6 +177,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "run_optional_meep_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_mpb_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_optiland_validation.sh").exists()
+    assert (ROOT / "scripts" / "run_optional_elmer_validation.sh").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -200,6 +204,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "MPB Level-3 Manual Validation Readiness" in combined
     assert "Optiland Optional Validation Pilot" in combined
     assert "Optiland Level-3 Manual Validation Readiness" in combined
+    assert "Elmer Optional Validation Pilot" in combined
+    assert "Elmer Level-3 Manual Validation Readiness" in combined
     assert "Manual Solver Validation Report Template" in combined
     assert "Pytest Marker Policy" in combined
     assert "0.9.0rc5.dev0" in combined
@@ -251,6 +257,20 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "NO PRODUCTION-GRADE VALIDATION CLAIMED" in mpb_script
     assert "NO MPB CLI REQUIRED" in mpb_script
     assert "level3_achieved" in mpb_script
+    optiland_script = (ROOT / "scripts" / "run_optional_optiland_validation.sh").read_text(
+        encoding="utf-8"
+    )
+    assert "NO OPTILAND EXECUTION PERFORMED" in optiland_script
+    assert "OPTIONAL VALIDATION NOT ENABLED" in optiland_script
+    assert "NO PRODUCTION-GRADE VALIDATION CLAIMED" in optiland_script
+    assert "level3_achieved" in optiland_script
+    elmer_script = (ROOT / "scripts" / "run_optional_elmer_validation.sh").read_text(
+        encoding="utf-8"
+    )
+    assert "NO ELMER EXECUTION PERFORMED" in elmer_script
+    assert "OPTIONAL VALIDATION NOT ENABLED" in elmer_script
+    assert "NO PRODUCTION-GRADE VALIDATION CLAIMED" in elmer_script
+    assert "level3_achieved" in elmer_script
 
 
 def test_release_and_preflight_scripts_do_not_publish():
@@ -261,6 +281,8 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "run_optional_gmsh_validation.sh",
         ROOT / "scripts" / "run_optional_meep_validation.sh",
         ROOT / "scripts" / "run_optional_mpb_validation.sh",
+        ROOT / "scripts" / "run_optional_optiland_validation.sh",
+        ROOT / "scripts" / "run_optional_elmer_validation.sh",
         ROOT / "Makefile",
     ]
     forbidden = [

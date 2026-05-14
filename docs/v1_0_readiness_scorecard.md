@@ -38,6 +38,8 @@
   validation evidence for one tiny project-owned Optiland backend path.
 - Optiland Level 3 optional manual validation evidence is recorded but remains
   narrow and non-default.
+- Elmer Level-3-ready optional validation path documented with a default
+  no-execution script.
 - Manual solver validation report template.
 - Pytest marker policy for optional/manual validation.
 - Open-source-solver-first strategy.
@@ -74,6 +76,8 @@
   solvers.
 - MPB CLI absence is acceptable when `meep.mpb` imports successfully; ElmerSolver
   remains optional/manual.
+- Elmer remains Level 2 pending ElmerSolver installation and explicit opt-in
+  manual validation; missing ElmerSolver is non-blocking for default gates.
 - TestPyPI upload not approved/exercised.
 - PyPI publication not approved.
 - Adapter outputs may still be MVP/scaffold.

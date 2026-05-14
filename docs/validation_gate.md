@@ -68,6 +68,10 @@ maintainers.
   does not run Optiland.
 - Include the 2026-05-14 Optiland Level 3 optional manual validation report as
   narrow evidence only; do not make Optiland a default gate.
+- Keep the Elmer optional validation pilot opt-in only; default validation does
+  not run Elmer and ElmerSolver unavailable is non-blocking.
+- Keep Elmer Level-3-ready but Level 2 until an explicit manual validation run
+  records a completed report.
 - Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.
