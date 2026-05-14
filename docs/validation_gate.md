@@ -51,6 +51,9 @@ maintainers.
 - Include v1.0 stability gate checks.
 - Include offline examples evidence from `examples/README.md`.
 - Include adapter evidence fixtures for preview/scaffold outputs.
+- Track adapter maturity with `docs/adapter_maturity_model.md`.
+- Keep the Gmsh optional validation pilot opt-in only; default validation does
+  not run Gmsh.
 - Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.

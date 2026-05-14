@@ -102,6 +102,11 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/open_source_solver_validation_plan.md`.
 - Optional open-source solver validation harness:
   `docs/open_solver_validation_harness.md`.
+- Adapter maturity model:
+  `docs/adapter_maturity_model.md`.
+- Gmsh optional validation pilot:
+  `docs/gmsh_optional_validation_pilot.md`; it is guarded by
+  `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1` and is not enabled by default.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

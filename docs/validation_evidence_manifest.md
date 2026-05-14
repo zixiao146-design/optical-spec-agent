@@ -21,6 +21,9 @@
   `docs/public_contract_change_checklist.md`.
 - Adapter evidence fixtures: stable fragments under
   `tests/fixtures/adapter_golden/`.
+- Adapter maturity model: `docs/adapter_maturity_model.md`.
+- Gmsh optional validation pilot default report:
+  `scripts/run_optional_gmsh_validation.sh`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -49,6 +52,7 @@
 - No external solver/LLM default path.
 - No proprietary solver default path.
 - Optional solver availability detection without solver execution.
+- Optional Gmsh pilot readiness without default Gmsh execution.
 - Deterministic offline end-to-end user journey through validate, parse,
   adapter listing, and workflow planning.
 - Candidate-stable public contract tracking for CLI, schema, adapter registry,
@@ -61,6 +65,7 @@
 - No formal convergence proof.
 - No solver-backed correctness claim by default.
 - No solver execution claim from availability preflight alone.
+- No Gmsh solver-backed validation unless a future manual report records it.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
 
@@ -89,6 +94,9 @@
 - `tests/test_validation_evidence_manifest.py`
 - `scripts/smoke_release.sh`
 - `scripts/open_solver_validation_preflight.sh`
+- `scripts/run_optional_gmsh_validation.sh`
 - `docs/open_solver_validation_harness.md`
+- `docs/adapter_maturity_model.md`
+- `docs/gmsh_optional_validation_pilot.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

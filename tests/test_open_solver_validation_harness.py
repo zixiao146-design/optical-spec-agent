@@ -22,17 +22,22 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "Candidate availability does not mean validation was run" in harness_text
     assert "An unavailable solver does not fail default tests" in harness_text
     assert "no production-grade physical validation claim" in harness_text
+    assert "Gmsh optional validation pilot" in harness_text
+    assert "does not run Gmsh unless explicitly enabled" in harness_text
 
     template_text = template.read_text(encoding="utf-8")
     assert "does not by itself imply production-grade validation" in template_text
     assert "Manual validation is optional and not part of default CI" in template_text
+    assert "gmsh_validation_pilot_template.md" in template_text
 
     marker_text = marker_policy.read_text(encoding="utf-8")
     assert "Default tests must remain offline and no-solver" in marker_text
     assert "Default `pytest` remains no-solver" in marker_text
     assert "Proprietary solver tests are not default tests" in marker_text
+    assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION=1" in marker_text
 
     plan_text = plan.read_text(encoding="utf-8")
     assert "records availability only" in plan_text
+    assert "first pilot-ready candidate is Gmsh" in plan_text
     assert "Tests should not be part of default `pytest`" in plan_text
     assert "Marker policy is documented in `docs/pytest_marker_policy.md`" in plan_text

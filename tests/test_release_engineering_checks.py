@@ -130,7 +130,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "validation_evidence_manifest.md",
         "open_source_solver_validation_plan.md",
         "open_solver_validation_harness.md",
+        "adapter_maturity_model.md",
+        "gmsh_optional_validation_pilot.md",
         "manual_solver_validation_report_template.md",
+        "manual_solver_validation_reports/gmsh_validation_pilot_template.md",
         "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc5.dev0.md",
         "release_readiness_v0.9.0rc5.md",
@@ -157,6 +160,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
     assert (ROOT / "scripts" / "open_solver_validation_preflight.sh").exists()
+    assert (ROOT / "scripts" / "run_optional_gmsh_validation.sh").exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -174,6 +178,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Validation Evidence Manifest" in combined
     assert "Open-source Solver Validation Plan" in combined
     assert "Open-source Solver Validation Harness" in combined
+    assert "Adapter Maturity Model" in combined
+    assert "Gmsh Optional Validation Pilot" in combined
     assert "Manual Solver Validation Report Template" in combined
     assert "Pytest Marker Policy" in combined
     assert "0.9.0rc5.dev0" in combined
@@ -203,6 +209,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "NO SOLVER EXECUTION PERFORMED" in (
         ROOT / "scripts" / "open_solver_validation_preflight.sh"
     ).read_text(encoding="utf-8")
+    gmsh_script = (ROOT / "scripts" / "run_optional_gmsh_validation.sh").read_text(
+        encoding="utf-8"
+    )
+    assert "NO GMSH EXECUTION PERFORMED" in gmsh_script
+    assert "OPTIONAL VALIDATION NOT ENABLED" in gmsh_script
+    assert "NO PRODUCTION-GRADE VALIDATION CLAIMED" in gmsh_script
 
 
 def test_release_and_preflight_scripts_do_not_publish():
@@ -210,6 +222,7 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "smoke_release.sh",
         ROOT / "scripts" / "testpypi_preflight.sh",
         ROOT / "scripts" / "run_quality_gates.sh",
+        ROOT / "scripts" / "run_optional_gmsh_validation.sh",
         ROOT / "Makefile",
     ]
     forbidden = [

@@ -27,3 +27,6 @@ Proprietary tools should not use this template unless separately approved as
 export-only/manual evidence. Export-only/manual evidence must not imply
 solver-backed correctness unless the actual solver-backed validation is
 explicitly recorded.
+
+The Gmsh-specific pilot template is
+`docs/manual_solver_validation_reports/gmsh_validation_pilot_template.md`.

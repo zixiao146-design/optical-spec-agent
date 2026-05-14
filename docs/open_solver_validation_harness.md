@@ -37,6 +37,12 @@ does not imply production-grade correctness.
 An unavailable solver does not fail default tests. Unavailable solvers also do
 not fail smoke, quality gates, or release dry-runs.
 
+The first pilot-ready path is the Gmsh optional validation pilot in
+`docs/gmsh_optional_validation_pilot.md` and
+`scripts/run_optional_gmsh_validation.sh`. Its default mode only checks
+availability and fixture presence; it does not run Gmsh unless explicitly enabled
+outside the default gates.
+
 ## Future Manual Validation Path
 
 Future manual solver validation should follow this pattern:

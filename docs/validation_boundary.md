@@ -66,6 +66,8 @@ solver commands are available, but availability detection is not solver-backed
 validation and does not imply production-grade physical correctness.
 Manual validation evidence should be recorded with
 `docs/manual_solver_validation_report_template.md`.
+The Gmsh optional validation pilot is a manual opt-in path and is not a
+production-grade physical validation claim.
 
 ## Requirements for production-grade validation
 

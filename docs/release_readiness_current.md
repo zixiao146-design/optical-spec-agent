@@ -163,6 +163,12 @@ Current v1.0 evidence artifacts:
   `docs/open_solver_validation_harness.md`,
   `docs/manual_solver_validation_report_template.md`, and
   `docs/pytest_marker_policy.md`.
+- Adapter maturity model:
+  `docs/adapter_maturity_model.md`.
+- Gmsh optional validation pilot:
+  `docs/gmsh_optional_validation_pilot.md` and
+  `scripts/run_optional_gmsh_validation.sh`; default tests, smoke, quality
+  gates, and release validation do not run Gmsh.
 
 ## Release Blockers
 

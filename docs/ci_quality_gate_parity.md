@@ -29,6 +29,7 @@ It is expected to cover:
 
 - TestPyPI no-upload preflight
 - open-source solver availability preflight without solver execution
+- Gmsh optional validation pilot default preflight without Gmsh execution
 - `smoke_release.sh`
 - wheel smoke
 - `pytest`
@@ -55,6 +56,7 @@ individual jobs shorter where appropriate:
 - never require external solver, external LLM, or proprietary optical software
 - optional solver availability checks may run, but solver commands must not be
   executed by default CI
+- default CI must not set `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1`
 
 ## Current Workflow Inventory
 

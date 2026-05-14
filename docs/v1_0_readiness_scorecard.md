@@ -20,6 +20,8 @@
 - Secrets and token hygiene.
 - Maintainer operations checklist.
 - Optional open-source solver availability preflight.
+- Adapter maturity model.
+- Gmsh optional validation pilot in default no-execution mode.
 - Manual solver validation report template.
 - Pytest marker policy for optional/manual validation.
 - Open-source-solver-first strategy.
@@ -39,6 +41,7 @@
 - No production-grade physical validation.
 - No formal convergence proof.
 - No solver-backed validation by default.
+- Gmsh optional validation pilot has not been run as solver-backed validation.
 - Open-source solver preflight detects availability only and does not execute
   solvers.
 - TestPyPI upload not approved/exercised.

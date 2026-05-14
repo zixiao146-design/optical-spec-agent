@@ -23,3 +23,6 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "TestPyPI upload not approved/exercised" in text
     assert "Optional open-source solver availability preflight" in text
     assert "Open-source solver preflight detects availability only" in text
+    assert "Adapter maturity model" in text
+    assert "Gmsh optional validation pilot" in text
+    assert "has not been run as solver-backed validation" in text

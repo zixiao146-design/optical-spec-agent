@@ -37,6 +37,10 @@ Optional solver tests, if added later, should require an explicit marker
 selection and an explicit environment variable. They should be skipped by
 default when the solver or opt-in variable is unavailable.
 
+The Gmsh optional validation pilot is guarded by
+`OSA_RUN_OPTIONAL_GMSH_VALIDATION=1`. Default tests and quality gates must not
+set that variable.
+
 ## Guardrails
 
 - Do not make external solvers a default dependency.

@@ -37,6 +37,11 @@ Future optional solver-backed validation should follow this pattern:
 - Manual results are recorded with
   `docs/manual_solver_validation_report_template.md`.
 
+The first pilot-ready candidate is Gmsh. Its opt-in guide is
+`docs/gmsh_optional_validation_pilot.md`, and its default script path is
+`scripts/run_optional_gmsh_validation.sh`. Default mode does not run Gmsh; it
+only checks availability, fixture presence, and report metadata.
+
 ## Required guardrails
 
 - No external solver is run by default.

@@ -7,6 +7,9 @@ Continue v1.0 readiness engineering and prepare a `v0.9.0rc5.dev0` development v
 only when accumulated changes should be published as another RC.
 Compatibility evidence is tracked in `docs/v1_0_compatibility_policy.md`,
 `docs/validation_evidence_manifest.md`, and `examples/examples_manifest.json`.
+Adapter maturity levels are tracked in `docs/adapter_maturity_model.md`; the
+first optional solver validation pilot candidate is Gmsh, documented in
+`docs/gmsh_optional_validation_pilot.md`.
 
 optical-spec-agent is open-source-solver-first. Adapter outputs are local
 generated artifacts. They do not run external solvers by default and do not
@@ -47,6 +50,8 @@ The adapter registry currently exposes:
 - Proprietary licenses are not required for default tests, examples, smoke, or
   release validation.
 - MPB/Gmsh/Elmer/Optiland outputs are scaffold/MVP unless separately validated.
+- Gmsh has an optional pilot path, but default tests, smoke, quality gates, and
+  release validation do not run Gmsh.
 - Meep execution remains optional/local and must be explicitly requested.
 - Adapter warnings and defaults are part of the auditable output contract.
 - Physical correctness is not claimed as production-grade.
