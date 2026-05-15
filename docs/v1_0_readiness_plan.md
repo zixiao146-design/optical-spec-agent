@@ -2,14 +2,14 @@
 
 ## Current baseline
 
-- Current public prerelease: `v0.9.0rc4`
-- Current main release draft: `0.9.0rc5`
-- `v0.9.0rc5` GitHub release has not been created
-- `v0.9.0rc5` tag has not been created
-- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc4
+- Current public prerelease: `v0.9.0rc5`
+- Current main development version: `0.9.0rc6.dev0`
+- `v0.9.0rc6` GitHub release has not been created
+- `v0.9.0rc6` tag has not been created
+- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc5
 - Release verified: yes
-- Post-release status: `docs/post_release_status_v0.9.0rc4.md`
-- Latest post-release status commit: `d26df1b`
+- Post-release status: `docs/post_release_status_v0.9.0rc5.md`
+- Latest post-release status commit: `e1782ea`
 - PyPI published: no
 - TestPyPI uploaded: no
 
@@ -41,11 +41,12 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path through v0.9.0rc5 release draft
+## Recommended path through v0.9.0rc6.dev0 development state
 
-`0.9.0rc5` is the current release draft state. It packages accumulated
-post-rc4 hardening for maintainer review, while `v0.9.0rc4` remains the current
-public prerelease until the `v0.9.0rc5` tag and GitHub prerelease are created.
+`v0.9.0rc5` is the current public prerelease. `main` now builds as
+`0.9.0rc6.dev0` for post-rc5 development toward a future release candidate.
+`0.9.0rc6.dev0` is not itself a public release, and the `v0.9.0rc6` tag has not
+been created.
 Recommended goals:
 
 - Keep TestPyPI/PyPI gated by explicit approval.
@@ -193,7 +194,8 @@ Before `v1.0.0`, maintainers should decide and document:
 - Public contract docs and regression tests. Added in current main.
 - Packaging and validation gates. Added in current main.
 - Optional external solver/LLM policy docs. Added in current main.
-- Continue v1.0 readiness engineering from the `0.9.0rc5` release draft.
+- Continue v1.0 readiness engineering from the verified `v0.9.0rc5`
+  public prerelease.
 
 ### P1
 
@@ -214,9 +216,11 @@ Before `v1.0.0`, maintainers should decide and document:
 
 - Do not publish PyPI yet.
 - Do not upload TestPyPI yet.
-- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, or `v0.9.0rc4` tags.
-- Do not create the `v0.9.0rc5` tag until final readiness checks and maintainer approval.
-- Do not treat `v0.9.0rc5` as a published release until tag/release verification is complete.
+- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or
+  `v0.9.0rc5` tags.
+- Do not create the `v0.9.0rc6` tag until future release-draft checks and
+  maintainer approval.
+- Do not treat `0.9.0rc6.dev0` as a public release.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.

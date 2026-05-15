@@ -2,8 +2,8 @@
 
 ## Current status
 
-- Current public prerelease: v0.9.0rc4
-- Current main release draft: 0.9.0rc5
+- Current public prerelease: v0.9.0rc5
+- Current main development version: 0.9.0rc6.dev0
 - v1.0.0 not released
 - PyPI/TestPyPI not published/uploaded
 - Public contract freeze candidate: `docs/v1_0_public_contract_freeze.md`

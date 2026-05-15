@@ -1,10 +1,10 @@
 # Validation Gate
 
-Version scope: current public prerelease `v0.9.0rc4`; current `main`
-release draft `0.9.0rc5`. `v0.9.0rc5` release draft is not a public release, the
-`v0.9.0rc5` tag has not been created, and PyPI/TestPyPI remain unpublished.
-Continue v1.0 readiness engineering and prepare a `v0.9.0rc5` release draft
-only when accumulated changes should be published as another RC.
+Version scope: current public prerelease `v0.9.0rc5`; current `main`
+development version `0.9.0rc6.dev0`. `0.9.0rc6.dev0` development state is not a public release, the
+`v0.9.0rc6` tag has not been created, and PyPI/TestPyPI remain unpublished.
+Continue v1.0 readiness engineering and prepare a future `v0.9.0rc6` release
+draft only when accumulated changes should be published as another RC.
 
 The validation strategy is open-source-solver-first. Proprietary solvers are not
 default dependencies, and no proprietary license is required for default tests,
@@ -43,7 +43,7 @@ production validation.
 External solver validation remains optional/manual unless explicitly enabled by
 maintainers.
 
-## v0.9.0rc5 validation target
+## v0.9.0rc6.dev0 validation target
 
 - Include contract tests from `d567660`.
 - Include packaging gate tests from this sprint.
@@ -96,15 +96,16 @@ maintainers.
 - Include documented CLI examples.
 - Keep PyPI unpublished unless explicitly approved.
 - Keep TestPyPI not uploaded unless explicitly approved.
-- Do not create the `v0.9.0rc5` tag until project/version consistency, final
-  smoke, wheel smoke, build, `make check`, and CLI examples pass.
+- Do not create the `v0.9.0rc6` tag until a future release draft has
+  project/version consistency, final smoke, wheel smoke, build, `make check`,
+  and CLI examples passing.
 - Adapter family evidence does not replace optional/manual external solver
   validation.
 - No proprietary solver validation is part of the default gate.
 - `scripts/open_solver_validation_preflight.sh` must remain no-execution and
   safe when solvers are unavailable.
-- Current public prerelease remains `v0.9.0rc4`, current main development
-  version remains `0.9.0rc5`, the `v0.9.0rc5` tag has not been created,
+- Current public prerelease remains `v0.9.0rc5`, current main development
+  version remains `0.9.0rc6.dev0`, the `v0.9.0rc6` tag has not been created,
   and PyPI/TestPyPI remain unpublished/not uploaded.
 
 ## v1.0 validation target

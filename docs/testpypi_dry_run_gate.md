@@ -4,15 +4,15 @@
 
 - TestPyPI uploaded: no
 - PyPI published: no
-- Current public prerelease: v0.9.0rc4
-- Current main release draft: `0.9.0rc5`
+- Current public prerelease: v0.9.0rc5
+- Current main development version: `0.9.0rc6.dev0`
 - Product positioning: open-source-solver-first
 - Proprietary solvers are not default dependencies
-- v0.9.0rc5 tag: not created
+- v0.9.0rc6 tag: not created
 - GitHub release: not created
 - PyPI/TestPyPI remain unpublished/not uploaded
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc5.md`
+  `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - TestPyPI upload approval status: pending
 - TestPyPI upload authorized: no
 - Upload command authorized: no

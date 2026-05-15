@@ -1,11 +1,11 @@
 # Release Engineering Playbook
 
 This playbook captures the release process hardened during the `v0.9.0rc1`,
-`v0.9.0rc2`, `v0.9.0rc3`, and `v0.9.0rc4` release candidates.
+`v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, and `v0.9.0rc5` release candidates.
 
-Current public prerelease: `v0.9.0rc4`.
-Current main release draft: `0.9.0rc5`.
-`v0.9.0rc5` is not a public release, and the `v0.9.0rc5` tag has not
+Current public prerelease: `v0.9.0rc5`.
+Current main development version: `0.9.0rc6.dev0`.
+`0.9.0rc6.dev0` is not a public release, and the `v0.9.0rc6` tag has not
 been created. PyPI/TestPyPI remain unpublished.
 
 Release engineering is open-source-solver-first. Default tests, smoke, examples,
@@ -97,7 +97,8 @@ make testpypi-preflight
 
 - Use annotated tags for RC releases.
 - Never move existing tags.
-- Never re-tag `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, or `v0.9.0rc4`.
+- Never re-tag `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or
+  `v0.9.0rc5`.
 - Create a new RC tag for post-release fixes.
 - GitHub pre-releases must have `draft=false` and `prerelease=true`.
 - Release notes should match `docs/github_release_draft_<version>.md`.

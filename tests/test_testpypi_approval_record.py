@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc5.md"
+APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc6.dev0.md"
 
 
 def test_testpypi_upload_approval_record_exists_and_is_pending():
@@ -20,8 +20,8 @@ def test_testpypi_upload_approval_record_exists_and_is_pending():
 
 def test_testpypi_upload_approval_record_documents_artifacts_and_token_safety():
     text = APPROVAL_RECORD.read_text(encoding="utf-8")
-    assert "optical_spec_agent-0.9.0rc5-py3-none-any.whl" in text
-    assert "optical_spec_agent-0.9.0rc5.tar.gz" in text
+    assert "optical_spec_agent-0.9.0rc6.dev0-py3-none-any.whl" in text
+    assert "optical_spec_agent-0.9.0rc6.dev0.tar.gz" in text
     assert "No token is printed, committed, logged, or pasted into chat" in text
     assert "Do not upload TestPyPI in this task" in text
     assert "Do not publish PyPI in this task" in text
@@ -36,6 +36,6 @@ def test_testpypi_upload_approval_record_is_linked_from_gate_docs():
     ]
     for path in required_docs:
         text = path.read_text(encoding="utf-8")
-        assert "docs/testpypi_upload_approval_v0.9.0rc5.md" in text
+        assert "docs/testpypi_upload_approval_v0.9.0rc6.dev0.md" in text
         assert "TestPyPI upload approval status: pending" in text
         assert "TestPyPI upload authorized: no" in text

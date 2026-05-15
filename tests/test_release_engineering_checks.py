@@ -148,7 +148,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "manual_solver_validation_reports/optiland_validation_report_schema.json",
         "manual_solver_validation_reports/elmer_validation_report_schema.json",
         "pytest_marker_policy.md",
-        "testpypi_upload_approval_v0.9.0rc5.md",
+        "testpypi_upload_approval_v0.9.0rc6.dev0.md",
+        "release_readiness_v0.9.0rc6.md",
         "release_readiness_v0.9.0rc5.md",
         "github_release_draft_v0.9.0rc5.md",
         "release_notes_v0.9.0rc5.md",
@@ -317,8 +318,8 @@ def test_adapter_support_matrix_covers_registered_adapter_families():
     assert "open-source-solver-first" in text
     assert "Proprietary/export-only future target" in text
     assert "not registered adapters unless" in text
-    assert "0.9.0rc5" in text
-    assert "v0.9.0rc4" in text
+    assert "0.9.0rc6.dev0" in text
+    assert "v0.9.0rc5" in text
     assert "PyPI/TestPyPI remain unpublished" in text
 
 
@@ -365,8 +366,8 @@ def test_offline_user_journey_release_artifacts_are_tracked():
     assert "no external LLM" in journey
     assert "no proprietary software" in journey
     assert "PyPI/TestPyPI: not published / not uploaded" in journey
-    assert "Current main release draft: `0.9.0rc5`" in journey
-    assert "Current public prerelease: v0.9.0rc4" in journey
+    assert "Current main development version: `0.9.0rc6.dev0`" in journey
+    assert "Current public prerelease: v0.9.0rc5" in journey
 
 
 def test_public_contract_freeze_artifacts_are_tracked():
@@ -374,10 +375,10 @@ def test_public_contract_freeze_artifacts_are_tracked():
     manifest = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
     checklist = (ROOT / "docs" / "public_contract_change_checklist.md").read_text(encoding="utf-8")
     assert "v1.0.0 not released" in freeze
-    assert "v0.9.0rc5 tag not created" in freeze
+    assert "v0.9.0rc6 tag not created" in freeze
     assert "PyPI/TestPyPI not published/uploaded" in freeze
-    assert manifest["version_scope"] == "0.9.0rc5"
-    assert manifest["current_public_prerelease"] == "v0.9.0rc4"
+    assert manifest["version_scope"] == "0.9.0rc6.dev0"
+    assert manifest["current_public_prerelease"] == "v0.9.0rc5"
     assert manifest["release_state"]["pypi_published"] is False
     assert manifest["release_state"]["testpypi_uploaded"] is False
     assert "external solver" in checklist

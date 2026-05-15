@@ -2,13 +2,13 @@
 
 ## Current Decisions
 
-- v0.9.0rc4 is the current public prerelease.
-- main is prepared as the 0.9.0rc5 release draft for maintainer review.
+- v0.9.0rc5 is the current public prerelease.
+- main is prepared as the 0.9.0rc6.dev0 development state for maintainer review.
 - TestPyPI upload approval: pending.
 - Upload command authorized: no.
 - PyPI publication approval: not granted.
 - Continue v1.0 readiness engineering.
-- Do not create v0.9.0rc5 tag now.
+- Do not create v0.9.0rc6 tag now.
 - Do not create a GitHub release now.
 - Do not use proprietary solvers as default dependencies.
 - Do not require external solver or external LLM by default.

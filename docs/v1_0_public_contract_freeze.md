@@ -7,11 +7,11 @@ v1.0 stabilization.
 
 ## Current scope
 
-- Current public prerelease: v0.9.0rc4
-- Current main release draft: `0.9.0rc5`
+- Current public prerelease: v0.9.0rc5
+- Current main development version: `0.9.0rc6.dev0`
 - v1.0.0 not released
-- v0.9.0rc5 tag not created
-- GitHub release not created
+- v0.9.0rc6 tag not created
+- v0.9.0rc6 GitHub release not created
 - PyPI/TestPyPI not published/uploaded
 
 ## Candidate stable public contract
