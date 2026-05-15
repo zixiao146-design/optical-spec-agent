@@ -1,6 +1,6 @@
 # Schema Compatibility Policy
 
-Current main development version: `0.9.0rc5.dev0`.
+Current main release draft: `0.9.0rc5`.
 Current public prerelease: `v0.9.0rc4`.
 
 Schema/API compatibility is being stabilized before `v1.0`. Public fields
@@ -28,5 +28,5 @@ scaffold compatibility evidence. They help stabilize generated artifact shape,
 metadata, warnings, and defaults, but they do not assert solver-backed physical
 correctness.
 
-PyPI/TestPyPI remain unpublished/not uploaded. `v0.9.0rc5.dev0` is not a public
+PyPI/TestPyPI remain unpublished/not uploaded. `v0.9.0rc5` is not a public
 release, and the `v0.9.0rc5` tag has not been created.

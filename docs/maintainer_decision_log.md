@@ -3,7 +3,7 @@
 ## Current Decisions
 
 - v0.9.0rc4 is the current public prerelease.
-- main moved to 0.9.0rc5.dev0 for post-rc4 development.
+- main is prepared as the 0.9.0rc5 release draft for maintainer review.
 - TestPyPI upload approval: pending.
 - Upload command authorized: no.
 - PyPI publication approval: not granted.

@@ -3,7 +3,7 @@
 ## Current baseline
 
 - Current public prerelease: `v0.9.0rc4`
-- Current main development version: `0.9.0rc5.dev0`
+- Current main release draft: `0.9.0rc5`
 - `v0.9.0rc5` GitHub release has not been created
 - `v0.9.0rc5` tag has not been created
 - Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc4
@@ -41,11 +41,12 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path through 0.9.0rc5.dev0
+## Recommended path through v0.9.0rc5 release draft
 
-`0.9.0rc5.dev0` is the current post-rc4 development state. A future
-`v0.9.0rc5` release draft should be prepared only when accumulated post-rc4
-hardening changes justify another public RC. Recommended goals:
+`0.9.0rc5` is the current release draft state. It packages accumulated
+post-rc4 hardening for maintainer review, while `v0.9.0rc4` remains the current
+public prerelease until the `v0.9.0rc5` tag and GitHub prerelease are created.
+Recommended goals:
 
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
@@ -192,7 +193,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Public contract docs and regression tests. Added in current main.
 - Packaging and validation gates. Added in current main.
 - Optional external solver/LLM policy docs. Added in current main.
-- Continue v1.0 readiness engineering from `0.9.0rc5.dev0`.
+- Continue v1.0 readiness engineering from the `0.9.0rc5` release draft.
 
 ### P1
 
@@ -215,7 +216,7 @@ Before `v1.0.0`, maintainers should decide and document:
 - Do not upload TestPyPI yet.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, or `v0.9.0rc4` tags.
 - Do not create the `v0.9.0rc5` tag until final readiness checks and maintainer approval.
-- Do not treat `v0.9.0rc5.dev0` as a published release.
+- Do not treat `v0.9.0rc5` as a published release until tag/release verification is complete.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.

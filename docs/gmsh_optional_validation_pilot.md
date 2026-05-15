@@ -8,7 +8,7 @@ without making Gmsh a default dependency.
 ## Current Scope
 
 - Current public prerelease: v0.9.0rc4
-- Current main development version: 0.9.0rc5.dev0
+- Current main release draft: 0.9.0rc5
 - Adapter: `gmsh`
 - Default tests do not run Gmsh.
 - Default smoke does not run Gmsh.

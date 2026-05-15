@@ -3,7 +3,7 @@
 ## Current Status
 
 - Current public prerelease: v0.9.0rc4
-- Current main development version: 0.9.0rc5.dev0
+- Current main release draft: `0.9.0rc5`
 - PyPI/TestPyPI: not published / not uploaded
 - TestPyPI upload approval: pending
 - v1.0.0 not released
@@ -93,5 +93,5 @@
 - Continue v1.0 readiness engineering.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
-- Prepare a `v0.9.0rc5` release draft only when accumulated changes justify
-  another public release candidate.
+- Proceed to `v0.9.0rc5` tag creation only after explicit maintainer approval
+  and final tag/release verification.

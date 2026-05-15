@@ -1,13 +1,13 @@
 # Packaging Gate
 
-Version scope: current `main` development version `0.9.0rc5.dev0` after the
+Version scope: current `main` release draft `0.9.0rc5` after the
 verified public `v0.9.0rc4` prerelease.
 
 ## Current package baseline
 
 - Package name: `optical-spec-agent`
-- Current package version on `main`: `0.9.0rc5.dev0`
-- Current main development version: `0.9.0rc5.dev0`
+- Current package version on `main`: `0.9.0rc5`
+- Current main release draft: `0.9.0rc5`
 - Current public prerelease: `v0.9.0rc4`
 - Product positioning: open-source-solver-first
 - `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, and `v0.9.0rc4` tags remain unchanged.
@@ -20,9 +20,10 @@ verified public `v0.9.0rc4` prerelease.
 - One-command quality gate script: `scripts/run_quality_gates.sh`
 - Quality gate doc: `docs/quality_gates.md`
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`
+  `docs/testpypi_upload_approval_v0.9.0rc5.md`
 - TestPyPI upload approval status: pending
 - TestPyPI upload authorized: no
+- Upload command authorized: no
 - PyPI publication approval: not granted
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
 - Open-source solver strategy doc: `docs/open_source_solver_strategy.md`
@@ -30,8 +31,8 @@ verified public `v0.9.0rc4` prerelease.
 - Build backend: `hatchling`
 - Console script: `optical-spec`
 - Expected build artifacts for current main:
-  - `optical_spec_agent-0.9.0rc5.dev0-py3-none-any.whl`
-  - `optical_spec_agent-0.9.0rc5.dev0.tar.gz`
+  - `optical_spec_agent-0.9.0rc5-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc5.tar.gz`
 
 ## Packaging checks required before publication
 
@@ -76,7 +77,7 @@ verified public `v0.9.0rc4` prerelease.
   GitHub releases.
 - TestPyPI upload requires explicit maintainer approval.
 - Approval remains pending in
-  `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`.
+  `docs/testpypi_upload_approval_v0.9.0rc5.md`.
 - TestPyPI upload must not be part of the default smoke script.
 - Wheel smoke remains local only.
 - Smoke script must not publish or upload packages.

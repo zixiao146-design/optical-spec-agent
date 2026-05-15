@@ -8,7 +8,7 @@ adapter without making Elmer a default dependency.
 ## Current Scope
 
 - Current public prerelease: v0.9.0rc4
-- Current main development version: 0.9.0rc5.dev0
+- Current main release draft: 0.9.0rc5
 - Adapter: elmer
 - ElmerSolver is not installed locally
 - 2026-05-15 install attempt was deferred because a safe binary/package route

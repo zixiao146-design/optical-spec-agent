@@ -4,10 +4,10 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc5.dev0`
+- `pyproject.toml` package version on `main`: `0.9.0rc5`
 - Current public prerelease: `v0.9.0rc4`
-- Current main development version: `0.9.0rc5.dev0`
-- Main branch state: `v0.9.0rc5.dev0` development version for maintainer review
+- Current main release draft: `0.9.0rc5`
+- Main branch state: `v0.9.0rc5` release draft for maintainer review
 - Product positioning: open-source-solver-first
 - `v0.9.0rc5` GitHub release has not been created
 - `v0.9.0rc5` tag has not been created
@@ -19,9 +19,10 @@ This document describes the current `main` branch. It is not a release tag.
 - PyPI published: no
 - TestPyPI uploaded: no
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`
+  `docs/testpypi_upload_approval_v0.9.0rc5.md`
 - TestPyPI upload approval status: pending
 - TestPyPI upload authorized: no
+- Upload command authorized: no
 - PyPI publication approval: not granted
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
@@ -96,7 +97,7 @@ python -m twine check dist/*
 
 Current recommendation: treat `v0.9.0rc4` as the active verified public
 prerelease until `v0.9.0rc5` is tagged and a GitHub prerelease is created. The
-`main` branch now builds as the `0.9.0rc5.dev0` development version and packages
+`main` branch now builds as the `0.9.0rc5` release draft and packages
 post-`v0.9.0rc4` hardening changes for maintainer review. Keep PyPI/TestPyPI
 unpublished unless explicitly approved.
 
@@ -191,7 +192,7 @@ Current v1.0 evidence artifacts:
 
 ## Release Blockers
 
-- No hard release blocker is currently recorded for `0.9.0rc5.dev0` development.
+- No hard release blocker is currently recorded for `0.9.0rc5` development.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, or `v0.9.0rc4`.
 - Do not publish PyPI yet.
 - Do not upload TestPyPI yet.

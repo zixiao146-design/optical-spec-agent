@@ -8,7 +8,7 @@ to Level 3 in the adapter maturity model.
 ## Current Status
 
 - Current public prerelease: v0.9.0rc4
-- Current main development version: 0.9.0rc5.dev0
+- Current main release draft: 0.9.0rc5
 - Elmer current maturity: Level 2
 - Target next maturity: Level 3 - Optional manual solver validation
 - ElmerSolver is not installed locally

@@ -13,7 +13,7 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
     assert "Current public prerelease: v0.9.0rc4" in text
-    assert "Current main development version: 0.9.0rc5.dev0" in text
+    assert "Current main release draft: `0.9.0rc5`" in text
     assert "v1.0.0 not released" in text
     assert "PyPI/TestPyPI: not published / not uploaded" in text
     assert "No production-grade physical validation" in text

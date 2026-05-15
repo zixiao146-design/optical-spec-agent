@@ -1,9 +1,9 @@
 # Validation Gate
 
 Version scope: current public prerelease `v0.9.0rc4`; current `main`
-development version `0.9.0rc5.dev0`. `v0.9.0rc5.dev0` is not a release, the
+release draft `0.9.0rc5`. `v0.9.0rc5` release draft is not a public release, the
 `v0.9.0rc5` tag has not been created, and PyPI/TestPyPI remain unpublished.
-Continue v1.0 readiness engineering and prepare a `v0.9.0rc5.dev0` development version
+Continue v1.0 readiness engineering and prepare a `v0.9.0rc5` release draft
 only when accumulated changes should be published as another RC.
 
 The validation strategy is open-source-solver-first. Proprietary solvers are not
@@ -43,7 +43,7 @@ production validation.
 External solver validation remains optional/manual unless explicitly enabled by
 maintainers.
 
-## v0.9.0rc5.dev0 validation target
+## v0.9.0rc5 validation target
 
 - Include contract tests from `d567660`.
 - Include packaging gate tests from this sprint.
@@ -104,7 +104,7 @@ maintainers.
 - `scripts/open_solver_validation_preflight.sh` must remain no-execution and
   safe when solvers are unavailable.
 - Current public prerelease remains `v0.9.0rc4`, current main development
-  version remains `0.9.0rc5.dev0`, the `v0.9.0rc5` tag has not been created,
+  version remains `0.9.0rc5`, the `v0.9.0rc5` tag has not been created,
   and PyPI/TestPyPI remain unpublished/not uploaded.
 
 ## v1.0 validation target

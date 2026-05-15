@@ -1,12 +1,14 @@
 # optical-spec-agent Docs
 
 Current public prerelease: v0.9.0rc4.
-Current main development version: 0.9.0rc5.dev0.
+Current main release draft: `0.9.0rc5`.
 
 ## Release / Readiness
 
 - [Current release readiness](release_readiness_current.md)
-- [v0.9.0rc5 development readiness](release_readiness_v0.9.0rc5.md)
+- [v0.9.0rc5 release draft readiness](release_readiness_v0.9.0rc5.md)
+- [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
+- [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
 - [v0.9.0rc4 post-release status](post_release_status_v0.9.0rc4.md)
 
 ## Quality / Packaging
@@ -17,7 +19,7 @@ Current main development version: 0.9.0rc5.dev0.
 - [Packaging gate](packaging_gate.md)
 - [TestPyPI dry-run gate](testpypi_dry_run_gate.md)
 - [PyPI publication decision](pypi_publication_decision.md)
-- [TestPyPI upload approval for 0.9.0rc5.dev0](testpypi_upload_approval_v0.9.0rc5.dev0.md)
+- [TestPyPI upload approval for 0.9.0rc5](testpypi_upload_approval_v0.9.0rc5.md)
 - [Secrets and token hygiene](secrets_and_token_hygiene.md)
 
 ## Contracts

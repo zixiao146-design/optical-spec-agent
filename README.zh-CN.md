@@ -36,8 +36,7 @@ PyPI/TestPyPI 仍未发布/上传。
 
 ## 发布状态
 
-当前公开 release candidate 是 `v0.9.0rc4`。当前 `main` 的 development
-version 是 `0.9.0rc5.dev0`，包含 post-`v0.9.0rc4` hardening changes。
+当前公开 release candidate 是 `v0.9.0rc4`。当前 `main` 的 release draft version 是 `0.9.0rc5`，包含 post-`v0.9.0rc4` hardening changes。
 `v0.9.0rc5` tag 和 GitHub release 尚未创建；这仍然不是 final stable `1.0`。
 
 `v0.6` 到 `v0.9` 的能力属于 preview/scaffold/evaluation capabilities：
@@ -182,7 +181,7 @@ pip install -e ".[dev]"
 完整的无网络、无外部 solver、无外部 LLM、无 proprietary solver 默认依赖的
 端到端路径见 `docs/offline_user_journey.md` 和 `examples/e2e/README.md`。
 
-`examples/` 目录中的 fixture 是当前 `0.9.0rc5.dev0` main 和公开
+`examples/` 目录中的 fixture 是当前 `0.9.0rc5` main 和公开
 `v0.9.0rc4` RC 线的本地示例证据：
 
 ```bash

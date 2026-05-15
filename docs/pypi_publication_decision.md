@@ -5,7 +5,7 @@
 - PyPI published: no.
 - TestPyPI uploaded: no.
 - Current public prerelease: `v0.9.0rc4`.
-- Current main development version: `0.9.0rc5.dev0`.
+- Current main release draft: `0.9.0rc5`.
 - `v0.9.0rc5` GitHub release has not been created.
 - `v0.9.0rc5` tag has not been created.
 - Package build smoke: passed for the RC line.
@@ -19,9 +19,10 @@
 - Secrets and token hygiene: `docs/secrets_and_token_hygiene.md`.
 - Maintainer operations checklist: `docs/maintainer_operations_checklist.md`.
 - TestPyPI upload approval record:
-  `docs/testpypi_upload_approval_v0.9.0rc5.dev0.md`.
+  `docs/testpypi_upload_approval_v0.9.0rc5.md`.
 - TestPyPI upload approval status: pending.
 - TestPyPI upload authorized: no.
+- Upload command authorized: no.
 - PyPI publication approval: not granted.
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
 
