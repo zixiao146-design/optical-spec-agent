@@ -2,13 +2,13 @@
 
 ## Purpose
 
-This document records the GitHub Actions Trusted Publishing route for a future
+This document records the GitHub Actions Trusted Publishing route used for the
 manual TestPyPI upload of `optical-spec-agent` `0.9.0rc6.dev0`.
 
 The local token-based TestPyPI upload attempt for `0.9.0rc6.dev0` failed with
-HTTP 403 Forbidden. The next safer route is to use TestPyPI Trusted Publishing
-bound to GitHub Actions, so no TestPyPI token needs to be stored in the
-repository or pasted into a workflow secret.
+HTTP 403 Forbidden. The successful route was TestPyPI Trusted Publishing bound
+to GitHub Actions, so no TestPyPI token was stored in the repository or pasted
+into a workflow secret.
 
 ## Workflow
 
@@ -18,12 +18,16 @@ repository or pasted into a workflow secret.
 - Target repository URL: `https://test.pypi.org/legacy/`
 - Package version guarded by workflow: `0.9.0rc6.dev0`
 - Token storage: no token stored
+- Workflow result: passed for `0.9.0rc6.dev0`
+- TestPyPI upload: completed
+- Clean install verification: passed
+- Status record: `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - PyPI publication approved: no
 - GitHub tag created: no
 - GitHub release created: no
 
-This task adds the workflow only. It does not run the workflow, upload to
-TestPyPI, publish to PyPI, create a tag, or create a GitHub release.
+The workflow has been run manually for `0.9.0rc6.dev0` and uploaded to
+TestPyPI. It did not publish to PyPI, create a tag, or create a GitHub release.
 
 ## Required TestPyPI Trusted Publisher Settings
 
@@ -48,3 +52,5 @@ The TestPyPI trusted publisher configuration should match:
 - The workflow does not create tags.
 - The workflow does not create GitHub releases.
 - PyPI publication remains separately gated and not approved.
+- Re-uploading the same version may fail because TestPyPI package files are
+  already present.

@@ -51,7 +51,7 @@ PyPI/TestPyPI 仍未发布/上传。
 `v0.9.0rc5` tag 和 GitHub prerelease 已由维护者确认后创建，并作为当前
 release candidate supersede `v0.9.0rc4`。不要移动 `v0.9.0rc1`、`v0.9.0rc2`、
 `v0.9.0rc3`、`v0.9.0rc4` 或 `v0.9.0rc5` tag。未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布；
-TestPyPI 仅批准用于 `0.9.0rc6.dev0` evaluation。
+TestPyPI 已通过手动 Trusted Publishing 上传 `0.9.0rc6.dev0`，但这不授权正式 PyPI 发布。
 
 面向 `v1.0` 的公共契约边界见：
 `docs/cli_contract.md`、`docs/schema_contract.md`、
@@ -59,8 +59,8 @@ TestPyPI 仅批准用于 `0.9.0rc6.dev0` evaluation。
 `docs/validation_boundary.md`、`docs/validation_gate.md`、`docs/packaging_gate.md`、
 `docs/open_source_solver_strategy.md`、`docs/proprietary_solver_policy.md`、
 `docs/external_solver_policy.md`、`docs/external_llm_policy.md` 和
-`docs/pypi_publication_decision.md`。TestPyPI/PyPI 决策仍是 pending /
-not granted，见 `docs/publication_decision_record.md`；该文档不授权上传或发布。
+`docs/pypi_publication_decision.md`。PyPI 发布仍是 not granted，见
+`docs/publication_decision_record.md`；TestPyPI 成功状态不授权正式 PyPI 发布。
 v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/validation_evidence_manifest.md`、`docs/adapter_maturity_model.md`、
 `docs/open_source_solver_validation_plan.md`、`docs/open_solver_validation_harness.md`、
@@ -88,6 +88,7 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 当前 rc6 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc6.md`、
 `docs/rc6_development_plan.md`、`docs/v1_0_gap_audit.md`、
 `docs/v1_0_decision_matrix.md`、`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`、
+`docs/testpypi_status_v0.9.0rc6.dev0.md`、
 `docs/testpypi_trusted_publishing.md`、
 `docs/testpypi_dry_run_gate.md` 和
 `docs/v1_0_stability_gate.md`。

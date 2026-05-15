@@ -2,16 +2,21 @@
 
 ## TestPyPI upload
 
-- Current: granted for 0.9.0rc6.dev0 only
+- Current: completed for 0.9.0rc6.dev0
 - Record: `docs/publication_decision_record.md`
+- Status: `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - Options:
-  - Approve upload.
-  - Continue no-upload.
-  - Skip with documented reason.
+  - Keep the completed 0.9.0rc6.dev0 TestPyPI upload as evidence.
+  - Approve a future TestPyPI upload for a later candidate.
+  - Skip future TestPyPI upload with documented reason.
 - Impact: decides whether package publication confidence includes a real
   TestPyPI exercise before v1.0, without authorizing PyPI publication by itself.
-- Latest attempt: failed with HTTP 403 Forbidden; retry requires a TestPyPI
-  token with sufficient upload/create-project permissions.
+- Latest result: GitHub Actions Trusted Publishing passed for 0.9.0rc6.dev0,
+  and clean install verification passed. The earlier local token attempt failed
+  with HTTP 403 Forbidden and remains a historical record.
+- Dependency-index caveat: the successful verification installed dependencies
+  from PyPI and installed `optical-spec-agent` from TestPyPI with `--no-deps`
+  because TestPyPI contains an unrelated `FASTAPI` package.
 
 ## PyPI publication
 
@@ -57,7 +62,8 @@
   publication boundaries are stable enough to call the next milestone v1.0.
 
 Public contract freeze remains a hard blocker until the maintainer confirms
-the checklist. TestPyPI is authorized only for `0.9.0rc6.dev0`; PyPI publication remains not granted, Elmer remains deferred/non-blocking,
+the checklist. TestPyPI is completed for `0.9.0rc6.dev0`; PyPI publication
+remains not granted, Elmer remains deferred/non-blocking,
 production-grade physical validation remains a non-goal unless explicitly
 claimed, and formal convergence proof remains a non-goal unless explicitly
 claimed.

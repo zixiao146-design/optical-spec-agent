@@ -15,16 +15,19 @@ verified public `v0.9.0rc5` prerelease.
 - `v0.9.0rc6` GitHub release: not created
 - `v0.9.0rc6` tag: not created
 - PyPI status: not published
-- TestPyPI status: not published
+- TestPyPI status: uploaded for 0.9.0rc6.dev0
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`
 - One-command quality gate script: `scripts/run_quality_gates.sh`
 - Quality gate doc: `docs/quality_gates.md`
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
+- TestPyPI status record:
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
 - TestPyPI upload authorized: yes, TestPyPI only
 - Upload command authorized: TestPyPI only
+- TestPyPI clean install verification: passed
 - PyPI publication approval: not granted
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
 - Open-source solver strategy doc: `docs/open_source_solver_strategy.md`
@@ -77,8 +80,8 @@ verified public `v0.9.0rc5` prerelease.
 - The no-upload preflight does not upload, publish, create tags, or create
   GitHub releases.
 - TestPyPI upload requires explicit maintainer approval.
-- Approval remains pending in
-  `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`.
+- TestPyPI upload for `0.9.0rc6.dev0` is completed and recorded in
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`.
 - TestPyPI upload must not be part of the default smoke script.
 - Wheel smoke remains local only.
 - Smoke script must not publish or upload packages.
@@ -102,7 +105,7 @@ verified public `v0.9.0rc5` prerelease.
 ## Non-goals
 
 - No PyPI publish now.
-- No TestPyPI upload now.
+- No additional TestPyPI upload now.
 - No upload from `scripts/testpypi_preflight.sh`.
 - No automatic package publishing from `scripts/smoke_release.sh`.
 - Do not publish automatically from release scripts.

@@ -29,6 +29,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Publication decision record](publication_decision_record.md)
 - [TestPyPI upload approval for 0.9.0rc6.dev0](testpypi_upload_approval_v0.9.0rc6.dev0.md)
 - [TestPyPI upload attempt for 0.9.0rc6.dev0](testpypi_upload_attempt_v0.9.0rc6.dev0.md)
+- [TestPyPI status for 0.9.0rc6.dev0](testpypi_status_v0.9.0rc6.dev0.md)
 - [TestPyPI Trusted Publishing](testpypi_trusted_publishing.md)
 - [Secrets and token hygiene](secrets_and_token_hygiene.md)
 

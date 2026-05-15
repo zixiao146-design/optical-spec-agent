@@ -7,7 +7,7 @@
 - v1.0.0: not released
 - v0.9.0rc6 tag: not created
 - PyPI: not published
-- TestPyPI: not uploaded
+- TestPyPI: uploaded for 0.9.0rc6.dev0
 
 ## Candidate-stable contract areas
 
@@ -44,8 +44,8 @@
 | Adapter registry names | ready | `meep`, `mpb`, `gmsh`, `elmer`, and `optiland` are documented and tested. |
 | Workflow-plan public keys | candidate-ready | Public top-level keys are documented and guarded; workflow internals remain preview. |
 | Examples manifest | ready | Paths and no-network/no-solver/no-LLM/no-proprietary guarantees are tested. |
-| Packaging metadata | ready for RC, not PyPI-published | Local build and wheel smoke pass; PyPI/TestPyPI remain unpublished/unuploaded. |
-| TestPyPI decision | pending | Upload is not approved and no upload command is authorized. |
+| Packaging metadata | ready for RC, not PyPI-published | Local build and wheel smoke pass; TestPyPI has `0.9.0rc6.dev0`, while PyPI remains unpublished. |
+| TestPyPI decision | completed for 0.9.0rc6.dev0 | Trusted Publishing upload and clean install verification are recorded in `docs/testpypi_status_v0.9.0rc6.dev0.md`; future uploads require explicit approval per version. |
 | PyPI publication decision | not granted | PyPI publication remains blocked pending explicit maintainer approval. |
 | Elmer Level 3 | deferred/non-blocking | Elmer remains Level 2 + Level-3-ready pending ElmerSolver availability and explicit opt-in validation. |
 | Production-grade physical validation | non-goal unless explicitly claimed | Current docs do not claim production-grade physical validation. |

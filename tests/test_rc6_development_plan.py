@@ -16,7 +16,7 @@ def test_rc6_development_plan_tracks_dev_state_and_exit_criteria():
     assert "Current public prerelease: v0.9.0rc5" in text
     assert "Current main development version: 0.9.0rc6.dev0" in text
     assert "v0.9.0rc6 tag: not created" in text
-    assert "No PyPI/TestPyPI upload now" in text
+    assert "No PyPI upload and no repeat TestPyPI upload now" in text
     assert "Quality gates passed" in text
     assert "PyPI/TestPyPI decision explicit" in text
     assert "Elmer deferred or validated status explicit" in text

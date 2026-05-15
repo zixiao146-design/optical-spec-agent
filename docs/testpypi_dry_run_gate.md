@@ -2,7 +2,7 @@
 
 ## Current status
 
-- TestPyPI uploaded: no
+- TestPyPI uploaded: yes, for 0.9.0rc6.dev0
 - PyPI published: no
 - Current public prerelease: v0.9.0rc5
 - Current main development version: `0.9.0rc6.dev0`
@@ -10,20 +10,23 @@
 - Proprietary solvers are not default dependencies
 - v0.9.0rc6 tag: not created
 - GitHub release: not created
-- PyPI/TestPyPI remain unpublished/not uploaded
+- PyPI remains unpublished; TestPyPI contains 0.9.0rc6.dev0
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- TestPyPI status:
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - TestPyPI Trusted Publishing doc:
   `docs/testpypi_trusted_publishing.md`
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml`
-- TestPyPI Trusted Publishing workflow status: added, not run
+- TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
 - TestPyPI upload authorized: yes, TestPyPI only
 - Upload command authorized: TestPyPI only
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
+- TestPyPI clean install verification: passed
 - PyPI publication approval: not granted
 
 ## Purpose
@@ -42,9 +45,10 @@ checks, and `optical-spec --help`.
 The preflight does not upload. It does not publish. It does not create tags. It
 does not create GitHub releases. It prints `NO UPLOAD PERFORMED`.
 
-For a future manual TestPyPI retry, use the Trusted Publishing workflow rather
-than a local token upload. The workflow is manual only, requires the confirmation
-string `UPLOAD_TESTPYPI`, and targets `https://test.pypi.org/legacy/`.
+The manual TestPyPI Trusted Publishing workflow was used successfully for
+`0.9.0rc6.dev0`. It is manual only, requires the confirmation string
+`UPLOAD_TESTPYPI`, and targets `https://test.pypi.org/legacy/`. Re-uploading the
+same version may fail because package files are already present.
 
 `scripts/run_quality_gates.sh` includes this preflight as the first local gate
 unless `OSA_SKIP_PREFLIGHT=1` is set.
@@ -81,15 +85,15 @@ Related operations docs:
 
 - TestPyPI upload requires explicit maintainer approval.
 - PyPI upload requires explicit maintainer approval.
-- The approval record grants TestPyPI upload for `0.9.0rc6.dev0` only.
+- The approval record granted TestPyPI upload for `0.9.0rc6.dev0` only, and the
+  status record now documents the completed Trusted Publishing upload.
 - Approval must be recorded in docs or release notes.
 - Default smoke/release scripts must never upload automatically.
 - No token should be printed or committed.
 
 ## Upload non-goals
 
-- This task may upload `0.9.0rc6.dev0` to TestPyPI only after the no-upload
-  preflight and secure token entry.
+- This document does not authorize another upload of `0.9.0rc6.dev0`.
 - This task does not publish PyPI.
 - This task does not create release artifacts beyond local dist.
 - This task does not create GitHub release.
@@ -97,7 +101,8 @@ Related operations docs:
 
 ## Future command placeholders
 
-AUTHORIZED FOR TESTPYPI ONLY FOR 0.9.0rc6.dev0:
+HISTORICAL LOCAL TOKEN TEMPLATE FOR 0.9.0rc6.dev0 ONLY. DO NOT RERUN AFTER THE
+SUCCESSFUL TRUSTED PUBLISHING UPLOAD:
 
 ```bash
 python -m twine upload \

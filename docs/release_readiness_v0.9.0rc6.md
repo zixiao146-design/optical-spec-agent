@@ -7,7 +7,7 @@
 - v0.9.0rc5 target commit: accce88c88a7e823b6e71ff3e1b51b0ac08db781
 - Current main development version: 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
-- PyPI/TestPyPI: not published / not uploaded
+- PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 
 ## Why Main Moved To 0.9.0rc6.dev0
@@ -20,7 +20,8 @@
 ## v0.9.0rc6 Development Goals
 
 - Continue v1.0 readiness engineering.
-- Decide whether to evaluate TestPyPI upload with explicit approval.
+- Use the completed 0.9.0rc6.dev0 TestPyPI Trusted Publishing upload as
+  packaging evidence.
 - Keep quality gates passing.
 - Keep the open-source-solver-first strategy.
 - Keep proprietary solvers non-default/export-only.
@@ -45,12 +46,13 @@
 - Dist filenames must contain `0.9.0rc6`.
 - Release draft notes must exist.
 - `v0.9.0rc6` tag must be absent before creation.
-- PyPI/TestPyPI decision must be explicit.
+- PyPI decision must be explicit; future TestPyPI uploads must be explicit per
+  candidate.
 
 ## Non-goals
 
 - Do not publish PyPI now.
-- Do not upload TestPyPI now.
+- Do not re-upload the existing 0.9.0rc6.dev0 TestPyPI artifacts now.
 - Do not create `v0.9.0rc6` tag now.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.

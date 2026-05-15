@@ -5,16 +5,16 @@
 - Current public prerelease: v0.9.0rc5
 - Current main development version: 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
-- PyPI/TestPyPI: not published / not uploaded
+- PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 
 ## Goals for rc6.dev cycle
 
 - Close v1.0 public contract freeze gaps.
 - Keep `docs/v1_0_public_contract_freeze_checklist.md` current.
-- Keep `docs/publication_decision_record.md` current while TestPyPI remains
-  pending and PyPI publication remains not granted.
+- Keep `docs/publication_decision_record.md` current now that TestPyPI
+  succeeded for 0.9.0rc6.dev0 and PyPI publication remains not granted.
 - Improve release/quality documentation consistency.
-- Decide whether TestPyPI upload will be approved.
+- Decide future TestPyPI uploads explicitly per candidate.
 - Keep quality gates passing.
 - Keep adapter maturity documentation current.
 - Optionally revisit Elmer only if a maintainable install route appears.
@@ -24,7 +24,7 @@
 
 - No tag creation now.
 - No release creation now.
-- No PyPI/TestPyPI upload now.
+- No PyPI upload and no repeat TestPyPI upload now.
 - No production-grade physical validation claim.
 - No formal convergence proof claim.
 - No proprietary solver dependency.

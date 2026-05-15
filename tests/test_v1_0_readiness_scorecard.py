@@ -15,7 +15,7 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Current public prerelease: v0.9.0rc5" in text
     assert "Current main development version: `0.9.0rc6.dev0`" in text
     assert "v1.0.0 not released" in text
-    assert "PyPI/TestPyPI: not published / not uploaded" in text
+    assert "PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0" in text
     assert "v1.0 readiness gap audit" in text
     assert "v0.9.0rc6 development plan" in text
     assert "v1.0 decision matrix" in text
@@ -25,8 +25,9 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "No formal convergence proof" in text
     assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in text
     assert "Quality gates" in text
-    assert "TestPyPI upload not approved/exercised" in text
-    assert "Publication decision record keeps TestPyPI pending" in text
+    assert "TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted" in text
+    assert "TestPyPI status record for 0.9.0rc6.dev0" in text
+    assert "Publication decision record keeps PyPI publication not granted" in text
     assert "Optional open-source solver availability preflight" in text
     assert "Open-source solver preflight detects availability only" in text
     assert "Adapter maturity model" in text

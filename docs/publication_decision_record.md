@@ -4,7 +4,7 @@
 
 - Current public prerelease: v0.9.0rc5
 - Current main development version: 0.9.0rc6.dev0
-- TestPyPI uploaded: no
+- TestPyPI uploaded: yes, for 0.9.0rc6.dev0
 - PyPI published: no
 - TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 - PyPI publication approval: not granted
@@ -12,9 +12,13 @@
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
+- TestPyPI Trusted Publishing status:
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`
+- TestPyPI Trusted Publishing result: completed
+- TestPyPI clean install verification: passed
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml`
-- TestPyPI Trusted Publishing workflow status: added, not run
+- TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0
 
 ## Decisions not yet granted
 
@@ -35,8 +39,10 @@
 
 ### Path B
 
-- Upload to TestPyPI only.
-- Verify clean install from TestPyPI.
+- Upload to TestPyPI only. Completed for `0.9.0rc6.dev0` through Trusted
+  Publishing.
+- Verify clean install from TestPyPI. Completed for `0.9.0rc6.dev0`; see
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`.
 - Do not publish PyPI.
 
 ### Path C
@@ -45,10 +51,10 @@
 - Verify.
 - Then separately approve PyPI publication.
 
-## Required before TestPyPI upload
+## Required before Future TestPyPI Upload
 
 - Explicit maintainer approval.
-- TestPyPI token available.
+- Trusted Publishing configuration or a valid TestPyPI token.
 - No-upload preflight passed.
 - Quality gates passed.
 - Version/tag strategy understood.
@@ -65,14 +71,23 @@
 
 ## Current recommendation
 
-Recommended current state: upload `0.9.0rc6.dev0` to TestPyPI only, verify a
-clean install from TestPyPI, and keep PyPI publication separately gated while
-v1.0 readiness engineering continues.
+Recommended current state: keep PyPI publication separately gated while v1.0
+readiness engineering continues. TestPyPI upload and clean-install verification
+are completed for `0.9.0rc6.dev0`; this does not authorize PyPI publication,
+tag creation, or GitHub release creation.
 
-The latest TestPyPI upload attempt failed with HTTP 403 Forbidden, so TestPyPI
-remains not uploaded until a token with sufficient TestPyPI permissions is used.
-The preferred retry path is the manual TestPyPI Trusted Publishing workflow
-documented in `docs/testpypi_trusted_publishing.md`; it has not been run.
+The earlier local token-based TestPyPI upload attempt failed with HTTP 403
+Forbidden and remains recorded in
+`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`. The successful path was the
+manual TestPyPI Trusted Publishing workflow documented in
+`docs/testpypi_trusted_publishing.md` and recorded in
+`docs/testpypi_status_v0.9.0rc6.dev0.md`.
+
+Dependency-index caveat: a naive install using TestPyPI as the primary package
+index failed because TestPyPI contains an unrelated `FASTAPI` package that can
+shadow the real `fastapi` dependency. The successful verification installed
+runtime dependencies from PyPI and installed `optical-spec-agent` from TestPyPI
+with `--no-deps`.
 
 This record authorizes TestPyPI upload only for `0.9.0rc6.dev0`. It does not
 authorize PyPI publication, GitHub release creation, tag creation, production-

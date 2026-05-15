@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_testpypi_dry_run_gate_doc_exists_and_requires_manual_approval():
     text = (ROOT / "docs" / "testpypi_dry_run_gate.md").read_text(encoding="utf-8")
-    assert "TestPyPI uploaded: no" in text
+    assert "TestPyPI uploaded: yes, for 0.9.0rc6.dev0" in text
     assert "PyPI published: no" in text
     assert "Current public prerelease: v0.9.0rc5" in text
     assert "Current main development version: `0.9.0rc6.dev0`" in text
@@ -19,15 +19,18 @@ def test_testpypi_dry_run_gate_doc_exists_and_requires_manual_approval():
     assert "scripts/testpypi_preflight.sh" in text
     assert "docs/testpypi_upload_approval_v0.9.0rc6.dev0.md" in text
     assert "docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md" in text
+    assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text
     assert "TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only" in text
     assert "TestPyPI upload authorized: yes, TestPyPI only" in text
     assert "Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden" in text
+    assert "TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0" in text
+    assert "TestPyPI clean install verification: passed" in text
     assert "PyPI publication approval: not granted" in text
     assert "NO UPLOAD PERFORMED" in text
     assert "does not upload" in text
     assert "does not create tags" in text
     if "twine upload" in text:
-        assert "AUTHORIZED FOR TESTPYPI ONLY FOR 0.9.0rc6.dev0" in text
+        assert "HISTORICAL LOCAL TOKEN TEMPLATE FOR 0.9.0rc6.dev0 ONLY" in text
         assert "Do not run this command for PyPI" in text
     assert "Token must never be committed or printed" in text
 

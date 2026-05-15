@@ -7,7 +7,7 @@
 - Adapter family: gmsh
 - Current maturity: Level 3 - Optional manual solver validation
 - Evidence report: `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`
-- PyPI/TestPyPI: not published / not uploaded
+- PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
 
 ## Evidence Summary

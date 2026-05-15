@@ -17,19 +17,24 @@ This document describes the current `main` branch. It is not a release tag.
 - Post-release status doc: `docs/post_release_status_v0.9.0rc5.md`
 - Latest release-status commit: `e1782ea`
 - PyPI published: no
-- TestPyPI uploaded: no
+- TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- TestPyPI status:
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - TestPyPI Trusted Publishing doc:
   `docs/testpypi_trusted_publishing.md`
 - TestPyPI Trusted Publishing workflow:
-  `.github/workflows/testpypi-trusted-publish.yml` (added, not run)
+  `.github/workflows/testpypi-trusted-publish.yml` (manual, passed for
+  `0.9.0rc6.dev0`)
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
 - TestPyPI upload authorized: yes, TestPyPI only
 - Upload command authorized: TestPyPI only
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
+- TestPyPI Trusted Publishing result: completed
+- TestPyPI clean install verification: passed
 - PyPI publication approval: not granted
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
@@ -105,8 +110,9 @@ python -m twine check dist/*
 Current recommendation: treat `v0.9.0rc5` as the active verified public
 prerelease. The `main` branch now builds as `0.9.0rc6.dev0`, a post-rc5
 development state toward the next candidate. `0.9.0rc6.dev0` is not a public
-release, the `v0.9.0rc6` tag has not been created, and PyPI/TestPyPI remain
-unpublished unless explicitly approved.
+release, the `v0.9.0rc6` tag has not been created, and publication remains
+separately gated. TestPyPI contains the `0.9.0rc6.dev0` development package via
+manual Trusted Publishing; PyPI remains unpublished.
 
 Current main contract artifacts:
 
@@ -148,6 +154,7 @@ Current main contract artifacts:
 - `docs/README.md`
 - `docs/release_readiness_v0.9.0rc6.md`
 - `docs/testpypi_dry_run_gate.md`
+- `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - `docs/v1_0_stability_gate.md`
 - `docs/schema_compatibility_policy.md`
 - `examples/README.md`
@@ -212,7 +219,7 @@ Current v1.0 evidence artifacts:
 - No hard release blocker is currently recorded for `0.9.0rc6.dev0` development.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or `v0.9.0rc5`.
 - Do not publish PyPI yet.
-- Do not upload TestPyPI yet.
+- Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
 - Next blocker class: any `v0.9.0rc6` candidate must pass the release smoke

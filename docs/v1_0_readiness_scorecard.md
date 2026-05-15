@@ -4,7 +4,7 @@
 
 - Current public prerelease: v0.9.0rc5
 - Current main development version: `0.9.0rc6.dev0`
-- PyPI/TestPyPI: not published / not uploaded
+- PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 - v1.0.0 not released
 
@@ -55,8 +55,10 @@
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
 - Publication decision record.
-- TestPyPI upload attempt record for 0.9.0rc6.dev0: failed with HTTP 403
-  Forbidden and did not publish PyPI.
+- TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
+  failed with HTTP 403 Forbidden and did not publish PyPI.
+- TestPyPI status record for 0.9.0rc6.dev0: Trusted Publishing upload
+  completed, clean install from TestPyPI passed, and PyPI remains unpublished.
 - Examples manifest.
 - Validation evidence manifest.
 - Package build and wheel install.
@@ -86,10 +88,11 @@
 - Elmer remains Level 2 pending ElmerSolver installation and explicit opt-in
   manual validation; missing ElmerSolver is non-blocking for default gates, and
   the 2026-05-15 package-manager install attempt is recorded as deferred.
-- TestPyPI upload not approved/exercised.
+- TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted
+  Publishing.
 - PyPI publication not approved.
-- Publication decision record keeps TestPyPI pending, upload unauthorized, and
-  PyPI publication not granted.
+- Publication decision record keeps PyPI publication not granted and prevents
+  tag/release creation from being implied by TestPyPI success.
 - Adapter outputs may still be MVP/scaffold.
 - Workflow remains local/synchronous preview.
 - v1.0 compatibility freeze not finalized.

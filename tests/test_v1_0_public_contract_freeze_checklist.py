@@ -16,6 +16,7 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     assert "Current public prerelease: v0.9.0rc5" in text
     assert "Current main development version: 0.9.0rc6.dev0" in text
     assert "v1.0.0: not released" in text
+    assert "TestPyPI: uploaded for 0.9.0rc6.dev0" in text
     assert "Candidate-stable contract areas" in text
     for phrase in [
         "Console script: `optical-spec`",
@@ -33,7 +34,8 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     assert "Areas still preview / not frozen" in text
     assert "Adapter generated-script internals" in text
     assert "Optional solver validation internals" in text
-    assert "TestPyPI decision | pending" in text
+    assert "TestPyPI decision | completed for 0.9.0rc6.dev0" in text
+    assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text
     assert "PyPI publication decision | not granted" in text
     assert "Elmer Level 3 | deferred/non-blocking" in text
     assert "Production-grade physical validation | non-goal unless explicitly claimed" in text
@@ -47,4 +49,6 @@ def test_public_contract_manifest_tracks_rc6_state_without_publish_or_upload():
     assert '"v0_9_0rc5_tag_created": true' in text
     assert '"v0_9_0rc6_tag_created": false' in text
     assert '"pypi_published": false' in text
-    assert '"testpypi_uploaded": false' in text
+    assert '"testpypi_uploaded": true' in text
+    assert '"testpypi_uploaded_version": "0.9.0rc6.dev0"' in text
+    assert '"testpypi_status_doc": "docs/testpypi_status_v0.9.0rc6.dev0.md"' in text

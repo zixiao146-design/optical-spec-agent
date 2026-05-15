@@ -6,7 +6,8 @@ This playbook captures the release process hardened during the `v0.9.0rc1`,
 Current public prerelease: `v0.9.0rc5`.
 Current main development version: `0.9.0rc6.dev0`.
 `0.9.0rc6.dev0` is not a public release, and the `v0.9.0rc6` tag has not
-been created. PyPI/TestPyPI remain unpublished.
+been created. PyPI remains unpublished; TestPyPI contains the `0.9.0rc6.dev0`
+development package.
 
 Release engineering is open-source-solver-first. Default tests, smoke, examples,
 and release validation require no proprietary solver license. External solvers

@@ -28,5 +28,6 @@ scaffold compatibility evidence. They help stabilize generated artifact shape,
 metadata, warnings, and defaults, but they do not assert solver-backed physical
 correctness.
 
-PyPI/TestPyPI remain unpublished/not uploaded. `v0.9.0rc5` is the current
-public prerelease, and the `v0.9.0rc6` tag has not been created.
+PyPI remains unpublished. TestPyPI contains the `0.9.0rc6.dev0` development
+package. `v0.9.0rc5` is the current public prerelease, and the `v0.9.0rc6` tag
+has not been created.

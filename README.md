@@ -41,8 +41,9 @@ scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
 The `v0.9.0rc5` git tag and GitHub prerelease were created after maintainer
 review and supersede `v0.9.0rc4` as the current release candidate. PyPI remains
-unpublished. TestPyPI upload is approved only for `0.9.0rc6.dev0` evaluation,
-and this repository state is not a final stable `1.0` release.
+unpublished. TestPyPI upload completed for `0.9.0rc6.dev0` through manual
+Trusted Publishing; this repository state is not a final stable `1.0` release,
+and PyPI publication remains separately gated.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -56,6 +57,7 @@ Current rc6 development readiness and publication gates are tracked in
 [`docs/v1_0_gap_audit.md`](docs/v1_0_gap_audit.md),
 [`docs/v1_0_decision_matrix.md`](docs/v1_0_decision_matrix.md),
 [`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`](docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md),
+[`docs/testpypi_status_v0.9.0rc6.dev0.md`](docs/testpypi_status_v0.9.0rc6.dev0.md),
 [`docs/testpypi_trusted_publishing.md`](docs/testpypi_trusted_publishing.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
@@ -86,7 +88,7 @@ Public contract boundaries are tracked in
 [`docs/pypi_publication_decision.md`](docs/pypi_publication_decision.md).
 Publication decisions remain pending/not granted and are tracked in
 [`docs/publication_decision_record.md`](docs/publication_decision_record.md);
-this does not authorize TestPyPI or PyPI upload.
+the completed TestPyPI upload does not authorize PyPI publication.
 Validation, packaging, and optional-provider policies are tracked in
 [`docs/validation_gate.md`](docs/validation_gate.md),
 [`docs/packaging_gate.md`](docs/packaging_gate.md),

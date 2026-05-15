@@ -40,3 +40,4 @@ def test_testpypi_upload_approval_record_is_linked_from_gate_docs():
         assert "docs/testpypi_upload_approval_v0.9.0rc6.dev0.md" in text
         assert "TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only" in text
         assert "TestPyPI upload authorized: yes, TestPyPI only" in text
+        assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text

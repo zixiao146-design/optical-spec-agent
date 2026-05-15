@@ -11,7 +11,7 @@
 - Post-release status: `docs/post_release_status_v0.9.0rc5.md`
 - Latest post-release status commit: `e1782ea`
 - PyPI published: no
-- TestPyPI uploaded: no
+- TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
 
 ## What v0.9.0rc2 already proves
 
@@ -58,8 +58,8 @@ Recommended goals:
 - Use `docs/v1_0_public_contract_freeze_checklist.md` to make the freeze
   candidate actionable.
 - Use `docs/publication_decision_record.md` to keep TestPyPI authorization
-  explicit, record the failed 0.9.0rc6.dev0 upload attempt, and keep PyPI not
-  granted.
+  explicit, record the successful 0.9.0rc6.dev0 Trusted Publishing upload, and
+  keep PyPI not granted.
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
 - Keep the v1.0 stability gate current.
@@ -77,8 +77,8 @@ Recommended goals:
   skipped/manual by default.
 - Physical validation status clarified without overclaiming.
 - PyPI remains unpublished unless explicitly approved.
-- TestPyPI remains not uploaded until a retry succeeds with sufficient
-  TestPyPI token permissions.
+- TestPyPI upload and clean-install verification are complete for
+  `0.9.0rc6.dev0`; do not re-upload the same version.
 
 ## Recommended path to v1.0.0
 

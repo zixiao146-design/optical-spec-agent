@@ -150,6 +150,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "testpypi_upload_attempt_v0.9.0rc6.dev0.md",
+        "testpypi_status_v0.9.0rc6.dev0.md",
         "testpypi_trusted_publishing.md",
         "release_readiness_v0.9.0rc6.md",
         "v1_0_gap_audit.md",
@@ -229,6 +230,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "scripts/testpypi_preflight.sh" in combined
     assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in combined
     assert "Upload command authorized: TestPyPI only" in combined
+    assert "TestPyPI uploaded: yes" in combined
+    assert "TestPyPI clean install verification: passed" in combined
+    assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined
     assert "PyPI publication approval: not granted" in combined
     assert "NO UPLOAD PERFORMED" in combined
     assert "Offline User Journey" in combined
@@ -332,7 +336,8 @@ def test_adapter_support_matrix_covers_registered_adapter_families():
     assert "not registered adapters unless" in text
     assert "0.9.0rc6.dev0" in text
     assert "v0.9.0rc5" in text
-    assert "PyPI/TestPyPI remain unpublished" in text
+    assert "PyPI remains unpublished" in text
+    assert "TestPyPI\ncontains the `0.9.0rc6.dev0` development package" in text
 
 
 def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
@@ -351,8 +356,8 @@ def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
         "no external solver",
         "external LLM",
         "proprietary",
-        "PyPI/TestPyPI remain unpublished",
-        "not uploaded",
+        "PyPI remains unpublished",
+        "TestPyPI contains the `0.9.0rc6.dev0` development package",
         "0.9.0rc5",
         "GitHub release",
         "v0.9.0rc5",
@@ -377,7 +382,7 @@ def test_offline_user_journey_release_artifacts_are_tracked():
     assert "no external solver" in journey
     assert "no external LLM" in journey
     assert "no proprietary software" in journey
-    assert "PyPI/TestPyPI: not published / not uploaded" in journey
+    assert "PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0" in journey
     assert "Current main development version: `0.9.0rc6.dev0`" in journey
     assert "Current public prerelease: v0.9.0rc5" in journey
 
@@ -392,7 +397,12 @@ def test_public_contract_freeze_artifacts_are_tracked():
     assert manifest["version_scope"] == "0.9.0rc6.dev0"
     assert manifest["current_public_prerelease"] == "v0.9.0rc5"
     assert manifest["release_state"]["pypi_published"] is False
-    assert manifest["release_state"]["testpypi_uploaded"] is False
+    assert manifest["release_state"]["testpypi_uploaded"] is True
+    assert manifest["release_state"]["testpypi_uploaded_version"] == "0.9.0rc6.dev0"
+    assert (
+        manifest["release_state"]["testpypi_status_doc"]
+        == "docs/testpypi_status_v0.9.0rc6.dev0.md"
+    )
     assert "external solver" in checklist
     assert "external LLM" in checklist
     assert "proprietary solver" in checklist

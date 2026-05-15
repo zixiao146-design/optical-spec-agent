@@ -2,7 +2,8 @@
 
 Version scope: current public prerelease `v0.9.0rc5`; current `main`
 development version `0.9.0rc6.dev0`. `0.9.0rc6.dev0` development state is not a public release, the
-`v0.9.0rc6` tag has not been created, and PyPI/TestPyPI remain unpublished.
+`v0.9.0rc6` tag has not been created, PyPI remains unpublished, and TestPyPI
+contains the `0.9.0rc6.dev0` development package.
 Continue v1.0 readiness engineering and prepare a future `v0.9.0rc6` release
 draft only when accumulated changes should be published as another RC.
 
@@ -95,7 +96,8 @@ maintainers.
 - Include optional wheel install smoke.
 - Include documented CLI examples.
 - Keep PyPI unpublished unless explicitly approved.
-- Keep TestPyPI not uploaded unless explicitly approved.
+- Do not re-upload existing TestPyPI artifacts unless explicitly approved for a
+  new version.
 - Do not create the `v0.9.0rc6` tag until a future release draft has
   project/version consistency, final smoke, wheel smoke, build, `make check`,
   and CLI examples passing.
@@ -106,7 +108,8 @@ maintainers.
   safe when solvers are unavailable.
 - Current public prerelease remains `v0.9.0rc5`, current main development
   version remains `0.9.0rc6.dev0`, the `v0.9.0rc6` tag has not been created,
-  and PyPI/TestPyPI remain unpublished/not uploaded.
+  PyPI remains unpublished, and TestPyPI contains the `0.9.0rc6.dev0`
+  development package.
 
 ## v1.0 validation target
 

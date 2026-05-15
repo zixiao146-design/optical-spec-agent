@@ -35,7 +35,7 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     packaging_gate = (ROOT / "docs" / "packaging_gate.md").read_text(encoding="utf-8")
     pypi_decision = (ROOT / "docs" / "pypi_publication_decision.md").read_text(encoding="utf-8")
     assert "PyPI status: not published" in packaging_gate
-    assert "TestPyPI status: not published" in packaging_gate
+    assert "TestPyPI status: uploaded for 0.9.0rc6.dev0" in packaging_gate
     assert "Current package version on `main`: `0.9.0rc6.dev0`" in packaging_gate
     assert "Current public prerelease: `v0.9.0rc5`" in packaging_gate
     assert "`v0.9.0rc6` tag: not created" in packaging_gate
@@ -45,13 +45,17 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     assert "does not upload, publish, create tags, or create" in packaging_gate
     assert "docs/v1_0_stability_gate.md" in packaging_gate
     assert "TestPyPI upload requires explicit maintainer approval" in packaging_gate
+    assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in packaging_gate
+    assert "TestPyPI clean install verification: passed" in packaging_gate
     assert "No automatic package publishing" in packaging_gate
     assert "Do not publish automatically from release scripts" in packaging_gate
     assert "PyPI published: no" in pypi_decision
-    assert "TestPyPI uploaded: no" in pypi_decision
+    assert "TestPyPI uploaded: yes, for `0.9.0rc6.dev0`" in pypi_decision
     assert "Current main development version: `0.9.0rc6.dev0`" in pypi_decision
     assert "explicit maintainer approval" in pypi_decision
     assert "TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only" in pypi_decision
+    assert "TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0" in pypi_decision
+    assert "TestPyPI clean install verification: passed" in pypi_decision
     assert "PyPI publication approval: not granted" in pypi_decision
 
 

@@ -9,7 +9,7 @@ external solvers default requirements.
 
 - Current public prerelease: v0.9.0rc5
 - Current main development version: 0.9.0rc6.dev0
-- PyPI/TestPyPI: not published / not uploaded
+- PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
 
 ## What The Preflight Does

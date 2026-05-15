@@ -6,7 +6,7 @@
 - Current main development version: 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
 - PyPI: not published
-- TestPyPI: not uploaded
+- TestPyPI: uploaded for 0.9.0rc6.dev0
 - TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 - PyPI publication approval: not granted
 
@@ -17,6 +17,8 @@
 - Post-release status process.
 - Quality gates.
 - TestPyPI no-upload preflight.
+- TestPyPI Trusted Publishing upload and clean install verification for
+  0.9.0rc6.dev0.
 - Wheel install smoke.
 - CLI examples.
 - Offline user journey.
@@ -32,17 +34,17 @@
 ## Remaining gaps
 
 - Elmer Level 3 validation deferred.
-- TestPyPI upload approval granted for 0.9.0rc6.dev0 only; upload/install
-  verification is the next TestPyPI evaluation step.
-- The latest TestPyPI upload attempt failed with HTTP 403 Forbidden and is
-  recorded in `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
+- TestPyPI upload completed for 0.9.0rc6.dev0 via Trusted Publishing and is
+  recorded in `docs/testpypi_status_v0.9.0rc6.dev0.md`.
+- The earlier local token-based TestPyPI upload attempt failed with HTTP 403
+  Forbidden and remains recorded in
+  `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
 - PyPI publication not approved.
 - v1.0 final public contract freeze not finalized.
 - `docs/v1_0_public_contract_freeze_checklist.md` exists but still needs
   maintainer confirmation before v1.0.
-- `docs/publication_decision_record.md` authorizes TestPyPI only for
-  `0.9.0rc6.dev0`; the first upload attempt failed with HTTP 403 Forbidden,
-  and PyPI remains not granted.
+- `docs/publication_decision_record.md` records that TestPyPI is completed for
+  `0.9.0rc6.dev0`; PyPI remains not granted.
 - Production-grade physical validation not claimed.
 - Formal convergence proof not claimed.
 - Workflow remains local/synchronous preview.
@@ -53,7 +55,7 @@
 | Item | Classification | Rationale | Next action |
 |---|---|---|---|
 | PyPI decision | Hard blocker for v1.0 | v1.0 distribution must have an explicit publication decision, whether PyPI, GitHub-only, or delayed. | Record an explicit maintainer decision before v1.0. |
-| TestPyPI upload | Soft blocker, possibly hard depending publication plan | TestPyPI is not required for GitHub-only prereleases, but it becomes a release confidence gate if PyPI publication is planned. | Approve, skip with documented reason, or keep deferred. |
+| TestPyPI upload | Satisfied for 0.9.0rc6.dev0; future decision for any new version | TestPyPI is not required for GitHub-only prereleases, but it becomes a release confidence gate if PyPI publication is planned. The 0.9.0rc6.dev0 upload and clean install verification are complete. | Do not re-upload the same version; decide future uploads per candidate. |
 | Elmer Level 3 | Deferred/non-blocker | Elmer remains Level 2 + Level-3-ready; missing ElmerSolver is documented and non-blocking for default gates. | Revisit only when a maintainable install route exists. |
 | Production-grade physical validation | Deferred/non-blocker unless v1.0 claims production-grade validation | The project does not claim production-grade physical validation. | Keep claims conservative or define a separate validation program. |
 | Formal convergence proof | Deferred/non-blocker unless explicitly claimed | The project does not claim a formal convergence proof. | Keep as a non-goal unless requirements change. |
@@ -67,7 +69,8 @@
 - Use `docs/v1_0_public_contract_freeze_checklist.md` as the executable
   freeze checklist.
 - Keep production claims conservative.
-- Decide TestPyPI upload explicitly through `docs/publication_decision_record.md`.
+- Use `docs/testpypi_status_v0.9.0rc6.dev0.md` as the current TestPyPI
+  verification record.
 - Decide PyPI publication explicitly through `docs/publication_decision_record.md`.
 - Keep Elmer deferred unless a maintainable install route appears.
 - Prepare v0.9.0rc6 only if new hardening justifies another release candidate.

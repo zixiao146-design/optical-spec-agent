@@ -3,7 +3,7 @@
 ## Current status
 
 - PyPI published: no.
-- TestPyPI uploaded: no.
+- TestPyPI uploaded: yes, for `0.9.0rc6.dev0`.
 - Current public prerelease: `v0.9.0rc5`.
 - Current main development version: `0.9.0rc6.dev0`.
 - `v0.9.0rc6` GitHub release has not been created.
@@ -22,26 +22,35 @@
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`.
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
+- TestPyPI status:
+  `docs/testpypi_status_v0.9.0rc6.dev0.md`.
 - TestPyPI Trusted Publishing doc:
   `docs/testpypi_trusted_publishing.md`.
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml`.
-- TestPyPI Trusted Publishing workflow status: added, not run.
+- TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0.
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only.
 - TestPyPI upload authorized: yes, TestPyPI only.
 - Upload command authorized: TestPyPI only.
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden.
+- TestPyPI clean install verification: passed.
 - PyPI publication approval: not granted.
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
 
 ## Recommendation
 
-Use TestPyPI before any PyPI release. TestPyPI upload is authorized only for
-`0.9.0rc6.dev0`; the latest attempt failed with HTTP 403 Forbidden and should be
-retried through the manual TestPyPI Trusted Publishing workflow after TestPyPI
-publisher settings are configured. PyPI publication remains prohibited without
-separate explicit maintainer approval. Do not publish to PyPI from smoke
-scripts, workflow automation, or local release engineering checks.
+Use TestPyPI before any PyPI release. TestPyPI upload is completed for
+`0.9.0rc6.dev0` through the manual Trusted Publishing workflow, and clean
+install verification passed. The earlier local token-based attempt failed with
+HTTP 403 Forbidden and remains recorded as historical evidence. PyPI
+publication remains prohibited without separate explicit maintainer approval.
+Do not publish to PyPI from smoke scripts, workflow automation, or local release
+engineering checks.
+
+Dependency-index caveat: the successful TestPyPI verification installed runtime
+dependencies from PyPI and installed `optical-spec-agent` from TestPyPI with
+`--no-deps`, because TestPyPI contains an unrelated `FASTAPI` package that can
+shadow the real `fastapi` dependency when TestPyPI is the primary index.
 
 `scripts/testpypi_preflight.sh` is a local no-upload check. It builds artifacts,
 runs `python -m twine check dist/*`, installs the wheel in a clean environment,

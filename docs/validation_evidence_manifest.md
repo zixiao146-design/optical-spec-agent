@@ -4,7 +4,7 @@
 
 - Current public prerelease: `v0.9.0rc5`
 - Current main development version: `0.9.0rc6.dev0`
-- PyPI/TestPyPI: not published / not uploaded
+- PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - Open-source-solver-first strategy: yes
 
 ## Evidence categories
