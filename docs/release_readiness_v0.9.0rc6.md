@@ -8,7 +8,7 @@
 - Current main development version: 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
 - PyPI/TestPyPI: not published / not uploaded
-- TestPyPI upload approval: pending
+- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 
 ## Why Main Moved To 0.9.0rc6.dev0
 

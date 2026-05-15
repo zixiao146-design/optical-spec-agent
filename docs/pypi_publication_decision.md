@@ -20,17 +20,23 @@
 - Maintainer operations checklist: `docs/maintainer_operations_checklist.md`.
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`.
-- TestPyPI upload approval status: pending.
-- TestPyPI upload authorized: no.
-- Upload command authorized: no.
+- Latest TestPyPI upload attempt:
+  `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
+- TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only.
+- TestPyPI upload authorized: yes, TestPyPI only.
+- Upload command authorized: TestPyPI only.
+- Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden.
 - PyPI publication approval: not granted.
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`.
 
 ## Recommendation
 
-Use TestPyPI before any PyPI release. Do not publish from smoke scripts,
-workflow automation, or local release engineering checks without explicit
-maintainer approval.
+Use TestPyPI before any PyPI release. TestPyPI upload is authorized only for
+`0.9.0rc6.dev0`; the latest attempt failed with HTTP 403 Forbidden and should be
+retried only with a TestPyPI token that has sufficient permissions. PyPI
+publication remains prohibited without separate explicit maintainer approval. Do
+not publish from smoke scripts, workflow automation, or local release engineering
+checks.
 
 `scripts/testpypi_preflight.sh` is a local no-upload check. It builds artifacts,
 runs `python -m twine check dist/*`, installs the wheel in a clean environment,
@@ -40,7 +46,8 @@ not upload, publish, create tags, or create GitHub releases.
 ## Preconditions before any PyPI publication
 
 - Explicit maintainer approval is recorded.
-- The approval record changes from pending to granted.
+- The approval record changes from pending to granted for the intended package
+  version.
 - The decision record must include the phrase: explicit maintainer approval.
 - `git status` is clean.
 - Package version in `pyproject.toml` and `__version__` match.

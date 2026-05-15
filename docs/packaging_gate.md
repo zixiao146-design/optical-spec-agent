@@ -22,9 +22,9 @@ verified public `v0.9.0rc5` prerelease.
 - Quality gate doc: `docs/quality_gates.md`
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
-- TestPyPI upload approval status: pending
-- TestPyPI upload authorized: no
-- Upload command authorized: no
+- TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
+- TestPyPI upload authorized: yes, TestPyPI only
+- Upload command authorized: TestPyPI only
 - PyPI publication approval: not granted
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
 - Open-source solver strategy doc: `docs/open_source_solver_strategy.md`

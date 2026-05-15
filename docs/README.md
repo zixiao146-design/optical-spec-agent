@@ -24,6 +24,7 @@ Current main development version: `0.9.0rc6.dev0`.
 - [PyPI publication decision](pypi_publication_decision.md)
 - [Publication decision record](publication_decision_record.md)
 - [TestPyPI upload approval for 0.9.0rc6.dev0](testpypi_upload_approval_v0.9.0rc6.dev0.md)
+- [TestPyPI upload attempt for 0.9.0rc6.dev0](testpypi_upload_attempt_v0.9.0rc6.dev0.md)
 - [Secrets and token hygiene](secrets_and_token_hygiene.md)
 
 ## Contracts

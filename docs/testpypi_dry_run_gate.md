@@ -13,15 +13,19 @@
 - PyPI/TestPyPI remain unpublished/not uploaded
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
-- TestPyPI upload approval status: pending
-- TestPyPI upload authorized: no
-- Upload command authorized: no
+- Latest TestPyPI upload attempt:
+  `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
+- TestPyPI upload authorized: yes, TestPyPI only
+- Upload command authorized: TestPyPI only
+- Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - PyPI publication approval: not granted
 
 ## Purpose
 
-This document defines what must be checked before any future TestPyPI upload is
-approved. It does not authorize upload.
+This document defines what must be checked before TestPyPI upload. The
+maintainer has authorized a TestPyPI-only upload for `0.9.0rc6.dev0`; it does
+not authorize PyPI publication, tag creation, or GitHub release creation.
 
 ## No-upload preflight
 
@@ -68,15 +72,15 @@ Related operations docs:
 
 - TestPyPI upload requires explicit maintainer approval.
 - PyPI upload requires explicit maintainer approval.
-- The approval record remains pending until a maintainer explicitly grants
-  TestPyPI upload approval.
+- The approval record grants TestPyPI upload for `0.9.0rc6.dev0` only.
 - Approval must be recorded in docs or release notes.
 - Default smoke/release scripts must never upload automatically.
 - No token should be printed or committed.
 
 ## Upload non-goals
 
-- This task does not upload TestPyPI.
+- This task may upload `0.9.0rc6.dev0` to TestPyPI only after the no-upload
+  preflight and secure token entry.
 - This task does not publish PyPI.
 - This task does not create release artifacts beyond local dist.
 - This task does not create GitHub release.
@@ -84,11 +88,16 @@ Related operations docs:
 
 ## Future command placeholders
 
-DO NOT RUN WITHOUT APPROVAL:
+AUTHORIZED FOR TESTPYPI ONLY FOR 0.9.0rc6.dev0:
 
 ```bash
-python -m twine upload --repository testpypi dist/*
+python -m twine upload \
+  --repository testpypi \
+  -u __token__ \
+  -p "$TESTPYPI_TOKEN" \
+  dist/optical_spec_agent-0.9.0rc6.dev0-py3-none-any.whl \
+  dist/optical_spec_agent-0.9.0rc6.dev0.tar.gz
 ```
 
-- Do not run this command in this task.
+- Do not run this command for PyPI.
 - Token must never be committed or printed.

@@ -15,17 +15,20 @@ def test_testpypi_dry_run_gate_doc_exists_and_requires_manual_approval():
     assert "Current public prerelease: v0.9.0rc5" in text
     assert "Current main development version: `0.9.0rc6.dev0`" in text
     assert "explicit maintainer approval" in text
-    assert "does not authorize upload" in text
+    assert "does\nnot authorize PyPI publication" in text
     assert "scripts/testpypi_preflight.sh" in text
     assert "docs/testpypi_upload_approval_v0.9.0rc6.dev0.md" in text
-    assert "TestPyPI upload approval status: pending" in text
-    assert "TestPyPI upload authorized: no" in text
+    assert "docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md" in text
+    assert "TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only" in text
+    assert "TestPyPI upload authorized: yes, TestPyPI only" in text
+    assert "Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden" in text
     assert "PyPI publication approval: not granted" in text
     assert "NO UPLOAD PERFORMED" in text
     assert "does not upload" in text
     assert "does not create tags" in text
     if "twine upload" in text:
-        assert "DO NOT RUN WITHOUT APPROVAL" in text
+        assert "AUTHORIZED FOR TESTPYPI ONLY FOR 0.9.0rc6.dev0" in text
+        assert "Do not run this command for PyPI" in text
     assert "Token must never be committed or printed" in text
 
 

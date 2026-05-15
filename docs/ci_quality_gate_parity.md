@@ -13,8 +13,8 @@ software.
 - Current main development version: `0.9.0rc6.dev0`
 - PyPI/TestPyPI: not published / not uploaded
 - v0.9.0rc6 tag: not created
-- TestPyPI upload approval: pending
-- Upload command authorized: no
+- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
+- Upload command authorized: TestPyPI only
 - PyPI publication approval: not granted
 
 ## Local Quality Gate

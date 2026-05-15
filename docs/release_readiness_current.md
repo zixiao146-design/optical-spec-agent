@@ -20,9 +20,12 @@ This document describes the current `main` branch. It is not a release tag.
 - TestPyPI uploaded: no
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
-- TestPyPI upload approval status: pending
-- TestPyPI upload authorized: no
-- Upload command authorized: no
+- Latest TestPyPI upload attempt:
+  `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
+- TestPyPI upload authorized: yes, TestPyPI only
+- Upload command authorized: TestPyPI only
+- Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - PyPI publication approval: not granted
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or

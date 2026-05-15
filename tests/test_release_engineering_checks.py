@@ -149,6 +149,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "manual_solver_validation_reports/elmer_validation_report_schema.json",
         "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
+        "testpypi_upload_attempt_v0.9.0rc6.dev0.md",
         "release_readiness_v0.9.0rc6.md",
         "v1_0_gap_audit.md",
         "rc6_development_plan.md",
@@ -225,8 +226,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
     assert "scripts/testpypi_preflight.sh" in combined
-    assert "TestPyPI upload approval: pending" in combined
-    assert "Upload command authorized: no" in combined
+    assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in combined
+    assert "Upload command authorized: TestPyPI only" in combined
     assert "PyPI publication approval: not granted" in combined
     assert "NO UPLOAD PERFORMED" in combined
     assert "Offline User Journey" in combined

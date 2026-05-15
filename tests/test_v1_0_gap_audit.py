@@ -17,12 +17,15 @@ def test_v1_0_gap_audit_tracks_current_baseline_and_blockers():
     assert "Current main development version: 0.9.0rc6.dev0" in text
     assert "PyPI: not published" in text
     assert "TestPyPI: not uploaded" in text
+    assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in text
     assert "Elmer Level 3 validation deferred" in text
     assert "Production-grade physical validation not claimed" in text
     assert "Formal convergence proof not claimed" in text
     assert "Public contract freeze" in text
     assert "Hard blocker for v1.0" in text
-    assert "TestPyPI upload not exercised" in text
+    assert "TestPyPI upload approval granted for 0.9.0rc6.dev0 only" in text
+    assert "docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md" in text
+    assert "HTTP 403 Forbidden" in text
     assert "PyPI publication not approved" in text
     assert "docs/v1_0_public_contract_freeze_checklist.md" in text
     assert "docs/publication_decision_record.md" in text

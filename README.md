@@ -41,8 +41,8 @@ scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
 The `v0.9.0rc5` git tag and GitHub prerelease were created after maintainer
 review and supersede `v0.9.0rc4` as the current release candidate. PyPI remains
-unpublished, TestPyPI has not been uploaded, and this repository state is not a
-final stable `1.0` release. PyPI/TestPyPI remain unpublished/not uploaded.
+unpublished. TestPyPI upload is approved only for `0.9.0rc6.dev0` evaluation,
+and this repository state is not a final stable `1.0` release.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -55,6 +55,7 @@ Current rc6 development readiness and publication gates are tracked in
 [`docs/rc6_development_plan.md`](docs/rc6_development_plan.md),
 [`docs/v1_0_gap_audit.md`](docs/v1_0_gap_audit.md),
 [`docs/v1_0_decision_matrix.md`](docs/v1_0_decision_matrix.md),
+[`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`](docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
 The local one-command quality gate is documented in

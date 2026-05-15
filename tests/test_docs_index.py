@@ -31,6 +31,7 @@ def test_docs_index_exists_and_links_major_docs():
         "pypi_publication_decision.md",
         "publication_decision_record.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
+        "testpypi_upload_attempt_v0.9.0rc6.dev0.md",
         "secrets_and_token_hygiene.md",
         "cli_contract.md",
         "schema_contract.md",

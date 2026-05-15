@@ -5,7 +5,7 @@
 - Current public prerelease: v0.9.0rc5
 - Current main development version: `0.9.0rc6.dev0`
 - PyPI/TestPyPI: not published / not uploaded
-- TestPyPI upload approval: pending
+- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 - v1.0.0 not released
 
 ## Ready / Strong Areas
@@ -55,6 +55,8 @@
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
 - Publication decision record.
+- TestPyPI upload attempt record for 0.9.0rc6.dev0: failed with HTTP 403
+  Forbidden and did not publish PyPI.
 - Examples manifest.
 - Validation evidence manifest.
 - Package build and wheel install.

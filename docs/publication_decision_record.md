@@ -6,17 +6,21 @@
 - Current main development version: 0.9.0rc6.dev0
 - TestPyPI uploaded: no
 - PyPI published: no
-- TestPyPI upload approval: pending
+- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 - PyPI publication approval: not granted
-- Upload command authorized: no
+- Upload command authorized: TestPyPI only
+- Latest TestPyPI upload attempt:
+  `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 
 ## Decisions not yet granted
 
-- TestPyPI upload
 - PyPI publication
 - PyPI project name claim
 - No production-grade validation claim
 - No formal convergence proof claim
+- GitHub tag creation for v0.9.0rc6
+- GitHub release creation for v0.9.0rc6
 
 ## Possible publication paths
 
@@ -58,8 +62,13 @@
 
 ## Current recommendation
 
-Recommended current state: keep TestPyPI/PyPI pending while v1.0 readiness
-engineering continues, unless maintainer explicitly approves TestPyPI.
+Recommended current state: upload `0.9.0rc6.dev0` to TestPyPI only, verify a
+clean install from TestPyPI, and keep PyPI publication separately gated while
+v1.0 readiness engineering continues.
 
-This record does not authorize `twine upload`, TestPyPI upload, or PyPI
-publication.
+The latest TestPyPI upload attempt failed with HTTP 403 Forbidden, so TestPyPI
+remains not uploaded until a token with sufficient TestPyPI permissions is used.
+
+This record authorizes TestPyPI upload only for `0.9.0rc6.dev0`. It does not
+authorize PyPI publication, GitHub release creation, tag creation, production-
+grade validation claims, or formal convergence proof claims.

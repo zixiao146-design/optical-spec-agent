@@ -50,8 +50,8 @@ PyPI/TestPyPI 仍未发布/上传。
 
 `v0.9.0rc5` tag 和 GitHub prerelease 已由维护者确认后创建，并作为当前
 release candidate supersede `v0.9.0rc4`。不要移动 `v0.9.0rc1`、`v0.9.0rc2`、
-`v0.9.0rc3`、`v0.9.0rc4` 或 `v0.9.0rc5` tag。未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布，
-TestPyPI 仍未上传，除非后续单独批准。PyPI/TestPyPI remain unpublished/not uploaded。
+`v0.9.0rc3`、`v0.9.0rc4` 或 `v0.9.0rc5` tag。未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布；
+TestPyPI 仅批准用于 `0.9.0rc6.dev0` evaluation。
 
 面向 `v1.0` 的公共契约边界见：
 `docs/cli_contract.md`、`docs/schema_contract.md`、
@@ -87,7 +87,8 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `examples/e2e/README.md` 和 `examples/examples_manifest.json`。
 当前 rc6 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc6.md`、
 `docs/rc6_development_plan.md`、`docs/v1_0_gap_audit.md`、
-`docs/v1_0_decision_matrix.md`、`docs/testpypi_dry_run_gate.md` 和
+`docs/v1_0_decision_matrix.md`、`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`、
+`docs/testpypi_dry_run_gate.md` 和
 `docs/v1_0_stability_gate.md`。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、

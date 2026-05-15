@@ -57,8 +57,9 @@ Recommended goals:
   production-validation, and public-contract-freeze decisions.
 - Use `docs/v1_0_public_contract_freeze_checklist.md` to make the freeze
   candidate actionable.
-- Use `docs/publication_decision_record.md` to keep TestPyPI pending, PyPI not
-  granted, and upload authorization explicit.
+- Use `docs/publication_decision_record.md` to keep TestPyPI authorization
+  explicit, record the failed 0.9.0rc6.dev0 upload attempt, and keep PyPI not
+  granted.
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
 - Keep the v1.0 stability gate current.
@@ -76,7 +77,8 @@ Recommended goals:
   skipped/manual by default.
 - Physical validation status clarified without overclaiming.
 - PyPI remains unpublished unless explicitly approved.
-- TestPyPI remains not uploaded unless explicitly approved.
+- TestPyPI remains not uploaded until a retry succeeds with sufficient
+  TestPyPI token permissions.
 
 ## Recommended path to v1.0.0
 

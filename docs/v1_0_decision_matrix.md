@@ -2,7 +2,7 @@
 
 ## TestPyPI upload
 
-- Current: pending
+- Current: granted for 0.9.0rc6.dev0 only
 - Record: `docs/publication_decision_record.md`
 - Options:
   - Approve upload.
@@ -10,6 +10,8 @@
   - Skip with documented reason.
 - Impact: decides whether package publication confidence includes a real
   TestPyPI exercise before v1.0, without authorizing PyPI publication by itself.
+- Latest attempt: failed with HTTP 403 Forbidden; retry requires a TestPyPI
+  token with sufficient upload/create-project permissions.
 
 ## PyPI publication
 
@@ -55,7 +57,7 @@
   publication boundaries are stable enough to call the next milestone v1.0.
 
 Public contract freeze remains a hard blocker until the maintainer confirms
-the checklist. TestPyPI remains pending, PyPI publication remains not granted,
-Elmer remains deferred/non-blocking, production-grade physical validation
-remains a non-goal unless explicitly claimed, and formal convergence proof
-remains a non-goal unless explicitly claimed.
+the checklist. TestPyPI is authorized only for `0.9.0rc6.dev0`; PyPI publication remains not granted, Elmer remains deferred/non-blocking,
+production-grade physical validation remains a non-goal unless explicitly
+claimed, and formal convergence proof remains a non-goal unless explicitly
+claimed.

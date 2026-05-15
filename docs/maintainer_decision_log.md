@@ -4,8 +4,8 @@
 
 - v0.9.0rc5 is the current public prerelease.
 - main is prepared as the 0.9.0rc6.dev0 development state for maintainer review.
-- TestPyPI upload approval: pending.
-- Upload command authorized: no.
+- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only.
+- Upload command authorized: TestPyPI only.
 - PyPI publication approval: not granted.
 - Continue v1.0 readiness engineering.
 - Do not create v0.9.0rc6 tag now.

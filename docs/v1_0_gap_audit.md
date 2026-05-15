@@ -7,7 +7,7 @@
 - v0.9.0rc6 tag: not created
 - PyPI: not published
 - TestPyPI: not uploaded
-- TestPyPI upload approval: pending
+- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
 - PyPI publication approval: not granted
 
 ## Strong areas
@@ -32,13 +32,17 @@
 ## Remaining gaps
 
 - Elmer Level 3 validation deferred.
-- TestPyPI upload not exercised.
+- TestPyPI upload approval granted for 0.9.0rc6.dev0 only; upload/install
+  verification is the next TestPyPI evaluation step.
+- The latest TestPyPI upload attempt failed with HTTP 403 Forbidden and is
+  recorded in `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
 - PyPI publication not approved.
 - v1.0 final public contract freeze not finalized.
 - `docs/v1_0_public_contract_freeze_checklist.md` exists but still needs
   maintainer confirmation before v1.0.
-- `docs/publication_decision_record.md` keeps TestPyPI pending and PyPI not
-  granted.
+- `docs/publication_decision_record.md` authorizes TestPyPI only for
+  `0.9.0rc6.dev0`; the first upload attempt failed with HTTP 403 Forbidden,
+  and PyPI remains not granted.
 - Production-grade physical validation not claimed.
 - Formal convergence proof not claimed.
 - Workflow remains local/synchronous preview.

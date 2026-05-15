@@ -51,6 +51,8 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     assert "TestPyPI uploaded: no" in pypi_decision
     assert "Current main development version: `0.9.0rc6.dev0`" in pypi_decision
     assert "explicit maintainer approval" in pypi_decision
+    assert "TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only" in pypi_decision
+    assert "PyPI publication approval: not granted" in pypi_decision
 
 
 def test_smoke_release_script_never_uploads_or_creates_releases():

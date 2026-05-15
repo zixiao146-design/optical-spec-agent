@@ -18,12 +18,13 @@ def test_v1_0_decision_matrix_covers_required_decisions():
     assert "Elmer Level 3" in text
     assert "Production-grade physical validation" in text
     assert "Public contract freeze" in text
-    assert "Current: pending" in text
+    assert "Current: granted for 0.9.0rc6.dev0 only" in text
     assert "Current: not approved" in text
     assert "Current: deferred" in text
     assert "Current: not claimed" in text
     assert "Current: candidate" in text
     assert "docs/publication_decision_record.md" in text
     assert "docs/v1_0_public_contract_freeze_checklist.md" in text
-    assert "TestPyPI remains pending" in text
+    assert "TestPyPI is authorized only for `0.9.0rc6.dev0`" in text
     assert "PyPI publication remains not granted" in text
+    assert "failed with HTTP 403 Forbidden" in text
