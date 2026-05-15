@@ -15,6 +15,11 @@
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- TestPyPI Trusted Publishing doc:
+  `docs/testpypi_trusted_publishing.md`
+- TestPyPI Trusted Publishing workflow:
+  `.github/workflows/testpypi-trusted-publish.yml`
+- TestPyPI Trusted Publishing workflow status: added, not run
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
 - TestPyPI upload authorized: yes, TestPyPI only
 - Upload command authorized: TestPyPI only
@@ -36,6 +41,10 @@ checks, and `optical-spec --help`.
 
 The preflight does not upload. It does not publish. It does not create tags. It
 does not create GitHub releases. It prints `NO UPLOAD PERFORMED`.
+
+For a future manual TestPyPI retry, use the Trusted Publishing workflow rather
+than a local token upload. The workflow is manual only, requires the confirmation
+string `UPLOAD_TESTPYPI`, and targets `https://test.pypi.org/legacy/`.
 
 `scripts/run_quality_gates.sh` includes this preflight as the first local gate
 unless `OSA_SKIP_PREFLIGHT=1` is set.

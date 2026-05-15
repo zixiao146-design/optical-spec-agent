@@ -150,6 +150,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "testpypi_upload_attempt_v0.9.0rc6.dev0.md",
+        "testpypi_trusted_publishing.md",
         "release_readiness_v0.9.0rc6.md",
         "v1_0_gap_audit.md",
         "rc6_development_plan.md",

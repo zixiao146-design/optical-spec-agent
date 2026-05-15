@@ -22,6 +22,10 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
+- TestPyPI Trusted Publishing doc:
+  `docs/testpypi_trusted_publishing.md`
+- TestPyPI Trusted Publishing workflow:
+  `.github/workflows/testpypi-trusted-publish.yml` (added, not run)
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only
 - TestPyPI upload authorized: yes, TestPyPI only
 - Upload command authorized: TestPyPI only

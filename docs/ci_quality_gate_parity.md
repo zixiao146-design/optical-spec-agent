@@ -95,14 +95,15 @@ individual jobs shorter where appropriate:
 - `.github/workflows/create-prerelease.yml`: manual `workflow_dispatch`
   prerelease helper. It is not default CI and requires explicit maintainer
   operation. It must not be treated as an automatic release path.
-
-No new workflow was added for this operations pass because the repository
-already has CI and release-dry-run workflows. The current work documents and
-tests their boundaries instead of adding overlapping automation.
+- `.github/workflows/testpypi-trusted-publish.yml`: manual `workflow_dispatch`
+  TestPyPI Trusted Publishing helper for `0.9.0rc6.dev0`. It is not default CI,
+  requires the confirmation string `UPLOAD_TESTPYPI`, targets only
+  `https://test.pypi.org/legacy/`, and must not create tags, create GitHub
+  releases, or publish to PyPI.
 
 ## Non-goals
 
-- no upload
+- no default upload
 - no tag creation
 - no GitHub release creation
 - no external solver by default

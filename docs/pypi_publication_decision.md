@@ -22,6 +22,11 @@
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`.
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
+- TestPyPI Trusted Publishing doc:
+  `docs/testpypi_trusted_publishing.md`.
+- TestPyPI Trusted Publishing workflow:
+  `.github/workflows/testpypi-trusted-publish.yml`.
+- TestPyPI Trusted Publishing workflow status: added, not run.
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only.
 - TestPyPI upload authorized: yes, TestPyPI only.
 - Upload command authorized: TestPyPI only.
@@ -33,10 +38,10 @@
 
 Use TestPyPI before any PyPI release. TestPyPI upload is authorized only for
 `0.9.0rc6.dev0`; the latest attempt failed with HTTP 403 Forbidden and should be
-retried only with a TestPyPI token that has sufficient permissions. PyPI
-publication remains prohibited without separate explicit maintainer approval. Do
-not publish from smoke scripts, workflow automation, or local release engineering
-checks.
+retried through the manual TestPyPI Trusted Publishing workflow after TestPyPI
+publisher settings are configured. PyPI publication remains prohibited without
+separate explicit maintainer approval. Do not publish to PyPI from smoke
+scripts, workflow automation, or local release engineering checks.
 
 `scripts/testpypi_preflight.sh` is a local no-upload check. It builds artifacts,
 runs `python -m twine check dist/*`, installs the wheel in a clean environment,

@@ -56,6 +56,7 @@ Current rc6 development readiness and publication gates are tracked in
 [`docs/v1_0_gap_audit.md`](docs/v1_0_gap_audit.md),
 [`docs/v1_0_decision_matrix.md`](docs/v1_0_decision_matrix.md),
 [`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`](docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md),
+[`docs/testpypi_trusted_publishing.md`](docs/testpypi_trusted_publishing.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
 The local one-command quality gate is documented in

@@ -1,0 +1,56 @@
+name: TestPyPI Trusted Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_testpypi_upload:
+        description: "Type UPLOAD_TESTPYPI to confirm TestPyPI upload"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  testpypi-publish:
+    if: ${{ inputs.confirm_testpypi_upload == 'UPLOAD_TESTPYPI' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Confirm package version
+        run: |
+          python - <<'PY'
+          import tomllib
+          from pathlib import Path
+
+          data = tomllib.loads(Path("pyproject.toml").read_text())
+          version = data["project"]["version"]
+          print("project.version:", version)
+          assert version == "0.9.0rc6.dev0"
+          PY
+
+      - name: Build distributions
+        run: python -m build
+
+      - name: Check distributions
+        run: python -m twine check dist/*
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          attestations: false
