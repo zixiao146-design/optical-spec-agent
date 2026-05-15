@@ -16,6 +16,9 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Current main development version: `0.9.0rc6.dev0`" in text
     assert "v1.0.0 not released" in text
     assert "PyPI/TestPyPI: not published / not uploaded" in text
+    assert "v1.0 readiness gap audit" in text
+    assert "v0.9.0rc6 development plan" in text
+    assert "v1.0 decision matrix" in text
     assert "No production-grade physical validation" in text
     assert "No formal convergence proof" in text
     assert "TestPyPI upload approval: pending" in text
@@ -35,5 +38,6 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Optiland Level 3 optional manual validation evidence" in text
     assert "Elmer Level-3-ready optional validation path" in text
     assert "Elmer remains Level 2 pending ElmerSolver installation" in text
+    assert "v1.0 public contract freeze remains a hard blocker" in text
     assert "not production-grade physical validation" in text
     assert "not production-grade optical validation" in text

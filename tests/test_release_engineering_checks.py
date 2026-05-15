@@ -150,6 +150,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "pytest_marker_policy.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "release_readiness_v0.9.0rc6.md",
+        "v1_0_gap_audit.md",
+        "rc6_development_plan.md",
+        "v1_0_decision_matrix.md",
         "release_readiness_v0.9.0rc5.md",
         "github_release_draft_v0.9.0rc5.md",
         "release_notes_v0.9.0rc5.md",
@@ -235,6 +238,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Secrets and Token Hygiene" in combined
     assert "Maintainer Operations Checklist" in combined
     assert "v1.0 Readiness Scorecard" in combined
+    assert "v1.0 Readiness Gap Audit" in combined
+    assert "v0.9.0rc6 Development Plan" in combined
+    assert "v1.0 Decision Matrix" in combined
     assert "Maintainer Decision Log" in combined
     assert "no proprietary" in combined.lower()
     assert "Never paste tokens into chat" in combined

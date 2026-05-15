@@ -19,6 +19,13 @@
 - Follow `docs/secrets_and_token_hygiene.md` before any token-mediated action.
 - Follow `docs/maintainer_operations_checklist.md` before RC, TestPyPI, or PyPI
   transitions.
+- Use `docs/v1_0_gap_audit.md` to classify v1.0 blockers, deferred items, and
+  future work.
+- Use `docs/rc6_development_plan.md` for the active `0.9.0rc6.dev0`
+  development scope.
+- Use `docs/v1_0_decision_matrix.md` before deciding TestPyPI upload, PyPI
+  publication, Elmer Level 3, production-validation scope, or public contract
+  freeze.
 
 ## Safety Notes
 

@@ -17,6 +17,9 @@ def test_docs_index_exists_and_links_major_docs():
         "Current main development version: `0.9.0rc6.dev0`",
         "release_readiness_current.md",
         "release_readiness_v0.9.0rc6.md",
+        "v1_0_gap_audit.md",
+        "rc6_development_plan.md",
+        "v1_0_decision_matrix.md",
         "github_release_draft_v0.9.0rc5.md",
         "release_notes_v0.9.0rc5.md",
         "post_release_status_v0.9.0rc5.md",
@@ -77,6 +80,9 @@ def test_docs_index_exists_and_links_major_docs():
         "maintainer_decision_log.md",
         "maintainer_operations_checklist.md",
         "v1_0_readiness_scorecard.md",
+        "v1_0_gap_audit.md",
+        "rc6_development_plan.md",
+        "v1_0_decision_matrix.md",
     ]
     for phrase in required:
         assert phrase in text

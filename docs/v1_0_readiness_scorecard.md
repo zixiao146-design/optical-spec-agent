@@ -50,6 +50,9 @@
 - Offline examples.
 - E2E user journey.
 - Public contract freeze candidate.
+- v1.0 readiness gap audit.
+- v0.9.0rc6 development plan.
+- v1.0 decision matrix.
 - Examples manifest.
 - Validation evidence manifest.
 - Package build and wheel install.
@@ -84,6 +87,7 @@
 - Adapter outputs may still be MVP/scaffold.
 - Workflow remains local/synchronous preview.
 - v1.0 compatibility freeze not finalized.
+- v1.0 public contract freeze remains a hard blocker until finalized.
 - No new GitHub Actions workflow was added during operations readiness because
   existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
   reviewed and documented instead of duplicating automation.
@@ -91,6 +95,10 @@
 ## Recommended Next Decisions
 
 - Continue v1.0 readiness engineering.
+- Use `docs/v1_0_gap_audit.md` to classify blockers and deferred work.
+- Use `docs/rc6_development_plan.md` to keep rc6 development scoped.
+- Use `docs/v1_0_decision_matrix.md` before TestPyPI, PyPI, Elmer, production
+  validation, or public-contract-freeze decisions.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue post-`v0.9.0rc5` readiness engineering on `0.9.0rc6.dev0`; only

@@ -84,7 +84,9 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/public_contract_manifest.json`、`docs/public_contract_change_checklist.md`、
 `examples/e2e/README.md` 和 `examples/examples_manifest.json`。
 当前 rc6 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc6.md`、
-`docs/testpypi_dry_run_gate.md` 和 `docs/v1_0_stability_gate.md`。
+`docs/rc6_development_plan.md`、`docs/v1_0_gap_audit.md`、
+`docs/v1_0_decision_matrix.md`、`docs/testpypi_dry_run_gate.md` 和
+`docs/v1_0_stability_gate.md`。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。

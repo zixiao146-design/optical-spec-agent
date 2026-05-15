@@ -52,6 +52,9 @@ for the repeatable RC procedure and
 the current RC line toward `v1.0`.
 Current rc6 development readiness and publication gates are tracked in
 [`docs/release_readiness_v0.9.0rc6.md`](docs/release_readiness_v0.9.0rc6.md),
+[`docs/rc6_development_plan.md`](docs/rc6_development_plan.md),
+[`docs/v1_0_gap_audit.md`](docs/v1_0_gap_audit.md),
+[`docs/v1_0_decision_matrix.md`](docs/v1_0_decision_matrix.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
 The local one-command quality gate is documented in

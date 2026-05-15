@@ -7,6 +7,9 @@ Current main development version: `0.9.0rc6.dev0`.
 
 - [Current release readiness](release_readiness_current.md)
 - [v0.9.0rc6 development readiness](release_readiness_v0.9.0rc6.md)
+- [v1.0 readiness gap audit](v1_0_gap_audit.md)
+- [v0.9.0rc6 development plan](rc6_development_plan.md)
+- [v1.0 decision matrix](v1_0_decision_matrix.md)
 - [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
 - [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
 - [v0.9.0rc5 post-release status](post_release_status_v0.9.0rc5.md)
@@ -85,3 +88,6 @@ Current main development version: `0.9.0rc6.dev0`.
 - [Maintainer decision log](maintainer_decision_log.md)
 - [Maintainer operations checklist](maintainer_operations_checklist.md)
 - [v1.0 readiness scorecard](v1_0_readiness_scorecard.md)
+- [v1.0 readiness gap audit](v1_0_gap_audit.md)
+- [v0.9.0rc6 development plan](rc6_development_plan.md)
+- [v1.0 decision matrix](v1_0_decision_matrix.md)

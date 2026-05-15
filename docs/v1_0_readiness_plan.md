@@ -49,6 +49,12 @@ early adopters. They do not prove physical correctness of generated simulations.
 been created.
 Recommended goals:
 
+- Use `docs/v1_0_gap_audit.md` to classify hard blockers,
+  soft blockers, deferred items, and future work.
+- Use `docs/rc6_development_plan.md` to keep the `0.9.0rc6.dev0`
+  cycle focused on explicit v1.0 readiness gaps.
+- Use `docs/v1_0_decision_matrix.md` for TestPyPI, PyPI, Elmer,
+  production-validation, and public-contract-freeze decisions.
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
 - Keep the v1.0 stability gate current.
@@ -93,6 +99,12 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/proprietary_solver_policy.md`.
 - v1.0 compatibility policy:
   `docs/v1_0_compatibility_policy.md`.
+- v1.0 readiness gap audit:
+  `docs/v1_0_gap_audit.md`.
+- v0.9.0rc6 development plan:
+  `docs/rc6_development_plan.md`.
+- v1.0 decision matrix:
+  `docs/v1_0_decision_matrix.md`.
 - v1.0 public contract freeze candidate:
   `docs/v1_0_public_contract_freeze.md`.
 - Public contract manifest and change checklist:

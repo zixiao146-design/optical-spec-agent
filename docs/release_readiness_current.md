@@ -126,6 +126,9 @@ Current main contract artifacts:
 - `docs/external_llm_policy.md`
 - `docs/release_engineering_playbook.md`
 - `docs/v1_0_readiness_plan.md`
+- `docs/v1_0_gap_audit.md`
+- `docs/rc6_development_plan.md`
+- `docs/v1_0_decision_matrix.md`
 - `docs/quality_gates.md`
 - `docs/ci_quality_gate_parity.md`
 - `docs/release_dry_run_operations.md`
@@ -170,6 +173,9 @@ Current v1.0 evidence artifacts:
   `docs/public_contract_manifest.json`,
   `docs/public_contract_change_checklist.md`, and
   `tests/test_public_contract_manifest.py`.
+- v1.0 gap audit and rc6 planning evidence:
+  `docs/v1_0_gap_audit.md`, `docs/rc6_development_plan.md`, and
+  `docs/v1_0_decision_matrix.md`.
 - Optional open-source solver validation harness:
   `scripts/open_solver_validation_preflight.sh`,
   `docs/open_solver_validation_harness.md`,
