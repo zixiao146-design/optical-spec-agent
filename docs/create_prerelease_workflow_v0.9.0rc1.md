@@ -6,6 +6,7 @@ point for creating the `v0.9.0rc1` GitHub pre-release.
 It is intentionally conservative:
 
 - It only runs through `workflow_dispatch`.
+- It requires the confirmation input `CREATE_PRERELEASE`.
 - It only creates a GitHub pre-release.
 - It does not publish to PyPI.
 - It does not upload `dist/` artifacts.
@@ -21,10 +22,11 @@ It is intentionally conservative:
 2. Go to **Actions**.
 3. Select **Create v0.9.0rc1 Pre-release**.
 4. Click **Run workflow**.
-5. Use the default inputs:
+5. Enter `CREATE_PRERELEASE` in the confirmation input.
+6. Use the default inputs:
    - `tag = v0.9.0rc1`
    - `title = optical-spec-agent v0.9.0rc1`
-6. After the workflow completes, check the GitHub **Releases** page.
+7. After the workflow completes, check the GitHub **Releases** page.
 
 ## What It Verifies
 

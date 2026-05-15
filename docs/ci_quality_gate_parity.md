@@ -77,15 +77,20 @@ individual jobs shorter where appropriate:
 
 ## Current Workflow Inventory
 
-- `.github/workflows/ci.yml`: push/PR CI on `main`; installs the project and
-  runs `make check` across Python 3.11 and 3.12. It is a default quality
+- `.github/workflows/ci.yml`: push/PR CI on `main`; uses Python 3.11, installs
+  the project with `.[test]` plus `build`, then runs `python -m pytest`,
+  `python -m build`, and documented CLI examples. It is a default quality
   workflow and must not publish packages or create releases.
 - `.github/workflows/test.yml`: push/PR tests and deterministic benchmarks. It
-  is a default quality workflow and must not publish packages or create
-  releases.
+  uses Python 3.11 with `.[test]` plus `build`, runs `python -m pytest`,
+  `python -m build`, documented CLI examples, and local deterministic
+  benchmarks. It is a default quality workflow and must not publish packages or
+  create releases.
 - `.github/workflows/docs.yml`: pull-request and manual documentation,
-  readiness, CLI, and artifact checks. It is a quality workflow and must not
-  publish packages or create releases.
+  readiness, CLI, and artifact checks. It uses the same `make docs-check`,
+  `make cli-check`, and `make artifact-check` paths used locally, so the
+  expected `0.9.0rc6.dev0` release-notes warning remains non-fatal. It is a
+  quality workflow and must not publish packages or create releases.
 - `.github/workflows/benchmarks.yml`: manual benchmark reporting. It may upload
   GitHub Actions report artifacts, but it must not upload package artifacts to
   PyPI/TestPyPI and must not create tags or releases.
@@ -93,8 +98,9 @@ individual jobs shorter where appropriate:
   local distributions and run `twine check`; it must not upload PyPI/TestPyPI,
   create tags, or create GitHub releases.
 - `.github/workflows/create-prerelease.yml`: manual `workflow_dispatch`
-  prerelease helper. It is not default CI and requires explicit maintainer
-  operation. It must not be treated as an automatic release path.
+  prerelease helper. It requires the `CREATE_PRERELEASE` confirmation input, is
+  not default CI, and requires explicit maintainer operation. It must not be
+  treated as an automatic release path.
 - `.github/workflows/testpypi-trusted-publish.yml`: manual `workflow_dispatch`
   TestPyPI Trusted Publishing helper for `0.9.0rc6.dev0`. It is not default CI,
   requires the confirmation string `UPLOAD_TESTPYPI`, targets only
