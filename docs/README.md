@@ -16,6 +16,10 @@ Current main development version: `0.9.0rc6.dev0`.
 
 ## Quality / Packaging
 
+`ci.yml` is the automatic push/PR quality gate. Benchmark, extended-test,
+release-dry-run, prerelease, and TestPyPI Trusted Publishing workflows are
+manual-only and must not publish or create tags/releases from default CI.
+
 - [Quality gates](quality_gates.md)
 - [CI and quality gate parity](ci_quality_gate_parity.md)
 - [Release dry-run operations](release_dry_run_operations.md)

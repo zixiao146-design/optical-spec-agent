@@ -20,6 +20,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[test]"
 
+      - name: Prepare report directories
+        run: mkdir -p outputs outputs/workflow_benchmark
+
       - name: Run parser benchmarks
         run: |
           python benchmarks/run_benchmark.py --mode all

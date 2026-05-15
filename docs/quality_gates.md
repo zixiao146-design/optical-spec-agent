@@ -27,6 +27,9 @@ make quality
 CI parity and workflow boundaries are documented in
 [`ci_quality_gate_parity.md`](ci_quality_gate_parity.md). Release dry-runs are
 documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
+Automatic GitHub CI is intentionally kept lightweight in `ci.yml`; benchmark
+and extended-test workflows are manual-only so push/PR checks do not depend on
+longer report-generation paths.
 
 ## Gate Components
 

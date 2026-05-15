@@ -7,6 +7,7 @@ TestPyPI uploads, or PyPI publication.
 
 ## Dry-run Checklist
 
+- Run only through manual `workflow_dispatch` or local maintainer command.
 - `git status` is clean.
 - Version state is understood.
 - Quality gates pass.
@@ -21,6 +22,7 @@ TestPyPI uploads, or PyPI publication.
 
 ## What Dry-run Must Not Do
 
+- no automatic push/PR release action
 - no `git tag`
 - no tag push
 - no `gh release create`

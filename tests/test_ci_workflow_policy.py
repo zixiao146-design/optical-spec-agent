@@ -82,25 +82,47 @@ def test_automatic_ci_workflows_match_local_dependency_baseline():
         assert '.[dev]' not in text, f"{path.name} should not depend on the dev extra in CI"
 
 
-def test_push_pr_ci_workflows_run_build_tests_and_cli_examples_without_uploading():
-    for name in ["ci.yml", "test.yml"]:
-        text = _read_workflow(name)
-        lowered = text.lower()
-        assert "push:" in text
-        assert "pull_request:" in text
-        assert "python -m pytest" in text
-        assert "python -m build" in text
-        assert "optical-spec --help" in text
-        assert "optical-spec adapter-list --json" in text
-        assert "optical-spec validate examples/specs/minimal_nanoparticle.json" in text
-        assert "optical-spec parse examples/specs/minimal_nanoparticle.json --json" in text
-        assert (
-            "optical-spec workflow-plan examples/workflows/local_preview_request.json --json"
-            in text
-        )
-        assert "twine upload" not in lowered
-        assert "gh release create" not in lowered
-        assert "git tag" not in lowered
+def test_ci_workflow_runs_build_tests_and_cli_examples_without_uploading():
+    text = _read_workflow("ci.yml")
+    lowered = text.lower()
+    assert "push:" in text
+    assert "pull_request:" in text
+    assert 'python-version: "3.11"' in text
+    assert '.[test]' in text
+    assert "python -m pytest" in text
+    assert "python -m build" in text
+    assert "optical-spec --help" in text
+    assert "optical-spec adapter-list --json" in text
+    assert "optical-spec validate examples/specs/minimal_nanoparticle.json" in text
+    assert "optical-spec parse examples/specs/minimal_nanoparticle.json --json" in text
+    assert (
+        "optical-spec workflow-plan examples/workflows/local_preview_request.json --json"
+        in text
+    )
+    assert "twine upload" not in lowered
+    assert "gh release create" not in lowered
+    assert "git tag" not in lowered
+
+
+def test_test_workflow_is_manual_extended_benchmark_workflow():
+    text = _read_workflow("test.yml")
+    lowered = text.lower()
+    assert "name: Benchmarks and Extended Tests" in text
+    assert "workflow_dispatch:" in text
+    assert "push:" not in text
+    assert "pull_request:" not in text
+    assert 'python-version: "3.11"' in text
+    assert '.[test]' in text
+    assert "mkdir -p outputs outputs/workflow_benchmark" in text
+    assert "python -m pytest" in text
+    assert "python benchmarks/run_benchmark.py --mode key_fields" in text
+    assert "python benchmarks/run_semantic_benchmark.py --report outputs/semantic_benchmark_report.json" in text
+    assert "python benchmarks/run_llm_benchmark.py" in text
+    assert "python benchmarks/run_workflow_benchmark.py" in text
+    assert "actions/upload-artifact" in text
+    assert "twine upload" not in lowered
+    assert "gh release create" not in lowered
+    assert "git tag" not in lowered
 
 
 def test_workflows_do_not_enable_optional_solver_or_llm_execution_by_default():
@@ -128,10 +150,12 @@ def test_release_and_publish_workflows_are_manual_and_scoped():
     assert "git tag" not in release_dry_run.lower()
 
     create_prerelease = _read_workflow("create-prerelease.yml")
+    assert "name: Create Historical v0.9.0rc1 Pre-release" in create_prerelease
     assert "workflow_dispatch:" in create_prerelease
     assert "push:" not in create_prerelease
     assert "pull_request:" not in create_prerelease
     assert "CREATE_PRERELEASE" in create_prerelease
+    assert "Historical helper" in create_prerelease
 
     testpypi = _read_workflow("testpypi-trusted-publish.yml")
     assert "workflow_dispatch:" in testpypi

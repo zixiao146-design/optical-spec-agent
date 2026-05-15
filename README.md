@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-[![Tests](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml/badge.svg)](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/test.yml)
+[![CI](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/zixiao146-design/optical-spec-agent/actions/workflows/ci.yml)
 
 > Open-source-solver-first optical simulation workflow agent: convert optical
 > simulation requests into validated spec JSON and generate inspectable,
@@ -71,6 +71,9 @@ checklists are tracked in
 [`docs/release_dry_run_operations.md`](docs/release_dry_run_operations.md),
 [`docs/secrets_and_token_hygiene.md`](docs/secrets_and_token_hygiene.md), and
 [`docs/maintainer_operations_checklist.md`](docs/maintainer_operations_checklist.md).
+`ci.yml` is the automatic push/PR gate; benchmark and extended-test workflows
+are manual-only. Release dry-run and TestPyPI Trusted Publishing workflows are
+manual-only and never publish or create tags/releases from default CI.
 Local package publication preflight is available through
 [`scripts/testpypi_preflight.sh`](scripts/testpypi_preflight.sh); it performs
 build, metadata, wheel install, and CLI checks without uploading anything.

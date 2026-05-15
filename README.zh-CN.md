@@ -98,6 +98,9 @@ CI/local gate parity、release dry-run、secrets/token hygiene 和 maintainer
 operations checklist 见 `docs/ci_quality_gate_parity.md`、
 `docs/release_dry_run_operations.md`、`docs/secrets_and_token_hygiene.md` 和
 `docs/maintainer_operations_checklist.md`。
+`ci.yml` 是自动 push/PR gate；benchmark 和 extended-test workflows 仅手动运行。
+release dry-run 与 TestPyPI Trusted Publishing 也仅手动运行，默认 CI 不会发布、
+上传、创建 tag 或创建 release。
 本地 package publication preflight 脚本为 `scripts/testpypi_preflight.sh`；
 它只做 build、metadata、wheel install 和 CLI 检查，不上传任何 artifact。
 

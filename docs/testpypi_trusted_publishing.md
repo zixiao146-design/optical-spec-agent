@@ -38,6 +38,7 @@ The TestPyPI trusted publisher configuration should match:
 
 - The workflow has no `push` trigger.
 - The workflow has no `pull_request` trigger.
+- The workflow is not part of automatic CI.
 - The workflow requires `workflow_dispatch` and the confirmation input
   `UPLOAD_TESTPYPI`.
 - The workflow uses `id-token: write` for Trusted Publishing.

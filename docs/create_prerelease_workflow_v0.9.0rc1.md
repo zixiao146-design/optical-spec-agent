@@ -1,13 +1,18 @@
-# Create v0.9.0rc1 Pre-release Workflow
+# Create Historical v0.9.0rc1 Pre-release Workflow
 
 The `Create v0.9.0rc1 Pre-release` workflow is a manual GitHub Actions entry
 point for creating the `v0.9.0rc1` GitHub pre-release.
+
+This is a historical helper for the already-published `v0.9.0rc1` prerelease.
+Do not use it for `v0.9.0rc5`, `v0.9.0rc6`, TestPyPI upload, PyPI publication,
+or any automatic release path.
 
 It is intentionally conservative:
 
 - It only runs through `workflow_dispatch`.
 - It requires the confirmation input `CREATE_PRERELEASE`.
 - It only creates a GitHub pre-release.
+- It is historical/manual only and is not part of automatic CI.
 - It does not publish to PyPI.
 - It does not upload `dist/` artifacts.
 - It does not create, move, or overwrite the git tag.

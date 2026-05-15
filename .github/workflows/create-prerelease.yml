@@ -1,4 +1,7 @@
-name: Create v0.9.0rc1 Pre-release
+name: Create Historical v0.9.0rc1 Pre-release
+
+# Historical helper for the already-published v0.9.0rc1 prerelease only.
+# Do not use this workflow for rc5, rc6, PyPI, or TestPyPI publication.
 
 on:
   workflow_dispatch:
