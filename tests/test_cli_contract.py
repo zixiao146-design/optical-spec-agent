@@ -3,12 +3,37 @@
 from __future__ import annotations
 
 import json
+import os
+import re
 import shlex
 import subprocess
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
+
+
+def _cli_env() -> dict[str, str]:
+    env = os.environ.copy()
+    env.update(
+        {
+            "NO_COLOR": "1",
+            "CLICOLOR": "0",
+            "TERM": "dumb",
+            "COLUMNS": "200",
+            "FORCE_COLOR": "0",
+        }
+    )
+    return env
+
+
+def _plain(text: str) -> str:
+    return ANSI_RE.sub("", text)
+
+
+def _normalized(text: str) -> str:
+    return " ".join(_plain(text).split())
 
 
 def _load_public_contract_manifest() -> dict:
@@ -21,6 +46,7 @@ def _run_cli(*args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         ["optical-spec", *args],
         cwd=ROOT,
+        env=_cli_env(),
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -67,8 +93,9 @@ def test_documented_help_fragments_remain_available():
     for args, fragments in help_checks.items():
         result = _run_cli(*args)
         assert result.returncode == 0, result.stdout + result.stderr
+        output = _normalized(result.stdout)
         for fragment in fragments:
-            assert fragment in result.stdout
+            assert fragment in output
 
 
 def test_offline_json_commands_have_stable_top_level_shape(tmp_path):
@@ -140,6 +167,7 @@ def test_manifest_runnable_cli_commands_exit_successfully():
         result = subprocess.run(
             shlex.split(command),
             cwd=ROOT,
+            env=_cli_env(),
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
