@@ -71,7 +71,8 @@ maintainers.
 - Keep the Elmer optional validation pilot opt-in only; default validation does
   not run Elmer and ElmerSolver unavailable is non-blocking.
 - Keep Elmer Level-3-ready but Level 2 until an explicit manual validation run
-  records a completed report.
+  records a completed report. The 2026-05-15 conda-forge/Homebrew install
+  attempt is deferred and is not solver-backed validation evidence.
 - Include expanded adapter family evidence for Gmsh, Elmer, MPB, and Optiland.
 - Include workflow evidence fixtures for deterministic local replay.
 - Include workflow-to-adapter planning evidence with no-execute behavior.

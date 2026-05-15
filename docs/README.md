@@ -59,6 +59,7 @@ Current main development version: 0.9.0rc5.dev0.
 - [MPB optional manual validation report](../validation/mpb/mpb_validation_pilot_2026-05-14.md)
 - [Optiland optional manual validation report](../validation/optiland/optiland_validation_pilot_2026-05-14.md)
 - [Elmer validation report directory](../validation/elmer/README.md)
+- [Elmer install deferred record](../validation/elmer/elmer_install_deferred_2026-05-15.md)
 - [Pytest marker policy](pytest_marker_policy.md)
 - [Offline user journey](offline_user_journey.md)
 - [Error model](error_model.md)

@@ -11,7 +11,8 @@ Adapter maturity levels are tracked in `docs/adapter_maturity_model.md`. Gmsh,
 Meep, MPB, and Optiland have narrow Level 3 optional manual validation evidence
 recorded in their readiness docs and under `validation/`. Elmer remains Level 2
 with a Level-3-ready path pending ElmerSolver installation and explicit opt-in
-manual validation.
+manual validation; the 2026-05-15 conda-forge/Homebrew install attempt is
+recorded as deferred.
 
 optical-spec-agent is open-source-solver-first. Adapter outputs are local
 generated artifacts. They do not run external solvers by default and do not
@@ -26,7 +27,7 @@ Gmsh, Elmer, and Optiland. No production-grade physical validation is claimed.
 | `meep` | Open-source simulation backend | Optional external open-source solver | Yes | `preview` / research-preview with Level 3 optional manual validation evidence | Python script | Yes, only for explicit `meep-run` or opt-in manual validation | No | Yes: `tests/fixtures/adapter_golden/meep_missing_wavelength_expected_fragments.txt`, `tests/test_adapter_evidence_fixtures.py`, `validation/meep/meep_validation_pilot_2026-05-14.md` | No | Specialized nanoparticle-on-film adapter; scripts are preview/research-preview and not production-grade validation | Needs reproducible benchmark scope before Level 4 or production claims |
 | `mpb` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold with Level 3 optional manual validation evidence | Python scaffold | Yes, only for explicit opt-in manual validation; MPB CLI is not required when `meep.mpb` is available | No | Yes: `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py`, `validation/mpb/mpb_validation_pilot_2026-05-14.md` | No | Uses default lattice, k-points, resolution, and num_bands when missing; geometry is schematic; Level 3 evidence is narrow and non-production-grade | Needs reproducible benchmark scope before Level 4 or production claims |
 | `gmsh` | Open-source geometry / mesh backend | Optional external open-source mesh tool | Yes | MVP scaffold with Level 3 optional manual validation evidence | `.geo` scaffold | Yes, to mesh externally | No | Yes: `examples/specs/gmsh_preview.json`, `tests/fixtures/adapter_golden/gmsh/`, `tests/test_adapter_family_evidence.py`, `validation/gmsh/gmsh_validation_pilot_2026-05-14.md` | No | Geometry is schematic unless OpticalSpec carries explicit dimensions; physical groups are placeholders | Needs reproducible benchmark scope before Level 4 or production claims |
-| `elmer` | Open-source multiphysics backend | Optional external open-source solver | Yes | MVP scaffold, Level-3-ready pending actual validation | `.sif` scaffold | Yes, to execute `ElmerSolver` externally | No | Yes: `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py`, `docs/elmer_optional_validation_pilot.md`, `docs/elmer_level3_readiness.md` | No | Requires a real mesh prepared outside this adapter; equation and boundary sections are placeholders; ElmerSolver is not installed locally | Needs explicit ElmerSolver installation and opt-in manual validation before Level 3 |
+| `elmer` | Open-source multiphysics backend | Optional external open-source solver | Yes | MVP scaffold, Level-3-ready pending actual validation | `.sif` scaffold | Yes, to execute `ElmerSolver` externally | No | Yes: `examples/specs/elmer_preview.json`, `tests/fixtures/adapter_golden/elmer/`, `tests/test_adapter_family_evidence.py`, `docs/elmer_optional_validation_pilot.md`, `docs/elmer_level3_readiness.md`, `validation/elmer/elmer_install_deferred_2026-05-15.md` | No | Requires a real mesh prepared outside this adapter; equation and boundary sections are placeholders; ElmerSolver is not installed locally and the 2026-05-15 package install attempt is deferred | Needs explicit ElmerSolver installation and opt-in manual validation before Level 3 |
 | `optiland` | Open-source simulation backend | Optional external open-source solver | Yes | MVP scaffold with Level 3 optional manual validation evidence | Python scaffold | Yes, only for explicit opt-in manual validation | No | Yes: `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py`, `validation/optiland/optiland_validation_pilot_2026-05-14.md` | No | OpticalSpec lacks full lens surface sequence and glass catalog mapping; Level 3 evidence is narrow and non-production-grade | Needs reproducible benchmark scope before Level 4 or production claims |
 
 ## Registry contract
@@ -65,7 +66,8 @@ The adapter registry currently exposes:
 - Elmer has a Level-3-ready optional manual validation path, but Elmer remains
   Level 2 until ElmerSolver is installed and an explicit opt-in validation run
   records a completed report. Default tests, smoke, quality gates, and release
-  validation do not run Elmer.
+  validation do not run Elmer. The current package-manager install attempt is
+  deferred.
 - Adapter warnings and defaults are part of the auditable output contract.
 - Physical correctness is not claimed as production-grade.
 - Workflow-to-adapter planning is preview/no-execute by default.

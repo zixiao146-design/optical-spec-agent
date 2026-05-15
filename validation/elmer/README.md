@@ -6,6 +6,8 @@ Current status:
 
 - No completed Elmer validation report is recorded.
 - Elmer remains Level 2 pending optional manual validation.
+- Install attempt deferred record:
+  `validation/elmer/elmer_install_deferred_2026-05-15.md`.
 - Do not commit large solver output files.
 - Do not make Elmer a default dependency.
 - Do not claim production-grade physical validation.

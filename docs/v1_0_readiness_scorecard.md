@@ -77,7 +77,8 @@
 - MPB CLI absence is acceptable when `meep.mpb` imports successfully; ElmerSolver
   remains optional/manual.
 - Elmer remains Level 2 pending ElmerSolver installation and explicit opt-in
-  manual validation; missing ElmerSolver is non-blocking for default gates.
+  manual validation; missing ElmerSolver is non-blocking for default gates, and
+  the 2026-05-15 package-manager install attempt is recorded as deferred.
 - TestPyPI upload not approved/exercised.
 - PyPI publication not approved.
 - Adapter outputs may still be MVP/scaffold.

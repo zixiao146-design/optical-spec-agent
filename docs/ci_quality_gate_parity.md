@@ -72,7 +72,8 @@ individual jobs shorter where appropriate:
 - recorded Optiland Level 3 evidence remains optional/manual and must not
   become a default CI requirement
 - Elmer Level-3-ready checks remain no-execution by default and must not require
-  ElmerSolver in default CI
+  ElmerSolver in default CI; the 2026-05-15 package-manager install attempt is
+  recorded as deferred rather than validation evidence
 
 ## Current Workflow Inventory
 

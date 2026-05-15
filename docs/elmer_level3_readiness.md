@@ -12,6 +12,9 @@ to Level 3 in the adapter maturity model.
 - Elmer current maturity: Level 2
 - Target next maturity: Level 3 - Optional manual solver validation
 - ElmerSolver is not installed locally
+- 2026-05-15 install attempt: deferred because `elmerfem` and `elmer` were not
+  available from the current conda-forge `osx-arm64` channels, and Homebrew had
+  no `elmer` or `elmerfem` formula/cask.
 - Elmer is not required by default
 - Elmer is not run by default
 - Default tests do not require Elmer
@@ -49,12 +52,15 @@ to Level 3 in the adapter maturity model.
 - Actual Elmer execution recorded: no.
 - Manual validation report filled: no.
 - Level 3 achieved: no, pending ElmerSolver installation and explicit opt-in validation.
+- Deferred install record: `validation/elmer/elmer_install_deferred_2026-05-15.md`.
 
 ## Readiness Boundary
 
 Elmer is Level-3-ready but remains Level 2 until an explicit manual validation
 run records a completed report. `ElmerSolver` unavailable is non-blocking for
 default tests, smoke, quality gates, release dry-runs, and documentation checks.
+The 2026-05-15 package-manager install attempt is recorded as deferred, not as
+solver-backed validation evidence.
 This readiness state does not make Elmer a default dependency, does not claim
 production-grade physical validation, and does not claim a formal convergence
 proof. In short: it does not claim production-grade physical validation and

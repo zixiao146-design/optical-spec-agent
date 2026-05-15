@@ -69,7 +69,8 @@ documented in [`release_dry_run_operations.md`](release_dry_run_operations.md).
   not part of the default quality gate.
 - No Elmer execution in the Elmer optional validation pilot default preflight.
 - Elmer remains Level 2 with Level-3-ready documentation until ElmerSolver is
-  installed and an explicit opt-in validation run records a report.
+  installed and an explicit opt-in validation run records a report. The
+  2026-05-15 package-manager install attempt is recorded as deferred.
 - No external LLM by default.
 - No proprietary solver by default.
 - No token is required for the default local quality gate.

@@ -178,6 +178,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "run_optional_mpb_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_optiland_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_elmer_validation.sh").exists()
+    assert (
+        ROOT / "validation" / "elmer" / "elmer_install_deferred_2026-05-15.md"
+    ).exists()
 
     combined = "\n".join(
         (ROOT / "docs" / name).read_text(encoding="utf-8") for name in required_docs
@@ -206,6 +209,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Optiland Level-3 Manual Validation Readiness" in combined
     assert "Elmer Optional Validation Pilot" in combined
     assert "Elmer Level-3 Manual Validation Readiness" in combined
+    assert "elmer_install_deferred_2026-05-15.md" in combined
     assert "Manual Solver Validation Report Template" in combined
     assert "Pytest Marker Policy" in combined
     assert "0.9.0rc5.dev0" in combined

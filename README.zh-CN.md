@@ -76,6 +76,7 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `validation/optiland/optiland_validation_pilot_2026-05-14.md`、
 `docs/elmer_optional_validation_pilot.md`、
 `docs/elmer_level3_readiness.md`、
+`validation/elmer/elmer_install_deferred_2026-05-15.md`、
 `docs/manual_solver_validation_report_template.md`、`docs/pytest_marker_policy.md`、
 `docs/offline_user_journey.md`、`docs/error_model.md`、
 `docs/migration_notes_pre_v1.md`、`docs/v1_0_public_contract_freeze.md`、

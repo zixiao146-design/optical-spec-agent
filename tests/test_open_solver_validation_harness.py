@@ -31,6 +31,7 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "docs/elmer_level3_readiness.md" in harness_text
     assert "scripts/run_optional_elmer_validation.sh" in harness_text
     assert "no completed Elmer manual validation report exists yet" in harness_text
+    assert "validation/elmer/elmer_install_deferred_2026-05-15.md" in harness_text
     assert "Meep opt-in pilot" in harness_text
     assert "MPB opt-in pilot" in harness_text
     assert "Optiland opt-in pilot" in harness_text
@@ -68,5 +69,6 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "docs/elmer_level3_readiness.md" in plan_text
     assert "scripts/run_optional_elmer_validation.sh" in plan_text
     assert "no Elmer execution or completed report exists yet" in plan_text
+    assert "validation/elmer/elmer_install_deferred_2026-05-15.md" in plan_text
     assert "Tests should not be part of default `pytest`" in plan_text
     assert "Marker policy is documented in `docs/pytest_marker_policy.md`" in plan_text

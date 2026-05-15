@@ -46,6 +46,7 @@ if [[ -n "${ELMER_PATH}" ]]; then
   fi
 else
   echo "ElmerSolver command detected: unavailable"
+  echo "Elmer install status: unavailable or deferred for this environment"
 fi
 
 if [[ ! -f "${ELMER_SPEC}" ]]; then
@@ -105,6 +106,10 @@ data = {
     "elmer_available": sys.argv[3] == "true",
     "solver_path": sys.argv[4] or None,
     "solver_version": sys.argv[5] or None,
+    "solver_installation_status": "available" if sys.argv[3] == "true" else "unavailable_or_deferred",
+    "install_deferred_record": None
+    if sys.argv[3] == "true"
+    else "validation/elmer/elmer_install_deferred_2026-05-15.md",
     "optional_validation_enabled": sys.argv[6] == "1",
     "elmer_executed": sys.argv[7] == "true",
     "passed": sys.argv[8] == "true",

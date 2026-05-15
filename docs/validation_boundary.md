@@ -112,8 +112,8 @@ release validation.
 The Elmer optional validation pilot is a Level-3-ready manual path only.
 `scripts/run_optional_elmer_validation.sh` checks ElmerSolver availability in
 default mode without executing Elmer. ElmerSolver is not installed locally, no
-completed Elmer report exists, and Elmer remains Level 2 pending explicit
-manual validation.
+completed Elmer report exists, the 2026-05-15 package install attempt is
+deferred, and Elmer remains Level 2 pending explicit manual validation.
 
 ## Requirements for production-grade validation
 

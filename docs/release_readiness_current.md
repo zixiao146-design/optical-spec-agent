@@ -43,7 +43,8 @@ This document describes the current `main` branch. It is not a release tag.
 - Optiland Level 3 optional manual validation evidence:
   `validation/optiland/optiland_validation_pilot_2026-05-14.md`
 - Elmer Level-3-ready optional validation path:
-  `docs/elmer_level3_readiness.md` and `scripts/run_optional_elmer_validation.sh`
+  `docs/elmer_level3_readiness.md` and `scripts/run_optional_elmer_validation.sh`;
+  the 2026-05-15 conda-forge/Homebrew install attempt is deferred.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`
 - Pytest marker policy:

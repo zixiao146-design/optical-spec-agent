@@ -81,7 +81,9 @@ Elmer is Level-3-ready but remains Level 2. The readiness path is documented in
 `docs/elmer_optional_validation_pilot.md` and `docs/elmer_level3_readiness.md`;
 `scripts/run_optional_elmer_validation.sh` checks ElmerSolver availability in
 default mode without executing Elmer. ElmerSolver is not installed locally, and
-no completed Elmer manual validation report exists yet.
+no completed Elmer manual validation report exists yet. The 2026-05-15
+conda-forge/Homebrew install attempt is recorded as deferred in
+`validation/elmer/elmer_install_deferred_2026-05-15.md`.
 
 ## Future Manual Validation Path
 

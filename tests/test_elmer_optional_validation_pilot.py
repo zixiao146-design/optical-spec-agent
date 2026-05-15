@@ -50,6 +50,14 @@ def test_elmer_optional_validation_script_default_mode_does_not_execute(tmp_path
     assert data["production_grade_validation_claimed"] is False
     assert data["formal_convergence_proof_claimed"] is False
     assert data["proprietary_required"] is False
+    assert data["solver_installation_status"] in {
+        "available",
+        "unavailable_or_deferred",
+    }
+    if not data["elmer_available"]:
+        assert data["install_deferred_record"] == (
+            "validation/elmer/elmer_install_deferred_2026-05-15.md"
+        )
 
 
 def test_elmer_optional_validation_script_has_no_publish_or_release_commands():

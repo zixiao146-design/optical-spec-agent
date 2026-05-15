@@ -43,6 +43,8 @@
 - Elmer Level-3-ready documentation:
   `docs/elmer_optional_validation_pilot.md` and
   `docs/elmer_level3_readiness.md`.
+- Elmer install deferred record:
+  `validation/elmer/elmer_install_deferred_2026-05-15.md`.
 - Workflow preview fixtures: stable keys under
   `tests/fixtures/workflow_preview/`.
 - Schema compatibility tests: `tests/test_schema_compatibility_policy.py` and
@@ -106,7 +108,8 @@
 - No production-grade Optiland optical validation; the recorded Level 3 report
   is narrow optional manual validation evidence only.
 - No Elmer Level 3 solver-backed validation yet; Elmer remains Level 2 pending
-  ElmerSolver installation and explicit opt-in manual validation.
+  ElmerSolver installation and explicit opt-in manual validation. The
+  2026-05-15 conda-forge/Homebrew install attempt is deferred.
 - No proprietary commercial solver validation.
 - No PyPI publication claim.
 
@@ -158,5 +161,6 @@
 - `docs/elmer_level3_readiness.md`
 - `docs/manual_solver_validation_reports/elmer_validation_report_schema.json`
 - `validation/elmer/README.md`
+- `validation/elmer/elmer_install_deferred_2026-05-15.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`

@@ -150,7 +150,9 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/elmer_level3_readiness.md` and
   `scripts/run_optional_elmer_validation.sh` prepare a default no-execution
   availability check. Elmer remains Level 2 until ElmerSolver is installed and
-  an explicit opt-in manual validation report is recorded.
+  an explicit opt-in manual validation report is recorded. The 2026-05-15
+  conda-forge/Homebrew install attempt is recorded as deferred in
+  `validation/elmer/elmer_install_deferred_2026-05-15.md`.
 - Manual solver validation report template:
   `docs/manual_solver_validation_report_template.md`.
 - Pytest marker policy for optional solver validation:

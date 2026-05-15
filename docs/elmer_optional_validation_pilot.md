@@ -11,6 +11,8 @@ adapter without making Elmer a default dependency.
 - Current main development version: 0.9.0rc5.dev0
 - Adapter: elmer
 - ElmerSolver is not installed locally
+- 2026-05-15 install attempt was deferred because a safe binary/package route
+  was not available through the checked conda-forge or Homebrew paths.
 - Default tests do not run Elmer
 - Default smoke does not run Elmer
 - Release validation does not require Elmer
@@ -39,7 +41,7 @@ DO NOT RUN BY DEFAULT.
 
 Future manual validation may:
 
-1. Install Elmer manually.
+1. Install Elmer manually through a maintainable binary/package route.
 2. Check `ElmerSolver` availability.
 3. Generate a local `.sif` preview artifact.
 4. Run `ElmerSolver` only after explicit maintainer opt-in.
@@ -58,6 +60,10 @@ Default:
 
 `OSA_RUN_OPTIONAL_ELMER_VALIDATION` is unset, so no `ElmerSolver` command is
 executed.
+
+The 2026-05-15 install attempt is recorded in
+`validation/elmer/elmer_install_deferred_2026-05-15.md`; it is not a completed
+manual validation report.
 
 ## Non-goals
 

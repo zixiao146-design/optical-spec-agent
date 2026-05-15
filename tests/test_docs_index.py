@@ -60,6 +60,7 @@ def test_docs_index_exists_and_links_major_docs():
         "../validation/mpb/mpb_validation_pilot_2026-05-14.md",
         "../validation/optiland/optiland_validation_pilot_2026-05-14.md",
         "../validation/elmer/README.md",
+        "../validation/elmer/elmer_install_deferred_2026-05-15.md",
         "pytest_marker_policy.md",
         "offline_user_journey.md",
         "error_model.md",

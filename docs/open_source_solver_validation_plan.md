@@ -76,7 +76,9 @@ guide is `docs/elmer_optional_validation_pilot.md`, readiness checklist is
 `docs/elmer_level3_readiness.md`, and default script is
 `scripts/run_optional_elmer_validation.sh`. Default mode only checks
 ElmerSolver availability and fixture presence; ElmerSolver unavailable is
-non-blocking, and no Elmer execution or completed report exists yet.
+non-blocking, and no Elmer execution or completed report exists yet. The
+2026-05-15 conda-forge/Homebrew install attempt is recorded as deferred in
+`validation/elmer/elmer_install_deferred_2026-05-15.md`.
 
 For Python-backed stacks, Meep availability can be reported through
 `import meep as mp`, MPB availability can be reported through `from meep import
