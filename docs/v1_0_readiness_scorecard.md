@@ -53,6 +53,8 @@
 - v1.0 readiness gap audit.
 - v0.9.0rc6 development plan.
 - v1.0 decision matrix.
+- v1.0 public contract freeze checklist.
+- Publication decision record.
 - Examples manifest.
 - Validation evidence manifest.
 - Package build and wheel install.
@@ -84,6 +86,8 @@
   the 2026-05-15 package-manager install attempt is recorded as deferred.
 - TestPyPI upload not approved/exercised.
 - PyPI publication not approved.
+- Publication decision record keeps TestPyPI pending, upload unauthorized, and
+  PyPI publication not granted.
 - Adapter outputs may still be MVP/scaffold.
 - Workflow remains local/synchronous preview.
 - v1.0 compatibility freeze not finalized.
@@ -99,6 +103,9 @@
 - Use `docs/rc6_development_plan.md` to keep rc6 development scoped.
 - Use `docs/v1_0_decision_matrix.md` before TestPyPI, PyPI, Elmer, production
   validation, or public-contract-freeze decisions.
+- Use `docs/v1_0_public_contract_freeze_checklist.md` before declaring a v1.0
+  freeze.
+- Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue post-`v0.9.0rc5` readiness engineering on `0.9.0rc6.dev0`; only

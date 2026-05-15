@@ -23,7 +23,8 @@ def test_public_contract_manifest_baseline_and_package_metadata():
     assert manifest["version_scope"] == "0.9.0rc6.dev0"
     assert manifest["current_public_prerelease"] == "v0.9.0rc5"
     assert manifest["release_state"]["v1_0_0_released"] is False
-    assert manifest["release_state"]["v0_9_0rc5_tag_created"] is False
+    assert manifest["release_state"]["v0_9_0rc5_tag_created"] is True
+    assert manifest["release_state"]["v0_9_0rc6_tag_created"] is False
     assert manifest["release_state"]["pypi_published"] is False
     assert manifest["release_state"]["testpypi_uploaded"] is False
     assert manifest["package"]["name"] == "optical-spec-agent"

@@ -29,6 +29,7 @@ def test_docs_index_exists_and_links_major_docs():
         "packaging_gate.md",
         "testpypi_dry_run_gate.md",
         "pypi_publication_decision.md",
+        "publication_decision_record.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "secrets_and_token_hygiene.md",
         "cli_contract.md",
@@ -36,6 +37,7 @@ def test_docs_index_exists_and_links_major_docs():
         "schema_compatibility_policy.md",
         "v1_0_compatibility_policy.md",
         "v1_0_public_contract_freeze.md",
+        "v1_0_public_contract_freeze_checklist.md",
         "public_contract_change_checklist.md",
         "public_contract_manifest.json",
         "validation_gate.md",
@@ -83,6 +85,8 @@ def test_docs_index_exists_and_links_major_docs():
         "v1_0_gap_audit.md",
         "rc6_development_plan.md",
         "v1_0_decision_matrix.md",
+        "v1_0_public_contract_freeze_checklist.md",
+        "publication_decision_record.md",
     ]
     for phrase in required:
         assert phrase in text

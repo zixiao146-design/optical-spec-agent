@@ -26,6 +26,10 @@
 - Use `docs/v1_0_decision_matrix.md` before deciding TestPyPI upload, PyPI
   publication, Elmer Level 3, production-validation scope, or public contract
   freeze.
+- Use `docs/v1_0_public_contract_freeze_checklist.md` before declaring the
+  v1.0 public contract frozen.
+- Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action;
+  current upload and publication approval remains pending/not granted.
 
 ## Safety Notes
 

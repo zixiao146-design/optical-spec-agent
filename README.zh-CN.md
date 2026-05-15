@@ -59,7 +59,8 @@ TestPyPI 仍未上传，除非后续单独批准。PyPI/TestPyPI remain unpublis
 `docs/validation_boundary.md`、`docs/validation_gate.md`、`docs/packaging_gate.md`、
 `docs/open_source_solver_strategy.md`、`docs/proprietary_solver_policy.md`、
 `docs/external_solver_policy.md`、`docs/external_llm_policy.md` 和
-`docs/pypi_publication_decision.md`。
+`docs/pypi_publication_decision.md`。TestPyPI/PyPI 决策仍是 pending /
+not granted，见 `docs/publication_decision_record.md`；该文档不授权上传或发布。
 v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/validation_evidence_manifest.md`、`docs/adapter_maturity_model.md`、
 `docs/open_source_solver_validation_plan.md`、`docs/open_solver_validation_harness.md`、
@@ -81,6 +82,7 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/manual_solver_validation_report_template.md`、`docs/pytest_marker_policy.md`、
 `docs/offline_user_journey.md`、`docs/error_model.md`、
 `docs/migration_notes_pre_v1.md`、`docs/v1_0_public_contract_freeze.md`、
+`docs/v1_0_public_contract_freeze_checklist.md`、
 `docs/public_contract_manifest.json`、`docs/public_contract_change_checklist.md`、
 `examples/e2e/README.md` 和 `examples/examples_manifest.json`。
 当前 rc6 开发态和发布 gate 见 `docs/release_readiness_v0.9.0rc6.md`、

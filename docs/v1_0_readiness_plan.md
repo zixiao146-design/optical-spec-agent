@@ -55,6 +55,10 @@ Recommended goals:
   cycle focused on explicit v1.0 readiness gaps.
 - Use `docs/v1_0_decision_matrix.md` for TestPyPI, PyPI, Elmer,
   production-validation, and public-contract-freeze decisions.
+- Use `docs/v1_0_public_contract_freeze_checklist.md` to make the freeze
+  candidate actionable.
+- Use `docs/publication_decision_record.md` to keep TestPyPI pending, PyPI not
+  granted, and upload authorization explicit.
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
 - Keep the v1.0 stability gate current.
@@ -107,6 +111,10 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/v1_0_decision_matrix.md`.
 - v1.0 public contract freeze candidate:
   `docs/v1_0_public_contract_freeze.md`.
+- v1.0 public contract freeze checklist:
+  `docs/v1_0_public_contract_freeze_checklist.md`.
+- Publication decision record:
+  `docs/publication_decision_record.md`.
 - Public contract manifest and change checklist:
   `docs/public_contract_manifest.json` and
   `docs/public_contract_change_checklist.md`.

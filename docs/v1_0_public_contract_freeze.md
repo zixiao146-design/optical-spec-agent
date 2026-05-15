@@ -14,6 +14,10 @@ v1.0 stabilization.
 - v0.9.0rc6 GitHub release not created
 - PyPI/TestPyPI not published/uploaded
 
+The executable freeze checklist is tracked in
+`docs/v1_0_public_contract_freeze_checklist.md`. Publication decisions remain
+pending/not granted and are tracked in `docs/publication_decision_record.md`.
+
 ## Candidate stable public contract
 
 - Console script name: `optical-spec`
@@ -31,6 +35,8 @@ v1.0 stabilization.
 - Examples manifest paths and no-network/no-solver/no-LLM/no-proprietary flags
 - Package build metadata sufficient for local wheel install and
   `optical-spec --help`
+- Public contract freeze checklist entries in
+  `docs/v1_0_public_contract_freeze_checklist.md`
 
 ## Explicit preview / unstable areas
 
@@ -54,6 +60,7 @@ v1.0 stabilization.
 ## v1.0 freeze entry criteria
 
 - Public contract manifest exists and passes tests.
+- Public contract freeze checklist exists and is reviewed by the maintainer.
 - CLI contract tests pass.
 - Schema compatibility tests pass.
 - Adapter matrix tests pass.
@@ -63,3 +70,4 @@ v1.0 stabilization.
 - Packaging/preflight checks pass.
 - No external solver, external LLM, or proprietary solver dependency is required
   by default.
+- TestPyPI/PyPI strategy is explicit before any v1.0 publication action.

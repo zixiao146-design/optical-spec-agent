@@ -20,3 +20,5 @@ def test_rc6_development_plan_tracks_dev_state_and_exit_criteria():
     assert "Quality gates passed" in text
     assert "PyPI/TestPyPI decision explicit" in text
     assert "Elmer deferred or validated status explicit" in text
+    assert "docs/v1_0_public_contract_freeze_checklist.md" in text
+    assert "docs/publication_decision_record.md" in text

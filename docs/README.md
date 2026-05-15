@@ -22,6 +22,7 @@ Current main development version: `0.9.0rc6.dev0`.
 - [Packaging gate](packaging_gate.md)
 - [TestPyPI dry-run gate](testpypi_dry_run_gate.md)
 - [PyPI publication decision](pypi_publication_decision.md)
+- [Publication decision record](publication_decision_record.md)
 - [TestPyPI upload approval for 0.9.0rc6.dev0](testpypi_upload_approval_v0.9.0rc6.dev0.md)
 - [Secrets and token hygiene](secrets_and_token_hygiene.md)
 
@@ -32,6 +33,7 @@ Current main development version: `0.9.0rc6.dev0`.
 - [Schema compatibility policy](schema_compatibility_policy.md)
 - [v1.0 compatibility policy](v1_0_compatibility_policy.md)
 - [v1.0 public contract freeze](v1_0_public_contract_freeze.md)
+- [v1.0 public contract freeze checklist](v1_0_public_contract_freeze_checklist.md)
 - [Public contract change checklist](public_contract_change_checklist.md)
 - [Public contract manifest](public_contract_manifest.json)
 
@@ -91,3 +93,5 @@ Current main development version: `0.9.0rc6.dev0`.
 - [v1.0 readiness gap audit](v1_0_gap_audit.md)
 - [v0.9.0rc6 development plan](rc6_development_plan.md)
 - [v1.0 decision matrix](v1_0_decision_matrix.md)
+- [v1.0 public contract freeze checklist](v1_0_public_contract_freeze_checklist.md)
+- [Publication decision record](publication_decision_record.md)

@@ -3,6 +3,7 @@
 ## TestPyPI upload
 
 - Current: pending
+- Record: `docs/publication_decision_record.md`
 - Options:
   - Approve upload.
   - Continue no-upload.
@@ -13,6 +14,7 @@
 ## PyPI publication
 
 - Current: not approved
+- Record: `docs/publication_decision_record.md`
 - Options:
   - Publish after TestPyPI.
   - Delay.
@@ -23,6 +25,7 @@
 ## Elmer Level 3
 
 - Current: deferred
+- Record: `docs/v1_0_public_contract_freeze_checklist.md`
 - Options:
   - Keep deferred.
   - Run on Linux/Docker/remote environment.
@@ -34,6 +37,7 @@
 ## Production-grade physical validation
 
 - Current: not claimed
+- Record: `docs/v1_0_public_contract_freeze_checklist.md`
 - Options:
   - Keep non-goal for v1.0.
   - Define separate validation program.
@@ -43,8 +47,15 @@
 ## Public contract freeze
 
 - Current: candidate
+- Checklist: `docs/v1_0_public_contract_freeze_checklist.md`
 - Options:
   - Freeze before v1.0.
   - Allow further pre-v1 changes.
 - Impact: determines whether CLI, schema, adapter, workflow, validation, and
   publication boundaries are stable enough to call the next milestone v1.0.
+
+Public contract freeze remains a hard blocker until the maintainer confirms
+the checklist. TestPyPI remains pending, PyPI publication remains not granted,
+Elmer remains deferred/non-blocking, production-grade physical validation
+remains a non-goal unless explicitly claimed, and formal convergence proof
+remains a non-goal unless explicitly claimed.

@@ -79,6 +79,9 @@ Public contract boundaries are tracked in
 [`docs/workflow_preview_contract.md`](docs/workflow_preview_contract.md),
 [`docs/validation_boundary.md`](docs/validation_boundary.md), and
 [`docs/pypi_publication_decision.md`](docs/pypi_publication_decision.md).
+Publication decisions remain pending/not granted and are tracked in
+[`docs/publication_decision_record.md`](docs/publication_decision_record.md);
+this does not authorize TestPyPI or PyPI upload.
 Validation, packaging, and optional-provider policies are tracked in
 [`docs/validation_gate.md`](docs/validation_gate.md),
 [`docs/packaging_gate.md`](docs/packaging_gate.md),
@@ -113,6 +116,7 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/error_model.md`](docs/error_model.md),
 [`docs/migration_notes_pre_v1.md`](docs/migration_notes_pre_v1.md),
 [`docs/v1_0_public_contract_freeze.md`](docs/v1_0_public_contract_freeze.md),
+[`docs/v1_0_public_contract_freeze_checklist.md`](docs/v1_0_public_contract_freeze_checklist.md),
 [`docs/public_contract_manifest.json`](docs/public_contract_manifest.json),
 [`docs/public_contract_change_checklist.md`](docs/public_contract_change_checklist.md),
 [`examples/e2e/README.md`](examples/e2e/README.md), and

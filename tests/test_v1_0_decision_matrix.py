@@ -23,3 +23,7 @@ def test_v1_0_decision_matrix_covers_required_decisions():
     assert "Current: deferred" in text
     assert "Current: not claimed" in text
     assert "Current: candidate" in text
+    assert "docs/publication_decision_record.md" in text
+    assert "docs/v1_0_public_contract_freeze_checklist.md" in text
+    assert "TestPyPI remains pending" in text
+    assert "PyPI publication remains not granted" in text

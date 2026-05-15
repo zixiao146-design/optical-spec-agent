@@ -19,11 +19,14 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "v1.0 readiness gap audit" in text
     assert "v0.9.0rc6 development plan" in text
     assert "v1.0 decision matrix" in text
+    assert "v1.0 public contract freeze checklist" in text
+    assert "Publication decision record" in text
     assert "No production-grade physical validation" in text
     assert "No formal convergence proof" in text
     assert "TestPyPI upload approval: pending" in text
     assert "Quality gates" in text
     assert "TestPyPI upload not approved/exercised" in text
+    assert "Publication decision record keeps TestPyPI pending" in text
     assert "Optional open-source solver availability preflight" in text
     assert "Open-source solver preflight detects availability only" in text
     assert "Adapter maturity model" in text

@@ -22,6 +22,8 @@
 - Offline user journey.
 - Examples manifest.
 - Public contract manifest.
+- v1.0 public contract freeze checklist.
+- Publication decision record.
 - Open-source-solver-first strategy.
 - Proprietary solver non-default policy.
 - Adapter maturity evidence for Gmsh / Meep / MPB / Optiland.
@@ -33,6 +35,10 @@
 - TestPyPI upload not exercised.
 - PyPI publication not approved.
 - v1.0 final public contract freeze not finalized.
+- `docs/v1_0_public_contract_freeze_checklist.md` exists but still needs
+  maintainer confirmation before v1.0.
+- `docs/publication_decision_record.md` keeps TestPyPI pending and PyPI not
+  granted.
 - Production-grade physical validation not claimed.
 - Formal convergence proof not claimed.
 - Workflow remains local/synchronous preview.
@@ -54,8 +60,10 @@
 ## Recommended v1.0 path
 
 - Finalize public contract freeze.
+- Use `docs/v1_0_public_contract_freeze_checklist.md` as the executable
+  freeze checklist.
 - Keep production claims conservative.
-- Decide TestPyPI upload explicitly.
-- Decide PyPI publication explicitly.
+- Decide TestPyPI upload explicitly through `docs/publication_decision_record.md`.
+- Decide PyPI publication explicitly through `docs/publication_decision_record.md`.
 - Keep Elmer deferred unless a maintainable install route appears.
 - Prepare v0.9.0rc6 only if new hardening justifies another release candidate.

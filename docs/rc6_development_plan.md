@@ -10,6 +10,9 @@
 ## Goals for rc6.dev cycle
 
 - Close v1.0 public contract freeze gaps.
+- Keep `docs/v1_0_public_contract_freeze_checklist.md` current.
+- Keep `docs/publication_decision_record.md` current while TestPyPI remains
+  pending and PyPI publication remains not granted.
 - Improve release/quality documentation consistency.
 - Decide whether TestPyPI upload will be approved.
 - Keep quality gates passing.
@@ -37,3 +40,4 @@
 - CLI examples passed.
 - PyPI/TestPyPI decision explicit.
 - Elmer deferred or validated status explicit.
+- Public contract freeze checklist reviewed by maintainer.

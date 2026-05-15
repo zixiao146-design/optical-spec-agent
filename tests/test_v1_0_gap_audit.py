@@ -24,3 +24,5 @@ def test_v1_0_gap_audit_tracks_current_baseline_and_blockers():
     assert "Hard blocker for v1.0" in text
     assert "TestPyPI upload not exercised" in text
     assert "PyPI publication not approved" in text
+    assert "docs/v1_0_public_contract_freeze_checklist.md" in text
+    assert "docs/publication_decision_record.md" in text
