@@ -2,11 +2,11 @@
 
 ## Baseline
 
-- Current public prerelease: v0.9.0rc5
-- Current main release draft: v0.9.0rc6
-- v0.9.0rc6 tag: not created
+- Current public prerelease: v0.9.0rc6
+- Current main development version: 0.9.0rc7.dev0
+- v0.9.0rc7 tag: not created
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc6: not performed
+- TestPyPI upload for 0.9.0rc7.dev0: not performed
 
 ## Goals for rc6.dev cycle
 

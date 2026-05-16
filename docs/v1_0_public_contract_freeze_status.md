@@ -3,8 +3,8 @@
 - Status: approved
 - Approval type: maintainer-approved documentation freeze
 - Approval date: 2026-05-16
-- Current public prerelease: v0.9.0rc5
-- Current main release draft: v0.9.0rc6
+- Current public prerelease: v0.9.0rc6
+- Current main development version: 0.9.0rc7.dev0
 - Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe
 - TestPyPI uploaded and verified: yes
 - PyPI published: no

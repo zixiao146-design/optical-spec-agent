@@ -1,9 +1,9 @@
 # CLI Contract
 
-Version scope: current public prerelease `v0.9.0rc5`; current `main` release
-draft `0.9.0rc6`. The `v0.9.0rc6` tag has not been created, PyPI remains
+Version scope: current public prerelease `v0.9.0rc6`; current `main` development
+version `0.9.0rc7.dev0`. The `v0.9.0rc7` tag has not been created, PyPI remains
 unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
-TestPyPI upload for `0.9.0rc6` has not been performed.
+TestPyPI upload for `0.9.0rc7.dev0` has not been performed.
 
 The `optical-spec` console script is the supported command-line entry point:
 

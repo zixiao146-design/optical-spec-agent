@@ -19,7 +19,7 @@ def test_v1_0_decision_matrix_covers_required_decisions():
     assert "Production-grade physical validation" in text
     assert "Public contract freeze" in text
     assert "Current: completed for 0.9.0rc6.dev0" in text
-    assert "Current rc6 release draft upload: not performed" in text
+    assert "Current rc7.dev0 upload: not performed" in text
     assert "Current: not approved" in text
     assert "Current: deferred" in text
     assert "Current: not claimed" in text

@@ -7,8 +7,8 @@ markers exist only to make future manual checks explicit and skippable.
 
 ## Current Defaults
 
-- Current public prerelease: v0.9.0rc5
-- Current main release draft: v0.9.0rc6
+- Current public prerelease: v0.9.0rc6
+- Current main development version: 0.9.0rc7.dev0
 - Default `pytest` remains no-solver.
 - Default smoke and quality gates do not execute external solvers.
 - External LLM access is not required by default.

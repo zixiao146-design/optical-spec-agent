@@ -2,10 +2,10 @@
 
 ## Current Status
 
-- Current public prerelease: v0.9.0rc5
-- Current main release draft: `0.9.0rc6`
+- Current public prerelease: v0.9.0rc6
+- Current main development version: `0.9.0rc7.dev0`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
-- TestPyPI upload approval for 0.9.0rc6: pending
+- TestPyPI upload approval for 0.9.0rc7.dev0: pending
 - v1.0.0 not released
 
 ## Ready / Strong Areas
@@ -51,7 +51,7 @@
 - E2E user journey.
 - Public contract freeze approved for the documented surface.
 - v1.0 readiness gap audit.
-- v0.9.0rc6 development plan.
+- v0.9.0rc7 development readiness.
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
 - v1.0 public contract freeze confirmation package.
@@ -97,7 +97,7 @@
   the 2026-05-15 package-manager install attempt is recorded as deferred.
 - TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted
   Publishing.
-- TestPyPI upload for 0.9.0rc6 is not performed and remains pending.
+- TestPyPI upload for 0.9.0rc7.dev0 is not performed and remains pending.
 - PyPI publication not approved.
 - PyPI publication readiness checklist records required approval, final version,
   CI, quality gates, build, twine check, metadata review, validation-claim
@@ -133,5 +133,5 @@
   `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
-- Continue release-draft review for `v0.9.0rc6`; create the tag and GitHub
-  prerelease only after explicit maintainer approval and fresh verification.
+- Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and
+  GitHub prerelease only after explicit maintainer approval and fresh verification.

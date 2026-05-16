@@ -1,22 +1,23 @@
 # Packaging Gate
 
-Version scope: current `main` release draft `0.9.0rc6` after the verified
-public `v0.9.0rc5` prerelease.
+Version scope: current `main` development version `0.9.0rc7.dev0` after the
+verified public `v0.9.0rc6` prerelease.
 
 ## Current package baseline
 
 - Package name: `optical-spec-agent`
-- Current package version on `main`: `0.9.0rc6`
-- Current main release draft: `0.9.0rc6`
-- Current public prerelease: `v0.9.0rc5`
+- Current package version on `main`: `0.9.0rc7.dev0`
+- Current main development version: `0.9.0rc7.dev0`
+- Current public prerelease: `v0.9.0rc6`
 - Product positioning: open-source-solver-first
-- `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, and `v0.9.0rc5`
+- `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, `v0.9.0rc5`, and
+  `v0.9.0rc6`
   tags remain unchanged.
-- `v0.9.0rc6` GitHub release: not created
-- `v0.9.0rc6` tag: not created
+- `v0.9.0rc7` GitHub release: not created
+- `v0.9.0rc7` tag: not created
 - PyPI status: not published
 - TestPyPI status: uploaded for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc6: not performed
+- TestPyPI upload for 0.9.0rc7.dev0: not performed
 - TestPyPI dry-run gate doc: `docs/testpypi_dry_run_gate.md`
 - TestPyPI no-upload preflight script: `scripts/testpypi_preflight.sh`
 - One-command quality gate script: `scripts/run_quality_gates.sh`
@@ -25,9 +26,9 @@ public `v0.9.0rc5` prerelease.
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - TestPyPI status record:
   `docs/testpypi_status_v0.9.0rc6.dev0.md`
-- TestPyPI upload approval status for rc6: pending
+- TestPyPI upload approval status for 0.9.0rc7.dev0: pending
 - TestPyPI upload authorized for rc6: no
-- Upload command authorized for rc6: no
+- Upload command authorized for 0.9.0rc7.dev0: no
 - TestPyPI clean install verification: passed
 - PyPI publication approval: not granted
 - v1.0 stability gate doc: `docs/v1_0_stability_gate.md`
@@ -36,8 +37,8 @@ public `v0.9.0rc5` prerelease.
 - Build backend: `hatchling`
 - Console script: `optical-spec`
 - Expected build artifacts for current main:
-  - `optical_spec_agent-0.9.0rc6-py3-none-any.whl`
-  - `optical_spec_agent-0.9.0rc6.tar.gz`
+  - `optical_spec_agent-0.9.0rc7.dev0-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc7.dev0.tar.gz`
 
 ## Packaging checks required before publication
 
@@ -83,8 +84,8 @@ public `v0.9.0rc5` prerelease.
 - TestPyPI upload requires explicit maintainer approval.
 - TestPyPI upload for `0.9.0rc6.dev0` is completed and recorded in
   `docs/testpypi_status_v0.9.0rc6.dev0.md`.
-- TestPyPI upload for `0.9.0rc6` is not performed and remains pending in
-  `docs/testpypi_upload_approval_v0.9.0rc6.md`.
+- TestPyPI upload for `0.9.0rc7.dev0` is not performed and remains pending in
+  `docs/testpypi_upload_approval_v0.9.0rc7.dev0.md`.
 - TestPyPI upload must not be part of the default smoke script.
 - Wheel smoke remains local only.
 - Smoke script must not publish or upload packages.

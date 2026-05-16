@@ -36,8 +36,8 @@ PyPI 仍未发布；TestPyPI 已上传并验证 `0.9.0rc6.dev0`。
 
 ## 发布状态
 
-当前公开 release candidate 是 `v0.9.0rc5`。当前 `main` 的 release draft version 是
-`0.9.0rc6`。`v0.9.0rc6` tag 和 GitHub release 尚未创建；这仍然不是
+当前公开 release candidate 是 `v0.9.0rc6`。当前 `main` 的 development version 是
+`0.9.0rc7.dev0`。`v0.9.0rc7` tag 和 GitHub release 尚未创建；这仍然不是
 final stable `1.0`。
 
 `v0.6` 到 `v0.9` 的能力属于 preview/scaffold/evaluation capabilities：
@@ -47,11 +47,11 @@ final stable `1.0`。
 - `v0.8`: LLM parser foundation，默认使用 deterministic mock provider。
 - `v0.9`: 本地同步 workflow orchestration。
 
-`v0.9.0rc5` tag 和 GitHub prerelease 已由维护者确认后创建，并作为当前
-release candidate supersede `v0.9.0rc4`。不要移动 `v0.9.0rc1`、`v0.9.0rc2`、
-`v0.9.0rc3`、`v0.9.0rc4` 或 `v0.9.0rc5` tag。未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布；
-TestPyPI 已通过手动 Trusted Publishing 上传 `0.9.0rc6.dev0`，但 `0.9.0rc6`
-本身尚未上传到 TestPyPI；这不授权正式 PyPI 发布。
+`v0.9.0rc6` tag 和 GitHub prerelease 已由维护者确认后创建，并作为当前
+release candidate supersede `v0.9.0rc5`。不要移动 `v0.9.0rc1`、`v0.9.0rc2`、
+`v0.9.0rc3`、`v0.9.0rc4`、`v0.9.0rc5` 或 `v0.9.0rc6` tag。未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布；
+TestPyPI 已通过手动 Trusted Publishing 上传 `0.9.0rc6.dev0`，但 `0.9.0rc7.dev0`
+尚未上传到 TestPyPI；这不授权正式 PyPI 发布。
 
 面向 `v1.0` 的公共契约边界见：
 `docs/cli_contract.md`、`docs/schema_contract.md`、
@@ -92,9 +92,12 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/v1_0_public_contract_freeze_checklist.md`、
 `docs/public_contract_manifest.json`、`docs/public_contract_change_checklist.md`、
 `examples/e2e/README.md` 和 `examples/examples_manifest.json`。
-当前 rc6 release draft 和发布 gate 见 `docs/release_readiness_v0.9.0rc6.md`、
+当前 rc7 development readiness 和发布 gate 见 `docs/release_readiness_v0.9.0rc7.md`、
+`docs/testpypi_upload_approval_v0.9.0rc7.dev0.md`，以及历史 rc6 release 记录：
+`docs/release_readiness_v0.9.0rc6.md`、
 `docs/github_release_draft_v0.9.0rc6.md`、`docs/release_notes_v0.9.0rc6.md`、
 `docs/testpypi_upload_approval_v0.9.0rc6.md`、
+`docs/post_release_status_v0.9.0rc6.md`、
 `docs/rc6_development_plan.md`、`docs/v1_0_gap_audit.md`、
 `docs/v1_0_decision_matrix.md`、`docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`、
 `docs/testpypi_status_v0.9.0rc6.dev0.md`、
@@ -205,8 +208,8 @@ pip install -e ".[dev]"
 完整的无网络、无外部 solver、无外部 LLM、无 proprietary solver 默认依赖的
 端到端路径见 `docs/offline_user_journey.md` 和 `examples/e2e/README.md`。
 
-`examples/` 目录中的 fixture 是当前 `0.9.0rc6` main 和公开
-`v0.9.0rc5` RC 线的本地示例证据：
+`examples/` 目录中的 fixture 是当前 `0.9.0rc7.dev0` main 和公开
+`v0.9.0rc6` RC 线的本地示例证据：
 
 ```bash
 optical-spec validate examples/specs/minimal_nanoparticle.json
@@ -564,7 +567,7 @@ twine check dist/*
 GitHub Actions 覆盖 deterministic local gates、docs checks、manual benchmarks 和
 release dry-run。默认 CI 不依赖外部 solver 或外部 LLM。
 
-`v0.9.0rc5` 的 GitHub prerelease 已完成验证。后续 RC 应继续使用
+`v0.9.0rc6` 的 GitHub prerelease 已完成验证。后续 RC 应继续使用
 `scripts/smoke_release.sh` 和 `docs/release_engineering_playbook.md` 记录的流程。
 该流程不发布 PyPI、不上传 `dist/`，也不移动已有 tag。
 从当前 RC 线走向 `v1.0` 的剩余门槛见 `docs/v1_0_readiness_plan.md`。
@@ -578,15 +581,15 @@ release dry-run。默认 CI 不依赖外部 solver 或外部 LLM。
 - v0.9: local synchronous workflow orchestration。
 - v1.0: API stabilization、文档收口、release hardening。
 
-## 发布候选说明：v0.9.0rc5
+## 发布候选说明：v0.9.0rc6
 
-`v0.9.0rc5` 是当前 release candidate：
+`v0.9.0rc6` 是当前 release candidate：
 
 - 不是 final stable `1.0`。
 - GitHub pre-release 已创建并验证：draft=false, prerelease=true。
 - PyPI 发布需要单独批准。
-- Release draft: `docs/github_release_draft_v0.9.0rc5.md`
-- Post-release status: `docs/post_release_status_v0.9.0rc5.md`
+- Release draft: `docs/github_release_draft_v0.9.0rc6.md`
+- Post-release status: `docs/post_release_status_v0.9.0rc6.md`
 - Release playbook: `docs/release_engineering_playbook.md`
 
 ## 已知限制

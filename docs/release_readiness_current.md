@@ -4,25 +4,26 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc6`
-- Current public prerelease: `v0.9.0rc5`
-- Current main release draft: `0.9.0rc6`
-- Main branch state: `v0.9.0rc6` release draft for maintainer review
+- `pyproject.toml` package version on `main`: `0.9.0rc7.dev0`
+- Current public prerelease: `v0.9.0rc6`
+- Current main development version: `0.9.0rc7.dev0`
+- Main branch state: post-v0.9.0rc6 development toward `v0.9.0rc7`
 - Product positioning: open-source-solver-first
-- `v0.9.0rc6` GitHub release has not been created
-- `v0.9.0rc6` tag has not been created
-- GitHub release for `v0.9.0rc6`: not created
-- Current public GitHub prerelease created: yes (`v0.9.0rc5`)
+- `v0.9.0rc6` GitHub prerelease has been created and verified
+- `v0.9.0rc7` GitHub release has not been created
+- `v0.9.0rc7` tag has not been created
+- GitHub release for `v0.9.0rc7`: not created
+- Current public GitHub prerelease created: yes (`v0.9.0rc6`)
 - Current public prerelease verified: yes
-- Post-release status doc: `docs/post_release_status_v0.9.0rc5.md`
-- Latest release-status commit: `e1782ea`
+- Post-release status doc: `docs/post_release_status_v0.9.0rc6.md`
+- Latest release-status commit: `cf2fe72`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
-- TestPyPI upload for `0.9.0rc6`: not performed
+- TestPyPI upload for `0.9.0rc7.dev0`: not performed
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
-- TestPyPI upload approval record for rc6:
-  `docs/testpypi_upload_approval_v0.9.0rc6.md`
+- TestPyPI upload approval record for rc7.dev0:
+  `docs/testpypi_upload_approval_v0.9.0rc7.dev0.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
 - TestPyPI status:
@@ -32,9 +33,9 @@ This document describes the current `main` branch. It is not a release tag.
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml` (manual, passed for
   `0.9.0rc6.dev0`)
-- TestPyPI upload approval status for rc6: pending
-- TestPyPI upload authorized for rc6: no
-- Upload command authorized for rc6: no
+- TestPyPI upload approval status for 0.9.0rc7.dev0: pending
+- TestPyPI upload authorized for rc7.dev0: no
+- Upload command authorized for 0.9.0rc7.dev0: no
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - TestPyPI Trusted Publishing result: completed
 - TestPyPI clean install verification: passed
@@ -116,12 +117,13 @@ python -m twine check dist/*
 
 ## Recommended Version Action
 
-Current recommendation: treat `v0.9.0rc5` as the active verified public
-prerelease while `main` is prepared as the `v0.9.0rc6` release draft. The
-`v0.9.0rc6` tag has not been created, no GitHub release exists for rc6, and
-publication remains separately gated. TestPyPI contains the `0.9.0rc6.dev0`
-development package via manual Trusted Publishing, but TestPyPI upload for
-`0.9.0rc6` has not been performed; PyPI remains unpublished.
+Current recommendation: treat `v0.9.0rc6` as the active verified public
+prerelease while `main` moves to post-v0.9.0rc6 development toward
+`v0.9.0rc7`. The `v0.9.0rc7` tag has not been created, no GitHub release
+exists for rc7, and publication remains separately gated. TestPyPI contains
+the `0.9.0rc6.dev0` development package via manual Trusted Publishing, but
+TestPyPI upload for `0.9.0rc7.dev0` has not been performed; PyPI remains
+unpublished.
 
 Current main contract artifacts:
 
@@ -154,6 +156,7 @@ Current main contract artifacts:
 - `docs/release_engineering_playbook.md`
 - `docs/v1_0_readiness_plan.md`
 - `docs/v1_0_gap_audit.md`
+- `docs/release_readiness_v0.9.0rc7.md`
 - `docs/rc6_development_plan.md`
 - `docs/v1_0_decision_matrix.md`
 - `docs/v1_0_public_contract_freeze_checklist.md`
@@ -232,17 +235,19 @@ Current v1.0 evidence artifacts:
 
 ## Release Blockers
 
-- No hard release blocker is currently recorded for the `v0.9.0rc6` release draft.
+- No hard release blocker is currently recorded for the post-`v0.9.0rc6`
+  `0.9.0rc7.dev0` development state.
 - v1.0 hard blockers remain: explicit PyPI publication decision and final
   `v1.0.0` release criteria.
 - The public contract freeze is approved for the documented surface.
-- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or `v0.9.0rc5`.
+- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`,
+  `v0.9.0rc5`, or `v0.9.0rc6`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
-- Do not upload `0.9.0rc6` to TestPyPI unless separately approved.
+- Do not upload `0.9.0rc7.dev0` to TestPyPI unless separately approved.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
-- Next blocker class: any `v0.9.0rc6` candidate must pass the release smoke
+- Next blocker class: any future `v0.9.0rc7` candidate must pass the release smoke
   script, full tests, build, docs checks, and release readiness checks before a
   new tag is considered.
 
@@ -259,13 +264,13 @@ Current v1.0 evidence artifacts:
 
 ## Manual Release Checklist
 
-1. Use `docs/post_release_status_v0.9.0rc5.md` as the rc5 source of truth.
+1. Use `docs/post_release_status_v0.9.0rc6.md` as the rc6 source of truth.
 2. Use `docs/v1_0_readiness_plan.md` for the next hardening priorities.
 3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
 4. Review the public contract docs before changing CLI, schema, adapter, or
    workflow behavior.
 5. Run the packaging and validation gates before any future RC.
-6. Confirm any future `v0.9.0rc6` tag is absent locally and remotely before tag creation.
-7. Create an annotated `v0.9.0rc6` tag only after final maintainer approval.
+6. Confirm any future `v0.9.0rc7` tag is absent locally and remotely before tag creation.
+7. Create an annotated `v0.9.0rc7` tag only after final maintainer approval.
 8. Keep PyPI unpublished and do not re-upload TestPyPI unless explicitly
    approved for a new version.

@@ -12,12 +12,12 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     path = ROOT / "docs" / "v1_0_readiness_scorecard.md"
     assert path.exists()
     text = path.read_text(encoding="utf-8")
-    assert "Current public prerelease: v0.9.0rc5" in text
-    assert "Current main release draft: `0.9.0rc6`" in text
+    assert "Current public prerelease: v0.9.0rc6" in text
+    assert "Current main development version: `0.9.0rc7.dev0`" in text
     assert "v1.0.0 not released" in text
     assert "PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0" in text
     assert "v1.0 readiness gap audit" in text
-    assert "v0.9.0rc6 development plan" in text
+    assert "v0.9.0rc7 development readiness" in text
     assert "v1.0 decision matrix" in text
     assert "v1.0 public contract freeze checklist" in text
     assert "v1.0 public contract freeze confirmation package" in text
@@ -30,10 +30,10 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "PyPI post-publication verification plan" in text
     assert "No production-grade physical validation" in text
     assert "No formal convergence proof" in text
-    assert "TestPyPI upload approval for 0.9.0rc6: pending" in text
+    assert "TestPyPI upload approval for 0.9.0rc7.dev0: pending" in text
     assert "Quality gates" in text
     assert "TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted" in text
-    assert "TestPyPI upload for 0.9.0rc6 is not performed and remains pending" in text
+    assert "TestPyPI upload for 0.9.0rc7.dev0 is not performed and remains pending" in text
     assert "TestPyPI status record for 0.9.0rc6.dev0" in text
     assert "Publication decision record keeps PyPI publication not granted" in text
     assert "CI, quality gates, build, twine check" in text

@@ -13,8 +13,8 @@ def test_freeze_confirmation_tracks_approved_status_and_scope():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
 
-    assert "Current public prerelease: v0.9.0rc5" in text
-    assert "Current main release draft: v0.9.0rc6" in text
+    assert "Current public prerelease: v0.9.0rc6" in text
+    assert "Current main development version: 0.9.0rc7.dev0" in text
     assert "TestPyPI uploaded and verified: yes" in text
     assert "PyPI published: no" in text
     assert "PyPI publication approval: not granted" in text

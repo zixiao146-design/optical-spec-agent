@@ -2,14 +2,14 @@
 
 ## Current baseline
 
-- Current public prerelease: `v0.9.0rc5`
-- Current main release draft: `0.9.0rc6`
-- `v0.9.0rc6` GitHub release has not been created
-- `v0.9.0rc6` tag has not been created
-- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc5
+- Current public prerelease: `v0.9.0rc6`
+- Current main development version: `0.9.0rc7.dev0`
+- `v0.9.0rc7` GitHub release has not been created
+- `v0.9.0rc7` tag has not been created
+- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc6
 - Release verified: yes
-- Post-release status: `docs/post_release_status_v0.9.0rc5.md`
-- Latest post-release status commit: `e1782ea`
+- Post-release status: `docs/post_release_status_v0.9.0rc6.md`
+- Latest post-release status commit: `cf2fe72`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
 
@@ -41,16 +41,16 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path through the v0.9.0rc6 release draft
+## Recommended path through the v0.9.0rc7 development cycle
 
-`v0.9.0rc5` is the current public prerelease. `main` now builds as the
-`0.9.0rc6` release draft. The `v0.9.0rc6` tag has not been created, no GitHub
-release exists for rc6, and PyPI remains unpublished.
+`v0.9.0rc6` is the current public prerelease. `main` now builds as the
+`0.9.0rc7.dev0` development version. The `v0.9.0rc7` tag has not been created,
+no GitHub release exists for rc7, and PyPI remains unpublished.
 Recommended goals:
 
 - Use `docs/v1_0_gap_audit.md` to classify hard blockers,
   soft blockers, deferred items, and future work.
-- Use `docs/release_readiness_v0.9.0rc6.md` to keep rc6 release-draft checks
+- Use `docs/release_readiness_v0.9.0rc7.md` to keep rc7 development checks
   explicit.
 - Use `docs/v1_0_decision_matrix.md` for TestPyPI, PyPI, Elmer,
   production-validation, and public-contract-freeze decisions.
@@ -119,8 +119,8 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/v1_0_compatibility_policy.md`.
 - v1.0 readiness gap audit:
   `docs/v1_0_gap_audit.md`.
-- v0.9.0rc6 development plan:
-  `docs/rc6_development_plan.md`.
+- v0.9.0rc7 development readiness:
+  `docs/release_readiness_v0.9.0rc7.md`.
 - v1.0 decision matrix:
   `docs/v1_0_decision_matrix.md`.
 - v1.0 public contract freeze:
@@ -268,11 +268,13 @@ Before `v1.0.0`, maintainers should decide and document:
 
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
-- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or
-  `v0.9.0rc5` tags.
-- Do not create the `v0.9.0rc6` tag until future release-draft checks and
+- Do not upload `0.9.0rc7.dev0` to TestPyPI without explicit approval.
+- Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`,
+  `v0.9.0rc5`, or `v0.9.0rc6` tags.
+- Do not create the `v0.9.0rc7` tag until future release-draft checks and
   maintainer approval.
-- Do not treat the `v0.9.0rc6` release draft as a public release until tag and
+- Do not treat `0.9.0rc7.dev0` as a public release; a future `v0.9.0rc7`
+  release candidate requires tag and
   GitHub prerelease creation are explicitly approved and completed.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.

@@ -4,8 +4,8 @@ These examples are local fixtures for README, CLI, adapter, workflow, and v1.0
 readiness evidence. They are offline by default: no external solver, external
 LLM provider, network access, PyPI upload, or TestPyPI upload is required.
 
-Current public prerelease: `v0.9.0rc5`.
-Current main release draft: `0.9.0rc6`.
+Current public prerelease: `v0.9.0rc6`.
+Current main development version: `0.9.0rc7.dev0`.
 
 ## Minimal spec
 

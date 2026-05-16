@@ -3,10 +3,10 @@
 This document states what current tests and diagnostics validate, and what they
 do not validate.
 
-Version scope: current public prerelease `v0.9.0rc5`; current `main` release
-draft `0.9.0rc6`. The `v0.9.0rc6` tag has not been created, PyPI remains
+Version scope: current public prerelease `v0.9.0rc6`; current `main` development
+version `0.9.0rc7.dev0`. The `v0.9.0rc7` tag has not been created, PyPI remains
 unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
-TestPyPI upload for `0.9.0rc6` has not been performed.
+TestPyPI upload for `0.9.0rc7.dev0` has not been performed.
 
 The project is open-source-solver-first. Proprietary solvers are not default
 dependencies, and no proprietary license is required for default tests, smoke,

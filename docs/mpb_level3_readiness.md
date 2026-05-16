@@ -7,8 +7,8 @@ to Level 3 in the adapter maturity model.
 
 ## Current Status
 
-- Current public prerelease: v0.9.0rc5
-- Current main release draft: v0.9.0rc6
+- Current public prerelease: v0.9.0rc6
+- Current main development version: 0.9.0rc7.dev0
 - MPB current maturity: Level 3
 - Target maturity achieved: Level 3 - Optional manual solver validation
 - MPB is not required by default

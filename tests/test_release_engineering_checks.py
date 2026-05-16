@@ -150,11 +150,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "manual_solver_validation_reports/optiland_validation_report_schema.json",
         "manual_solver_validation_reports/elmer_validation_report_schema.json",
         "pytest_marker_policy.md",
+        "testpypi_upload_approval_v0.9.0rc7.dev0.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "testpypi_upload_approval_v0.9.0rc6.md",
         "testpypi_upload_attempt_v0.9.0rc6.dev0.md",
         "testpypi_status_v0.9.0rc6.dev0.md",
         "testpypi_trusted_publishing.md",
+        "release_readiness_v0.9.0rc7.md",
         "release_readiness_v0.9.0rc6.md",
         "github_release_draft_v0.9.0rc6.md",
         "release_notes_v0.9.0rc6.md",
@@ -238,8 +240,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Never move existing tags" in combined
     assert "No automatic package publishing" in combined
     assert "scripts/testpypi_preflight.sh" in combined
-    assert "TestPyPI upload approval for 0.9.0rc6: pending" in combined
-    assert "Upload command authorized for rc6: no" in combined or "Upload command authorized for 0.9.0rc6: no" in combined
+    assert "TestPyPI upload approval for 0.9.0rc7.dev0: pending" in combined
+    assert "Upload command authorized for 0.9.0rc7.dev0: no" in combined
     assert "TestPyPI uploaded: yes" in combined
     assert "TestPyPI clean install verification: passed" in combined
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined
@@ -354,11 +356,11 @@ def test_adapter_support_matrix_covers_registered_adapter_families():
     assert "open-source-solver-first" in text
     assert "Proprietary/export-only future target" in text
     assert "not registered adapters unless" in text
-    assert "0.9.0rc6" in text
-    assert "v0.9.0rc5" in text
+    assert "0.9.0rc7.dev0" in text
+    assert "v0.9.0rc6" in text
     assert "PyPI remains unpublished" in text
     assert "TestPyPI contains the `0.9.0rc6.dev0` development package" in text
-    assert "TestPyPI upload for `0.9.0rc6` has not been performed" in text
+    assert "TestPyPI upload for `0.9.0rc7.dev0` has not been performed" in text
 
 
 def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
@@ -379,9 +381,9 @@ def test_v1_evidence_docs_and_examples_are_offline_and_unpublished():
         "proprietary",
         "PyPI remains unpublished",
         "TestPyPI contains the `0.9.0rc6.dev0` development package",
-        "0.9.0rc5",
+        "0.9.0rc6",
         "GitHub release",
-        "v0.9.0rc5",
+        "v0.9.0rc6",
         "not created",
     ]
     for phrase in required:
@@ -404,8 +406,8 @@ def test_offline_user_journey_release_artifacts_are_tracked():
     assert "no external LLM" in journey
     assert "no proprietary software" in journey
     assert "PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0" in journey
-    assert "Current main release draft: `0.9.0rc6`" in journey
-    assert "Current public prerelease: v0.9.0rc5" in journey
+    assert "Current main development version: `0.9.0rc7.dev0`" in journey
+    assert "Current public prerelease: v0.9.0rc6" in journey
 
 
 def test_public_contract_freeze_artifacts_are_tracked():
@@ -413,16 +415,17 @@ def test_public_contract_freeze_artifacts_are_tracked():
     manifest = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
     checklist = (ROOT / "docs" / "public_contract_change_checklist.md").read_text(encoding="utf-8")
     assert "v1.0.0 not released" in freeze
-    assert "v0.9.0rc6 tag not created" in freeze
+    assert "v0.9.0rc7 tag not created" in freeze
     assert "TestPyPI uploaded and verified for `0.9.0rc6.dev0`" in freeze
     assert "PyPI published: no" in freeze
     assert "Public contract freeze: approved" in freeze
-    assert manifest["version_scope"] == "0.9.0rc6"
-    assert manifest["current_public_prerelease"] == "v0.9.0rc5"
+    assert manifest["version_scope"] == "0.9.0rc7.dev0"
+    assert manifest["current_public_prerelease"] == "v0.9.0rc6"
     assert manifest["release_state"]["pypi_published"] is False
     assert manifest["release_state"]["testpypi_uploaded"] is True
     assert manifest["release_state"]["testpypi_uploaded_version"] == "0.9.0rc6.dev0"
     assert manifest["release_state"]["testpypi_upload_for_0_9_0rc6_performed"] is False
+    assert manifest["release_state"]["testpypi_upload_for_0_9_0rc7_dev0_performed"] is False
     assert (
         manifest["release_state"]["testpypi_status_doc"]
         == "docs/testpypi_status_v0.9.0rc6.dev0.md"
