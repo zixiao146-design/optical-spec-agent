@@ -25,3 +25,36 @@ def test_agent_api_openapi_includes_agent_endpoints():
         "/api/readiness",
     ]:
         assert path in paths
+
+
+def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api():
+    client = TestClient(app)
+    response = client.get("/openapi.json")
+    assert response.status_code == 200
+    openapi = response.json()
+    paths = openapi["paths"]
+    for path in [
+        "/api/health",
+        "/api/version",
+        "/api/adapters",
+        "/api/schema",
+        "/api/parse",
+        "/api/validate",
+        "/api/workflow-plan",
+        "/api/adapter-preview",
+        "/api/validation-evidence",
+        "/api/readiness",
+    ]:
+        operation = paths[path]["get"] if "get" in paths[path] else paths[path]["post"]
+        schema = operation["responses"]["200"]["content"]["application/json"]["schema"]
+        assert "$ref" in schema or "allOf" in schema
+
+    forbidden_api_paths = {
+        "/api/workflow-run",
+        "/api/solver-run",
+        "/api/upload",
+        "/api/publish",
+        "/api/testpypi-upload",
+        "/api/pypi-upload",
+    }
+    assert forbidden_api_paths.isdisjoint(paths)

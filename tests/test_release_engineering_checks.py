@@ -176,6 +176,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_post_release_verification_plan.md",
         "agent_studio_frontend_roadmap.md",
         "api_agent_contract.md",
+        "api_error_model.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -200,6 +201,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "README.md").exists()
     assert (ROOT / "examples" / "examples_manifest.json").exists()
     assert (ROOT / "examples" / "e2e" / "README.md").exists()
+    assert (ROOT / "examples" / "api" / "README.md").exists()
+    assert (ROOT / "examples" / "api" / "frontend_fixture_manifest.json").exists()
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
@@ -253,7 +256,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "TestPyPI uploaded: yes" in combined
     assert "TestPyPI clean install verification: passed" in combined
     assert "Local Agent API Contract" in combined
+    assert "Local Agent API Error Model" in combined
     assert "CLI / API Parity" in combined
+    assert "examples/api/" in combined
     assert "No external solver execution by default" in combined
     assert "No external LLM call by default" in combined
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined

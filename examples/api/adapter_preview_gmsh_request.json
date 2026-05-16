@@ -1,0 +1,4 @@
+{
+  "path": "examples/specs/minimal_nanoparticle.json",
+  "tool": "gmsh"
+}

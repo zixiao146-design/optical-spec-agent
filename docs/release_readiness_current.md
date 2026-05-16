@@ -60,6 +60,10 @@ This document describes the current `main` branch. It is not a release tag.
 - Local Agent API readiness:
   `docs/api_agent_contract.md` and `docs/cli_api_parity.md` (in progress;
   frontend implementation not started)
+- Local Agent API error model:
+  `docs/api_error_model.md`
+- Local Agent API frontend fixtures:
+  `examples/api/`
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -106,6 +110,7 @@ This document describes the current `main` branch. It is not a release tag.
 | LLM parser foundation | RC preview | Mock provider is deterministic |
 | Workflow orchestration | RC preview | Local and synchronous |
 | Local Agent API | API readiness in progress | Local/synchronous preview only; no solver, LLM, proprietary, or network default |
+| Frontend fixtures | API examples ready | `examples/api/`; frontend implementation not started |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

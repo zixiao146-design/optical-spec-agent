@@ -1,0 +1,44 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Continue API readiness engineering.",
+    "Decide PyPI publication later with explicit maintainer approval.",
+    "Prepare v1.0.0 release draft only after explicit approval."
+  ],
+  "current_public_prerelease": "v0.9.0rc6",
+  "main_development_version": "0.9.0rc7.dev0",
+  "testpypi": {
+    "uploaded_and_verified": true,
+    "verified_version": "0.9.0rc6.dev0",
+    "upload_for_current_dev_version": "not performed"
+  },
+  "pypi": {
+    "published": false,
+    "publication_approval": "not granted"
+  },
+  "public_contract_freeze": {
+    "status": "approved",
+    "date": "2026-05-16"
+  },
+  "adapter_maturity": {
+    "gmsh": "Level 3",
+    "meep": "Level 3",
+    "mpb": "Level 3",
+    "optiland": "Level 3",
+    "elmer": "Level 2 + Level-3-ready"
+  },
+  "v1_0_0_released": false
+}

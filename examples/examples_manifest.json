@@ -100,6 +100,24 @@
       "requires_external_solver": false,
       "requires_external_llm": false,
       "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/api/README.md",
+      "purpose": "Local Agent API frontend fixture documentation",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/api/frontend_fixture_manifest.json",
+      "purpose": "Local Agent API frontend fixture manifest",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     }
   ]
 }

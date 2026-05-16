@@ -29,6 +29,8 @@ def test_cli_api_parity_doc_maps_major_cli_surface_to_api():
         "Production-grade physical validation is not claimed",
         "Formal convergence proof is not claimed",
         "frontend implementation is not started",
+        "src/optical_spec_agent/api/models.py",
+        "examples/api/",
     ]
     for phrase in required:
         assert phrase in text

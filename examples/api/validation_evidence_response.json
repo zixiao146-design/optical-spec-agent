@@ -1,0 +1,64 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [],
+    "details": {}
+  },
+  "recommended_next_actions": [],
+  "validation_evidence": [
+    {
+      "tool_name": "gmsh",
+      "display_name": "Gmsh geometry / meshing",
+      "maturity_level": "Level 3",
+      "evidence": "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
+      "status_note": "Optional manual validation evidence recorded.",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "tool_name": "meep",
+      "display_name": "Meep FDTD",
+      "maturity_level": "Level 3",
+      "evidence": "validation/meep/meep_validation_pilot_2026-05-14.md",
+      "status_note": "Optional manual validation evidence recorded.",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "tool_name": "mpb",
+      "display_name": "MIT Photonic Bands (MPB)",
+      "maturity_level": "Level 3",
+      "evidence": "validation/mpb/mpb_validation_pilot_2026-05-14.md",
+      "status_note": "Optional manual validation evidence recorded.",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "tool_name": "optiland",
+      "display_name": "Optiland",
+      "maturity_level": "Level 3",
+      "evidence": "validation/optiland/optiland_validation_pilot_2026-05-14.md",
+      "status_note": "Optional manual validation evidence recorded.",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "tool_name": "elmer",
+      "display_name": "Elmer FEM",
+      "maturity_level": "Level 2 + Level-3-ready",
+      "evidence": "validation/elmer/elmer_install_deferred_2026-05-15.md",
+      "status_note": "Level 3 validation deferred pending maintainable ElmerSolver availability.",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ]
+}

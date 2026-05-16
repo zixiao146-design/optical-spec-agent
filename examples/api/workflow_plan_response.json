@@ -1,0 +1,79 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Review workflow_plan.risk_flags before running any optional execution.",
+    "Use /api/adapter-preview for local artifact preview."
+  ],
+  "workflow_plan": {
+    "schema_version": "workflow_plan.v0.9",
+    "input_text": "Use MPB to calculate a 2D photonic crystal band diagram for the first 8 bands using a local preview workflow.",
+    "planned_steps": [
+      "intake",
+      "parse",
+      "validate",
+      "adapter_selection",
+      "generation",
+      "execution_plan",
+      "optional_execution",
+      "diagnostics",
+      "evaluation",
+      "human_review",
+      "report"
+    ],
+    "parser_mode": "rule",
+    "selected_tool": "mpb",
+    "execute_policy": "no_execute_by_default",
+    "expected_artifacts": [
+      "input.txt",
+      "workflow_plan.json",
+      "workflow_run.json",
+      "workflow_summary.md",
+      "workflow_summary.json",
+      "human_review_checklist.md",
+      "steps/*.json",
+      "artifacts/spec.json",
+      "artifacts/validation_report.json",
+      "artifacts/adapter_selection.json",
+      "artifacts/generated_input.*",
+      "artifacts/execution_plan.json",
+      "artifacts/workflow_evaluation.json",
+      "artifacts/diagnostics_not_applicable.json"
+    ],
+    "risk_flags": [
+      "human_review_required"
+    ],
+    "limitations": [
+      "Preview scaffold only; does not run MPB.",
+      "Uses default lattice, k-points, resolution, and num_bands when missing.",
+      "Geometry is intentionally schematic until OpticalSpec carries richer periodic geometry.",
+      "Workflow v0.9 is synchronous/local orchestration only.",
+      "No external solver execution is planned by default."
+    ],
+    "warnings": []
+  },
+  "public_top_level_keys": [
+    "execute_policy",
+    "expected_artifacts",
+    "input_text",
+    "limitations",
+    "parser_mode",
+    "planned_steps",
+    "risk_flags",
+    "schema_version",
+    "selected_tool",
+    "warnings"
+  ]
+}

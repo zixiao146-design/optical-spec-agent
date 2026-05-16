@@ -13,6 +13,8 @@ validation evidence.
 - This is not a v1.0.0 release blocker.
 - Local Agent API readiness is in progress through
   `docs/api_agent_contract.md` and `docs/cli_api_parity.md`.
+- API response models exist in `src/optical_spec_agent/api/models.py`.
+- Frontend fixture examples exist under `examples/api/`.
 - Frontend implementation is not started.
 - Agent Studio frontend should call the local Agent API instead of shelling out
   directly to the CLI.
@@ -31,6 +33,7 @@ validation evidence.
 - No-solver/no-LLM default behavior.
 - API endpoints for health/version, adapter registry, schema, parse, validate,
   workflow-plan, adapter-preview, validation evidence, and readiness/status.
+- API response model and fixture coverage for frontend mock data.
 
 ### Phase 2
 

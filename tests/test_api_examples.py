@@ -1,0 +1,61 @@
+"""Local Agent API frontend fixture tests."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+API_EXAMPLES = ROOT / "examples" / "api"
+
+
+def _load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _assert_no_claim_expansion(payload: dict) -> None:
+    assert payload["external_solver_executed"] is False
+    assert payload["external_llm_required"] is False
+    assert payload["production_grade_validation_claimed"] is False
+    assert payload["formal_convergence_proof_claimed"] is False
+
+
+def test_api_examples_readme_and_manifest_exist():
+    assert (API_EXAMPLES / "README.md").exists()
+    manifest_path = API_EXAMPLES / "frontend_fixture_manifest.json"
+    assert manifest_path.exists()
+    manifest = _load_json(manifest_path)
+    assert manifest["current_public_prerelease"] == "v0.9.0rc6"
+    assert manifest["current_main_development_version"] == "0.9.0rc7.dev0"
+    assert manifest["frontend_implementation"] == "not started"
+
+
+def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_defaults():
+    manifest = _load_json(API_EXAMPLES / "frontend_fixture_manifest.json")
+    for entry in manifest["fixtures"]:
+        if entry["request_file"] is not None:
+            assert (API_EXAMPLES / entry["request_file"]).exists()
+        response_path = API_EXAMPLES / entry["response_file"]
+        assert response_path.exists()
+        assert entry["no_network"] is True
+        assert entry["external_solver_executed"] is False
+        assert entry["external_llm_required"] is False
+        assert entry["production_grade_validation_claimed"] is False
+        assert entry["formal_convergence_proof_claimed"] is False
+        _assert_no_claim_expansion(_load_json(response_path))
+
+
+def test_api_version_and_readiness_fixtures_track_publication_state():
+    version = _load_json(API_EXAMPLES / "version_response.json")
+    assert version["package_version"] == "0.9.0rc7.dev0"
+    assert version["current_public_prerelease"] == "v0.9.0rc6"
+    assert version["pypi_published"] is False
+    _assert_no_claim_expansion(version)
+
+    readiness = _load_json(API_EXAMPLES / "readiness_response.json")
+    assert readiness["main_development_version"] == "0.9.0rc7.dev0"
+    assert readiness["testpypi"]["uploaded_and_verified"] is True
+    assert readiness["pypi"]["published"] is False
+    assert readiness["v1_0_0_released"] is False
+    _assert_no_claim_expansion(readiness)

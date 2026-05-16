@@ -12,6 +12,8 @@ access, or proprietary solver support.
 - Continue `0.9.0rc7.dev0` engineering.
 - Continue local Agent API readiness without starting full frontend
   implementation.
+- Keep API response models and `examples/api/` frontend fixtures aligned with
+  endpoint behavior.
 - Decide PyPI publication path.
 - Prepare v1.0.0 release draft.
 - Run quality gates.
@@ -38,4 +40,5 @@ access, or proprietary solver support.
 - No TestPyPI upload.
 - No claim expansion.
 - No full frontend implementation unless separately approved.
+- No PyPI publication trigger from API fixture readiness alone.
 - No default external solver, external LLM, network, or proprietary dependency.

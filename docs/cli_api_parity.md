@@ -5,6 +5,9 @@ surface for a future Agent Studio frontend. The API is local-first and does not
 run external solvers, call external LLMs, require proprietary tools, or access
 the network by default.
 
+API response models are defined in `src/optical_spec_agent/api/models.py`, and
+frontend fixture examples live under `examples/api/`.
+
 | CLI command | API endpoint | Parity status | Notes |
 |---|---|---|---|
 | `optical-spec --help` | `GET /api/health`, `GET /api/version` | Candidate-ready | API exposes service health and version/status metadata for frontend bootstrapping. |

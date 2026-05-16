@@ -34,6 +34,8 @@ def test_examples_manifest_lists_existing_offline_examples():
         "examples/specs/elmer_preview.json",
         "examples/specs/mpb_preview.json",
         "examples/specs/optiland_preview.json",
+        "examples/api/README.md",
+        "examples/api/frontend_fixture_manifest.json",
     }
     assert expected <= listed
     contract_examples = {item["path"] for item in public_contract["examples"]}

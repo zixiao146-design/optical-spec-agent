@@ -1,0 +1,99 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [],
+    "details": {}
+  },
+  "recommended_next_actions": [],
+  "adapters": [
+    {
+      "tool_name": "meep",
+      "display_name": "Meep FDTD",
+      "solver_family": "FDTD",
+      "current_status": "preview",
+      "maturity_level": "Level 3",
+      "evidence": "validation/meep/meep_validation_pilot_2026-05-14.md",
+      "external_solver_required_by_default": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Specialized nanoparticle-on-film adapter.",
+        "Generates scripts only; Meep execution is explicit via meep-run.",
+        "Research-preview scripts are not production-grade physical validation."
+      ]
+    },
+    {
+      "tool_name": "mpb",
+      "display_name": "MIT Photonic Bands (MPB)",
+      "solver_family": "eigenmode / band structure",
+      "current_status": "mvp",
+      "maturity_level": "Level 3",
+      "evidence": "validation/mpb/mpb_validation_pilot_2026-05-14.md",
+      "external_solver_required_by_default": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Preview scaffold only; does not run MPB.",
+        "Uses default lattice, k-points, resolution, and num_bands when missing.",
+        "Geometry is intentionally schematic until OpticalSpec carries richer periodic geometry."
+      ]
+    },
+    {
+      "tool_name": "gmsh",
+      "display_name": "Gmsh geometry / meshing",
+      "solver_family": "geometry / mesh",
+      "current_status": "mvp",
+      "maturity_level": "Level 3",
+      "evidence": "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
+      "external_solver_required_by_default": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Preview scaffold only; does not run gmsh.",
+        "Geometry is schematic unless OpticalSpec contains explicit geometry dimensions.",
+        "Physical groups are placeholders for downstream FEM workflows."
+      ]
+    },
+    {
+      "tool_name": "elmer",
+      "display_name": "Elmer FEM",
+      "solver_family": "FEM",
+      "current_status": "mvp",
+      "maturity_level": "Level 2 + Level-3-ready",
+      "evidence": "validation/elmer/elmer_install_deferred_2026-05-15.md",
+      "external_solver_required_by_default": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Preview scaffold only; does not run ElmerSolver.",
+        "Requires a real mesh directory/file prepared outside this adapter.",
+        "Equation and boundary sections are placeholders pending richer FEM schema."
+      ]
+    },
+    {
+      "tool_name": "optiland",
+      "display_name": "Optiland",
+      "solver_family": "sequential ray tracing",
+      "current_status": "mvp",
+      "maturity_level": "Level 3",
+      "evidence": "validation/optiland/optiland_validation_pilot_2026-05-14.md",
+      "external_solver_required_by_default": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Scaffold only; does not run Optiland.",
+        "Current OpticalSpec lacks a full lens surface sequence and glass catalog mapping.",
+        "Generated code must be completed by an optical designer before optimization."
+      ]
+    }
+  ]
+}

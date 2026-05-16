@@ -8,8 +8,29 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+from starlette.responses import JSONResponse
 
 from optical_spec_agent import __version__
+from optical_spec_agent.api.models import (
+    AdapterPreviewRequest as AgentAdapterPreviewRequest,
+    AdapterPreviewResponse,
+    AdapterSummary,
+    AdaptersResponse,
+    ApiDiagnostic,
+    ApiErrorResponse,
+    HealthResponse,
+    ParseRequest as AgentParseRequest,
+    ParseResponse as AgentParseResponse,
+    ReadinessResponse,
+    SchemaResponse,
+    ValidateRequest as AgentSpecRequest,
+    ValidateResponse as AgentValidateResponse,
+    ValidationEvidenceItem,
+    ValidationEvidenceResponse,
+    VersionResponse,
+    WorkflowPlanRequest as AgentWorkflowPlanRequest,
+    WorkflowPlanResponse,
+)
 from optical_spec_agent.adapters.registry import (
     AdapterRegistryError,
     dispatch_adapter,
@@ -117,28 +138,6 @@ class WorkflowRunRequest(BaseModel):
 class WorkflowReportRequest(BaseModel):
     workflow_run: dict[str, Any]
     format: str = "markdown"
-
-
-class AgentParseRequest(BaseModel):
-    text: str = Field(..., description="Natural language optical task description")
-    task_id: str = Field("", description="Optional task ID")
-    parser: str = Field("heuristic", description="Local parser mode: heuristic or rule")
-    json_output: bool = Field(True, alias="json", description="Return JSON response")
-
-
-class AgentSpecRequest(BaseModel):
-    spec: dict[str, Any] | None = Field(None, description="Inline OpticalSpec JSON")
-    path: str | None = Field(None, description="Local repo-relative JSON spec path")
-
-
-class AgentWorkflowPlanRequest(AgentSpecRequest):
-    text: str | None = Field(None, description="Natural language workflow request")
-    parser: str = Field("heuristic", description="Local parser mode: heuristic or rule")
-    tool: str = Field("auto", description="Adapter tool hint")
-
-
-class AgentAdapterPreviewRequest(AgentSpecRequest):
-    tool: str = Field("auto", description="Adapter tool hint")
 
 
 # ---- Routes ----
@@ -266,167 +265,184 @@ def workflow_report(req: WorkflowReportRequest):
 # ---- Local Agent API routes ----
 
 
-@router.get("/api/health")
+@router.get("/api/health", response_model=HealthResponse)
 def agent_health():
     """Local-first API health endpoint for future Agent Studio clients."""
-    return {
-        "status": "ok",
-        "service": "optical-spec-agent",
-        **SAFETY_FLAGS,
-    }
+    return HealthResponse(
+        status="ok",
+        service="optical-spec-agent",
+    )
 
 
-@router.get("/api/version")
+@router.get("/api/version", response_model=VersionResponse)
 def agent_version():
-    return {
-        "status": "ok",
-        "package_version": __version__,
-        "current_public_prerelease": CURRENT_PUBLIC_PRERELEASE,
-        "main_development_version": MAIN_DEVELOPMENT_VERSION,
-        "pypi_published": False,
-        "testpypi_verified": True,
-        "testpypi_verified_version": "0.9.0rc6.dev0",
-        **SAFETY_FLAGS,
-    }
+    return VersionResponse(
+        package_version=__version__,
+        current_public_prerelease=CURRENT_PUBLIC_PRERELEASE,
+        main_development_version=MAIN_DEVELOPMENT_VERSION,
+    )
 
 
-@router.get("/api/adapters")
+@router.get("/api/adapters", response_model=AdaptersResponse)
 def agent_adapters():
-    adapters: list[dict[str, Any]] = []
+    adapters: list[AdapterSummary] = []
     for metadata in list_adapters():
         maturity = ADAPTER_MATURITY.get(metadata.tool_name, {})
         adapters.append(
-            {
-                "tool_name": metadata.tool_name,
-                "display_name": metadata.display_name,
-                "solver_family": metadata.solver_family,
-                "current_status": metadata.current_status,
-                "maturity_level": maturity.get("maturity_level", "unclassified"),
-                "evidence": maturity.get("evidence"),
-                "external_solver_required_by_default": False,
-                "production_grade_validation_claimed": False,
-                "formal_convergence_proof_claimed": False,
-                "limitations": metadata.limitations,
-            }
+            AdapterSummary(
+                tool_name=metadata.tool_name,
+                display_name=metadata.display_name,
+                solver_family=metadata.solver_family,
+                current_status=metadata.current_status,
+                maturity_level=maturity.get("maturity_level", "unclassified"),
+                evidence=maturity.get("evidence"),
+                limitations=metadata.limitations,
+            )
         )
-    return {"status": "ok", "adapters": adapters, **SAFETY_FLAGS}
+    return AdaptersResponse(adapters=adapters)
 
 
-@router.get("/api/schema")
+@router.get("/api/schema", response_model=SchemaResponse)
 def agent_schema():
-    return {
-        "status": "ok",
-        "schema_name": "OpticalSpec",
-        "schema": OpticalSpec.export_json_schema_dict(),
-        **SAFETY_FLAGS,
-    }
+    return SchemaResponse(json_schema=OpticalSpec.export_json_schema_dict())
 
 
-@router.post("/api/parse")
+@router.post("/api/parse", response_model=AgentParseResponse)
 def agent_parse(req: AgentParseRequest):
-    parser = _local_parser(req.parser)
     try:
+        parser = _local_parser(req.parser)
         svc = SpecService(parser=parser)
         spec = svc.process(req.text, task_id=req.task_id)
+    except AgentApiError as exc:
+        return _agent_error_response(exc)
     except Exception as exc:  # noqa: BLE001 - API returns structured diagnostics.
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    return {
-        "status": "ok",
-        "parser": parser,
-        "spec": spec.to_flat_dict(),
-        "summary": spec_to_summary(spec),
-        "diagnostics": {
-            "missing_fields": spec.missing_fields,
-            "warnings": spec.validation_status.warnings,
-            "errors": spec.validation_status.errors,
-            "assumptions": spec.assumption_log,
-        },
-        "recommended_next_actions": [
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return AgentParseResponse(
+        parser=parser,
+        spec=spec.to_flat_dict(),
+        summary=spec_to_summary(spec),
+        diagnostics=ApiDiagnostic(
+            missing_fields=spec.missing_fields,
+            warnings=spec.validation_status.warnings,
+            errors=spec.validation_status.errors,
+            assumptions=spec.assumption_log,
+        ),
+        recommended_next_actions=[
             "Review inferred fields before generation.",
             "Use /api/validate before adapter preview.",
         ],
-        **SAFETY_FLAGS,
-    }
+    )
 
 
-@router.post("/api/validate")
+@router.post("/api/validate", response_model=AgentValidateResponse)
 def agent_validate(req: AgentSpecRequest):
-    spec = _load_spec(req.spec, req.path)
-    validated = SpecValidator().validate(spec)
-    return {
-        "status": "ok" if validated.validation_status.is_executable else "needs_review",
-        "valid": validated.validation_status.is_executable,
-        "diagnostics": {
-            "errors": validated.validation_status.errors,
-            "warnings": validated.validation_status.warnings,
-            "missing_fields": validated.missing_fields,
-        },
-        **SAFETY_FLAGS,
-    }
+    try:
+        spec = _load_spec(req.spec, req.path)
+        validated = SpecValidator().validate(spec)
+    except AgentApiError as exc:
+        return _agent_error_response(exc)
+    return AgentValidateResponse(
+        status="ok" if validated.validation_status.is_executable else "needs_review",
+        valid=validated.validation_status.is_executable,
+        diagnostics=ApiDiagnostic(
+            errors=validated.validation_status.errors,
+            warnings=validated.validation_status.warnings,
+            missing_fields=validated.missing_fields,
+        ),
+    )
 
 
-@router.post("/api/workflow-plan")
+@router.post("/api/workflow-plan", response_model=WorkflowPlanResponse)
 def agent_workflow_plan(req: AgentWorkflowPlanRequest):
     from optical_spec_agent.workflows import plan_workflow
 
-    parser = _local_parser(req.parser)
-    input_text = req.text
-    if input_text is None and req.path:
-        input_text = _load_workflow_input_text(req.path)
-    if input_text is None:
-        spec = _load_spec(req.spec, req.path)
-        input_text = _workflow_text_from_spec(spec)
+    try:
+        parser = _local_parser(req.parser)
+        input_text = req.text
+        if input_text is None and req.path:
+            input_text = _load_workflow_input_text(req.path)
+        if input_text is None:
+            spec = _load_spec(req.spec, req.path)
+            input_text = _workflow_text_from_spec(spec)
 
-    plan = plan_workflow(input_text, parser=parser, llm_provider="mock", tool=req.tool)
+        plan = plan_workflow(input_text, parser=parser, llm_provider="mock", tool=req.tool)
+    except AgentApiError as exc:
+        return _agent_error_response(exc)
+    except Exception as exc:  # noqa: BLE001 - return stable local API errors.
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
     payload = plan.model_dump(mode="json")
-    return {
-        "status": "ok",
-        "workflow_plan": payload,
-        "public_top_level_keys": sorted(payload),
-        "recommended_next_actions": [
+    return WorkflowPlanResponse(
+        workflow_plan=payload,
+        public_top_level_keys=sorted(payload),
+        recommended_next_actions=[
             "Review workflow_plan.risk_flags before running any optional execution.",
             "Use /api/adapter-preview for local artifact preview.",
         ],
-        **SAFETY_FLAGS,
-    }
+    )
 
 
-@router.post("/api/adapter-preview")
+@router.post("/api/adapter-preview", response_model=AdapterPreviewResponse)
 def agent_adapter_preview(req: AgentAdapterPreviewRequest):
-    spec = _load_spec(req.spec, req.path)
     try:
+        spec = _load_spec(req.spec, req.path)
         adapter = dispatch_adapter(spec, preferred_tool=req.tool)
         metadata = adapter.metadata()
         result = adapter.generate(spec)
+    except AgentApiError as exc:
+        return _agent_error_response(exc)
     except AdapterRegistryError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return _agent_error_response(
+            AgentApiError(
+                "unsupported_adapter",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=["Use /api/adapters to inspect supported adapter names."],
+            )
+        )
     except Exception as exc:  # noqa: BLE001 - preview should return clean API errors.
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
 
     status = "ok" if not result.errors else "needs_review"
-    return {
-        "status": status,
-        "tool": result.tool,
-        "display_name": metadata.display_name,
-        "output_language": result.language,
-        "output_extension": metadata.output_extension,
-        "preview_content": result.content,
-        "artifact_summary": {
+    return AdapterPreviewResponse(
+        status=status,
+        tool=result.tool,
+        display_name=metadata.display_name,
+        output_language=result.language,
+        output_extension=metadata.output_extension,
+        preview_content=result.content,
+        artifact_summary={
             "content_length": len(result.content),
             "generated_files": result.generated_files,
             "missing_required": result.missing_required,
             "defaults_applied": result.defaults_applied,
         },
-        "diagnostics": {
-            "warnings": result.warnings,
-            "errors": result.errors,
-            "limitations": result.limitations,
-        },
-        **SAFETY_FLAGS,
-    }
+        diagnostics=ApiDiagnostic(
+            warnings=result.warnings,
+            errors=result.errors,
+            limitations=result.limitations,
+        ),
+    )
 
 
-@router.get("/api/validation-evidence")
+@router.get("/api/validation-evidence", response_model=ValidationEvidenceResponse)
 def agent_validation_evidence():
     evidence = []
     for tool in ("gmsh", "meep", "mpb", "optiland", "elmer"):
@@ -434,49 +450,80 @@ def agent_validation_evidence():
         metadata = adapter.metadata()
         maturity = ADAPTER_MATURITY[tool]
         evidence.append(
-            {
-                "tool_name": tool,
-                "display_name": metadata.display_name,
-                "maturity_level": maturity["maturity_level"],
-                "evidence": maturity.get("evidence"),
-                "status_note": maturity.get("status_note", "Optional manual validation evidence recorded."),
-                "production_grade_validation_claimed": False,
-                "formal_convergence_proof_claimed": False,
-            }
+            ValidationEvidenceItem(
+                tool_name=tool,
+                display_name=metadata.display_name,
+                maturity_level=maturity["maturity_level"],
+                evidence=maturity.get("evidence"),
+                status_note=maturity.get(
+                    "status_note", "Optional manual validation evidence recorded."
+                ),
+            )
         )
-    return {"status": "ok", "validation_evidence": evidence, **SAFETY_FLAGS}
+    return ValidationEvidenceResponse(validation_evidence=evidence)
 
 
-@router.get("/api/readiness")
+@router.get("/api/readiness", response_model=ReadinessResponse)
 def agent_readiness():
     adapter_maturity = {
         tool: data["maturity_level"] for tool, data in ADAPTER_MATURITY.items()
     }
-    return {
-        "status": "ok",
-        "current_public_prerelease": CURRENT_PUBLIC_PRERELEASE,
-        "main_development_version": MAIN_DEVELOPMENT_VERSION,
-        "testpypi": {
+    return ReadinessResponse(
+        current_public_prerelease=CURRENT_PUBLIC_PRERELEASE,
+        main_development_version=MAIN_DEVELOPMENT_VERSION,
+        testpypi={
             "uploaded_and_verified": True,
             "verified_version": "0.9.0rc6.dev0",
             "upload_for_current_dev_version": "not performed",
         },
-        "pypi": {
+        pypi={
             "published": False,
             "publication_approval": "not granted",
         },
-        "public_contract_freeze": {
+        public_contract_freeze={
             "status": "approved",
             "date": "2026-05-16",
         },
-        "adapter_maturity": adapter_maturity,
-        "recommended_next_actions": [
+        adapter_maturity=adapter_maturity,
+        v1_0_0_released=False,
+        recommended_next_actions=[
             "Continue API readiness engineering.",
             "Decide PyPI publication later with explicit maintainer approval.",
             "Prepare v1.0.0 release draft only after explicit approval.",
         ],
-        **SAFETY_FLAGS,
-    }
+    )
+
+
+class AgentApiError(Exception):
+    def __init__(
+        self,
+        error_code: str,
+        message: str,
+        *,
+        status_code: int = 400,
+        diagnostics: ApiDiagnostic | None = None,
+        recommended_next_actions: list[str] | None = None,
+    ) -> None:
+        self.error_code = error_code
+        self.message = message
+        self.status_code = status_code
+        self.diagnostics = diagnostics or ApiDiagnostic(errors=[message])
+        self.recommended_next_actions = recommended_next_actions or [
+            "Review the request payload and retry with local, documented inputs."
+        ]
+
+
+def _agent_error_response(error: AgentApiError) -> JSONResponse:
+    payload = ApiErrorResponse(
+        error_code=error.error_code,
+        message=error.message,
+        diagnostics=error.diagnostics,
+        recommended_next_actions=error.recommended_next_actions,
+    )
+    return JSONResponse(
+        status_code=error.status_code,
+        content=payload.model_dump(mode="json"),
+    )
 
 
 def _local_parser(parser: str) -> str:
@@ -485,22 +532,34 @@ def _local_parser(parser: str) -> str:
         return "rule"
     if normalized == "rule":
         return normalized
-    raise HTTPException(
-        status_code=400,
-        detail="The local Agent API only allows heuristic/rule parsing by default.",
+    raise AgentApiError(
+        "external_llm_not_enabled",
+        "The local Agent API only allows heuristic/rule parsing by default.",
+        diagnostics=ApiDiagnostic(errors=["Parser must be heuristic or rule."]),
+        recommended_next_actions=["Use parser='heuristic' or parser='rule'."],
     )
 
 
 def _load_spec(spec_payload: dict[str, Any] | None, path: str | None) -> OpticalSpec:
     if spec_payload is None and path is None:
-        raise HTTPException(status_code=400, detail="Provide spec or local path.")
+        raise AgentApiError(
+            "invalid_spec",
+            "Provide spec or local path.",
+            recommended_next_actions=[
+                "Send an inline OpticalSpec as spec or a repo-local JSON path."
+            ],
+        )
     data = spec_payload if spec_payload is not None else _load_json_file(path or "")
     if isinstance(data, dict) and "spec" in data and isinstance(data["spec"], dict):
         data = data["spec"]
     try:
         return OpticalSpec.model_validate(data)
     except Exception as exc:  # noqa: BLE001 - surface validation details as API diagnostics.
-        raise HTTPException(status_code=400, detail=f"Invalid OpticalSpec: {exc}") from exc
+        raise AgentApiError(
+            "invalid_spec",
+            f"Invalid OpticalSpec: {exc}",
+            diagnostics=ApiDiagnostic(errors=[str(exc)]),
+        ) from exc
 
 
 def _load_workflow_input_text(path: str) -> str | None:
@@ -517,12 +576,20 @@ def _load_json_file(path: str) -> Any:
     try:
         return json.loads(local_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        raise HTTPException(status_code=400, detail=f"Invalid JSON file: {path}") from exc
+        raise AgentApiError(
+            "invalid_json",
+            f"Invalid JSON file: {path}",
+            diagnostics=ApiDiagnostic(errors=[str(exc)]),
+        ) from exc
 
 
 def _resolve_local_path(path: str) -> Path:
     if "://" in path:
-        raise HTTPException(status_code=400, detail="Network paths are not supported.")
+        raise AgentApiError(
+            "invalid_workflow_request",
+            "Network paths are not supported.",
+            recommended_next_actions=["Use a repo-local JSON fixture path."],
+        )
     candidate = Path(path)
     if not candidate.is_absolute():
         candidate = REPO_ROOT / candidate
@@ -530,9 +597,18 @@ def _resolve_local_path(path: str) -> Path:
     try:
         resolved.relative_to(REPO_ROOT)
     except ValueError as exc:
-        raise HTTPException(status_code=400, detail="Path must stay inside the repository.") from exc
+        raise AgentApiError(
+            "invalid_workflow_request",
+            "Path must stay inside the repository.",
+            recommended_next_actions=["Use a repo-local path under examples/ or docs/."],
+        ) from exc
     if not resolved.exists():
-        raise HTTPException(status_code=404, detail=f"Local path not found: {path}")
+        raise AgentApiError(
+            "invalid_workflow_request",
+            f"Local path not found: {path}",
+            status_code=404,
+            recommended_next_actions=["Check the path and retry with an existing local file."],
+        )
     return resolved
 
 

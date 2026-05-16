@@ -94,6 +94,13 @@ the same default boundaries: no external solver execution, no external LLM
 call, no proprietary solver dependency, no network requirement for documented
 local examples, no production-grade physical validation claim, and no formal
 convergence proof claim.
+API response models are defined in
+[`src/optical_spec_agent/api/models.py`](src/optical_spec_agent/api/models.py),
+stable error behavior is documented in
+[`docs/api_error_model.md`](docs/api_error_model.md), and frontend fixture
+examples live under [`examples/api/`](examples/api/). This API readiness work
+does not trigger PyPI publication and does not change the current version or
+release status.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in
@@ -173,7 +180,9 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/v1_0_post_release_verification_plan.md`](docs/v1_0_post_release_verification_plan.md),
 [`docs/agent_studio_frontend_roadmap.md`](docs/agent_studio_frontend_roadmap.md),
 [`docs/api_agent_contract.md`](docs/api_agent_contract.md),
+[`docs/api_error_model.md`](docs/api_error_model.md),
 [`docs/cli_api_parity.md`](docs/cli_api_parity.md),
+[`examples/api/README.md`](examples/api/README.md),
 [`docs/public_contract_manifest.json`](docs/public_contract_manifest.json),
 [`docs/public_contract_change_checklist.md`](docs/public_contract_change_checklist.md),
 [`examples/e2e/README.md`](examples/e2e/README.md), and

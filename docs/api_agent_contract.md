@@ -13,6 +13,8 @@ solvers, external LLMs, or proprietary tools by default.
 - Current main development version: 0.9.0rc7.dev0
 - v1.0 public contract freeze: approved
 - API readiness: in progress
+- API response models: available in `src/optical_spec_agent/api/models.py`
+- API examples and frontend fixtures: `examples/api/`
 - Frontend implementation: not started
 - PyPI: not published
 
@@ -50,9 +52,19 @@ solvers, external LLMs, or proprietary tools by default.
 - Include `production_grade_validation_claimed=false`.
 - Include `formal_convergence_proof_claimed=false`.
 - Include `recommended_next_actions` where appropriate.
+- Use documented response models for health, version, adapters, schema, parse,
+  validate, workflow-plan, adapter-preview, validation evidence, readiness, and
+  error responses.
+
+## Error behavior
+
+Stable API error behavior is documented in `docs/api_error_model.md`. Error
+responses include `status: error`, `error_code`, `message`, diagnostics,
+recommended next actions, and the same conservative safety flags.
 
 ## Frontend readiness
 
 Frontend Agent Studio should call this API later rather than shelling out to
 the CLI directly. The API is a backend readiness surface only; no full frontend
-implementation is included in this task.
+implementation is included in this task. Future frontend work should use the
+`examples/api/` fixtures for local mock data and contract checks.

@@ -1,0 +1,104 @@
+{
+  "schema_version": "frontend_fixture_manifest.v0.1",
+  "current_public_prerelease": "v0.9.0rc6",
+  "current_main_development_version": "0.9.0rc7.dev0",
+  "frontend_implementation": "not started",
+  "fixtures": [
+    {
+      "name": "health",
+      "endpoint": "/api/health",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "health_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "version",
+      "endpoint": "/api/version",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "version_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "adapters",
+      "endpoint": "/api/adapters",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "adapters_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "validate minimal",
+      "endpoint": "/api/validate",
+      "method": "POST",
+      "request_file": "validate_request_minimal.json",
+      "response_file": "validate_response_minimal.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "workflow plan",
+      "endpoint": "/api/workflow-plan",
+      "method": "POST",
+      "request_file": "workflow_plan_request.json",
+      "response_file": "workflow_plan_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "adapter preview gmsh",
+      "endpoint": "/api/adapter-preview",
+      "method": "POST",
+      "request_file": "adapter_preview_gmsh_request.json",
+      "response_file": "adapter_preview_gmsh_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "validation evidence",
+      "endpoint": "/api/validation-evidence",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "validation_evidence_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "name": "readiness",
+      "endpoint": "/api/readiness",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "readiness_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ]
+}
