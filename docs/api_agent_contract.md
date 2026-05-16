@@ -13,10 +13,18 @@ solvers, external LLMs, or proprietary tools by default.
 - Current main development version: 0.9.0rc7.dev0
 - v1.0 public contract freeze: approved
 - API readiness: in progress
+- API status: frontend-readiness / candidate API
+- `api_contract_version`: 0.1
 - API response models: available in `src/optical_spec_agent/api/models.py`
 - API examples and frontend fixtures: `examples/api/`
+- API versioning policy: `docs/api_versioning_policy.md`
+- API request validation contract: `docs/api_request_validation_contract.md`
+- API migration notes: `docs/api_migration_notes.md`
 - Frontend implementation: not started
 - PyPI: not published
+
+The Local Agent API is not yet a separately frozen v1.0 API contract unless a
+maintainer explicitly approves freezing it.
 
 ## Default guarantees
 
@@ -44,6 +52,7 @@ solvers, external LLMs, or proprietary tools by default.
 ## Response shape principles
 
 - JSON only.
+- Include `api_contract_version`.
 - Include `status`.
 - Include diagnostics and warnings where relevant.
 - Include `external_solver_executed=false` by default.
@@ -59,8 +68,10 @@ solvers, external LLMs, or proprietary tools by default.
 ## Error behavior
 
 Stable API error behavior is documented in `docs/api_error_model.md`. Error
-responses include `status: error`, `error_code`, `message`, diagnostics,
-recommended next actions, and the same conservative safety flags.
+responses include `api_contract_version`, `status: error`, `error_code`,
+`message`, diagnostics, recommended next actions, and the same conservative
+safety flags. Request validation behavior is documented in
+`docs/api_request_validation_contract.md`.
 
 ## Frontend readiness
 

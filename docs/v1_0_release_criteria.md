@@ -10,6 +10,8 @@
 - PyPI publication approval: not granted
 - v1.0.0 released: no
 - Local Agent API readiness: in progress
+- Local Agent API status: frontend-readiness / candidate API
+- Local Agent API contract version: 0.1
 - Local Agent API response models: available
 - Local Agent API frontend fixtures: `examples/api/`
 - Frontend implementation: not started
@@ -66,4 +68,5 @@
 | Formal convergence proof | Non-goal | Not claimed | Do not add formal convergence proof claims. |
 | Frontend/API Agent Studio | Future work | Phase 2 direction | Not a v1.0 blocker. |
 | Local Agent API readiness | Engineering track | In progress | Useful for future Agent Studio, but not a v1.0 blocker unless maintainers choose to gate on it. |
+| Local Agent API contract freeze | Future decision | Not separately frozen | API remains frontend-readiness / candidate API until maintainer explicitly approves freezing it. |
 | Frontend fixture readiness | Engineering track | Available under `examples/api/` | Useful for future Agent Studio mock data, but not a PyPI publication trigger. |

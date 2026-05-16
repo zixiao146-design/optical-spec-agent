@@ -10,6 +10,7 @@ external LLM use, network access, or expanded validation claims.
 
 Agent API errors use JSON with:
 
+- `api_contract_version: "0.1"`
 - `status: error`
 - `error_code`
 - `message`
@@ -38,3 +39,8 @@ Agent API errors use JSON with:
 - API does not require proprietary solvers.
 - API does not claim production-grade physical validation.
 - API does not claim a formal convergence proof.
+
+Request validation details are documented in
+`docs/api_request_validation_contract.md`. API versioning and migration rules
+are documented in `docs/api_versioning_policy.md` and
+`docs/api_migration_notes.md`.

@@ -4,6 +4,8 @@ These fixtures document the current local Agent API response shapes for a
 future Agent Studio frontend. They are example request/response JSON files, not
 a frontend implementation.
 
+Current `api_contract_version`: 0.1.
+
 ## Guarantees
 
 - No network access is required.
@@ -25,8 +27,11 @@ a frontend implementation.
 - `no_network: true`
 - `external_solver_executed: false`
 - `external_llm_required: false`
+- `proprietary_solver_required: false`
 - `production_grade_validation_claimed: false`
 - `formal_convergence_proof_claimed: false`
 
-Future frontend work should use these fixtures for local mock data and contract
-checks before any full UI implementation begins.
+The manifest includes successful responses and stable error fixtures for
+invalid specs, unsupported adapters, invalid workflow requests, and disabled
+external LLM parsing. Future frontend work should use these fixtures for local
+mock data and contract checks before any full UI implementation begins.

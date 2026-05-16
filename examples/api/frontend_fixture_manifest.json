@@ -1,7 +1,7 @@
 {
-  "schema_version": "frontend_fixture_manifest.v0.1",
   "current_public_prerelease": "v0.9.0rc6",
   "current_main_development_version": "0.9.0rc7.dev0",
+  "api_contract_version": "0.1",
   "frontend_implementation": "not started",
   "fixtures": [
     {
@@ -14,7 +14,8 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
       "name": "version",
@@ -26,7 +27,8 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
       "name": "adapters",
@@ -38,10 +40,11 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
-      "name": "validate minimal",
+      "name": "validate-minimal",
       "endpoint": "/api/validate",
       "method": "POST",
       "request_file": "validate_request_minimal.json",
@@ -50,10 +53,11 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
-      "name": "workflow plan",
+      "name": "workflow-plan",
       "endpoint": "/api/workflow-plan",
       "method": "POST",
       "request_file": "workflow_plan_request.json",
@@ -62,10 +66,11 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
-      "name": "adapter preview gmsh",
+      "name": "adapter-preview-gmsh",
       "endpoint": "/api/adapter-preview",
       "method": "POST",
       "request_file": "adapter_preview_gmsh_request.json",
@@ -74,10 +79,11 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
-      "name": "validation evidence",
+      "name": "validation-evidence",
       "endpoint": "/api/validation-evidence",
       "method": "GET",
       "request_file": null,
@@ -86,7 +92,8 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     },
     {
       "name": "readiness",
@@ -98,7 +105,60 @@
       "external_solver_executed": false,
       "external_llm_required": false,
       "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "error-invalid-spec",
+      "endpoint": "/api/validate",
+      "method": "POST",
+      "request_file": null,
+      "response_file": "error_invalid_spec_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "error-unsupported-adapter",
+      "endpoint": "/api/adapter-preview",
+      "method": "POST",
+      "request_file": null,
+      "response_file": "error_unsupported_adapter_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "error-invalid-workflow-request",
+      "endpoint": "/api/workflow-plan",
+      "method": "POST",
+      "request_file": null,
+      "response_file": "error_invalid_workflow_request_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "error-external-llm-not-enabled",
+      "endpoint": "/api/parse",
+      "method": "POST",
+      "request_file": null,
+      "response_file": "error_external_llm_not_enabled_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     }
   ]
 }

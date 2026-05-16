@@ -62,6 +62,9 @@ This document describes the current `main` branch. It is not a release tag.
   frontend implementation not started)
 - Local Agent API error model:
   `docs/api_error_model.md`
+- Local Agent API versioning and request validation:
+  `docs/api_versioning_policy.md`, `docs/api_request_validation_contract.md`,
+  and `docs/api_migration_notes.md`
 - Local Agent API frontend fixtures:
   `examples/api/`
 - Proprietary solvers are not default dependencies.
@@ -110,6 +113,7 @@ This document describes the current `main` branch. It is not a release tag.
 | LLM parser foundation | RC preview | Mock provider is deterministic |
 | Workflow orchestration | RC preview | Local and synchronous |
 | Local Agent API | API readiness in progress | Local/synchronous preview only; no solver, LLM, proprietary, or network default |
+| API contract version | 0.1 candidate API | Frontend-readiness surface; not separately frozen as v1.0 API |
 | Frontend fixtures | API examples ready | `examples/api/`; frontend implementation not started |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |

@@ -7,6 +7,9 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 
+API_CONTRACT_VERSION = "0.1"
+
+
 class ApiSafetyFlags(BaseModel):
     """Shared default safety flags for local preview-first API responses."""
 
@@ -31,6 +34,7 @@ class ApiDiagnostic(BaseModel):
 class ApiResponseBase(ApiSafetyFlags):
     """Base response fields shared by local Agent API endpoints."""
 
+    api_contract_version: str = API_CONTRACT_VERSION
     status: str = "ok"
     diagnostics: ApiDiagnostic = Field(default_factory=ApiDiagnostic)
     recommended_next_actions: list[str] = Field(default_factory=list)
@@ -73,9 +77,13 @@ class SchemaResponse(ApiResponseBase):
     json_schema: dict[str, Any] = Field(alias="schema")
 
 
-class ParseRequest(BaseModel):
-    model_config = ConfigDict(populate_by_name=True)
+class ApiRequestBase(BaseModel):
+    """Base request model for explicit frontend-facing Agent API requests."""
 
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+
+
+class ParseRequest(ApiRequestBase):
     text: str = Field(..., description="Natural language optical task description")
     task_id: str = Field("", description="Optional task ID")
     parser: str = Field("heuristic", description="Local parser mode: heuristic or rule")
@@ -88,7 +96,7 @@ class ParseResponse(ApiResponseBase):
     summary: str
 
 
-class ValidateRequest(BaseModel):
+class ValidateRequest(ApiRequestBase):
     spec: dict[str, Any] | None = Field(None, description="Inline OpticalSpec JSON")
     path: str | None = Field(None, description="Local repo-relative JSON spec path")
 

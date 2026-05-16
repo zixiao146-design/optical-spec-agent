@@ -6,7 +6,10 @@ run external solvers, call external LLMs, require proprietary tools, or access
 the network by default.
 
 API response models are defined in `src/optical_spec_agent/api/models.py`, and
-frontend fixture examples live under `examples/api/`.
+frontend fixture examples live under `examples/api/`. The current
+`api_contract_version` is 0.1, and the API remains a
+frontend-readiness / candidate API rather than a separately frozen v1.0 API
+contract.
 
 | CLI command | API endpoint | Parity status | Notes |
 |---|---|---|---|
@@ -27,3 +30,6 @@ frontend fixture examples live under `examples/api/`.
 - Formal convergence proof is not claimed.
 - The frontend implementation is not started; Agent Studio should use this API
   as the backend surface when that work begins.
+- API versioning, request validation, and migration notes are documented in
+  `docs/api_versioning_policy.md`, `docs/api_request_validation_contract.md`,
+  and `docs/api_migration_notes.md`.

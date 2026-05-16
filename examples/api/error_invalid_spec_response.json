@@ -5,15 +5,20 @@
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false,
   "api_contract_version": "0.1",
-  "status": "ok",
+  "status": "error",
   "diagnostics": {
-    "errors": [],
+    "errors": [
+      "Provide spec or local path."
+    ],
     "warnings": [],
     "missing_fields": [],
     "assumptions": [],
     "limitations": [],
     "details": {}
   },
-  "recommended_next_actions": [],
-  "valid": true
+  "recommended_next_actions": [
+    "Send an inline OpticalSpec as spec or a repo-local JSON path."
+  ],
+  "error_code": "invalid_spec",
+  "message": "Provide spec or local path."
 }

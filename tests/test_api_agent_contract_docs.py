@@ -16,8 +16,14 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
     assert "Current public prerelease: v0.9.0rc6" in text
     assert "Current main development version: 0.9.0rc7.dev0" in text
     assert "API readiness: in progress" in text
+    assert "`api_contract_version`: 0.1" in text
+    assert "frontend-readiness / candidate API" in text
     assert "API response models" in text
     assert "examples/api/" in text
+    assert "docs/api_versioning_policy.md" in text
+    assert "docs/api_request_validation_contract.md" in text
+    assert "docs/api_migration_notes.md" in text
+    assert "not yet a separately frozen v1.0 API contract" in text
     assert "Frontend implementation: not started" in text
     assert "No external solver execution by default" in text
     assert "No external LLM call by default" in text
@@ -48,6 +54,7 @@ def test_api_error_model_doc_exists_and_defines_stable_shape():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
     assert "Local Agent API Error Model" in text
+    assert 'api_contract_version: "0.1"' in text
     assert "status: error" in text
     assert "error_code" in text
     assert "recommended_next_actions" in text
@@ -65,3 +72,6 @@ def test_api_error_model_doc_exists_and_defines_stable_shape():
         "external_llm_not_enabled",
     ]:
         assert error_code in text
+    assert "docs/api_request_validation_contract.md" in text
+    assert "docs/api_versioning_policy.md" in text
+    assert "docs/api_migration_notes.md" in text

@@ -31,6 +31,11 @@ def test_cli_api_parity_doc_maps_major_cli_surface_to_api():
         "frontend implementation is not started",
         "src/optical_spec_agent/api/models.py",
         "examples/api/",
+        "api_contract_version",
+        "frontend-readiness / candidate API",
+        "docs/api_versioning_policy.md",
+        "docs/api_request_validation_contract.md",
+        "docs/api_migration_notes.md",
     ]
     for phrase in required:
         assert phrase in text

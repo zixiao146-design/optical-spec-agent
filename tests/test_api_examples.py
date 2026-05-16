@@ -15,8 +15,10 @@ def _load_json(path: Path) -> dict:
 
 
 def _assert_no_claim_expansion(payload: dict) -> None:
+    assert payload["api_contract_version"] == "0.1"
     assert payload["external_solver_executed"] is False
     assert payload["external_llm_required"] is False
+    assert payload["proprietary_solver_required"] is False
     assert payload["production_grade_validation_claimed"] is False
     assert payload["formal_convergence_proof_claimed"] is False
 
@@ -28,6 +30,7 @@ def test_api_examples_readme_and_manifest_exist():
     manifest = _load_json(manifest_path)
     assert manifest["current_public_prerelease"] == "v0.9.0rc6"
     assert manifest["current_main_development_version"] == "0.9.0rc7.dev0"
+    assert manifest["api_contract_version"] == "0.1"
     assert manifest["frontend_implementation"] == "not started"
 
 
@@ -41,6 +44,7 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         assert entry["no_network"] is True
         assert entry["external_solver_executed"] is False
         assert entry["external_llm_required"] is False
+        assert entry["proprietary_solver_required"] is False
         assert entry["production_grade_validation_claimed"] is False
         assert entry["formal_convergence_proof_claimed"] is False
         _assert_no_claim_expansion(_load_json(response_path))
@@ -59,3 +63,23 @@ def test_api_version_and_readiness_fixtures_track_publication_state():
     assert readiness["pypi"]["published"] is False
     assert readiness["v1_0_0_released"] is False
     _assert_no_claim_expansion(readiness)
+
+
+def test_api_error_fixtures_are_manifested_and_keep_safe_error_shape():
+    manifest = _load_json(API_EXAMPLES / "frontend_fixture_manifest.json")
+    error_files = {
+        "error_invalid_spec_response.json": "invalid_spec",
+        "error_unsupported_adapter_response.json": "unsupported_adapter",
+        "error_invalid_workflow_request_response.json": "invalid_workflow_request",
+        "error_external_llm_not_enabled_response.json": "external_llm_not_enabled",
+    }
+    manifested = {entry["response_file"] for entry in manifest["fixtures"]}
+    assert set(error_files).issubset(manifested)
+    for filename, error_code in error_files.items():
+        payload = _load_json(API_EXAMPLES / filename)
+        _assert_no_claim_expansion(payload)
+        assert payload["status"] == "error"
+        assert payload["error_code"] == error_code
+        assert payload["message"]
+        assert isinstance(payload["diagnostics"], dict)
+        assert isinstance(payload["recommended_next_actions"], list)

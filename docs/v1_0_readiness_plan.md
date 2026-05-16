@@ -85,6 +85,9 @@ Recommended goals:
   frontend.
 - Use `docs/api_error_model.md` and `examples/api/frontend_fixture_manifest.json`
   to keep API error behavior and frontend fixtures stable.
+- Use `docs/api_versioning_policy.md`,
+  `docs/api_request_validation_contract.md`, and `docs/api_migration_notes.md`
+  to keep API schema versioning and request validation explicit.
 - Keep API defaults local/synchronous/preview-first: no external solver
   execution, no external LLM call, no proprietary solver requirement, and no
   network dependency for documented examples.

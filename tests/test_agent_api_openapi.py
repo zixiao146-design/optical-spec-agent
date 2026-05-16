@@ -49,9 +49,27 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
         schema = operation["responses"]["200"]["content"]["application/json"]["schema"]
         assert "$ref" in schema or "allOf" in schema
 
+    for path in [
+        "/api/parse",
+        "/api/validate",
+        "/api/workflow-plan",
+        "/api/adapter-preview",
+    ]:
+        operation = paths[path]["post"]
+        assert operation["requestBody"]["content"]["application/json"]["schema"]
+        assert "400" in operation["responses"]
+        error_schema = operation["responses"]["400"]["content"]["application/json"]["schema"]
+        assert error_schema["$ref"].endswith("/ApiErrorResponse")
+
+    schemas = openapi["components"]["schemas"]
+    for schema_name in ("VersionResponse", "ReadinessResponse", "ApiErrorResponse"):
+        assert "api_contract_version" in schemas[schema_name]["properties"]
+
     forbidden_api_paths = {
         "/api/workflow-run",
         "/api/solver-run",
+        "/api/tag",
+        "/api/release",
         "/api/upload",
         "/api/publish",
         "/api/testpypi-upload",

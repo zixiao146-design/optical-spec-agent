@@ -14,6 +14,9 @@ validation evidence.
 - Local Agent API readiness is in progress through
   `docs/api_agent_contract.md` and `docs/cli_api_parity.md`.
 - API response models exist in `src/optical_spec_agent/api/models.py`.
+- Current `api_contract_version`: 0.1.
+- API versioning and request validation are documented in
+  `docs/api_versioning_policy.md` and `docs/api_request_validation_contract.md`.
 - Frontend fixture examples exist under `examples/api/`.
 - Frontend implementation is not started.
 - Agent Studio frontend should call the local Agent API instead of shelling out

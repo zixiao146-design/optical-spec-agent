@@ -4,6 +4,7 @@
   "proprietary_solver_required": false,
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
   "status": "ok",
   "diagnostics": {
     "errors": [],

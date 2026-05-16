@@ -121,7 +121,11 @@ API 默认仍不运行外部 solver、不调用外部 LLM、不依赖 proprietar
 不要求网络、不声称 production-grade physical validation，也不声称 formal
 convergence proof。
 API response models 定义在 `src/optical_spec_agent/api/models.py`，稳定错误模型
-见 `docs/api_error_model.md`，frontend fixture examples 位于 `examples/api/`。
+见 `docs/api_error_model.md`，API versioning 见
+`docs/api_versioning_policy.md`，request validation contract 见
+`docs/api_request_validation_contract.md`，frontend fixture examples 位于
+`examples/api/`。当前 `api_contract_version` 为 0.1。该 API 仍是
+frontend-readiness / candidate API，不是单独冻结的 v1.0 API contract。
 这项 API readiness 工作不触发 PyPI 发布，也不改变当前版本或 release 状态。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、

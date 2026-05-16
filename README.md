@@ -97,10 +97,15 @@ convergence proof claim.
 API response models are defined in
 [`src/optical_spec_agent/api/models.py`](src/optical_spec_agent/api/models.py),
 stable error behavior is documented in
-[`docs/api_error_model.md`](docs/api_error_model.md), and frontend fixture
-examples live under [`examples/api/`](examples/api/). This API readiness work
-does not trigger PyPI publication and does not change the current version or
-release status.
+[`docs/api_error_model.md`](docs/api_error_model.md), API versioning is
+documented in [`docs/api_versioning_policy.md`](docs/api_versioning_policy.md),
+request validation is documented in
+[`docs/api_request_validation_contract.md`](docs/api_request_validation_contract.md),
+and frontend fixture examples live under [`examples/api/`](examples/api/). The
+current `api_contract_version` is 0.1. The API remains a frontend-readiness /
+candidate API, not a separately frozen v1.0 API contract. This API readiness
+work does not trigger PyPI publication and does not change the current version
+or release status.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in

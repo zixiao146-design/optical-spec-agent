@@ -5,15 +5,20 @@
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false,
   "api_contract_version": "0.1",
-  "status": "ok",
+  "status": "error",
   "diagnostics": {
-    "errors": [],
+    "errors": [
+      "Parser must be heuristic or rule."
+    ],
     "warnings": [],
     "missing_fields": [],
     "assumptions": [],
     "limitations": [],
     "details": {}
   },
-  "recommended_next_actions": [],
-  "valid": true
+  "recommended_next_actions": [
+    "Use parser='heuristic' or parser='rule'."
+  ],
+  "error_code": "external_llm_not_enabled",
+  "message": "The local Agent API only allows heuristic/rule parsing by default."
 }

@@ -23,6 +23,7 @@ def _assert_safety(payload: dict) -> None:
 
 
 def _assert_status_and_diagnostics(payload: dict) -> None:
+    assert payload["api_contract_version"] == "0.1"
     assert "status" in payload
     assert "diagnostics" in payload
     assert "recommended_next_actions" in payload

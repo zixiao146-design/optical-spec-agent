@@ -57,6 +57,11 @@ SAFETY_FLAGS: dict[str, bool] = {
     "formal_convergence_proof_claimed": False,
 }
 
+API_ERROR_RESPONSES = {
+    400: {"model": ApiErrorResponse},
+    404: {"model": ApiErrorResponse},
+}
+
 ADAPTER_MATURITY: dict[str, dict[str, Any]] = {
     "gmsh": {
         "maturity_level": "Level 3",
@@ -307,7 +312,11 @@ def agent_schema():
     return SchemaResponse(json_schema=OpticalSpec.export_json_schema_dict())
 
 
-@router.post("/api/parse", response_model=AgentParseResponse)
+@router.post(
+    "/api/parse",
+    response_model=AgentParseResponse,
+    responses=API_ERROR_RESPONSES,
+)
 def agent_parse(req: AgentParseRequest):
     try:
         parser = _local_parser(req.parser)
@@ -340,7 +349,11 @@ def agent_parse(req: AgentParseRequest):
     )
 
 
-@router.post("/api/validate", response_model=AgentValidateResponse)
+@router.post(
+    "/api/validate",
+    response_model=AgentValidateResponse,
+    responses=API_ERROR_RESPONSES,
+)
 def agent_validate(req: AgentSpecRequest):
     try:
         spec = _load_spec(req.spec, req.path)
@@ -358,12 +371,27 @@ def agent_validate(req: AgentSpecRequest):
     )
 
 
-@router.post("/api/workflow-plan", response_model=WorkflowPlanResponse)
+@router.post(
+    "/api/workflow-plan",
+    response_model=WorkflowPlanResponse,
+    responses=API_ERROR_RESPONSES,
+)
 def agent_workflow_plan(req: AgentWorkflowPlanRequest):
     from optical_spec_agent.workflows import plan_workflow
 
     try:
         parser = _local_parser(req.parser)
+        if req.text is None and req.path is None and req.spec is None:
+            raise AgentApiError(
+                "invalid_workflow_request",
+                "Provide text, spec, or local path for workflow planning.",
+                diagnostics=ApiDiagnostic(
+                    errors=["Workflow planning requires text, spec, or path."]
+                ),
+                recommended_next_actions=[
+                    "Send local text, an inline OpticalSpec, or a repo-local workflow fixture path."
+                ],
+            )
         input_text = req.text
         if input_text is None and req.path:
             input_text = _load_workflow_input_text(req.path)
@@ -393,7 +421,11 @@ def agent_workflow_plan(req: AgentWorkflowPlanRequest):
     )
 
 
-@router.post("/api/adapter-preview", response_model=AdapterPreviewResponse)
+@router.post(
+    "/api/adapter-preview",
+    response_model=AdapterPreviewResponse,
+    responses=API_ERROR_RESPONSES,
+)
 def agent_adapter_preview(req: AgentAdapterPreviewRequest):
     try:
         spec = _load_spec(req.spec, req.path)

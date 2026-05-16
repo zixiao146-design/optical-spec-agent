@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 from optical_spec_agent.api.models import (
+    API_CONTRACT_VERSION,
     AdapterSummary,
     ApiErrorResponse,
     HealthResponse,
+    ParseRequest,
+    ReadinessResponse,
+    ValidateRequest,
     VersionResponse,
+    WorkflowPlanRequest,
 )
 from optical_spec_agent.adapters.registry import list_adapters
+from pydantic import ValidationError
 
 
 def _assert_safety_defaults(model) -> None:
@@ -33,6 +39,8 @@ def test_version_response_tracks_current_versions():
         main_development_version="0.9.0rc7.dev0",
     )
     _assert_safety_defaults(response)
+    assert API_CONTRACT_VERSION == "0.1"
+    assert response.api_contract_version == "0.1"
     assert response.package_version == "0.9.0rc7.dev0"
     assert response.current_public_prerelease == "v0.9.0rc6"
     assert response.main_development_version == "0.9.0rc7.dev0"
@@ -59,7 +67,36 @@ def test_adapter_summary_can_represent_all_known_adapters_without_claim_expansio
 def test_error_response_preserves_safety_boundaries():
     response = ApiErrorResponse(error_code="invalid_spec", message="Invalid spec")
     _assert_safety_defaults(response)
+    assert response.api_contract_version == "0.1"
     assert response.status == "error"
     assert response.error_code == "invalid_spec"
     assert response.message == "Invalid spec"
     assert response.diagnostics.errors == []
+
+
+def test_readiness_response_includes_api_contract_version():
+    response = ReadinessResponse(
+        current_public_prerelease="v0.9.0rc6",
+        main_development_version="0.9.0rc7.dev0",
+        testpypi={"uploaded_and_verified": True},
+        pypi={"published": False},
+        public_contract_freeze={"status": "approved"},
+        adapter_maturity={"elmer": "Level 2 + Level-3-ready"},
+    )
+    _assert_safety_defaults(response)
+    assert response.api_contract_version == "0.1"
+    assert response.v1_0_0_released is False
+
+
+def test_agent_api_request_models_reject_unknown_fields():
+    for model, payload in [
+        (ParseRequest, {"text": "Use Meep.", "unexpected": True}),
+        (ValidateRequest, {"path": "examples/specs/minimal_nanoparticle.json", "unexpected": True}),
+        (WorkflowPlanRequest, {"text": "Use MPB.", "unexpected": True}),
+    ]:
+        try:
+            model.model_validate(payload)
+        except ValidationError as exc:
+            assert "extra_forbidden" in str(exc)
+        else:  # pragma: no cover - explicit failure path
+            raise AssertionError(f"{model.__name__} accepted an unknown field")

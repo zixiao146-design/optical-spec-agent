@@ -73,6 +73,8 @@
   parse, validate, workflow-plan, adapter-preview, validation evidence, and
   readiness/status.
 - Local Agent API response models and stable error model.
+- Local Agent API `api_contract_version` 0.1, request validation contract, and
+  API migration notes.
 - Frontend fixture examples under `examples/api/`.
 - CLI/API parity documentation for future Agent Studio integration.
 - TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
@@ -130,6 +132,8 @@
   gate on it.
 - API fixture readiness is not a PyPI publication trigger and does not change
   the current package version or release status.
+- The Local Agent API remains a frontend-readiness / candidate API and is not
+  yet a separately frozen v1.0 API contract.
 - No new GitHub Actions workflow was added during operations readiness because
   existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
   reviewed and documented instead of duplicating automation.
@@ -161,6 +165,9 @@
   frontend MVP planning decision.
 - Use `docs/api_error_model.md` and `examples/api/` before building frontend
   mock states.
+- Use `docs/api_versioning_policy.md`,
+  `docs/api_request_validation_contract.md`, and `docs/api_migration_notes.md`
+  before changing API request or response shapes.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and
