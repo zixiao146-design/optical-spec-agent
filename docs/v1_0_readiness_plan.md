@@ -12,6 +12,8 @@
 - Latest post-release status commit: `cf2fe72`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
+- Local Agent API readiness: in progress
+- Frontend implementation: not started
 
 ## What v0.9.0rc2 already proves
 
@@ -76,6 +78,12 @@ Recommended goals:
   release criteria package.
 - Treat `docs/agent_studio_frontend_roadmap.md` as future/Phase 2 planning,
   not as a v1.0.0 release blocker.
+- Use `docs/api_agent_contract.md` and `docs/cli_api_parity.md` to keep the
+  local Agent API aligned with the CLI and ready for a future Agent Studio
+  frontend.
+- Keep API defaults local/synchronous/preview-first: no external solver
+  execution, no external LLM call, no proprietary solver requirement, and no
+  network dependency for documented examples.
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
 - Keep the v1.0 stability gate current.

@@ -113,6 +113,13 @@ v1.0.0 planning package 见 `docs/v1_0_release_criteria.md`、
 `docs/v1_0_post_release_verification_plan.md` 和
 `docs/agent_studio_frontend_roadmap.md`。Agent Studio frontend/API roadmap
 属于 v1.0 之后或 Phase 2 规划，不是 v1.0.0 release blocker。
+Local Agent API readiness 见 `docs/api_agent_contract.md` 和
+`docs/cli_api_parity.md`。该 API 为未来 Agent Studio frontend 暴露
+health/version、adapter registry、schema、parse、validate、workflow-plan、
+adapter-preview、validation evidence 和 readiness/status；frontend 尚未实现。
+API 默认仍不运行外部 solver、不调用外部 LLM、不依赖 proprietary solver、
+不要求网络、不声称 production-grade physical validation，也不声称 formal
+convergence proof。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。

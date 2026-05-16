@@ -10,6 +10,8 @@ access, or proprietary solver support.
 ## Proposed release sequence
 
 - Continue `0.9.0rc7.dev0` engineering.
+- Continue local Agent API readiness without starting full frontend
+  implementation.
 - Decide PyPI publication path.
 - Prepare v1.0.0 release draft.
 - Run quality gates.
@@ -35,4 +37,5 @@ access, or proprietary solver support.
 - No PyPI publication.
 - No TestPyPI upload.
 - No claim expansion.
-
+- No full frontend implementation unless separately approved.
+- No default external solver, external LLM, network, or proprietary dependency.

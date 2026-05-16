@@ -20,6 +20,8 @@ Current main development version: `0.9.0rc7.dev0`.
 - [v1.0 PyPI decision gate](v1_0_pypi_decision_gate.md)
 - [v1.0 post-release verification plan](v1_0_post_release_verification_plan.md)
 - [Agent Studio frontend roadmap](agent_studio_frontend_roadmap.md)
+- [Local Agent API contract](api_agent_contract.md)
+- [CLI / API parity](cli_api_parity.md)
 - [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
 - [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
 - [v0.9.0rc5 post-release status](post_release_status_v0.9.0rc5.md)
@@ -49,6 +51,8 @@ manual-only and must not publish or create tags/releases from default CI.
 
 ## Contracts
 
+- [Local Agent API contract](api_agent_contract.md)
+- [CLI / API parity](cli_api_parity.md)
 - [CLI contract](cli_contract.md)
 - [Schema contract](schema_contract.md)
 - [Schema compatibility policy](schema_compatibility_policy.md)
@@ -126,6 +130,8 @@ manual-only and must not publish or create tags/releases from default CI.
 - [v1.0 PyPI decision gate](v1_0_pypi_decision_gate.md)
 - [v1.0 post-release verification plan](v1_0_post_release_verification_plan.md)
 - [Agent Studio frontend roadmap](agent_studio_frontend_roadmap.md)
+- [Local Agent API contract](api_agent_contract.md)
+- [CLI / API parity](cli_api_parity.md)
 - [v1.0 public contract freeze checklist](v1_0_public_contract_freeze_checklist.md)
 - [v1.0 public contract freeze confirmation](v1_0_public_contract_freeze_confirmation.md)
 - [v1.0 public contract freeze status](v1_0_public_contract_freeze_status.md)

@@ -57,6 +57,9 @@ This document describes the current `main` branch. It is not a release tag.
 - Agent Studio frontend roadmap:
   `docs/agent_studio_frontend_roadmap.md` (future/Phase 2, not a v1.0.0
   blocker)
+- Local Agent API readiness:
+  `docs/api_agent_contract.md` and `docs/cli_api_parity.md` (in progress;
+  frontend implementation not started)
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -102,6 +105,7 @@ This document describes the current `main` branch. It is not a release tag.
 | MPB/Gmsh/Elmer/Optiland adapters | RC MVP scaffold generation plus narrow MPB/Gmsh/Optiland Level 3 optional evidence; Elmer Level-3-ready pending actual validation | Do not run external solvers by default |
 | LLM parser foundation | RC preview | Mock provider is deterministic |
 | Workflow orchestration | RC preview | Local and synchronous |
+| Local Agent API | API readiness in progress | Local/synchronous preview only; no solver, LLM, proprietary, or network default |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

@@ -11,8 +11,15 @@ validation evidence.
 - Not part of v1.0.0 release criteria.
 - Not required for v1.0.0.
 - This is not a v1.0.0 release blocker.
-- Should follow API readiness.
+- Local Agent API readiness is in progress through
+  `docs/api_agent_contract.md` and `docs/cli_api_parity.md`.
+- Frontend implementation is not started.
+- Agent Studio frontend should call the local Agent API instead of shelling out
+  directly to the CLI.
+- Should follow API readiness and continued backend contract tests.
 - Should remain local-first and no-default-solver.
+- The API and future frontend must not run external solvers, call external
+  LLMs, require proprietary tools, or access the network by default.
 
 ## Recommended phases
 
@@ -22,6 +29,8 @@ validation evidence.
 - FastAPI endpoints.
 - API contract tests.
 - No-solver/no-LLM default behavior.
+- API endpoints for health/version, adapter registry, schema, parse, validate,
+  workflow-plan, adapter-preview, validation evidence, and readiness/status.
 
 ### Phase 2
 

@@ -84,6 +84,16 @@ and
 [`docs/agent_studio_frontend_roadmap.md`](docs/agent_studio_frontend_roadmap.md).
 The Agent Studio roadmap is future/Phase 2 planning and is not a v1.0.0
 release blocker.
+Local Agent API readiness is now tracked in
+[`docs/api_agent_contract.md`](docs/api_agent_contract.md) and
+[`docs/cli_api_parity.md`](docs/cli_api_parity.md). The API exposes local
+health/version, adapter registry, schema, parse, validate, workflow-plan,
+adapter-preview, validation-evidence, and readiness endpoints for a future
+Agent Studio frontend. The frontend is not implemented yet, and the API keeps
+the same default boundaries: no external solver execution, no external LLM
+call, no proprietary solver dependency, no network requirement for documented
+local examples, no production-grade physical validation claim, and no formal
+convergence proof claim.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in
@@ -162,6 +172,8 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/v1_0_pypi_decision_gate.md`](docs/v1_0_pypi_decision_gate.md),
 [`docs/v1_0_post_release_verification_plan.md`](docs/v1_0_post_release_verification_plan.md),
 [`docs/agent_studio_frontend_roadmap.md`](docs/agent_studio_frontend_roadmap.md),
+[`docs/api_agent_contract.md`](docs/api_agent_contract.md),
+[`docs/cli_api_parity.md`](docs/cli_api_parity.md),
 [`docs/public_contract_manifest.json`](docs/public_contract_manifest.json),
 [`docs/public_contract_change_checklist.md`](docs/public_contract_change_checklist.md),
 [`examples/e2e/README.md`](examples/e2e/README.md), and

@@ -175,6 +175,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_pypi_decision_gate.md",
         "v1_0_post_release_verification_plan.md",
         "agent_studio_frontend_roadmap.md",
+        "api_agent_contract.md",
+        "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
         "github_release_draft_v0.9.0rc5.md",
@@ -250,6 +252,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Upload command authorized for 0.9.0rc7.dev0: no" in combined
     assert "TestPyPI uploaded: yes" in combined
     assert "TestPyPI clean install verification: passed" in combined
+    assert "Local Agent API Contract" in combined
+    assert "CLI / API Parity" in combined
+    assert "No external solver execution by default" in combined
+    assert "No external LLM call by default" in combined
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined
     assert "PyPI publication approval: not granted" in combined
     assert "NO UPLOAD PERFORMED" in combined
