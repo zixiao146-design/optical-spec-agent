@@ -4,8 +4,9 @@
 
 - PyPI published: no.
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`.
+- TestPyPI upload for `0.9.0rc6`: not performed.
 - Current public prerelease: `v0.9.0rc5`.
-- Current main development version: `0.9.0rc6.dev0`.
+- Current main release draft: `0.9.0rc6`.
 - `v0.9.0rc6` GitHub release has not been created.
 - `v0.9.0rc6` tag has not been created.
 - Package build smoke: passed for the RC line.
@@ -20,6 +21,8 @@
 - Maintainer operations checklist: `docs/maintainer_operations_checklist.md`.
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`.
+- TestPyPI upload approval record for rc6:
+  `docs/testpypi_upload_approval_v0.9.0rc6.md`.
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`.
 - TestPyPI status:
@@ -35,9 +38,9 @@
   `docs/pypi_post_publication_verification_plan.md`.
 - v1.0 public contract freeze approved:
   `docs/v1_0_public_contract_freeze_status.md`.
-- TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only.
-- TestPyPI upload authorized: yes, TestPyPI only.
-- Upload command authorized: TestPyPI only.
+- TestPyPI upload approval status for rc6: pending.
+- TestPyPI upload authorized for rc6: no.
+- Upload command authorized for rc6: no.
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden.
 - TestPyPI clean install verification: passed.
 - PyPI publication approval: not granted.

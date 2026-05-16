@@ -3,9 +3,9 @@
 ## Current Status
 
 - Current public prerelease: v0.9.0rc5
-- Current main development version: `0.9.0rc6.dev0`
+- Current main release draft: `0.9.0rc6`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
-- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
+- TestPyPI upload approval for 0.9.0rc6: pending
 - v1.0.0 not released
 
 ## Ready / Strong Areas
@@ -97,6 +97,7 @@
   the 2026-05-15 package-manager install attempt is recorded as deferred.
 - TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted
   Publishing.
+- TestPyPI upload for 0.9.0rc6 is not performed and remains pending.
 - PyPI publication not approved.
 - PyPI publication readiness checklist records required approval, final version,
   CI, quality gates, build, twine check, metadata review, validation-claim
@@ -132,6 +133,5 @@
   `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
-- Continue post-`v0.9.0rc5` readiness engineering on `0.9.0rc6.dev0`; only
-  prepare a future `v0.9.0rc6` release draft after explicit maintainer approval
-  and fresh verification.
+- Continue release-draft review for `v0.9.0rc6`; create the tag and GitHub
+  prerelease only after explicit maintainer approval and fresh verification.

@@ -54,7 +54,8 @@ def test_adapter_cli_listing_is_offline_contract():
     assert "External LLM" in matrix
     assert "no production-grade physical validation" in matrix.lower()
     assert "PyPI remains unpublished" in matrix
-    assert "TestPyPI\ncontains the `0.9.0rc6.dev0` development package" in matrix
+    assert "TestPyPI contains the `0.9.0rc6.dev0` development package" in matrix
+    assert "TestPyPI upload for `0.9.0rc6` has not been performed" in matrix
     assert "open-source-solver-first" in matrix
     assert "Proprietary/export-only future target" in matrix
     assert "not registered adapters unless" in matrix

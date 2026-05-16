@@ -1,11 +1,10 @@
 # Adapter Support Matrix
 
-Version scope: current public prerelease `v0.9.0rc5`; current `main`
-development version `0.9.0rc6.dev0`. `0.9.0rc6.dev0` development state is not a public release, the
-`v0.9.0rc6` tag has not been created, PyPI remains unpublished, and TestPyPI
-contains the `0.9.0rc6.dev0` development package.
-Continue v1.0 readiness engineering and prepare a future `v0.9.0rc6` release
-draft only when accumulated changes should be published as another RC.
+Version scope: current public prerelease `v0.9.0rc5`; current `main` release
+draft `0.9.0rc6`. The `v0.9.0rc6` tag has not been created, PyPI remains
+unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
+TestPyPI upload for `0.9.0rc6` has not been performed.
+PyPI remains unpublished.
 Compatibility evidence is tracked in `docs/v1_0_compatibility_policy.md`,
 `docs/validation_evidence_manifest.md`, and `examples/examples_manifest.json`.
 Adapter maturity levels are tracked in `docs/adapter_maturity_model.md`. Gmsh,

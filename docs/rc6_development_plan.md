@@ -3,9 +3,10 @@
 ## Baseline
 
 - Current public prerelease: v0.9.0rc5
-- Current main development version: 0.9.0rc6.dev0
+- Current main release draft: v0.9.0rc6
 - v0.9.0rc6 tag: not created
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
+- TestPyPI upload for 0.9.0rc6: not performed
 
 ## Goals for rc6.dev cycle
 
@@ -37,9 +38,11 @@
 - No formal convergence proof claim.
 - No proprietary solver dependency.
 
-## Exit criteria before v0.9.0rc6 release draft
+## Exit criteria before v0.9.0rc6 tag/release
 
 - `project.version` changed from `0.9.0rc6.dev0` to `0.9.0rc6`.
+- Release draft notes exist.
+- TestPyPI upload for rc6 remains explicitly pending unless separately approved.
 - Release notes exist.
 - Readiness doc updated.
 - Quality gates passed.

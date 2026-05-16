@@ -20,7 +20,7 @@ def _load_manifest() -> dict:
 
 def test_public_contract_manifest_baseline_and_package_metadata():
     manifest = _load_manifest()
-    assert manifest["version_scope"] == "0.9.0rc6.dev0"
+    assert manifest["version_scope"] == "0.9.0rc6"
     assert manifest["current_public_prerelease"] == "v0.9.0rc5"
     freeze = manifest["public_contract_freeze"]
     assert freeze["status"] == "approved"
@@ -38,6 +38,7 @@ def test_public_contract_manifest_baseline_and_package_metadata():
     assert manifest["release_state"]["pypi_published"] is False
     assert manifest["release_state"]["testpypi_uploaded"] is True
     assert manifest["release_state"]["testpypi_uploaded_version"] == "0.9.0rc6.dev0"
+    assert manifest["release_state"]["testpypi_upload_for_0_9_0rc6_performed"] is False
     assert (
         manifest["release_state"]["testpypi_status_doc"]
         == "docs/testpypi_status_v0.9.0rc6.dev0.md"

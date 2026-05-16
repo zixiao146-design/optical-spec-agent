@@ -1,6 +1,6 @@
 # Schema Compatibility Policy
 
-Current main development version: `0.9.0rc6.dev0`.
+Current main release draft: `0.9.0rc6`.
 Current public prerelease: `v0.9.0rc5`.
 
 Schema/API compatibility is being stabilized before `v1.0`. Public fields

@@ -20,7 +20,7 @@ def _load_manifest() -> dict:
 def test_examples_manifest_lists_existing_offline_examples():
     manifest = _load_manifest()
     public_contract = json.loads((ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8"))
-    assert manifest["version_scope"] == "0.9.0rc6.dev0"
+    assert manifest["version_scope"] == "0.9.0rc6"
     assert manifest["current_public_prerelease"] == "v0.9.0rc5"
     examples = manifest["examples"]
     listed = {item["path"] for item in examples}

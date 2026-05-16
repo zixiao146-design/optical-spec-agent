@@ -21,7 +21,7 @@ behavior is stable enough for downstream users.
 ## Current status
 
 - Current public prerelease: v0.9.0rc5
-- Current main development version: 0.9.0rc6.dev0
+- Current main release draft: v0.9.0rc6
 - Product positioning: open-source-solver-first
 - v1.0.0 not ready yet
 - Production-grade physical validation not claimed

@@ -14,9 +14,11 @@ def test_docs_index_exists_and_links_major_docs():
     text = index.read_text(encoding="utf-8")
     required = [
         "Current public prerelease: v0.9.0rc5",
-        "Current main development version: `0.9.0rc6.dev0`",
+        "Current main release draft: `0.9.0rc6`",
         "release_readiness_current.md",
         "release_readiness_v0.9.0rc6.md",
+        "github_release_draft_v0.9.0rc6.md",
+        "release_notes_v0.9.0rc6.md",
         "v1_0_gap_audit.md",
         "rc6_development_plan.md",
         "v1_0_decision_matrix.md",
@@ -33,6 +35,7 @@ def test_docs_index_exists_and_links_major_docs():
         "pypi_post_publication_verification_plan.md",
         "publication_decision_record.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
+        "testpypi_upload_approval_v0.9.0rc6.md",
         "testpypi_upload_attempt_v0.9.0rc6.dev0.md",
         "testpypi_status_v0.9.0rc6.dev0.md",
         "testpypi_trusted_publishing.md",

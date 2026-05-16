@@ -3,10 +3,12 @@
 ## TestPyPI upload
 
 - Current: completed for 0.9.0rc6.dev0
+- Current rc6 release draft upload: not performed
 - Record: `docs/publication_decision_record.md`
 - Status: `docs/testpypi_status_v0.9.0rc6.dev0.md`
 - Options:
   - Keep the completed 0.9.0rc6.dev0 TestPyPI upload as evidence.
+  - Keep the 0.9.0rc6 TestPyPI upload pending unless explicitly approved.
   - Approve a future TestPyPI upload for a later candidate.
   - Skip future TestPyPI upload with documented reason.
 - Impact: decides whether package publication confidence includes a real

@@ -8,7 +8,7 @@ Level 2 to Level 3 in the adapter maturity model.
 ## Current Status
 
 - Current public prerelease: v0.9.0rc5
-- Current main development version: 0.9.0rc6.dev0
+- Current main release draft: v0.9.0rc6
 - Optiland current maturity: Level 3
 - Target maturity achieved: Level 3 - Optional manual backend validation
 - Optiland is not required by default

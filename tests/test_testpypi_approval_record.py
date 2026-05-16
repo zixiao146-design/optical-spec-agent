@@ -7,15 +7,21 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc6.dev0.md"
+RC6_APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc6.md"
 
 
 def test_testpypi_upload_approval_record_exists_and_grants_testpypi_only():
     assert APPROVAL_RECORD.exists()
+    assert RC6_APPROVAL_RECORD.exists()
     text = APPROVAL_RECORD.read_text(encoding="utf-8")
     assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in text
     assert "Upload command authorized: TestPyPI only" in text
     assert "PyPI publication approval: not granted" in text
     assert "AUTHORIZED FOR TESTPYPI ONLY FOR 0.9.0rc6.dev0" in text
+    rc6_text = RC6_APPROVAL_RECORD.read_text(encoding="utf-8")
+    assert "TestPyPI upload approval for 0.9.0rc6: pending" in rc6_text
+    assert "Upload command authorized for rc6: no" in rc6_text
+    assert "PyPI publication approval: not granted" in rc6_text
 
 
 def test_testpypi_upload_approval_record_documents_artifacts_and_token_safety():
@@ -37,7 +43,6 @@ def test_testpypi_upload_approval_record_is_linked_from_gate_docs():
     ]
     for path in required_docs:
         text = path.read_text(encoding="utf-8")
-        assert "docs/testpypi_upload_approval_v0.9.0rc6.dev0.md" in text
-        assert "TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only" in text
-        assert "TestPyPI upload authorized: yes, TestPyPI only" in text
+        assert "docs/testpypi_upload_approval_v0.9.0rc6.md" in text
+        assert "pending" in text
         assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text

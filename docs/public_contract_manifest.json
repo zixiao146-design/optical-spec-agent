@@ -1,5 +1,5 @@
 {
-  "version_scope": "0.9.0rc6.dev0",
+  "version_scope": "0.9.0rc6",
   "current_public_prerelease": "v0.9.0rc5",
   "public_contract_freeze": {
     "status": "approved",
@@ -18,7 +18,8 @@
     "pypi_published": false,
     "testpypi_uploaded": true,
     "testpypi_uploaded_version": "0.9.0rc6.dev0",
-    "testpypi_status_doc": "docs/testpypi_status_v0.9.0rc6.dev0.md"
+    "testpypi_status_doc": "docs/testpypi_status_v0.9.0rc6.dev0.md",
+    "testpypi_upload_for_0_9_0rc6_performed": false
   },
   "package": {
     "name": "optical-spec-agent",

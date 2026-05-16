@@ -32,18 +32,18 @@ COMSOL, or proprietary Ansys tools. External solvers are optional and not run by
 default. External LLM access is optional and not required by default.
 
 Release status: the current public release candidate is `v0.9.0rc5`, while the
-current `main` development version is `0.9.0rc6.dev0`. `main` contains
-post-`v0.9.0rc5` development changes toward the next candidate.
-`0.9.0rc6.dev0` is not a public release, the `v0.9.0rc6` tag has not been
-created, and no `v0.9.0rc6` GitHub release exists.
+current `main` release draft is `0.9.0rc6`. The `v0.9.0rc6` tag has not been
+created, no `v0.9.0rc6` GitHub release exists, and `v0.9.0rc6` is not a public
+release until those actions are separately approved and completed.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
 The `v0.9.0rc5` git tag and GitHub prerelease were created after maintainer
 review and supersede `v0.9.0rc4` as the current release candidate. PyPI remains
 unpublished. TestPyPI upload completed for `0.9.0rc6.dev0` through manual
-Trusted Publishing; this repository state is not a final stable `1.0` release,
-and PyPI publication remains separately gated.
+Trusted Publishing, but TestPyPI upload for `0.9.0rc6` has not been performed;
+this repository state is not a final stable `1.0` release, and PyPI
+publication remains separately gated.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
 [`docs/release_readiness_current.md`](docs/release_readiness_current.md) for the
 current release policy and release-readiness matrix. Use
@@ -51,8 +51,11 @@ current release policy and release-readiness matrix. Use
 for the repeatable RC procedure and
 [`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
 the current RC line toward `v1.0`.
-Current rc6 development readiness and publication gates are tracked in
+Current rc6 release draft readiness and publication gates are tracked in
 [`docs/release_readiness_v0.9.0rc6.md`](docs/release_readiness_v0.9.0rc6.md),
+[`docs/github_release_draft_v0.9.0rc6.md`](docs/github_release_draft_v0.9.0rc6.md),
+[`docs/release_notes_v0.9.0rc6.md`](docs/release_notes_v0.9.0rc6.md),
+[`docs/testpypi_upload_approval_v0.9.0rc6.md`](docs/testpypi_upload_approval_v0.9.0rc6.md),
 [`docs/rc6_development_plan.md`](docs/rc6_development_plan.md),
 [`docs/v1_0_gap_audit.md`](docs/v1_0_gap_audit.md),
 [`docs/v1_0_decision_matrix.md`](docs/v1_0_decision_matrix.md),
@@ -151,8 +154,7 @@ optical-spec-agent 是一个开源仿真工具链优先的光学仿真工作流 
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
 pre-release 是 `v0.9.0rc5`，当前 `main` package version 是
-`0.9.0rc6.dev0`。`main` 包含 post-`v0.9.0rc5` development changes；
-`0.9.0rc6.dev0` 不是公开 release，`v0.9.0rc6` tag 尚未创建，也不是最终稳定版。
+`0.9.0rc6` release draft。`v0.9.0rc6` tag 尚未创建，也不是最终稳定版。
 本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
@@ -194,7 +196,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (main `0.9.0rc6.dev0`: post-v0.9.0rc5 development)
+## Current scope (main `0.9.0rc6`: v0.9.0rc6 release draft)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -293,7 +295,7 @@ no-proprietary-solver flow, see
 [`examples/e2e/README.md`](examples/e2e/README.md).
 
 The checked-in fixtures under [`examples/`](examples/README.md) are the
-canonical no-network examples for the current `0.9.0rc6.dev0` main branch and
+canonical no-network examples for the current `0.9.0rc6` main branch and
 the public `v0.9.0rc5` RC line:
 
 ```bash

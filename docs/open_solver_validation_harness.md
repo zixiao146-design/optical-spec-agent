@@ -8,7 +8,7 @@ external solvers default requirements.
 ## Current Scope
 
 - Current public prerelease: v0.9.0rc5
-- Current main development version: 0.9.0rc6.dev0
+- Current main release draft: v0.9.0rc6
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - v0.9.0rc6 tag: not created
 

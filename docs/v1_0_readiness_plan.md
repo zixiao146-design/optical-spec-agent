@@ -3,7 +3,7 @@
 ## Current baseline
 
 - Current public prerelease: `v0.9.0rc5`
-- Current main development version: `0.9.0rc6.dev0`
+- Current main release draft: `0.9.0rc6`
 - `v0.9.0rc6` GitHub release has not been created
 - `v0.9.0rc6` tag has not been created
 - Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc5
@@ -41,18 +41,17 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path through v0.9.0rc6.dev0 development state
+## Recommended path through the v0.9.0rc6 release draft
 
-`v0.9.0rc5` is the current public prerelease. `main` now builds as
-`0.9.0rc6.dev0` for post-rc5 development toward a future release candidate.
-`0.9.0rc6.dev0` is not itself a public release, and the `v0.9.0rc6` tag has not
-been created.
+`v0.9.0rc5` is the current public prerelease. `main` now builds as the
+`0.9.0rc6` release draft. The `v0.9.0rc6` tag has not been created, no GitHub
+release exists for rc6, and PyPI remains unpublished.
 Recommended goals:
 
 - Use `docs/v1_0_gap_audit.md` to classify hard blockers,
   soft blockers, deferred items, and future work.
-- Use `docs/rc6_development_plan.md` to keep the `0.9.0rc6.dev0`
-  cycle focused on explicit v1.0 readiness gaps.
+- Use `docs/release_readiness_v0.9.0rc6.md` to keep rc6 release-draft checks
+  explicit.
 - Use `docs/v1_0_decision_matrix.md` for TestPyPI, PyPI, Elmer,
   production-validation, and public-contract-freeze decisions.
 - Use `docs/v1_0_public_contract_freeze_checklist.md` to make the freeze
@@ -90,6 +89,8 @@ Recommended goals:
 - PyPI remains unpublished unless explicitly approved.
 - TestPyPI upload and clean-install verification are complete for
   `0.9.0rc6.dev0`; do not re-upload the same version.
+- TestPyPI upload for `0.9.0rc6` is not performed and requires separate
+  approval.
 
 ## Recommended path to v1.0.0
 
@@ -271,7 +272,8 @@ Before `v1.0.0`, maintainers should decide and document:
   `v0.9.0rc5` tags.
 - Do not create the `v0.9.0rc6` tag until future release-draft checks and
   maintainer approval.
-- Do not treat `0.9.0rc6.dev0` as a public release.
+- Do not treat the `v0.9.0rc6` release draft as a public release until tag and
+  GitHub prerelease creation are explicitly approved and completed.
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.

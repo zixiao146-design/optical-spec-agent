@@ -3,11 +3,12 @@
 ## Current baseline
 
 - Current public prerelease: v0.9.0rc5
-- Current main development version: 0.9.0rc6.dev0
+- Current main release draft: v0.9.0rc6
 - v0.9.0rc6 tag: not created
 - PyPI: not published
 - TestPyPI: uploaded for 0.9.0rc6.dev0
-- TestPyPI upload approval: granted for 0.9.0rc6.dev0 only
+- TestPyPI upload for 0.9.0rc6: not performed
+- TestPyPI upload approval for 0.9.0rc6: pending
 - PyPI publication approval: not granted
 
 ## Strong areas
@@ -18,7 +19,7 @@
 - Quality gates.
 - TestPyPI no-upload preflight.
 - TestPyPI Trusted Publishing upload and clean install verification for
-  0.9.0rc6.dev0.
+  0.9.0rc6.dev0, plus rc6 release draft preparation.
 - Wheel install smoke.
 - CLI examples.
 - Offline user journey.
@@ -48,7 +49,8 @@
 - v1.0 public contract freeze is approved and recorded in
   `docs/v1_0_public_contract_freeze_status.md`.
 - `docs/publication_decision_record.md` records that TestPyPI is completed for
-  `0.9.0rc6.dev0`; PyPI remains not granted.
+  `0.9.0rc6.dev0`; the `0.9.0rc6` upload is not performed and PyPI remains not
+  granted.
 - `docs/pypi_publication_readiness_checklist.md` exists and keeps PyPI
   publication blocked until explicit maintainer approval, final version choice,
   quality gates, CI, build, twine check, metadata review, validation-claim

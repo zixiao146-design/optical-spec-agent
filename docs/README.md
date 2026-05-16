@@ -1,12 +1,14 @@
 # optical-spec-agent Docs
 
 Current public prerelease: v0.9.0rc5.
-Current main development version: `0.9.0rc6.dev0`.
+Current main release draft: `0.9.0rc6`.
 
 ## Release / Readiness
 
 - [Current release readiness](release_readiness_current.md)
-- [v0.9.0rc6 development readiness](release_readiness_v0.9.0rc6.md)
+- [v0.9.0rc6 release draft readiness](release_readiness_v0.9.0rc6.md)
+- [v0.9.0rc6 GitHub release draft](github_release_draft_v0.9.0rc6.md)
+- [v0.9.0rc6 release notes](release_notes_v0.9.0rc6.md)
 - [v1.0 readiness gap audit](v1_0_gap_audit.md)
 - [v0.9.0rc6 development plan](rc6_development_plan.md)
 - [v1.0 decision matrix](v1_0_decision_matrix.md)
@@ -30,6 +32,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - [PyPI post-publication verification plan](pypi_post_publication_verification_plan.md)
 - [Publication decision record](publication_decision_record.md)
 - [TestPyPI upload approval for 0.9.0rc6.dev0](testpypi_upload_approval_v0.9.0rc6.dev0.md)
+- [TestPyPI upload approval for v0.9.0rc6](testpypi_upload_approval_v0.9.0rc6.md)
 - [TestPyPI upload attempt for 0.9.0rc6.dev0](testpypi_upload_attempt_v0.9.0rc6.dev0.md)
 - [TestPyPI status for 0.9.0rc6.dev0](testpypi_status_v0.9.0rc6.dev0.md)
 - [TestPyPI Trusted Publishing](testpypi_trusted_publishing.md)
