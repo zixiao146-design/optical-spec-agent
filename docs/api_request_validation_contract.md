@@ -40,3 +40,11 @@ API error responses must include:
 - `proprietary_solver_required: false`
 - `production_grade_validation_claimed: false`
 - `formal_convergence_proof_claimed: false`
+
+## Fixture and curl coverage
+
+Request fixtures under `examples/api/` are suitable for frontend handoff and
+for the curl examples in `docs/api_curl_examples.md`. The live consistency
+script `scripts/check_api_fixtures.py` verifies that request files exist,
+response files exist, and live API responses keep the same top-level shape and
+safety flags as the fixture responses.

@@ -14,6 +14,10 @@
 - Local Agent API contract version: 0.1
 - Local Agent API response models: available
 - Local Agent API frontend fixtures: `examples/api/`
+- Local Agent API handoff docs: `docs/api_local_launch_guide.md`,
+  `docs/frontend_handoff_spec.md`, and `docs/api_curl_examples.md`
+- Local Agent API fixture/smoke scripts: `scripts/check_api_fixtures.py` and
+  `scripts/smoke_agent_api.sh`
 - Frontend implementation: not started
 
 ## Required before v1.0.0
@@ -70,3 +74,4 @@
 | Local Agent API readiness | Engineering track | In progress | Useful for future Agent Studio, but not a v1.0 blocker unless maintainers choose to gate on it. |
 | Local Agent API contract freeze | Future decision | Not separately frozen | API remains frontend-readiness / candidate API until maintainer explicitly approves freezing it. |
 | Frontend fixture readiness | Engineering track | Available under `examples/api/` | Useful for future Agent Studio mock data, but not a PyPI publication trigger. |
+| Frontend handoff docs/scripts | Engineering track | Available | Launch guide, handoff spec, curl examples, API smoke, and fixture consistency checks support future frontend planning. |

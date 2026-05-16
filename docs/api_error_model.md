@@ -44,3 +44,8 @@ Request validation details are documented in
 `docs/api_request_validation_contract.md`. API versioning and migration rules
 are documented in `docs/api_versioning_policy.md` and
 `docs/api_migration_notes.md`.
+
+Error fixtures are included in `examples/api/` and listed in
+`examples/api/frontend_fixture_manifest.json`. `scripts/check_api_fixtures.py`
+checks those fixtures against live TestClient responses without network access,
+solver execution, external LLM calls, uploads, tags, or releases.

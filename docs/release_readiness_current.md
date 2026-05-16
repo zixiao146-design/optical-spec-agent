@@ -67,6 +67,16 @@ This document describes the current `main` branch. It is not a release tag.
   and `docs/api_migration_notes.md`
 - Local Agent API frontend fixtures:
   `examples/api/`
+- Local Agent API local launch guide:
+  `docs/api_local_launch_guide.md`
+- Frontend handoff spec:
+  `docs/frontend_handoff_spec.md`
+- API curl examples:
+  `docs/api_curl_examples.md`
+- API smoke script:
+  `scripts/smoke_agent_api.sh`
+- API fixture consistency script:
+  `scripts/check_api_fixtures.py`
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -115,6 +125,7 @@ This document describes the current `main` branch. It is not a release tag.
 | Local Agent API | API readiness in progress | Local/synchronous preview only; no solver, LLM, proprietary, or network default |
 | API contract version | 0.1 candidate API | Frontend-readiness surface; not separately frozen as v1.0 API |
 | Frontend fixtures | API examples ready | `examples/api/`; frontend implementation not started |
+| Frontend handoff | API handoff docs/scripts ready | Launch guide, handoff spec, curl examples, smoke script, fixture consistency script |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

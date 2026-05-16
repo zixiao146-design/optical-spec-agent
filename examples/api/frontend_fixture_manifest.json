@@ -44,6 +44,32 @@
       "proprietary_solver_required": false
     },
     {
+      "name": "schema",
+      "endpoint": "/api/schema",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "schema_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "parse-heuristic",
+      "endpoint": "/api/parse",
+      "method": "POST",
+      "request_file": "parse_request_heuristic.json",
+      "response_file": "parse_response_heuristic.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
       "name": "validate-minimal",
       "endpoint": "/api/validate",
       "method": "POST",

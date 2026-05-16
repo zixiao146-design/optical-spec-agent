@@ -10,6 +10,9 @@ frontend fixture examples live under `examples/api/`. The current
 `api_contract_version` is 0.1, and the API remains a
 frontend-readiness / candidate API rather than a separately frozen v1.0 API
 contract.
+Local launch, frontend handoff, and curl examples are documented in
+`docs/api_local_launch_guide.md`, `docs/frontend_handoff_spec.md`, and
+`docs/api_curl_examples.md`.
 
 | CLI command | API endpoint | Parity status | Notes |
 |---|---|---|---|
@@ -33,3 +36,6 @@ contract.
 - API versioning, request validation, and migration notes are documented in
   `docs/api_versioning_policy.md`, `docs/api_request_validation_contract.md`,
   and `docs/api_migration_notes.md`.
+- `scripts/smoke_agent_api.sh` and `scripts/check_api_fixtures.py` provide
+  local API smoke and fixture consistency checks without uploading, publishing,
+  creating tags, or creating releases.

@@ -15,6 +15,7 @@
 - Local Agent API readiness: in progress
 - Local Agent API response models: available
 - Local Agent API frontend fixtures: `examples/api/`
+- Local Agent API handoff docs/scripts: available
 - Frontend implementation: not started
 
 ## What v0.9.0rc2 already proves
@@ -88,6 +89,11 @@ Recommended goals:
 - Use `docs/api_versioning_policy.md`,
   `docs/api_request_validation_contract.md`, and `docs/api_migration_notes.md`
   to keep API schema versioning and request validation explicit.
+- Use `docs/api_local_launch_guide.md`, `docs/frontend_handoff_spec.md`, and
+  `docs/api_curl_examples.md` for future frontend developer handoff.
+- Use `scripts/smoke_agent_api.sh` and `scripts/check_api_fixtures.py` to keep
+  the local API smoke path and frontend fixtures aligned with live TestClient
+  responses.
 - Keep API defaults local/synchronous/preview-first: no external solver
   execution, no external LLM call, no proprietary solver requirement, and no
   network dependency for documented examples.

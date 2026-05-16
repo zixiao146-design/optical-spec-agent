@@ -48,6 +48,15 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         assert entry["production_grade_validation_claimed"] is False
         assert entry["formal_convergence_proof_claimed"] is False
         _assert_no_claim_expansion(_load_json(response_path))
+    response_files = {entry["response_file"] for entry in manifest["fixtures"]}
+    request_files = {
+        entry["request_file"]
+        for entry in manifest["fixtures"]
+        if entry["request_file"] is not None
+    }
+    assert "schema_response.json" in response_files
+    assert "parse_response_heuristic.json" in response_files
+    assert "parse_request_heuristic.json" in request_files
 
 
 def test_api_version_and_readiness_fixtures_track_publication_state():

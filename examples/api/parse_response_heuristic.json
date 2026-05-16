@@ -1,0 +1,30 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Review inferred fields before generation.",
+    "Use /api/validate before adapter preview."
+  ],
+  "parser": "rule",
+  "spec": {
+    "task": {
+      "task_name": {
+        "value": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum"
+      }
+    }
+  },
+  "summary": "Local heuristic parse preview for a Meep scattering task."
+}

@@ -180,6 +180,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "api_versioning_policy.md",
         "api_request_validation_contract.md",
         "api_migration_notes.md",
+        "api_local_launch_guide.md",
+        "frontend_handoff_spec.md",
+        "api_curl_examples.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -206,6 +209,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "e2e" / "README.md").exists()
     assert (ROOT / "examples" / "api" / "README.md").exists()
     assert (ROOT / "examples" / "api" / "frontend_fixture_manifest.json").exists()
+    assert (ROOT / "scripts" / "smoke_agent_api.sh").exists()
+    assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
@@ -260,8 +265,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "TestPyPI clean install verification: passed" in combined
     assert "Local Agent API Contract" in combined
     assert "Local Agent API Error Model" in combined
+    assert "Local Agent API Launch Guide" in combined
+    assert "Frontend Handoff Spec" in combined
+    assert "Local Agent API Curl Examples" in combined
     assert "CLI / API Parity" in combined
     assert "examples/api/" in combined
+    assert "scripts/smoke_agent_api.sh" in combined
+    assert "scripts/check_api_fixtures.py" in combined
     assert "No external solver execution by default" in combined
     assert "No external LLM call by default" in combined
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined
@@ -355,6 +365,7 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "run_optional_mpb_validation.sh",
         ROOT / "scripts" / "run_optional_optiland_validation.sh",
         ROOT / "scripts" / "run_optional_elmer_validation.sh",
+        ROOT / "scripts" / "smoke_agent_api.sh",
         ROOT / "Makefile",
     ]
     forbidden = [

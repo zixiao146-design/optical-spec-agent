@@ -20,6 +20,11 @@ solvers, external LLMs, or proprietary tools by default.
 - API versioning policy: `docs/api_versioning_policy.md`
 - API request validation contract: `docs/api_request_validation_contract.md`
 - API migration notes: `docs/api_migration_notes.md`
+- Local launch guide: `docs/api_local_launch_guide.md`
+- Frontend handoff spec: `docs/frontend_handoff_spec.md`
+- Curl examples: `docs/api_curl_examples.md`
+- Live fixture consistency check: `scripts/check_api_fixtures.py`
+- API smoke script: `scripts/smoke_agent_api.sh`
 - Frontend implementation: not started
 - PyPI: not published
 
@@ -79,3 +84,12 @@ Frontend Agent Studio should call this API later rather than shelling out to
 the CLI directly. The API is a backend readiness surface only; no full frontend
 implementation is included in this task. Future frontend work should use the
 `examples/api/` fixtures for local mock data and contract checks.
+
+## Handoff readiness
+
+The local launch guide, frontend handoff spec, curl examples, API smoke script,
+and live fixture consistency script are now part of the API readiness package.
+They help a future frontend developer run the backend locally, copy documented
+curl calls, and check that `examples/api/` fixtures still match the live API
+top-level response shape. These checks do not run solvers, call external LLMs,
+upload packages, create tags, or create releases.

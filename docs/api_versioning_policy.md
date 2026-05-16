@@ -35,3 +35,11 @@ maintainer explicitly approves freezing it.
 - No proprietary solver by default.
 - No production-grade validation claim.
 - No formal convergence proof claim.
+
+## Handoff checks
+
+Frontend handoff guidance is documented in `docs/api_local_launch_guide.md`,
+`docs/frontend_handoff_spec.md`, and `docs/api_curl_examples.md`. Fixture
+consistency is checked by `scripts/check_api_fixtures.py`, and live API smoke
+coverage is checked by `scripts/smoke_agent_api.sh`. These scripts preserve
+`api_contract_version: "0.1"` and the same conservative safety defaults.

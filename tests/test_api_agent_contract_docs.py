@@ -23,6 +23,11 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
     assert "docs/api_versioning_policy.md" in text
     assert "docs/api_request_validation_contract.md" in text
     assert "docs/api_migration_notes.md" in text
+    assert "docs/api_local_launch_guide.md" in text
+    assert "docs/frontend_handoff_spec.md" in text
+    assert "docs/api_curl_examples.md" in text
+    assert "scripts/check_api_fixtures.py" in text
+    assert "scripts/smoke_agent_api.sh" in text
     assert "not yet a separately frozen v1.0 API contract" in text
     assert "Frontend implementation: not started" in text
     assert "No external solver execution by default" in text
@@ -75,3 +80,5 @@ def test_api_error_model_doc_exists_and_defines_stable_shape():
     assert "docs/api_request_validation_contract.md" in text
     assert "docs/api_versioning_policy.md" in text
     assert "docs/api_migration_notes.md" in text
+    assert "examples/api/frontend_fixture_manifest.json" in text
+    assert "scripts/check_api_fixtures.py" in text

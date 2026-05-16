@@ -32,6 +32,13 @@ Current `api_contract_version`: 0.1.
 - `formal_convergence_proof_claimed: false`
 
 The manifest includes successful responses and stable error fixtures for
-invalid specs, unsupported adapters, invalid workflow requests, and disabled
-external LLM parsing. Future frontend work should use these fixtures for local
-mock data and contract checks before any full UI implementation begins.
+schema, heuristic parse, invalid specs, unsupported adapters, invalid workflow
+requests, and disabled external LLM parsing. Future frontend work should use
+these fixtures for local mock data and contract checks before any full UI
+implementation begins.
+
+`scripts/check_api_fixtures.py` compares these fixtures with live FastAPI
+`TestClient` response top-level shapes. `scripts/smoke_agent_api.sh` exercises
+all current `/api/*` endpoints without starting a background server. Both
+scripts preserve the no-network, no-solver, no-external-LLM, no-upload,
+no-tag, and no-release boundaries.

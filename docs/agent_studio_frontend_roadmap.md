@@ -17,7 +17,12 @@ validation evidence.
 - Current `api_contract_version`: 0.1.
 - API versioning and request validation are documented in
   `docs/api_versioning_policy.md` and `docs/api_request_validation_contract.md`.
+- Local API launch guidance is documented in `docs/api_local_launch_guide.md`.
+- Frontend handoff details are documented in `docs/frontend_handoff_spec.md`.
+- Copyable local curl examples are documented in `docs/api_curl_examples.md`.
 - Frontend fixture examples exist under `examples/api/`.
+- Fixture consistency is checked by `scripts/check_api_fixtures.py`.
+- API smoke coverage is checked by `scripts/smoke_agent_api.sh`.
 - Frontend implementation is not started.
 - Agent Studio frontend should call the local Agent API instead of shelling out
   directly to the CLI.
@@ -37,6 +42,7 @@ validation evidence.
 - API endpoints for health/version, adapter registry, schema, parse, validate,
   workflow-plan, adapter-preview, validation evidence, and readiness/status.
 - API response model and fixture coverage for frontend mock data.
+- Local launch guide, curl examples, and live fixture consistency checks.
 
 ### Phase 2
 

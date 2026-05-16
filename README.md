@@ -101,7 +101,14 @@ stable error behavior is documented in
 documented in [`docs/api_versioning_policy.md`](docs/api_versioning_policy.md),
 request validation is documented in
 [`docs/api_request_validation_contract.md`](docs/api_request_validation_contract.md),
-and frontend fixture examples live under [`examples/api/`](examples/api/). The
+and frontend fixture examples live under [`examples/api/`](examples/api/).
+Local launch guidance, frontend handoff details, and copyable curl examples are
+documented in
+[`docs/api_local_launch_guide.md`](docs/api_local_launch_guide.md),
+[`docs/frontend_handoff_spec.md`](docs/frontend_handoff_spec.md), and
+[`docs/api_curl_examples.md`](docs/api_curl_examples.md). API smoke and fixture
+consistency checks live in [`scripts/smoke_agent_api.sh`](scripts/smoke_agent_api.sh)
+and [`scripts/check_api_fixtures.py`](scripts/check_api_fixtures.py). The
 current `api_contract_version` is 0.1. The API remains a frontend-readiness /
 candidate API, not a separately frozen v1.0 API contract. This API readiness
 work does not trigger PyPI publication and does not change the current version
@@ -656,7 +663,7 @@ production-grade plasmon simulation.
 ### API
 
 ```bash
-uvicorn optical_spec_agent.api.app:app --reload --port 8000
+python -m uvicorn optical_spec_agent.api.app:app --reload --host 127.0.0.1 --port 8000
 ```
 
 | Method | Path | Description |
@@ -667,6 +674,11 @@ uvicorn optical_spec_agent.api.app:app --reload --port 8000
 | `GET` | `/schema` | Export JSON Schema |
 
 Interactive docs at `http://localhost:8000/docs`.
+The future Agent Studio handoff surface uses `/api/*` endpoints; see
+[`docs/api_local_launch_guide.md`](docs/api_local_launch_guide.md),
+[`docs/frontend_handoff_spec.md`](docs/frontend_handoff_spec.md), and
+[`docs/api_curl_examples.md`](docs/api_curl_examples.md). The frontend is not
+implemented yet.
 
 Example parse request:
 

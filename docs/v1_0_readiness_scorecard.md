@@ -76,6 +76,8 @@
 - Local Agent API `api_contract_version` 0.1, request validation contract, and
   API migration notes.
 - Frontend fixture examples under `examples/api/`.
+- Local API launch guide, frontend handoff spec, and curl examples.
+- Local API smoke script and fixture consistency script.
 - CLI/API parity documentation for future Agent Studio integration.
 - TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
   failed with HTTP 403 Forbidden and did not publish PyPI.
@@ -168,6 +170,9 @@
 - Use `docs/api_versioning_policy.md`,
   `docs/api_request_validation_contract.md`, and `docs/api_migration_notes.md`
   before changing API request or response shapes.
+- Use `docs/api_local_launch_guide.md`, `docs/frontend_handoff_spec.md`,
+  `docs/api_curl_examples.md`, `scripts/smoke_agent_api.sh`, and
+  `scripts/check_api_fixtures.py` before starting frontend MVP planning.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and

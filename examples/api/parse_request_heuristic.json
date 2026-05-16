@@ -1,0 +1,5 @@
+{
+  "text": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum.",
+  "parser": "heuristic",
+  "json": true
+}

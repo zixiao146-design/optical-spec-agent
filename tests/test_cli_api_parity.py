@@ -36,6 +36,11 @@ def test_cli_api_parity_doc_maps_major_cli_surface_to_api():
         "docs/api_versioning_policy.md",
         "docs/api_request_validation_contract.md",
         "docs/api_migration_notes.md",
+        "docs/api_local_launch_guide.md",
+        "docs/frontend_handoff_spec.md",
+        "docs/api_curl_examples.md",
+        "scripts/smoke_agent_api.sh",
+        "scripts/check_api_fixtures.py",
     ]
     for phrase in required:
         assert phrase in text
