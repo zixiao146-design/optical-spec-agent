@@ -31,3 +31,7 @@ def test_v1_0_gap_audit_tracks_current_baseline_and_blockers():
     assert "PyPI publication not approved" in text
     assert "docs/v1_0_public_contract_freeze_checklist.md" in text
     assert "docs/publication_decision_record.md" in text
+    assert "docs/pypi_publication_readiness_checklist.md" in text
+    assert "docs/pypi_post_publication_verification_plan.md" in text
+    assert "yanking-policy review" in text
+    assert "post-publication verification planning" in text

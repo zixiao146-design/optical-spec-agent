@@ -92,6 +92,9 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/testpypi_trusted_publishing.md`、
 `docs/testpypi_dry_run_gate.md` 和
 `docs/v1_0_stability_gate.md`。
+PyPI publication readiness 与发布后验证计划见
+`docs/pypi_publication_readiness_checklist.md` 和
+`docs/pypi_post_publication_verification_plan.md`；当前建议仍是不发布 PyPI。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。

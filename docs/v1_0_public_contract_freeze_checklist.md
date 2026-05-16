@@ -8,6 +8,8 @@
 - v0.9.0rc6 tag: not created
 - PyPI: not published
 - TestPyPI: uploaded for 0.9.0rc6.dev0
+- TestPyPI verified: yes
+- Clean install from TestPyPI: passed
 
 ## Candidate-stable contract areas
 
@@ -50,6 +52,11 @@
 | Elmer Level 3 | deferred/non-blocking | Elmer remains Level 2 + Level-3-ready pending ElmerSolver availability and explicit opt-in validation. |
 | Production-grade physical validation | non-goal unless explicitly claimed | Current docs do not claim production-grade physical validation. |
 | Formal convergence proof | non-goal unless explicitly claimed | Current docs do not claim a formal convergence proof. |
+
+## Remaining hard blockers
+
+- Maintainer confirmation of the v1.0 public contract freeze.
+- PyPI publication decision.
 
 ## Required before v1.0 final
 

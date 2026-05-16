@@ -45,6 +45,14 @@
   maintainer confirmation before v1.0.
 - `docs/publication_decision_record.md` records that TestPyPI is completed for
   `0.9.0rc6.dev0`; PyPI remains not granted.
+- `docs/pypi_publication_readiness_checklist.md` exists and keeps PyPI
+  publication blocked until explicit maintainer approval, final version choice,
+  quality gates, CI, build, twine check, metadata review, validation-claim
+  review, yanking-policy review, and post-publication verification planning are
+  complete.
+- `docs/pypi_post_publication_verification_plan.md` exists for clean PyPI
+  install, version, CLI, example, status-doc, and yank/rollback checks after a
+  separately approved publication.
 - Production-grade physical validation not claimed.
 - Formal convergence proof not claimed.
 - Workflow remains local/synchronous preview.
@@ -72,5 +80,7 @@
 - Use `docs/testpypi_status_v0.9.0rc6.dev0.md` as the current TestPyPI
   verification record.
 - Decide PyPI publication explicitly through `docs/publication_decision_record.md`.
+- Use `docs/pypi_publication_readiness_checklist.md` and
+  `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.
 - Keep Elmer deferred unless a maintainable install route appears.
 - Prepare v0.9.0rc6 only if new hardening justifies another release candidate.

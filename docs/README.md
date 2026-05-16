@@ -26,6 +26,8 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Packaging gate](packaging_gate.md)
 - [TestPyPI dry-run gate](testpypi_dry_run_gate.md)
 - [PyPI publication decision](pypi_publication_decision.md)
+- [PyPI publication readiness checklist](pypi_publication_readiness_checklist.md)
+- [PyPI post-publication verification plan](pypi_post_publication_verification_plan.md)
 - [Publication decision record](publication_decision_record.md)
 - [TestPyPI upload approval for 0.9.0rc6.dev0](testpypi_upload_approval_v0.9.0rc6.dev0.md)
 - [TestPyPI upload attempt for 0.9.0rc6.dev0](testpypi_upload_attempt_v0.9.0rc6.dev0.md)

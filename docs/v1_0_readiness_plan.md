@@ -60,6 +60,11 @@ Recommended goals:
 - Use `docs/publication_decision_record.md` to keep TestPyPI authorization
   explicit, record the successful 0.9.0rc6.dev0 Trusted Publishing upload, and
   keep PyPI not granted.
+- Use `docs/pypi_publication_readiness_checklist.md` to keep PyPI publication
+  preconditions explicit.
+- Use `docs/pypi_post_publication_verification_plan.md` to define the clean
+  install, CLI, example, status-doc, and yank/rollback checks required after a
+  separately approved PyPI publication.
 - Keep TestPyPI/PyPI gated by explicit approval.
 - Keep packaging metadata and wheel install smoke reliable.
 - Keep the v1.0 stability gate current.
@@ -117,6 +122,10 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/v1_0_public_contract_freeze_checklist.md`.
 - Publication decision record:
   `docs/publication_decision_record.md`.
+- PyPI publication readiness checklist:
+  `docs/pypi_publication_readiness_checklist.md`.
+- PyPI post-publication verification plan:
+  `docs/pypi_post_publication_verification_plan.md`.
 - Public contract manifest and change checklist:
   `docs/public_contract_manifest.json` and
   `docs/public_contract_change_checklist.md`.
@@ -199,6 +208,10 @@ Before `v1.0.0`, maintainers should decide and document:
 - Production-grade validation plan, or an explicit non-production disclaimer.
 - Versioning policy for previews, RCs, and final releases.
 - PyPI publication decision: `docs/pypi_publication_decision.md`.
+- PyPI publication readiness checklist:
+  `docs/pypi_publication_readiness_checklist.md`.
+- PyPI post-publication verification plan:
+  `docs/pypi_post_publication_verification_plan.md`.
 - Packaging publication gate: `docs/packaging_gate.md`.
 - Validation gate for RC/v1.0 readiness: `docs/validation_gate.md`.
 - Optional external solver policy: `docs/external_solver_policy.md`.
@@ -237,7 +250,7 @@ Before `v1.0.0`, maintainers should decide and document:
 ## Explicit non-goals
 
 - Do not publish PyPI yet.
-- Do not upload TestPyPI yet.
+- Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or
   `v0.9.0rc5` tags.
 - Do not create the `v0.9.0rc6` tag until future release-draft checks and

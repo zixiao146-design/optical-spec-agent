@@ -19,6 +19,8 @@ def test_rc6_development_plan_tracks_dev_state_and_exit_criteria():
     assert "No PyPI upload and no repeat TestPyPI upload now" in text
     assert "Quality gates passed" in text
     assert "PyPI/TestPyPI decision explicit" in text
+    assert "PyPI publication readiness checklist reviewed" in text
+    assert "PyPI post-publication verification plan prepared" in text
     assert "Elmer deferred or validated status explicit" in text
     assert "docs/v1_0_public_contract_freeze_checklist.md" in text
     assert "docs/publication_decision_record.md" in text

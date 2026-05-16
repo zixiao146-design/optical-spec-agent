@@ -55,6 +55,8 @@
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
 - Publication decision record.
+- PyPI publication readiness checklist.
+- PyPI post-publication verification plan.
 - TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
   failed with HTTP 403 Forbidden and did not publish PyPI.
 - TestPyPI status record for 0.9.0rc6.dev0: Trusted Publishing upload
@@ -91,6 +93,9 @@
 - TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted
   Publishing.
 - PyPI publication not approved.
+- PyPI publication readiness checklist records required approval, final version,
+  CI, quality gates, build, twine check, metadata review, validation-claim
+  review, yanking policy, and post-publication verification before PyPI.
 - Publication decision record keeps PyPI publication not granted and prevents
   tag/release creation from being implied by TestPyPI success.
 - Adapter outputs may still be MVP/scaffold.
@@ -111,6 +116,8 @@
 - Use `docs/v1_0_public_contract_freeze_checklist.md` before declaring a v1.0
   freeze.
 - Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action.
+- Use `docs/pypi_publication_readiness_checklist.md` and
+  `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue post-`v0.9.0rc5` readiness engineering on `0.9.0rc6.dev0`; only

@@ -118,6 +118,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "external_solver_policy.md",
         "external_llm_policy.md",
         "pypi_publication_decision.md",
+        "pypi_publication_readiness_checklist.md",
+        "pypi_post_publication_verification_plan.md",
         "validation_boundary.md",
         "release_engineering_playbook.md",
         "adapter_support_matrix.md",
@@ -251,6 +253,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v1.0 Decision Matrix" in combined
     assert "v1.0 Public Contract Freeze Checklist" in combined
     assert "Publication Decision Record" in combined
+    assert "PyPI Publication Readiness Checklist" in combined
+    assert "PyPI Post-publication Verification Plan" in combined
+    assert "Do not publish PyPI yet" in combined
+    assert "PyPI publication does not imply production-grade physical validation" in combined
     assert "Maintainer Decision Log" in combined
     assert "no proprietary" in combined.lower()
     assert "Never paste tokens into chat" in combined

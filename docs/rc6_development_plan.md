@@ -13,6 +13,9 @@
 - Keep `docs/v1_0_public_contract_freeze_checklist.md` current.
 - Keep `docs/publication_decision_record.md` current now that TestPyPI
   succeeded for 0.9.0rc6.dev0 and PyPI publication remains not granted.
+- Keep `docs/pypi_publication_readiness_checklist.md` and
+  `docs/pypi_post_publication_verification_plan.md` current before any PyPI
+  approval.
 - Improve release/quality documentation consistency.
 - Decide future TestPyPI uploads explicitly per candidate.
 - Keep quality gates passing.
@@ -39,5 +42,7 @@
 - Pytest/build/make check passed.
 - CLI examples passed.
 - PyPI/TestPyPI decision explicit.
+- PyPI publication readiness checklist reviewed.
+- PyPI post-publication verification plan prepared.
 - Elmer deferred or validated status explicit.
 - Public contract freeze checklist reviewed by maintainer.

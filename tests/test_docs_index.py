@@ -29,6 +29,8 @@ def test_docs_index_exists_and_links_major_docs():
         "packaging_gate.md",
         "testpypi_dry_run_gate.md",
         "pypi_publication_decision.md",
+        "pypi_publication_readiness_checklist.md",
+        "pypi_post_publication_verification_plan.md",
         "publication_decision_record.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "testpypi_upload_attempt_v0.9.0rc6.dev0.md",

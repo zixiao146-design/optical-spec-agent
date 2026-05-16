@@ -36,6 +36,10 @@ This document describes the current `main` branch. It is not a release tag.
 - TestPyPI Trusted Publishing result: completed
 - TestPyPI clean install verification: passed
 - PyPI publication approval: not granted
+- PyPI publication readiness checklist:
+  `docs/pypi_publication_readiness_checklist.md`
+- PyPI post-publication verification plan:
+  `docs/pypi_post_publication_verification_plan.md`
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -144,6 +148,8 @@ Current main contract artifacts:
 - `docs/v1_0_decision_matrix.md`
 - `docs/v1_0_public_contract_freeze_checklist.md`
 - `docs/publication_decision_record.md`
+- `docs/pypi_publication_readiness_checklist.md`
+- `docs/pypi_post_publication_verification_plan.md`
 - `docs/quality_gates.md`
 - `docs/ci_quality_gate_parity.md`
 - `docs/release_dry_run_operations.md`
@@ -217,6 +223,8 @@ Current v1.0 evidence artifacts:
 ## Release Blockers
 
 - No hard release blocker is currently recorded for `0.9.0rc6.dev0` development.
+- v1.0 hard blockers remain: maintainer confirmation of the public contract
+  freeze and an explicit PyPI publication decision.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or `v0.9.0rc5`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.

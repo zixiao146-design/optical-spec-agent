@@ -21,6 +21,8 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "v1.0 decision matrix" in text
     assert "v1.0 public contract freeze checklist" in text
     assert "Publication decision record" in text
+    assert "PyPI publication readiness checklist" in text
+    assert "PyPI post-publication verification plan" in text
     assert "No production-grade physical validation" in text
     assert "No formal convergence proof" in text
     assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in text
@@ -28,6 +30,7 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted" in text
     assert "TestPyPI status record for 0.9.0rc6.dev0" in text
     assert "Publication decision record keeps PyPI publication not granted" in text
+    assert "CI, quality gates, build, twine check" in text
     assert "Optional open-source solver availability preflight" in text
     assert "Open-source solver preflight detects availability only" in text
     assert "Adapter maturity model" in text

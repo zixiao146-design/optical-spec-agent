@@ -29,6 +29,10 @@
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml`.
 - TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0.
+- PyPI publication readiness checklist:
+  `docs/pypi_publication_readiness_checklist.md`.
+- PyPI post-publication verification plan:
+  `docs/pypi_post_publication_verification_plan.md`.
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only.
 - TestPyPI upload authorized: yes, TestPyPI only.
 - Upload command authorized: TestPyPI only.
@@ -46,6 +50,9 @@ HTTP 403 Forbidden and remains recorded as historical evidence. PyPI
 publication remains prohibited without separate explicit maintainer approval.
 Do not publish to PyPI from smoke scripts, workflow automation, or local release
 engineering checks.
+
+Current recommendation: do not publish PyPI yet. Continue v1.0 readiness
+engineering and prepare PyPI only after the public contract freeze is confirmed.
 
 Dependency-index caveat: the successful TestPyPI verification installed runtime
 dependencies from PyPI and installed `optical-spec-agent` from TestPyPI with
@@ -79,6 +86,8 @@ not upload, publish, create tags, or create GitHub releases.
 - No token is printed or committed.
 - TestPyPI upload/install is evaluated first, unless maintainers explicitly
   waive it.
+- `docs/pypi_publication_readiness_checklist.md` has been reviewed.
+- `docs/pypi_post_publication_verification_plan.md` has been prepared.
 
 ## Rollback and yanking considerations
 

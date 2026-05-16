@@ -19,6 +19,10 @@
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml`
 - TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0
+- PyPI publication readiness checklist:
+  `docs/pypi_publication_readiness_checklist.md`
+- PyPI post-publication verification plan:
+  `docs/pypi_post_publication_verification_plan.md`
 
 ## Decisions not yet granted
 
@@ -65,8 +69,12 @@
 - Explicit maintainer approval.
 - TestPyPI completed or explicit skip recorded.
 - PyPI token available.
+- Final version chosen and not previously uploaded to PyPI.
+- Quality gates, CI, build, and `twine check` passed.
+- README, package metadata, and release notes reviewed.
 - Yanking/rollback policy reviewed.
 - Production/validation claims reviewed.
+- Post-publication verification plan prepared.
 - Release notes final.
 
 ## Current recommendation
@@ -75,6 +83,11 @@ Recommended current state: keep PyPI publication separately gated while v1.0
 readiness engineering continues. TestPyPI upload and clean-install verification
 are completed for `0.9.0rc6.dev0`; this does not authorize PyPI publication,
 tag creation, or GitHub release creation.
+
+Use `docs/pypi_publication_readiness_checklist.md` and
+`docs/pypi_post_publication_verification_plan.md` before any future PyPI
+approval. The current recommendation is: do not publish PyPI yet; prepare PyPI
+only after the public contract freeze is confirmed.
 
 The earlier local token-based TestPyPI upload attempt failed with HTTP 403
 Forbidden and remains recorded in

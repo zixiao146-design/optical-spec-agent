@@ -61,6 +61,12 @@ Current rc6 development readiness and publication gates are tracked in
 [`docs/testpypi_trusted_publishing.md`](docs/testpypi_trusted_publishing.md),
 [`docs/testpypi_dry_run_gate.md`](docs/testpypi_dry_run_gate.md), and
 [`docs/v1_0_stability_gate.md`](docs/v1_0_stability_gate.md).
+PyPI publication readiness and post-publication verification planning are
+tracked in
+[`docs/pypi_publication_readiness_checklist.md`](docs/pypi_publication_readiness_checklist.md)
+and
+[`docs/pypi_post_publication_verification_plan.md`](docs/pypi_post_publication_verification_plan.md);
+the current recommendation remains not to publish PyPI yet.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in
