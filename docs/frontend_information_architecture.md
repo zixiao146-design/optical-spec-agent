@@ -3,6 +3,8 @@
 The MVP should be a single-user, local-first interface backed by the Local Agent
 API. It requires no authentication, no cloud dependency, and no solver
 execution by default.
+The implementation exists under `frontend/` and follows this information
+architecture.
 
 ## 1. Dashboard / Readiness
 

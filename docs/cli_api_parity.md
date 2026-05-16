@@ -19,6 +19,8 @@ Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
 `docs/frontend_mvp_acceptance_criteria.md`,
 `docs/frontend_safety_policy.md`, and
 `docs/frontend_mvp_implementation_plan.md`.
+The implemented local MVP lives under `frontend/`, with run instructions in
+`docs/frontend_mvp_runbook.md`.
 
 | CLI command | API endpoint | Parity status | Notes |
 |---|---|---|---|
@@ -37,8 +39,8 @@ Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
 - Proprietary solvers are not required by default.
 - Production-grade physical validation is not claimed.
 - Formal convergence proof is not claimed.
-- The frontend implementation is not started; Agent Studio should use this API
-  as the backend surface when that work begins.
+- The frontend MVP uses this API as its backend surface and does not shell out
+  directly to CLI commands.
 - API versioning, request validation, and migration notes are documented in
   `docs/api_versioning_policy.md`, `docs/api_request_validation_contract.md`,
   and `docs/api_migration_notes.md`.

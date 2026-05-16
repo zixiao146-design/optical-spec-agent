@@ -17,7 +17,7 @@
 - Local Agent API frontend fixtures: `examples/api/`
 - Local Agent API handoff docs/scripts: available
 - Agent Studio frontend MVP planning: available
-- Frontend implementation: not started
+- Agent Studio frontend MVP implementation: available under `frontend/`
 
 ## What v0.9.0rc2 already proves
 
@@ -100,8 +100,10 @@ Recommended goals:
   `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
   `docs/frontend_mvp_acceptance_criteria.md`,
   `docs/frontend_safety_policy.md`, and
-  `docs/frontend_mvp_implementation_plan.md` before starting a frontend
-  implementation task.
+  `docs/frontend_mvp_implementation_plan.md` to keep the implemented frontend
+  MVP aligned with the planning package.
+- Use `docs/frontend_mvp_runbook.md` to run the local React + Vite +
+  TypeScript MVP against the Local Agent API.
 - Keep API defaults local/synchronous/preview-first: no external solver
   execution, no external LLM call, no proprietary solver requirement, and no
   network dependency for documented examples.

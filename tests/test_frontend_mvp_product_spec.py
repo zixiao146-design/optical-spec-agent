@@ -16,7 +16,7 @@ def test_frontend_mvp_product_spec_exists_and_bounds_mvp_scope():
     assert "Current public prerelease: v0.9.0rc6" in text
     assert "Current main development version: 0.9.0rc7.dev0" in text
     assert "API contract version: 0.1" in text
-    assert "Frontend implementation: not started" in text
+    assert "Frontend implementation: MVP implemented under `frontend/`" in text
     assert "make the project feel like an agent" in text.lower()
     assert "Expose spec parsing and validation visually" in text
     assert "Show adapter maturity and validation evidence" in text
@@ -26,3 +26,5 @@ def test_frontend_mvp_product_spec_exists_and_bounds_mvp_scope():
     assert "No external LLM call by default" in text
     assert "No production-grade validation claim" in text
     assert "No formal convergence proof" in text
+    assert "React + Vite + TypeScript scaffold exists in `frontend/`" in text
+    assert "docs/frontend_mvp_runbook.md" in text

@@ -18,14 +18,15 @@
   `docs/frontend_handoff_spec.md`, and `docs/api_curl_examples.md`
 - Local Agent API fixture/smoke scripts: `scripts/check_api_fixtures.py` and
   `scripts/smoke_agent_api.sh`
-- Agent Studio frontend MVP planning: available in
+- Agent Studio frontend MVP planning and implementation: available in
   `docs/frontend_mvp_product_spec.md`,
   `docs/frontend_information_architecture.md`,
   `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
   `docs/frontend_mvp_acceptance_criteria.md`,
   `docs/frontend_safety_policy.md`, and
   `docs/frontend_mvp_implementation_plan.md`
-- Frontend implementation: not started
+- Frontend implementation: local MVP under `frontend/`
+- Frontend MVP runbook: `docs/frontend_mvp_runbook.md`
 
 ## Required before v1.0.0
 
@@ -77,9 +78,9 @@
 | Elmer Level 3 | Deferred/non-blocker | Deferred | Keep Elmer Level 2 + Level-3-ready unless a maintainable validation route appears. |
 | Production-grade validation | Non-goal | Not claimed | Do not add production-grade physical validation claims. |
 | Formal convergence proof | Non-goal | Not claimed | Do not add formal convergence proof claims. |
-| Frontend/API Agent Studio | Future work | Phase 2 direction | Not a v1.0 blocker. |
+| Frontend/API Agent Studio | Engineering track | Local MVP implemented; production UI remains future/Phase 2 | Not a v1.0 blocker. |
 | Local Agent API readiness | Engineering track | In progress | Useful for future Agent Studio, but not a v1.0 blocker unless maintainers choose to gate on it. |
 | Local Agent API contract freeze | Future decision | Not separately frozen | API remains frontend-readiness / candidate API until maintainer explicitly approves freezing it. |
 | Frontend fixture readiness | Engineering track | Available under `examples/api/` | Useful for future Agent Studio mock data, but not a PyPI publication trigger. |
 | Frontend handoff docs/scripts | Engineering track | Available | Launch guide, handoff spec, curl examples, API smoke, and fixture consistency checks support future frontend planning. |
-| Frontend MVP planning | Future work | Planning complete enough for implementation task | Not a v1.0 blocker and not a PyPI publication trigger. |
+| Frontend MVP | Engineering track | Local React + Vite + TypeScript MVP implemented | Not a v1.0 blocker and not a PyPI publication trigger. |

@@ -2,13 +2,15 @@
 
 ## Purpose
 
-Defines what a future Agent Studio frontend can rely on today.
+Defines what the Agent Studio Frontend MVP can rely on today.
 Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
 `docs/frontend_information_architecture.md`, `docs/frontend_api_mapping.md`,
 `docs/frontend_mvp_user_flows.md`,
 `docs/frontend_mvp_acceptance_criteria.md`,
 `docs/frontend_safety_policy.md`, and
 `docs/frontend_mvp_implementation_plan.md`.
+The implemented local MVP lives under `frontend/`, with run instructions in
+`docs/frontend_mvp_runbook.md`.
 
 ## API base
 
@@ -40,12 +42,20 @@ Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
 - Readiness/status -> `GET /api/readiness`
 - Evidence view -> `GET /api/validation-evidence`
 
-## Not implemented yet
+## Implemented MVP
 
-- No frontend app yet.
-- No React/Vite app yet.
+- React + Vite + TypeScript frontend app exists under `frontend/`.
+- It uses `VITE_API_BASE_URL` and defaults to `http://127.0.0.1:8000`.
+- It calls the Local Agent API rather than shelling out to the CLI.
+- It includes Dashboard, Spec Input, Adapter Matrix, Workflow Plan, Artifact
+  Preview, Validation Evidence, and System Status views.
+
+## Not implemented beyond MVP
+
 - No session history.
 - No login.
 - No cloud backend.
 - No default solver execution.
 - No default external LLM.
+- No PyPI/TestPyPI upload controls.
+- No tag/release controls.

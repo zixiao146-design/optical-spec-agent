@@ -11,3 +11,5 @@
 - Frontend must display preview and validation boundaries clearly.
 - Frontend must remain local-first unless a future maintainer decision changes
   the product scope.
+- The implemented MVP must not include buttons or API calls for package upload,
+  PyPI/TestPyPI publication, tag creation, or GitHub release creation.

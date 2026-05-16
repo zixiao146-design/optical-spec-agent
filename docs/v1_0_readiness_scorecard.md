@@ -79,6 +79,8 @@
 - Local API launch guide, frontend handoff spec, and curl examples.
 - Local API smoke script and fixture consistency script.
 - Agent Studio frontend MVP planning docs.
+- Agent Studio frontend MVP implementation under `frontend/`.
+- Agent Studio frontend MVP runbook.
 - CLI/API parity documentation for future Agent Studio integration.
 - TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
   failed with HTTP 403 Forbidden and did not publish PyPI.
@@ -129,10 +131,10 @@
 - `v1.0.0` final release remains separately gated.
 - v1.0.0 release criteria and release plan are documented, but no v1.0.0 tag
   or GitHub release has been created.
-- API/frontend Agent Studio is future work and not a v1.0.0 blocker.
-- Local Agent API readiness is in progress; the frontend is not implemented
-  yet and API readiness is not a v1.0 blocker unless maintainers choose to
-  gate on it.
+- API/frontend Agent Studio is local MVP work and not a v1.0.0 blocker.
+- Local Agent API readiness is in progress; the frontend MVP is implemented
+  locally, but API/frontend readiness is not a v1.0 blocker unless maintainers
+  choose to gate on it.
 - API fixture readiness is not a PyPI publication trigger and does not change
   the current package version or release status.
 - The Local Agent API remains a frontend-readiness / candidate API and is not
@@ -179,7 +181,10 @@
   `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
   `docs/frontend_mvp_acceptance_criteria.md`,
   `docs/frontend_safety_policy.md`, and
-  `docs/frontend_mvp_implementation_plan.md` before implementing frontend MVP.
+  `docs/frontend_mvp_implementation_plan.md` to keep frontend MVP scope
+  bounded.
+- Use `docs/frontend_mvp_runbook.md` before running or hardening the frontend
+  MVP.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and

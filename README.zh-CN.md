@@ -112,7 +112,7 @@ v1.0.0 planning package 见 `docs/v1_0_release_criteria.md`、
 `docs/v1_0_pypi_decision_gate.md`、
 `docs/v1_0_post_release_verification_plan.md` 和
 `docs/agent_studio_frontend_roadmap.md`。Agent Studio frontend/API roadmap
-属于 v1.0 之后或 Phase 2 规划，不是 v1.0.0 release blocker。
+包含当前本地 MVP 与后续 Phase 2 规划，不是 v1.0.0 release blocker。
 Local Agent API readiness 见 `docs/api_agent_contract.md` 和
 `docs/cli_api_parity.md`。该 API 为未来 Agent Studio frontend 暴露
 health/version、adapter registry、schema、parse、validate、workflow-plan、
@@ -132,10 +132,14 @@ frontend MVP planning package 见 `docs/frontend_mvp_product_spec.md`、
 `docs/frontend_information_architecture.md`、`docs/frontend_api_mapping.md`、
 `docs/frontend_mvp_user_flows.md`、
 `docs/frontend_mvp_acceptance_criteria.md`、`docs/frontend_safety_policy.md`
-和 `docs/frontend_mvp_implementation_plan.md`。frontend implementation 尚未开始，
-本任务没有创建 React/Vite app。当前 `api_contract_version` 为 0.1。该 API 仍是
-frontend-readiness / candidate API，不是单独冻结的 v1.0 API contract。这项
-API/frontend planning 工作不触发 PyPI 发布，也不改变当前版本或 release 状态。
+和 `docs/frontend_mvp_implementation_plan.md`。Agent Studio frontend MVP 已在
+`frontend/` 中实现为本地 React + Vite + TypeScript app，运行说明见
+`docs/frontend_mvp_runbook.md`。它使用 Local Agent API，默认 API base 为
+`http://127.0.0.1:8000`，不提供 upload、publish、tag、release、solver-run、
+external LLM、login、cloud 或 production deployment 控件。当前
+`api_contract_version` 为 0.1。该 API 仍是 frontend-readiness / candidate API，
+不是单独冻结的 v1.0 API contract。这项 API/frontend 工作不触发 PyPI 发布，也不
+改变当前版本或 release 状态。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。

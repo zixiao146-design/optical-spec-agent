@@ -16,3 +16,5 @@
 All mapped endpoints are local-first, no-network fixtures for frontend planning.
 They must not expose upload, publish, tag, release, solver-run, or external LLM
 controls in the MVP.
+The implemented frontend API client is `frontend/src/api/client.ts` and calls
+only the configured local API base URL plus these `/api/*` paths.

@@ -32,7 +32,8 @@ solvers, external LLMs, or proprietary tools by default.
   `docs/frontend_mvp_implementation_plan.md`
 - Live fixture consistency check: `scripts/check_api_fixtures.py`
 - API smoke script: `scripts/smoke_agent_api.sh`
-- Frontend implementation: not started
+- Frontend MVP implementation: available under `frontend/`
+- Frontend MVP runbook: `docs/frontend_mvp_runbook.md`
 - PyPI: not published
 
 The Local Agent API is not yet a separately frozen v1.0 API contract unless a
@@ -87,9 +88,8 @@ safety flags. Request validation behavior is documented in
 
 ## Frontend readiness
 
-Frontend Agent Studio should call this API later rather than shelling out to
-the CLI directly. The API is a backend readiness surface only; no full frontend
-implementation is included in this task. Future frontend work should use the
+Frontend Agent Studio calls this API rather than shelling out to the CLI
+directly. The first local MVP is implemented under `frontend/` and uses the
 `examples/api/` fixtures for local mock data and contract checks.
 
 ## Handoff readiness
@@ -101,5 +101,6 @@ curl calls, and check that `examples/api/` fixtures still match the live API
 top-level response shape. These checks do not run solvers, call external LLMs,
 upload packages, create tags, or create releases.
 
-Frontend MVP planning now exists, but no frontend implementation, React/Vite
-app, `frontend/` directory, or build artifact is part of this API package.
+Frontend MVP implementation now exists under `frontend/`. It is local-first,
+uses `VITE_API_BASE_URL`, and does not include solver execution, external LLM,
+upload, publish, tag, release, login, cloud, or production deployment controls.

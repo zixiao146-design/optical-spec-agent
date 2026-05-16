@@ -22,6 +22,7 @@ def test_frontend_handoff_spec_maps_screens_to_endpoints_and_limits_scope():
     assert "docs/frontend_mvp_acceptance_criteria.md" in text
     assert "docs/frontend_safety_policy.md" in text
     assert "docs/frontend_mvp_implementation_plan.md" in text
+    assert "docs/frontend_mvp_runbook.md" in text
     for endpoint in [
         "GET /api/health",
         "GET /api/version",
@@ -44,10 +45,13 @@ def test_frontend_handoff_spec_maps_screens_to_endpoints_and_limits_scope():
         "Evidence view -> `GET /api/validation-evidence`",
     ]:
         assert mapping in text
-    assert "No frontend app yet" in text
-    assert "No React/Vite app yet" in text
+    assert "React + Vite + TypeScript frontend app exists under `frontend/`" in text
+    assert "VITE_API_BASE_URL" in text
+    assert "Dashboard, Spec Input, Adapter Matrix, Workflow Plan" in text
     assert "No session history" in text
     assert "No login" in text
     assert "No cloud backend" in text
     assert "No default solver execution" in text
     assert "No default external LLM" in text
+    assert "No PyPI/TestPyPI upload controls" in text
+    assert "No tag/release controls" in text

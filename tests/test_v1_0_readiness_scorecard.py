@@ -32,8 +32,11 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "v1.0.0 post-release verification plan" in text
     assert "Agent Studio frontend roadmap" in text
     assert "Agent Studio frontend MVP planning docs" in text
+    assert "Agent Studio frontend MVP implementation under `frontend/`" in text
+    assert "Agent Studio frontend MVP runbook" in text
     assert "docs/frontend_mvp_product_spec.md" in text
     assert "docs/frontend_mvp_implementation_plan.md" in text
+    assert "docs/frontend_mvp_runbook.md" in text
     assert "not a v1.0.0 blocker" in text
     assert "Publication decision record" in text
     assert "PyPI publication readiness checklist" in text

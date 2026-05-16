@@ -38,3 +38,10 @@
 - 3D visualization.
 - Optimization UI.
 - PyPI/release operations.
+
+## Implementation evidence
+
+- Frontend source exists under `frontend/`.
+- API base URL is configurable with `VITE_API_BASE_URL`.
+- The MVP uses Local Agent API endpoints only.
+- Build outputs, `node_modules`, and generated artifacts must not be committed.

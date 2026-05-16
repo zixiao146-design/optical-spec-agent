@@ -37,5 +37,10 @@ outputs/*.sif
 optical_spec_schema.json
 runs/
 
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
 # Secrets
 .env

@@ -55,11 +55,11 @@ This document describes the current `main` branch. It is not a release tag.
 - v1.0.0 post-release verification plan:
   `docs/v1_0_post_release_verification_plan.md`
 - Agent Studio frontend roadmap:
-  `docs/agent_studio_frontend_roadmap.md` (future/Phase 2, not a v1.0.0
-  blocker)
+  `docs/agent_studio_frontend_roadmap.md` (local MVP implemented; production
+  frontend remains future/Phase 2 and not a v1.0.0 blocker)
 - Local Agent API readiness:
   `docs/api_agent_contract.md` and `docs/cli_api_parity.md` (in progress;
-  frontend implementation not started)
+  frontend MVP implemented)
 - Local Agent API error model:
   `docs/api_error_model.md`
 - Local Agent API versioning and request validation:
@@ -84,6 +84,8 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/frontend_mvp_acceptance_criteria.md`,
   `docs/frontend_safety_policy.md`, and
   `docs/frontend_mvp_implementation_plan.md`
+- Agent Studio frontend MVP implementation:
+  `frontend/` and `docs/frontend_mvp_runbook.md`
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -131,9 +133,9 @@ This document describes the current `main` branch. It is not a release tag.
 | Workflow orchestration | RC preview | Local and synchronous |
 | Local Agent API | API readiness in progress | Local/synchronous preview only; no solver, LLM, proprietary, or network default |
 | API contract version | 0.1 candidate API | Frontend-readiness surface; not separately frozen as v1.0 API |
-| Frontend fixtures | API examples ready | `examples/api/`; frontend implementation not started |
-| Frontend handoff | API handoff docs/scripts ready | Launch guide, handoff spec, curl examples, smoke script, fixture consistency script |
-| Frontend MVP planning | Planning docs ready | Product spec, information architecture, API mapping, user flows, acceptance criteria, safety policy, implementation plan; implementation not started |
+| Frontend fixtures | API examples ready | `examples/api/`; frontend MVP implemented |
+| Frontend handoff | API handoff docs/scripts ready | Launch guide, handoff spec, curl examples, smoke script, fixture consistency script, frontend runbook |
+| Frontend MVP | Local MVP implemented | React + Vite + TypeScript under `frontend/`; no upload/release/solver/LLM controls |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

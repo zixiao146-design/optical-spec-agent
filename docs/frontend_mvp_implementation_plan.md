@@ -1,7 +1,10 @@
 # Agent Studio Frontend MVP Implementation Plan
 
-This document is planning only. This task does not implement frontend code.
-This task does not create the `frontend/` directory.
+This document records the implementation plan used for the first local Agent
+Studio Frontend MVP. The MVP scaffold now exists under `frontend/`, while
+production deployment, solver execution, upload/release controls, login, cloud
+backend, optimization dashboards, and complex 3D visualization remain outside
+scope.
 
 ## Recommended technology stack
 
@@ -10,11 +13,13 @@ This task does not create the `frontend/` directory.
 - API base URL config.
 - Local development only.
 
-## Suggested directory layout
+## Implemented directory layout
 
 ```text
 frontend/
   package.json
+  index.html
+  vite.config.ts
   src/
     App.tsx
     api/
@@ -23,18 +28,19 @@ frontend/
     fixtures/
 ```
 
-This task does not create the directory and does not implement frontend.
+The implementation uses the existing Local Agent API and defaults to
+`http://127.0.0.1:8000` through `VITE_API_BASE_URL`.
 
 ## Implementation phases
 
-1. Scaffold frontend.
-2. Connect health/version/readiness.
-3. Adapter matrix.
-4. Spec input / validate.
-5. Workflow plan.
-6. Adapter preview.
-7. Evidence view.
-8. Polish / docs.
+1. Scaffold frontend. Completed.
+2. Connect health/version/readiness. Completed.
+3. Adapter matrix. Completed.
+4. Spec input / validate. Completed.
+5. Workflow plan. Completed.
+6. Adapter preview. Completed.
+7. Evidence view. Completed.
+8. Polish / docs. Initial MVP completed; hardening remains future work.
 
 ## Guardrails for implementation task
 
@@ -44,3 +50,4 @@ This task does not create the directory and does not implement frontend.
 - Do not imply production-grade physical validation.
 - Do not imply formal convergence proof.
 - Do not commit `node_modules` or frontend build artifacts.
+- Keep `VITE_API_BASE_URL` local by default.

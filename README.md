@@ -82,8 +82,8 @@ The v1.0.0 planning package is documented in
 [`docs/v1_0_post_release_verification_plan.md`](docs/v1_0_post_release_verification_plan.md),
 and
 [`docs/agent_studio_frontend_roadmap.md`](docs/agent_studio_frontend_roadmap.md).
-The Agent Studio roadmap is future/Phase 2 planning and is not a v1.0.0
-release blocker.
+The Agent Studio roadmap is local MVP work plus future/Phase 2 planning and is
+not a v1.0.0 release blocker.
 Local Agent API readiness is now tracked in
 [`docs/api_agent_contract.md`](docs/api_agent_contract.md) and
 [`docs/cli_api_parity.md`](docs/cli_api_parity.md). The API exposes local
@@ -117,11 +117,16 @@ Agent Studio frontend MVP planning package is documented in
 [`docs/frontend_mvp_acceptance_criteria.md`](docs/frontend_mvp_acceptance_criteria.md),
 [`docs/frontend_safety_policy.md`](docs/frontend_safety_policy.md), and
 [`docs/frontend_mvp_implementation_plan.md`](docs/frontend_mvp_implementation_plan.md).
-The frontend implementation has not started, and no React/Vite app is included.
+The Agent Studio frontend MVP is implemented under [`frontend/`](frontend/) as
+a local React + Vite + TypeScript app; run instructions are in
+[`docs/frontend_mvp_runbook.md`](docs/frontend_mvp_runbook.md).
+It uses the Local Agent API, defaults to `http://127.0.0.1:8000`, and does not
+include upload, publish, tag, release, solver-run, external LLM, login, cloud,
+or production deployment controls.
 The current `api_contract_version` is 0.1. The API remains a
 frontend-readiness / candidate API, not a separately frozen v1.0 API contract.
-This API/frontend planning work does not trigger PyPI publication and does not
-change the current version or release status.
+This API/frontend work does not trigger PyPI publication and does not change
+the current version or release status.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in

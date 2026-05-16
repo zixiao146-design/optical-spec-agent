@@ -29,7 +29,10 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
     assert "scripts/check_api_fixtures.py" in text
     assert "scripts/smoke_agent_api.sh" in text
     assert "not yet a separately frozen v1.0 API contract" in text
-    assert "Frontend implementation: not started" in text
+    assert "Frontend MVP implementation: available under `frontend/`" in text
+    assert "docs/frontend_mvp_runbook.md" in text
+    assert "does not include solver execution, external LLM" in text
+    assert "upload, publish, tag, release, login, cloud" in text
     assert "No external solver execution by default" in text
     assert "No external LLM call by default" in text
     assert "No proprietary solver dependency" in text
@@ -51,7 +54,7 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
         "GET /api/readiness",
     ]:
         assert endpoint in text
-    assert "Frontend Agent Studio should call this API" in text
+    assert "Frontend Agent Studio calls this API" in text
 
 
 def test_api_error_model_doc_exists_and_defines_stable_shape():

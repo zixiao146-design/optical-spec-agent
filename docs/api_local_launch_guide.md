@@ -2,16 +2,16 @@
 
 ## Purpose
 
-This guide explains how to run the local Agent API for future Agent Studio
-frontend development. It is a backend handoff guide only; it does not implement
-the frontend.
+This guide explains how to run the local Agent API for Agent Studio frontend
+development. The implemented MVP frontend runbook is
+`docs/frontend_mvp_runbook.md`.
 
 ## Current status
 
 - Current public prerelease: v0.9.0rc6
 - Current main development version: 0.9.0rc7.dev0
 - API contract version: 0.1
-- Frontend implementation: not started
+- Frontend implementation: MVP available under `frontend/`
 - PyPI: not published
 
 ## Install local dev package
@@ -56,5 +56,8 @@ Frontend MVP planning is tracked in `docs/frontend_mvp_product_spec.md`,
 `docs/frontend_mvp_user_flows.md`,
 `docs/frontend_mvp_acceptance_criteria.md`,
 `docs/frontend_safety_policy.md`, and
-`docs/frontend_mvp_implementation_plan.md`. The frontend implementation has not
-started.
+`docs/frontend_mvp_implementation_plan.md`.
+
+The MVP frontend lives under `frontend/` and is run with `npm run dev` after
+starting the API. It remains local-first and does not expose solver execution,
+external LLM, upload, publish, tag, or release controls.

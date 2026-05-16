@@ -12,7 +12,7 @@ readiness status.
 - Current public prerelease: v0.9.0rc6
 - Current main development version: 0.9.0rc7.dev0
 - API contract version: 0.1
-- Frontend implementation: not started
+- Frontend implementation: MVP implemented under `frontend/`
 - PyPI: not published
 - v1.0.0: not released
 
@@ -59,3 +59,15 @@ readiness status.
 - User can see validation evidence.
 - User can see readiness and publication status.
 - All views preserve safety boundary language.
+
+## Implementation status
+
+- React + Vite + TypeScript scaffold exists in `frontend/`.
+- Frontend API client calls only the configured local API base URL and `/api/*`
+  endpoints.
+- The MVP includes dashboard/readiness, spec input, adapter matrix, workflow
+  plan, artifact preview, validation evidence, and system status views.
+- No PyPI/TestPyPI upload controls, tag/release controls, solver-run controls,
+  external LLM controls, login, cloud backend, or production deployment are
+  included.
+- Run instructions are documented in `docs/frontend_mvp_runbook.md`.

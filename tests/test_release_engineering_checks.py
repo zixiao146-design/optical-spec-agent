@@ -190,6 +190,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "frontend_mvp_acceptance_criteria.md",
         "frontend_safety_policy.md",
         "frontend_mvp_implementation_plan.md",
+        "frontend_mvp_runbook.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -282,7 +283,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Agent Studio Frontend MVP Acceptance Criteria" in combined
     assert "Agent Studio Frontend Safety Policy" in combined
     assert "Agent Studio Frontend MVP Implementation Plan" in combined
-    assert "Frontend implementation: not started" in combined
+    assert "Frontend implementation: MVP implemented under `frontend/`" in combined
+    assert "Agent Studio Frontend MVP Runbook" in combined
+    assert "React + Vite + TypeScript" in combined
     assert "No PyPI/TestPyPI upload controls in MVP" in combined
     assert "No tag/release controls in MVP" in combined
     assert "CLI / API Parity" in combined

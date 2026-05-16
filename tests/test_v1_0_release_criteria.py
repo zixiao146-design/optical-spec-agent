@@ -23,7 +23,9 @@ def test_v1_0_release_criteria_exists_and_bounds_release_claims():
     assert "Deferred/non-blocker" in text
     assert "Frontend/API Agent Studio" in text
     assert "Not a v1.0 blocker" in text
-    assert "Agent Studio frontend MVP planning" in text
+    assert "Agent Studio frontend MVP planning and implementation" in text
     assert "docs/frontend_mvp_product_spec.md" in text
     assert "docs/frontend_safety_policy.md" in text
+    assert "docs/frontend_mvp_runbook.md" in text
+    assert "local MVP under `frontend/`" in text
     assert "not a PyPI publication trigger" in text
