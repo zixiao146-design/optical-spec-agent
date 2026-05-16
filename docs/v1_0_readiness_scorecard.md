@@ -54,6 +54,10 @@
 - v0.9.0rc6 development plan.
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
+- v1.0 public contract freeze confirmation package.
+- v1.0 contract frozen surface candidate.
+- v1.0 contract non-goals.
+- v1.0 breaking change policy.
 - Publication decision record.
 - PyPI publication readiness checklist.
 - PyPI post-publication verification plan.
@@ -102,6 +106,7 @@
 - Workflow remains local/synchronous preview.
 - v1.0 compatibility freeze not finalized.
 - v1.0 public contract freeze remains a hard blocker until finalized.
+- Maintainer confirmation for the v1.0 public contract freeze remains pending.
 - No new GitHub Actions workflow was added during operations readiness because
   existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
   reviewed and documented instead of duplicating automation.
@@ -115,6 +120,11 @@
   validation, or public-contract-freeze decisions.
 - Use `docs/v1_0_public_contract_freeze_checklist.md` before declaring a v1.0
   freeze.
+- Use `docs/v1_0_public_contract_freeze_confirmation.md`,
+  `docs/v1_0_contract_frozen_surface.md`,
+  `docs/v1_0_contract_non_goals.md`, and
+  `docs/v1_0_breaking_change_policy.md` before asking for maintainer freeze
+  confirmation.
 - Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action.
 - Use `docs/pypi_publication_readiness_checklist.md` and
   `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.

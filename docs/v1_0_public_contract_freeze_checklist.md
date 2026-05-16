@@ -10,6 +10,7 @@
 - TestPyPI: uploaded for 0.9.0rc6.dev0
 - TestPyPI verified: yes
 - Clean install from TestPyPI: passed
+- Maintainer confirmation: pending
 
 ## Candidate-stable contract areas
 
@@ -58,9 +59,17 @@
 - Maintainer confirmation of the v1.0 public contract freeze.
 - PyPI publication decision.
 
+## Confirmation package
+
+- `docs/v1_0_public_contract_freeze_confirmation.md`
+- `docs/v1_0_contract_frozen_surface.md`
+- `docs/v1_0_contract_non_goals.md`
+- `docs/v1_0_breaking_change_policy.md`
+
 ## Required before v1.0 final
 
 - Maintainer confirms public contract freeze.
+- Maintainer reviews the public contract freeze confirmation package.
 - TestPyPI/PyPI strategy decided.
 - Release notes explicitly state validation scope.
 - Quality gates pass.

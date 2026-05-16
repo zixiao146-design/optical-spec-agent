@@ -19,6 +19,7 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     assert "TestPyPI: uploaded for 0.9.0rc6.dev0" in text
     assert "TestPyPI verified: yes" in text
     assert "Clean install from TestPyPI: passed" in text
+    assert "Maintainer confirmation: pending" in text
     assert "Candidate-stable contract areas" in text
     for phrase in [
         "Console script: `optical-spec`",
@@ -45,6 +46,13 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     assert "Remaining hard blockers" in text
     assert "Maintainer confirmation of the v1.0 public contract freeze" in text
     assert "PyPI publication decision" in text
+    for phrase in [
+        "docs/v1_0_public_contract_freeze_confirmation.md",
+        "docs/v1_0_contract_frozen_surface.md",
+        "docs/v1_0_contract_non_goals.md",
+        "docs/v1_0_breaking_change_policy.md",
+    ]:
+        assert phrase in text
 
 
 def test_public_contract_manifest_tracks_rc6_state_without_publish_or_upload():

@@ -25,6 +25,10 @@
 - Examples manifest.
 - Public contract manifest.
 - v1.0 public contract freeze checklist.
+- v1.0 public contract freeze confirmation package.
+- v1.0 contract frozen surface candidate.
+- v1.0 contract non-goals.
+- v1.0 breaking change policy.
 - Publication decision record.
 - Open-source-solver-first strategy.
 - Proprietary solver non-default policy.
@@ -43,6 +47,8 @@
 - v1.0 final public contract freeze not finalized.
 - `docs/v1_0_public_contract_freeze_checklist.md` exists but still needs
   maintainer confirmation before v1.0.
+- `docs/v1_0_public_contract_freeze_confirmation.md` prepares the
+  maintainer-facing package, but maintainer confirmation remains pending.
 - `docs/publication_decision_record.md` records that TestPyPI is completed for
   `0.9.0rc6.dev0`; PyPI remains not granted.
 - `docs/pypi_publication_readiness_checklist.md` exists and keeps PyPI
@@ -76,6 +82,10 @@
 - Finalize public contract freeze.
 - Use `docs/v1_0_public_contract_freeze_checklist.md` as the executable
   freeze checklist.
+- Use `docs/v1_0_public_contract_freeze_confirmation.md`,
+  `docs/v1_0_contract_frozen_surface.md`,
+  `docs/v1_0_contract_non_goals.md`, and
+  `docs/v1_0_breaking_change_policy.md` as the maintainer review package.
 - Keep production claims conservative.
 - Use `docs/testpypi_status_v0.9.0rc6.dev0.md` as the current TestPyPI
   verification record.

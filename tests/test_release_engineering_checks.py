@@ -159,6 +159,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "rc6_development_plan.md",
         "v1_0_decision_matrix.md",
         "v1_0_public_contract_freeze_checklist.md",
+        "v1_0_public_contract_freeze_confirmation.md",
+        "v1_0_contract_frozen_surface.md",
+        "v1_0_contract_non_goals.md",
+        "v1_0_breaking_change_policy.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
         "github_release_draft_v0.9.0rc5.md",
@@ -252,6 +256,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v0.9.0rc6 Development Plan" in combined
     assert "v1.0 Decision Matrix" in combined
     assert "v1.0 Public Contract Freeze Checklist" in combined
+    assert "v1.0 Public Contract Freeze Confirmation" in combined
+    assert "v1.0 Contract Frozen Surface Candidate" in combined
+    assert "v1.0 Contract Non-goals" in combined
+    assert "v1.0 Breaking Change Policy" in combined
+    assert "Maintainer confirmation: pending" in combined
     assert "Publication Decision Record" in combined
     assert "PyPI Publication Readiness Checklist" in combined
     assert "PyPI Post-publication Verification Plan" in combined

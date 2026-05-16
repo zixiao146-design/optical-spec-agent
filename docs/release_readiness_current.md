@@ -129,6 +129,10 @@ Current main contract artifacts:
 - `docs/proprietary_solver_policy.md`
 - `docs/v1_0_compatibility_policy.md`
 - `docs/v1_0_public_contract_freeze.md`
+- `docs/v1_0_public_contract_freeze_confirmation.md`
+- `docs/v1_0_contract_frozen_surface.md`
+- `docs/v1_0_contract_non_goals.md`
+- `docs/v1_0_breaking_change_policy.md`
 - `docs/public_contract_manifest.json`
 - `docs/public_contract_change_checklist.md`
 - `docs/validation_evidence_manifest.md`
@@ -225,6 +229,8 @@ Current v1.0 evidence artifacts:
 - No hard release blocker is currently recorded for `0.9.0rc6.dev0` development.
 - v1.0 hard blockers remain: maintainer confirmation of the public contract
   freeze and an explicit PyPI publication decision.
+- The public contract freeze confirmation package is ready for maintainer
+  review, but maintainer confirmation remains pending.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or `v0.9.0rc5`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.

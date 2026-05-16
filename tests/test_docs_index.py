@@ -43,6 +43,10 @@ def test_docs_index_exists_and_links_major_docs():
         "v1_0_compatibility_policy.md",
         "v1_0_public_contract_freeze.md",
         "v1_0_public_contract_freeze_checklist.md",
+        "v1_0_public_contract_freeze_confirmation.md",
+        "v1_0_contract_frozen_surface.md",
+        "v1_0_contract_non_goals.md",
+        "v1_0_breaking_change_policy.md",
         "public_contract_change_checklist.md",
         "public_contract_manifest.json",
         "validation_gate.md",
@@ -91,6 +95,10 @@ def test_docs_index_exists_and_links_major_docs():
         "rc6_development_plan.md",
         "v1_0_decision_matrix.md",
         "v1_0_public_contract_freeze_checklist.md",
+        "v1_0_public_contract_freeze_confirmation.md",
+        "v1_0_contract_frozen_surface.md",
+        "v1_0_contract_non_goals.md",
+        "v1_0_breaking_change_policy.md",
         "publication_decision_record.md",
     ]
     for phrase in required:

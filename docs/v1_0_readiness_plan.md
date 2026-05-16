@@ -57,6 +57,11 @@ Recommended goals:
   production-validation, and public-contract-freeze decisions.
 - Use `docs/v1_0_public_contract_freeze_checklist.md` to make the freeze
   candidate actionable.
+- Use `docs/v1_0_public_contract_freeze_confirmation.md`,
+  `docs/v1_0_contract_frozen_surface.md`,
+  `docs/v1_0_contract_non_goals.md`, and
+  `docs/v1_0_breaking_change_policy.md` as the maintainer-facing freeze
+  confirmation package. Maintainer confirmation remains pending.
 - Use `docs/publication_decision_record.md` to keep TestPyPI authorization
   explicit, record the successful 0.9.0rc6.dev0 Trusted Publishing upload, and
   keep PyPI not granted.
@@ -120,6 +125,14 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/v1_0_public_contract_freeze.md`.
 - v1.0 public contract freeze checklist:
   `docs/v1_0_public_contract_freeze_checklist.md`.
+- v1.0 public contract freeze confirmation:
+  `docs/v1_0_public_contract_freeze_confirmation.md`.
+- v1.0 contract frozen surface candidate:
+  `docs/v1_0_contract_frozen_surface.md`.
+- v1.0 contract non-goals:
+  `docs/v1_0_contract_non_goals.md`.
+- v1.0 breaking change policy:
+  `docs/v1_0_breaking_change_policy.md`.
 - Publication decision record:
   `docs/publication_decision_record.md`.
 - PyPI publication readiness checklist:

@@ -30,6 +30,11 @@ def test_v1_0_gap_audit_tracks_current_baseline_and_blockers():
     assert "The 0.9.0rc6.dev0 upload and clean install verification are complete" in text
     assert "PyPI publication not approved" in text
     assert "docs/v1_0_public_contract_freeze_checklist.md" in text
+    assert "docs/v1_0_public_contract_freeze_confirmation.md" in text
+    assert "docs/v1_0_contract_frozen_surface.md" in text
+    assert "docs/v1_0_contract_non_goals.md" in text
+    assert "docs/v1_0_breaking_change_policy.md" in text
+    assert "maintainer confirmation remains pending" in text
     assert "docs/publication_decision_record.md" in text
     assert "docs/pypi_publication_readiness_checklist.md" in text
     assert "docs/pypi_post_publication_verification_plan.md" in text

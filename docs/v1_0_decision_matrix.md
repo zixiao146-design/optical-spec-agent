@@ -61,6 +61,11 @@
 
 - Current: candidate
 - Checklist: `docs/v1_0_public_contract_freeze_checklist.md`
+- Confirmation package: `docs/v1_0_public_contract_freeze_confirmation.md`
+- Frozen surface candidate: `docs/v1_0_contract_frozen_surface.md`
+- Non-goals: `docs/v1_0_contract_non_goals.md`
+- Breaking change policy: `docs/v1_0_breaking_change_policy.md`
+- Maintainer confirmation: pending
 - Options:
   - Freeze before v1.0.
   - Allow further pre-v1 changes.

@@ -11,6 +11,10 @@
 
 - Close v1.0 public contract freeze gaps.
 - Keep `docs/v1_0_public_contract_freeze_checklist.md` current.
+- Keep `docs/v1_0_public_contract_freeze_confirmation.md`,
+  `docs/v1_0_contract_frozen_surface.md`,
+  `docs/v1_0_contract_non_goals.md`, and
+  `docs/v1_0_breaking_change_policy.md` ready for maintainer review.
 - Keep `docs/publication_decision_record.md` current now that TestPyPI
   succeeded for 0.9.0rc6.dev0 and PyPI publication remains not granted.
 - Keep `docs/pypi_publication_readiness_checklist.md` and
@@ -46,3 +50,4 @@
 - PyPI post-publication verification plan prepared.
 - Elmer deferred or validated status explicit.
 - Public contract freeze checklist reviewed by maintainer.
+- Public contract freeze confirmation package reviewed by maintainer.
