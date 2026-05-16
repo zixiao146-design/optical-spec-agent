@@ -19,6 +19,13 @@ access, or proprietary solver support.
 - Keep `docs/api_local_launch_guide.md`, `docs/frontend_handoff_spec.md`,
   `docs/api_curl_examples.md`, `scripts/smoke_agent_api.sh`, and
   `scripts/check_api_fixtures.py` aligned before any frontend MVP work.
+- Keep `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md` as the planning package for a
+  separate frontend implementation task.
 - Decide PyPI publication path.
 - Prepare v1.0.0 release draft.
 - Run quality gates.
@@ -46,6 +53,8 @@ access, or proprietary solver support.
 - No claim expansion.
 - No full frontend implementation unless separately approved.
 - No frontend framework scaffolding unless separately approved.
+- No `frontend/`, React/Vite, Node, or built frontend artifacts during planning
+  tasks.
 - No PyPI publication trigger from API fixture readiness alone.
 - No separate v1.0 API contract freeze unless maintainers explicitly approve it.
 - No default external solver, external LLM, network, or proprietary dependency.

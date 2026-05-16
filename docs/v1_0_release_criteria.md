@@ -18,6 +18,13 @@
   `docs/frontend_handoff_spec.md`, and `docs/api_curl_examples.md`
 - Local Agent API fixture/smoke scripts: `scripts/check_api_fixtures.py` and
   `scripts/smoke_agent_api.sh`
+- Agent Studio frontend MVP planning: available in
+  `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md`
 - Frontend implementation: not started
 
 ## Required before v1.0.0
@@ -75,3 +82,4 @@
 | Local Agent API contract freeze | Future decision | Not separately frozen | API remains frontend-readiness / candidate API until maintainer explicitly approves freezing it. |
 | Frontend fixture readiness | Engineering track | Available under `examples/api/` | Useful for future Agent Studio mock data, but not a PyPI publication trigger. |
 | Frontend handoff docs/scripts | Engineering track | Available | Launch guide, handoff spec, curl examples, API smoke, and fixture consistency checks support future frontend planning. |
+| Frontend MVP planning | Future work | Planning complete enough for implementation task | Not a v1.0 blocker and not a PyPI publication trigger. |

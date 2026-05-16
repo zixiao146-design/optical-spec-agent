@@ -183,6 +183,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "api_local_launch_guide.md",
         "frontend_handoff_spec.md",
         "api_curl_examples.md",
+        "frontend_mvp_product_spec.md",
+        "frontend_information_architecture.md",
+        "frontend_api_mapping.md",
+        "frontend_mvp_user_flows.md",
+        "frontend_mvp_acceptance_criteria.md",
+        "frontend_safety_policy.md",
+        "frontend_mvp_implementation_plan.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -268,6 +275,16 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Local Agent API Launch Guide" in combined
     assert "Frontend Handoff Spec" in combined
     assert "Local Agent API Curl Examples" in combined
+    assert "Agent Studio Frontend MVP Product Spec" in combined
+    assert "Agent Studio Frontend Information Architecture" in combined
+    assert "Agent Studio Frontend API Mapping" in combined
+    assert "Agent Studio Frontend MVP User Flows" in combined
+    assert "Agent Studio Frontend MVP Acceptance Criteria" in combined
+    assert "Agent Studio Frontend Safety Policy" in combined
+    assert "Agent Studio Frontend MVP Implementation Plan" in combined
+    assert "Frontend implementation: not started" in combined
+    assert "No PyPI/TestPyPI upload controls in MVP" in combined
+    assert "No tag/release controls in MVP" in combined
     assert "CLI / API Parity" in combined
     assert "examples/api/" in combined
     assert "scripts/smoke_agent_api.sh" in combined

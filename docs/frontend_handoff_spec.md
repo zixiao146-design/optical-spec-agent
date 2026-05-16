@@ -3,6 +3,12 @@
 ## Purpose
 
 Defines what a future Agent Studio frontend can rely on today.
+Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
+`docs/frontend_information_architecture.md`, `docs/frontend_api_mapping.md`,
+`docs/frontend_mvp_user_flows.md`,
+`docs/frontend_mvp_acceptance_criteria.md`,
+`docs/frontend_safety_policy.md`, and
+`docs/frontend_mvp_implementation_plan.md`.
 
 ## API base
 
@@ -37,6 +43,7 @@ Defines what a future Agent Studio frontend can rely on today.
 ## Not implemented yet
 
 - No frontend app yet.
+- No React/Vite app yet.
 - No session history.
 - No login.
 - No cloud backend.

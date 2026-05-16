@@ -23,6 +23,13 @@ solvers, external LLMs, or proprietary tools by default.
 - Local launch guide: `docs/api_local_launch_guide.md`
 - Frontend handoff spec: `docs/frontend_handoff_spec.md`
 - Curl examples: `docs/api_curl_examples.md`
+- Frontend MVP planning:
+  `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md`
 - Live fixture consistency check: `scripts/check_api_fixtures.py`
 - API smoke script: `scripts/smoke_agent_api.sh`
 - Frontend implementation: not started
@@ -93,3 +100,6 @@ They help a future frontend developer run the backend locally, copy documented
 curl calls, and check that `examples/api/` fixtures still match the live API
 top-level response shape. These checks do not run solvers, call external LLMs,
 upload packages, create tags, or create releases.
+
+Frontend MVP planning now exists, but no frontend implementation, React/Vite
+app, `frontend/` directory, or build artifact is part of this API package.

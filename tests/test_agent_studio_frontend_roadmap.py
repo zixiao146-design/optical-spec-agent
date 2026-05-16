@@ -16,7 +16,14 @@ def test_agent_studio_frontend_roadmap_exists_and_is_future_work():
     assert "Should follow API readiness" in text
     assert "API response models exist" in text
     assert "examples/api/" in text
+    assert "docs/frontend_mvp_product_spec.md" in text
+    assert "docs/frontend_information_architecture.md" in text
+    assert "docs/frontend_api_mapping.md" in text
+    assert "docs/frontend_mvp_acceptance_criteria.md" in text
+    assert "docs/frontend_safety_policy.md" in text
+    assert "docs/frontend_mvp_implementation_plan.md" in text
     assert "Frontend implementation is not started" in text
+    assert "no React/Vite app" in text
     assert "Spec input" in text
     assert "Adapter matrix" in text
     assert "Workflow plan" in text
@@ -24,3 +31,4 @@ def test_agent_studio_frontend_roadmap_exists_and_is_future_work():
     assert "Validation evidence view" in text
     assert "No default solver execution" in text
     assert "No cloud requirement" in text
+    assert "No formal convergence proof claim" in text

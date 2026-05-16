@@ -20,10 +20,18 @@ validation evidence.
 - Local API launch guidance is documented in `docs/api_local_launch_guide.md`.
 - Frontend handoff details are documented in `docs/frontend_handoff_spec.md`.
 - Copyable local curl examples are documented in `docs/api_curl_examples.md`.
+- Frontend MVP planning exists in `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md`.
 - Frontend fixture examples exist under `examples/api/`.
 - Fixture consistency is checked by `scripts/check_api_fixtures.py`.
 - API smoke coverage is checked by `scripts/smoke_agent_api.sh`.
 - Frontend implementation is not started.
+- Frontend MVP planning exists, but no React/Vite app, `frontend/` directory,
+  or UI implementation has been created.
 - Agent Studio frontend should call the local Agent API instead of shelling out
   directly to the CLI.
 - Should follow API readiness and continued backend contract tests.
@@ -43,6 +51,8 @@ validation evidence.
   workflow-plan, adapter-preview, validation evidence, and readiness/status.
 - API response model and fixture coverage for frontend mock data.
 - Local launch guide, curl examples, and live fixture consistency checks.
+- Frontend MVP product spec, information architecture, API mapping, user
+  flows, acceptance criteria, safety policy, and implementation plan.
 
 ### Phase 2
 
@@ -68,3 +78,4 @@ validation evidence.
 - No default solver execution.
 - No proprietary solver dependency.
 - No production-grade claim.
+- No formal convergence proof claim.

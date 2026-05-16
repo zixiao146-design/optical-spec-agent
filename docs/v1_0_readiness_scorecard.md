@@ -78,6 +78,7 @@
 - Frontend fixture examples under `examples/api/`.
 - Local API launch guide, frontend handoff spec, and curl examples.
 - Local API smoke script and fixture consistency script.
+- Agent Studio frontend MVP planning docs.
 - CLI/API parity documentation for future Agent Studio integration.
 - TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
   failed with HTTP 403 Forbidden and did not publish PyPI.
@@ -173,6 +174,12 @@
 - Use `docs/api_local_launch_guide.md`, `docs/frontend_handoff_spec.md`,
   `docs/api_curl_examples.md`, `scripts/smoke_agent_api.sh`, and
   `scripts/check_api_fixtures.py` before starting frontend MVP planning.
+- Use `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md` before implementing frontend MVP.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and

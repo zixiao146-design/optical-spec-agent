@@ -13,6 +13,12 @@ contract.
 Local launch, frontend handoff, and curl examples are documented in
 `docs/api_local_launch_guide.md`, `docs/frontend_handoff_spec.md`, and
 `docs/api_curl_examples.md`.
+Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
+`docs/frontend_information_architecture.md`, `docs/frontend_api_mapping.md`,
+`docs/frontend_mvp_user_flows.md`,
+`docs/frontend_mvp_acceptance_criteria.md`,
+`docs/frontend_safety_policy.md`, and
+`docs/frontend_mvp_implementation_plan.md`.
 
 | CLI command | API endpoint | Parity status | Notes |
 |---|---|---|---|

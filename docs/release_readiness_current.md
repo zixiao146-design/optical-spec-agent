@@ -77,6 +77,13 @@ This document describes the current `main` branch. It is not a release tag.
   `scripts/smoke_agent_api.sh`
 - API fixture consistency script:
   `scripts/check_api_fixtures.py`
+- Agent Studio frontend MVP planning:
+  `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md`
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -126,6 +133,7 @@ This document describes the current `main` branch. It is not a release tag.
 | API contract version | 0.1 candidate API | Frontend-readiness surface; not separately frozen as v1.0 API |
 | Frontend fixtures | API examples ready | `examples/api/`; frontend implementation not started |
 | Frontend handoff | API handoff docs/scripts ready | Launch guide, handoff spec, curl examples, smoke script, fixture consistency script |
+| Frontend MVP planning | Planning docs ready | Product spec, information architecture, API mapping, user flows, acceptance criteria, safety policy, implementation plan; implementation not started |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

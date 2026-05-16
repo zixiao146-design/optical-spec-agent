@@ -1,0 +1,18 @@
+# Agent Studio Frontend API Mapping
+
+| Frontend screen | API endpoint | Method | Request fixture | Response fixture | Safety notes |
+|---|---|---|---|---|---|
+| Dashboard | `/api/readiness` | GET | none | `examples/api/readiness_response.json` | Shows PyPI not published, v1.0.0 not released, and recommended next actions. |
+| Spec Input | `/api/parse` | POST | `examples/api/parse_request_heuristic.json` | `examples/api/parse_response_heuristic.json` | Uses local heuristic/rule parser by default; no external LLM. |
+| Spec Input | `/api/validate` | POST | `examples/api/validate_request_minimal.json` | `examples/api/validate_response_minimal.json` | Local spec validation only; no production-grade validation claim. |
+| Adapter Matrix | `/api/adapters` | GET | none | `examples/api/adapters_response.json` | Registry summary only; no solver execution. |
+| Adapter Matrix | `/api/validation-evidence` | GET | none | `examples/api/validation_evidence_response.json` | Shows evidence and limitations without expanding claims. |
+| Workflow Plan | `/api/workflow-plan` | POST | `examples/api/workflow_plan_request.json` | `examples/api/workflow_plan_response.json` | Local synchronous preview only; `external_solver_executed=false`. |
+| Artifact Preview | `/api/adapter-preview` | POST | `examples/api/adapter_preview_gmsh_request.json` | `examples/api/adapter_preview_gmsh_response.json` | Preview artifact only; does not run solver. |
+| Evidence | `/api/validation-evidence` | GET | none | `examples/api/validation_evidence_response.json` | Gmsh/Meep/MPB/Optiland Level 3 evidence; Elmer deferred. |
+| System Status | `/api/health` | GET | none | `examples/api/health_response.json` | Local service health only. |
+| System Status | `/api/version` | GET | none | `examples/api/version_response.json` | Shows package version and `api_contract_version`. |
+
+All mapped endpoints are local-first, no-network fixtures for frontend planning.
+They must not expose upload, publish, tag, release, solver-run, or external LLM
+controls in the MVP.

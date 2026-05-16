@@ -50,3 +50,11 @@ Future Agent Studio frontend work should call this local API rather than
 shelling out directly to the CLI. CLI/API parity is tracked in
 `docs/cli_api_parity.md`, and frontend fixture JSON lives under
 `examples/api/`.
+
+Frontend MVP planning is tracked in `docs/frontend_mvp_product_spec.md`,
+`docs/frontend_information_architecture.md`, `docs/frontend_api_mapping.md`,
+`docs/frontend_mvp_user_flows.md`,
+`docs/frontend_mvp_acceptance_criteria.md`,
+`docs/frontend_safety_policy.md`, and
+`docs/frontend_mvp_implementation_plan.md`. The frontend implementation has not
+started.

@@ -127,10 +127,15 @@ API response models 定义在 `src/optical_spec_agent/api/models.py`，稳定错
 `examples/api/`。本地启动指南、frontend handoff spec 和可复制的 curl 示例见
 `docs/api_local_launch_guide.md`、`docs/frontend_handoff_spec.md` 和
 `docs/api_curl_examples.md`；API smoke 与 fixture consistency 检查脚本为
-`scripts/smoke_agent_api.sh` 和 `scripts/check_api_fixtures.py`。当前
-`api_contract_version` 为 0.1。该 API 仍是 frontend-readiness / candidate
-API，不是单独冻结的 v1.0 API contract。这项 API readiness 工作不触发 PyPI
-发布，也不改变当前版本或 release 状态。
+`scripts/smoke_agent_api.sh` 和 `scripts/check_api_fixtures.py`。Agent Studio
+frontend MVP planning package 见 `docs/frontend_mvp_product_spec.md`、
+`docs/frontend_information_architecture.md`、`docs/frontend_api_mapping.md`、
+`docs/frontend_mvp_user_flows.md`、
+`docs/frontend_mvp_acceptance_criteria.md`、`docs/frontend_safety_policy.md`
+和 `docs/frontend_mvp_implementation_plan.md`。frontend implementation 尚未开始，
+本任务没有创建 React/Vite app。当前 `api_contract_version` 为 0.1。该 API 仍是
+frontend-readiness / candidate API，不是单独冻结的 v1.0 API contract。这项
+API/frontend planning 工作不触发 PyPI 发布，也不改变当前版本或 release 状态。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。

@@ -16,6 +16,7 @@
 - Local Agent API response models: available
 - Local Agent API frontend fixtures: `examples/api/`
 - Local Agent API handoff docs/scripts: available
+- Agent Studio frontend MVP planning: available
 - Frontend implementation: not started
 
 ## What v0.9.0rc2 already proves
@@ -94,6 +95,13 @@ Recommended goals:
 - Use `scripts/smoke_agent_api.sh` and `scripts/check_api_fixtures.py` to keep
   the local API smoke path and frontend fixtures aligned with live TestClient
   responses.
+- Use `docs/frontend_mvp_product_spec.md`,
+  `docs/frontend_information_architecture.md`,
+  `docs/frontend_api_mapping.md`, `docs/frontend_mvp_user_flows.md`,
+  `docs/frontend_mvp_acceptance_criteria.md`,
+  `docs/frontend_safety_policy.md`, and
+  `docs/frontend_mvp_implementation_plan.md` before starting a frontend
+  implementation task.
 - Keep API defaults local/synchronous/preview-first: no external solver
   execution, no external LLM call, no proprietary solver requirement, and no
   network dependency for documented examples.

@@ -109,10 +109,19 @@ documented in
 [`docs/api_curl_examples.md`](docs/api_curl_examples.md). API smoke and fixture
 consistency checks live in [`scripts/smoke_agent_api.sh`](scripts/smoke_agent_api.sh)
 and [`scripts/check_api_fixtures.py`](scripts/check_api_fixtures.py). The
-current `api_contract_version` is 0.1. The API remains a frontend-readiness /
-candidate API, not a separately frozen v1.0 API contract. This API readiness
-work does not trigger PyPI publication and does not change the current version
-or release status.
+Agent Studio frontend MVP planning package is documented in
+[`docs/frontend_mvp_product_spec.md`](docs/frontend_mvp_product_spec.md),
+[`docs/frontend_information_architecture.md`](docs/frontend_information_architecture.md),
+[`docs/frontend_api_mapping.md`](docs/frontend_api_mapping.md),
+[`docs/frontend_mvp_user_flows.md`](docs/frontend_mvp_user_flows.md),
+[`docs/frontend_mvp_acceptance_criteria.md`](docs/frontend_mvp_acceptance_criteria.md),
+[`docs/frontend_safety_policy.md`](docs/frontend_safety_policy.md), and
+[`docs/frontend_mvp_implementation_plan.md`](docs/frontend_mvp_implementation_plan.md).
+The frontend implementation has not started, and no React/Vite app is included.
+The current `api_contract_version` is 0.1. The API remains a
+frontend-readiness / candidate API, not a separately frozen v1.0 API contract.
+This API/frontend planning work does not trigger PyPI publication and does not
+change the current version or release status.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in
