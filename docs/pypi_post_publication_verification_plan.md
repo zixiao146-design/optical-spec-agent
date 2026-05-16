@@ -3,6 +3,9 @@
 This plan defines the checks to run only after a separately approved PyPI
 publication. It is not approval to publish PyPI.
 
+For v1.0.0 planning, this plan is paired with
+`docs/v1_0_pypi_decision_gate.md` and `docs/v1_0_release_criteria.md`.
+
 ## Clean install
 
 - Create a clean virtual environment.

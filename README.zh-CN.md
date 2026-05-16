@@ -107,6 +107,12 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 PyPI publication readiness 与发布后验证计划见
 `docs/pypi_publication_readiness_checklist.md` 和
 `docs/pypi_post_publication_verification_plan.md`；当前建议仍是不发布 PyPI。
+v1.0.0 planning package 见 `docs/v1_0_release_criteria.md`、
+`docs/v1_0_release_plan.md`、`docs/rc_to_v1_0_transition_path.md`、
+`docs/v1_0_pypi_decision_gate.md`、
+`docs/v1_0_post_release_verification_plan.md` 和
+`docs/agent_studio_frontend_roadmap.md`。Agent Studio frontend/API roadmap
+属于 v1.0 之后或 Phase 2 规划，不是 v1.0.0 release blocker。
 一键本地质量门禁、文档地图、v1.0 readiness scorecard 和 maintainer decision
 log 见 `docs/quality_gates.md`、`docs/README.md`、
 `docs/v1_0_readiness_scorecard.md` 和 `docs/maintainer_decision_log.md`。

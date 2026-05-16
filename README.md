@@ -74,6 +74,16 @@ tracked in
 and
 [`docs/pypi_post_publication_verification_plan.md`](docs/pypi_post_publication_verification_plan.md);
 the current recommendation remains not to publish PyPI yet.
+The v1.0.0 planning package is documented in
+[`docs/v1_0_release_criteria.md`](docs/v1_0_release_criteria.md),
+[`docs/v1_0_release_plan.md`](docs/v1_0_release_plan.md),
+[`docs/rc_to_v1_0_transition_path.md`](docs/rc_to_v1_0_transition_path.md),
+[`docs/v1_0_pypi_decision_gate.md`](docs/v1_0_pypi_decision_gate.md),
+[`docs/v1_0_post_release_verification_plan.md`](docs/v1_0_post_release_verification_plan.md),
+and
+[`docs/agent_studio_frontend_roadmap.md`](docs/agent_studio_frontend_roadmap.md).
+The Agent Studio roadmap is future/Phase 2 planning and is not a v1.0.0
+release blocker.
 The local one-command quality gate is documented in
 [`docs/quality_gates.md`](docs/quality_gates.md), and the docs map,
 readiness scorecard, and maintainer decisions are tracked in
@@ -146,6 +156,12 @@ v1.0 compatibility and evidence tracking lives in
 [`docs/migration_notes_pre_v1.md`](docs/migration_notes_pre_v1.md),
 [`docs/v1_0_public_contract_freeze.md`](docs/v1_0_public_contract_freeze.md),
 [`docs/v1_0_public_contract_freeze_checklist.md`](docs/v1_0_public_contract_freeze_checklist.md),
+[`docs/v1_0_release_criteria.md`](docs/v1_0_release_criteria.md),
+[`docs/v1_0_release_plan.md`](docs/v1_0_release_plan.md),
+[`docs/rc_to_v1_0_transition_path.md`](docs/rc_to_v1_0_transition_path.md),
+[`docs/v1_0_pypi_decision_gate.md`](docs/v1_0_pypi_decision_gate.md),
+[`docs/v1_0_post_release_verification_plan.md`](docs/v1_0_post_release_verification_plan.md),
+[`docs/agent_studio_frontend_roadmap.md`](docs/agent_studio_frontend_roadmap.md),
 [`docs/public_contract_manifest.json`](docs/public_contract_manifest.json),
 [`docs/public_contract_change_checklist.md`](docs/public_contract_change_checklist.md),
 [`examples/e2e/README.md`](examples/e2e/README.md), and

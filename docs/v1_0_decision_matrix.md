@@ -36,6 +36,7 @@
 - Current recommendation: do not publish PyPI yet. Continue v1.0 readiness
   engineering and decide PyPI publication timing separately after reviewing the
   approved public contract freeze package.
+- v1.0 decision gate: `docs/v1_0_pypi_decision_gate.md`.
 
 ## Elmer Level 3
 
@@ -81,3 +82,15 @@ deferred/non-blocking,
 production-grade physical validation remains a non-goal unless explicitly
 claimed, and formal convergence proof remains a non-goal unless explicitly
 claimed.
+
+## v1.0.0 release planning
+
+- Current: planning package prepared, release not approved.
+- Criteria: `docs/v1_0_release_criteria.md`.
+- Release plan: `docs/v1_0_release_plan.md`.
+- RC transition path: `docs/rc_to_v1_0_transition_path.md`.
+- Post-release verification: `docs/v1_0_post_release_verification_plan.md`.
+- Agent Studio frontend/API roadmap: `docs/agent_studio_frontend_roadmap.md`.
+- Decision: prepare v1.0.0 release draft only after explicit maintainer
+  approval; Agent Studio remains future/Phase 2 work and is not a v1.0.0
+  blocker.

@@ -25,6 +25,13 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "v1.0 contract frozen surface" in text
     assert "v1.0 contract non-goals" in text
     assert "v1.0 breaking change policy" in text
+    assert "v1.0.0 release criteria" in text
+    assert "v1.0.0 release plan" in text
+    assert "RC to v1.0.0 transition path" in text
+    assert "v1.0 PyPI decision gate" in text
+    assert "v1.0.0 post-release verification plan" in text
+    assert "Agent Studio frontend roadmap" in text
+    assert "not a v1.0.0 blocker" in text
     assert "Publication decision record" in text
     assert "PyPI publication readiness checklist" in text
     assert "PyPI post-publication verification plan" in text

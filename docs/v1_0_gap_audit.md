@@ -32,6 +32,12 @@
 - v1.0 contract non-goals.
 - v1.0 breaking change policy.
 - Publication decision record.
+- v1.0.0 release criteria.
+- v1.0.0 release plan.
+- RC to v1.0.0 transition path.
+- v1.0 PyPI decision gate.
+- v1.0.0 post-release verification plan.
+- Agent Studio frontend roadmap as future/Phase 2 planning.
 - Open-source-solver-first strategy.
 - Proprietary solver non-default policy.
 - Adapter maturity evidence for Gmsh / Meep / MPB / Optiland.
@@ -63,6 +69,8 @@
 - Formal convergence proof not claimed.
 - Workflow remains local/synchronous preview.
 - Adapter outputs may still be MVP/scaffold unless explicitly validated.
+- API/frontend Agent Studio planning is documented as future/Phase 2 work, not
+  a v1.0 blocker.
 
 ## Blocker classification
 
@@ -74,8 +82,10 @@
 | Production-grade physical validation | Deferred/non-blocker unless v1.0 claims production-grade validation | The project does not claim production-grade physical validation. | Keep claims conservative or define a separate validation program. |
 | Formal convergence proof | Deferred/non-blocker unless explicitly claimed | The project does not claim a formal convergence proof. | Keep as a non-goal unless requirements change. |
 | Public contract freeze | Satisfied for documented surface | CLI, schema, adapter, workflow, validation, and publication boundaries are frozen or explicitly scoped. | Keep `docs/v1_0_public_contract_freeze_status.md` and manifest checks current. |
+| v1.0.0 release approval | Hard blocker | v1.0.0 requires a separate explicit maintainer approval. | Use `docs/v1_0_release_criteria.md` and `docs/v1_0_release_plan.md`. |
 | Quality gates | Already satisfied, must remain passing | Local quality gates, smoke, build, docs, and CLI checks are established. | Re-run before each RC or v1.0 transition. |
 | Workflow preview | Future work unless final v1.0 claims expand | Workflow orchestration remains local/synchronous preview. | Keep scope clear or define future automation. |
+| API/frontend Agent Studio | Future work | Roadmap exists, but frontend/API Studio is not part of v1.0.0 release criteria. | Revisit after backend/API contract readiness. |
 
 ## Recommended v1.0 path
 
@@ -93,5 +103,11 @@
 - Decide PyPI publication explicitly through `docs/publication_decision_record.md`.
 - Use `docs/pypi_publication_readiness_checklist.md` and
   `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.
+- Use `docs/v1_0_release_criteria.md`, `docs/v1_0_release_plan.md`,
+  `docs/rc_to_v1_0_transition_path.md`, `docs/v1_0_pypi_decision_gate.md`, and
+  `docs/v1_0_post_release_verification_plan.md` before any v1.0.0 release
+  decision.
+- Keep `docs/agent_studio_frontend_roadmap.md` as a future/Phase 2 roadmap,
+  not a release blocker.
 - Keep Elmer deferred unless a maintainable install route appears.
 - Prepare v0.9.0rc6 only if new hardening justifies another release candidate.

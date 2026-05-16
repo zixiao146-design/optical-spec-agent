@@ -24,6 +24,10 @@
   `docs/pypi_publication_readiness_checklist.md`
 - PyPI post-publication verification plan:
   `docs/pypi_post_publication_verification_plan.md`
+- v1.0 PyPI decision gate:
+  `docs/v1_0_pypi_decision_gate.md`
+- v1.0.0 release criteria:
+  `docs/v1_0_release_criteria.md`
 - v1.0 public contract freeze: approved
 - v1.0 public contract freeze status:
   `docs/v1_0_public_contract_freeze_status.md`
@@ -93,6 +97,9 @@ Use `docs/pypi_publication_readiness_checklist.md` and
 `docs/pypi_post_publication_verification_plan.md` before any future PyPI
 approval. The current recommendation is: do not publish PyPI yet; decide PyPI
 publication timing separately after reviewing the approved freeze package.
+For v1.0.0, use `docs/v1_0_pypi_decision_gate.md` to decide whether the
+release remains GitHub-only, publishes PyPI after GitHub, publishes PyPI
+together with v1.0.0, or delays PyPI until post-v1.0.
 
 The earlier local token-based TestPyPI upload attempt failed with HTTP 403
 Forbidden and remains recorded in

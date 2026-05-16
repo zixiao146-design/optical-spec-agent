@@ -41,5 +41,12 @@ def test_v1_0_gap_audit_tracks_current_baseline_and_blockers():
     assert "docs/publication_decision_record.md" in text
     assert "docs/pypi_publication_readiness_checklist.md" in text
     assert "docs/pypi_post_publication_verification_plan.md" in text
+    assert "v1.0.0 release criteria" in text
+    assert "v1.0.0 release plan" in text
+    assert "RC to v1.0.0 transition path" in text
+    assert "v1.0 PyPI decision gate" in text
+    assert "v1.0.0 post-release verification plan" in text
+    assert "Agent Studio frontend roadmap" in text
+    assert "not\n  a v1.0 blocker" in text
     assert "yanking-policy review" in text
     assert "post-publication verification planning" in text

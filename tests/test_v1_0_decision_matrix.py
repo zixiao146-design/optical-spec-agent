@@ -27,6 +27,7 @@ def test_v1_0_decision_matrix_covers_required_decisions():
     assert "docs/publication_decision_record.md" in text
     assert "docs/pypi_publication_readiness_checklist.md" in text
     assert "docs/pypi_post_publication_verification_plan.md" in text
+    assert "docs/v1_0_pypi_decision_gate.md" in text
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text
     assert "docs/v1_0_public_contract_freeze_checklist.md" in text
     assert "docs/v1_0_public_contract_freeze_confirmation.md" in text
@@ -42,3 +43,10 @@ def test_v1_0_decision_matrix_covers_required_decisions():
     assert "Trusted Publishing passed for 0.9.0rc6.dev0" in text
     assert "failed\n  with HTTP 403 Forbidden" in text
     assert "with `--no-deps`" in text
+    assert "v1.0.0 release planning" in text
+    assert "docs/v1_0_release_criteria.md" in text
+    assert "docs/v1_0_release_plan.md" in text
+    assert "docs/rc_to_v1_0_transition_path.md" in text
+    assert "docs/v1_0_post_release_verification_plan.md" in text
+    assert "docs/agent_studio_frontend_roadmap.md" in text
+    assert "not a v1.0.0\n  blocker" in text

@@ -44,6 +44,19 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/pypi_publication_readiness_checklist.md`
 - PyPI post-publication verification plan:
   `docs/pypi_post_publication_verification_plan.md`
+- v1.0.0 release criteria:
+  `docs/v1_0_release_criteria.md`
+- v1.0.0 release plan:
+  `docs/v1_0_release_plan.md`
+- RC to v1.0.0 transition path:
+  `docs/rc_to_v1_0_transition_path.md`
+- v1.0 PyPI decision gate:
+  `docs/v1_0_pypi_decision_gate.md`
+- v1.0.0 post-release verification plan:
+  `docs/v1_0_post_release_verification_plan.md`
+- Agent Studio frontend roadmap:
+  `docs/agent_studio_frontend_roadmap.md` (future/Phase 2, not a v1.0.0
+  blocker)
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -163,6 +176,12 @@ Current main contract artifacts:
 - `docs/publication_decision_record.md`
 - `docs/pypi_publication_readiness_checklist.md`
 - `docs/pypi_post_publication_verification_plan.md`
+- `docs/v1_0_release_criteria.md`
+- `docs/v1_0_release_plan.md`
+- `docs/rc_to_v1_0_transition_path.md`
+- `docs/v1_0_pypi_decision_gate.md`
+- `docs/v1_0_post_release_verification_plan.md`
+- `docs/agent_studio_frontend_roadmap.md`
 - `docs/quality_gates.md`
 - `docs/ci_quality_gate_parity.md`
 - `docs/release_dry_run_operations.md`

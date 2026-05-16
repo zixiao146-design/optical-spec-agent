@@ -13,6 +13,10 @@
 - v1.0 public contract freeze: approved
 - v1.0 public contract freeze status:
   `docs/v1_0_public_contract_freeze_status.md`
+- v1.0 PyPI decision gate:
+  `docs/v1_0_pypi_decision_gate.md`
+- v1.0.0 release criteria:
+  `docs/v1_0_release_criteria.md`
 
 ## Required before PyPI publication
 
@@ -29,6 +33,7 @@
 - Validation claims reviewed and kept conservative.
 - Yanking policy reviewed.
 - Post-publication verification plan prepared.
+- v1.0 PyPI decision gate reviewed.
 
 ## PyPI publication risks
 
@@ -44,6 +49,8 @@
 - Do not publish PyPI yet.
 - Continue v1.0 readiness engineering.
 - Prepare PyPI only after a separate explicit publication decision.
+- Keep PyPI publication separate from v1.0.0 planning unless the maintainer
+  explicitly approves a combined path.
 
 This checklist does not authorize PyPI publication, tag creation, GitHub release
 creation, TestPyPI re-upload, production-grade physical validation claims, or

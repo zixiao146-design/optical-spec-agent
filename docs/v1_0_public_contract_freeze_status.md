@@ -42,3 +42,7 @@
 - This freeze does not create any tag or GitHub release.
 - PyPI publication remains separately gated.
 - `v1.0.0` remains separately gated.
+- v1.0.0 release criteria are documented in
+  `docs/v1_0_release_criteria.md`.
+- API/frontend Agent Studio planning is future/Phase 2 work and is not part of
+  the approved frozen surface.

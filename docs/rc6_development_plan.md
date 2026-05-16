@@ -22,6 +22,11 @@
 - Keep `docs/pypi_publication_readiness_checklist.md` and
   `docs/pypi_post_publication_verification_plan.md` current before any PyPI
   approval.
+- Keep the v1.0.0 planning package current:
+  `docs/v1_0_release_criteria.md`, `docs/v1_0_release_plan.md`,
+  `docs/rc_to_v1_0_transition_path.md`, `docs/v1_0_pypi_decision_gate.md`,
+  `docs/v1_0_post_release_verification_plan.md`, and
+  `docs/agent_studio_frontend_roadmap.md`.
 - Improve release/quality documentation consistency.
 - Decide future TestPyPI uploads explicitly per candidate.
 - Keep quality gates passing.
@@ -55,3 +60,5 @@
 - Elmer deferred or validated status explicit.
 - Public contract freeze approval remains recorded.
 - Any frozen-surface changes have maintainer approval and migration notes.
+- v1.0.0 release criteria and PyPI decision gate reviewed before any final
+  release planning.

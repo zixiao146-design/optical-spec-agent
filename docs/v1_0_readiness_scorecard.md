@@ -62,6 +62,13 @@
 - Publication decision record.
 - PyPI publication readiness checklist.
 - PyPI post-publication verification plan.
+- v1.0.0 release criteria.
+- v1.0.0 release plan.
+- RC to v1.0.0 transition path.
+- v1.0 PyPI decision gate.
+- v1.0.0 post-release verification plan.
+- Agent Studio frontend roadmap as future/Phase 2 planning, not a v1.0.0
+  blocker.
 - TestPyPI upload attempt record for 0.9.0rc6.dev0: first local token attempt
   failed with HTTP 403 Forbidden and did not publish PyPI.
 - TestPyPI status record for 0.9.0rc6.dev0: Trusted Publishing upload
@@ -109,6 +116,9 @@
 - v1.0 public contract freeze is approved for the documented surface.
 - PyPI publication remains a hard strategic decision.
 - `v1.0.0` final release remains separately gated.
+- v1.0.0 release criteria and release plan are documented, but no v1.0.0 tag
+  or GitHub release has been created.
+- API/frontend Agent Studio is future work and not a v1.0.0 blocker.
 - No new GitHub Actions workflow was added during operations readiness because
   existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
   reviewed and documented instead of duplicating automation.
@@ -131,6 +141,11 @@
 - Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action.
 - Use `docs/pypi_publication_readiness_checklist.md` and
   `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.
+- Use `docs/v1_0_release_criteria.md`, `docs/v1_0_release_plan.md`,
+  `docs/rc_to_v1_0_transition_path.md`, `docs/v1_0_pypi_decision_gate.md`,
+  `docs/v1_0_post_release_verification_plan.md`, and
+  `docs/agent_studio_frontend_roadmap.md` before any v1.0.0 release planning
+  decision.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and

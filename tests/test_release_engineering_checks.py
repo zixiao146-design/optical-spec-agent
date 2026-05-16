@@ -169,6 +169,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_contract_frozen_surface.md",
         "v1_0_contract_non_goals.md",
         "v1_0_breaking_change_policy.md",
+        "v1_0_release_criteria.md",
+        "v1_0_release_plan.md",
+        "rc_to_v1_0_transition_path.md",
+        "v1_0_pypi_decision_gate.md",
+        "v1_0_post_release_verification_plan.md",
+        "agent_studio_frontend_roadmap.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
         "github_release_draft_v0.9.0rc5.md",
@@ -267,6 +273,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v1.0 Contract Frozen Surface" in combined
     assert "v1.0 Contract Non-goals" in combined
     assert "v1.0 Breaking Change Policy" in combined
+    assert "v1.0.0 Release Criteria" in combined
+    assert "v1.0.0 Release Plan" in combined
+    assert "RC to v1.0.0 Transition Path" in combined
+    assert "v1.0 PyPI Decision Gate" in combined
+    assert "v1.0.0 Post-release Verification Plan" in combined
+    assert "Agent Studio Frontend Roadmap" in combined
+    assert "not a v1.0.0 release blocker" in combined
     assert "Maintainer confirmation: approved" in combined
     assert "Publication Decision Record" in combined
     assert "PyPI Publication Readiness Checklist" in combined
