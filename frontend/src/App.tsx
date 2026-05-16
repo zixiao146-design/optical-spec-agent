@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { API_BASE_URL } from "./api/client";
 import { BoundaryBadge } from "./components/BoundaryBadge";
+import { SafetyNotice } from "./components/SafetyNotice";
 import { AdapterMatrixPage } from "./pages/AdapterMatrixPage";
 import { ArtifactPreviewPage } from "./pages/ArtifactPreviewPage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -61,6 +62,7 @@ export default function App() {
               key={page}
               className={page === activePage ? "active" : ""}
               onClick={() => setActivePage(page)}
+              aria-current={page === activePage ? "page" : undefined}
             >
               {page}
             </button>
@@ -83,6 +85,7 @@ export default function App() {
             <BoundaryBadge tone="notice">Preview-first</BoundaryBadge>
           </div>
         </header>
+        <SafetyNotice compact />
         {content}
       </main>
     </div>

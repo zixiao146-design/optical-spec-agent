@@ -18,6 +18,8 @@ def test_frontend_mvp_acceptance_criteria_cover_functional_safety_and_technical_
     assert "Can call all frontend-ready endpoints" in text
     assert "Can render adapter matrix" in text
     assert "Can render workflow plan" in text
+    assert "Can show loading, empty, error, and API disconnected states" in text
+    assert "Can show demo fixture mode" in text
     assert "UI must not expose PyPI/TestPyPI upload button" in text
     assert "UI must not expose tag/release button" in text
     assert "UI must not imply production-grade validation" in text
@@ -25,3 +27,6 @@ def test_frontend_mvp_acceptance_criteria_cover_functional_safety_and_technical_
     assert "API base configurable" in text
     assert "Uses API contract version 0.1" in text
     assert "No generated build artifacts committed" in text
+    assert "LoadingState" in text
+    assert "ApiDisconnectedNotice" in text
+    assert "aria-live" in text

@@ -191,6 +191,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "frontend_safety_policy.md",
         "frontend_mvp_implementation_plan.md",
         "frontend_mvp_runbook.md",
+        "frontend_mvp_qa_checklist.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -219,6 +220,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "api" / "frontend_fixture_manifest.json").exists()
     assert (ROOT / "scripts" / "smoke_agent_api.sh").exists()
     assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
+    assert (ROOT / "scripts" / "smoke_frontend_mvp.sh").exists()
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
@@ -285,6 +287,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Agent Studio Frontend MVP Implementation Plan" in combined
     assert "Frontend implementation: MVP implemented under `frontend/`" in combined
     assert "Agent Studio Frontend MVP Runbook" in combined
+    assert "Agent Studio Frontend MVP QA Checklist" in combined
+    assert "Demo fixture mode" in combined
+    assert "not live validation" in combined
     assert "React + Vite + TypeScript" in combined
     assert "No PyPI/TestPyPI upload controls in MVP" in combined
     assert "No tag/release controls in MVP" in combined
@@ -292,6 +297,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "examples/api/" in combined
     assert "scripts/smoke_agent_api.sh" in combined
     assert "scripts/check_api_fixtures.py" in combined
+    assert "scripts/smoke_frontend_mvp.sh" in combined
     assert "No external solver execution by default" in combined
     assert "No external LLM call by default" in combined
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined
@@ -386,6 +392,7 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "run_optional_optiland_validation.sh",
         ROOT / "scripts" / "run_optional_elmer_validation.sh",
         ROOT / "scripts" / "smoke_agent_api.sh",
+        ROOT / "scripts" / "smoke_frontend_mvp.sh",
         ROOT / "Makefile",
     ]
     forbidden = [

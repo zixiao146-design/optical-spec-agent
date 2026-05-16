@@ -5,7 +5,7 @@
 - Current public prerelease: v0.9.0rc6
 - Current main development version: 0.9.0rc7.dev0
 - Local Agent API status: frontend-readiness / candidate API
-- Frontend implementation: not started
+- Frontend implementation: local MVP implemented under `frontend/`
 - PyPI: not published
 
 ## API contract version
@@ -43,3 +43,5 @@ Frontend handoff guidance is documented in `docs/api_local_launch_guide.md`,
 consistency is checked by `scripts/check_api_fixtures.py`, and live API smoke
 coverage is checked by `scripts/smoke_agent_api.sh`. These scripts preserve
 `api_contract_version: "0.1"` and the same conservative safety defaults.
+Frontend MVP smoke is checked by `scripts/smoke_frontend_mvp.sh`; demo fixture
+mode remains explicitly not live validation.

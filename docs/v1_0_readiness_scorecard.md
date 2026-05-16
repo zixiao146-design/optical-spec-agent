@@ -185,6 +185,8 @@
   bounded.
 - Use `docs/frontend_mvp_runbook.md` before running or hardening the frontend
   MVP.
+- Use `docs/frontend_mvp_qa_checklist.md` and `scripts/smoke_frontend_mvp.sh`
+  before demoing or extending the frontend MVP.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and

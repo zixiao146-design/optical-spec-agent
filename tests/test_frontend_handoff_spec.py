@@ -23,6 +23,8 @@ def test_frontend_handoff_spec_maps_screens_to_endpoints_and_limits_scope():
     assert "docs/frontend_safety_policy.md" in text
     assert "docs/frontend_mvp_implementation_plan.md" in text
     assert "docs/frontend_mvp_runbook.md" in text
+    assert "loading, empty, error, and API disconnected states" in text
+    assert "not live validation" in text
     for endpoint in [
         "GET /api/health",
         "GET /api/version",
@@ -48,6 +50,8 @@ def test_frontend_handoff_spec_maps_screens_to_endpoints_and_limits_scope():
     assert "React + Vite + TypeScript frontend app exists under `frontend/`" in text
     assert "VITE_API_BASE_URL" in text
     assert "Dashboard, Spec Input, Adapter Matrix, Workflow Plan" in text
+    assert "LoadingState" in text
+    assert "ApiDisconnectedNotice" in text
     assert "No session history" in text
     assert "No login" in text
     assert "No cloud backend" in text

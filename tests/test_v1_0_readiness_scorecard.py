@@ -34,6 +34,8 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Agent Studio frontend MVP planning docs" in text
     assert "Agent Studio frontend MVP implementation under `frontend/`" in text
     assert "Agent Studio frontend MVP runbook" in text
+    assert "docs/frontend_mvp_qa_checklist.md" in text
+    assert "scripts/smoke_frontend_mvp.sh" in text
     assert "docs/frontend_mvp_product_spec.md" in text
     assert "docs/frontend_mvp_implementation_plan.md" in text
     assert "docs/frontend_mvp_runbook.md" in text

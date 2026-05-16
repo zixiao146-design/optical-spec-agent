@@ -1,20 +1,39 @@
 import { useEffect, useState } from "react";
 import { agentApi } from "../api/client";
+import { INITIAL_LOADING_STATE, stateFromPayload, type RemoteState } from "../api/state";
 import type { HealthResponse, ReadinessResponse, VersionResponse } from "../api/types";
+import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
+import { LoadingState } from "../components/LoadingState";
 import { StatusCard } from "../components/StatusCard";
+import { demoHealth, demoReadiness, demoVersion } from "../fixtures/demoData";
 
 export function DashboardPage() {
-  const [health, setHealth] = useState<HealthResponse | undefined>();
-  const [version, setVersion] = useState<VersionResponse | undefined>();
-  const [readiness, setReadiness] = useState<ReadinessResponse | undefined>();
+  const [health, setHealth] = useState<RemoteState<HealthResponse>>(INITIAL_LOADING_STATE);
+  const [version, setVersion] = useState<RemoteState<VersionResponse>>(INITIAL_LOADING_STATE);
+  const [readiness, setReadiness] = useState<RemoteState<ReadinessResponse>>(INITIAL_LOADING_STATE);
 
   useEffect(() => {
-    void agentApi.getHealth().then((payload) => setHealth(payload as HealthResponse));
-    void agentApi.getVersion().then((payload) => setVersion(payload as VersionResponse));
-    void agentApi.getReadiness().then((payload) => setReadiness(payload as ReadinessResponse));
+    let active = true;
+    void agentApi.getHealth().then((payload) => {
+      if (active) setHealth(stateFromPayload(payload, demoHealth, "Demo health fixture shown; this is not live API health."));
+    });
+    void agentApi.getVersion().then((payload) => {
+      if (active) setVersion(stateFromPayload(payload, demoVersion, "Demo version fixture shown; this is not a live API version check."));
+    });
+    void agentApi.getReadiness().then((payload) => {
+      if (active) setReadiness(stateFromPayload(payload, demoReadiness, "Demo readiness fixture shown; this is not live validation."));
+    });
+    return () => {
+      active = false;
+    };
   }, []);
+
+  const isLoading = [health, version, readiness].some((item) => item.status === "loading");
+  const demoMessage = [health, version, readiness].find((item) => item.status === "demo")?.message;
+  const error = [health, version, readiness].find((item) => item.status === "error")?.error;
 
   return (
     <div className="page-grid">
@@ -35,21 +54,30 @@ export function DashboardPage() {
         </div>
       </section>
 
+      {isLoading ? <LoadingState label="Loading dashboard from the local Agent API..." /> : null}
+      {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
+      {error ? (
+        <ErrorState
+          message={error.message}
+          actions={error.recommended_next_actions}
+        />
+      ) : null}
+
       <section className="status-grid wide">
-        <StatusCard label="Service" value={health?.status || "loading"} note={health?.service} />
+        <StatusCard label="Service" value={health.data?.status || health.status} note={health.data?.service} />
         <StatusCard
           label="Package"
-          value={version?.package_version || "loading"}
-          note={version?.api_contract_version ? `API ${version.api_contract_version}` : undefined}
+          value={version.data?.package_version || version.status}
+          note={version.data?.api_contract_version ? `API ${version.data.api_contract_version}` : undefined}
         />
         <StatusCard
           label="Public prerelease"
-          value={readiness?.current_public_prerelease || "loading"}
+          value={readiness.data?.current_public_prerelease || readiness.status}
           note="Current public candidate"
         />
         <StatusCard
           label="PyPI"
-          value={readiness?.pypi?.published === false ? "not published" : "loading"}
+          value={readiness.data?.pypi?.published === false ? "not published" : readiness.status}
           note="No publication control in UI"
         />
       </section>
@@ -57,7 +85,7 @@ export function DashboardPage() {
       <section className="page-panel wide">
         <h3>Recommended next actions</h3>
         <ul className="action-list">
-          {(readiness?.recommended_next_actions || ["Start the local API to load readiness."]).map(
+          {(readiness.data?.recommended_next_actions || ["Start the local API to load readiness."]).map(
             (item) => (
               <li key={item}>{item}</li>
             ),
@@ -65,7 +93,7 @@ export function DashboardPage() {
         </ul>
       </section>
 
-      <JsonPanel title="Readiness payload" value={readiness || { status: "loading" }} />
+      <JsonPanel title="Readiness payload" value={readiness.data || { status: readiness.status }} />
     </div>
   );
 }

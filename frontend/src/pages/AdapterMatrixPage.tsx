@@ -1,21 +1,37 @@
 import { useEffect, useState } from "react";
 import { agentApi } from "../api/client";
-import type { AdapterSummary, ValidationEvidenceItem } from "../api/types";
+import { INITIAL_LOADING_STATE, stateFromPayload, type RemoteState } from "../api/state";
+import type { AdaptersResponse, ValidationEvidenceResponse } from "../api/types";
 import { AdapterMatrix } from "../components/AdapterMatrix";
+import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { EmptyState } from "../components/EmptyState";
+import { ErrorState } from "../components/ErrorState";
+import { LoadingState } from "../components/LoadingState";
+import { demoAdapters, demoEvidence } from "../fixtures/demoData";
 
 export function AdapterMatrixPage() {
-  const [adapters, setAdapters] = useState<AdapterSummary[]>([]);
-  const [evidence, setEvidence] = useState<ValidationEvidenceItem[]>([]);
+  const [adapters, setAdapters] = useState<RemoteState<AdaptersResponse>>(INITIAL_LOADING_STATE);
+  const [evidence, setEvidence] = useState<RemoteState<ValidationEvidenceResponse>>(INITIAL_LOADING_STATE);
 
   useEffect(() => {
+    let active = true;
     void agentApi.getAdapters().then((payload) => {
-      if ("adapters" in payload) setAdapters(payload.adapters);
+      if (active) setAdapters(stateFromPayload(payload, demoAdapters, "Demo adapter fixture shown; this is not live registry data."));
     });
     void agentApi.getValidationEvidence().then((payload) => {
-      if ("validation_evidence" in payload) setEvidence(payload.validation_evidence);
+      if (active) setEvidence(stateFromPayload(payload, demoEvidence, "Demo evidence fixture shown; this is not live evidence data."));
     });
+    return () => {
+      active = false;
+    };
   }, []);
+
+  const isLoading = adapters.status === "loading" || evidence.status === "loading";
+  const demoMessage = [adapters, evidence].find((item) => item.status === "demo")?.message;
+  const error = [adapters, evidence].find((item) => item.status === "error")?.error;
+  const adapterRows = adapters.data?.adapters || [];
+  const evidenceRows = evidence.data?.validation_evidence || [];
 
   return (
     <div className="page-grid">
@@ -34,7 +50,13 @@ export function AdapterMatrixPage() {
         </div>
       </section>
       <section className="page-panel wide">
-        <AdapterMatrix adapters={adapters} evidence={evidence} />
+        {isLoading ? <LoadingState label="Loading adapter matrix from the local API..." /> : null}
+        {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
+        {error ? <ErrorState message={error.message} actions={error.recommended_next_actions} /> : null}
+        {!isLoading && adapterRows.length === 0 && !error ? (
+          <EmptyState title="No adapters available" message="Start the local API or use demo fixture mode." />
+        ) : null}
+        {adapterRows.length > 0 ? <AdapterMatrix adapters={adapterRows} evidence={evidenceRows} /> : null}
       </section>
     </div>
   );

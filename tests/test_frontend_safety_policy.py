@@ -20,3 +20,5 @@ def test_frontend_safety_policy_keeps_mvp_local_and_non_publishing():
     assert "No production-grade physical validation claim" in text
     assert "No formal convergence proof claim" in text
     assert "Optional solver execution, if ever added, must require explicit approval gates" in text
+    assert "demo fixture mode must be labeled as not live validation" in text
+    assert "Loading, empty, error, and API disconnected states" in text

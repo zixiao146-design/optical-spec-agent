@@ -1,21 +1,40 @@
 import { useEffect, useState } from "react";
 import { agentApi } from "../api/client";
+import { INITIAL_LOADING_STATE, stateFromPayload, type RemoteState } from "../api/state";
+import type { HealthResponse, SchemaResponse, VersionResponse } from "../api/types";
+import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
+import { LoadingState } from "../components/LoadingState";
 import { StatusCard } from "../components/StatusCard";
+import { demoHealth, demoSchema, demoVersion } from "../fixtures/demoData";
 
 export function SystemStatusPage() {
-  const [health, setHealth] = useState<unknown>();
-  const [version, setVersion] = useState<unknown>();
-  const [schema, setSchema] = useState<unknown>();
+  const [health, setHealth] = useState<RemoteState<HealthResponse>>(INITIAL_LOADING_STATE);
+  const [version, setVersion] = useState<RemoteState<VersionResponse>>(INITIAL_LOADING_STATE);
+  const [schema, setSchema] = useState<RemoteState<SchemaResponse>>(INITIAL_LOADING_STATE);
 
   useEffect(() => {
-    void agentApi.getHealth().then(setHealth);
-    void agentApi.getVersion().then(setVersion);
-    void agentApi.getSchema().then(setSchema);
+    let active = true;
+    void agentApi.getHealth().then((payload) => {
+      if (active) setHealth(stateFromPayload(payload, demoHealth, "Demo health fixture shown; this is not live API health."));
+    });
+    void agentApi.getVersion().then((payload) => {
+      if (active) setVersion(stateFromPayload(payload, demoVersion, "Demo version fixture shown; this is not live API version."));
+    });
+    void agentApi.getSchema().then((payload) => {
+      if (active) setSchema(stateFromPayload(payload, demoSchema, "Demo schema fixture shown; this is not live schema metadata."));
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
-  const versionPayload = version as { api_contract_version?: string; package_version?: string };
+  const isLoading = [health, version, schema].some((item) => item.status === "loading");
+  const demoMessage = [health, version, schema].find((item) => item.status === "demo")?.message;
+  const error = [health, version, schema].find((item) => item.status === "error")?.error;
+
   return (
     <div className="page-grid">
       <section className="page-panel wide">
@@ -32,14 +51,17 @@ export function SystemStatusPage() {
           <BoundaryBadge>No tag or release controls in this UI</BoundaryBadge>
         </div>
       </section>
+      {isLoading ? <LoadingState label="Loading system status from the local API..." /> : null}
+      {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
+      {error ? <ErrorState message={error.message} actions={error.recommended_next_actions} /> : null}
       <section className="status-grid wide">
-        <StatusCard label="API contract" value={versionPayload.api_contract_version || "loading"} />
-        <StatusCard label="Package" value={versionPayload.package_version || "loading"} />
-        <StatusCard label="Schema" value={(schema as { schema_name?: string })?.schema_name || "loading"} />
+        <StatusCard label="API contract" value={version.data?.api_contract_version || version.status} />
+        <StatusCard label="Package" value={version.data?.package_version || version.status} />
+        <StatusCard label="Schema" value={schema.data?.schema_name || schema.status} />
       </section>
-      <JsonPanel title="Health" value={health || { status: "loading" }} />
-      <JsonPanel title="Version" value={version || { status: "loading" }} />
-      <JsonPanel title="Schema" value={schema || { status: "loading" }} />
+      <JsonPanel title="Health" value={health.data || health.error || { status: health.status }} />
+      <JsonPanel title="Version" value={version.data || version.error || { status: version.status }} />
+      <JsonPanel title="Schema" value={schema.data || schema.error || { status: schema.status }} />
     </div>
   );
 }

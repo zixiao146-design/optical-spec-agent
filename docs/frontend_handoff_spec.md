@@ -11,6 +11,9 @@ Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
 `docs/frontend_mvp_implementation_plan.md`.
 The implemented local MVP lives under `frontend/`, with run instructions in
 `docs/frontend_mvp_runbook.md`.
+The hardened MVP includes loading, empty, error, and API disconnected states.
+When the API is unavailable, demo fixture mode keeps the UI navigable but is
+explicitly marked as not live validation.
 
 ## API base
 
@@ -49,6 +52,10 @@ The implemented local MVP lives under `frontend/`, with run instructions in
 - It calls the Local Agent API rather than shelling out to the CLI.
 - It includes Dashboard, Spec Input, Adapter Matrix, Workflow Plan, Artifact
   Preview, Validation Evidence, and System Status views.
+- It includes shared `LoadingState`, `EmptyState`, `ErrorState`,
+  `SafetyNotice`, and `ApiDisconnectedNotice` components.
+- It can fall back to demo fixtures for local walkthroughs without live API
+  validation.
 
 ## Not implemented beyond MVP
 

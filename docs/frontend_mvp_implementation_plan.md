@@ -40,7 +40,10 @@ The implementation uses the existing Local Agent API and defaults to
 5. Workflow plan. Completed.
 6. Adapter preview. Completed.
 7. Evidence view. Completed.
-8. Polish / docs. Initial MVP completed; hardening remains future work.
+8. Polish / docs. Initial MVP completed.
+9. Loading / empty / error / API disconnected state hardening. Completed.
+10. Demo fixture mode for local walkthroughs when API is unavailable. Completed.
+11. Frontend smoke script and QA checklist. Completed.
 
 ## Guardrails for implementation task
 
@@ -51,3 +54,5 @@ The implementation uses the existing Local Agent API and defaults to
 - Do not imply formal convergence proof.
 - Do not commit `node_modules` or frontend build artifacts.
 - Keep `VITE_API_BASE_URL` local by default.
+- Demo fixture mode must be visibly labeled as not live validation.
+- Loading, error, and disconnected states must preserve safety boundaries.

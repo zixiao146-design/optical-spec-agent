@@ -116,7 +116,8 @@ v1.0.0 planning package 见 `docs/v1_0_release_criteria.md`、
 Local Agent API readiness 见 `docs/api_agent_contract.md` 和
 `docs/cli_api_parity.md`。该 API 为未来 Agent Studio frontend 暴露
 health/version、adapter registry、schema、parse、validate、workflow-plan、
-adapter-preview、validation evidence 和 readiness/status；frontend 尚未实现。
+adapter-preview、validation evidence 和 readiness/status；本地 frontend MVP
+已在 `frontend/` 中实现。
 API 默认仍不运行外部 solver、不调用外部 LLM、不依赖 proprietary solver、
 不要求网络、不声称 production-grade physical validation，也不声称 formal
 convergence proof。
@@ -134,9 +135,12 @@ frontend MVP planning package 见 `docs/frontend_mvp_product_spec.md`、
 `docs/frontend_mvp_acceptance_criteria.md`、`docs/frontend_safety_policy.md`
 和 `docs/frontend_mvp_implementation_plan.md`。Agent Studio frontend MVP 已在
 `frontend/` 中实现为本地 React + Vite + TypeScript app，运行说明见
-`docs/frontend_mvp_runbook.md`。它使用 Local Agent API，默认 API base 为
+`docs/frontend_mvp_runbook.md`，本地 demo QA checklist 见
+`docs/frontend_mvp_qa_checklist.md`。它使用 Local Agent API，默认 API base 为
 `http://127.0.0.1:8000`，不提供 upload、publish、tag、release、solver-run、
-external LLM、login、cloud 或 production deployment 控件。当前
+external LLM、login、cloud 或 production deployment 控件。API 断开时 UI 会进入
+明确标注的 demo fixture mode；demo mode 不是 live validation。frontend smoke
+脚本为 `scripts/smoke_frontend_mvp.sh`。当前
 `api_contract_version` 为 0.1。该 API 仍是 frontend-readiness / candidate API，
 不是单独冻结的 v1.0 API contract。这项 API/frontend 工作不触发 PyPI 发布，也不
 改变当前版本或 release 状态。

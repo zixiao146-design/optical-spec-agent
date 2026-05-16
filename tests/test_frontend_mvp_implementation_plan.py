@@ -20,6 +20,10 @@ def test_frontend_mvp_implementation_plan_tracks_implemented_mvp_scope():
     assert "Connect health/version/readiness. Completed." in text
     assert "Adapter matrix. Completed." in text
     assert "Spec input / validate. Completed." in text
+    assert "Loading / empty / error / API disconnected state hardening. Completed." in text
+    assert "Demo fixture mode for local walkthroughs when API is unavailable. Completed." in text
+    assert "Frontend smoke script and QA checklist. Completed." in text
     assert "Keep `VITE_API_BASE_URL` local by default" in text
+    assert "Demo fixture mode must be visibly labeled as not live validation" in text
     assert "Do not commit `node_modules` or frontend build artifacts" in text
     assert (ROOT / "frontend").exists()

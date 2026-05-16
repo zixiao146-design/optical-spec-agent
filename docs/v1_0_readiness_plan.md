@@ -104,6 +104,9 @@ Recommended goals:
   MVP aligned with the planning package.
 - Use `docs/frontend_mvp_runbook.md` to run the local React + Vite +
   TypeScript MVP against the Local Agent API.
+- Use `docs/frontend_mvp_qa_checklist.md` and `scripts/smoke_frontend_mvp.sh`
+  to keep frontend loading, empty, error, API disconnected, and demo fixture
+  states suitable for local demos.
 - Keep API defaults local/synchronous/preview-first: no external solver
   execution, no external LLM call, no proprietary solver requirement, and no
   network dependency for documented examples.

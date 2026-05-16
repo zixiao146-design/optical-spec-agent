@@ -21,6 +21,9 @@ Frontend MVP planning is documented in `docs/frontend_mvp_product_spec.md`,
 `docs/frontend_mvp_implementation_plan.md`.
 The implemented local MVP lives under `frontend/`, with run instructions in
 `docs/frontend_mvp_runbook.md`.
+Hardened frontend demo checks are documented in
+`docs/frontend_mvp_qa_checklist.md` and exercised by
+`scripts/smoke_frontend_mvp.sh`. Demo fixture mode is not live validation.
 
 | CLI command | API endpoint | Parity status | Notes |
 |---|---|---|---|

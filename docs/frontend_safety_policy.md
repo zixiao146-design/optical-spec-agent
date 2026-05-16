@@ -13,3 +13,6 @@
   the product scope.
 - The implemented MVP must not include buttons or API calls for package upload,
   PyPI/TestPyPI publication, tag creation, or GitHub release creation.
+- API disconnected/demo fixture mode must be labeled as not live validation.
+- Loading, empty, error, and API disconnected states must preserve the same
+  no-solver/no-LLM/no-publication boundary copy.

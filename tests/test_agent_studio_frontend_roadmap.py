@@ -24,6 +24,9 @@ def test_agent_studio_frontend_roadmap_exists_and_is_future_work():
     assert "docs/frontend_mvp_implementation_plan.md" in text
     assert "Frontend MVP implementation exists under `frontend/`" in text
     assert "docs/frontend_mvp_runbook.md" in text
+    assert "docs/frontend_mvp_qa_checklist.md" in text
+    assert "scripts/smoke_frontend_mvp.sh" in text
+    assert "Loading, empty, error, API disconnected, and demo fixture states" in text
     assert "React + Vite + TypeScript MVP scaffold exists" in text
     assert "Spec input" in text
     assert "Adapter matrix" in text

@@ -10,6 +10,8 @@
 - Can render workflow plan.
 - Can render adapter preview.
 - Can render validation evidence.
+- Can show loading, empty, error, and API disconnected states.
+- Can show demo fixture mode when the local API is unavailable.
 
 ## 2. Safety criteria
 
@@ -19,6 +21,9 @@
 - UI must not expose tag/release button.
 - UI must not imply production-grade validation.
 - UI must not imply formal convergence proof.
+- Demo fixture mode must state that it is not live validation.
+- UI must show that it does not control PyPI/TestPyPI publication or GitHub
+  releases.
 
 ## 3. Technical criteria
 
@@ -29,6 +34,10 @@
 - Uses API contract version 0.1.
 - Uses `examples/api` fixtures for initial development.
 - No generated build artifacts committed.
+- Uses shared `LoadingState`, `EmptyState`, `ErrorState`, `SafetyNotice`, and
+  `ApiDisconnectedNotice` components.
+- Buttons are disabled while the matching local API action is loading.
+- Status and error regions use `aria-live`.
 
 ## 4. Not required for MVP
 
@@ -44,4 +53,7 @@
 - Frontend source exists under `frontend/`.
 - API base URL is configurable with `VITE_API_BASE_URL`.
 - The MVP uses Local Agent API endpoints only.
+- The MVP has demo fixture fallback for API disconnected local demos.
+- `./scripts/smoke_frontend_mvp.sh` verifies typecheck/build without committing
+  generated frontend artifacts.
 - Build outputs, `node_modules`, and generated artifacts must not be committed.

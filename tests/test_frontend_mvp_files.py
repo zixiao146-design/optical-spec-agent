@@ -14,6 +14,16 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
     assert (FRONTEND / "src" / "App.tsx").exists()
     assert (FRONTEND / "src" / "api" / "client.ts").exists()
     assert (FRONTEND / "src" / "api" / "types.ts").exists()
+    assert (FRONTEND / "src" / "api" / "state.ts").exists()
+    assert (FRONTEND / "src" / "fixtures" / "demoData.ts").exists()
+    for component in [
+        "LoadingState.tsx",
+        "EmptyState.tsx",
+        "ErrorState.tsx",
+        "SafetyNotice.tsx",
+        "ApiDisconnectedNotice.tsx",
+    ]:
+        assert (FRONTEND / "src" / "components" / component).exists()
 
     package_json = _read(FRONTEND / "package.json")
     assert '"dev"' in package_json
@@ -46,6 +56,7 @@ def test_frontend_source_has_no_release_or_upload_controls():
         assert phrase not in source
     assert "No solver run" in source
     assert "No external LLM" in source
+    assert "This UI does not control PyPI/TestPyPI publication or GitHub releases." in source
 
 
 def test_frontend_generated_artifacts_are_not_present():

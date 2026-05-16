@@ -31,7 +31,8 @@ def test_api_examples_readme_and_manifest_exist():
     assert manifest["current_public_prerelease"] == "v0.9.0rc6"
     assert manifest["current_main_development_version"] == "0.9.0rc7.dev0"
     assert manifest["api_contract_version"] == "0.1"
-    assert manifest["frontend_implementation"] == "not started"
+    assert manifest["frontend_implementation"] == "mvp implemented under frontend/"
+    assert "not live validation" in manifest["demo_mode"]
 
 
 def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_defaults():

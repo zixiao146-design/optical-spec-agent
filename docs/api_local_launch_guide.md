@@ -61,3 +61,7 @@ Frontend MVP planning is tracked in `docs/frontend_mvp_product_spec.md`,
 The MVP frontend lives under `frontend/` and is run with `npm run dev` after
 starting the API. It remains local-first and does not expose solver execution,
 external LLM, upload, publish, tag, or release controls.
+Frontend hardening and local demo checks are tracked in
+`docs/frontend_mvp_qa_checklist.md` and `scripts/smoke_frontend_mvp.sh`.
+If the API is disconnected, demo fixture mode is visibly marked as not live
+validation.

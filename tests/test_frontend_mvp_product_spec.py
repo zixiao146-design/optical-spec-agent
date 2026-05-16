@@ -28,3 +28,5 @@ def test_frontend_mvp_product_spec_exists_and_bounds_mvp_scope():
     assert "No formal convergence proof" in text
     assert "React + Vite + TypeScript scaffold exists in `frontend/`" in text
     assert "docs/frontend_mvp_runbook.md" in text
+    assert "Loading, empty, error, API disconnected, and demo fixture states" in text
+    assert "Demo fixture mode is labeled as not live validation" in text

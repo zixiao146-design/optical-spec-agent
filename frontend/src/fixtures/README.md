@@ -2,7 +2,8 @@
 
 The frontend MVP uses the canonical API fixtures in `../../examples/api` during
 development. Keeping fixture ownership outside the frontend avoids duplicating
-API contract examples.
+API contract examples. Small in-app demo fixtures live in `demoData.ts` so the
+UI can stay navigable when the local API is disconnected.
 
 - API contract version: 0.1
 - No network access beyond the configured local API base URL.
@@ -10,3 +11,4 @@ API contract examples.
 - No external LLM call by default.
 - No PyPI/TestPyPI upload controls.
 - No tag or release controls.
+- Demo fixture mode is not live validation.

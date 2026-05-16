@@ -28,6 +28,9 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
     assert "docs/api_curl_examples.md" in text
     assert "scripts/check_api_fixtures.py" in text
     assert "scripts/smoke_agent_api.sh" in text
+    assert "docs/frontend_mvp_qa_checklist.md" in text
+    assert "scripts/smoke_frontend_mvp.sh" in text
+    assert "Demo fixture mode is explicitly not live validation" in text
     assert "not yet a separately frozen v1.0 API contract" in text
     assert "Frontend MVP implementation: available under `frontend/`" in text
     assert "docs/frontend_mvp_runbook.md" in text

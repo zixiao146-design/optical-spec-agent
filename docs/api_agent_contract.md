@@ -34,6 +34,8 @@ solvers, external LLMs, or proprietary tools by default.
 - API smoke script: `scripts/smoke_agent_api.sh`
 - Frontend MVP implementation: available under `frontend/`
 - Frontend MVP runbook: `docs/frontend_mvp_runbook.md`
+- Frontend MVP QA checklist: `docs/frontend_mvp_qa_checklist.md`
+- Frontend MVP smoke script: `scripts/smoke_frontend_mvp.sh`
 - PyPI: not published
 
 The Local Agent API is not yet a separately frozen v1.0 API contract unless a
@@ -104,3 +106,5 @@ upload packages, create tags, or create releases.
 Frontend MVP implementation now exists under `frontend/`. It is local-first,
 uses `VITE_API_BASE_URL`, and does not include solver execution, external LLM,
 upload, publish, tag, release, login, cloud, or production deployment controls.
+The hardened MVP includes loading, empty, error, API disconnected, and demo
+fixture states. Demo fixture mode is explicitly not live validation.

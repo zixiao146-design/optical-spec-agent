@@ -28,10 +28,14 @@ validation evidence.
   `docs/frontend_mvp_implementation_plan.md`.
 - Frontend MVP implementation exists under `frontend/`.
 - Frontend MVP runbook: `docs/frontend_mvp_runbook.md`.
+- Frontend MVP QA checklist: `docs/frontend_mvp_qa_checklist.md`.
 - Frontend fixture examples exist under `examples/api/`.
 - Fixture consistency is checked by `scripts/check_api_fixtures.py`.
 - API smoke coverage is checked by `scripts/smoke_agent_api.sh`.
+- Frontend smoke coverage is checked by `scripts/smoke_frontend_mvp.sh`.
 - React + Vite + TypeScript MVP scaffold exists and remains local-first.
+- Loading, empty, error, API disconnected, and demo fixture states exist for
+  local demos and continued development.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out
@@ -55,6 +59,7 @@ validation evidence.
 - Local launch guide, curl examples, and live fixture consistency checks.
 - Frontend MVP product spec, information architecture, API mapping, user
   flows, acceptance criteria, safety policy, and implementation plan.
+- Frontend QA checklist and smoke script.
 
 ### Phase 2
 
@@ -66,6 +71,8 @@ validation evidence.
 - Validation evidence view.
 - Dashboard/readiness and system status views.
 - Local API base URL configuration with `VITE_API_BASE_URL`.
+- Loading, empty, error, and API disconnected states.
+- Demo fixture mode that is explicitly not live validation.
 
 ### Phase 3
 

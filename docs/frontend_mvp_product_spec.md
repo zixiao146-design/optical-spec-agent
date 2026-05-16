@@ -70,4 +70,7 @@ readiness status.
 - No PyPI/TestPyPI upload controls, tag/release controls, solver-run controls,
   external LLM controls, login, cloud backend, or production deployment are
   included.
+- Loading, empty, error, API disconnected, and demo fixture states are included
+  for local demos and continued development.
+- Demo fixture mode is labeled as not live validation.
 - Run instructions are documented in `docs/frontend_mvp_runbook.md`.

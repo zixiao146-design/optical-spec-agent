@@ -88,12 +88,12 @@ Local Agent API readiness is now tracked in
 [`docs/api_agent_contract.md`](docs/api_agent_contract.md) and
 [`docs/cli_api_parity.md`](docs/cli_api_parity.md). The API exposes local
 health/version, adapter registry, schema, parse, validate, workflow-plan,
-adapter-preview, validation-evidence, and readiness endpoints for a future
-Agent Studio frontend. The frontend is not implemented yet, and the API keeps
-the same default boundaries: no external solver execution, no external LLM
-call, no proprietary solver dependency, no network requirement for documented
-local examples, no production-grade physical validation claim, and no formal
-convergence proof claim.
+adapter-preview, validation-evidence, and readiness endpoints for Agent Studio.
+The local frontend MVP is implemented under [`frontend/`](frontend/), and the
+API/frontend stack keeps the same default boundaries: no external solver
+execution, no external LLM call, no proprietary solver dependency, no network
+requirement for documented local examples, no production-grade physical
+validation claim, and no formal convergence proof claim.
 API response models are defined in
 [`src/optical_spec_agent/api/models.py`](src/optical_spec_agent/api/models.py),
 stable error behavior is documented in
@@ -119,10 +119,15 @@ Agent Studio frontend MVP planning package is documented in
 [`docs/frontend_mvp_implementation_plan.md`](docs/frontend_mvp_implementation_plan.md).
 The Agent Studio frontend MVP is implemented under [`frontend/`](frontend/) as
 a local React + Vite + TypeScript app; run instructions are in
-[`docs/frontend_mvp_runbook.md`](docs/frontend_mvp_runbook.md).
+[`docs/frontend_mvp_runbook.md`](docs/frontend_mvp_runbook.md), and local demo
+QA is tracked in
+[`docs/frontend_mvp_qa_checklist.md`](docs/frontend_mvp_qa_checklist.md).
 It uses the Local Agent API, defaults to `http://127.0.0.1:8000`, and does not
 include upload, publish, tag, release, solver-run, external LLM, login, cloud,
-or production deployment controls.
+or production deployment controls. If the API is disconnected, the UI falls
+back to visibly labeled demo fixture mode; demo mode is not live validation.
+Frontend smoke is available through
+[`scripts/smoke_frontend_mvp.sh`](scripts/smoke_frontend_mvp.sh).
 The current `api_contract_version` is 0.1. The API remains a
 frontend-readiness / candidate API, not a separately frozen v1.0 API contract.
 This API/frontend work does not trigger PyPI publication and does not change
@@ -691,8 +696,9 @@ Interactive docs at `http://localhost:8000/docs`.
 The future Agent Studio handoff surface uses `/api/*` endpoints; see
 [`docs/api_local_launch_guide.md`](docs/api_local_launch_guide.md),
 [`docs/frontend_handoff_spec.md`](docs/frontend_handoff_spec.md), and
-[`docs/api_curl_examples.md`](docs/api_curl_examples.md). The frontend is not
-implemented yet.
+[`docs/api_curl_examples.md`](docs/api_curl_examples.md). The local Agent
+Studio frontend MVP is implemented under [`frontend/`](frontend/) and can be
+checked with [`scripts/smoke_frontend_mvp.sh`](scripts/smoke_frontend_mvp.sh).
 
 Example parse request:
 
