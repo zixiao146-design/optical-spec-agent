@@ -44,6 +44,8 @@ This document describes the current `main` branch. It is not a release tag.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
 - v1.0 compatibility policy exists: `docs/v1_0_compatibility_policy.md`
+- v1.0 public contract freeze approved:
+  `docs/v1_0_public_contract_freeze_status.md`
 - Validation evidence manifest exists: `docs/validation_evidence_manifest.md`
 - Optional open-source solver validation plan exists:
   `docs/open_source_solver_validation_plan.md`
@@ -130,6 +132,7 @@ Current main contract artifacts:
 - `docs/v1_0_compatibility_policy.md`
 - `docs/v1_0_public_contract_freeze.md`
 - `docs/v1_0_public_contract_freeze_confirmation.md`
+- `docs/v1_0_public_contract_freeze_status.md`
 - `docs/v1_0_contract_frozen_surface.md`
 - `docs/v1_0_contract_non_goals.md`
 - `docs/v1_0_breaking_change_policy.md`
@@ -194,7 +197,7 @@ Current v1.0 evidence artifacts:
 - Error model and pre-v1 migration evidence:
   `docs/error_model.md`, `docs/migration_notes_pre_v1.md`, and
   `tests/test_error_model.py`.
-- Public contract freeze candidate evidence:
+- Public contract freeze approved evidence:
   `docs/v1_0_public_contract_freeze.md`,
   `docs/public_contract_manifest.json`,
   `docs/public_contract_change_checklist.md`, and
@@ -227,10 +230,9 @@ Current v1.0 evidence artifacts:
 ## Release Blockers
 
 - No hard release blocker is currently recorded for `0.9.0rc6.dev0` development.
-- v1.0 hard blockers remain: maintainer confirmation of the public contract
-  freeze and an explicit PyPI publication decision.
-- The public contract freeze confirmation package is ready for maintainer
-  review, but maintainer confirmation remains pending.
+- v1.0 hard blockers remain: explicit PyPI publication decision and final
+  `v1.0.0` release criteria.
+- The public contract freeze is approved for the documented surface.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, or `v0.9.0rc5`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
@@ -261,4 +263,5 @@ Current v1.0 evidence artifacts:
 5. Run the packaging and validation gates before any future RC.
 6. Confirm any future `v0.9.0rc6` tag is absent locally and remotely before tag creation.
 7. Create an annotated `v0.9.0rc6` tag only after final maintainer approval.
-8. Keep PyPI/TestPyPI unpublished unless explicitly approved.
+8. Keep PyPI unpublished and do not re-upload TestPyPI unless explicitly
+   approved for a new version.

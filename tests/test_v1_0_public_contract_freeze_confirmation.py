@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_freeze_confirmation_tracks_pending_status_and_scope():
+def test_freeze_confirmation_tracks_approved_status_and_scope():
     path = ROOT / "docs" / "v1_0_public_contract_freeze_confirmation.md"
     assert path.exists()
     text = path.read_text(encoding="utf-8")
@@ -17,10 +17,14 @@ def test_freeze_confirmation_tracks_pending_status_and_scope():
     assert "Current main development version: 0.9.0rc6.dev0" in text
     assert "TestPyPI uploaded and verified: yes" in text
     assert "PyPI published: no" in text
+    assert "PyPI publication approval: not granted" in text
     assert "v1.0.0 released: no" in text
-    assert "Maintainer confirmation: pending" in text
-    assert "This document prepares the maintainer-facing confirmation package" in text
-    assert "This document does not approve the freeze" in text
+    assert "Maintainer confirmation: approved" in text
+    assert "Freeze approval date: 2026-05-16" in text
+    assert "Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe" in text
+    assert "records the maintainer-approved documentation freeze" in text
+    assert "does not publish PyPI" in text
+    assert "does not create `v1.0.0`" in text
 
 
 def test_freeze_confirmation_lists_frozen_areas_and_gates():
@@ -66,4 +70,3 @@ def test_freeze_confirmation_lists_not_frozen_areas():
         "Elmer Level 3 validation",
     ]:
         assert phrase in text
-

@@ -33,6 +33,8 @@
   `docs/pypi_publication_readiness_checklist.md`.
 - PyPI post-publication verification plan:
   `docs/pypi_post_publication_verification_plan.md`.
+- v1.0 public contract freeze approved:
+  `docs/v1_0_public_contract_freeze_status.md`.
 - TestPyPI upload approval status: granted for 0.9.0rc6.dev0 only.
 - TestPyPI upload authorized: yes, TestPyPI only.
 - Upload command authorized: TestPyPI only.
@@ -52,7 +54,8 @@ Do not publish to PyPI from smoke scripts, workflow automation, or local release
 engineering checks.
 
 Current recommendation: do not publish PyPI yet. Continue v1.0 readiness
-engineering and prepare PyPI only after the public contract freeze is confirmed.
+engineering and decide PyPI publication timing separately after reviewing the
+approved public contract freeze package.
 
 Dependency-index caveat: the successful TestPyPI verification installed runtime
 dependencies from PyPI and installed `optical-spec-agent` from TestPyPI with

@@ -6,18 +6,27 @@
 - Current main development version: 0.9.0rc6.dev0
 - TestPyPI uploaded and verified: yes
 - PyPI published: no
+- PyPI publication approval: not granted
 - v1.0.0 released: no
-- Maintainer confirmation: pending
+- Maintainer confirmation: approved
+- Freeze approval date: 2026-05-16
+- Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe
 
 ## What this document is
 
-This document prepares the maintainer-facing confirmation package for freezing
-the v1.0 public contract. It summarizes the candidate frozen public surface,
-the areas that remain preview or explicitly non-goal, and the confirmation
-gates that must be reviewed before the freeze can be approved.
+This document records the maintainer-approved documentation freeze for the
+v1.0 public contract. It summarizes the approved frozen public surface, the
+areas that remain preview or explicitly non-goal, and the gates that should
+remain satisfied before any later v1.0.0 release.
 
-This document does not approve the freeze. Maintainer confirmation remains
-pending until a separate explicit approval step.
+This approval freezes the documented public contract surface only. It does not
+publish PyPI, does not create `v1.0.0`, does not create any tag or GitHub
+release, and does not approve production-grade physical validation or a formal
+convergence proof.
+
+- This freeze does not publish PyPI.
+- This freeze does not create any tag or GitHub release.
+- This freeze does not create `v1.0.0`.
 
 ## Candidate frozen areas
 
@@ -55,6 +64,6 @@ pending until a separate explicit approval step.
 
 ## Current recommendation
 
-Recommendation: keep maintainer confirmation pending until final review, then
-approve freeze in a separate explicit step.
-
+Recommendation: treat the v1.0 public contract freeze as approved for the
+documented surface above, while keeping PyPI publication, `v1.0.0` release,
+tag creation, and GitHub release creation separately gated.

@@ -13,6 +13,8 @@
 - Breaking changes require explicit migration notes.
 - Generated internals may change unless documented as frozen.
 - Preview/scaffold outputs may change.
+- PyPI publication still requires separate approval.
+- Final `v1.0.0` release still requires separate approval.
 
 ## Versioning expectations
 
@@ -20,6 +22,7 @@
 - Post-release main uses `rcN+1.dev0`.
 - Final `v1.0.0` requires separate approval.
 
-This policy does not authorize a v1.0 freeze, PyPI publication, tag creation,
-GitHub release creation, production-grade physical validation claims, or formal
+This policy records that the public contract freeze is approved, but it does
+not authorize PyPI publication, tag creation, GitHub release creation,
+`v1.0.0` release, production-grade physical validation claims, or formal
 convergence proof claims.

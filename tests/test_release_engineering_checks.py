@@ -160,6 +160,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "v1_0_decision_matrix.md",
         "v1_0_public_contract_freeze_checklist.md",
         "v1_0_public_contract_freeze_confirmation.md",
+        "v1_0_public_contract_freeze_status.md",
         "v1_0_contract_frozen_surface.md",
         "v1_0_contract_non_goals.md",
         "v1_0_breaking_change_policy.md",
@@ -244,7 +245,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Offline User Journey" in combined
     assert "Error Model" in combined
     assert "Pre-v1 Migration Notes" in combined
-    assert "v1.0 Public Contract Freeze Candidate" in combined
+    assert "v1.0 Public Contract Freeze" in combined
     assert "Public Contract Change Checklist" in combined
     assert "Quality Gates" in combined
     assert "CI and Quality Gate Parity" in combined
@@ -257,10 +258,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "v1.0 Decision Matrix" in combined
     assert "v1.0 Public Contract Freeze Checklist" in combined
     assert "v1.0 Public Contract Freeze Confirmation" in combined
-    assert "v1.0 Contract Frozen Surface Candidate" in combined
+    assert "v1.0 Public Contract Freeze Status" in combined
+    assert "v1.0 Contract Frozen Surface" in combined
     assert "v1.0 Contract Non-goals" in combined
     assert "v1.0 Breaking Change Policy" in combined
-    assert "Maintainer confirmation: pending" in combined
+    assert "Maintainer confirmation: approved" in combined
     assert "Publication Decision Record" in combined
     assert "PyPI Publication Readiness Checklist" in combined
     assert "PyPI Post-publication Verification Plan" in combined
@@ -408,7 +410,9 @@ def test_public_contract_freeze_artifacts_are_tracked():
     checklist = (ROOT / "docs" / "public_contract_change_checklist.md").read_text(encoding="utf-8")
     assert "v1.0.0 not released" in freeze
     assert "v0.9.0rc6 tag not created" in freeze
-    assert "PyPI/TestPyPI not published/uploaded" in freeze
+    assert "TestPyPI uploaded and verified for `0.9.0rc6.dev0`" in freeze
+    assert "PyPI published: no" in freeze
+    assert "Public contract freeze: approved" in freeze
     assert manifest["version_scope"] == "0.9.0rc6.dev0"
     assert manifest["current_public_prerelease"] == "v0.9.0rc5"
     assert manifest["release_state"]["pypi_published"] is False

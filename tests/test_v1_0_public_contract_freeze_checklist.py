@@ -19,8 +19,10 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     assert "TestPyPI: uploaded for 0.9.0rc6.dev0" in text
     assert "TestPyPI verified: yes" in text
     assert "Clean install from TestPyPI: passed" in text
-    assert "Maintainer confirmation: pending" in text
-    assert "Candidate-stable contract areas" in text
+    assert "Maintainer confirmation: approved" in text
+    assert "Freeze approval date: 2026-05-16" in text
+    assert "Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe" in text
+    assert "Approved frozen contract areas" in text
     for phrase in [
         "Console script: `optical-spec`",
         "Documented CLI commands",
@@ -44,13 +46,13 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     assert "Production-grade physical validation | non-goal unless explicitly claimed" in text
     assert "Formal convergence proof | non-goal unless explicitly claimed" in text
     assert "Remaining hard blockers" in text
-    assert "Maintainer confirmation of the v1.0 public contract freeze" in text
     assert "PyPI publication decision" in text
     for phrase in [
         "docs/v1_0_public_contract_freeze_confirmation.md",
         "docs/v1_0_contract_frozen_surface.md",
         "docs/v1_0_contract_non_goals.md",
         "docs/v1_0_breaking_change_policy.md",
+        "docs/v1_0_public_contract_freeze_status.md",
     ]:
         assert phrase in text
 
@@ -65,3 +67,8 @@ def test_public_contract_manifest_tracks_rc6_state_without_publish_or_upload():
     assert '"testpypi_uploaded": true' in text
     assert '"testpypi_uploaded_version": "0.9.0rc6.dev0"' in text
     assert '"testpypi_status_doc": "docs/testpypi_status_v0.9.0rc6.dev0.md"' in text
+    assert '"public_contract_freeze"' in text
+    assert '"status": "approved"' in text
+    assert '"approval_date": "2026-05-16"' in text
+    assert '"freeze_baseline_commit": "6e7ddf9c1811685c12db16bffb55cd76455267fe"' in text
+    assert '"status_doc": "docs/v1_0_public_contract_freeze_status.md"' in text

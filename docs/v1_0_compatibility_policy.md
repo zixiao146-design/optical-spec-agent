@@ -11,9 +11,9 @@ This policy applies to the current public prerelease `v0.9.0rc5` and current
 created, PyPI remains unpublished, and TestPyPI contains the `0.9.0rc6.dev0`
 development package.
 
-The v1.0 public contract freeze candidate is tracked in
-`docs/v1_0_public_contract_freeze.md`, with machine-readable scope in
-`docs/public_contract_manifest.json` and change review guidance in
+The v1.0 public contract freeze is maintainer-approved. The approved status is
+recorded in `docs/v1_0_public_contract_freeze_status.md`, with machine-readable
+scope in `docs/public_contract_manifest.json` and change review guidance in
 `docs/public_contract_change_checklist.md`.
 
 ## Compatibility scopes
@@ -57,6 +57,13 @@ The v1.0 public contract freeze candidate is tracked in
 - Public contract changes should use `docs/public_contract_change_checklist.md`
   and update `docs/public_contract_manifest.json` when the manifest scope
   changes.
+
+## Policy after the approved public contract freeze
+
+- Changes to the frozen public surface require maintainer approval.
+- Breaking changes require explicit migration notes.
+- Preview/scaffold internals may still change unless documented as frozen.
+- Final `v1.0.0` release and PyPI publication still require separate approval.
 
 ## v1.0 entry criteria
 

@@ -20,6 +20,8 @@ def test_breaking_change_policy_covers_pre_and_post_freeze_rules():
     assert "Breaking changes require explicit migration notes" in text
     assert "Generated internals may change unless documented as frozen" in text
     assert "Preview/scaffold outputs may change" in text
+    assert "PyPI publication still requires separate approval" in text
+    assert "Final `v1.0.0` release still requires separate approval" in text
 
 
 def test_breaking_change_policy_tracks_versioning_and_non_authorization():
@@ -30,7 +32,8 @@ def test_breaking_change_policy_tracks_versioning_and_non_authorization():
     assert "Release candidates use `rcN`" in text
     assert "Post-release main uses `rcN+1.dev0`" in text
     assert "Final `v1.0.0` requires separate approval" in text
-    assert "does not authorize a v1.0 freeze" in text
+    assert "public contract freeze is approved" in text
     assert "PyPI publication" in text
     assert "tag creation" in text
     assert "GitHub release creation" in text
+    assert "`v1.0.0` release" in text

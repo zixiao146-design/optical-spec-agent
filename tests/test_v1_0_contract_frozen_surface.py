@@ -13,8 +13,12 @@ def test_frozen_surface_candidate_lists_public_surface_and_evidence():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
 
-    assert "v1.0 Contract Frozen Surface Candidate" in text
-    assert "not an approved freeze" in text
+    assert "v1.0 Contract Frozen Surface" in text
+    assert "Status: maintainer-approved" in text
+    assert "Approval date: 2026-05-16" in text
+    assert "Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe" in text
+    assert "PyPI publication approval: not granted" in text
+    assert "v1.0.0 released: no" in text
     for phrase in [
         "CLI command names",
         "CLI examples",
@@ -48,4 +52,3 @@ def test_frozen_surface_candidate_excludes_preview_and_validation_claims():
         "Elmer Level 3 validation",
     ]:
         assert phrase in text
-

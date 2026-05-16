@@ -85,7 +85,7 @@ maintainers.
   `examples/e2e/`.
 - Include error model checks from `docs/error_model.md`.
 - Include pre-v1 migration notes from `docs/migration_notes_pre_v1.md`.
-- Include public contract freeze candidate checks from
+- Include public contract freeze checks from
   `docs/v1_0_public_contract_freeze.md`, `docs/public_contract_manifest.json`,
   and `docs/public_contract_change_checklist.md`.
 - Include optional open-source solver validation plan checks.

@@ -19,6 +19,8 @@ def test_pypi_publication_readiness_checklist_tracks_current_gate():
     assert "PyPI published: no" in text
     assert "PyPI publication approval: not granted" in text
     assert "Upload command authorized for PyPI: no" in text
+    assert "v1.0 public contract freeze: approved" in text
+    assert "docs/v1_0_public_contract_freeze_status.md" in text
     assert "Explicit maintainer approval" in text
     assert "Quality gates passed" in text
     assert "GitHub Actions CI passed" in text
@@ -26,6 +28,7 @@ def test_pypi_publication_readiness_checklist_tracks_current_gate():
     assert "`python -m twine check dist/*` passed" in text
     assert "Validation claims reviewed and kept conservative" in text
     assert "Do not publish PyPI yet" in text
+    assert "Prepare PyPI only after a separate explicit publication decision" in text
 
 
 def test_pypi_publication_readiness_checklist_records_risks_and_limits():

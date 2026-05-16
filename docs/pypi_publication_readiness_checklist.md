@@ -9,6 +9,9 @@
 - PyPI publication approval: not granted
 - Upload command authorized for PyPI: no
 - GitHub tag/release for v0.9.0rc6: not created
+- v1.0 public contract freeze: approved
+- v1.0 public contract freeze status:
+  `docs/v1_0_public_contract_freeze_status.md`
 
 ## Required before PyPI publication
 
@@ -39,7 +42,7 @@
 
 - Do not publish PyPI yet.
 - Continue v1.0 readiness engineering.
-- Prepare PyPI only after the public contract freeze is confirmed.
+- Prepare PyPI only after a separate explicit publication decision.
 
 This checklist does not authorize PyPI publication, tag creation, GitHub release
 creation, TestPyPI re-upload, production-grade physical validation claims, or

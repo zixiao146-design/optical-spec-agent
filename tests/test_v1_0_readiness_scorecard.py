@@ -21,7 +21,8 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "v1.0 decision matrix" in text
     assert "v1.0 public contract freeze checklist" in text
     assert "v1.0 public contract freeze confirmation package" in text
-    assert "v1.0 contract frozen surface candidate" in text
+    assert "v1.0 public contract freeze status" in text
+    assert "v1.0 contract frozen surface" in text
     assert "v1.0 contract non-goals" in text
     assert "v1.0 breaking change policy" in text
     assert "Publication decision record" in text
@@ -49,7 +50,7 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "Optiland Level 3 optional manual validation evidence" in text
     assert "Elmer Level-3-ready optional validation path" in text
     assert "Elmer remains Level 2 pending ElmerSolver installation" in text
-    assert "v1.0 public contract freeze remains a hard blocker" in text
-    assert "Maintainer confirmation for the v1.0 public contract freeze remains pending" in text
+    assert "v1.0 public contract freeze is approved for the documented surface" in text
+    assert "PyPI publication remains a hard strategic decision" in text
     assert "not production-grade physical validation" in text
     assert "not production-grade optical validation" in text

@@ -22,4 +22,5 @@ def test_contract_non_goals_keep_validation_and_backend_scope_conservative():
     assert "Workflow internals are not frozen" in text
     assert "Elmer Level 3 is deferred" in text
     assert "PyPI publication is not yet approved" in text
-
+    assert "`v1.0.0` final release is not yet approved" in text
+    assert "The approved freeze does not convert these non-goals into supported claims" in text

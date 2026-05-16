@@ -32,8 +32,8 @@
 - Impact: determines whether v1.0 is distributed through PyPI or remains a
   GitHub release artifact until a later approval.
 - Current recommendation: do not publish PyPI yet. Continue v1.0 readiness
-  engineering and prepare PyPI only after the public contract freeze is
-  confirmed.
+  engineering and decide PyPI publication timing separately after reviewing the
+  approved public contract freeze package.
 
 ## Elmer Level 3
 
@@ -59,23 +59,23 @@
 
 ## Public contract freeze
 
-- Current: candidate
+- Current: approved
 - Checklist: `docs/v1_0_public_contract_freeze_checklist.md`
 - Confirmation package: `docs/v1_0_public_contract_freeze_confirmation.md`
+- Status: `docs/v1_0_public_contract_freeze_status.md`
 - Frozen surface candidate: `docs/v1_0_contract_frozen_surface.md`
 - Non-goals: `docs/v1_0_contract_non_goals.md`
 - Breaking change policy: `docs/v1_0_breaking_change_policy.md`
-- Maintainer confirmation: pending
+- Maintainer confirmation: approved
 - Options:
-  - Freeze before v1.0.
-  - Allow further pre-v1 changes.
+  - Keep the approved freeze and require maintainer approval for frozen-surface changes.
+  - Reopen the freeze only with explicit maintainer approval and migration notes.
 - Impact: determines whether CLI, schema, adapter, workflow, validation, and
   publication boundaries are stable enough to call the next milestone v1.0.
 
-Public contract freeze remains a hard blocker until the maintainer confirms
-the checklist. TestPyPI is completed for `0.9.0rc6.dev0`; PyPI publication
-remains not granted and is tracked by the PyPI publication readiness checklist,
-Elmer remains deferred/non-blocking,
+Public contract freeze is approved for the documented surface. TestPyPI is completed for `0.9.0rc6.dev0`; PyPI publication remains not granted and is
+tracked by the PyPI publication readiness checklist, Elmer remains
+deferred/non-blocking,
 production-grade physical validation remains a non-goal unless explicitly
 claimed, and formal convergence proof remains a non-goal unless explicitly
 claimed.

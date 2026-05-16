@@ -14,8 +14,13 @@ check:
 - Does this change require updating `docs/public_contract_manifest.json`?
 - Does this change require updating tests?
 
-Before v1.0, breaking changes are allowed but should be documented. After v1.0,
-public contract changes should be more conservative.
+The v1.0 public contract freeze is maintainer-approved as of 2026-05-16.
+Changes to the approved frozen public surface require maintainer approval.
+Breaking changes require explicit migration notes, release notes, and public
+contract manifest updates.
+
+Preview/scaffold internals may still change when they are not documented as
+frozen public surface.
 
 external solver, external LLM, and proprietary solver dependencies must not
 become default accidentally.

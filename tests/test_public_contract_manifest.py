@@ -1,4 +1,4 @@
-"""Public contract manifest checks for the v1.0 freeze candidate."""
+"""Public contract manifest checks for the approved v1.0 freeze."""
 
 from __future__ import annotations
 
@@ -22,6 +22,16 @@ def test_public_contract_manifest_baseline_and_package_metadata():
     manifest = _load_manifest()
     assert manifest["version_scope"] == "0.9.0rc6.dev0"
     assert manifest["current_public_prerelease"] == "v0.9.0rc5"
+    freeze = manifest["public_contract_freeze"]
+    assert freeze["status"] == "approved"
+    assert freeze["approval_type"] == "maintainer-approved documentation freeze"
+    assert freeze["approval_date"] == "2026-05-16"
+    assert freeze["freeze_baseline_commit"] == (
+        "6e7ddf9c1811685c12db16bffb55cd76455267fe"
+    )
+    assert freeze["status_doc"] == "docs/v1_0_public_contract_freeze_status.md"
+    assert freeze["does_not_publish_pypi"] is True
+    assert freeze["does_not_create_tag_or_release"] is True
     assert manifest["release_state"]["v1_0_0_released"] is False
     assert manifest["release_state"]["v0_9_0rc5_tag_created"] is True
     assert manifest["release_state"]["v0_9_0rc6_tag_created"] is False

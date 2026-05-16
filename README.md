@@ -92,13 +92,15 @@ Public contract boundaries are tracked in
 [`docs/workflow_preview_contract.md`](docs/workflow_preview_contract.md),
 [`docs/validation_boundary.md`](docs/validation_boundary.md), and
 [`docs/pypi_publication_decision.md`](docs/pypi_publication_decision.md).
-The v1.0 public contract freeze confirmation package is prepared for
-maintainer review in
+The v1.0 public contract freeze is maintainer-approved and recorded in
+[`docs/v1_0_public_contract_freeze_status.md`](docs/v1_0_public_contract_freeze_status.md).
+The freeze package includes
 [`docs/v1_0_public_contract_freeze_confirmation.md`](docs/v1_0_public_contract_freeze_confirmation.md),
 [`docs/v1_0_contract_frozen_surface.md`](docs/v1_0_contract_frozen_surface.md),
 [`docs/v1_0_contract_non_goals.md`](docs/v1_0_contract_non_goals.md), and
-[`docs/v1_0_breaking_change_policy.md`](docs/v1_0_breaking_change_policy.md);
-maintainer confirmation remains pending.
+[`docs/v1_0_breaking_change_policy.md`](docs/v1_0_breaking_change_policy.md).
+This freeze does not authorize PyPI publication, tag creation, GitHub release
+creation, or `v1.0.0` release.
 Publication decisions remain pending/not granted and are tracked in
 [`docs/publication_decision_record.md`](docs/publication_decision_record.md);
 the completed TestPyPI upload does not authorize PyPI publication.

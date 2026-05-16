@@ -61,7 +61,8 @@ Recommended goals:
   `docs/v1_0_contract_frozen_surface.md`,
   `docs/v1_0_contract_non_goals.md`, and
   `docs/v1_0_breaking_change_policy.md` as the maintainer-facing freeze
-  confirmation package. Maintainer confirmation remains pending.
+  confirmation package. Maintainer confirmation is approved and recorded in
+  `docs/v1_0_public_contract_freeze_status.md`.
 - Use `docs/publication_decision_record.md` to keep TestPyPI authorization
   explicit, record the successful 0.9.0rc6.dev0 Trusted Publishing upload, and
   keep PyPI not granted.
@@ -121,12 +122,14 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/rc6_development_plan.md`.
 - v1.0 decision matrix:
   `docs/v1_0_decision_matrix.md`.
-- v1.0 public contract freeze candidate:
+- v1.0 public contract freeze:
   `docs/v1_0_public_contract_freeze.md`.
 - v1.0 public contract freeze checklist:
   `docs/v1_0_public_contract_freeze_checklist.md`.
 - v1.0 public contract freeze confirmation:
   `docs/v1_0_public_contract_freeze_confirmation.md`.
+- v1.0 public contract freeze status:
+  `docs/v1_0_public_contract_freeze_status.md`.
 - v1.0 contract frozen surface candidate:
   `docs/v1_0_contract_frozen_surface.md`.
 - v1.0 contract non-goals:

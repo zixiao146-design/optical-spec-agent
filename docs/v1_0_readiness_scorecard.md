@@ -49,13 +49,14 @@
 - Adapter support matrix.
 - Offline examples.
 - E2E user journey.
-- Public contract freeze candidate.
+- Public contract freeze approved for the documented surface.
 - v1.0 readiness gap audit.
 - v0.9.0rc6 development plan.
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
 - v1.0 public contract freeze confirmation package.
-- v1.0 contract frozen surface candidate.
+- v1.0 public contract freeze status.
+- v1.0 contract frozen surface.
 - v1.0 contract non-goals.
 - v1.0 breaking change policy.
 - Publication decision record.
@@ -104,9 +105,9 @@
   tag/release creation from being implied by TestPyPI success.
 - Adapter outputs may still be MVP/scaffold.
 - Workflow remains local/synchronous preview.
-- v1.0 compatibility freeze not finalized.
-- v1.0 public contract freeze remains a hard blocker until finalized.
-- Maintainer confirmation for the v1.0 public contract freeze remains pending.
+- v1.0 public contract freeze is approved for the documented surface.
+- PyPI publication remains a hard strategic decision.
+- `v1.0.0` final release remains separately gated.
 - No new GitHub Actions workflow was added during operations readiness because
   existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
   reviewed and documented instead of duplicating automation.
@@ -118,13 +119,14 @@
 - Use `docs/rc6_development_plan.md` to keep rc6 development scoped.
 - Use `docs/v1_0_decision_matrix.md` before TestPyPI, PyPI, Elmer, production
   validation, or public-contract-freeze decisions.
-- Use `docs/v1_0_public_contract_freeze_checklist.md` before declaring a v1.0
-  freeze.
+- Use `docs/v1_0_public_contract_freeze_checklist.md` and
+  `docs/v1_0_public_contract_freeze_status.md` before changing the frozen
+  surface.
 - Use `docs/v1_0_public_contract_freeze_confirmation.md`,
   `docs/v1_0_contract_frozen_surface.md`,
   `docs/v1_0_contract_non_goals.md`, and
-  `docs/v1_0_breaking_change_policy.md` before asking for maintainer freeze
-  confirmation.
+  `docs/v1_0_breaking_change_policy.md`, and
+  `docs/v1_0_public_contract_freeze_status.md` as the approved freeze package.
 - Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action.
 - Use `docs/pypi_publication_readiness_checklist.md` and
   `docs/pypi_post_publication_verification_plan.md` before any PyPI approval.

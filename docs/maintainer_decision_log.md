@@ -7,6 +7,8 @@
 - TestPyPI upload approval: granted for 0.9.0rc6.dev0 only.
 - Upload command authorized: TestPyPI only.
 - PyPI publication approval: not granted.
+- v1.0 public contract freeze: approved on 2026-05-16.
+- Freeze status: `docs/v1_0_public_contract_freeze_status.md`.
 - Continue v1.0 readiness engineering.
 - Do not create v0.9.0rc6 tag now.
 - Do not create a GitHub release now.
@@ -26,8 +28,9 @@
 - Use `docs/v1_0_decision_matrix.md` before deciding TestPyPI upload, PyPI
   publication, Elmer Level 3, production-validation scope, or public contract
   freeze.
-- Use `docs/v1_0_public_contract_freeze_checklist.md` before declaring the
-  v1.0 public contract frozen.
+- Use `docs/v1_0_public_contract_freeze_checklist.md` and
+  `docs/v1_0_public_contract_freeze_status.md` before changing the approved
+  v1.0 frozen public surface.
 - Use `docs/publication_decision_record.md` before any TestPyPI/PyPI action;
   current upload and publication approval remains pending/not granted.
 

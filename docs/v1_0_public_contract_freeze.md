@@ -1,9 +1,9 @@
-# v1.0 Public Contract Freeze Candidate
+# v1.0 Public Contract Freeze
 
 ## Purpose
 
-This document identifies the user-visible behavior that is being prepared for
-v1.0 stabilization.
+This document identifies the user-visible behavior covered by the
+maintainer-approved v1.0 public contract freeze.
 
 ## Current scope
 
@@ -12,13 +12,19 @@ v1.0 stabilization.
 - v1.0.0 not released
 - v0.9.0rc6 tag not created
 - v0.9.0rc6 GitHub release not created
-- PyPI/TestPyPI not published/uploaded
+- TestPyPI uploaded and verified for `0.9.0rc6.dev0`
+- PyPI published: no
+- PyPI publication approval: not granted
+- Public contract freeze: approved
+- Freeze approval date: 2026-05-16
+- Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe
 
 The executable freeze checklist is tracked in
-`docs/v1_0_public_contract_freeze_checklist.md`. Publication decisions remain
+`docs/v1_0_public_contract_freeze_checklist.md`, with approved status in
+`docs/v1_0_public_contract_freeze_status.md`. Publication decisions remain
 pending/not granted and are tracked in `docs/publication_decision_record.md`.
 
-## Candidate stable public contract
+## Approved stable public contract
 
 - Console script name: `optical-spec`
 - Documented CLI command names in `docs/cli_contract.md`
@@ -48,9 +54,10 @@ pending/not granted and are tracked in `docs/publication_decision_record.md`.
 - Optional external solver validation path
 - Proprietary export-only future targets
 
-## Change policy before v1.0
+## Change policy after the approved freeze
 
-- Breaking changes are allowed before v1.0 but should be documented.
+- Changes to the frozen public surface require maintainer approval.
+- Breaking changes require explicit migration notes.
 - Public examples must be updated with tests.
 - Public schema field changes should get migration notes.
 - CLI command removals/renames should be called out in release notes.
@@ -71,3 +78,4 @@ pending/not granted and are tracked in `docs/publication_decision_record.md`.
 - No external solver, external LLM, or proprietary solver dependency is required
   by default.
 - TestPyPI/PyPI strategy is explicit before any v1.0 publication action.
+- `v1.0.0` final release still requires separate approval.

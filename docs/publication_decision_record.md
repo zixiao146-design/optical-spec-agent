@@ -23,6 +23,9 @@
   `docs/pypi_publication_readiness_checklist.md`
 - PyPI post-publication verification plan:
   `docs/pypi_post_publication_verification_plan.md`
+- v1.0 public contract freeze: approved
+- v1.0 public contract freeze status:
+  `docs/v1_0_public_contract_freeze_status.md`
 
 ## Decisions not yet granted
 
@@ -81,13 +84,14 @@
 
 Recommended current state: keep PyPI publication separately gated while v1.0
 readiness engineering continues. TestPyPI upload and clean-install verification
-are completed for `0.9.0rc6.dev0`; this does not authorize PyPI publication,
-tag creation, or GitHub release creation.
+are completed for `0.9.0rc6.dev0`, and the v1.0 public contract freeze is
+approved; these do not authorize PyPI publication, tag creation, or GitHub
+release creation.
 
 Use `docs/pypi_publication_readiness_checklist.md` and
 `docs/pypi_post_publication_verification_plan.md` before any future PyPI
-approval. The current recommendation is: do not publish PyPI yet; prepare PyPI
-only after the public contract freeze is confirmed.
+approval. The current recommendation is: do not publish PyPI yet; decide PyPI
+publication timing separately after reviewing the approved freeze package.
 
 The earlier local token-based TestPyPI upload attempt failed with HTTP 403
 Forbidden and remains recorded in
