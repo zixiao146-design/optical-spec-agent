@@ -145,6 +145,24 @@
       "requires_external_solver": false,
       "requires_external_llm": false,
       "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/quickstart/zh_nanoparticle_prompt.txt",
+      "purpose": "Chinese natural-language Agent Studio quickstart prompt",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/quickstart/zh_quickstart_notes.md",
+      "purpose": "Chinese quickstart safety and usage notes",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     }
   ]
 }

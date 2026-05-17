@@ -1,4 +1,5 @@
 import type { ApiDiagnostic } from "../api/types";
+import { useI18n } from "../i18n/useI18n";
 import { EmptyState } from "./EmptyState";
 
 interface DiagnosticsPanelProps {
@@ -11,6 +12,7 @@ function hasEntries(items?: string[]): boolean {
 }
 
 export function DiagnosticsPanel({ diagnostics, title = "Diagnostics" }: DiagnosticsPanelProps) {
+  const { t } = useI18n();
   if (
     !diagnostics ||
     (!hasEntries(diagnostics.errors) &&
@@ -19,15 +21,15 @@ export function DiagnosticsPanel({ diagnostics, title = "Diagnostics" }: Diagnos
       !hasEntries(diagnostics.assumptions) &&
       !hasEntries(diagnostics.limitations))
   ) {
-    return <EmptyState title={title} message="No diagnostics reported for this response." />;
+    return <EmptyState title={title} message={t("state.diagnostics.empty")} />;
   }
 
   const groups = [
-    ["Errors", diagnostics.errors],
-    ["Warnings", diagnostics.warnings],
-    ["Missing fields", diagnostics.missing_fields],
-    ["Assumptions", diagnostics.assumptions],
-    ["Limitations", diagnostics.limitations],
+    [t("state.diagnostics.errors"), diagnostics.errors],
+    [t("state.diagnostics.warnings"), diagnostics.warnings],
+    [t("state.diagnostics.missingFields"), diagnostics.missing_fields],
+    [t("state.diagnostics.assumptions"), diagnostics.assumptions],
+    [t("state.diagnostics.limitations"), diagnostics.limitations],
   ] as const;
 
   return (

@@ -1,4 +1,5 @@
 import type { ValidationEvidenceItem } from "../api/types";
+import { useI18n } from "../i18n/useI18n";
 import { BoundaryBadge } from "./BoundaryBadge";
 
 interface EvidencePanelProps {
@@ -6,6 +7,7 @@ interface EvidencePanelProps {
 }
 
 export function EvidencePanel({ evidence }: EvidencePanelProps) {
+  const { t } = useI18n();
   return (
     <div className="evidence-list">
       {evidence.map((item) => (
@@ -19,7 +21,7 @@ export function EvidencePanel({ evidence }: EvidencePanelProps) {
             <BoundaryBadge tone={item.tool_name === "elmer" ? "notice" : "safe"}>
               {item.maturity_level}
             </BoundaryBadge>
-            <BoundaryBadge>No production claim</BoundaryBadge>
+            <BoundaryBadge>{t("evidence.noProductionClaim")}</BoundaryBadge>
           </div>
         </article>
       ))}

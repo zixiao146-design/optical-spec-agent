@@ -53,6 +53,10 @@ validation evidence.
 - Quickstart onboarding is documented in `docs/quickstart.md` and
   `docs/quickstart.zh-CN.md`, with setup/run scripts
   `scripts/bootstrap_demo_env.sh` and `scripts/run_quickstart_demo.sh`.
+- English / 中文 frontend localization is documented in
+  `docs/frontend_i18n_zh_CN.md`; UI copy, guided demo, and safety boundaries
+  are localized while API JSON field names, adapter tool names, and
+  `api_contract_version` remain stable.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out
@@ -98,6 +102,7 @@ validation evidence.
 - Demo feedback review loop and prioritized hardening backlog.
 - Guided quickstart panel and quickstart completion checklist for first-time
   local users.
+- English / 中文 language switcher and Chinese guided demo copy.
 
 ### Phase 3
 

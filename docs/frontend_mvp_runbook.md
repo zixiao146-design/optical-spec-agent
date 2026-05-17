@@ -26,6 +26,11 @@ npm run dev
 
 Default API base: `http://127.0.0.1:8000`.
 
+The UI supports English / 中文 switching through the sidebar
+`LanguageSwitcher`. The selected language is stored in `localStorage` under
+`agent-studio-language`; Chinese browser environments default to `zh-CN`.
+API JSON field names and adapter tool names remain untranslated.
+
 Override:
 
 ```bash

@@ -26,10 +26,14 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
         "DemoModeBanner.tsx",
         "DiagnosticsPanel.tsx",
         "GuidedDemoStepper.tsx",
+        "LanguageSwitcher.tsx",
         "QuickstartPanel.tsx",
         "RecommendedActions.tsx",
     ]:
         assert (FRONTEND / "src" / "components" / component).exists()
+    assert (FRONTEND / "src" / "i18n" / "en.ts").exists()
+    assert (FRONTEND / "src" / "i18n" / "zhCN.ts").exists()
+    assert (FRONTEND / "src" / "i18n" / "useI18n.tsx").exists()
 
     package_json = _read(FRONTEND / "package.json")
     assert '"dev"' in package_json
@@ -68,6 +72,7 @@ def test_frontend_source_has_no_release_or_upload_controls():
     assert "Load example spec" in source
     assert "Load workflow fixture" in source
     assert "Load minimal spec" in source
+    assert "agent-studio-language" in source
 
 
 def test_frontend_generated_artifacts_are_not_present():

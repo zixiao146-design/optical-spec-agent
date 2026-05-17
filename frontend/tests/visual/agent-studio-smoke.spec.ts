@@ -42,6 +42,9 @@ async function expectForbiddenControlsAbsent(page: Page) {
 }
 
 test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem("agent-studio-language", "en");
+  });
   await blockExternalNetwork(page);
 });
 

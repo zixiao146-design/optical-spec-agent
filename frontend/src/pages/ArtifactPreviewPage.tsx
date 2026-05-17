@@ -13,33 +13,34 @@ import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
 import { RecommendedActions } from "../components/RecommendedActions";
 import {
-  DEMO_FIXTURE_LOADED_MESSAGE,
   demoAdapterPreview,
   demoAdapterPreviewRequestText,
 } from "../fixtures/demoData";
+import { useI18n } from "../i18n/useI18n";
 
 const TOOLS = ["gmsh", "meep", "mpb", "elmer", "optiland"];
 
 export function ArtifactPreviewPage() {
+  const { t } = useI18n();
   const [tool, setTool] = useState("gmsh");
   const [requestText, setRequestText] = useState(demoAdapterPreviewRequestText);
-  const [fixtureNotice, setFixtureNotice] = useState(DEMO_FIXTURE_LOADED_MESSAGE);
+  const [fixtureNotice, setFixtureNotice] = useState(t("state.demoLoadedMessage"));
   const [response, setResponse] = useState<RemoteState<AdapterPreviewResponse>>({ status: "idle" });
 
   function loadMinimalSpec() {
     setTool("gmsh");
     setRequestText(demoAdapterPreviewRequestText);
-    setFixtureNotice(DEMO_FIXTURE_LOADED_MESSAGE);
+    setFixtureNotice(t("state.demoLoadedMessage"));
     setResponse({ status: "idle" });
   }
 
   async function preview() {
-    setResponse({ status: "loading", message: "Generating local preview artifact." });
+    setResponse({ status: "loading", message: t("preview.loadingMessage") });
     try {
       const body = JSON.parse(requestText) as { path?: string; spec?: Record<string, unknown> };
       const payload = await agentApi.getAdapterPreview({ ...body, tool });
       setResponse(
-        stateFromPayload(payload, demoAdapterPreview, "Demo adapter preview fixture shown; this is not live preview generation."),
+        stateFromPayload(payload, demoAdapterPreview, t("preview.demo")),
       );
     } catch (error) {
       const apiError = jsonParseError(error);
@@ -51,23 +52,22 @@ export function ArtifactPreviewPage() {
     <div className="page-grid">
       <section className="page-panel wide">
         <div className="page-title">
-          <span>Artifact Preview</span>
-          <h2>Generate solver-native preview content</h2>
+          <span>{t("preview.kicker")}</span>
+          <h2>{t("preview.title")}</h2>
           <p>
-            Preview generation produces local scaffold content only. It never runs
-            the selected solver by default.
+            {t("preview.description")}
           </p>
         </div>
         <div className="boundary-row">
-          <BoundaryBadge>Preview artifact only</BoundaryBadge>
-          <BoundaryBadge>No solver was executed</BoundaryBadge>
+          <BoundaryBadge>{t("preview.badge.previewOnly")}</BoundaryBadge>
+          <BoundaryBadge>{t("preview.badge.noSolver")}</BoundaryBadge>
         </div>
       </section>
       <DemoModeBanner message={fixtureNotice} />
       <section className="page-panel">
-        <h3>Preview request</h3>
+        <h3>{t("preview.requestTitle")}</h3>
         <label htmlFor="adapter-tool">
-          Tool
+          {t("preview.toolLabel")}
         </label>
         <select id="adapter-tool" value={tool} onChange={(event) => setTool(event.target.value)}>
           {TOOLS.map((item) => (
@@ -76,7 +76,7 @@ export function ArtifactPreviewPage() {
             </option>
           ))}
         </select>
-        <label htmlFor="adapter-preview-request">Adapter preview request JSON</label>
+        <label htmlFor="adapter-preview-request">{t("preview.requestLabel")}</label>
         <textarea
           id="adapter-preview-request"
           value={requestText}
@@ -88,31 +88,31 @@ export function ArtifactPreviewPage() {
           onClick={() => void preview()}
           disabled={response.status === "loading" || requestText.trim().length === 0}
         >
-          {response.status === "loading" ? "Generating..." : "Generate preview"}
+          {response.status === "loading" ? t("preview.generating") : t("preview.generateButton")}
         </button>
         <button type="button" className="secondary-button" onClick={loadMinimalSpec}>
-          Load minimal spec
+          {t("preview.loadMinimal")}
         </button>
-        <p className="inline-boundary">Preview-only artifact. No solver is executed by default.</p>
+        <p className="inline-boundary">{t("preview.inlineBoundary")}</p>
         <div id="adapter-preview-status" className="sr-status" aria-live="polite">
-          Adapter preview status: {response.status}
+          {t("preview.status")} {response.status}
         </div>
       </section>
       <section className="page-panel">
-        <h3>Preview state</h3>
+        <h3>{t("preview.stateTitle")}</h3>
         {response.status === "idle" ? (
-          <EmptyState title="No preview generated yet" message="Choose a tool and generate a local preview." />
+          <EmptyState title={t("preview.emptyTitle")} message={t("preview.emptyMessage")} />
         ) : null}
-        {response.status === "loading" ? <LoadingState label="Generating preview artifact..." /> : null}
+        {response.status === "loading" ? <LoadingState label={t("preview.loading")} /> : null}
         {response.status === "demo" ? <ApiDisconnectedNotice message={response.message} /> : null}
         {response.status === "error" && response.error ? (
           <ErrorState message={response.error.message} actions={response.error.recommended_next_actions} />
         ) : null}
       </section>
       <ArtifactPreviewPanel response={response.data} />
-      <DiagnosticsPanel diagnostics={response.data?.diagnostics || response.error?.diagnostics} title="Preview diagnostics" />
-      <RecommendedActions actions={response.data?.recommended_next_actions || response.error?.recommended_next_actions} title="Preview recommended next actions" />
-      <JsonPanel title="Adapter Preview" value={response.data || response.error || { status: response.status }} />
+      <DiagnosticsPanel diagnostics={response.data?.diagnostics || response.error?.diagnostics} title={t("preview.diagnostics")} />
+      <RecommendedActions actions={response.data?.recommended_next_actions || response.error?.recommended_next_actions} title={t("preview.actions")} />
+      <JsonPanel title={t("preview.jsonTitle")} value={response.data || response.error || { status: response.status }} />
     </div>
   );
 }

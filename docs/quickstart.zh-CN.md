@@ -7,7 +7,8 @@
 evidence。
 
 这是一个 local-first、preview-first 的 agent demo，使用 Local Agent API 和 Agent
-Studio frontend MVP。
+Studio frontend MVP。Agent Studio 前端现在支持 English / 中文切换；中文浏览器
+环境会默认显示中文，也可以在侧边栏的 LanguageSwitcher 手动切换。
 
 ## 2. 这个 Quickstart 不会做什么
 
@@ -70,16 +71,20 @@ OSA_QUICKSTART_WITH_VISUAL=1 OSA_QUICKSTART_NO_HOLD=1 ./scripts/run_quickstart_d
 
 ## 7. Guided Demo 步骤
 
-1. Load example spec。
-2. Parse locally。
-3. Validate。
-4. View adapter matrix。
-5. Generate workflow plan。
-6. Preview artifact。
-7. Review validation evidence。
-8. Readiness / next actions。
+中文 guided demo 会显示：
+
+1. 加载示例规格。
+2. 本地解析。
+3. 验证规格。
+4. 查看适配器矩阵。
+5. 生成工作流计划。
+6. 预览适配器产物。
+7. 查看验证证据。
+8. 查看 readiness / 下一步建议。
 
 Frontend 的 guided demo panel 会显示每一步对应的 Local Agent API endpoint。
+中文自然语言 quickstart 示例见
+`examples/quickstart/zh_nanoparticle_prompt.txt`。
 
 ## 8. 成功标志
 

@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { API_BASE_URL } from "./api/client";
 import { BoundaryBadge } from "./components/BoundaryBadge";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { SafetyNotice } from "./components/SafetyNotice";
+import { useI18n } from "./i18n/useI18n";
 import { AdapterMatrixPage } from "./pages/AdapterMatrixPage";
 import { ArtifactPreviewPage } from "./pages/ArtifactPreviewPage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -21,6 +23,16 @@ const PAGES = [
 ] as const;
 
 type Page = (typeof PAGES)[number];
+
+const PAGE_LABEL_KEYS: Record<Page, string> = {
+  Dashboard: "nav.dashboard",
+  "Spec Input": "nav.specInput",
+  "Adapter Matrix": "nav.adapterMatrix",
+  "Workflow Plan": "nav.workflowPlan",
+  "Artifact Preview": "nav.artifactPreview",
+  "Validation Evidence": "nav.validationEvidence",
+  "System Status": "nav.systemStatus",
+};
 
 function pageComponent(page: Page, onNavigate: (page: Page) => void) {
   switch (page) {
@@ -42,6 +54,7 @@ function pageComponent(page: Page, onNavigate: (page: Page) => void) {
 }
 
 export default function App() {
+  const { t } = useI18n();
   const [activePage, setActivePage] = useState<Page>("Dashboard");
   const content = useMemo(() => pageComponent(activePage, setActivePage), [activePage]);
 
@@ -52,10 +65,11 @@ export default function App() {
           <span className="brand-mark">OSA</span>
           <div>
             <h1>Agent Studio</h1>
-            <p>Local MVP</p>
+            <p>{t("app.brand.subtitle")}</p>
           </div>
         </div>
-        <nav aria-label="Agent Studio sections">
+        <LanguageSwitcher />
+        <nav aria-label={t("app.nav.label")}>
           {PAGES.map((page) => (
             <button
               type="button"
@@ -64,12 +78,12 @@ export default function App() {
               onClick={() => setActivePage(page)}
               aria-current={page === activePage ? "page" : undefined}
             >
-              {page}
+              {t(PAGE_LABEL_KEYS[page])}
             </button>
           ))}
         </nav>
         <div className="sidebar-footer">
-          <span>API base</span>
+          <span>{t("app.apiBase")}</span>
           <code>{API_BASE_URL}</code>
         </div>
       </aside>
@@ -77,12 +91,12 @@ export default function App() {
         <header className="topbar">
           <div>
             <span className="eyebrow">optical-spec-agent</span>
-            <h2>{activePage}</h2>
+            <h2>{t(PAGE_LABEL_KEYS[activePage])}</h2>
           </div>
           <div className="boundary-row compact">
-            <BoundaryBadge>No solver run</BoundaryBadge>
-            <BoundaryBadge>No external LLM</BoundaryBadge>
-            <BoundaryBadge tone="notice">Preview-first</BoundaryBadge>
+            <BoundaryBadge>{t("app.topbar.noSolver")}</BoundaryBadge>
+            <BoundaryBadge>{t("app.topbar.noExternalLlm")}</BoundaryBadge>
+            <BoundaryBadge tone="notice">{t("app.topbar.previewFirst")}</BoundaryBadge>
           </div>
         </header>
         <SafetyNotice compact />

@@ -39,6 +39,12 @@ validation evidence 和 Readiness / next actions。它保持 local-first、previ
 不上传、不发布、不创建 tag/release、不默认执行 solver、不默认调用外部 LLM、不声称
 production-grade physical validation，也不声称 formal convergence proof。
 
+Agent Studio 前端支持 English / 中文界面切换；中文环境会默认显示中文，也可以在
+侧边栏手动切换。中文 guided demo、中文安全边界和中文 quickstart prompt 见
+`docs/frontend_i18n_zh_CN.md` 与
+`examples/quickstart/zh_nanoparticle_prompt.txt`。API JSON 字段名、adapter tool
+names 和 `api_contract_version` 保持英文稳定。
+
 核心主线：
 
 ```text
@@ -168,6 +174,7 @@ walkthrough 串在一起，但不上传、不创建 tag/release、不运行 solv
 `docs/agent_studio_demo_feedback.md` 和 `docs/frontend_hardening_backlog.md`。
 Quickstart onboarding 见 `docs/quickstart.md` 和 `docs/quickstart.zh-CN.md`，
 对应脚本为 `scripts/bootstrap_demo_env.sh` 和 `scripts/run_quickstart_demo.sh`。
+中文本地化状态见 `docs/frontend_i18n_zh_CN.md`。
 它使用 Local Agent API，默认 API base 为
 `http://127.0.0.1:8000`，不提供 upload、publish、tag、release、solver-run、
 external LLM、login、cloud 或 production deployment 控件。API 断开时 UI 会进入

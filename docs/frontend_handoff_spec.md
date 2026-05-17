@@ -22,6 +22,9 @@ diagnostics panels, recommended action panels, and collapsible JSON payloads.
 - Local base URL: `http://127.0.0.1:8000`
 - API contract version: 0.1
 - Package version: 0.9.0rc7.dev0
+- UI languages: English and 中文
+- Language preference key: `agent-studio-language`
+- API JSON field names and adapter tool names remain untranslated.
 
 ## Frontend-ready endpoints
 

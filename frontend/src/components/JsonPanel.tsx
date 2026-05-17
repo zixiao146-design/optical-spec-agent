@@ -1,3 +1,5 @@
+import { useI18n } from "../i18n/useI18n";
+
 interface JsonPanelProps {
   title: string;
   value: unknown;
@@ -11,13 +13,14 @@ function hasJsonValue(value: unknown): boolean {
 }
 
 export function JsonPanel({ title, value, initiallyOpen = true }: JsonPanelProps) {
+  const { t } = useI18n();
   if (!hasJsonValue(value)) {
     return (
       <section className="json-panel" aria-label={title}>
         <div className="panel-heading">
           <h3>{title}</h3>
         </div>
-        <p className="muted">No JSON payload is available yet.</p>
+        <p className="muted">{t("state.emptyJson")}</p>
       </section>
     );
   }

@@ -20,6 +20,9 @@
 - Can show a guided quickstart demo with Load example spec, Parse locally,
   Validate spec, Review adapter matrix, Generate workflow plan, Preview
   artifact, Review validation evidence, and Review readiness / next action.
+- Can switch between English and 中文 without refreshing the page.
+- Chinese guided demo shows 加载示例规格、本地解析、验证规格、查看适配器矩阵、
+  生成工作流计划、预览适配器产物、查看验证证据、查看 readiness / 下一步建议。
 - Can show a quickstart completion checklist with API connected,
   `0.9.0rc7.dev0`, `api_contract_version` 0.1, no solver executed, and no
   external LLM called.
@@ -35,6 +38,8 @@
 - Demo fixture mode must state that it is not live validation.
 - UI must show that it does not control PyPI/TestPyPI publication or GitHub
   releases.
+- 中文 UI 必须显示默认不执行外部求解器、默认不调用外部 LLM、不声明形式化收敛证明、
+  不控制 PyPI/TestPyPI 上传或 GitHub tag/release 的边界。
 
 ## 3. Technical criteria
 
@@ -58,6 +63,8 @@
 - Playwright visual smoke remains manual and outside the default release gate.
 - Quickstart setup/run scripts are documented and do not upload, publish,
   create tags/releases, run solvers, or call external LLMs.
+- i18n dictionaries live under `frontend/src/i18n/`; API JSON keys and adapter
+  tool names remain untranslated.
 
 ## 4. Not required for MVP
 

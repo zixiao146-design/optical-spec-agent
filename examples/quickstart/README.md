@@ -6,6 +6,10 @@ These examples support the local Agent Studio quickstart.
   used by the local validate and adapter-preview demos.
 - `quickstart_workflow_request.json` points to the offline local workflow
   preview request.
+- `zh_nanoparticle_prompt.txt` provides a Chinese natural-language prompt for
+  the bilingual Agent Studio demo.
+- `zh_quickstart_notes.md` records Chinese safety notes for the same local
+  fixture path.
 
 Safety boundaries:
 

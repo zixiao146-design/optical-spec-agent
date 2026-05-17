@@ -32,6 +32,10 @@ access, or proprietary solver support.
 - Keep `docs/quickstart.md`, `docs/quickstart.zh-CN.md`,
   `scripts/bootstrap_demo_env.sh`, `scripts/run_quickstart_demo.sh`, and
   `examples/quickstart/` aligned as the first-run onboarding path.
+- Keep English / 中文 localization docs and dictionaries aligned:
+  `docs/frontend_i18n_zh_CN.md` and `frontend/src/i18n/`. Localization must not
+  rename API JSON keys, adapter tool names, package metadata, or
+  `api_contract_version`.
 - Decide PyPI publication path.
 - Prepare v1.0.0 release draft.
 - Run quality gates.

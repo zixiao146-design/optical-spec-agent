@@ -33,5 +33,11 @@
 - Quickstart scripts and guided demo mode are local-only. They must not upload
   packages, publish PyPI/TestPyPI, create tags, create GitHub releases, execute
   solvers, or call external LLMs.
+- Chinese localization must preserve the same safety boundaries:
+  默认不执行外部求解器、默认不调用外部 LLM、预览产物不代表生产级物理验证、
+  不声明形式化收敛证明、本界面不控制 PyPI/TestPyPI 上传，也不控制 GitHub
+  tag/release。
+- Localization must not translate API JSON field names, adapter tool names,
+  package metadata, version strings, or `api_contract_version`.
 - Demo screenshots or recordings must not be committed unless explicitly
   approved by the maintainer.

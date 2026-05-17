@@ -29,6 +29,9 @@ readiness status.
 - Provide a polished guided quickstart demo for first-time local users.
 - Show a quickstart success / next-action experience.
 - Preserve the no-default-solver and no-default-LLM policy.
+- Support English / 中文 UI switching for local demos while preserving stable
+  English API JSON field names, adapter tool names, package metadata, and
+  `api_contract_version`.
 
 ## MVP non-goals
 

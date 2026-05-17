@@ -1,4 +1,5 @@
 import type { AdapterSummary, ValidationEvidenceItem } from "../api/types";
+import { useI18n } from "../i18n/useI18n";
 import { BoundaryBadge } from "./BoundaryBadge";
 
 interface AdapterMatrixProps {
@@ -7,17 +8,18 @@ interface AdapterMatrixProps {
 }
 
 export function AdapterMatrix({ adapters, evidence }: AdapterMatrixProps) {
+  const { t } = useI18n();
   const evidenceByTool = new Map(evidence.map((item) => [item.tool_name, item]));
   return (
     <div className="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>Adapter</th>
-            <th>Family</th>
-            <th>Status</th>
-            <th>Maturity</th>
-            <th>Boundary</th>
+            <th>{t("adapters.table.adapter")}</th>
+            <th>{t("adapters.table.family")}</th>
+            <th>{t("adapters.table.status")}</th>
+            <th>{t("adapters.table.maturity")}</th>
+            <th>{t("adapters.table.boundary")}</th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +35,7 @@ export function AdapterMatrix({ adapters, evidence }: AdapterMatrixProps) {
                 <td>{adapter.current_status}</td>
                 <td>{item?.maturity_level || adapter.maturity_level}</td>
                 <td>
-                  <BoundaryBadge>No solver by default</BoundaryBadge>
+                  <BoundaryBadge>{t("adapters.table.noSolver")}</BoundaryBadge>
                 </td>
               </tr>
             );

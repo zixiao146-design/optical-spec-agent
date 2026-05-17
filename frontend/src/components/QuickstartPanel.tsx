@@ -1,30 +1,31 @@
+import { useI18n } from "../i18n/useI18n";
 import { BoundaryBadge } from "./BoundaryBadge";
 
 export function QuickstartPanel() {
+  const { t } = useI18n();
   return (
-    <section className="quickstart-success" aria-label="Quickstart success criteria">
+    <section className="quickstart-success" aria-label={t("quickstartSuccess.title")}>
       <div className="page-title">
-        <span>Expected success</span>
-        <h3>Quickstart completion checklist</h3>
+        <span>{t("quickstartSuccess.kicker")}</span>
+        <h3>{t("quickstartSuccess.title")}</h3>
         <p>
-          Use this as the first-run success state. Live API results may replace
-          demo fixtures, but the safety boundaries stay the same.
+          {t("quickstartSuccess.description")}
         </p>
       </div>
       <ul className="check-list">
-        <li>API connected.</li>
-        <li>Package version 0.9.0rc7.dev0.</li>
-        <li>api_contract_version 0.1.</li>
-        <li>Spec parsed and validated, or demo fixture mode clearly labeled.</li>
-        <li>Workflow plan generated as a preview.</li>
-        <li>Adapter preview generated without solver execution.</li>
-        <li>Validation evidence summary reviewed.</li>
-        <li>Recommended next action shown.</li>
+        <li>{t("quickstartSuccess.apiConnected")}</li>
+        <li>{t("quickstartSuccess.packageVersion")}</li>
+        <li>{t("quickstartSuccess.apiContract")}</li>
+        <li>{t("quickstartSuccess.spec")}</li>
+        <li>{t("quickstartSuccess.workflow")}</li>
+        <li>{t("quickstartSuccess.preview")}</li>
+        <li>{t("quickstartSuccess.evidence")}</li>
+        <li>{t("quickstartSuccess.nextAction")}</li>
       </ul>
       <div className="boundary-row">
-        <BoundaryBadge>No solver executed</BoundaryBadge>
-        <BoundaryBadge>No external LLM called</BoundaryBadge>
-        <BoundaryBadge tone="notice">Preview-only warnings visible</BoundaryBadge>
+        <BoundaryBadge>{t("quickstartSuccess.badge.noSolver")}</BoundaryBadge>
+        <BoundaryBadge>{t("quickstartSuccess.badge.noLlm")}</BoundaryBadge>
+        <BoundaryBadge tone="notice">{t("quickstartSuccess.badge.preview")}</BoundaryBadge>
       </div>
     </section>
   );

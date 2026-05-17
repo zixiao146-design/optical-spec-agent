@@ -13,12 +13,14 @@ import { QuickstartPanel } from "../components/QuickstartPanel";
 import { RecommendedActions } from "../components/RecommendedActions";
 import { StatusCard } from "../components/StatusCard";
 import { demoHealth, demoReadiness, demoVersion } from "../fixtures/demoData";
+import { useI18n } from "../i18n/useI18n";
 
 interface DashboardPageProps {
   onNavigate?: (page: "Dashboard" | "Spec Input" | "Adapter Matrix" | "Workflow Plan" | "Artifact Preview" | "Validation Evidence" | "System Status") => void;
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
+  const { t } = useI18n();
   const [health, setHealth] = useState<RemoteState<HealthResponse>>(INITIAL_LOADING_STATE);
   const [version, setVersion] = useState<RemoteState<VersionResponse>>(INITIAL_LOADING_STATE);
   const [readiness, setReadiness] = useState<RemoteState<ReadinessResponse>>(INITIAL_LOADING_STATE);
@@ -26,18 +28,18 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
   useEffect(() => {
     let active = true;
     void agentApi.getHealth().then((payload) => {
-      if (active) setHealth(stateFromPayload(payload, demoHealth, "Demo health fixture shown; this is not live API health."));
+      if (active) setHealth(stateFromPayload(payload, demoHealth, t("dashboard.healthDemo")));
     });
     void agentApi.getVersion().then((payload) => {
-      if (active) setVersion(stateFromPayload(payload, demoVersion, "Demo version fixture shown; this is not a live API version check."));
+      if (active) setVersion(stateFromPayload(payload, demoVersion, t("dashboard.versionDemo")));
     });
     void agentApi.getReadiness().then((payload) => {
-      if (active) setReadiness(stateFromPayload(payload, demoReadiness, "Demo readiness fixture shown; this is not live validation."));
+      if (active) setReadiness(stateFromPayload(payload, demoReadiness, t("dashboard.readinessDemo")));
     });
     return () => {
       active = false;
     };
-  }, []);
+  }, [t]);
 
   const isLoading = [health, version, readiness].some((item) => item.status === "loading");
   const demoMessage = [health, version, readiness].find((item) => item.status === "demo")?.message;
@@ -47,25 +49,24 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
     <div className="page-grid">
       <section className="page-panel wide">
         <div className="page-title">
-          <span>Dashboard / Readiness</span>
-          <h2>Local Agent API workbench</h2>
+          <span>{t("dashboard.kicker")}</span>
+          <h2>{t("dashboard.title")}</h2>
           <p>
-            Agent Studio MVP visualizes the local API state, release boundaries,
-            and recommended next actions without running solvers or publishing packages.
+            {t("dashboard.description")}
           </p>
         </div>
         <div className="boundary-row">
-          <BoundaryBadge>No solver execution by default</BoundaryBadge>
-          <BoundaryBadge>No external LLM by default</BoundaryBadge>
-          <BoundaryBadge tone="notice">PyPI not controlled here</BoundaryBadge>
-          <BoundaryBadge>Formal convergence proof not claimed</BoundaryBadge>
+          <BoundaryBadge>{t("dashboard.badge.noSolver")}</BoundaryBadge>
+          <BoundaryBadge>{t("dashboard.badge.noLlm")}</BoundaryBadge>
+          <BoundaryBadge tone="notice">{t("dashboard.badge.noPypi")}</BoundaryBadge>
+          <BoundaryBadge>{t("dashboard.badge.noConvergence")}</BoundaryBadge>
         </div>
       </section>
 
       <GuidedDemoStepper onNavigate={onNavigate} />
       <QuickstartPanel />
 
-      {isLoading ? <LoadingState label="Loading dashboard from the local Agent API..." /> : null}
+      {isLoading ? <LoadingState label={t("dashboard.loading")} /> : null}
       <ApiModeIndicator statuses={[health.status, version.status, readiness.status]} />
       {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
       {error ? (
@@ -76,31 +77,31 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
       ) : null}
 
       <section className="status-grid wide">
-        <StatusCard label="Service" value={health.data?.status || health.status} note={health.data?.service} />
+        <StatusCard label={t("dashboard.card.service")} value={health.data?.status || health.status} note={health.data?.service} />
         <StatusCard
-          label="Package"
+          label={t("dashboard.card.package")}
           value={version.data?.package_version || version.status}
           note={version.data?.api_contract_version ? `API ${version.data.api_contract_version}` : undefined}
         />
         <StatusCard
-          label="Public prerelease"
+          label={t("dashboard.card.publicPrerelease")}
           value={readiness.data?.current_public_prerelease || readiness.status}
-          note="Current public candidate"
+          note={t("dashboard.card.currentCandidate")}
         />
         <StatusCard
-          label="PyPI"
-          value={readiness.data?.pypi?.published === false ? "not published" : readiness.status}
-          note="No publication control in UI"
+          label={t("dashboard.card.pypi")}
+          value={readiness.data?.pypi?.published === false ? t("dashboard.card.notPublished") : readiness.status}
+          note={t("dashboard.card.noPublicationControl")}
         />
       </section>
 
       <section className="page-panel wide">
         <RecommendedActions
-          actions={readiness.data?.recommended_next_actions || ["Start the local API to load readiness."]}
+          actions={readiness.data?.recommended_next_actions || [t("dashboard.startApiAction")]}
         />
       </section>
 
-      <JsonPanel title="Readiness payload" value={readiness.data || { status: readiness.status }} />
+      <JsonPanel title={t("dashboard.readinessPayload")} value={readiness.data || { status: readiness.status }} />
     </div>
   );
 }

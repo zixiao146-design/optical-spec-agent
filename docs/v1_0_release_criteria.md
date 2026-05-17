@@ -35,6 +35,10 @@
 - Quickstart onboarding: `docs/quickstart.md`, `docs/quickstart.zh-CN.md`,
   `scripts/bootstrap_demo_env.sh`, `scripts/run_quickstart_demo.sh`, and
   `examples/quickstart/`
+- Agent Studio English / 中文 localization:
+  `docs/frontend_i18n_zh_CN.md` and `frontend/src/i18n/`; it improves local
+  usability without changing API JSON fields, adapter tool names,
+  `api_contract_version`, package version, or release status.
 
 ## Required before v1.0.0
 
@@ -94,3 +98,4 @@
 | Frontend MVP | Engineering track | Local React + Vite + TypeScript MVP implemented | Not a v1.0 blocker and not a PyPI publication trigger. |
 | Agent Studio demo package | Engineering track | Local demo runbook/script/checklist/storyboard/troubleshooting available | Useful for maintainer review, but not a release, PyPI, tag, or GitHub release action. |
 | Quickstart onboarding | Engineering track | Local quickstart docs/scripts/examples available | Useful for public-demo rehearsal, but not a release, PyPI, tag, or GitHub release action. |
+| Frontend localization | Engineering track | English / 中文 UI available | Improves local demos; does not change the API contract or release criteria. |

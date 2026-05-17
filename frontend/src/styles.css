@@ -105,6 +105,38 @@ nav button.active {
   color: #ffffff;
 }
 
+.language-switcher {
+  display: grid;
+  gap: 8px;
+}
+
+.language-switcher > span {
+  color: #becbc4;
+  font-size: 13px;
+}
+
+.language-switcher div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.language-switcher button {
+  border: 1px solid #3a4c46;
+  border-radius: 8px;
+  background: transparent;
+  color: #e6eee8;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.language-switcher button:hover,
+.language-switcher button.active {
+  background: #e4f4ec;
+  color: #12201c;
+  border-color: #9bd4bd;
+}
+
 .sidebar-footer {
   margin-top: auto;
   display: grid;

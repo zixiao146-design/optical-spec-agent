@@ -9,19 +9,21 @@ import { ErrorState } from "../components/ErrorState";
 import { EvidencePanel } from "../components/EvidencePanel";
 import { LoadingState } from "../components/LoadingState";
 import { demoEvidence } from "../fixtures/demoData";
+import { useI18n } from "../i18n/useI18n";
 
 export function EvidencePage() {
+  const { t } = useI18n();
   const [evidence, setEvidence] = useState<RemoteState<ValidationEvidenceResponse>>(INITIAL_LOADING_STATE);
 
   useEffect(() => {
     let active = true;
     void agentApi.getValidationEvidence().then((payload) => {
-      if (active) setEvidence(stateFromPayload(payload, demoEvidence, "Demo validation evidence shown; this is not live evidence retrieval."));
+      if (active) setEvidence(stateFromPayload(payload, demoEvidence, t("evidence.demo")));
     });
     return () => {
       active = false;
     };
-  }, []);
+  }, [t]);
 
   const rows = evidence.data?.validation_evidence || [];
 
@@ -29,26 +31,25 @@ export function EvidencePage() {
     <div className="page-grid">
       <section className="page-panel wide">
         <div className="page-title">
-          <span>Validation Evidence</span>
-          <h2>Evidence and limitations</h2>
+          <span>{t("evidence.kicker")}</span>
+          <h2>{t("evidence.title")}</h2>
           <p>
-            Evidence levels document local readiness signals. They do not imply
-            production-grade physical validation or formal convergence proof.
+            {t("evidence.description")}
           </p>
         </div>
         <div className="boundary-row">
-          <BoundaryBadge>No production-grade physical validation is claimed</BoundaryBadge>
-          <BoundaryBadge>Formal convergence proof is not claimed</BoundaryBadge>
+          <BoundaryBadge>{t("evidence.badge.noProduction")}</BoundaryBadge>
+          <BoundaryBadge>{t("evidence.badge.noConvergence")}</BoundaryBadge>
         </div>
       </section>
       <section className="page-panel wide">
-        {evidence.status === "loading" ? <LoadingState label="Loading validation evidence..." /> : null}
+        {evidence.status === "loading" ? <LoadingState label={t("evidence.loading")} /> : null}
         {evidence.status === "demo" ? <ApiDisconnectedNotice message={evidence.message} /> : null}
         {evidence.status === "error" && evidence.error ? (
           <ErrorState message={evidence.error.message} actions={evidence.error.recommended_next_actions} />
         ) : null}
         {evidence.status !== "loading" && rows.length === 0 && !evidence.error ? (
-          <EmptyState title="No validation evidence loaded" message="Start the local API or use demo fixture mode." />
+          <EmptyState title={t("evidence.emptyTitle")} message={t("evidence.emptyMessage")} />
         ) : null}
         {rows.length > 0 ? <EvidencePanel evidence={rows} /> : null}
       </section>

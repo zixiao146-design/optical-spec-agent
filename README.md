@@ -51,6 +51,14 @@ local-first and does not upload packages, create tags/releases, execute solvers
 by default, call external LLMs by default, claim production-grade physical
 validation, or claim formal convergence proof.
 
+Agent Studio now supports English / Chinese UI switching. Chinese browser
+environments default to Chinese, and users can switch languages in the sidebar.
+The API JSON field names, adapter tool names, package metadata, and
+`api_contract_version` remain stable English contract fields. See
+[`docs/frontend_i18n_zh_CN.md`](docs/frontend_i18n_zh_CN.md) and the Chinese
+quickstart prompt at
+[`examples/quickstart/zh_nanoparticle_prompt.txt`](examples/quickstart/zh_nanoparticle_prompt.txt).
+
 Release status: the current public release candidate is `v0.9.0rc6`, while the
 current `main` development version is `0.9.0rc7.dev0`. The `v0.9.0rc7` tag has
 not been created, no `v0.9.0rc7` GitHub release exists, and `0.9.0rc7.dev0` is

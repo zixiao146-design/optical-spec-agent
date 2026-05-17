@@ -87,6 +87,10 @@ This document describes the current `main` branch. It is not a release tag.
 - Agent Studio frontend MVP implementation:
   `frontend/`, `docs/frontend_mvp_runbook.md`, and
   `docs/frontend_mvp_qa_checklist.md`
+- Agent Studio frontend English / 中文 localization:
+  `docs/frontend_i18n_zh_CN.md` and `frontend/src/i18n/`; UI copy, guided
+  demo, and safety copy are localized, while API JSON field names, adapter tool
+  names, and `api_contract_version` remain unchanged.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:

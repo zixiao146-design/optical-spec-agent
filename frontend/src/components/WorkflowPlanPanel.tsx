@@ -1,4 +1,5 @@
 import type { WorkflowPlanResponse } from "../api/types";
+import { useI18n } from "../i18n/useI18n";
 import { BoundaryBadge } from "./BoundaryBadge";
 
 interface WorkflowPlanPanelProps {
@@ -6,16 +7,17 @@ interface WorkflowPlanPanelProps {
 }
 
 export function WorkflowPlanPanel({ response }: WorkflowPlanPanelProps) {
+  const { t } = useI18n();
   if (!response) {
-    return <p className="muted">Generate a local workflow preview to inspect steps.</p>;
+    return <p className="muted">{t("workflow.panelEmpty")}</p>;
   }
   const plan = response.workflow_plan;
   const steps = Array.isArray(plan.planned_steps) ? plan.planned_steps : [];
   return (
     <section className="workflow-panel">
       <div className="boundary-row">
-        <BoundaryBadge>No solver was executed</BoundaryBadge>
-        <BoundaryBadge>No external LLM was called</BoundaryBadge>
+        <BoundaryBadge>{t("workflow.badge.noSolver")}</BoundaryBadge>
+        <BoundaryBadge>{t("safety.noExternalLlmDefault")}</BoundaryBadge>
       </div>
       <ol className="step-list">
         {steps.map((step) => (

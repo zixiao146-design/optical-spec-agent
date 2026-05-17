@@ -30,6 +30,14 @@ def test_frontend_guided_demo_contains_all_steps_and_boundaries():
         "Preview artifacts are not production-grade physical validation",
         "Formal convergence proof is not claimed",
         "This UI does not control PyPI/TestPyPI publication or GitHub releases",
+        "加载示例规格",
+        "本地解析",
+        "验证规格",
+        "查看适配器矩阵",
+        "生成工作流计划",
+        "预览适配器产物",
+        "查看验证证据",
+        "查看 readiness / 下一步建议",
     ]
     for phrase in required:
         assert phrase in source

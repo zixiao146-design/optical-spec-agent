@@ -1,3 +1,5 @@
+import { useI18n } from "../i18n/useI18n";
+
 interface ErrorStateProps {
   title?: string;
   message: string;
@@ -5,17 +7,19 @@ interface ErrorStateProps {
 }
 
 export function ErrorState({
-  title = "Unable to complete this local API action",
+  title,
   message,
-  actions = ["Check the request payload and try again."],
+  actions,
 }: ErrorStateProps) {
+  const { t } = useI18n();
+  const visibleActions = actions || [t("state.error.defaultAction")];
   return (
     <div className="state-box error-state" role="alert" aria-live="assertive">
-      <strong>{title}</strong>
+      <strong>{title || t("state.error.defaultTitle")}</strong>
       <span>{message}</span>
-      {actions.length > 0 ? (
+      {visibleActions.length > 0 ? (
         <ul>
-          {actions.map((action) => (
+          {visibleActions.map((action) => (
             <li key={action}>{action}</li>
           ))}
         </ul>

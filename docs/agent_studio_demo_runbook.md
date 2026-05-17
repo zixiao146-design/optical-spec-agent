@@ -70,6 +70,8 @@ npm run dev -- --host 127.0.0.1 --port 5173
 - Frontend: http://127.0.0.1:5173
 - API health: http://127.0.0.1:8000/api/health
 - API OpenAPI docs if available: http://127.0.0.1:8000/docs
+- Language: use the sidebar LanguageSwitcher for English / 中文. Chinese guided
+  demo and safety copy are available without changing API field names.
 
 ## 5. Demo Walkthrough
 

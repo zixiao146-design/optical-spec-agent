@@ -1,4 +1,5 @@
 import type { AdapterPreviewResponse } from "../api/types";
+import { useI18n } from "../i18n/useI18n";
 import { BoundaryBadge } from "./BoundaryBadge";
 
 interface ArtifactPreviewPanelProps {
@@ -6,14 +7,15 @@ interface ArtifactPreviewPanelProps {
 }
 
 export function ArtifactPreviewPanel({ response }: ArtifactPreviewPanelProps) {
+  const { t } = useI18n();
   if (!response) {
-    return <p className="muted">Generate a preview artifact to inspect local scaffold content.</p>;
+    return <p className="muted">{t("preview.panelEmpty")}</p>;
   }
   return (
     <section className="artifact-preview">
       <div className="boundary-row">
-        <BoundaryBadge>Preview artifact only</BoundaryBadge>
-        <BoundaryBadge>No solver was executed</BoundaryBadge>
+        <BoundaryBadge>{t("preview.badge.previewOnly")}</BoundaryBadge>
+        <BoundaryBadge>{t("preview.badge.noSolver")}</BoundaryBadge>
       </div>
       <div className="artifact-meta">
         <span>{response.tool}</span>

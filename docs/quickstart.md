@@ -9,6 +9,11 @@ reviews validation evidence.
 This is a local-first, preview-first agent workflow for `optical-spec-agent`.
 It uses the Local Agent API and Agent Studio frontend MVP.
 
+Agent Studio supports English / Chinese UI switching. Chinese browser
+environments default to Chinese, and the sidebar language switcher can change
+between English and 中文 without reloading. API JSON field names, adapter tool
+names, package metadata, and `api_contract_version` remain untranslated.
+
 ## 2. What This Quickstart Does Not Do
 
 - Does not run external solvers by default.
@@ -77,10 +82,12 @@ OSA_QUICKSTART_WITH_VISUAL=1 OSA_QUICKSTART_NO_HOLD=1 ./scripts/run_quickstart_d
 5. Generate workflow plan.
 6. Preview artifact.
 7. Review validation evidence.
-8. Review readiness / next actions.
+8. Review Readiness / next actions.
 
 The frontend guided demo panel maps each step to the Local Agent API endpoint
 used by Agent Studio.
+Chinese quickstart prompt:
+`examples/quickstart/zh_nanoparticle_prompt.txt`.
 
 ## 8. Expected Success
 

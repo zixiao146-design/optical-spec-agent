@@ -10,8 +10,10 @@ import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
 import { StatusCard } from "../components/StatusCard";
 import { demoHealth, demoSchema, demoVersion } from "../fixtures/demoData";
+import { useI18n } from "../i18n/useI18n";
 
 export function SystemStatusPage() {
+  const { t } = useI18n();
   const [health, setHealth] = useState<RemoteState<HealthResponse>>(INITIAL_LOADING_STATE);
   const [version, setVersion] = useState<RemoteState<VersionResponse>>(INITIAL_LOADING_STATE);
   const [schema, setSchema] = useState<RemoteState<SchemaResponse>>(INITIAL_LOADING_STATE);
@@ -19,18 +21,18 @@ export function SystemStatusPage() {
   useEffect(() => {
     let active = true;
     void agentApi.getHealth().then((payload) => {
-      if (active) setHealth(stateFromPayload(payload, demoHealth, "Demo health fixture shown; this is not live API health."));
+      if (active) setHealth(stateFromPayload(payload, demoHealth, t("system.healthDemo")));
     });
     void agentApi.getVersion().then((payload) => {
-      if (active) setVersion(stateFromPayload(payload, demoVersion, "Demo version fixture shown; this is not live API version."));
+      if (active) setVersion(stateFromPayload(payload, demoVersion, t("system.versionDemo")));
     });
     void agentApi.getSchema().then((payload) => {
-      if (active) setSchema(stateFromPayload(payload, demoSchema, "Demo schema fixture shown; this is not live schema metadata."));
+      if (active) setSchema(stateFromPayload(payload, demoSchema, t("system.schemaDemo")));
     });
     return () => {
       active = false;
     };
-  }, []);
+  }, [t]);
 
   const isLoading = [health, version, schema].some((item) => item.status === "loading");
   const demoMessage = [health, version, schema].find((item) => item.status === "demo")?.message;
@@ -40,30 +42,29 @@ export function SystemStatusPage() {
     <div className="page-grid">
       <section className="page-panel wide">
         <div className="page-title">
-          <span>API / System Status</span>
-          <h2>Local API contract and schema</h2>
+          <span>{t("system.kicker")}</span>
+          <h2>{t("system.title")}</h2>
           <p>
-            Use this view to confirm the API process, package version, and schema
-            before frontend development.
+            {t("system.description")}
           </p>
         </div>
         <div className="boundary-row">
-          <BoundaryBadge>No upload controls in this UI</BoundaryBadge>
-          <BoundaryBadge>No tag or release controls in this UI</BoundaryBadge>
+          <BoundaryBadge>{t("system.badge.noUpload")}</BoundaryBadge>
+          <BoundaryBadge>{t("system.badge.noRelease")}</BoundaryBadge>
         </div>
       </section>
-      {isLoading ? <LoadingState label="Loading system status from the local API..." /> : null}
+      {isLoading ? <LoadingState label={t("system.loading")} /> : null}
       <ApiModeIndicator statuses={[health.status, version.status, schema.status]} />
       {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
       {error ? <ErrorState message={error.message} actions={error.recommended_next_actions} /> : null}
       <section className="status-grid wide">
-        <StatusCard label="API contract" value={version.data?.api_contract_version || version.status} />
-        <StatusCard label="Package" value={version.data?.package_version || version.status} />
-        <StatusCard label="Schema" value={schema.data?.schema_name || schema.status} />
+        <StatusCard label={t("system.card.apiContract")} value={version.data?.api_contract_version || version.status} />
+        <StatusCard label={t("system.card.package")} value={version.data?.package_version || version.status} />
+        <StatusCard label={t("system.card.schema")} value={schema.data?.schema_name || schema.status} />
       </section>
-      <JsonPanel title="Health" value={health.data || health.error || { status: health.status }} />
-      <JsonPanel title="Version" value={version.data || version.error || { status: version.status }} />
-      <JsonPanel title="Schema" value={schema.data || schema.error || { status: schema.status }} />
+      <JsonPanel title={t("system.health")} value={health.data || health.error || { status: health.status }} />
+      <JsonPanel title={t("system.version")} value={version.data || version.error || { status: version.status }} />
+      <JsonPanel title={t("system.schema")} value={schema.data || schema.error || { status: schema.status }} />
     </div>
   );
 }

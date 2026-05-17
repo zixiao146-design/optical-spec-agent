@@ -9,23 +9,25 @@ import { EmptyState } from "../components/EmptyState";
 import { ErrorState } from "../components/ErrorState";
 import { LoadingState } from "../components/LoadingState";
 import { demoAdapters, demoEvidence } from "../fixtures/demoData";
+import { useI18n } from "../i18n/useI18n";
 
 export function AdapterMatrixPage() {
+  const { t } = useI18n();
   const [adapters, setAdapters] = useState<RemoteState<AdaptersResponse>>(INITIAL_LOADING_STATE);
   const [evidence, setEvidence] = useState<RemoteState<ValidationEvidenceResponse>>(INITIAL_LOADING_STATE);
 
   useEffect(() => {
     let active = true;
     void agentApi.getAdapters().then((payload) => {
-      if (active) setAdapters(stateFromPayload(payload, demoAdapters, "Demo adapter fixture shown; this is not live registry data."));
+      if (active) setAdapters(stateFromPayload(payload, demoAdapters, t("adapters.demoAdapters")));
     });
     void agentApi.getValidationEvidence().then((payload) => {
-      if (active) setEvidence(stateFromPayload(payload, demoEvidence, "Demo evidence fixture shown; this is not live evidence data."));
+      if (active) setEvidence(stateFromPayload(payload, demoEvidence, t("adapters.demoEvidence")));
     });
     return () => {
       active = false;
     };
-  }, []);
+  }, [t]);
 
   const isLoading = adapters.status === "loading" || evidence.status === "loading";
   const demoMessage = [adapters, evidence].find((item) => item.status === "demo")?.message;
@@ -37,24 +39,23 @@ export function AdapterMatrixPage() {
     <div className="page-grid">
       <section className="page-panel wide">
         <div className="page-title">
-          <span>Adapter Matrix</span>
-          <h2>Adapter maturity and evidence</h2>
+          <span>{t("adapters.kicker")}</span>
+          <h2>{t("adapters.title")}</h2>
           <p>
-            The matrix shows registry metadata and validation evidence without
-            running external solvers.
+            {t("adapters.description")}
           </p>
         </div>
         <div className="boundary-row">
-          <BoundaryBadge>No solver was executed</BoundaryBadge>
-          <BoundaryBadge tone="notice">Elmer Level 3 remains deferred</BoundaryBadge>
+          <BoundaryBadge>{t("adapters.badge.noSolver")}</BoundaryBadge>
+          <BoundaryBadge tone="notice">{t("adapters.badge.elmerDeferred")}</BoundaryBadge>
         </div>
       </section>
       <section className="page-panel wide">
-        {isLoading ? <LoadingState label="Loading adapter matrix from the local API..." /> : null}
+        {isLoading ? <LoadingState label={t("adapters.loading")} /> : null}
         {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
         {error ? <ErrorState message={error.message} actions={error.recommended_next_actions} /> : null}
         {!isLoading && adapterRows.length === 0 && !error ? (
-          <EmptyState title="No adapters available" message="Start the local API or use demo fixture mode." />
+          <EmptyState title={t("adapters.noAdaptersTitle")} message={t("adapters.noAdaptersMessage")} />
         ) : null}
         {adapterRows.length > 0 ? <AdapterMatrix adapters={adapterRows} evidence={evidenceRows} /> : null}
       </section>

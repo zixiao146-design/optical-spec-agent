@@ -39,6 +39,8 @@ def test_examples_manifest_lists_existing_offline_examples():
         "examples/quickstart/README.md",
         "examples/quickstart/nanoparticle_demo_spec.json",
         "examples/quickstart/quickstart_workflow_request.json",
+        "examples/quickstart/zh_nanoparticle_prompt.txt",
+        "examples/quickstart/zh_quickstart_notes.md",
     }
     assert expected <= listed
     contract_examples = {item["path"] for item in public_contract["examples"]}

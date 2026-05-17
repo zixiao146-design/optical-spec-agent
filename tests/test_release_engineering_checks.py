@@ -202,6 +202,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "frontend_hardening_backlog.md",
         "quickstart.md",
         "quickstart.zh-CN.md",
+        "frontend_i18n_zh_CN.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -231,6 +232,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "quickstart" / "README.md").exists()
     assert (ROOT / "examples" / "quickstart" / "nanoparticle_demo_spec.json").exists()
     assert (ROOT / "examples" / "quickstart" / "quickstart_workflow_request.json").exists()
+    assert (ROOT / "examples" / "quickstart" / "zh_nanoparticle_prompt.txt").exists()
+    assert (ROOT / "examples" / "quickstart" / "zh_quickstart_notes.md").exists()
     assert (ROOT / "scripts" / "smoke_agent_api.sh").exists()
     assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
     assert (ROOT / "scripts" / "smoke_frontend_mvp.sh").exists()

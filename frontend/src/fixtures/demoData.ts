@@ -17,6 +17,9 @@ export const DEMO_FIXTURE_LOADED_MESSAGE =
 export const demoNaturalLanguageSpec =
   "Use Meep FDTD to simulate an 80 nm gold nanoparticle on a 100 nm gold film with a 5 nm SiO2 gap, normal-incidence plane wave from 400-900 nm, and report the scattering spectrum.";
 
+export const demoChineseNaturalLanguageSpec =
+  "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。优先使用开源仿真工具链，默认不运行外部求解器，不调用外部 LLM，只生成可检查的规格、工作流计划和适配器预览。";
+
 export const demoValidateRequestText = JSON.stringify(
   { path: "examples/specs/minimal_nanoparticle.json" },
   null,

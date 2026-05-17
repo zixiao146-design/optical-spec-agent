@@ -17,6 +17,11 @@ def test_frontend_global_safety_copy_is_visible_and_specific():
         "Preview artifacts are not production-grade physical validation.",
         "Formal convergence proof is not claimed.",
         "This UI does not control PyPI/TestPyPI publication or GitHub releases.",
+        "默认不执行外部求解器",
+        "默认不调用外部 LLM",
+        "预览产物不代表生产级物理验证",
+        "不声明形式化收敛证明",
+        "本界面不控制 PyPI/TestPyPI 上传",
         "not live validation",
     ]
     for phrase in required:
