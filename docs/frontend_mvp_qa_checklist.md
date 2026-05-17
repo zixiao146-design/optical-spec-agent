@@ -60,15 +60,19 @@
 - `python scripts/check_api_fixtures.py`
 - `./scripts/smoke_agent_api.sh`
 - `./scripts/smoke_frontend_mvp.sh`
+- Optional/manual: `./scripts/smoke_frontend_visual.sh`
 - `python -m pytest`
 - `python -m build`
 - `make check`
 - `./scripts/run_quality_gates.sh`
-- Future visual smoke plan: `docs/frontend_visual_smoke_plan.md`
+- Playwright visual smoke plan: `docs/frontend_visual_smoke_plan.md`
+- Playwright visual smoke runbook: `docs/frontend_visual_smoke_runbook.md`
 
 ## Generated Artifacts
 
 - Do not commit `node_modules`.
 - Do not commit `frontend/dist`.
 - Do not commit `frontend/build`.
+- Do not commit `frontend/test-results`.
+- Do not commit `frontend/playwright-report`.
 - Do not commit Python `dist/`, `build/`, egg-info, cache, or temporary venv artifacts.

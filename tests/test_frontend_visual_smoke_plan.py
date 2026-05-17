@@ -21,7 +21,10 @@ def test_frontend_visual_smoke_plan_documents_future_checks():
         "API disconnected/demo mode state",
         "No upload/release controls",
         "No default solver or external LLM controls",
-        "Playwright or an equivalent lightweight screenshot tool can be added later",
-        "not required for the current MVP hardening task",
+        "Playwright visual smoke support is now added",
+        "manual optional",
+        "not part of the default release gate",
+        "frontend_visual_smoke_runbook.md",
+        "scripts/smoke_frontend_visual.sh",
     ]:
         assert phrase in text

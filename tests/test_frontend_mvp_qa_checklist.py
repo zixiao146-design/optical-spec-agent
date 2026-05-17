@@ -28,9 +28,13 @@ def test_frontend_mvp_qa_checklist_documents_demo_safety_and_verification():
         "This UI does not control PyPI/TestPyPI publication or GitHub releases.",
         "aria-live",
         "./scripts/smoke_frontend_mvp.sh",
+        "./scripts/smoke_frontend_visual.sh",
         "docs/frontend_visual_smoke_plan.md",
+        "docs/frontend_visual_smoke_runbook.md",
         "Do not commit `node_modules`",
         "Do not commit `frontend/dist`",
+        "Do not commit `frontend/test-results`",
+        "Do not commit `frontend/playwright-report`",
     ]
     for phrase in required:
         assert phrase in text

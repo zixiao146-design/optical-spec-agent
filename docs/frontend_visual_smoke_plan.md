@@ -2,9 +2,12 @@
 
 ## Purpose
 
-This plan defines future screenshot checks for the Agent Studio frontend MVP.
-It is not required for the current MVP hardening task, and it does not add
-Playwright or any browser automation dependency yet.
+This plan defines lightweight local visual smoke checks for the Agent Studio
+frontend MVP. Playwright visual smoke support is now added as a manual optional
+check. It is not part of the default release gate or `run_quality_gates.sh`
+unless a maintainer explicitly promotes it later.
+
+Runbook: [`frontend_visual_smoke_runbook.md`](frontend_visual_smoke_runbook.md).
 
 ## Pages to Screenshot
 
@@ -26,7 +29,7 @@ Playwright or any browser automation dependency yet.
 
 ## Safety Checks
 
-Future visual smoke checks should confirm:
+The Playwright smoke checks should confirm:
 
 - No upload/release controls are visible.
 - No PyPI/TestPyPI publication controls are visible.
@@ -35,9 +38,16 @@ Future visual smoke checks should confirm:
 - Preview and validation boundaries remain visible.
 - Demo fixture mode is labeled as not live validation.
 
-## Future Tooling
+## Current Tooling
 
-Playwright or an equivalent lightweight screenshot tool can be added later.
-When added, it should run against local-only frontend and API processes and
-should not access external networks, execute solvers, call external LLMs,
-upload packages, create tags, or create releases.
+- Playwright config: `frontend/playwright.config.ts`.
+- Visual smoke test: `frontend/tests/visual/agent-studio-smoke.spec.ts`.
+- Manual wrapper: `scripts/smoke_frontend_visual.sh`.
+
+The smoke is assertion-first rather than snapshot-first. Screenshots and HTML
+reports are written only to ignored Playwright output directories and should
+not be committed by default.
+
+The check runs against local-only frontend and API processes. It should not
+access external networks from the frontend, execute solvers, call external
+LLMs, upload packages, create tags, or create releases.

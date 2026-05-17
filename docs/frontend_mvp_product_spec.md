@@ -77,6 +77,9 @@ readiness status.
   preview forms; loading a fixture does not call the API until submitted.
 - API mode indicators, diagnostics panels, recommended action panels, and
   collapsible JSON panels are included for live API ergonomics.
-- Future visual smoke planning is documented in
-  `docs/frontend_visual_smoke_plan.md`.
+- Optional Playwright visual smoke is documented in
+  `docs/frontend_visual_smoke_plan.md` and
+  `docs/frontend_visual_smoke_runbook.md`.
+- Playwright visual smoke is manual/optional and is not part of the default
+  release gate.
 - Run instructions are documented in `docs/frontend_mvp_runbook.md`.

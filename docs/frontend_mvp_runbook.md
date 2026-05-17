@@ -45,6 +45,15 @@ Or run the repository smoke wrapper:
 ./scripts/smoke_frontend_mvp.sh
 ```
 
+Optional Playwright visual smoke:
+
+```bash
+./scripts/smoke_frontend_visual.sh
+```
+
+Visual smoke remains manual/optional and is not part of the default release
+gate. See [`frontend_visual_smoke_runbook.md`](frontend_visual_smoke_runbook.md).
+
 Do not commit `node_modules`, `frontend/dist`, or other build artifacts.
 
 ## 4. Demo / Fixture Mode
@@ -89,4 +98,5 @@ parse, validate, workflow, preview, and readiness views.
   badge.
 - Fixture mismatch: run `python scripts/check_api_fixtures.py`.
 - Frontend smoke: run `./scripts/smoke_frontend_mvp.sh`.
-- Visual smoke planning: review `docs/frontend_visual_smoke_plan.md`.
+- Visual smoke: run `./scripts/smoke_frontend_visual.sh` or review
+  `docs/frontend_visual_smoke_plan.md`.

@@ -33,6 +33,8 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
     assert '"dev"' in package_json
     assert '"build"' in package_json
     assert '"typecheck"' in package_json
+    assert '"visual:smoke"' in package_json
+    assert '"@playwright/test"' in package_json
 
 
 def test_frontend_source_has_no_release_or_upload_controls():
@@ -70,3 +72,5 @@ def test_frontend_generated_artifacts_are_not_present():
     assert not (FRONTEND / "node_modules").exists()
     assert not (FRONTEND / "dist").exists()
     assert not (FRONTEND / "build").exists()
+    assert not (FRONTEND / "test-results").exists()
+    assert not (FRONTEND / "playwright-report").exists()

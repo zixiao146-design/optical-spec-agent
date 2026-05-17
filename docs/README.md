@@ -38,7 +38,7 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Agent Studio frontend MVP runbook](frontend_mvp_runbook.md)
 - [Agent Studio frontend MVP QA checklist](frontend_mvp_qa_checklist.md)
 - [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
-- [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
+- [Agent Studio frontend visual smoke runbook](frontend_visual_smoke_runbook.md)
 - [CLI / API parity](cli_api_parity.md)
 - [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
 - [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
@@ -87,6 +87,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Agent Studio frontend MVP runbook](frontend_mvp_runbook.md)
 - [Agent Studio frontend MVP QA checklist](frontend_mvp_qa_checklist.md)
 - [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
+- [Agent Studio frontend visual smoke runbook](frontend_visual_smoke_runbook.md)
 - [CLI / API parity](cli_api_parity.md)
 - [CLI contract](cli_contract.md)
 - [Schema contract](schema_contract.md)
@@ -153,6 +154,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - API smoke script: `../scripts/smoke_agent_api.sh`
 - API fixture consistency script: `../scripts/check_api_fixtures.py`
 - Frontend MVP smoke script: `../scripts/smoke_frontend_mvp.sh`
+- Frontend Playwright visual smoke script: `../scripts/smoke_frontend_visual.sh`
 - [Examples manifest](../examples/examples_manifest.json)
 
 ## Decisions
@@ -187,6 +189,8 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Agent Studio frontend MVP implementation plan](frontend_mvp_implementation_plan.md)
 - [Agent Studio frontend MVP runbook](frontend_mvp_runbook.md)
 - [Agent Studio frontend MVP QA checklist](frontend_mvp_qa_checklist.md)
+- [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
+- [Agent Studio frontend visual smoke runbook](frontend_visual_smoke_runbook.md)
 - [CLI / API parity](cli_api_parity.md)
 - [v1.0 public contract freeze checklist](v1_0_public_contract_freeze_checklist.md)
 - [v1.0 public contract freeze confirmation](v1_0_public_contract_freeze_confirmation.md)

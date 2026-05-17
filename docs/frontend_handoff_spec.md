@@ -62,7 +62,10 @@ diagnostics panels, recommended action panels, and collapsible JSON payloads.
 - It includes fixture loading buttons for Spec Input, Workflow Plan, and
   Artifact Preview. Loading fixtures fills local forms but does not call the
   API until submitted.
-- Visual smoke planning is documented in `docs/frontend_visual_smoke_plan.md`.
+- Optional Playwright visual smoke is documented in
+  `docs/frontend_visual_smoke_plan.md` and
+  `docs/frontend_visual_smoke_runbook.md`.
+- Visual smoke remains manual and is not part of the default release gate.
 
 ## Not implemented beyond MVP
 

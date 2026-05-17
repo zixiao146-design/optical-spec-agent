@@ -36,6 +36,9 @@ solvers, external LLMs, or proprietary tools by default.
 - Frontend MVP runbook: `docs/frontend_mvp_runbook.md`
 - Frontend MVP QA checklist: `docs/frontend_mvp_qa_checklist.md`
 - Frontend MVP smoke script: `scripts/smoke_frontend_mvp.sh`
+- Optional Playwright visual smoke:
+  `docs/frontend_visual_smoke_runbook.md` and
+  `scripts/smoke_frontend_visual.sh`
 - PyPI: not published
 
 The Local Agent API is not yet a separately frozen v1.0 API contract unless a
@@ -108,3 +111,5 @@ uses `VITE_API_BASE_URL`, and does not include solver execution, external LLM,
 upload, publish, tag, release, login, cloud, or production deployment controls.
 The hardened MVP includes loading, empty, error, API disconnected, and demo
 fixture states. Demo fixture mode is explicitly not live validation.
+Optional Playwright visual smoke is manual-only and verifies local rendering
+and safety copy without changing the API contract or release gate.

@@ -45,8 +45,11 @@
 - Status and error regions use `aria-live`.
 - JSON panels are labeled, scrollable, and can be collapsed for scan-friendly
   local demos.
-- Visual smoke planning is documented in `docs/frontend_visual_smoke_plan.md`;
-  Playwright or equivalent can be added later.
+- Playwright visual smoke is documented in `docs/frontend_visual_smoke_plan.md`
+  and `docs/frontend_visual_smoke_runbook.md`.
+- Optional Playwright visual smoke can be run with
+  `./scripts/smoke_frontend_visual.sh`.
+- Playwright visual smoke remains manual and outside the default release gate.
 
 ## 4. Not required for MVP
 
@@ -56,6 +59,7 @@
 - 3D visualization.
 - Optimization UI.
 - PyPI/release operations.
+- Required Playwright screenshot automation in the default quality gates.
 
 ## Implementation evidence
 
@@ -65,4 +69,6 @@
 - The MVP has demo fixture fallback for API disconnected local demos.
 - `./scripts/smoke_frontend_mvp.sh` verifies typecheck/build without committing
   generated frontend artifacts.
+- `./scripts/smoke_frontend_visual.sh` verifies major pages and safety copy
+  manually without committing Playwright reports.
 - Build outputs, `node_modules`, and generated artifacts must not be committed.

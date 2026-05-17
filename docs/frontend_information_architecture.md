@@ -59,3 +59,5 @@ architecture.
 - No authentication required for MVP.
 - No cloud dependency.
 - No solver execution by default.
+- Optional Playwright visual smoke covers these seven pages manually and is not
+  a default release gate.

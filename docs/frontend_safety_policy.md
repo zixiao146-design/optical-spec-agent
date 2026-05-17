@@ -21,3 +21,9 @@
 - API mode indicators must make live API versus demo fixture mode clear.
 - Diagnostics and recommended next actions must not imply production-grade
   validation or a formal convergence proof.
+- Optional Playwright visual smoke may verify rendering and safety copy, but it
+  must remain local/manual and outside the default release gate.
+- Playwright visual smoke must not upload packages, create tags, create
+  releases, execute solvers, or call external LLMs.
+- Playwright reports, screenshots, `node_modules`, and frontend build outputs
+  must not be committed by default.

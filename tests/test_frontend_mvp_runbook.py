@@ -11,6 +11,9 @@ def test_frontend_mvp_runbook_documents_local_start_and_safety():
     assert "npm run dev" in text
     assert "npm run build" in text
     assert "./scripts/smoke_frontend_mvp.sh" in text
+    assert "./scripts/smoke_frontend_visual.sh" in text
+    assert "frontend_visual_smoke_runbook.md" in text
+    assert "manual/optional" in text
     assert "VITE_API_BASE_URL" in text
     assert "Demo fixture mode" in text
     assert "not live validation" in text
