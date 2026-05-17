@@ -60,6 +60,13 @@ If the API is disconnected, the frontend uses labeled demo fixture mode. This is
 useful for walkthroughs, but it is not live validation. Start the API and retry
 the action to demonstrate live local responses.
 
+## Chinese Guided Tutorial Missing
+
+Confirm the sidebar language is set to 中文 and open Dashboard / Readiness. The
+中文手把手教程 should appear there. The written tutorial is
+`docs/agent_studio_chinese_guided_tutorial.md`, and terminology is tracked in
+`docs/frontend_chinese_terminology.md`.
+
 ## CORS Issue
 
 The FastAPI app is configured for local Vite origins such as

@@ -5,6 +5,7 @@ import type { HealthResponse, ReadinessResponse, VersionResponse } from "../api/
 import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { ApiModeIndicator } from "../components/ApiModeIndicator";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { ChineseGuidedTutorial } from "../components/ChineseGuidedTutorial";
 import { ErrorState } from "../components/ErrorState";
 import { GuidedDemoStepper } from "../components/GuidedDemoStepper";
 import { JsonPanel } from "../components/JsonPanel";
@@ -64,6 +65,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
       </section>
 
       <GuidedDemoStepper onNavigate={onNavigate} />
+      <ChineseGuidedTutorial />
       <QuickstartPanel />
 
       {isLoading ? <LoadingState label={t("dashboard.loading")} /> : null}
@@ -96,8 +98,15 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
       </section>
 
       <section className="page-panel wide">
+        <p className="first-time-prompt">{t("quickstart.firstTimePrompt")}</p>
         <RecommendedActions
-          actions={readiness.data?.recommended_next_actions || [t("dashboard.startApiAction")]}
+          actions={readiness.data?.recommended_next_actions || [
+            t("dashboard.startApiAction"),
+            t("quickstart.loadChineseNanoparticleExample"),
+            t("guidedTutorial.step.parse.title"),
+            t("guidedTutorial.step.validate.title"),
+            t("guidedTutorial.step.workflow.title"),
+          ]}
         />
       </section>
 

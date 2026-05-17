@@ -55,6 +55,8 @@ def test_frontend_fixture_buttons_and_live_api_clarity_exist():
     i18n = _i18n_text()
 
     assert "Load example spec" in i18n
+    assert "Load Chinese nanoparticle example" in i18n
+    assert "加载中文纳米颗粒示例" in i18n
     assert "Load fixture" in i18n
     assert "Load workflow fixture" in i18n
     assert "Load minimal spec" in i18n

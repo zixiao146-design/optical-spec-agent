@@ -13,6 +13,7 @@ def test_frontend_guided_demo_contains_all_steps_and_boundaries():
     )
     required = [
         "GuidedDemoStepper",
+        "ChineseGuidedTutorial",
         "QuickstartPanel",
         "Start guided demo",
         "Load example spec",
@@ -38,6 +39,9 @@ def test_frontend_guided_demo_contains_all_steps_and_boundaries():
         "预览适配器产物",
         "查看验证证据",
         "查看 readiness / 下一步建议",
+        "中文手把手教程",
+        "加载中文纳米颗粒示例",
+        "查看验证证据和下一步建议",
     ]
     for phrase in required:
         assert phrase in source

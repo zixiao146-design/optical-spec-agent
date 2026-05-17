@@ -35,6 +35,10 @@ source /tmp/osa-agent-studio-demo/bin/activate
 
 The user-facing quickstart is documented in `docs/quickstart.md` and
 `docs/quickstart.zh-CN.md`.
+The Chinese step-by-step tutorial is documented in
+`docs/agent_studio_chinese_guided_tutorial.md`, with terminology in
+`docs/frontend_chinese_terminology.md`. Real maintainer feedback is recorded in
+`docs/agent_studio_demo_feedback.md`.
 
 The script runs the API and frontend smoke checks, starts the local API and
 frontend, prints the URLs, verifies readiness, and exits by default. To keep the
@@ -72,6 +76,8 @@ npm run dev -- --host 127.0.0.1 --port 5173
 - API OpenAPI docs if available: http://127.0.0.1:8000/docs
 - Language: use the sidebar LanguageSwitcher for English / 中文. Chinese guided
   demo and safety copy are available without changing API field names.
+- Chinese tutorial: use the Dashboard "中文手把手教程" / "Guided tutorial" panel
+  for the nine-step workflow before a public demo rehearsal.
 
 ## 5. Demo Walkthrough
 

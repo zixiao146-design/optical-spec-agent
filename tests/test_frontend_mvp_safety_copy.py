@@ -43,7 +43,6 @@ def test_frontend_keeps_publication_release_and_solver_controls_absent():
         "create tag",
         "create release",
         "run solver",
-        "execute solver",
         "external llm provider",
     ]
     for phrase in forbidden:

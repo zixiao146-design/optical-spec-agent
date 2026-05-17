@@ -548,11 +548,13 @@ td span {
 }
 
 .guided-demo,
+.guided-tutorial,
 .quickstart-success {
   grid-column: 1 / -1;
 }
 
 .guided-step-list,
+.tutorial-step-list,
 .check-list {
   display: grid;
   gap: 10px;
@@ -584,6 +586,72 @@ td span {
   margin: 0;
   color: #4e5b57;
   line-height: 1.45;
+}
+
+.tutorial-progress,
+.first-time-prompt {
+  border-radius: 8px;
+  background: #f3f7f5;
+  color: #254f43;
+  font-weight: 700;
+  padding: 10px 12px;
+}
+
+.tutorial-step-list li {
+  border: 1px solid #e5ebe5;
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.tutorial-step-list li.complete {
+  border-color: #7fb69f;
+  background: #f6fbf8;
+}
+
+.tutorial-step-heading {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.tutorial-step-heading span {
+  align-items: center;
+  background: #254f43;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 800;
+  height: 28px;
+  justify-content: center;
+  min-width: 28px;
+}
+
+.tutorial-step-heading h4 {
+  margin: 0;
+}
+
+.tutorial-step-list dl {
+  display: grid;
+  gap: 6px 12px;
+  grid-template-columns: minmax(110px, max-content) minmax(0, 1fr);
+  margin: 0;
+}
+
+.tutorial-step-list dt {
+  color: #4e5b57;
+  font-weight: 800;
+}
+
+.tutorial-step-list dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.tutorial-step-list code {
+  white-space: normal;
 }
 
 .diagnostics-panel,
@@ -632,7 +700,8 @@ td span {
 
   .topbar,
   .evidence-row,
-  .guided-step-list li {
+  .guided-step-list li,
+  .tutorial-step-list dl {
     align-items: flex-start;
     flex-direction: column;
     grid-template-columns: 1fr;

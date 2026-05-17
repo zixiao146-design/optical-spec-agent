@@ -89,3 +89,9 @@
   for quickstart rehearsal when Node/npm are available.
 - Confirm the guided demo panel and quickstart completion checklist are visible
   on Dashboard / Readiness.
+- Confirm the Chinese step-by-step tutorial is visible on Dashboard / Readiness
+  when the UI is switched to 中文.
+- Confirm `docs/agent_studio_chinese_guided_tutorial.md` and
+  `docs/frontend_chinese_terminology.md` are linked from the docs index.
+- Confirm the real maintainer feedback in `docs/agent_studio_demo_feedback.md`
+  is recorded without inventing page-by-page details.

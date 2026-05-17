@@ -25,14 +25,16 @@ export function SpecInputPage() {
   const localizedDemoSpec = language === "zh-CN" ? demoChineseNaturalLanguageSpec : demoNaturalLanguageSpec;
   const [text, setText] = useState(localizedDemoSpec);
   const [validateJson, setValidateJson] = useState(demoValidateRequestText);
-  const [fixtureNotice, setFixtureNotice] = useState(t("state.demoLoadedMessage"));
+  const [fixtureNotice, setFixtureNotice] = useState(
+    language === "zh-CN" ? t("quickstart.exampleLoaded") : t("state.demoLoadedMessage"),
+  );
   const [parseResponse, setParseResponse] = useState<RemoteState<ParseResponse>>({ status: "idle" });
   const [validateResponse, setValidateResponse] = useState<RemoteState<ValidateResponse>>({ status: "idle" });
 
   function loadExampleSpec() {
     setText(localizedDemoSpec);
     setValidateJson(demoValidateRequestText);
-    setFixtureNotice(t("state.demoLoadedMessage"));
+    setFixtureNotice(language === "zh-CN" ? t("quickstart.exampleLoaded") : t("state.demoLoadedMessage"));
     setParseResponse({ status: "idle" });
     setValidateResponse({ status: "idle" });
   }
@@ -94,7 +96,7 @@ export function SpecInputPage() {
           {parseResponse.status === "loading" ? t("spec.parseLoading") : t("spec.parseButton")}
         </button>
         <button type="button" className="secondary-button" onClick={loadExampleSpec}>
-          {t("spec.loadExample")}
+          {language === "zh-CN" ? t("quickstart.loadChineseNanoparticleExample") : t("spec.loadExample")}
         </button>
         <div id="parse-status" className="sr-status" aria-live="polite">
           {t("spec.parseStatus")} {parseResponse.status}

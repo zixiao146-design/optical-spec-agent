@@ -5,6 +5,9 @@
 - Agent Studio 支持 English / 中文。
 - API 字段名保持英文稳定。
 - UI 文案、guided demo、安全边界支持中文。
+- 中文手把手教程已加入前端和文档：
+  `docs/agent_studio_chinese_guided_tutorial.md`。
+- 中文术语表见 `docs/frontend_chinese_terminology.md`。
 - Current main development version: 0.9.0rc7.dev0。
 - PyPI 未发布。
 
@@ -37,3 +40,9 @@
 Tests guard the Chinese copy, English fallback copy, i18n dictionaries,
 `LanguageSwitcher`, and the rule that API JSON fields and adapter tool names
 remain stable.
+
+## 6. Demo feedback
+
+真实 maintainer demo feedback 已记录在
+`docs/agent_studio_demo_feedback.md`。当前 P0 是公开演示前加入中文手把手教程；
+页面逐项反馈目前未提供，后续 demo 再补，不编造。

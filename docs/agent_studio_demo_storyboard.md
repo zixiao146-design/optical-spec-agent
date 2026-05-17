@@ -7,6 +7,10 @@ feel like an agent-like workflow while staying local-first, open-source-solver-f
 preview-first, and conservative about validation claims.
 Use `docs/quickstart.md`, `docs/quickstart.zh-CN.md`, and the frontend
 `Start guided demo` panel for the first-time user path.
+For Chinese public-demo rehearsal, use
+`docs/agent_studio_chinese_guided_tutorial.md` and the frontend
+“中文手把手教程” panel. Page-by-page maintainer feedback has not been provided
+yet; do not invent it.
 Each scene includes a safety note for the maintainer to point out.
 
 | Scene | Page | Action | Expected UI | API endpoint used | Speaker note | Safety note |

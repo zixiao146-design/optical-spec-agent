@@ -88,6 +88,9 @@ The frontend guided demo panel maps each step to the Local Agent API endpoint
 used by Agent Studio.
 Chinese quickstart prompt:
 `examples/quickstart/zh_nanoparticle_prompt.txt`.
+Chinese step-by-step public-demo tutorial:
+`docs/agent_studio_chinese_guided_tutorial.md`; terminology:
+`docs/frontend_chinese_terminology.md`.
 
 ## 8. Expected Success
 

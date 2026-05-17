@@ -10,6 +10,7 @@ def test_frontend_i18n_files_and_language_switcher_exist():
     assert (FRONTEND / "i18n" / "zhCN.ts").exists()
     assert (FRONTEND / "i18n" / "useI18n.tsx").exists()
     assert (FRONTEND / "components" / "LanguageSwitcher.tsx").exists()
+    assert (FRONTEND / "components" / "ChineseGuidedTutorial.tsx").exists()
     assert (ROOT / "docs" / "frontend_i18n_zh_CN.md").exists()
 
     source = "\n".join(
@@ -29,6 +30,8 @@ def test_chinese_localization_doc_records_contract_boundaries():
     text = (ROOT / "docs" / "frontend_i18n_zh_CN.md").read_text(encoding="utf-8")
     required = [
         "Agent Studio 支持 English / 中文",
+        "docs/agent_studio_chinese_guided_tutorial.md",
+        "docs/frontend_chinese_terminology.md",
         "API 字段名保持英文稳定",
         "agent-studio-language",
         "默认不执行外部求解器",
@@ -63,5 +66,8 @@ def test_i18n_dictionaries_preserve_english_and_chinese_safety_copy():
         "不声明形式化收敛证明",
         "本界面不控制 PyPI/TestPyPI 上传",
         "本演示是本地优先、同步、预览优先的 Agent Studio",
+        "中文手把手教程",
+        "加载中文纳米颗粒示例",
+        "示例已加载。点击本地解析后才会调用 API。",
     ]:
         assert phrase in chinese

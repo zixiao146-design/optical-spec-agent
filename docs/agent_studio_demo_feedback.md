@@ -4,8 +4,8 @@
 
 - Current public prerelease: v0.9.0rc6
 - Current main development version: 0.9.0rc7.dev0
-- Latest demo package commit reviewed: 514551a
-- Agent Studio demo package: exists
+- Latest localized frontend commit reviewed: 212b880
+- Agent Studio frontend localization: English / 中文
 - Demo was run locally: yes
 - PyPI published: no
 - PyPI publication approval: not granted
@@ -15,24 +15,44 @@
 
 ## Maintainer Feedback Source
 
-The task included the placeholder `[在这里粘贴我的观察]` and did not include
-specific pasted observations. This document records the demo review status and
-creates a backlog-ready capture point without inventing maintainer feedback.
+- Demo date: 五月十七日
+- Maintainer: MilesLee
+- Overall impression: 还是很粗糙简陋
+- P0: 公开演示前必须增加中文手把手教程
+- P1: 待进一步 demo 反馈确认
+- P2: 待进一步 demo 反馈确认
 
 ## Recorded Observations
 
 - Demo was run locally.
-- No specific maintainer observation text was provided in this task.
-- Follow-up maintainer feedback: the project still feels far from a polished
-  agent product and should improve onboarding, guided demo flow,
-  quickstart-style first-run experience, and user-facing success criteria.
-- The quickstart work uses mature quickstart product experience as inspiration
-  only; it does not copy external website text, branding, or assets.
-- Frontend hardening should continue through
-  `docs/frontend_hardening_backlog.md`.
-- Any future concrete maintainer observations should be appended here with the
-  demo date, environment, affected page, observed behavior, expected behavior,
-  and priority.
+- The maintainer confirmed the current Agent Studio still feels rough and
+  minimal for a public-facing demo.
+- The immediate P0 fix is a Chinese step-by-step guided tutorial that lets a
+  Chinese user complete one full local agent workflow without maintainer
+  narration.
+- Page-by-page feedback has not been provided yet. Do not invent detailed page feedback;
+  collect it during the next guided tutorial demo.
+- Follow-up work is tracked in `docs/frontend_hardening_backlog.md`.
+
+## Priority Summary
+
+### P0 Must Fix Before Public Demo
+
+- Add a Chinese step-by-step tutorial entry in the frontend.
+- Document the Chinese guided tutorial in
+  `docs/agent_studio_chinese_guided_tutorial.md`.
+- Include per-step operation, expected result, API endpoint, and safety
+  boundary.
+- Add a one-click Chinese nanoparticle example load path.
+- Show tutorial completion / next action guidance.
+
+### P1 Important Polish
+
+- Pending further demo feedback.
+
+### P2 Future Enhancement
+
+- Pending further demo feedback.
 
 ## Safety Boundaries Preserved
 
@@ -41,14 +61,14 @@ creates a backlog-ready capture point without inventing maintainer feedback.
 - No default solver execution.
 - No default external LLM.
 - No production-grade validation claim.
+- No production-grade physical validation claim.
 - No formal convergence proof claim.
 - No PyPI/TestPyPI publication action.
 - No GitHub release action.
 
 ## Follow-up
 
-- Use `docs/frontend_hardening_backlog.md` as the tracked implementation
-  backlog.
-- Keep `docs/frontend_mvp_qa_checklist.md` aligned with any new observations.
+- Run the Chinese guided tutorial demo again after the P0 tutorial is merged.
+- Record page-by-page feedback only when it is actually provided.
 - Keep the Agent Studio demo package local-only until a maintainer explicitly
   approves a different scope.

@@ -58,6 +58,10 @@ The API JSON field names, adapter tool names, package metadata, and
 [`docs/frontend_i18n_zh_CN.md`](docs/frontend_i18n_zh_CN.md) and the Chinese
 quickstart prompt at
 [`examples/quickstart/zh_nanoparticle_prompt.txt`](examples/quickstart/zh_nanoparticle_prompt.txt).
+The Chinese step-by-step tutorial is tracked in
+[`docs/agent_studio_chinese_guided_tutorial.md`](docs/agent_studio_chinese_guided_tutorial.md),
+with terminology in
+[`docs/frontend_chinese_terminology.md`](docs/frontend_chinese_terminology.md).
 
 Release status: the current public release candidate is `v0.9.0rc6`, while the
 current `main` development version is `0.9.0rc7.dev0`. The `v0.9.0rc7` tag has

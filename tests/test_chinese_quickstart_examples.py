@@ -18,10 +18,13 @@ def test_chinese_quickstart_examples_and_docs_exist():
     notes_text = notes.read_text(encoding="utf-8")
 
     assert "English / 中文切换" in zh_quickstart
-    assert "中文 guided demo" in zh_quickstart
+    assert "中文手把手教程" in zh_quickstart
+    assert "docs/agent_studio_chinese_guided_tutorial.md" in zh_quickstart
+    assert "docs/frontend_chinese_terminology.md" in zh_quickstart
     assert "examples/quickstart/zh_nanoparticle_prompt.txt" in zh_quickstart
     assert "Agent Studio 前端支持 English / 中文界面切换" in readme_zh
     assert "docs/frontend_i18n_zh_CN.md" in readme_zh
+    assert "docs/agent_studio_chinese_guided_tutorial.md" in readme_zh
     for phrase in [
         "不访问网络",
         "不运行外部求解器",

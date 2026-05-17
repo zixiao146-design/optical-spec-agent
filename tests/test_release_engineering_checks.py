@@ -203,6 +203,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "quickstart.md",
         "quickstart.zh-CN.md",
         "frontend_i18n_zh_CN.md",
+        "agent_studio_chinese_guided_tutorial.md",
+        "frontend_chinese_terminology.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",

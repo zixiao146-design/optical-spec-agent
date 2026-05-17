@@ -4,6 +4,9 @@
 
 - [ ] Quickstart docs reviewed: `docs/quickstart.md` and
       `docs/quickstart.zh-CN.md`.
+- [ ] Chinese guided tutorial reviewed:
+      `docs/agent_studio_chinese_guided_tutorial.md`.
+- [ ] Chinese terminology reviewed: `docs/frontend_chinese_terminology.md`.
 - [ ] `./scripts/bootstrap_demo_env.sh` completed for first-run setup if needed.
 - [ ] `./scripts/run_quickstart_demo.sh` starts the local quickstart.
 - [ ] `git status clean`.
@@ -23,6 +26,9 @@
 - [ ] Guided demo panel shows Load example spec, Parse locally, Validate spec,
       Review adapter matrix, Generate workflow plan, Preview artifact, Review
       validation evidence, and Review readiness / next action.
+- [ ] 中文手把手教程 shows nine steps: 打开 Agent Studio, 查看 readiness / 系统状态,
+      加载中文纳米颗粒示例, 本地解析规格, 验证规格, 查看适配器矩阵, 生成工作流计划,
+      预览适配器产物, 查看验证证据和下一步建议.
 - [ ] Dashboard shows readiness, API mode, package version, TestPyPI/PyPI
       status, and recommended next actions.
 - [ ] Spec Input parse/validate works with the local API, or demo fixture mode

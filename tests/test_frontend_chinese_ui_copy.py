@@ -19,6 +19,11 @@ def test_chinese_dictionary_contains_core_pages_and_safety_boundaries():
         "默认不调用外部 LLM",
         "不声明形式化收敛证明",
         "不控制 PyPI/TestPyPI 上传",
+        "中文手把手教程",
+        "开始中文教程",
+        "打开 Agent Studio",
+        "加载中文纳米颗粒示例",
+        "查看验证证据和下一步建议",
     ]
     for phrase in required:
         assert phrase in chinese

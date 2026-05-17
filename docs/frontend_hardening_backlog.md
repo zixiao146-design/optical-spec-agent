@@ -12,49 +12,34 @@
 
 ## P0 Must Fix Before Public Demo
 
-- Capture concrete maintainer demo observations in
-  `docs/agent_studio_demo_feedback.md` before announcing a public demo.
-- Run the quickstart rehearsal with `./scripts/bootstrap_demo_env.sh` and
-  `./scripts/run_quickstart_demo.sh` before any public demo.
-- Confirm the guided demo panel and quickstart completion checklist make the
-  first-run flow understandable without maintainer narration.
-- Run the demo package from a clean checkout and confirm
-  `./scripts/demo_agent_studio.sh` starts the API and frontend without leaving
-  generated artifacts.
-- Confirm API disconnected/demo fixture mode is visibly labeled as not live
-  validation on every relevant page.
-- Confirm all seven MVP pages keep safety copy visible:
-  Dashboard / Readiness, Spec Input, Adapter Matrix, Workflow Plan, Artifact
-  Preview, Validation Evidence, and System Status.
+- Chinese step-by-step tutorial before any public demo:
+  `docs/agent_studio_chinese_guided_tutorial.md`.
+- Chinese tutorial entry in the frontend.
+- Tutorial stepper with the full local agent workflow.
+- Per-step operation instructions.
+- Per-step expected results.
+- Per-step API endpoint reference.
+- Per-step safety boundary.
+- One-click Chinese nanoparticle example loading.
+- Tutorial completion state / next-step suggestions.
 - Confirm no PyPI/TestPyPI upload controls, tag controls, release controls,
   solver-run controls, or external LLM controls are visible.
-- Confirm frontend smoke, API smoke, fixture consistency, and optional
-  Playwright visual smoke remain passing on the demo machine.
 
 ## P1 Important Polish
 
-- Improve keyboard focus visibility and tab order across navigation, forms,
-  JSON panels, and action buttons.
-- Add clearer "live API" versus "demo fixture" page-level labels in screenshots
-  and walkthrough moments.
-- Improve diagnostics grouping for warnings, assumptions, missing fields, and
-  recommended next actions.
-- Add copy-to-clipboard affordances for selected JSON panels without requiring
-  browser permissions.
-- Add responsive layout checks for narrow laptop and tablet-width local demos.
-- Add a guided demo mode that highlights the next page/action without adding
-  cloud, login, upload, tag, release, solver, or external LLM controls.
+- 待进一步 demo 反馈确认.
 
 ## P2 Future Enhancement
 
-- Add optional Playwright screenshot capture that writes only to ignored output
-  directories.
-- Add a generated local demo report summarizing API status, frontend status,
-  fixtures used, and safety boundaries.
-- Add persisted local UI preferences for API base URL and selected adapter.
-- Add deeper fixture scenarios for MPB, Meep, Gmsh, Optiland, and Elmer
-  deferred evidence.
-- Add non-blocking visual theme polish after core workflow clarity is stable.
+- 待进一步 demo 反馈确认.
+
+## Feedback Discipline
+
+- Do not invent page-by-page issues that were not provided.
+- Current real feedback is limited to: "还是很粗糙简陋" and the P0 need for a
+  Chinese step-by-step tutorial before public demo.
+- Add page-specific P1/P2 items only after the next demo produces concrete
+  observations.
 
 ## Deferred / Non-goals
 
