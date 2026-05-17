@@ -1,0 +1,17 @@
+{
+  "path": "examples/workflows/local_preview_request.json",
+  "description": "Quickstart pointer to the offline local workflow preview request.",
+  "tool": "mpb",
+  "safety": {
+    "no_network": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "notes": [
+    "Use this fixture for local workflow-plan demos.",
+    "The workflow remains no-execute-by-default.",
+    "No solver is executed and no external LLM provider is called."
+  ]
+}

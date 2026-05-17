@@ -17,6 +17,12 @@
 - Can show API connected, API disconnected, and demo fixture mode with the API
   base URL.
 - Can render diagnostics and recommended next actions consistently.
+- Can show a guided quickstart demo with Load example spec, Parse locally,
+  Validate spec, Review adapter matrix, Generate workflow plan, Preview
+  artifact, Review validation evidence, and Review readiness / next action.
+- Can show a quickstart completion checklist with API connected,
+  `0.9.0rc7.dev0`, `api_contract_version` 0.1, no solver executed, and no
+  external LLM called.
 
 ## 2. Safety criteria
 
@@ -50,6 +56,8 @@
 - Optional Playwright visual smoke can be run with
   `./scripts/smoke_frontend_visual.sh`.
 - Playwright visual smoke remains manual and outside the default release gate.
+- Quickstart setup/run scripts are documented and do not upload, publish,
+  create tags/releases, run solvers, or call external LLMs.
 
 ## 4. Not required for MVP
 

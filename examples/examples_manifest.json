@@ -118,6 +118,33 @@
       "requires_external_solver": false,
       "requires_external_llm": false,
       "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/quickstart/README.md",
+      "purpose": "Agent Studio quickstart example documentation",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/quickstart/nanoparticle_demo_spec.json",
+      "purpose": "Agent Studio quickstart nanoparticle demo spec pointer",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/quickstart/quickstart_workflow_request.json",
+      "purpose": "Agent Studio quickstart workflow request pointer",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     }
   ]
 }

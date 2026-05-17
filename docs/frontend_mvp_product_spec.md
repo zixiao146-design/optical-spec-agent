@@ -26,6 +26,8 @@ readiness status.
 - Show generated preview artifacts.
 - Show validation boundaries.
 - Show recommended next actions.
+- Provide a polished guided quickstart demo for first-time local users.
+- Show a quickstart success / next-action experience.
 - Preserve the no-default-solver and no-default-LLM policy.
 
 ## MVP non-goals
@@ -77,6 +79,11 @@ readiness status.
   preview forms; loading a fixture does not call the API until submitted.
 - API mode indicators, diagnostics panels, recommended action panels, and
   collapsible JSON panels are included for live API ergonomics.
+- A guided quickstart panel and completion checklist are included on the
+  dashboard to make the first-run experience feel agent-like.
+- `docs/quickstart.md`, `docs/quickstart.zh-CN.md`,
+  `scripts/bootstrap_demo_env.sh`, and `scripts/run_quickstart_demo.sh` provide
+  the user-facing onboarding path.
 - Optional Playwright visual smoke is documented in
   `docs/frontend_visual_smoke_plan.md` and
   `docs/frontend_visual_smoke_runbook.md`.

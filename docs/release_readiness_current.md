@@ -232,6 +232,8 @@ Current main contract artifacts:
 - `docs/v1_0_pypi_decision_gate.md`
 - `docs/v1_0_post_release_verification_plan.md`
 - `docs/agent_studio_frontend_roadmap.md`
+- `docs/quickstart.md`
+- `docs/quickstart.zh-CN.md`
 - `docs/quality_gates.md`
 - `docs/ci_quality_gate_parity.md`
 - `docs/release_dry_run_operations.md`
@@ -247,6 +249,7 @@ Current main contract artifacts:
 - `docs/schema_compatibility_policy.md`
 - `examples/README.md`
 - `examples/e2e/README.md`
+- `examples/quickstart/README.md`
 
 Current v1.0 evidence artifacts:
 

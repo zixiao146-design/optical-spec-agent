@@ -22,7 +22,7 @@ const PAGES = [
 
 type Page = (typeof PAGES)[number];
 
-function pageComponent(page: Page) {
+function pageComponent(page: Page, onNavigate: (page: Page) => void) {
   switch (page) {
     case "Spec Input":
       return <SpecInputPage />;
@@ -37,13 +37,13 @@ function pageComponent(page: Page) {
     case "System Status":
       return <SystemStatusPage />;
     default:
-      return <DashboardPage />;
+      return <DashboardPage onNavigate={onNavigate} />;
   }
 }
 
 export default function App() {
   const [activePage, setActivePage] = useState<Page>("Dashboard");
-  const content = useMemo(() => pageComponent(activePage), [activePage]);
+  const content = useMemo(() => pageComponent(activePage, setActivePage), [activePage]);
 
   return (
     <div className="app-shell">

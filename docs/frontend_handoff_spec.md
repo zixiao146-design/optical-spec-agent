@@ -62,6 +62,11 @@ diagnostics panels, recommended action panels, and collapsible JSON payloads.
 - It includes fixture loading buttons for Spec Input, Workflow Plan, and
   Artifact Preview. Loading fixtures fills local forms but does not call the
   API until submitted.
+- It includes a guided quickstart demo panel and quickstart completion
+  checklist for first-time users.
+- Quickstart setup/run docs and scripts are `docs/quickstart.md`,
+  `docs/quickstart.zh-CN.md`, `scripts/bootstrap_demo_env.sh`, and
+  `scripts/run_quickstart_demo.sh`.
 - Optional Playwright visual smoke is documented in
   `docs/frontend_visual_smoke_plan.md` and
   `docs/frontend_visual_smoke_runbook.md`.

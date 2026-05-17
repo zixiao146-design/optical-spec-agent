@@ -25,6 +25,17 @@ Recommended command:
 ./scripts/demo_agent_studio.sh
 ```
 
+First-run quickstart command:
+
+```bash
+./scripts/bootstrap_demo_env.sh
+source /tmp/osa-agent-studio-demo/bin/activate
+./scripts/run_quickstart_demo.sh
+```
+
+The user-facing quickstart is documented in `docs/quickstart.md` and
+`docs/quickstart.zh-CN.md`.
+
 The script runs the API and frontend smoke checks, starts the local API and
 frontend, prints the URLs, verifies readiness, and exits by default. To keep the
 demo running until Ctrl-C:
@@ -65,6 +76,8 @@ npm run dev -- --host 127.0.0.1 --port 5173
 ### Dashboard / Readiness
 
 - What to click: open the frontend URL and select Dashboard / Readiness.
+- Quickstart action: use Start guided demo to follow the eight-step local
+  agent walkthrough.
 - Expected result: readiness cards show `v0.9.0rc6`,
   `0.9.0rc7.dev0`, API contract version 0.1, PyPI not published, and
   recommended next actions.

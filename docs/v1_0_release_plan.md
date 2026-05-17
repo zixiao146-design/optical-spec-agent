@@ -29,6 +29,9 @@ access, or proprietary solver support.
 - Keep `scripts/demo_agent_studio.sh` and the Agent Studio demo runbook,
   checklist, storyboard, and troubleshooting guide aligned with the frontend
   MVP for local maintainer demos.
+- Keep `docs/quickstart.md`, `docs/quickstart.zh-CN.md`,
+  `scripts/bootstrap_demo_env.sh`, `scripts/run_quickstart_demo.sh`, and
+  `examples/quickstart/` aligned as the first-run onboarding path.
 - Decide PyPI publication path.
 - Prepare v1.0.0 release draft.
 - Run quality gates.
@@ -60,6 +63,9 @@ access, or proprietary solver support.
   controls.
 - No demo workflow that uploads packages, publishes PyPI/TestPyPI, creates
   tags, creates GitHub releases, executes solvers, or calls external LLMs.
+- No quickstart workflow that uploads packages, publishes PyPI/TestPyPI,
+  creates tags, creates GitHub releases, executes solvers, or calls external
+  LLMs.
 - No PyPI publication trigger from API fixture readiness alone.
 - No separate v1.0 API contract freeze unless maintainers explicitly approve it.
 - No default external solver, external LLM, network, or proprietary dependency.

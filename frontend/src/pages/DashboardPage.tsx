@@ -6,13 +6,19 @@ import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { ApiModeIndicator } from "../components/ApiModeIndicator";
 import { BoundaryBadge } from "../components/BoundaryBadge";
 import { ErrorState } from "../components/ErrorState";
+import { GuidedDemoStepper } from "../components/GuidedDemoStepper";
 import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
+import { QuickstartPanel } from "../components/QuickstartPanel";
 import { RecommendedActions } from "../components/RecommendedActions";
 import { StatusCard } from "../components/StatusCard";
 import { demoHealth, demoReadiness, demoVersion } from "../fixtures/demoData";
 
-export function DashboardPage() {
+interface DashboardPageProps {
+  onNavigate?: (page: "Dashboard" | "Spec Input" | "Adapter Matrix" | "Workflow Plan" | "Artifact Preview" | "Validation Evidence" | "System Status") => void;
+}
+
+export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [health, setHealth] = useState<RemoteState<HealthResponse>>(INITIAL_LOADING_STATE);
   const [version, setVersion] = useState<RemoteState<VersionResponse>>(INITIAL_LOADING_STATE);
   const [readiness, setReadiness] = useState<RemoteState<ReadinessResponse>>(INITIAL_LOADING_STATE);
@@ -55,6 +61,9 @@ export function DashboardPage() {
           <BoundaryBadge>Formal convergence proof not claimed</BoundaryBadge>
         </div>
       </section>
+
+      <GuidedDemoStepper onNavigate={onNavigate} />
+      <QuickstartPanel />
 
       {isLoading ? <LoadingState label="Loading dashboard from the local Agent API..." /> : null}
       <ApiModeIndicator statuses={[health.status, version.status, readiness.status]} />

@@ -31,6 +31,26 @@ Default quickstart and release validation do not require Zemax, Lumerical,
 COMSOL, or proprietary Ansys tools. External solvers are optional and not run by
 default. External LLM access is optional and not required by default.
 
+## Quickstart
+
+For a polished first-run local Agent Studio walkthrough, use
+[`docs/quickstart.md`](docs/quickstart.md):
+
+```bash
+./scripts/bootstrap_demo_env.sh
+source /tmp/osa-agent-studio-demo/bin/activate
+./scripts/run_quickstart_demo.sh
+```
+
+The quickstart opens Agent Studio at `http://127.0.0.1:5173` and the Local
+Agent API docs at `http://127.0.0.1:8000/docs`. It guides a first-time user
+through loading an example spec, parsing locally, validating, viewing the
+adapter matrix, generating a workflow plan, previewing an artifact, reviewing
+validation evidence, and reading readiness / next actions. It remains
+local-first and does not upload packages, create tags/releases, execute solvers
+by default, call external LLMs by default, claim production-grade physical
+validation, or claim formal convergence proof.
+
 Release status: the current public release candidate is `v0.9.0rc6`, while the
 current `main` development version is `0.9.0rc7.dev0`. The `v0.9.0rc7` tag has
 not been created, no `v0.9.0rc7` GitHub release exists, and `0.9.0rc7.dev0` is
@@ -143,6 +163,11 @@ external LLM actions.
 Local demo review and follow-up hardening are tracked in
 [`docs/agent_studio_demo_feedback.md`](docs/agent_studio_demo_feedback.md) and
 [`docs/frontend_hardening_backlog.md`](docs/frontend_hardening_backlog.md).
+Quickstart onboarding is documented in
+[`docs/quickstart.md`](docs/quickstart.md) and
+[`docs/quickstart.zh-CN.md`](docs/quickstart.zh-CN.md), with setup/run scripts
+[`scripts/bootstrap_demo_env.sh`](scripts/bootstrap_demo_env.sh) and
+[`scripts/run_quickstart_demo.sh`](scripts/run_quickstart_demo.sh).
 It uses the Local Agent API, defaults to `http://127.0.0.1:8000`, and does not
 include upload, publish, tag, release, solver-run, external LLM, login, cloud,
 or production deployment controls. If the API is disconnected, the UI falls

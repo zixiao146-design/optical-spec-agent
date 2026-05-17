@@ -58,14 +58,14 @@ test("major Agent Studio pages render in local visual smoke", async ({ page }) =
 
 test("safety notices remain visible and conservative", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("No solver is executed by default.")).toBeVisible();
-  await expect(page.getByText("No external LLM is called by default.")).toBeVisible();
+  await expect(page.getByText("No solver is executed by default.").first()).toBeVisible();
+  await expect(page.getByText("No external LLM is called by default.").first()).toBeVisible();
   await expect(
-    page.getByText("Preview artifacts are not production-grade physical validation."),
+    page.getByText("Preview artifacts are not production-grade physical validation.").first(),
   ).toBeVisible();
-  await expect(page.getByText("Formal convergence proof is not claimed.")).toBeVisible();
+  await expect(page.getByText("Formal convergence proof is not claimed.").first()).toBeVisible();
   await expect(
-    page.getByText("This UI does not control PyPI/TestPyPI publication or GitHub releases."),
+    page.getByText("This UI does not control PyPI/TestPyPI publication or GitHub releases.").first(),
   ).toBeVisible();
   await expectForbiddenControlsAbsent(page);
 });

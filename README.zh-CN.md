@@ -21,6 +21,24 @@ physical validation。
 外部 solver 是可选项，默认不运行；外部 LLM 也是可选项，默认不需要。
 PyPI 仍未发布；TestPyPI 已上传并验证 `0.9.0rc6.dev0`。
 
+## Quickstart
+
+面向第一次使用的本地 Agent Studio walkthrough 见
+`docs/quickstart.zh-CN.md`：
+
+```bash
+./scripts/bootstrap_demo_env.sh
+source /tmp/osa-agent-studio-demo/bin/activate
+./scripts/run_quickstart_demo.sh
+```
+
+Quickstart 会打开 Agent Studio `http://127.0.0.1:5173` 和 Local Agent API docs
+`http://127.0.0.1:8000/docs`，并引导用户完成 Load example spec、Parse locally、
+Validate、View adapter matrix、Generate workflow plan、Preview artifact、Review
+validation evidence 和 Readiness / next actions。它保持 local-first、preview-first：
+不上传、不发布、不创建 tag/release、不默认执行 solver、不默认调用外部 LLM、不声称
+production-grade physical validation，也不声称 formal convergence proof。
+
 核心主线：
 
 ```text
@@ -148,6 +166,8 @@ demo package 见 `docs/agent_studio_demo_runbook.md`、
 walkthrough 串在一起，但不上传、不创建 tag/release、不运行 solver、不调用外部 LLM。
 本地 demo review 与后续 hardening backlog 见
 `docs/agent_studio_demo_feedback.md` 和 `docs/frontend_hardening_backlog.md`。
+Quickstart onboarding 见 `docs/quickstart.md` 和 `docs/quickstart.zh-CN.md`，
+对应脚本为 `scripts/bootstrap_demo_env.sh` 和 `scripts/run_quickstart_demo.sh`。
 它使用 Local Agent API，默认 API base 为
 `http://127.0.0.1:8000`，不提供 upload、publish、tag、release、solver-run、
 external LLM、login、cloud 或 production deployment 控件。API 断开时 UI 会进入

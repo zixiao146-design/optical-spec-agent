@@ -1,0 +1,16 @@
+{
+  "path": "examples/specs/minimal_nanoparticle.json",
+  "description": "Quickstart pointer to the offline minimal nanoparticle spec.",
+  "safety": {
+    "no_network": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "notes": [
+    "Use this fixture for local Agent Studio demo loading.",
+    "The referenced spec is a preview fixture, not solver output.",
+    "No solver is executed and no external LLM is called."
+  ]
+}

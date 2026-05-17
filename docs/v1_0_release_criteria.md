@@ -32,6 +32,9 @@
   `docs/agent_studio_demo_checklist.md`,
   `docs/agent_studio_demo_storyboard.md`, and
   `docs/agent_studio_demo_troubleshooting.md`
+- Quickstart onboarding: `docs/quickstart.md`, `docs/quickstart.zh-CN.md`,
+  `scripts/bootstrap_demo_env.sh`, `scripts/run_quickstart_demo.sh`, and
+  `examples/quickstart/`
 
 ## Required before v1.0.0
 
@@ -90,3 +93,4 @@
 | Frontend handoff docs/scripts | Engineering track | Available | Launch guide, handoff spec, curl examples, API smoke, and fixture consistency checks support future frontend planning. |
 | Frontend MVP | Engineering track | Local React + Vite + TypeScript MVP implemented | Not a v1.0 blocker and not a PyPI publication trigger. |
 | Agent Studio demo package | Engineering track | Local demo runbook/script/checklist/storyboard/troubleshooting available | Useful for maintainer review, but not a release, PyPI, tag, or GitHub release action. |
+| Quickstart onboarding | Engineering track | Local quickstart docs/scripts/examples available | Useful for public-demo rehearsal, but not a release, PyPI, tag, or GitHub release action. |

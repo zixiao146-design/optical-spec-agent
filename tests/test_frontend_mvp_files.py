@@ -25,6 +25,8 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
         "ApiModeIndicator.tsx",
         "DemoModeBanner.tsx",
         "DiagnosticsPanel.tsx",
+        "GuidedDemoStepper.tsx",
+        "QuickstartPanel.tsx",
         "RecommendedActions.tsx",
     ]:
         assert (FRONTEND / "src" / "components" / component).exists()

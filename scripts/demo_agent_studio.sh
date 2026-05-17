@@ -74,6 +74,34 @@ echo "Agent Studio local demo package"
 echo "Root: $ROOT_DIR"
 echo "API: $API_URL"
 echo "Frontend: $FRONTEND_URL"
+echo "For first-run setup, use ./scripts/bootstrap_demo_env.sh and ./scripts/run_quickstart_demo.sh."
+
+check_python_deps() {
+  python - <<'PY'
+try:
+    import fastapi
+    import optical_spec_agent
+    import uvicorn
+except Exception:
+    raise SystemExit(1)
+raise SystemExit(0 if optical_spec_agent.__version__ == "0.9.0rc7.dev0" else 1)
+PY
+}
+
+if ! check_python_deps; then
+  echo "Demo dependencies are not ready."
+  echo "Run:"
+  echo "./scripts/bootstrap_demo_env.sh"
+  echo "source /tmp/osa-agent-studio-demo/bin/activate"
+  echo "./scripts/run_quickstart_demo.sh"
+  echo "NO SOLVER EXECUTION PERFORMED"
+  echo "NO EXTERNAL LLM CALLED"
+  echo "NO PROPRIETARY SOLVER REQUIRED"
+  echo "NO UPLOAD PERFORMED"
+  echo "NO TAG CREATED"
+  echo "NO RELEASE CREATED"
+  exit 0
+fi
 
 if ! command -v npm >/dev/null 2>&1; then
   echo "npm unavailable; the API can still be checked, but the frontend demo cannot start."

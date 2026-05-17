@@ -10,6 +10,10 @@ def test_agent_studio_demo_runbook_documents_local_walkthrough_and_safety():
     text = path.read_text(encoding="utf-8")
     required = [
         "./scripts/demo_agent_studio.sh",
+        "./scripts/bootstrap_demo_env.sh",
+        "./scripts/run_quickstart_demo.sh",
+        "docs/quickstart.md",
+        "Start guided demo",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:8000/api/health",
         "Dashboard / Readiness",

@@ -2,6 +2,10 @@
 
 ## Pre-demo
 
+- [ ] Quickstart docs reviewed: `docs/quickstart.md` and
+      `docs/quickstart.zh-CN.md`.
+- [ ] `./scripts/bootstrap_demo_env.sh` completed for first-run setup if needed.
+- [ ] `./scripts/run_quickstart_demo.sh` starts the local quickstart.
 - [ ] `git status clean`.
 - [ ] `python scripts/check_api_fixtures.py` passes.
 - [ ] API smoke `./scripts/smoke_agent_api.sh` passes.
@@ -16,6 +20,9 @@
 
 ## During demo
 
+- [ ] Guided demo panel shows Load example spec, Parse locally, Validate spec,
+      Review adapter matrix, Generate workflow plan, Preview artifact, Review
+      validation evidence, and Review readiness / next action.
 - [ ] Dashboard shows readiness, API mode, package version, TestPyPI/PyPI
       status, and recommended next actions.
 - [ ] Spec Input parse/validate works with the local API, or demo fixture mode

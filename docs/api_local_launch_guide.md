@@ -65,3 +65,8 @@ Frontend hardening and local demo checks are tracked in
 `docs/frontend_mvp_qa_checklist.md` and `scripts/smoke_frontend_mvp.sh`.
 If the API is disconnected, demo fixture mode is visibly marked as not live
 validation.
+
+For first-run Agent Studio onboarding, use `docs/quickstart.md` or
+`docs/quickstart.zh-CN.md`. The setup script is
+`scripts/bootstrap_demo_env.sh`, and the run script is
+`scripts/run_quickstart_demo.sh`.

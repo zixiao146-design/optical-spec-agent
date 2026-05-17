@@ -14,6 +14,10 @@
 
 - Capture concrete maintainer demo observations in
   `docs/agent_studio_demo_feedback.md` before announcing a public demo.
+- Run the quickstart rehearsal with `./scripts/bootstrap_demo_env.sh` and
+  `./scripts/run_quickstart_demo.sh` before any public demo.
+- Confirm the guided demo panel and quickstart completion checklist make the
+  first-run flow understandable without maintainer narration.
 - Run the demo package from a clean checkout and confirm
   `./scripts/demo_agent_studio.sh` starts the API and frontend without leaving
   generated artifacts.

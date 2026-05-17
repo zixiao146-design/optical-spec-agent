@@ -20,6 +20,8 @@ def test_demo_agent_studio_script_is_local_only_and_safe():
         "NO RELEASE CREATED",
         "scripts/smoke_agent_api.sh",
         "scripts/smoke_frontend_mvp.sh",
+        "./scripts/bootstrap_demo_env.sh",
+        "./scripts/run_quickstart_demo.sh",
     ]
     for phrase in required:
         assert phrase in text

@@ -200,6 +200,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "agent_studio_demo_troubleshooting.md",
         "agent_studio_demo_feedback.md",
         "frontend_hardening_backlog.md",
+        "quickstart.md",
+        "quickstart.zh-CN.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -226,11 +228,16 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "e2e" / "README.md").exists()
     assert (ROOT / "examples" / "api" / "README.md").exists()
     assert (ROOT / "examples" / "api" / "frontend_fixture_manifest.json").exists()
+    assert (ROOT / "examples" / "quickstart" / "README.md").exists()
+    assert (ROOT / "examples" / "quickstart" / "nanoparticle_demo_spec.json").exists()
+    assert (ROOT / "examples" / "quickstart" / "quickstart_workflow_request.json").exists()
     assert (ROOT / "scripts" / "smoke_agent_api.sh").exists()
     assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
     assert (ROOT / "scripts" / "smoke_frontend_mvp.sh").exists()
     assert (ROOT / "scripts" / "smoke_frontend_visual.sh").exists()
     assert (ROOT / "scripts" / "demo_agent_studio.sh").exists()
+    assert (ROOT / "scripts" / "bootstrap_demo_env.sh").exists()
+    assert (ROOT / "scripts" / "run_quickstart_demo.sh").exists()
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
@@ -317,6 +324,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Agent Studio Demo Troubleshooting" in combined
     assert "Agent Studio Demo Feedback" in combined
     assert "Frontend Hardening Backlog" in combined
+    assert "Quickstart" in combined
+    assert "scripts/bootstrap_demo_env.sh" in combined
+    assert "scripts/run_quickstart_demo.sh" in combined
+    assert "examples/quickstart/" in combined
     assert "scripts/demo_agent_studio.sh" in combined
     assert "No external solver execution by default" in combined
     assert "No external LLM call by default" in combined

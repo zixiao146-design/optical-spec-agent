@@ -20,6 +20,8 @@ Current main development version: `0.9.0rc7.dev0`.
 - [v1.0 PyPI decision gate](v1_0_pypi_decision_gate.md)
 - [v1.0 post-release verification plan](v1_0_post_release_verification_plan.md)
 - [Agent Studio frontend roadmap](agent_studio_frontend_roadmap.md)
+- [Quickstart](quickstart.md)
+- [Quickstart zh-CN](quickstart.zh-CN.md)
 - [Local Agent API contract](api_agent_contract.md)
 - [Local Agent API error model](api_error_model.md)
 - [Local Agent API versioning policy](api_versioning_policy.md)
@@ -45,6 +47,8 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Agent Studio demo troubleshooting](agent_studio_demo_troubleshooting.md)
 - [Agent Studio demo feedback](agent_studio_demo_feedback.md)
 - [Frontend hardening backlog](frontend_hardening_backlog.md)
+- [Quickstart](quickstart.md)
+- [Quickstart zh-CN](quickstart.zh-CN.md)
 - [CLI / API parity](cli_api_parity.md)
 - [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
 - [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
@@ -100,6 +104,8 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Agent Studio demo troubleshooting](agent_studio_demo_troubleshooting.md)
 - [Agent Studio demo feedback](agent_studio_demo_feedback.md)
 - [Frontend hardening backlog](frontend_hardening_backlog.md)
+- [Quickstart](quickstart.md)
+- [Quickstart zh-CN](quickstart.zh-CN.md)
 - [CLI / API parity](cli_api_parity.md)
 - [CLI contract](cli_contract.md)
 - [Schema contract](schema_contract.md)
@@ -168,6 +174,9 @@ manual-only and must not publish or create tags/releases from default CI.
 - Frontend MVP smoke script: `../scripts/smoke_frontend_mvp.sh`
 - Frontend Playwright visual smoke script: `../scripts/smoke_frontend_visual.sh`
 - Agent Studio local demo script: `../scripts/demo_agent_studio.sh`
+- Agent Studio quickstart setup script: `../scripts/bootstrap_demo_env.sh`
+- Agent Studio quickstart run script: `../scripts/run_quickstart_demo.sh`
+- Agent Studio quickstart examples: `../examples/quickstart/README.md`
 - [Examples manifest](../examples/examples_manifest.json)
 
 ## Decisions

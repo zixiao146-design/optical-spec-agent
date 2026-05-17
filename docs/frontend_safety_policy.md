@@ -30,5 +30,8 @@
 - The Agent Studio demo package is local-only. It must not upload packages,
   publish PyPI/TestPyPI, create tags, create GitHub releases, execute solvers,
   or call external LLMs.
+- Quickstart scripts and guided demo mode are local-only. They must not upload
+  packages, publish PyPI/TestPyPI, create tags, create GitHub releases, execute
+  solvers, or call external LLMs.
 - Demo screenshots or recordings must not be committed unless explicitly
   approved by the maintainer.

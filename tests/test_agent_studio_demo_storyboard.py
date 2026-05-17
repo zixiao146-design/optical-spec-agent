@@ -10,6 +10,8 @@ def test_agent_studio_demo_storyboard_links_workflow_api_and_safety():
     text = path.read_text(encoding="utf-8")
     required = [
         "agent-like workflow",
+        "docs/quickstart.md",
+        "Start guided demo",
         "GET /api/readiness",
         "POST /api/parse",
         "POST /api/validate",

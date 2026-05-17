@@ -50,6 +50,9 @@ validation evidence.
 - Demo review capture and hardening backlog are tracked in
   `docs/agent_studio_demo_feedback.md` and
   `docs/frontend_hardening_backlog.md`.
+- Quickstart onboarding is documented in `docs/quickstart.md` and
+  `docs/quickstart.zh-CN.md`, with setup/run scripts
+  `scripts/bootstrap_demo_env.sh` and `scripts/run_quickstart_demo.sh`.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out
@@ -93,6 +96,8 @@ validation evidence.
 - Local maintainer demo package that ties API launch, frontend launch, smoke
   checks, optional visual smoke, and a guided walkthrough together.
 - Demo feedback review loop and prioritized hardening backlog.
+- Guided quickstart panel and quickstart completion checklist for first-time
+  local users.
 
 ### Phase 3
 

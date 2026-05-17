@@ -1,5 +1,13 @@
 # Agent Studio Demo Troubleshooting
 
+For first-run setup, prefer:
+
+```bash
+./scripts/bootstrap_demo_env.sh
+source /tmp/osa-agent-studio-demo/bin/activate
+./scripts/run_quickstart_demo.sh
+```
+
 ## API Not Running
 
 Start the local API:

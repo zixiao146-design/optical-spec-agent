@@ -51,6 +51,17 @@ Maintainer-facing local demo wrapper:
 ./scripts/demo_agent_studio.sh
 ```
 
+First-run quickstart:
+
+```bash
+./scripts/bootstrap_demo_env.sh
+source /tmp/osa-agent-studio-demo/bin/activate
+./scripts/run_quickstart_demo.sh
+```
+
+See [`quickstart.md`](quickstart.md) and
+[`quickstart.zh-CN.md`](quickstart.zh-CN.md).
+
 Use `OSA_DEMO_HOLD=1 ./scripts/demo_agent_studio.sh` to keep the local API and
 frontend running for a guided walkthrough. The demo package is documented in
 [`agent_studio_demo_runbook.md`](agent_studio_demo_runbook.md),
@@ -115,3 +126,5 @@ parse, validate, workflow, preview, and readiness views.
   `docs/frontend_visual_smoke_plan.md`.
 - Demo walkthrough: run `./scripts/demo_agent_studio.sh` or review
   `docs/agent_studio_demo_runbook.md`.
+- Quickstart walkthrough: run `./scripts/run_quickstart_demo.sh` after
+  `./scripts/bootstrap_demo_env.sh`.

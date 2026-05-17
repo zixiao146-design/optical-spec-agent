@@ -83,3 +83,9 @@
   `docs/agent_studio_demo_troubleshooting.md` aligned with the current MVP.
 - Record maintainer demo observations in `docs/agent_studio_demo_feedback.md`.
 - Track prioritized follow-up work in `docs/frontend_hardening_backlog.md`.
+- Review first-run onboarding in `docs/quickstart.md` and
+  `docs/quickstart.zh-CN.md`.
+- Run `./scripts/bootstrap_demo_env.sh` and `./scripts/run_quickstart_demo.sh`
+  for quickstart rehearsal when Node/npm are available.
+- Confirm the guided demo panel and quickstart completion checklist are visible
+  on Dashboard / Readiness.

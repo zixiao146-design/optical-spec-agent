@@ -23,6 +23,11 @@ creates a backlog-ready capture point without inventing maintainer feedback.
 
 - Demo was run locally.
 - No specific maintainer observation text was provided in this task.
+- Follow-up maintainer feedback: the project still feels far from a polished
+  agent product and should improve onboarding, guided demo flow,
+  quickstart-style first-run experience, and user-facing success criteria.
+- The quickstart work uses mature quickstart product experience as inspiration
+  only; it does not copy external website text, branding, or assets.
 - Frontend hardening should continue through
   `docs/frontend_hardening_backlog.md`.
 - Any future concrete maintainer observations should be appended here with the
