@@ -8,6 +8,7 @@ from .task_session import (
     AgentPlanStep,
     AgentTaskSession,
     PermissionGate,
+    ToolCallRecord,
     build_agent_task_session,
 )
 
@@ -19,6 +20,7 @@ __all__ = [
     "AgentTaskSession",
     "AgentTrace",
     "PermissionGate",
+    "ToolCallRecord",
     "build_agent_task_session",
     "build_agent_trace",
 ]

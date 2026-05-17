@@ -327,6 +327,17 @@ Current v1.0 evidence artifacts:
   `tests/test_example_registry.py`; Example Gallery and Agent Trace Timeline
   are preview-first local UI/API surfaces and do not run solvers or call
   external LLMs.
+- Backend tool-call reality evidence:
+  `docs/tool_call_reality_matrix.md`, `docs/backend_functionality_status.md`,
+  `scripts/audit_sub_agents.py`, and `scripts/smoke_backend_capabilities.sh`;
+  these document installed/callable/executed status, task-session tool-call
+  ledgers, blocked solver/LLM/upload/tag/release actions, and local optical
+  preview calculators.
+- Optical calculator evidence:
+  `docs/optical_calculators.md`, `docs/optical_calculators.zh-CN.md`,
+  `examples/optics_calculators/`, and `/api/optics/*`; calculators are
+  preview/design-assist only and do not claim production-grade physical
+  validation.
 
 ## Release Blockers
 

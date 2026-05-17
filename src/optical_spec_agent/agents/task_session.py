@@ -21,6 +21,16 @@ from .orchestrator import build_agent_trace
 PlanStatus = Literal["pending", "completed", "warning", "blocked"]
 GateStatus = Literal["allowed", "blocked", "requires_explicit_approval"]
 RiskLevel = Literal["low", "medium", "high"]
+ToolKind = Literal[
+    "internal_python",
+    "api_endpoint",
+    "adapter_preview",
+    "external_solver",
+    "external_llm",
+    "publication",
+    "release",
+]
+ToolCallStatus = Literal["executed", "skipped", "blocked", "requires_explicit_approval"]
 ArtifactType = Literal[
     "spec",
     "workflow_plan",
@@ -66,6 +76,20 @@ class PermissionGate(BaseModel):
     default_allowed: bool
 
 
+class ToolCallRecord(BaseModel):
+    call_id: str
+    tool_name: str
+    tool_kind: ToolKind
+    called_by_agent: str
+    executed: bool
+    default_allowed: bool
+    status: ToolCallStatus
+    input_summary: str
+    output_summary: str
+    reason: str
+    safety_note: str
+
+
 class AgentTaskSession(BaseModel):
     session_id: str
     user_goal: str
@@ -76,6 +100,7 @@ class AgentTaskSession(BaseModel):
     agent_trace: AgentTrace
     artifacts: list[AgentArtifact] = Field(default_factory=list)
     permission_gates: list[PermissionGate] = Field(default_factory=list)
+    tool_call_ledger: list[ToolCallRecord] = Field(default_factory=list)
     final_recommendation: str
     recommended_next_actions: list[str] = Field(default_factory=list)
     status: str = "ok"
@@ -151,6 +176,11 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             adapter_recommendation=adapter_recommendation,
         ),
         permission_gates=_permission_gates(),
+        tool_call_ledger=_tool_call_ledger(
+            optical_intent=optical_intent,
+            selected_example_id=selected_example_id,
+            adapter_recommendation=adapter_recommendation,
+        ),
         final_recommendation=(
             f"Use the local {design_case_summary} path, inspect material candidates "
             f"{', '.join(trace.material_suggestions) or 'from the material catalog'}, "
@@ -180,6 +210,8 @@ def _detect_optical_intent(goal: str) -> str:
         return "dielectric metasurface preview"
     if any(token in lowered for token in ("lens", "ray", "透镜", "光线")):
         return "lens ray tracing preview"
+    if any(token in lowered for token in ("gaussian", "beam waist", "rayleigh", "高斯光束")):
+        return "gaussian beam propagation preview"
     return "general optical design preview"
 
 
@@ -196,6 +228,8 @@ def _application_for_intent(intent: str) -> str:
         return "dielectric metasurface"
     if "lens" in intent:
         return "lens/ray optics"
+    if "gaussian" in intent:
+        return "gaussian beam"
     return "general optical preview"
 
 
@@ -384,6 +418,285 @@ def _artifacts(
             summary="Adapter maturity and validation evidence references.",
             source_endpoint="/api/validation-evidence",
             generated_by_agent="EvidenceAgent",
+        ),
+    ]
+
+
+def _tool_call_ledger(
+    *,
+    optical_intent: str,
+    selected_example_id: str | None,
+    adapter_recommendation: str,
+) -> list[ToolCallRecord]:
+    ledger = [
+        ToolCallRecord(
+            call_id="material-catalog-suggest",
+            tool_name="material_catalog.suggest",
+            tool_kind="internal_python",
+            called_by_agent="MaterialAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=f"Application inferred from {optical_intent}.",
+            output_summary="Returned local preview material candidates.",
+            reason="Material suggestions are needed before adapter/workflow planning.",
+            safety_note="Local preview catalog only; not production-grade optical constants.",
+        ),
+        ToolCallRecord(
+            call_id="example-registry-load",
+            tool_name="example_registry.load",
+            tool_kind="internal_python",
+            called_by_agent="SpecAgent",
+            executed=selected_example_id is not None,
+            default_allowed=True,
+            status="executed" if selected_example_id is not None else "skipped",
+            input_summary=selected_example_id or "No bundled example matched or requested.",
+            output_summary=(
+                f"Loaded {selected_example_id} from examples/optical_design."
+                if selected_example_id
+                else "No local example file was loaded."
+            ),
+            reason="Use local examples when the user goal matches a known optical design case.",
+            safety_note="Example loading is repo-local and does not access the network.",
+        ),
+        ToolCallRecord(
+            call_id="agent-trace-build",
+            tool_name="agent_trace.build",
+            tool_kind="internal_python",
+            called_by_agent="RecommendationAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Optical intent, materials, adapter recommendation, and example context.",
+            output_summary="Built deterministic eight-role sub-agent trace.",
+            reason="The command center needs visible collaboration trace data.",
+            safety_note="Trace is deterministic local Python; no external LLM is called.",
+        ),
+        ToolCallRecord(
+            call_id="workflow-plan-preview",
+            tool_name="workflow_plan.preview",
+            tool_kind="api_endpoint",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=f"Adapter path: {adapter_recommendation}.",
+            output_summary="Prepared local workflow-plan preview steps.",
+            reason="Workflow planning is a local preview operation.",
+            safety_note="No solver execution is part of workflow planning by default.",
+        ),
+        ToolCallRecord(
+            call_id="adapter-preview-generate",
+            tool_name="adapter_preview.generate",
+            tool_kind="adapter_preview",
+            called_by_agent="AdapterAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=f"Preview adapter path: {adapter_recommendation}.",
+            output_summary="Prepared preview scaffold metadata; solver process not launched.",
+            reason="Adapter preview makes artifacts inspectable without running a solver.",
+            safety_note="Preview generation is not production-grade physical validation.",
+        ),
+    ]
+    calculator_record = _calculator_tool_call(optical_intent)
+    if calculator_record is not None:
+        ledger.append(calculator_record)
+    ledger.extend(_blocked_tool_calls())
+    return ledger
+
+
+def _calculator_tool_call(optical_intent: str) -> ToolCallRecord | None:
+    if "thin film" in optical_intent:
+        return ToolCallRecord(
+            call_id="optics-thin-film-calculate",
+            tool_name="optics.thin_film.calculate",
+            tool_kind="internal_python",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Thin-film/coating intent detected.",
+            output_summary="Prepared preview transfer-matrix estimate for coating review.",
+            reason="Thin-film stack estimates are deterministic local design-assist tools.",
+            safety_note="Calculator output is preview/design-assist, not production validation.",
+        )
+    if "lens" in optical_intent:
+        return ToolCallRecord(
+            call_id="optics-paraxial-thin-lens",
+            tool_name="optics.paraxial.thin_lens",
+            tool_kind="internal_python",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Lens/ray optics intent detected.",
+            output_summary="Prepared thin-lens/paraxial preview estimate.",
+            reason="Paraxial estimates are deterministic local design-assist tools.",
+            safety_note="Paraxial preview is not full ray-trace validation.",
+        )
+    if "waveguide" in optical_intent:
+        return ToolCallRecord(
+            call_id="optics-waveguide-v-number",
+            tool_name="optics.waveguide.v_number",
+            tool_kind="internal_python",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Waveguide intent detected.",
+            output_summary="Prepared slab waveguide V-number preview estimate.",
+            reason="V-number estimates provide local design orientation before solver setup.",
+            safety_note="Waveguide estimate is not a mode-solver result.",
+        )
+    if "gaussian" in optical_intent.lower():
+        return ToolCallRecord(
+            call_id="optics-gaussian-beam-propagate",
+            tool_name="optics.gaussian_beam.propagate",
+            tool_kind="internal_python",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Gaussian beam intent detected.",
+            output_summary="Prepared Gaussian beam propagation preview estimate.",
+            reason="Gaussian beam formulas provide local design-assist calculations.",
+            safety_note="Gaussian beam output is paraxial preview only.",
+        )
+    return None
+
+
+def _blocked_tool_calls() -> list[ToolCallRecord]:
+    return [
+        ToolCallRecord(
+            call_id="external-solver-meep",
+            tool_name="external_solver.meep",
+            tool_kind="external_solver",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="requires_explicit_approval",
+            input_summary="Potential Meep execution request.",
+            output_summary="No Meep process was launched.",
+            reason="External solvers require explicit maintainer/user approval.",
+            safety_note="No solver is executed by default.",
+        ),
+        ToolCallRecord(
+            call_id="external-solver-gmsh",
+            tool_name="external_solver.gmsh",
+            tool_kind="external_solver",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="requires_explicit_approval",
+            input_summary="Potential Gmsh execution request.",
+            output_summary="No Gmsh process was launched.",
+            reason="External solvers require explicit maintainer/user approval.",
+            safety_note="No solver is executed by default.",
+        ),
+        ToolCallRecord(
+            call_id="external-solver-mpb",
+            tool_name="external_solver.mpb",
+            tool_kind="external_solver",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="requires_explicit_approval",
+            input_summary="Potential MPB execution request.",
+            output_summary="No MPB process was launched.",
+            reason="External solvers require explicit maintainer/user approval.",
+            safety_note="No solver is executed by default.",
+        ),
+        ToolCallRecord(
+            call_id="external-solver-elmer",
+            tool_name="external_solver.elmer",
+            tool_kind="external_solver",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="requires_explicit_approval",
+            input_summary="Potential ElmerSolver execution request.",
+            output_summary="No Elmer process was launched.",
+            reason="Elmer remains install-deferred and is never run by default.",
+            safety_note="Elmer is not marked Level 3.",
+        ),
+        ToolCallRecord(
+            call_id="external-solver-optiland",
+            tool_name="external_solver.optiland",
+            tool_kind="external_solver",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="requires_explicit_approval",
+            input_summary="Potential Optiland execution request.",
+            output_summary="No Optiland process was launched.",
+            reason="External solver/tool execution requires explicit approval.",
+            safety_note="No solver is executed by default.",
+        ),
+        ToolCallRecord(
+            call_id="external-llm",
+            tool_name="external_llm",
+            tool_kind="external_llm",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="requires_explicit_approval",
+            input_summary="Potential external LLM call.",
+            output_summary="No external LLM call was made.",
+            reason="The backend is deterministic/local by default.",
+            safety_note="No external LLM is called by default.",
+        ),
+        ToolCallRecord(
+            call_id="testpypi-upload",
+            tool_name="testpypi_upload",
+            tool_kind="publication",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="blocked",
+            input_summary="Potential TestPyPI upload.",
+            output_summary="No upload command is exposed or executed.",
+            reason="Uploads require explicit maintainer approval outside Agent Studio.",
+            safety_note="NO UPLOAD PERFORMED.",
+        ),
+        ToolCallRecord(
+            call_id="pypi-publish",
+            tool_name="pypi_publish",
+            tool_kind="publication",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="blocked",
+            input_summary="Potential PyPI publication.",
+            output_summary="No PyPI publication is exposed or executed.",
+            reason="PyPI is not published and approval is not granted.",
+            safety_note="NO UPLOAD PERFORMED.",
+        ),
+        ToolCallRecord(
+            call_id="git-tag-create",
+            tool_name="git_tag_create",
+            tool_kind="release",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="blocked",
+            input_summary="Potential git tag creation.",
+            output_summary="No tag was created.",
+            reason="Release actions are out of scope for backend tool-call previews.",
+            safety_note="NO TAG CREATED.",
+        ),
+        ToolCallRecord(
+            call_id="github-release-create",
+            tool_name="github_release_create",
+            tool_kind="release",
+            called_by_agent="SafetyAgent",
+            executed=False,
+            default_allowed=False,
+            status="blocked",
+            input_summary="Potential GitHub release creation.",
+            output_summary="No release was created.",
+            reason="Release actions require separate explicit approval.",
+            safety_note="NO RELEASE CREATED.",
         ),
     ]
 

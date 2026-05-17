@@ -100,10 +100,25 @@ curl -X POST http://127.0.0.1:8000/api/agent-trace \
 curl -X POST http://127.0.0.1:8000/api/agent-session \
   -H "Content-Type: application/json" \
   --data @examples/api/agent_session_request_nanoparticle.json
+curl http://127.0.0.1:8000/api/tool-capabilities
+curl -X POST http://127.0.0.1:8000/api/optics/thin-film \
+  -H "Content-Type: application/json" \
+  --data @examples/api/thin_film_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/paraxial-lens \
+  -H "Content-Type: application/json" \
+  --data @examples/api/paraxial_lens_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/gaussian-beam \
+  -H "Content-Type: application/json" \
+  --data @examples/api/gaussian_beam_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/waveguide-estimate \
+  -H "Content-Type: application/json" \
+  --data @examples/api/waveguide_estimate_request.json
 ```
 
 The Example Gallery and material examples use local repo files and the local
 preview material catalog only. The agent-trace examples render a deterministic
 Agent Trace Timeline. The agent-session example renders an Agent Command Center
-task session with permission gates and local artifacts. These examples do not
-call an external LLM, run solvers, upload packages, or create tags/releases.
+task session with permission gates, a tool-call ledger, and local artifacts.
+Tool capabilities and optical calculator examples are backend reality checks
+and design-assist previews. These examples do not call an external LLM, run
+solvers, upload packages, or create tags/releases.

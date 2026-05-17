@@ -41,6 +41,10 @@ Agent Command Center:
 - `POST /api/agent-session` wraps the same sub-agent roles into a task-level
   session for a natural language goal.
 - The session adds optical intent, selected design case, plan steps, local
-  artifacts, permission gates, final recommendation, and next actions.
+  artifacts, permission gates, a tool-call ledger, final recommendation, and
+  next actions.
 - Permission gates keep external solver, external LLM, upload, PyPI
   publication, tag, and release actions blocked by default.
+- `scripts/audit_sub_agents.py` reports the current reality honestly:
+  sub-agents are deterministic trace roles with callable backend functions, not
+  standalone importable autonomous classes.

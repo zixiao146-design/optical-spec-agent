@@ -1,0 +1,19 @@
+{
+  "calculator": "paraxial_lens",
+  "description": "Preview thin-lens image distance and magnification.",
+  "request": {
+    "focal_length_mm": 50.0,
+    "object_distance_mm": 200.0
+  },
+  "safety": {
+    "preview_design_assist": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Thin-lens formula.",
+    "Paraxial small-angle approximation."
+  ]
+}

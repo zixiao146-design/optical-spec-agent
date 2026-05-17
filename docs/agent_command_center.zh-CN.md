@@ -27,11 +27,16 @@ Agent 命令中心是 Agent Studio 中面向任务的本地光学设计入口。
 - `GET /api/examples`
 - `GET /api/materials`
 - `POST /api/materials/suggest`
+- `GET /api/tool-capabilities`
+- `POST /api/optics/thin-film`
+- `POST /api/optics/paraxial-lens`
+- `POST /api/optics/gaussian-beam`
+- `POST /api/optics/waveguide-estimate`
 - `POST /api/workflow-plan`
 - `POST /api/adapter-preview`
 - `GET /api/validation-evidence`
 
-`POST /api/agent-session` 接收本地目标、可选本地示例 ID 和可选语言提示，返回 Agent Task Session：任务计划、子智能体轨迹、权限门控、本地产物、证据和下一步建议。
+`POST /api/agent-session` 接收本地目标、可选本地示例 ID 和可选语言提示，返回 Agent Task Session：任务计划、子智能体轨迹、权限门控、tool-call ledger、本地产物、证据和下一步建议。
 
 ## 任务会话
 
@@ -46,8 +51,14 @@ Agent Task Session 包含：
 - `agent_trace`
 - `artifacts`
 - `permission_gates`
+- `tool_call_ledger`
 - `final_recommendation`
 - `recommended_next_actions`
+
+tool-call ledger 会记录真实本地 Python 调用，例如
+`material_catalog.suggest`、`example_registry.load`、`agent_trace.build`、
+`workflow_plan.preview`、`adapter_preview.generate` 和适用的 `optics.*`
+预览计算器；同时记录被阻断的外部求解器、LLM、上传、tag 和 release 动作。
 
 ## 权限门控
 
@@ -77,4 +88,3 @@ Agent Task Session 包含：
 - 不声明生产级物理验证。
 - 不声明形式化收敛证明。
 - 材料库仍是 preview/design-assist，做物理结论前必须独立核验。
-

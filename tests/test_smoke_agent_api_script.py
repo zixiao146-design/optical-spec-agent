@@ -29,6 +29,11 @@ def test_smoke_agent_api_script_exists_and_does_not_publish_or_release():
         "/api/adapter-preview",
         "/api/validation-evidence",
         "/api/readiness",
+        "/api/tool-capabilities",
+        "/api/optics/thin-film",
+        "/api/optics/paraxial-lens",
+        "/api/optics/gaussian-beam",
+        "/api/optics/waveguide-estimate",
     ]:
         assert phrase in text
     lowered = text.lower()

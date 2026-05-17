@@ -7,7 +7,12 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 from optical_spec_agent.agents.models import AgentStep
-from optical_spec_agent.agents.task_session import AgentArtifact, AgentPlanStep, PermissionGate
+from optical_spec_agent.agents.task_session import (
+    AgentArtifact,
+    AgentPlanStep,
+    PermissionGate,
+    ToolCallRecord,
+)
 from optical_spec_agent.examples.models import (
     OpticalDesignExampleDetail,
     OpticalDesignExampleSummary,
@@ -225,7 +230,57 @@ class AgentTaskSessionResponse(ApiResponseBase):
     agent_trace: AgentTraceResponse
     artifacts: list[AgentArtifact] = Field(default_factory=list)
     permission_gates: list[PermissionGate] = Field(default_factory=list)
+    tool_call_ledger: list[ToolCallRecord] = Field(default_factory=list)
     final_recommendation: str
+
+
+class ToolCapabilityItem(BaseModel):
+    tool_name: str
+    tool_kind: str
+    available: bool
+    default_allowed: bool
+    status: str
+    detection_method: str
+    notes: list[str] = Field(default_factory=list)
+
+
+class ToolCapabilitiesResponse(ApiResponseBase):
+    internal_tools: list[ToolCapabilityItem] = Field(default_factory=list)
+    external_solvers: list[ToolCapabilityItem] = Field(default_factory=list)
+    publication_release_controls: list[ToolCapabilityItem] = Field(default_factory=list)
+
+
+class ThinFilmCalculatorRequest(ApiRequestBase):
+    incident_n: float = 1.0
+    substrate_n: float = 1.5
+    layers: list[dict[str, Any]] = Field(default_factory=list)
+    wavelength_nm: float
+    incidence_angle_deg: float = 0.0
+    polarization: str = "s"
+
+
+class ParaxialLensRequest(ApiRequestBase):
+    focal_length_mm: float
+    object_distance_mm: float
+
+
+class GaussianBeamRequest(ApiRequestBase):
+    wavelength_nm: float
+    waist_um: float
+    z_mm: float = 0.0
+
+
+class WaveguideEstimateRequest(ApiRequestBase):
+    core_n: float
+    cladding_n: float
+    core_thickness_um: float
+    wavelength_nm: float
+
+
+class OpticalCalculatorResponse(ApiResponseBase):
+    result: dict[str, Any] = Field(default_factory=dict)
+    assumptions: list[str] = Field(default_factory=list)
+    limitations: list[str] = Field(default_factory=list)
 
 
 class ExamplesResponse(ApiResponseBase):

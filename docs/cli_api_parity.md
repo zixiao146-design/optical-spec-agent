@@ -39,7 +39,9 @@ Hardened frontend demo checks are documented in
 | optical design examples | `GET /api/examples`, `GET /api/examples/{example_id}` | API-first | Local bundled Example Gallery; examples load from `examples/optical_design/`. |
 | agent collaboration | `POST /api/agent-trace` | API-first | Deterministic local sub-agent trace; no external LLM or solver call. |
 | example collaboration | `POST /api/examples/{example_id}/agent-trace` | API-first | Builds an Agent Trace Timeline for a bundled example. |
-| command-center task session | `POST /api/agent-session` | API-first | Natural language goal to optical intent, design case, plan, artifacts, permission gates, evidence, and next actions. |
+| command-center task session | `POST /api/agent-session` | API-first | Natural language goal to optical intent, design case, plan, artifacts, permission gates, tool-call ledger, evidence, and next actions. |
+| backend tool capabilities | `GET /api/tool-capabilities` | API-first | Reports internal tools, external solver detection, and disabled publication/release controls without executing solvers. |
+| optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/paraxial-lens`, `POST /api/optics/gaussian-beam`, `POST /api/optics/waveguide-estimate` | API-first | Local preview/design-assist calculators; no production-grade validation claim. |
 
 ## Shared boundaries
 

@@ -9,8 +9,11 @@ from optical_spec_agent.api.models import (
     AgentSessionRequest,
     AgentTaskSessionResponse,
     HealthResponse,
+    OpticalCalculatorResponse,
     ParseRequest,
     ReadinessResponse,
+    ToolCapabilitiesResponse,
+    ToolCapabilityItem,
     ValidateRequest,
     VersionResponse,
     WorkflowPlanRequest,
@@ -122,3 +125,29 @@ def test_agent_task_session_response_preserves_safety_defaults():
     assert response.plan_steps == []
     assert response.artifacts == []
     assert response.permission_gates == []
+    assert response.tool_call_ledger == []
+
+
+def test_tool_capabilities_and_calculator_response_models_keep_safety_defaults():
+    capabilities = ToolCapabilitiesResponse(
+        internal_tools=[
+            ToolCapabilityItem(
+                tool_name="material_catalog",
+                tool_kind="internal_python",
+                available=True,
+                default_allowed=True,
+                status="available",
+                detection_method="import",
+            )
+        ]
+    )
+    _assert_safety_defaults(capabilities)
+    assert capabilities.internal_tools[0].tool_name == "material_catalog"
+
+    calculator = OpticalCalculatorResponse(
+        result={"reflectance": 0.1},
+        assumptions=["preview"],
+        limitations=["not production-grade"],
+    )
+    _assert_safety_defaults(calculator)
+    assert calculator.result["reflectance"] == 0.1

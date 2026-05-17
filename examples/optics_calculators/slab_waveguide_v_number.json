@@ -1,0 +1,21 @@
+{
+  "calculator": "waveguide_v_number",
+  "description": "Preview slab waveguide V-number orientation.",
+  "request": {
+    "core_n": 3.48,
+    "cladding_n": 1.44,
+    "core_thickness_um": 0.22,
+    "wavelength_nm": 1550.0
+  },
+  "safety": {
+    "preview_design_assist": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Scalar symmetric slab-waveguide preview.",
+    "Does not solve vector eigenmodes."
+  ]
+}

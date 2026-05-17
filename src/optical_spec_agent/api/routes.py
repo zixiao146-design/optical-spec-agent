@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 from pathlib import Path
+import shutil
 from typing import Any
 
 from fastapi import APIRouter, HTTPException
@@ -29,15 +31,22 @@ from optical_spec_agent.api.models import (
     MaterialSuggestionRequest,
     MaterialSuggestionResponse,
     MaterialsResponse,
+    OpticalCalculatorResponse,
+    ParaxialLensRequest,
     ParseRequest as AgentParseRequest,
     ParseResponse as AgentParseResponse,
     ReadinessResponse,
     SchemaResponse,
+    ThinFilmCalculatorRequest,
+    ToolCapabilitiesResponse,
+    ToolCapabilityItem,
     ValidateRequest as AgentSpecRequest,
     ValidateResponse as AgentValidateResponse,
     ValidationEvidenceItem,
     ValidationEvidenceResponse,
     VersionResponse,
+    GaussianBeamRequest,
+    WaveguideEstimateRequest,
     WorkflowPlanRequest as AgentWorkflowPlanRequest,
     WorkflowPlanResponse,
 )
@@ -61,6 +70,13 @@ from optical_spec_agent.materials.catalog import (
     suggest_materials_for_application,
 )
 from optical_spec_agent.models.spec import OpticalSpec
+from optical_spec_agent.optics import (
+    calculate_thin_film_stack,
+    gaussian_beam_parameters,
+    propagate_gaussian_beam,
+    thin_lens,
+    slab_waveguide_v_number,
+)
 from optical_spec_agent.services.spec_service import SpecService
 from optical_spec_agent.utils.format import spec_to_summary
 from optical_spec_agent.validators.spec_validator import SpecValidator
@@ -549,6 +565,208 @@ def agent_readiness():
     )
 
 
+@router.get("/api/tool-capabilities", response_model=ToolCapabilitiesResponse)
+def agent_tool_capabilities():
+    """Report backend tool reality without executing external tools."""
+
+    internal = [
+        ToolCapabilityItem(
+            tool_name="material_catalog",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.materials.catalog",
+            notes=["Callable local preview material catalog."],
+        ),
+        ToolCapabilityItem(
+            tool_name="example_registry",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.examples.registry",
+            notes=["Loads repo-local optical design examples."],
+        ),
+        ToolCapabilityItem(
+            tool_name="agent_trace_builder",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.agents.orchestrator",
+            notes=["Builds deterministic local sub-agent traces."],
+        ),
+        ToolCapabilityItem(
+            tool_name="workflow_planner",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.workflows",
+            notes=["Plans local no-execute workflows."],
+        ),
+        ToolCapabilityItem(
+            tool_name="adapter_preview_generator",
+            tool_kind="adapter_preview",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="adapter registry dispatch",
+            notes=["Generates preview scaffold content only."],
+        ),
+        ToolCapabilityItem(
+            tool_name="optical_calculators",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.optics",
+            notes=["Thin-film, paraxial, Gaussian beam, and waveguide preview calculators."],
+        ),
+    ]
+    external = [
+        _external_tool_capability("meep", module_name="meep"),
+        _external_tool_capability("gmsh", module_name="gmsh", executable_name="gmsh"),
+        _external_tool_capability("mpb", executable_name="mpb"),
+        _external_tool_capability("ElmerSolver", executable_name="ElmerSolver"),
+        _external_tool_capability("optiland", module_name="optiland"),
+    ]
+    publication = [
+        ToolCapabilityItem(
+            tool_name="testpypi_upload",
+            tool_kind="publication",
+            available=False,
+            default_allowed=False,
+            status="disabled_not_exposed",
+            detection_method="policy",
+            notes=["No TestPyPI upload endpoint or UI control is exposed."],
+        ),
+        ToolCapabilityItem(
+            tool_name="pypi_publish",
+            tool_kind="publication",
+            available=False,
+            default_allowed=False,
+            status="disabled_not_exposed",
+            detection_method="policy",
+            notes=["PyPI is not published and publication approval is not granted."],
+        ),
+        ToolCapabilityItem(
+            tool_name="tag_or_release_create",
+            tool_kind="release",
+            available=False,
+            default_allowed=False,
+            status="disabled_not_exposed",
+            detection_method="policy",
+            notes=["No tag or GitHub release endpoint is exposed."],
+        ),
+    ]
+    return ToolCapabilitiesResponse(
+        internal_tools=internal,
+        external_solvers=external,
+        publication_release_controls=publication,
+        diagnostics=ApiDiagnostic(
+            warnings=["External solver availability is detected only; solvers are not executed."],
+            limitations=["Availability does not imply validation or production readiness."],
+        ),
+        recommended_next_actions=[
+            "Use /api/agent-session to inspect the tool-call ledger for a concrete task.",
+            "Run scripts/audit_sub_agents.py for installed/callable/executed status.",
+        ],
+    )
+
+
+@router.post(
+    "/api/optics/thin-film",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_thin_film(req: ThinFilmCalculatorRequest):
+    try:
+        result = calculate_thin_film_stack(
+            req.layers,
+            req.wavelength_nm,
+            incident_n=req.incident_n,
+            substrate_n=req.substrate_n,
+            incidence_angle_deg=req.incidence_angle_deg,
+            polarization=req.polarization,
+        )
+    except Exception as exc:  # noqa: BLE001 - stable calculator API error.
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/paraxial-lens",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_paraxial_lens(req: ParaxialLensRequest):
+    try:
+        result = thin_lens(req.focal_length_mm, req.object_distance_mm)
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/gaussian-beam",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_gaussian_beam(req: GaussianBeamRequest):
+    try:
+        result = propagate_gaussian_beam(req.wavelength_nm, req.waist_um, req.z_mm)
+        # Include the z=0 parameter helper explicitly in the response path.
+        base = gaussian_beam_parameters(req.wavelength_nm, req.waist_um)
+        result.result["parameter_summary"] = base.result
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/waveguide-estimate",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_waveguide_estimate(req: WaveguideEstimateRequest):
+    try:
+        result = slab_waveguide_v_number(
+            req.core_n,
+            req.cladding_n,
+            req.core_thickness_um,
+            req.wavelength_nm,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
 @router.get("/api/materials", response_model=MaterialsResponse)
 def agent_materials():
     return MaterialsResponse(
@@ -811,6 +1029,7 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
         agent_trace=trace,
         artifacts=session.artifacts,
         permission_gates=session.permission_gates,
+        tool_call_ledger=session.tool_call_ledger,
         final_recommendation=session.final_recommendation,
         diagnostics=ApiDiagnostic(
             warnings=[
@@ -821,6 +1040,59 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
             ],
         ),
         recommended_next_actions=session.recommended_next_actions,
+    )
+
+
+def _external_tool_capability(
+    tool_name: str,
+    *,
+    module_name: str | None = None,
+    executable_name: str | None = None,
+) -> ToolCapabilityItem:
+    module_available = importlib.util.find_spec(module_name) is not None if module_name else False
+    executable_path = shutil.which(executable_name) if executable_name else None
+    available = bool(module_available or executable_path)
+    methods = []
+    if module_name:
+        methods.append(f"importlib.util.find_spec('{module_name}')")
+    if executable_name:
+        methods.append(f"shutil.which('{executable_name}')")
+    notes = [
+        "Availability detection only; no solver command was executed.",
+        "External solver execution remains blocked by default.",
+    ]
+    if executable_path:
+        notes.append(f"Executable '{executable_name}' is detectable on PATH.")
+    if module_available:
+        notes.append(f"Python module '{module_name}' is import-detectable.")
+    return ToolCapabilityItem(
+        tool_name=tool_name,
+        tool_kind="external_solver",
+        available=available,
+        default_allowed=False,
+        status="detectable_not_executed" if available else "not_detected_not_executed",
+        detection_method="; ".join(methods) or "not checked",
+        notes=notes,
+    )
+
+
+def _optical_calculator_response(result: Any) -> OpticalCalculatorResponse:
+    return OpticalCalculatorResponse(
+        status=result.status,
+        result=result.result,
+        assumptions=result.assumptions,
+        limitations=result.limitations,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Calculator output is preview/design-assist only."
+            ],
+            limitations=result.limitations,
+            details={"calculator_diagnostics": result.diagnostics},
+        ),
+        recommended_next_actions=[
+            "Inspect assumptions before using the estimate.",
+            "Verify with validated material data and solver studies before physical conclusions.",
+        ],
     )
 
 

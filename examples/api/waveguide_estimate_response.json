@@ -1,0 +1,47 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": [
+        "Use MPB/Elmer or another validated mode solver for physical conclusions."
+      ]
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "result": {
+    "v_number": 2.8253254797387437,
+    "single_mode_likely": true,
+    "core_n": 3.48,
+    "cladding_n": 1.44,
+    "core_thickness_um": 0.22,
+    "wavelength_nm": 1550.0
+  },
+  "assumptions": [
+    "Symmetric slab-waveguide preview.",
+    "Uses scalar V-number orientation only.",
+    "Does not solve vector eigenmodes."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ]
+}

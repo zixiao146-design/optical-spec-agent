@@ -27,11 +27,16 @@ The command center uses:
 - `GET /api/examples`
 - `GET /api/materials`
 - `POST /api/materials/suggest`
+- `GET /api/tool-capabilities`
+- `POST /api/optics/thin-film`
+- `POST /api/optics/paraxial-lens`
+- `POST /api/optics/gaussian-beam`
+- `POST /api/optics/waveguide-estimate`
 - `POST /api/workflow-plan`
 - `POST /api/adapter-preview`
 - `GET /api/validation-evidence`
 
-`POST /api/agent-session` accepts a local goal, optional local example ID, and optional language hint. It returns an Agent Task Session with task plan steps, sub-agent trace, permission gates, local artifacts, evidence, and recommended next actions.
+`POST /api/agent-session` accepts a local goal, optional local example ID, and optional language hint. It returns an Agent Task Session with task plan steps, sub-agent trace, permission gates, a tool-call ledger, local artifacts, evidence, and recommended next actions.
 
 ## Task Session Shape
 
@@ -46,8 +51,15 @@ An Agent Task Session includes:
 - `agent_trace`
 - `artifacts`
 - `permission_gates`
+- `tool_call_ledger`
 - `final_recommendation`
 - `recommended_next_actions`
+
+The tool-call ledger records actual local Python calls such as
+`material_catalog.suggest`, `example_registry.load`, `agent_trace.build`,
+`workflow_plan.preview`, `adapter_preview.generate`, and applicable
+`optics.*` preview calculators. It also records blocked external solver, LLM,
+upload, tag, and release actions.
 
 ## Permission Gates
 
@@ -77,4 +89,3 @@ Blocked or requiring explicit approval outside Agent Studio:
 - No production-grade physical validation claim.
 - No formal convergence proof claim.
 - Material data remains preview/design-assist and must be independently verified.
-

@@ -16,6 +16,10 @@ Current frontend/API domain expansion:
 - Optical design examples for nanoparticle plasmonics, thin films, waveguides,
   photonic crystals, dielectric metasurfaces, and lens/ray optics.
 - Deterministic sub-agent collaboration trace.
+- Agent Command Center tool-call ledger that records internal Python calls and
+  blocked external actions.
+- Local preview optical calculators for thin-film stacks, paraxial lenses,
+  Gaussian beams, and waveguide V-number estimates.
 
 Candidate future integrations to evaluate:
 - TorchOptics for differentiable optical modeling experiments.

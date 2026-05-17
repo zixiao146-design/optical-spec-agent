@@ -75,6 +75,13 @@ The new [`Agent Command Center`](docs/agent_command_center.md) turns a natural
 language optical design goal into a deterministic local task session with
 optical intent, design case, agent plan, permission gates, artifacts, evidence,
 and recommended next actions.
+The backend now also records a
+[`tool-call reality matrix`](docs/tool_call_reality_matrix.md), live
+[`backend functionality status`](docs/backend_functionality_status.md), and
+local preview [`optical calculators`](docs/optical_calculators.md) for
+thin-film stacks, paraxial lenses, Gaussian beams, and waveguide V-number
+estimates. These calculators are design-assist previews only; they do not run
+external solvers, call external LLMs, or claim production-grade validation.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

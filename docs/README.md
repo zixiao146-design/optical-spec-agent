@@ -31,6 +31,10 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Agent Trace Timeline zh-CN](agent_trace_timeline.zh-CN.md)
 - [Agent Command Center](agent_command_center.md)
 - [Agent Command Center zh-CN](agent_command_center.zh-CN.md)
+- [Tool-call reality matrix](tool_call_reality_matrix.md)
+- [Backend functionality status](backend_functionality_status.md)
+- [Optical calculators](optical_calculators.md)
+- [Optical calculators zh-CN](optical_calculators.zh-CN.md)
 - [Material library](material_library.md)
 - [Material library zh-CN](material_library.zh-CN.md)
 - [Sub-agent architecture](sub_agent_architecture.md)
@@ -140,6 +144,10 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Agent Trace Timeline zh-CN](agent_trace_timeline.zh-CN.md)
 - [Agent Command Center](agent_command_center.md)
 - [Agent Command Center zh-CN](agent_command_center.zh-CN.md)
+- [Tool-call reality matrix](tool_call_reality_matrix.md)
+- [Backend functionality status](backend_functionality_status.md)
+- [Optical calculators](optical_calculators.md)
+- [Optical calculators zh-CN](optical_calculators.zh-CN.md)
 - [Quickstart](quickstart.md)
 - [Quickstart zh-CN](quickstart.zh-CN.md)
 - [CLI / API parity](cli_api_parity.md)
@@ -215,6 +223,9 @@ manual-only and must not publish or create tags/releases from default CI.
 - Agent Studio quickstart run script: `../scripts/run_quickstart_demo.sh`
 - Agent Studio quickstart examples: `../examples/quickstart/README.md`
 - Optical design examples: `../examples/optical_design/`
+- Optical calculator examples: `../examples/optics_calculators/`
+- Backend sub-agent audit script: `../scripts/audit_sub_agents.py`
+- Backend capabilities smoke script: `../scripts/smoke_backend_capabilities.sh`
 - [Examples manifest](../examples/examples_manifest.json)
 
 ## Decisions

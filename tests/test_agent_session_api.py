@@ -26,11 +26,16 @@ def test_agent_session_api_returns_task_session():
     assert payload["plan_steps"]
     assert payload["artifacts"]
     assert payload["permission_gates"]
+    assert payload["tool_call_ledger"]
     assert payload["agent_trace"]["agents"]
     assert payload["external_solver_executed"] is False
     assert payload["external_llm_required"] is False
     assert payload["production_grade_validation_claimed"] is False
     assert payload["formal_convergence_proof_claimed"] is False
+    ledger = {entry["tool_name"]: entry for entry in payload["tool_call_ledger"]}
+    assert ledger["material_catalog.suggest"]["executed"] is True
+    assert ledger["external_solver.meep"]["executed"] is False
+    assert ledger["external_llm"]["executed"] is False
 
 
 def test_agent_session_api_blocks_empty_goal_and_unknown_example():
@@ -49,4 +54,3 @@ def test_agent_session_api_blocks_empty_goal_and_unknown_example():
     assert unknown_example.json()["status"] == "error"
     assert unknown_example.json()["external_solver_executed"] is False
     assert unknown_example.json()["external_llm_required"] is False
-

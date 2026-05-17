@@ -20,6 +20,7 @@ def test_agent_task_session_builds_local_optical_design_session():
     assert session.plan_steps
     assert session.artifacts
     assert session.permission_gates
+    assert session.tool_call_ledger
     assert session.agent_trace.agents
     assert session.final_recommendation
     assert session.recommended_next_actions
@@ -28,6 +29,8 @@ def test_agent_task_session_builds_local_optical_design_session():
     assert session.proprietary_solver_required is False
     assert session.production_grade_validation_claimed is False
     assert session.formal_convergence_proof_claimed is False
+    assert any(entry.tool_name == "material_catalog.suggest" for entry in session.tool_call_ledger)
+    assert any(entry.tool_name == "agent_trace.build" for entry in session.tool_call_ledger)
 
 
 def test_agent_task_session_blocks_external_and_release_actions():
@@ -54,8 +57,13 @@ def test_agent_task_session_blocks_external_and_release_actions():
         assert gates[blocked].status in {"blocked", "requires_explicit_approval"}
         assert gates[blocked].default_allowed is False
 
+    ledger = {entry.tool_name: entry for entry in session.tool_call_ledger}
+    assert ledger["external_solver.meep"].executed is False
+    assert ledger["external_llm"].executed is False
+    assert ledger["testpypi_upload"].executed is False
+    assert ledger["git_tag_create"].executed is False
+
 
 def test_agent_task_session_unknown_explicit_example_is_error():
     with pytest.raises(ExampleRegistryError):
         build_agent_task_session("Plan a local preview.", example_id="missing_example")
-

@@ -133,6 +133,22 @@ require(agent_session["optical_intent_summary"], "agent session missing optical 
 require(agent_session["plan_steps"], "agent session missing plan steps")
 require(agent_session["artifacts"], "agent session missing artifacts")
 require(agent_session["permission_gates"], "agent session missing permission gates")
+require(agent_session["tool_call_ledger"], "agent session missing tool call ledger")
+
+tool_capabilities = get("/api/tool-capabilities")
+internal_tools = {item["tool_name"] for item in tool_capabilities["internal_tools"]}
+require("optical_calculators" in internal_tools, "tool capabilities missing optical calculators")
+
+thin_film = post(
+    "/api/optics/thin-film",
+    {"incident_n": 1.0, "substrate_n": 1.5, "wavelength_nm": 550.0, "layers": [{"n": 1.22, "thickness_nm": 112.7}]},
+)
+paraxial = post("/api/optics/paraxial-lens", {"focal_length_mm": 50.0, "object_distance_mm": 200.0})
+gaussian = post("/api/optics/gaussian-beam", {"wavelength_nm": 1064.0, "waist_um": 10.0, "z_mm": 5.0})
+waveguide = post(
+    "/api/optics/waveguide-estimate",
+    {"core_n": 3.48, "cladding_n": 1.44, "core_thickness_um": 0.22, "wavelength_nm": 1550.0},
+)
 
 for name, payload in {
     "health": health,
@@ -153,6 +169,11 @@ for name, payload in {
     "example_agent_trace": example_agent_trace,
     "agent_trace": agent_trace,
     "agent_session": agent_session,
+    "tool_capabilities": tool_capabilities,
+    "thin_film": thin_film,
+    "paraxial": paraxial,
+    "gaussian": gaussian,
+    "waveguide": waveguide,
 }.items():
     require(payload["external_solver_executed"] is False, f"{name} solver flag changed")
     require(payload["external_llm_required"] is False, f"{name} LLM flag changed")
@@ -160,7 +181,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 18}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 23}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

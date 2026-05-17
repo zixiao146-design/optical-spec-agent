@@ -50,7 +50,17 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `example_agent_trace_nanoparticle_response.json`
 - `agent_session_request_nanoparticle.json`
 - `agent_session_response_nanoparticle.json`
+- `agent_session_tool_ledger_response.json`
 - `agent_session_error_empty_goal_response.json`
+- `tool_capabilities_response.json`
+- `thin_film_request.json`
+- `thin_film_response.json`
+- `paraxial_lens_request.json`
+- `paraxial_lens_response.json`
+- `gaussian_beam_request.json`
+- `gaussian_beam_response.json`
+- `waveguide_estimate_request.json`
+- `waveguide_estimate_response.json`
 
 These fixtures are local preview/design-assist data only. They do not perform
 external material database lookup, solver execution, external LLM calls,
@@ -58,9 +68,11 @@ uploads, tags, or releases.
 
 The Agent Command Center fixtures exercise `POST /api/agent-session` and show
 how a natural language goal becomes optical intent, a design case, local plan
-steps, sub-agent trace, permission gates, local artifacts, evidence, and next
-actions. They preserve the same no-solver, no-external-LLM, no-upload, no-tag,
-and no-release boundaries.
+steps, sub-agent trace, permission gates, a tool-call ledger, local artifacts,
+evidence, and next actions. The tool capabilities and optical calculator
+fixtures show backend tool-call reality and preview/design-assist calculations.
+They preserve the same no-solver, no-external-LLM, no-upload, no-tag, and
+no-release boundaries.
 
 `scripts/check_api_fixtures.py` compares these fixtures with live FastAPI
 `TestClient` response top-level shapes. `scripts/smoke_agent_api.sh` exercises

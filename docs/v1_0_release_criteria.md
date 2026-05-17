@@ -101,6 +101,8 @@
 | Frontend localization | Engineering track | English / 中文 UI available | Improves local demos; does not change the API contract or release criteria. |
 | Example Gallery / Material Library / Agent Trace Timeline | Engineering track | Preview-first domain expansion | Useful for Agent Studio orientation, but does not expand validation claims or require v1.0 release gating. |
 | Agent Command Center | Engineering track | Local task-session surface available | Useful for maintainer demos; not a release, upload, tag, or PyPI publication trigger. |
+| Tool-call reality ledger | Engineering track | Backend task sessions include ledger records | Helps prove which local tools were called and which external actions were blocked; not a release trigger. |
+| Optical calculators | Engineering track | Preview/design-assist endpoints available | Useful backend functionality; not production-grade physical validation and not a v1.0 blocker by itself. |
 
 Material constants remain preview/design-assist data unless independently
 verified. Sub-agent trace is local/deterministic and does not call external

@@ -36,5 +36,7 @@ agent workflow 可视化，但不会引入自主外部 agent、外部 LLM 调用
 
 Agent 命令中心：
 - `POST /api/agent-session` 将同一组子智能体角色包装成面向自然语言目标的任务会话。
-- 任务会话包含光学意图、选中的设计案例、计划步骤、本地产物、权限门控、最终建议和下一步建议。
+- 任务会话包含光学意图、选中的设计案例、计划步骤、本地产物、权限门控、tool-call ledger、最终建议和下一步建议。
 - 权限门控默认阻断外部求解器、外部 LLM、上传、PyPI 发布、tag 和 release 动作。
+- `scripts/audit_sub_agents.py` 会诚实报告当前现实：这些子智能体是确定性的
+  trace 角色和可调用后端函数，不是独立安装的自主 class。

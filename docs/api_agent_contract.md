@@ -149,11 +149,20 @@ API contract version `0.1` also includes the task-driven command-center
 endpoint:
 
 - `POST /api/agent-session`
+- `GET /api/tool-capabilities`
+- `POST /api/optics/thin-film`
+- `POST /api/optics/paraxial-lens`
+- `POST /api/optics/gaussian-beam`
+- `POST /api/optics/waveguide-estimate`
 
 This endpoint turns a natural language optical design goal into a
 deterministic local Agent Task Session: optical intent, selected design case, material
 suggestions, adapter recommendation, workflow plan steps, artifacts, evidence,
-permission gates, and recommended next actions. It reuses the local material
-catalog, local example registry, and deterministic sub-agent trace. It does not
-call an external LLM, does not execute a solver, does not access the network,
-does not upload packages, and does not create tags/releases.
+permission gates, a tool-call ledger, and recommended next actions. It reuses
+the local material catalog, local example registry, deterministic sub-agent
+trace, and preview optical calculators when applicable. `/api/tool-capabilities`
+reports internal tools, external solver availability detection, and disabled
+publication/release controls without executing external tools. The optics
+endpoints provide preview/design-assist calculations only. These endpoints do
+not call an external LLM, do not execute a solver, do not access the network,
+do not upload packages, and do not create tags/releases.

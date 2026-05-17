@@ -1,0 +1,20 @@
+{
+  "calculator": "gaussian_beam",
+  "description": "Preview Gaussian beam radius after propagation.",
+  "request": {
+    "wavelength_nm": 1064.0,
+    "waist_um": 10.0,
+    "z_mm": 5.0
+  },
+  "safety": {
+    "preview_design_assist": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Ideal fundamental Gaussian beam.",
+    "Paraxial approximation."
+  ]
+}

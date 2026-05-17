@@ -1,0 +1,192 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "External solver availability is detected only; solvers are not executed."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Availability does not imply validation or production readiness."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Use /api/agent-session to inspect the tool-call ledger for a concrete task.",
+    "Run scripts/audit_sub_agents.py for installed/callable/executed status."
+  ],
+  "internal_tools": [
+    {
+      "tool_name": "material_catalog",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.materials.catalog",
+      "notes": [
+        "Callable local preview material catalog."
+      ]
+    },
+    {
+      "tool_name": "example_registry",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.examples.registry",
+      "notes": [
+        "Loads repo-local optical design examples."
+      ]
+    },
+    {
+      "tool_name": "agent_trace_builder",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.agents.orchestrator",
+      "notes": [
+        "Builds deterministic local sub-agent traces."
+      ]
+    },
+    {
+      "tool_name": "workflow_planner",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.workflows",
+      "notes": [
+        "Plans local no-execute workflows."
+      ]
+    },
+    {
+      "tool_name": "adapter_preview_generator",
+      "tool_kind": "adapter_preview",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "adapter registry dispatch",
+      "notes": [
+        "Generates preview scaffold content only."
+      ]
+    },
+    {
+      "tool_name": "optical_calculators",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.optics",
+      "notes": [
+        "Thin-film, paraxial, Gaussian beam, and waveguide preview calculators."
+      ]
+    }
+  ],
+  "external_solvers": [
+    {
+      "tool_name": "meep",
+      "tool_kind": "external_solver",
+      "available": false,
+      "default_allowed": false,
+      "status": "not_detected_not_executed",
+      "detection_method": "importlib.util.find_spec('meep')",
+      "notes": [
+        "Availability detection only; no solver command was executed.",
+        "External solver execution remains blocked by default."
+      ]
+    },
+    {
+      "tool_name": "gmsh",
+      "tool_kind": "external_solver",
+      "available": true,
+      "default_allowed": false,
+      "status": "detectable_not_executed",
+      "detection_method": "importlib.util.find_spec('gmsh'); shutil.which('gmsh')",
+      "notes": [
+        "Availability detection only; no solver command was executed.",
+        "External solver execution remains blocked by default.",
+        "Executable 'gmsh' is detectable on PATH."
+      ]
+    },
+    {
+      "tool_name": "mpb",
+      "tool_kind": "external_solver",
+      "available": false,
+      "default_allowed": false,
+      "status": "not_detected_not_executed",
+      "detection_method": "shutil.which('mpb')",
+      "notes": [
+        "Availability detection only; no solver command was executed.",
+        "External solver execution remains blocked by default."
+      ]
+    },
+    {
+      "tool_name": "ElmerSolver",
+      "tool_kind": "external_solver",
+      "available": false,
+      "default_allowed": false,
+      "status": "not_detected_not_executed",
+      "detection_method": "shutil.which('ElmerSolver')",
+      "notes": [
+        "Availability detection only; no solver command was executed.",
+        "External solver execution remains blocked by default."
+      ]
+    },
+    {
+      "tool_name": "optiland",
+      "tool_kind": "external_solver",
+      "available": true,
+      "default_allowed": false,
+      "status": "detectable_not_executed",
+      "detection_method": "importlib.util.find_spec('optiland')",
+      "notes": [
+        "Availability detection only; no solver command was executed.",
+        "External solver execution remains blocked by default.",
+        "Python module 'optiland' is import-detectable."
+      ]
+    }
+  ],
+  "publication_release_controls": [
+    {
+      "tool_name": "testpypi_upload",
+      "tool_kind": "publication",
+      "available": false,
+      "default_allowed": false,
+      "status": "disabled_not_exposed",
+      "detection_method": "policy",
+      "notes": [
+        "No TestPyPI upload endpoint or UI control is exposed."
+      ]
+    },
+    {
+      "tool_name": "pypi_publish",
+      "tool_kind": "publication",
+      "available": false,
+      "default_allowed": false,
+      "status": "disabled_not_exposed",
+      "detection_method": "policy",
+      "notes": [
+        "PyPI is not published and publication approval is not granted."
+      ]
+    },
+    {
+      "tool_name": "tag_or_release_create",
+      "tool_kind": "release",
+      "available": false,
+      "default_allowed": false,
+      "status": "disabled_not_exposed",
+      "detection_method": "policy",
+      "notes": [
+        "No tag or GitHub release endpoint is exposed."
+      ]
+    }
+  ]
+}

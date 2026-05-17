@@ -65,11 +65,21 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "example_detail_nanoparticle_response.json" in response_files
     assert "example_agent_trace_nanoparticle_response.json" in response_files
     assert "agent_session_response_nanoparticle.json" in response_files
+    assert "agent_session_tool_ledger_response.json" in response_files
     assert "agent_session_error_empty_goal_response.json" in response_files
+    assert "tool_capabilities_response.json" in response_files
+    assert "thin_film_response.json" in response_files
+    assert "paraxial_lens_response.json" in response_files
+    assert "gaussian_beam_response.json" in response_files
+    assert "waveguide_estimate_response.json" in response_files
     assert "parse_request_heuristic.json" in request_files
     assert "material_suggestion_request.json" in request_files
     assert "agent_trace_request_nanoparticle.json" in request_files
     assert "agent_session_request_nanoparticle.json" in request_files
+    assert "thin_film_request.json" in request_files
+    assert "paraxial_lens_request.json" in request_files
+    assert "gaussian_beam_request.json" in request_files
+    assert "waveguide_estimate_request.json" in request_files
 
 
 def test_api_version_and_readiness_fixtures_track_publication_state():
