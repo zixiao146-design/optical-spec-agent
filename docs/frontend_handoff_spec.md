@@ -66,6 +66,11 @@ diagnostics panels, recommended action panels, and collapsible JSON payloads.
   `docs/frontend_visual_smoke_plan.md` and
   `docs/frontend_visual_smoke_runbook.md`.
 - Visual smoke remains manual and is not part of the default release gate.
+- The local demo package is documented in `docs/agent_studio_demo_runbook.md`,
+  `docs/agent_studio_demo_checklist.md`,
+  `docs/agent_studio_demo_storyboard.md`, and
+  `docs/agent_studio_demo_troubleshooting.md`; the wrapper script is
+  `scripts/demo_agent_studio.sh`.
 
 ## Not implemented beyond MVP
 
@@ -76,3 +81,5 @@ diagnostics panels, recommended action panels, and collapsible JSON payloads.
 - No default external LLM.
 - No PyPI/TestPyPI upload controls.
 - No tag/release controls.
+- No demo workflow uploads packages, publishes PyPI/TestPyPI, creates tags, or
+  creates GitHub releases.

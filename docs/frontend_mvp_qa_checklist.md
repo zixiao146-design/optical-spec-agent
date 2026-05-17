@@ -60,6 +60,7 @@
 - `python scripts/check_api_fixtures.py`
 - `./scripts/smoke_agent_api.sh`
 - `./scripts/smoke_frontend_mvp.sh`
+- `./scripts/demo_agent_studio.sh` for local demo readiness/default smoke mode.
 - Optional/manual: `./scripts/smoke_frontend_visual.sh`
 - `python -m pytest`
 - `python -m build`
@@ -76,3 +77,7 @@
 - Do not commit `frontend/test-results`.
 - Do not commit `frontend/playwright-report`.
 - Do not commit Python `dist/`, `build/`, egg-info, cache, or temporary venv artifacts.
+- Keep `docs/agent_studio_demo_runbook.md`,
+  `docs/agent_studio_demo_checklist.md`,
+  `docs/agent_studio_demo_storyboard.md`, and
+  `docs/agent_studio_demo_troubleshooting.md` aligned with the current MVP.

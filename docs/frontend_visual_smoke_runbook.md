@@ -19,6 +19,10 @@ publication, tag, release, solver-run, or external LLM controls.
 The visual smoke is not part of the default release gate or
 `./scripts/run_quality_gates.sh`.
 
+The maintainer demo package may optionally invoke this check with
+`OSA_DEMO_WITH_VISUAL=1 ./scripts/demo_agent_studio.sh`, but visual smoke
+remains manual/optional.
+
 ## 3. Run Command
 
 Preferred wrapper:

@@ -27,6 +27,11 @@
   `docs/frontend_mvp_implementation_plan.md`
 - Frontend implementation: local MVP under `frontend/`
 - Frontend MVP runbook: `docs/frontend_mvp_runbook.md`
+- Agent Studio demo package: `scripts/demo_agent_studio.sh`,
+  `docs/agent_studio_demo_runbook.md`,
+  `docs/agent_studio_demo_checklist.md`,
+  `docs/agent_studio_demo_storyboard.md`, and
+  `docs/agent_studio_demo_troubleshooting.md`
 
 ## Required before v1.0.0
 
@@ -84,3 +89,4 @@
 | Frontend fixture readiness | Engineering track | Available under `examples/api/` | Useful for future Agent Studio mock data, but not a PyPI publication trigger. |
 | Frontend handoff docs/scripts | Engineering track | Available | Launch guide, handoff spec, curl examples, API smoke, and fixture consistency checks support future frontend planning. |
 | Frontend MVP | Engineering track | Local React + Vite + TypeScript MVP implemented | Not a v1.0 blocker and not a PyPI publication trigger. |
+| Agent Studio demo package | Engineering track | Local demo runbook/script/checklist/storyboard/troubleshooting available | Useful for maintainer review, but not a release, PyPI, tag, or GitHub release action. |

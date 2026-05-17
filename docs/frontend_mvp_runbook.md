@@ -45,6 +45,19 @@ Or run the repository smoke wrapper:
 ./scripts/smoke_frontend_mvp.sh
 ```
 
+Maintainer-facing local demo wrapper:
+
+```bash
+./scripts/demo_agent_studio.sh
+```
+
+Use `OSA_DEMO_HOLD=1 ./scripts/demo_agent_studio.sh` to keep the local API and
+frontend running for a guided walkthrough. The demo package is documented in
+[`agent_studio_demo_runbook.md`](agent_studio_demo_runbook.md),
+[`agent_studio_demo_checklist.md`](agent_studio_demo_checklist.md),
+[`agent_studio_demo_storyboard.md`](agent_studio_demo_storyboard.md), and
+[`agent_studio_demo_troubleshooting.md`](agent_studio_demo_troubleshooting.md).
+
 Optional Playwright visual smoke:
 
 ```bash
@@ -100,3 +113,5 @@ parse, validate, workflow, preview, and readiness views.
 - Frontend smoke: run `./scripts/smoke_frontend_mvp.sh`.
 - Visual smoke: run `./scripts/smoke_frontend_visual.sh` or review
   `docs/frontend_visual_smoke_plan.md`.
+- Demo walkthrough: run `./scripts/demo_agent_studio.sh` or review
+  `docs/agent_studio_demo_runbook.md`.

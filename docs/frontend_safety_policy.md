@@ -27,3 +27,8 @@
   releases, execute solvers, or call external LLMs.
 - Playwright reports, screenshots, `node_modules`, and frontend build outputs
   must not be committed by default.
+- The Agent Studio demo package is local-only. It must not upload packages,
+  publish PyPI/TestPyPI, create tags, create GitHub releases, execute solvers,
+  or call external LLMs.
+- Demo screenshots or recordings must not be committed unless explicitly
+  approved by the maintainer.

@@ -42,6 +42,11 @@ validation evidence.
   `docs/frontend_visual_smoke_plan.md` and
   `docs/frontend_visual_smoke_runbook.md`; it remains manual and outside the
   default release gate.
+- Maintainer-facing local demo package exists through
+  `scripts/demo_agent_studio.sh`, `docs/agent_studio_demo_runbook.md`,
+  `docs/agent_studio_demo_checklist.md`,
+  `docs/agent_studio_demo_storyboard.md`, and
+  `docs/agent_studio_demo_troubleshooting.md`.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out
@@ -82,6 +87,8 @@ validation evidence.
 - Fixture-backed form defaults and live API/demo mode clarity.
 - Diagnostics and recommended next actions.
 - Optional/manual Playwright visual smoke for major local pages and safety copy.
+- Local maintainer demo package that ties API launch, frontend launch, smoke
+  checks, optional visual smoke, and a guided walkthrough together.
 
 ### Phase 3
 

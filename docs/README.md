@@ -39,6 +39,10 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Agent Studio frontend MVP QA checklist](frontend_mvp_qa_checklist.md)
 - [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
 - [Agent Studio frontend visual smoke runbook](frontend_visual_smoke_runbook.md)
+- [Agent Studio demo runbook](agent_studio_demo_runbook.md)
+- [Agent Studio demo checklist](agent_studio_demo_checklist.md)
+- [Agent Studio demo storyboard](agent_studio_demo_storyboard.md)
+- [Agent Studio demo troubleshooting](agent_studio_demo_troubleshooting.md)
 - [CLI / API parity](cli_api_parity.md)
 - [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
 - [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
@@ -88,6 +92,10 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Agent Studio frontend MVP QA checklist](frontend_mvp_qa_checklist.md)
 - [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
 - [Agent Studio frontend visual smoke runbook](frontend_visual_smoke_runbook.md)
+- [Agent Studio demo runbook](agent_studio_demo_runbook.md)
+- [Agent Studio demo checklist](agent_studio_demo_checklist.md)
+- [Agent Studio demo storyboard](agent_studio_demo_storyboard.md)
+- [Agent Studio demo troubleshooting](agent_studio_demo_troubleshooting.md)
 - [CLI / API parity](cli_api_parity.md)
 - [CLI contract](cli_contract.md)
 - [Schema contract](schema_contract.md)
@@ -155,6 +163,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - API fixture consistency script: `../scripts/check_api_fixtures.py`
 - Frontend MVP smoke script: `../scripts/smoke_frontend_mvp.sh`
 - Frontend Playwright visual smoke script: `../scripts/smoke_frontend_visual.sh`
+- Agent Studio local demo script: `../scripts/demo_agent_studio.sh`
 - [Examples manifest](../examples/examples_manifest.json)
 
 ## Decisions
@@ -191,6 +200,10 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Agent Studio frontend MVP QA checklist](frontend_mvp_qa_checklist.md)
 - [Agent Studio frontend visual smoke plan](frontend_visual_smoke_plan.md)
 - [Agent Studio frontend visual smoke runbook](frontend_visual_smoke_runbook.md)
+- [Agent Studio demo runbook](agent_studio_demo_runbook.md)
+- [Agent Studio demo checklist](agent_studio_demo_checklist.md)
+- [Agent Studio demo storyboard](agent_studio_demo_storyboard.md)
+- [Agent Studio demo troubleshooting](agent_studio_demo_troubleshooting.md)
 - [CLI / API parity](cli_api_parity.md)
 - [v1.0 public contract freeze checklist](v1_0_public_contract_freeze_checklist.md)
 - [v1.0 public contract freeze confirmation](v1_0_public_contract_freeze_confirmation.md)

@@ -26,5 +26,7 @@ def test_frontend_visual_smoke_plan_documents_future_checks():
         "not part of the default release gate",
         "frontend_visual_smoke_runbook.md",
         "scripts/smoke_frontend_visual.sh",
+        "agent_studio_demo_runbook.md",
+        "scripts/demo_agent_studio.sh",
     ]:
         assert phrase in text

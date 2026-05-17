@@ -96,6 +96,12 @@ This document describes the current `main` branch. It is not a release tag.
   default release gate)
 - Frontend visual smoke script:
   `scripts/smoke_frontend_visual.sh`
+- Agent Studio local demo package:
+  `scripts/demo_agent_studio.sh`, `docs/agent_studio_demo_runbook.md`,
+  `docs/agent_studio_demo_checklist.md`,
+  `docs/agent_studio_demo_storyboard.md`, and
+  `docs/agent_studio_demo_troubleshooting.md` (local-only, not a release or
+  publication action)
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -145,7 +151,7 @@ This document describes the current `main` branch. It is not a release tag.
 | API contract version | 0.1 candidate API | Frontend-readiness surface; not separately frozen as v1.0 API |
 | Frontend fixtures | API examples ready | `examples/api/`; frontend MVP implemented |
 | Frontend handoff | API handoff docs/scripts ready | Launch guide, handoff spec, curl examples, smoke script, fixture consistency script, frontend runbook |
-| Frontend MVP | Local MVP implemented and hardened | React + Vite + TypeScript under `frontend/`; fixture loading, API mode indicator, diagnostics, recommended actions, loading/empty/error/API-disconnected/demo states; optional Playwright visual smoke; no upload/release/solver/LLM controls |
+| Frontend MVP | Local MVP implemented and hardened | React + Vite + TypeScript under `frontend/`; fixture loading, API mode indicator, diagnostics, recommended actions, loading/empty/error/API-disconnected/demo states; optional Playwright visual smoke; local demo package; no upload/release/solver/LLM controls |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

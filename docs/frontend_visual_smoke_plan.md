@@ -8,6 +8,9 @@ check. It is not part of the default release gate or `run_quality_gates.sh`
 unless a maintainer explicitly promotes it later.
 
 Runbook: [`frontend_visual_smoke_runbook.md`](frontend_visual_smoke_runbook.md).
+The Agent Studio demo package references the same optional visual check through
+[`agent_studio_demo_runbook.md`](agent_studio_demo_runbook.md) and
+`scripts/demo_agent_studio.sh`.
 
 ## Pages to Screenshot
 

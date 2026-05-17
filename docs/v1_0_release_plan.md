@@ -26,6 +26,9 @@ access, or proprietary solver support.
   `docs/frontend_safety_policy.md`, and
   `docs/frontend_mvp_implementation_plan.md` aligned with the implemented MVP.
 - Keep `docs/frontend_mvp_runbook.md` aligned with `frontend/`.
+- Keep `scripts/demo_agent_studio.sh` and the Agent Studio demo runbook,
+  checklist, storyboard, and troubleshooting guide aligned with the frontend
+  MVP for local maintainer demos.
 - Decide PyPI publication path.
 - Prepare v1.0.0 release draft.
 - Run quality gates.
@@ -55,6 +58,8 @@ access, or proprietary solver support.
 - No committed `node_modules`, `frontend/dist`, or frontend build artifacts.
 - No frontend upload, publish, tag, release, solver-run, or external LLM
   controls.
+- No demo workflow that uploads packages, publishes PyPI/TestPyPI, creates
+  tags, creates GitHub releases, executes solvers, or calls external LLMs.
 - No PyPI publication trigger from API fixture readiness alone.
 - No separate v1.0 API contract freeze unless maintainers explicitly approve it.
 - No default external solver, external LLM, network, or proprietary dependency.

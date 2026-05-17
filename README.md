@@ -130,6 +130,16 @@ Manual/optional Playwright visual smoke is available through
 [`docs/frontend_visual_smoke_runbook.md`](docs/frontend_visual_smoke_runbook.md)
 and [`scripts/smoke_frontend_visual.sh`](scripts/smoke_frontend_visual.sh);
 it is not part of the default release gate.
+The maintainer-facing local demo package is documented in
+[`docs/agent_studio_demo_runbook.md`](docs/agent_studio_demo_runbook.md),
+[`docs/agent_studio_demo_checklist.md`](docs/agent_studio_demo_checklist.md),
+[`docs/agent_studio_demo_storyboard.md`](docs/agent_studio_demo_storyboard.md),
+and
+[`docs/agent_studio_demo_troubleshooting.md`](docs/agent_studio_demo_troubleshooting.md);
+the wrapper is [`scripts/demo_agent_studio.sh`](scripts/demo_agent_studio.sh).
+It ties together API launch, frontend launch, smoke checks, optional visual
+smoke, and a guided local walkthrough without upload, tag, release, solver, or
+external LLM actions.
 It uses the Local Agent API, defaults to `http://127.0.0.1:8000`, and does not
 include upload, publish, tag, release, solver-run, external LLM, login, cloud,
 or production deployment controls. If the API is disconnected, the UI falls

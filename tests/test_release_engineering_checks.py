@@ -194,6 +194,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "frontend_mvp_qa_checklist.md",
         "frontend_visual_smoke_plan.md",
         "frontend_visual_smoke_runbook.md",
+        "agent_studio_demo_runbook.md",
+        "agent_studio_demo_checklist.md",
+        "agent_studio_demo_storyboard.md",
+        "agent_studio_demo_troubleshooting.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -224,6 +228,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
     assert (ROOT / "scripts" / "smoke_frontend_mvp.sh").exists()
     assert (ROOT / "scripts" / "smoke_frontend_visual.sh").exists()
+    assert (ROOT / "scripts" / "demo_agent_studio.sh").exists()
     assert (ROOT / "docs" / "public_contract_manifest.json").exists()
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
@@ -304,6 +309,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "scripts/smoke_frontend_visual.sh" in combined
     assert "Frontend Visual Smoke Runbook" in combined
     assert "Playwright visual smoke" in combined
+    assert "Agent Studio Demo Runbook" in combined
+    assert "Agent Studio Demo Checklist" in combined
+    assert "Agent Studio Demo Storyboard" in combined
+    assert "Agent Studio Demo Troubleshooting" in combined
+    assert "scripts/demo_agent_studio.sh" in combined
     assert "No external solver execution by default" in combined
     assert "No external LLM call by default" in combined
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in combined
