@@ -1,0 +1,15 @@
+{
+  "example_id": "photonic_crystal_band",
+  "design_goal": "Preview a photonic crystal band-structure workflow.",
+  "application": "photonic crystal band",
+  "suggested_materials": ["si", "gaas", "sio2", "air"],
+  "suggested_adapter": "mpb",
+  "geometry_family": "periodic_lattice",
+  "workflow_steps": ["parse", "validate", "material_suggest", "workflow_plan", "adapter_preview", "human_review"],
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

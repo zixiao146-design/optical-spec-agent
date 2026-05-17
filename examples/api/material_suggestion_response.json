@@ -1,0 +1,49 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Suggestions are local preview guidance and do not replace material-data review."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "No external material database lookup was performed."
+    ],
+    "details": {
+      "wavelength_nm": 633.0
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect the suggested material records.",
+    "Verify wavelength-dependent n/k before physical interpretation."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "application": "nanoparticle plasmonics",
+  "suggested_materials": [
+    {
+      "material_id": "au",
+      "display_name": "Gold (Au)",
+      "aliases": [
+        "gold"
+      ],
+      "category": "metal",
+      "common_use": [
+        "nanoparticle plasmonics",
+        "film",
+        "antenna"
+      ],
+      "optical_role": "plasmonic metal",
+      "production_grade": false,
+      "validation_level": "preview",
+      "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions."
+    }
+  ],
+  "catalog_status": "local_preview_catalog",
+  "catalog_note": "Suggestions are local preview guidance only; verify material data independently."
+}

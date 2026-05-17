@@ -1,0 +1,7 @@
+{
+  "example_id": "nanoparticle_plasmonics",
+  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "material_agent": "Suggest Au, Ag, SiO2, water, and air as preview material candidates.",
+  "adapter_agent": "Recommend Meep with optional Gmsh geometry preview.",
+  "safety_agent": "Keep no solver, no external LLM, no production-grade validation, and no formal convergence proof boundaries."
+}

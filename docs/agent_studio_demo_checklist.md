@@ -34,8 +34,10 @@
 - [ ] Spec Input parse/validate works with the local API, or demo fixture mode
       works and is labeled as not live validation.
 - [ ] Adapter Matrix shows five adapters: Gmsh, Meep, MPB, Optiland, and Elmer.
+- [ ] Material Library shows local preview materials and a no-production-grade optical constants warning.
 - [ ] Workflow Plan shows no solver execution.
 - [ ] Artifact Preview shows the preview-only boundary.
+- [ ] Agent Collaboration shows SpecAgent / MaterialAgent / AdapterAgent / SafetyAgent trace.
 - [ ] Validation Evidence shows Gmsh/Meep/MPB/Optiland Level 3 and Elmer
       deferred.
 - [ ] System Status shows API contract version 0.1.

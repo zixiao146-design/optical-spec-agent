@@ -136,6 +136,58 @@
       "proprietary_solver_required": false
     },
     {
+      "name": "materials",
+      "endpoint": "/api/materials",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "materials_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "material-detail-sio2",
+      "endpoint": "/api/materials/sio2",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "material_detail_sio2_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "material-suggestion",
+      "endpoint": "/api/materials/suggest",
+      "method": "POST",
+      "request_file": "material_suggestion_request.json",
+      "response_file": "material_suggestion_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "agent-trace-nanoparticle",
+      "endpoint": "/api/agent-trace",
+      "method": "POST",
+      "request_file": "agent_trace_request_nanoparticle.json",
+      "response_file": "agent_trace_response_nanoparticle.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
       "name": "error-invalid-spec",
       "endpoint": "/api/validate",
       "method": "POST",

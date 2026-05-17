@@ -17,6 +17,10 @@
 | external LLM | 外部 LLM |
 | production-grade physical validation is not claimed | 生产级物理验证 |
 | formal convergence proof is not claimed | 形式化收敛证明 |
+| material library | 材料库 |
+| material catalog | 材料目录 |
+| sub-agent collaboration | 子智能体协作 |
+| agent trace | agent trace / 协作轨迹 |
 
 ## 不翻译的内容
 
@@ -25,6 +29,9 @@
 - Adapter tool names are not translated.
 - 工具名 `meep`, `gmsh`, `mpb`, `elmer`, `optiland` 不翻译。
 - Package metadata 和 version strings 不翻译。
+- 材料 ID 例如 `sio2`, `si`, `au`, `ag` 保持英文/化学式稳定。
+- 子智能体名称 `SpecAgent`, `MaterialAgent`, `GeometryAgent`, `AdapterAgent`,
+  `WorkflowAgent`, `EvidenceAgent`, `SafetyAgent`, `RecommendationAgent` 不翻译。
 
 ## 维护说明
 

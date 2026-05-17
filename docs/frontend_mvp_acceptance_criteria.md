@@ -10,6 +10,9 @@
 - Can render workflow plan.
 - Can render adapter preview.
 - Can render validation evidence.
+- Can render Material Library.
+- Can request local material suggestions.
+- Can render Agent Collaboration trace.
 - Can show loading, empty, error, and API disconnected states.
 - Can show demo fixture mode when the local API is unavailable.
 - Can load example/fixture requests into Spec Input, Workflow Plan, and Artifact
@@ -35,6 +38,8 @@
 - UI must not expose tag/release button.
 - UI must not imply production-grade validation.
 - UI must not imply formal convergence proof.
+- UI must show material catalog is preview-only.
+- UI must show sub-agent trace does not call external LLMs.
 - Demo fixture mode must state that it is not live validation.
 - UI must show that it does not control PyPI/TestPyPI publication or GitHub
   releases.

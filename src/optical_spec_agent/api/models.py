@@ -6,6 +6,9 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from optical_spec_agent.agents.models import AgentStep
+from optical_spec_agent.materials.models import MaterialDetail, MaterialSummary
+
 
 API_CONTRACT_VERSION = "0.1"
 
@@ -151,6 +154,49 @@ class ReadinessResponse(ApiResponseBase):
     public_contract_freeze: dict[str, Any]
     adapter_maturity: dict[str, str]
     v1_0_0_released: bool = False
+
+
+class MaterialsResponse(ApiResponseBase):
+    materials: list[MaterialSummary] = Field(default_factory=list)
+    catalog_status: str = "local_preview_catalog"
+    catalog_note: str = (
+        "Material data is a local preview/design-assist catalog and not a "
+        "production-grade optical constants database."
+    )
+
+
+class MaterialDetailResponse(ApiResponseBase):
+    material: MaterialDetail
+    catalog_status: str = "local_preview_catalog"
+    catalog_note: str = (
+        "Verify material constants before drawing physical conclusions."
+    )
+
+
+class MaterialSuggestionRequest(ApiRequestBase):
+    application: str = Field(..., description="Optical application phrase")
+    wavelength_nm: float | None = Field(None, description="Optional design wavelength")
+
+
+class MaterialSuggestionResponse(ApiResponseBase):
+    application: str
+    suggested_materials: list[MaterialSummary] = Field(default_factory=list)
+    catalog_status: str = "local_preview_catalog"
+    catalog_note: str = (
+        "Suggestions are local preview guidance only; verify material data independently."
+    )
+
+
+class AgentTraceRequest(ApiRequestBase):
+    spec: dict[str, Any] | None = Field(None, description="Inline OpticalSpec-like payload")
+    text: str | None = Field(None, description="Natural language optical design request")
+    example_id: str | None = Field(None, description="Local example identifier")
+
+
+class AgentTraceResponse(ApiResponseBase):
+    trace_id: str
+    agents: list[AgentStep] = Field(default_factory=list)
+    final_recommendation: str
 
 
 class ApiErrorResponse(ApiResponseBase):

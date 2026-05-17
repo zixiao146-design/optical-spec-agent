@@ -51,8 +51,10 @@ visual smoke result still reports honestly.
 - Dashboard
 - Spec Input
 - Adapter Matrix
+- Material Library
 - Workflow Plan
 - Artifact Preview
+- Agent Collaboration
 - Validation Evidence
 - System Status
 - Safety notices remain visible

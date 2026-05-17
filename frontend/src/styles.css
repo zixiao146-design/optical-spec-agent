@@ -680,6 +680,76 @@ td span {
   line-height: 1.55;
 }
 
+.material-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.material-card {
+  border: 1px solid #e2e9e5;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+}
+
+.material-card h3,
+.material-card p {
+  margin: 0;
+}
+
+.material-card span {
+  color: #55706a;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.compact-list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.compact-list li {
+  border: 1px solid #e2e9e5;
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.agent-trace-list {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agent-trace-list li {
+  border: 1px solid #e2e9e5;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  padding: 14px;
+}
+
+.agent-trace-list h4,
+.agent-trace-list p,
+.agent-trace-list ul {
+  margin: 0;
+}
+
+.agent-trace-list span {
+  color: #254f43;
+  font-weight: 800;
+}
+
 @media (max-width: 940px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -701,6 +771,7 @@ td span {
   .topbar,
   .evidence-row,
   .guided-step-list li,
+  .agent-trace-list li,
   .tutorial-step-list dl {
     align-items: flex-start;
     flex-direction: column;

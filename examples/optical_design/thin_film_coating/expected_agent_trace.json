@@ -1,0 +1,7 @@
+{
+  "example_id": "thin_film_coating",
+  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "material_agent": "Suggest SiO2, TiO2, and Al2O3 as coating candidates.",
+  "adapter_agent": "Mark this as preview-only until a TMM adapter is explicitly implemented.",
+  "safety_agent": "No solver execution and no production-grade validation claim."
+}

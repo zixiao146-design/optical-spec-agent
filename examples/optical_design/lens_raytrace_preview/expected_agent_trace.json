@@ -1,0 +1,7 @@
+{
+  "example_id": "lens_raytrace_preview",
+  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "material_agent": "Suggest preview optical glasses and air.",
+  "adapter_agent": "Recommend Optiland preview.",
+  "safety_agent": "No solver execution and no production-grade validation claim."
+}

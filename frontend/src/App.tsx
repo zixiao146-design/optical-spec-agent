@@ -5,9 +5,11 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { SafetyNotice } from "./components/SafetyNotice";
 import { useI18n } from "./i18n/useI18n";
 import { AdapterMatrixPage } from "./pages/AdapterMatrixPage";
+import { AgentCollaborationPage } from "./pages/AgentCollaborationPage";
 import { ArtifactPreviewPage } from "./pages/ArtifactPreviewPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { EvidencePage } from "./pages/EvidencePage";
+import { MaterialLibraryPage } from "./pages/MaterialLibraryPage";
 import { SpecInputPage } from "./pages/SpecInputPage";
 import { SystemStatusPage } from "./pages/SystemStatusPage";
 import { WorkflowPlanPage } from "./pages/WorkflowPlanPage";
@@ -16,8 +18,10 @@ const PAGES = [
   "Dashboard",
   "Spec Input",
   "Adapter Matrix",
+  "Material Library",
   "Workflow Plan",
   "Artifact Preview",
+  "Agent Collaboration",
   "Validation Evidence",
   "System Status",
 ] as const;
@@ -28,8 +32,10 @@ const PAGE_LABEL_KEYS: Record<Page, string> = {
   Dashboard: "nav.dashboard",
   "Spec Input": "nav.specInput",
   "Adapter Matrix": "nav.adapterMatrix",
+  "Material Library": "nav.materialLibrary",
   "Workflow Plan": "nav.workflowPlan",
   "Artifact Preview": "nav.artifactPreview",
+  "Agent Collaboration": "nav.agentCollaboration",
   "Validation Evidence": "nav.validationEvidence",
   "System Status": "nav.systemStatus",
 };
@@ -40,10 +46,14 @@ function pageComponent(page: Page, onNavigate: (page: Page) => void) {
       return <SpecInputPage />;
     case "Adapter Matrix":
       return <AdapterMatrixPage />;
+    case "Material Library":
+      return <MaterialLibraryPage />;
     case "Workflow Plan":
       return <WorkflowPlanPage />;
     case "Artifact Preview":
       return <ArtifactPreviewPage />;
+    case "Agent Collaboration":
+      return <AgentCollaborationPage />;
     case "Validation Evidence":
       return <EvidencePage />;
     case "System Status":

@@ -1,0 +1,15 @@
+{
+  "example_id": "nanoparticle_plasmonics",
+  "design_goal": "Preview a local workflow for plasmonic nanoparticle scattering.",
+  "application": "nanoparticle plasmonics",
+  "suggested_materials": ["au", "ag", "sio2", "water", "air"],
+  "suggested_adapter": "meep",
+  "geometry_family": "sphere_on_film",
+  "workflow_steps": ["parse", "validate", "material_suggest", "workflow_plan", "adapter_preview", "human_review"],
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

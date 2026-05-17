@@ -1,0 +1,59 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Material constants are approximate preview values unless stronger provenance is documented."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "This response is not a production-grade optical constants record."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Verify this material against trusted optical data before physical conclusions.",
+    "Use /api/agent-trace to see how a local agent workflow would use this material."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "material": {
+    "material_id": "sio2",
+    "display_name": "Silicon dioxide (SiO2)",
+    "aliases": [
+      "silica",
+      "oxide",
+      "fused_silica"
+    ],
+    "category": "dielectric",
+    "common_use": [
+      "thin film coating",
+      "waveguide cladding",
+      "spacer"
+    ],
+    "optical_role": "low-index dielectric",
+    "production_grade": false,
+    "validation_level": "preview",
+    "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions.",
+    "wavelength_range_nm": [
+      400.0,
+      1600.0
+    ],
+    "refractive_index_model": {
+      "kind": "constant",
+      "n": 1.45,
+      "k": 0.0,
+      "wavelength_nm": 633.0
+    },
+    "notes": [
+      "Approximate preview constant; use wavelength-dependent data for real design."
+    ]
+  },
+  "catalog_status": "local_preview_catalog",
+  "catalog_note": "Verify material constants before drawing physical conclusions."
+}

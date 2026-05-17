@@ -1,0 +1,15 @@
+{
+  "example_id": "waveguide_mode",
+  "design_goal": "Preview a waveguide mode workflow.",
+  "application": "waveguide mode",
+  "suggested_materials": ["si", "sio2", "si3n4"],
+  "suggested_adapter": "mpb or elmer preview",
+  "geometry_family": "ridge_or_strip_waveguide",
+  "workflow_steps": ["parse", "validate", "material_suggest", "workflow_plan", "adapter_preview", "human_review"],
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

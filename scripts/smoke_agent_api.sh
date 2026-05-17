@@ -72,6 +72,22 @@ require(evidence["production_grade_validation_claimed"] is False, "evidence must
 readiness = get("/api/readiness")
 require(readiness["pypi"]["published"] is False, "PyPI must remain unpublished")
 
+materials = get("/api/materials")
+material_ids = {item["material_id"] for item in materials["materials"]}
+require({"sio2", "si", "au", "ag"}.issubset(material_ids), "missing preview materials")
+require("production-grade optical constants" in materials["catalog_note"], "material catalog must carry preview warning")
+
+material_detail = get("/api/materials/sio2")
+require(material_detail["material"]["material_id"] == "sio2", "sio2 material detail missing")
+
+material_suggestion = post("/api/materials/suggest", {"application": "nanoparticle plasmonics"})
+suggestion_ids = {item["material_id"] for item in material_suggestion["suggested_materials"]}
+require({"au", "ag", "sio2"}.issubset(suggestion_ids), "material suggestion missing plasmonics candidates")
+
+agent_trace = post("/api/agent-trace", {"example_id": "nanoparticle_plasmonics", "text": "nanoparticle plasmonics"})
+agent_names = {item["agent_name"] for item in agent_trace["agents"]}
+require({"SpecAgent", "MaterialAgent", "AdapterAgent", "SafetyAgent"}.issubset(agent_names), "agent trace missing expected agents")
+
 for name, payload in {
     "health": health,
     "version": version,
@@ -83,6 +99,10 @@ for name, payload in {
     "preview": preview_payload,
     "evidence": evidence,
     "readiness": readiness,
+    "materials": materials,
+    "material_detail": material_detail,
+    "material_suggestion": material_suggestion,
+    "agent_trace": agent_trace,
 }.items():
     require(payload["external_solver_executed"] is False, f"{name} solver flag changed")
     require(payload["external_llm_required"] is False, f"{name} LLM flag changed")
@@ -90,7 +110,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 10}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 14}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

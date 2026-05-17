@@ -1,0 +1,7 @@
+{
+  "example_id": "dielectric_metasurface_preview",
+  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "material_agent": "Suggest TiO2, Si3N4, Si, and SiO2.",
+  "adapter_agent": "Recommend Meep with Gmsh geometry preview.",
+  "safety_agent": "No solver execution and no production-grade validation claim."
+}

@@ -57,6 +57,8 @@ validation evidence.
   `docs/frontend_i18n_zh_CN.md`; UI copy, guided demo, and safety boundaries
   are localized while API JSON field names, adapter tool names, and
   `api_contract_version` remain stable.
+- Material Library and Agent Collaboration trace are available as preview-first
+  optical-design domain expansion.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out

@@ -63,3 +63,23 @@
   0.9.0rc6.dev0, and v1.0.0 not released.
 - UI state: show publication gates as read-only status.
 - Safety boundary copy: "No solver was executed."
+
+## User Flow 4: Optical design orientation and sub-agent trace
+
+- User action: open Material Library and inspect a local preview material.
+- API call: `GET /api/materials`.
+- Expected response: local preview material catalog and warning that material
+  data is not production-grade optical constants.
+- UI state: show searchable material cards and preview-only boundary.
+- Safety boundary copy: "Material data is a local preview catalog, not production-grade optical constants."
+- User action: request materials for nanoparticle plasmonics.
+- API call: `POST /api/materials/suggest`.
+- Expected response: preview material suggestions such as Au, Ag, SiO2, water, and air.
+- UI state: show suggested materials and verification reminder.
+- Safety boundary copy: "No external material database lookup was performed."
+- User action: open Agent Collaboration and load the nanoparticle trace.
+- API call: `POST /api/agent-trace`.
+- Expected response: SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent,
+  WorkflowAgent, EvidenceAgent, SafetyAgent, and RecommendationAgent steps.
+- UI state: show sub-agent timeline and final recommendation.
+- Safety boundary copy: "Sub-agent collaboration is a local deterministic trace."

@@ -91,6 +91,13 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/frontend_i18n_zh_CN.md` and `frontend/src/i18n/`; UI copy, guided
   demo, and safety copy are localized, while API JSON field names, adapter tool
   names, and `api_contract_version` remain unchanged.
+- Optical design domain expansion:
+  local preview material catalog, `examples/optical_design/`, and
+  deterministic sub-agent collaboration trace for Agent Studio. These are
+  preview-first development capabilities and do not authorize PyPI/TestPyPI
+  upload, create tags/releases, run external solvers by default, call external
+  LLMs by default, claim production-grade physical validation, or claim formal
+  convergence proof.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:

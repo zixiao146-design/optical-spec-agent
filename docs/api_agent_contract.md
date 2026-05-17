@@ -113,3 +113,20 @@ The hardened MVP includes loading, empty, error, API disconnected, and demo
 fixture states. Demo fixture mode is explicitly not live validation.
 Optional Playwright visual smoke is manual-only and verifies local rendering
 and safety copy without changing the API contract or release gate.
+
+## Optical Design Domain Expansion
+
+API contract version `0.1` now includes local preview endpoints for optical
+design domain assistance:
+
+- `GET /api/materials`
+- `GET /api/materials/{material_id}`
+- `POST /api/materials/suggest`
+- `POST /api/agent-trace`
+
+These endpoints are frontend-readiness / candidate API surfaces. They do not
+run external solvers, do not call external LLMs, do not access external material
+databases, do not upload packages, and do not create tags/releases. Material
+records are local preview/design-assist hints, not production-grade optical
+constants. The agent trace is deterministic local collaboration visibility, not
+autonomous external agent execution.

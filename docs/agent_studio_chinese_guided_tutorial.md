@@ -101,3 +101,21 @@
 - 不创建 tag/release
 - 不声明生产级物理验证
 - 不声明形式化收敛证明
+
+## 6. 光学设计扩展步骤
+
+新增材料库和子智能体协作后，公开演示前的中文教程还应引导用户完成：
+
+### 10. 查看材料库和材料建议
+
+- 用户操作：打开“材料库”，搜索 `sio2` 或输入 `nanoparticle plasmonics` 获取材料建议。
+- 预期看到的结果：看到本地预览材料、用途建议和“非生产级光学常数”提示。
+- 使用的 API endpoint：`GET /api/materials`, `POST /api/materials/suggest`
+- 安全边界说明：材料库是本地预览/设计辅助，不联网查询材料数据库，不代表生产级材料常数。
+
+### 11. 查看子智能体协作轨迹
+
+- 用户操作：打开“子智能体协作”，加载 nanoparticle agent trace。
+- 预期看到的结果：看到 SpecAgent、MaterialAgent、GeometryAgent、AdapterAgent、WorkflowAgent、EvidenceAgent、SafetyAgent 和 RecommendationAgent 的贡献。
+- 使用的 API endpoint：`POST /api/agent-trace`
+- 安全边界说明：子智能体协作轨迹是本地确定性预览，不调用外部 LLM，也不运行求解器。

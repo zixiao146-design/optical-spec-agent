@@ -61,3 +61,17 @@ architecture.
 - No solver execution by default.
 - Optional Playwright visual smoke covers these seven pages manually and is not
   a default release gate.
+
+## 8. Material Library
+
+- Calls `GET /api/materials`.
+- Calls `POST /api/materials/suggest`.
+- Shows local preview materials and material suggestions.
+- States material data is not production-grade optical constants.
+
+## 9. Agent Collaboration
+
+- Calls `POST /api/agent-trace`.
+- Shows SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent, WorkflowAgent,
+  EvidenceAgent, SafetyAgent, and RecommendationAgent.
+- Shows final recommendation and safety boundaries.

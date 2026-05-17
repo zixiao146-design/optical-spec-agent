@@ -1,7 +1,10 @@
 import type {
+  AgentTraceResponse,
   AdapterPreviewResponse,
   AdaptersResponse,
   HealthResponse,
+  MaterialSuggestionResponse,
+  MaterialsResponse,
   ParseResponse,
   ReadinessResponse,
   SchemaResponse,
@@ -246,4 +249,117 @@ export const demoAdapterPreview: AdapterPreviewResponse = {
     missing_required: [],
     defaults_applied: [],
   },
+};
+
+export const demoMaterials: MaterialsResponse = {
+  ...base,
+  catalog_status: "local_preview_catalog",
+  catalog_note:
+    "Material data is a local preview/design-assist catalog and not a production-grade optical constants database.",
+  materials: [
+    {
+      material_id: "sio2",
+      display_name: "Silicon dioxide (SiO2)",
+      aliases: ["silica", "oxide", "fused_silica"],
+      category: "dielectric",
+      common_use: ["thin film coating", "waveguide cladding", "spacer"],
+      optical_role: "low-index dielectric",
+      production_grade: false,
+      validation_level: "preview",
+      source_note: "Curated local preview value for examples only.",
+    },
+    {
+      material_id: "si",
+      display_name: "Silicon (Si)",
+      aliases: ["silicon"],
+      category: "semiconductor",
+      common_use: ["waveguide", "photonic crystal", "metasurface"],
+      optical_role: "high-index semiconductor",
+      production_grade: false,
+      validation_level: "preview",
+      source_note: "Curated local preview value for examples only.",
+    },
+    {
+      material_id: "au",
+      display_name: "Gold (Au)",
+      aliases: ["gold"],
+      category: "metal",
+      common_use: ["nanoparticle plasmonics", "film", "antenna"],
+      optical_role: "plasmonic metal",
+      production_grade: false,
+      validation_level: "preview",
+      source_note: "Curated local preview value for examples only.",
+    },
+    {
+      material_id: "ag",
+      display_name: "Silver (Ag)",
+      aliases: ["silver"],
+      category: "metal",
+      common_use: ["nanoparticle plasmonics", "film", "antenna"],
+      optical_role: "plasmonic metal",
+      production_grade: false,
+      validation_level: "preview",
+      source_note: "Curated local preview value for examples only.",
+    },
+  ],
+};
+
+export const demoMaterialSuggestion: MaterialSuggestionResponse = {
+  ...base,
+  application: "nanoparticle plasmonics",
+  catalog_status: "local_preview_catalog",
+  catalog_note:
+    "Suggestions are local preview guidance only; verify material data independently.",
+  suggested_materials: demoMaterials.materials.filter((item) =>
+    ["au", "ag", "sio2"].includes(item.material_id),
+  ),
+};
+
+export const demoAgentTrace: AgentTraceResponse = {
+  ...base,
+  trace_id: "trace-demo-nanoparticle",
+  agents: [
+    {
+      agent_name: "SpecAgent",
+      role: "Interprets user intent / spec and identifies missing fields.",
+      input_summary: "Nanoparticle plasmonics request.",
+      output_summary: "Prepared a local preview intent summary.",
+      diagnostics: ["Spec interpretation is deterministic and local."],
+      recommended_next_actions: ["Review wavelength, geometry, material, and output fields."],
+      confidence: "candidate",
+      evidence_refs: [],
+    },
+    {
+      agent_name: "MaterialAgent",
+      role: "Suggests materials from the local preview material catalog.",
+      input_summary: "Application: nanoparticle plasmonics.",
+      output_summary: "Suggested Au, Ag, and SiO2 as preview materials.",
+      diagnostics: ["Material constants are preview/design-assist values only."],
+      recommended_next_actions: ["Verify optical constants before physical conclusions."],
+      confidence: "preview",
+      evidence_refs: ["docs/material_library.md"],
+    },
+    {
+      agent_name: "AdapterAgent",
+      role: "Recommends adapter/tool and explains maturity / limitations.",
+      input_summary: "Nanoparticle plasmonics with local material hints.",
+      output_summary: "Recommended Meep with Gmsh geometry preview.",
+      diagnostics: ["Open-source-solver-first recommendation; no proprietary dependency."],
+      recommended_next_actions: ["Use adapter preview before optional solver execution."],
+      confidence: "candidate",
+      evidence_refs: ["docs/adapter_support_matrix.md"],
+    },
+    {
+      agent_name: "SafetyAgent",
+      role: "Checks no overclaim and no default solver/LLM/publish/release actions.",
+      input_summary: "Collaboration trace safety review.",
+      output_summary: "Safety flags remain false.",
+      diagnostics: ["No production-grade validation or formal convergence proof is claimed."],
+      recommended_next_actions: ["Keep preview boundaries visible in the UI."],
+      confidence: "validated",
+      evidence_refs: ["docs/frontend_safety_policy.md"],
+    },
+  ],
+  final_recommendation:
+    "Use local preview materials, generate a workflow plan, and inspect adapter previews without executing a solver.",
 };

@@ -93,3 +93,13 @@ readiness status.
 - Playwright visual smoke is manual/optional and is not part of the default
   release gate.
 - Run instructions are documented in `docs/frontend_mvp_runbook.md`.
+
+## Optical Design Domain Expansion
+
+The MVP now includes a Material Library page and an Agent Collaboration page.
+The Material Library presents a local preview catalog and application-oriented
+suggestions. The Agent Collaboration page renders SpecAgent, MaterialAgent,
+GeometryAgent, AdapterAgent, WorkflowAgent, EvidenceAgent, SafetyAgent, and
+RecommendationAgent as a visible local trace. Both features preserve no
+default solver execution, no external LLM calls, no production-grade physical
+validation claim, and no formal convergence proof claim.

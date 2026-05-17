@@ -142,6 +142,11 @@
 - No new GitHub Actions workflow was added during operations readiness because
   existing CI, docs, benchmark, prerelease, and release-dry-run workflows were
   reviewed and documented instead of duplicating automation.
+- Material Library, Optical Design Examples, and Agent Collaboration trace are
+  preview-first Agent Studio capabilities. Scorecard status remains
+  conservative: no production-grade physical validation claim, no formal
+  convergence proof claim, Elmer Level 3 deferred, PyPI unpublished, and no
+  tag/release action for `v0.9.0rc7` or `v1.0.0`.
 
 ## Recommended Next Decisions
 

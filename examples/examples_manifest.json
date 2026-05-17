@@ -163,6 +163,60 @@
       "requires_external_solver": false,
       "requires_external_llm": false,
       "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/optical_design/nanoparticle_plasmonics/spec.json",
+      "purpose": "optical design example: nanoparticle plasmonics",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/optical_design/thin_film_coating/spec.json",
+      "purpose": "optical design example: thin film coating",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/optical_design/waveguide_mode/spec.json",
+      "purpose": "optical design example: waveguide mode",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/optical_design/photonic_crystal_band/spec.json",
+      "purpose": "optical design example: photonic crystal band",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/optical_design/dielectric_metasurface_preview/spec.json",
+      "purpose": "optical design example: dielectric metasurface preview",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
+    },
+    {
+      "path": "examples/optical_design/lens_raytrace_preview/spec.json",
+      "purpose": "optical design example: lens raytrace preview",
+      "commands": [],
+      "requires_network": false,
+      "requires_external_solver": false,
+      "requires_external_llm": false,
+      "requires_proprietary_solver": false
     }
   ]
 }

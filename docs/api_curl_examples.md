@@ -80,3 +80,20 @@ curl http://127.0.0.1:8000/api/readiness
 All examples are local, synchronous, preview-first API calls intended for a
 future frontend developer to copy while building against `api_contract_version`
 0.1.
+
+## Material Library And Agent Trace
+
+```bash
+curl http://127.0.0.1:8000/api/materials
+curl http://127.0.0.1:8000/api/materials/sio2
+curl -X POST http://127.0.0.1:8000/api/materials/suggest \
+  -H "Content-Type: application/json" \
+  --data @examples/api/material_suggestion_request.json
+curl -X POST http://127.0.0.1:8000/api/agent-trace \
+  -H "Content-Type: application/json" \
+  --data @examples/api/agent_trace_request_nanoparticle.json
+```
+
+The material examples use the local preview material catalog only. The
+agent-trace example renders a deterministic sub-agent collaboration trace and
+does not call an external LLM.

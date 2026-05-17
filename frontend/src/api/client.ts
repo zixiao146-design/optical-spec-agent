@@ -1,10 +1,16 @@
 import type {
+  AgentTraceRequest,
+  AgentTraceResponse,
   AdapterPreviewRequest,
   AdapterPreviewResponse,
   AdaptersResponse,
   ApiErrorResponse,
   ApiResult,
   HealthResponse,
+  MaterialDetailResponse,
+  MaterialSuggestionRequest,
+  MaterialSuggestionResponse,
+  MaterialsResponse,
   ParseRequest,
   ParseResponse,
   ReadinessResponse,
@@ -100,4 +106,11 @@ export const agentApi = {
   getValidationEvidence: () =>
     request<ValidationEvidenceResponse>("/api/validation-evidence"),
   getReadiness: () => request<ReadinessResponse>("/api/readiness"),
+  getMaterials: () => request<MaterialsResponse>("/api/materials"),
+  getMaterial: (materialId: string) =>
+    request<MaterialDetailResponse>(`/api/materials/${encodeURIComponent(materialId)}`),
+  suggestMaterials: (body: MaterialSuggestionRequest) =>
+    post<MaterialSuggestionResponse, MaterialSuggestionRequest>("/api/materials/suggest", body),
+  getAgentTrace: (body: AgentTraceRequest) =>
+    post<AgentTraceResponse, AgentTraceRequest>("/api/agent-trace", body),
 };

@@ -6,8 +6,10 @@ const pages = [
   { nav: "Dashboard", heading: "Local Agent API workbench" },
   { nav: "Spec Input", heading: "Parse and validate local optical specs" },
   { nav: "Adapter Matrix", heading: "Adapter maturity and evidence" },
+  { nav: "Material Library", heading: "Local preview material catalog" },
   { nav: "Workflow Plan", heading: "Generate a synchronous local workflow preview" },
   { nav: "Artifact Preview", heading: "Generate solver-native preview content" },
+  { nav: "Agent Collaboration", heading: "Sub-agent collaboration trace" },
   { nav: "Validation Evidence", heading: "Evidence and limitations" },
   { nav: "System Status", heading: "Local API contract and schema" },
 ];
@@ -92,6 +94,14 @@ test("fixture-backed interactions are visible without solver or LLM controls", a
       hasText: "Preview-only artifact. No solver is executed by default.",
     }),
   ).toBeVisible();
+
+  await page.getByRole("button", { name: "Material Library" }).click();
+  await expect(page.getByText("not production-grade optical constants").first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Suggest materials" })).toBeVisible();
+
+  await page.getByRole("button", { name: "Agent Collaboration" }).click();
+  await expect(page.getByRole("button", { name: "Load nanoparticle agent trace" })).toBeVisible();
+  await expect(page.getByText("does not call an external LLM").first()).toBeVisible();
 
   await expectForbiddenControlsAbsent(page);
 });

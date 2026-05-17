@@ -17,7 +17,7 @@ import { demoHealth, demoReadiness, demoVersion } from "../fixtures/demoData";
 import { useI18n } from "../i18n/useI18n";
 
 interface DashboardPageProps {
-  onNavigate?: (page: "Dashboard" | "Spec Input" | "Adapter Matrix" | "Workflow Plan" | "Artifact Preview" | "Validation Evidence" | "System Status") => void;
+  onNavigate?: (page: "Dashboard" | "Spec Input" | "Adapter Matrix" | "Material Library" | "Workflow Plan" | "Artifact Preview" | "Agent Collaboration" | "Validation Evidence" | "System Status") => void;
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {

@@ -1,0 +1,7 @@
+{
+  "example_id": "photonic_crystal_band",
+  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "material_agent": "Suggest Si, GaAs, SiO2, and air.",
+  "adapter_agent": "Recommend MPB preview.",
+  "safety_agent": "No solver execution and no formal convergence proof claim."
+}

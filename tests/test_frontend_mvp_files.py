@@ -35,6 +35,8 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
     assert (FRONTEND / "src" / "i18n" / "en.ts").exists()
     assert (FRONTEND / "src" / "i18n" / "zhCN.ts").exists()
     assert (FRONTEND / "src" / "i18n" / "useI18n.tsx").exists()
+    assert (FRONTEND / "src" / "pages" / "MaterialLibraryPage.tsx").exists()
+    assert (FRONTEND / "src" / "pages" / "AgentCollaborationPage.tsx").exists()
 
     package_json = _read(FRONTEND / "package.json")
     assert '"dev"' in package_json

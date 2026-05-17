@@ -52,6 +52,14 @@ export const CHINESE_GUIDED_TUTORIAL_STEPS = [
     safety: "guidedTutorial.step.adapters.safety",
   },
   {
+    key: "materials",
+    endpoint: "GET /api/materials, POST /api/materials/suggest",
+    title: "guidedTutorial.step.materials.title",
+    action: "guidedTutorial.step.materials.action",
+    expected: "guidedTutorial.step.materials.expected",
+    safety: "guidedTutorial.step.materials.safety",
+  },
+  {
     key: "workflow",
     endpoint: "POST /api/workflow-plan",
     title: "guidedTutorial.step.workflow.title",
@@ -66,6 +74,14 @@ export const CHINESE_GUIDED_TUTORIAL_STEPS = [
     action: "guidedTutorial.step.preview.action",
     expected: "guidedTutorial.step.preview.expected",
     safety: "guidedTutorial.step.preview.safety",
+  },
+  {
+    key: "agentTrace",
+    endpoint: "POST /api/agent-trace",
+    title: "guidedTutorial.step.agentTrace.title",
+    action: "guidedTutorial.step.agentTrace.action",
+    expected: "guidedTutorial.step.agentTrace.expected",
+    safety: "guidedTutorial.step.agentTrace.safety",
   },
   {
     key: "evidence",

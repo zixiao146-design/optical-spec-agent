@@ -27,6 +27,12 @@ export const GUIDED_DEMO_STEPS = [
     safety: "Adapter discovery is metadata-only.",
   },
   {
+    key: "materials",
+    label: "Review material library",
+    endpoint: "GET /api/materials",
+    safety: "Material data is preview-only and must be verified before physical conclusions.",
+  },
+  {
     key: "workflow",
     label: "Generate workflow plan",
     endpoint: "POST /api/workflow-plan",
@@ -45,6 +51,12 @@ export const GUIDED_DEMO_STEPS = [
     safety: "Formal convergence proof is not claimed.",
   },
   {
+    key: "agentTrace",
+    label: "Review agent collaboration",
+    endpoint: "POST /api/agent-trace",
+    safety: "Sub-agent trace is deterministic, local, and does not call an external LLM.",
+  },
+  {
     key: "readiness",
     label: "Review readiness / next action",
     endpoint: "GET /api/readiness",
@@ -56,8 +68,10 @@ export type GuidedDemoPage =
   | "Dashboard"
   | "Spec Input"
   | "Adapter Matrix"
+  | "Material Library"
   | "Workflow Plan"
   | "Artifact Preview"
+  | "Agent Collaboration"
   | "Validation Evidence"
   | "System Status";
 
@@ -70,9 +84,11 @@ const STEP_PAGE: Record<string, GuidedDemoPage> = {
   "Parse locally": "Spec Input",
   "Validate spec": "Spec Input",
   "Review adapter matrix": "Adapter Matrix",
+  "Review material library": "Material Library",
   "Generate workflow plan": "Workflow Plan",
   "Preview artifact": "Artifact Preview",
   "Review validation evidence": "Validation Evidence",
+  "Review agent collaboration": "Agent Collaboration",
   "Review readiness / next action": "Dashboard",
 };
 
@@ -93,6 +109,10 @@ const STEP_KEYS = {
     label: "guided.step.adapterMatrix",
     safety: "guided.safety.adapters",
   },
+  materials: {
+    label: "guided.step.materials",
+    safety: "guided.safety.materials",
+  },
   workflow: {
     label: "guided.step.workflow",
     safety: "guided.safety.workflow",
@@ -104,6 +124,10 @@ const STEP_KEYS = {
   evidence: {
     label: "guided.step.evidence",
     safety: "guided.safety.evidence",
+  },
+  agentTrace: {
+    label: "guided.step.agentTrace",
+    safety: "guided.safety.agentTrace",
   },
   readiness: {
     label: "guided.step.readiness",

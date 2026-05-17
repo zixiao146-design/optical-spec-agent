@@ -205,6 +205,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "frontend_i18n_zh_CN.md",
         "agent_studio_chinese_guided_tutorial.md",
         "frontend_chinese_terminology.md",
+        "material_library.md",
+        "material_library.zh-CN.md",
+        "sub_agent_architecture.md",
+        "sub_agent_architecture.zh-CN.md",
+        "open_source_optical_design_ecosystem.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -236,6 +241,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "quickstart" / "quickstart_workflow_request.json").exists()
     assert (ROOT / "examples" / "quickstart" / "zh_nanoparticle_prompt.txt").exists()
     assert (ROOT / "examples" / "quickstart" / "zh_quickstart_notes.md").exists()
+    assert (ROOT / "examples" / "optical_design" / "nanoparticle_plasmonics" / "spec.json").exists()
+    assert (ROOT / "examples" / "optical_design" / "thin_film_coating" / "spec.json").exists()
+    assert (ROOT / "examples" / "optical_design" / "waveguide_mode" / "spec.json").exists()
+    assert (ROOT / "examples" / "optical_design" / "photonic_crystal_band" / "spec.json").exists()
+    assert (ROOT / "examples" / "optical_design" / "dielectric_metasurface_preview" / "spec.json").exists()
+    assert (ROOT / "examples" / "optical_design" / "lens_raytrace_preview" / "spec.json").exists()
     assert (ROOT / "scripts" / "smoke_agent_api.sh").exists()
     assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
     assert (ROOT / "scripts" / "smoke_frontend_mvp.sh").exists()

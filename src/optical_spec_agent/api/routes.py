@@ -12,6 +12,8 @@ from starlette.responses import JSONResponse
 
 from optical_spec_agent import __version__
 from optical_spec_agent.api.models import (
+    AgentTraceRequest,
+    AgentTraceResponse,
     AdapterPreviewRequest as AgentAdapterPreviewRequest,
     AdapterPreviewResponse,
     AdapterSummary,
@@ -19,6 +21,10 @@ from optical_spec_agent.api.models import (
     ApiDiagnostic,
     ApiErrorResponse,
     HealthResponse,
+    MaterialDetailResponse,
+    MaterialSuggestionRequest,
+    MaterialSuggestionResponse,
+    MaterialsResponse,
     ParseRequest as AgentParseRequest,
     ParseResponse as AgentParseResponse,
     ReadinessResponse,
@@ -31,11 +37,17 @@ from optical_spec_agent.api.models import (
     WorkflowPlanRequest as AgentWorkflowPlanRequest,
     WorkflowPlanResponse,
 )
+from optical_spec_agent.agents.orchestrator import build_agent_trace
 from optical_spec_agent.adapters.registry import (
     AdapterRegistryError,
     dispatch_adapter,
     get_adapter,
     list_adapters,
+)
+from optical_spec_agent.materials.catalog import (
+    get_material,
+    list_materials,
+    suggest_materials_for_application,
 )
 from optical_spec_agent.models.spec import OpticalSpec
 from optical_spec_agent.services.spec_service import SpecService
@@ -523,6 +535,126 @@ def agent_readiness():
             "Decide PyPI publication later with explicit maintainer approval.",
             "Prepare v1.0.0 release draft only after explicit approval.",
         ],
+    )
+
+
+@router.get("/api/materials", response_model=MaterialsResponse)
+def agent_materials():
+    return MaterialsResponse(
+        materials=list_materials(),
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Local preview material catalog; verify optical constants independently."
+            ],
+            limitations=[
+                "Material records are design-assist hints, not production-grade optical constants."
+            ],
+        ),
+        recommended_next_actions=[
+            "Use /api/materials/suggest for broad application-oriented material hints.",
+            "Verify material constants before physical conclusions.",
+        ],
+    )
+
+
+@router.post(
+    "/api/materials/suggest",
+    response_model=MaterialSuggestionResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_material_suggest(req: MaterialSuggestionRequest):
+    suggestions = suggest_materials_for_application(req.application)
+    return MaterialSuggestionResponse(
+        application=req.application,
+        suggested_materials=suggestions,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Suggestions are local preview guidance and do not replace material-data review."
+            ],
+            limitations=[
+                "No external material database lookup was performed."
+            ],
+            details={"wavelength_nm": req.wavelength_nm},
+        ),
+        recommended_next_actions=[
+            "Inspect the suggested material records.",
+            "Verify wavelength-dependent n/k before physical interpretation.",
+        ],
+    )
+
+
+@router.get(
+    "/api/materials/{material_id}",
+    response_model=MaterialDetailResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_material_detail(material_id: str):
+    material = get_material(material_id)
+    if material is None:
+        return _agent_error_response(
+            AgentApiError(
+                "unsupported_material",
+                f"Unknown material: {material_id}",
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[f"Unknown material: {material_id}"]),
+                recommended_next_actions=["Use /api/materials to inspect supported local preview materials."],
+            )
+        )
+    return MaterialDetailResponse(
+        material=material,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Material constants are approximate preview values unless stronger provenance is documented."
+            ],
+            limitations=[
+                "This response is not a production-grade optical constants record."
+            ],
+        ),
+        recommended_next_actions=[
+            "Verify this material against trusted optical data before physical conclusions.",
+            "Use /api/agent-trace to see how a local agent workflow would use this material.",
+        ],
+    )
+
+
+@router.post(
+    "/api/agent-trace",
+    response_model=AgentTraceResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_collaboration_trace(req: AgentTraceRequest):
+    if req.text is None and req.spec is None and req.example_id is None:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Provide text, spec, or example_id for an agent collaboration trace.",
+                diagnostics=ApiDiagnostic(errors=["Agent trace requires text, spec, or example_id."]),
+                recommended_next_actions=[
+                    "Use example_id='nanoparticle_plasmonics' or provide a local spec/text request."
+                ],
+            )
+        )
+    request_payload: dict[str, Any] = {}
+    if req.text is not None:
+        request_payload["text"] = req.text
+    if req.spec is not None:
+        request_payload["spec"] = req.spec
+    if req.example_id is not None:
+        request_payload["example_id"] = req.example_id
+    trace = build_agent_trace(request_payload)
+    return AgentTraceResponse(
+        trace_id=trace.trace_id,
+        agents=trace.agents,
+        final_recommendation=trace.final_recommendation,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Sub-agent collaboration is a deterministic local preview trace, not autonomous external agents."
+            ],
+            limitations=[
+                "No external LLM, external solver, network, upload, tag, or release action was performed."
+            ],
+        ),
+        recommended_next_actions=trace.recommended_next_actions,
     )
 
 

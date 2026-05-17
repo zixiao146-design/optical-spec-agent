@@ -12,6 +12,9 @@
 | Evidence | `/api/validation-evidence` | GET | none | `examples/api/validation_evidence_response.json` | Gmsh/Meep/MPB/Optiland Level 3 evidence; Elmer deferred. |
 | System Status | `/api/health` | GET | none | `examples/api/health_response.json` | Local service health only. |
 | System Status | `/api/version` | GET | none | `examples/api/version_response.json` | Shows package version and `api_contract_version`. |
+| Material Library | `/api/materials` | GET | none | `examples/api/materials_response.json` | Local preview material catalog only. |
+| Material Library | `/api/materials/suggest` | POST | `examples/api/material_suggestion_request.json` | `examples/api/material_suggestion_response.json` | Application hints; no external material lookup. |
+| Agent Collaboration | `/api/agent-trace` | POST | `examples/api/agent_trace_request_nanoparticle.json` | `examples/api/agent_trace_response_nanoparticle.json` | Deterministic local trace; no external LLM. |
 
 All mapped endpoints are local-first, no-network fixtures for frontend planning.
 They must not expose upload, publish, tag, release, solver-run, or external LLM

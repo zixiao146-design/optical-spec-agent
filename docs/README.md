@@ -25,6 +25,11 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Agent Studio Chinese localization](frontend_i18n_zh_CN.md)
 - [Agent Studio Chinese guided tutorial](agent_studio_chinese_guided_tutorial.md)
 - [Frontend Chinese terminology](frontend_chinese_terminology.md)
+- [Material library](material_library.md)
+- [Material library zh-CN](material_library.zh-CN.md)
+- [Sub-agent architecture](sub_agent_architecture.md)
+- [Sub-agent architecture zh-CN](sub_agent_architecture.zh-CN.md)
+- [Open-source optical design ecosystem](open_source_optical_design_ecosystem.md)
 - [Local Agent API contract](api_agent_contract.md)
 - [Local Agent API error model](api_error_model.md)
 - [Local Agent API versioning policy](api_versioning_policy.md)
@@ -55,6 +60,11 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Agent Studio Chinese localization](frontend_i18n_zh_CN.md)
 - [Agent Studio Chinese guided tutorial](agent_studio_chinese_guided_tutorial.md)
 - [Frontend Chinese terminology](frontend_chinese_terminology.md)
+- [Material library](material_library.md)
+- [Material library zh-CN](material_library.zh-CN.md)
+- [Sub-agent architecture](sub_agent_architecture.md)
+- [Sub-agent architecture zh-CN](sub_agent_architecture.zh-CN.md)
+- [Open-source optical design ecosystem](open_source_optical_design_ecosystem.md)
 - [CLI / API parity](cli_api_parity.md)
 - [v0.9.0rc5 GitHub release draft](github_release_draft_v0.9.0rc5.md)
 - [v0.9.0rc5 release notes](release_notes_v0.9.0rc5.md)
@@ -167,6 +177,7 @@ manual-only and must not publish or create tags/releases from default CI.
 ## Strategy
 
 - [Open-source solver strategy](open_source_solver_strategy.md)
+- [Open-source optical design ecosystem](open_source_optical_design_ecosystem.md)
 - [Proprietary solver policy](proprietary_solver_policy.md)
 - [External solver policy](external_solver_policy.md)
 - [External LLM policy](external_llm_policy.md)
@@ -185,6 +196,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - Agent Studio quickstart setup script: `../scripts/bootstrap_demo_env.sh`
 - Agent Studio quickstart run script: `../scripts/run_quickstart_demo.sh`
 - Agent Studio quickstart examples: `../examples/quickstart/README.md`
+- Optical design examples: `../examples/optical_design/`
 - [Examples manifest](../examples/examples_manifest.json)
 
 ## Decisions

@@ -34,6 +34,9 @@ Hardened frontend demo checks are documented in
 | `optical-spec validate ...` | `POST /api/validate` | Candidate-ready | API validates inline specs or local repo paths with structured diagnostics. |
 | `optical-spec workflow-plan ... --json` | `POST /api/workflow-plan` | Candidate-ready | API returns a local synchronous workflow preview and does not execute solvers. |
 | `optical-spec adapter-generate ...` | `POST /api/adapter-preview` | Preview-ready | API returns preview content or artifact metadata only; it does not run the solver. |
+| material catalog | `GET /api/materials`, `GET /api/materials/{material_id}` | API-first | Local preview material catalog; no production-grade optical constants claim. |
+| material suggest | `POST /api/materials/suggest` | API-first | Local application-to-material hints; no network lookup. |
+| agent collaboration | `POST /api/agent-trace` | API-first | Deterministic local sub-agent trace; no external LLM or solver call. |
 
 ## Shared boundaries
 

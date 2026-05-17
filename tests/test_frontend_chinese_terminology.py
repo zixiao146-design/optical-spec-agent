@@ -35,10 +35,17 @@ def test_frontend_chinese_terminology_doc_preserves_contract_names():
         "生产级物理验证",
         "formal convergence proof",
         "形式化收敛证明",
+        "material library",
+        "材料库",
+        "sub-agent collaboration",
+        "子智能体协作",
         "API 字段名保持英文",
         "API JSON keys 保持英文稳定",
         "Adapter tool names are not translated",
         "`meep`, `gmsh`, `mpb`, `elmer`, `optiland` 不翻译",
+        "材料 ID",
+        "SpecAgent",
+        "MaterialAgent",
     ]
     for phrase in required:
         assert phrase in text

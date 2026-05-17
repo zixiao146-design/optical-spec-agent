@@ -63,6 +63,17 @@ The Chinese step-by-step tutorial is tracked in
 with terminology in
 [`docs/frontend_chinese_terminology.md`](docs/frontend_chinese_terminology.md).
 
+The current domain expansion adds a local preview
+[`material library`](docs/material_library.md), richer
+[`optical design examples`](examples/optical_design/), and a deterministic
+[`sub-agent collaboration trace`](docs/sub_agent_architecture.md) that makes
+SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent, WorkflowAgent,
+EvidenceAgent, SafetyAgent, and RecommendationAgent visible in Agent Studio.
+These additions remain preview-first: no solver is executed by default, no
+external LLM is called by default, material values are not production-grade
+optical constants, and PyPI/TestPyPI upload or GitHub tag/release controls are
+not exposed.
+
 Release status: the current public release candidate is `v0.9.0rc6`, while the
 current `main` development version is `0.9.0rc7.dev0`. The `v0.9.0rc7` tag has
 not been created, no `v0.9.0rc7` GitHub release exists, and `0.9.0rc7.dev0` is

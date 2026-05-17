@@ -37,6 +37,19 @@ requests, and disabled external LLM parsing. Future frontend work should use
 these fixtures for local mock data and contract checks before any full UI
 implementation begins.
 
+The manifest also includes Material Library and Agent Collaboration fixtures:
+
+- `materials_response.json`
+- `material_detail_sio2_response.json`
+- `material_suggestion_request.json`
+- `material_suggestion_response.json`
+- `agent_trace_request_nanoparticle.json`
+- `agent_trace_response_nanoparticle.json`
+
+These fixtures are local preview/design-assist data only. They do not perform
+external material database lookup, solver execution, external LLM calls,
+uploads, tags, or releases.
+
 `scripts/check_api_fixtures.py` compares these fixtures with live FastAPI
 `TestClient` response top-level shapes. `scripts/smoke_agent_api.sh` exercises
 all current `/api/*` endpoints without starting a background server. Both

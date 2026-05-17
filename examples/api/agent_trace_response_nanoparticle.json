@@ -1,0 +1,60 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Sub-agent collaboration is a deterministic local preview trace, not autonomous external agents."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "No external LLM, external solver, network, upload, tag, or release action was performed."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Review material library warnings.",
+    "Open Agent Collaboration in the frontend.",
+    "Use /api/adapter-preview for local scaffold output."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "trace_id": "trace-demo",
+  "agents": [
+    {
+      "agent_name": "SpecAgent",
+      "role": "Interprets user intent / spec and identifies missing fields.",
+      "input_summary": "Request classified as nanoparticle plasmonics.",
+      "output_summary": "Prepared a local preview intent summary for downstream agents.",
+      "diagnostics": [
+        "Spec interpretation is deterministic and local."
+      ],
+      "recommended_next_actions": [
+        "Review required wavelength, geometry, material, and output fields."
+      ],
+      "confidence": "candidate",
+      "evidence_refs": []
+    },
+    {
+      "agent_name": "MaterialAgent",
+      "role": "Suggests materials from the local preview material catalog.",
+      "input_summary": "Application: nanoparticle plasmonics.",
+      "output_summary": "Suggested preview materials: au, ag, sio2, water, air.",
+      "diagnostics": [
+        "Material constants are preview/design-assist values only."
+      ],
+      "recommended_next_actions": [
+        "Verify optical constants before physical conclusions."
+      ],
+      "confidence": "preview",
+      "evidence_refs": [
+        "docs/material_library.md"
+      ]
+    }
+  ],
+  "final_recommendation": "Use local preview material candidates, generate a workflow plan, and inspect adapter previews without executing a solver."
+}

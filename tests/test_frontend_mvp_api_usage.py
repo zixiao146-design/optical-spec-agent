@@ -17,6 +17,9 @@ def test_frontend_api_client_is_local_api_only():
     assert '"/api/adapter-preview"' in text
     assert '"/api/validation-evidence"' in text
     assert '"/api/readiness"' in text
+    assert '"/api/materials"' in text
+    assert '"/api/materials/suggest"' in text
+    assert '"/api/agent-trace"' in text
     assert "http://127.0.0.1:8000" in text
     assert "path.startsWith(\"/api/\")" in text
 

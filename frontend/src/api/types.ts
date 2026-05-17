@@ -127,6 +127,78 @@ export interface ReadinessResponse extends ApiResponseBase {
   v1_0_0_released: boolean;
 }
 
+export interface RefractiveIndexModel {
+  kind: string;
+  n?: number | null;
+  k?: number | null;
+  wavelength_nm?: number | null;
+}
+
+export interface MaterialSummary {
+  material_id: string;
+  display_name: string;
+  aliases: string[];
+  category: string;
+  common_use: string[];
+  optical_role: string;
+  production_grade: boolean;
+  validation_level: string;
+  source_note: string;
+}
+
+export interface MaterialDetail extends MaterialSummary {
+  wavelength_range_nm?: [number, number] | null;
+  refractive_index_model: RefractiveIndexModel;
+  notes: string[];
+}
+
+export interface MaterialsResponse extends ApiResponseBase {
+  materials: MaterialSummary[];
+  catalog_status: string;
+  catalog_note: string;
+}
+
+export interface MaterialDetailResponse extends ApiResponseBase {
+  material: MaterialDetail;
+  catalog_status: string;
+  catalog_note: string;
+}
+
+export interface MaterialSuggestionRequest {
+  application: string;
+  wavelength_nm?: number;
+}
+
+export interface MaterialSuggestionResponse extends ApiResponseBase {
+  application: string;
+  suggested_materials: MaterialSummary[];
+  catalog_status: string;
+  catalog_note: string;
+}
+
+export interface AgentStep {
+  agent_name: string;
+  role: string;
+  input_summary: string;
+  output_summary: string;
+  diagnostics: string[];
+  recommended_next_actions: string[];
+  confidence: string;
+  evidence_refs: string[];
+}
+
+export interface AgentTraceRequest {
+  spec?: Record<string, unknown>;
+  text?: string;
+  example_id?: string;
+}
+
+export interface AgentTraceResponse extends ApiResponseBase {
+  trace_id: string;
+  agents: AgentStep[];
+  final_recommendation: string;
+}
+
 export interface ApiErrorResponse extends ApiResponseBase {
   status: "error";
   error_code: string;

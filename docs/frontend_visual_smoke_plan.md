@@ -17,8 +17,10 @@ The Agent Studio demo package references the same optional visual check through
 - Dashboard
 - Spec Input
 - Adapter Matrix
+- Material Library
 - Workflow Plan
 - Artifact Preview
+- Agent Collaboration
 - Validation Evidence
 - System Status
 
