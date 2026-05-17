@@ -188,6 +188,45 @@
       "proprietary_solver_required": false
     },
     {
+      "name": "examples",
+      "endpoint": "/api/examples",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "examples_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "example-detail-nanoparticle",
+      "endpoint": "/api/examples/nanoparticle_plasmonics",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "example_detail_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "example-agent-trace-nanoparticle",
+      "endpoint": "/api/examples/nanoparticle_plasmonics/agent-trace",
+      "method": "POST",
+      "request_file": null,
+      "response_file": "example_agent_trace_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
       "name": "error-invalid-spec",
       "endpoint": "/api/validate",
       "method": "POST",

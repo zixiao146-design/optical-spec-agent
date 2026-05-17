@@ -63,12 +63,16 @@ The Chinese step-by-step tutorial is tracked in
 with terminology in
 [`docs/frontend_chinese_terminology.md`](docs/frontend_chinese_terminology.md).
 
-The current domain expansion adds a local preview
+The current domain expansion adds an Agent Studio
+[`Example Gallery`](docs/example_gallery.md), a local preview
 [`material library`](docs/material_library.md), richer
 [`optical design examples`](examples/optical_design/), and a deterministic
+[`Agent Trace Timeline`](docs/agent_trace_timeline.md) /
 [`sub-agent collaboration trace`](docs/sub_agent_architecture.md) that makes
 SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent, WorkflowAgent,
 EvidenceAgent, SafetyAgent, and RecommendationAgent visible in Agent Studio.
+The gallery connects examples to material suggestions, adapter recommendations,
+workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no
 external LLM is called by default, material values are not production-grade
 optical constants, and PyPI/TestPyPI upload or GitHub tag/release controls are

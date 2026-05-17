@@ -1,0 +1,225 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Examples are local preview workflows; no solver or external LLM was used."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Example outputs do not imply production-grade physical validation."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Load an example in Agent Studio Example Gallery.",
+    "Review materials, adapter recommendation, and agent trace timeline."
+  ],
+  "examples": [
+    {
+      "example_id": "dielectric_metasurface_preview",
+      "title": "Dielectric Metasurface Preview",
+      "title_zh": "介质超表面预览",
+      "design_goal": "Preview a dielectric metasurface design workflow.",
+      "design_goal_zh": "预览介质超表面本地工作流。",
+      "category": "metasurface",
+      "suggested_materials": [
+        "tio2",
+        "si3n4",
+        "si",
+        "sio2"
+      ],
+      "suggested_adapter": "meep with gmsh geometry preview",
+      "physical_system": "metasurface",
+      "workflow_focus": [
+        "parse",
+        "validate",
+        "material_suggest",
+        "workflow_plan",
+        "adapter_preview",
+        "human_review"
+      ],
+      "maturity_note": "Meep/Gmsh preview path; geometry remains scaffold until reviewed.",
+      "spec_path": "examples/optical_design/dielectric_metasurface_preview/spec.json",
+      "has_agent_trace": true,
+      "safety": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "example_id": "lens_raytrace_preview",
+      "title": "Lens Raytrace Preview",
+      "title_zh": "透镜光线追迹预览",
+      "design_goal": "Preview a local ray-optics/lens design workflow.",
+      "design_goal_zh": "预览 Optiland 方向的本地透镜/光线光学工作流。",
+      "category": "ray_optics",
+      "suggested_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "suggested_adapter": "optiland",
+      "physical_system": "lens",
+      "workflow_focus": [
+        "parse",
+        "validate",
+        "material_suggest",
+        "workflow_plan",
+        "adapter_preview",
+        "human_review"
+      ],
+      "maturity_note": "Optiland scaffold; glass catalog data must be verified.",
+      "spec_path": "examples/optical_design/lens_raytrace_preview/spec.json",
+      "has_agent_trace": true,
+      "safety": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "example_id": "nanoparticle_plasmonics",
+      "title": "Nanoparticle Plasmonics Preview",
+      "title_zh": "纳米颗粒等离激元预览",
+      "design_goal": "Preview a local workflow for plasmonic nanoparticle scattering.",
+      "design_goal_zh": "预览一个本地纳米颗粒散射工作流。",
+      "category": "plasmonics",
+      "suggested_materials": [
+        "au",
+        "ag",
+        "sio2",
+        "water",
+        "air"
+      ],
+      "suggested_adapter": "meep",
+      "physical_system": "nanoparticle_on_film",
+      "workflow_focus": [
+        "parse",
+        "validate",
+        "material_suggest",
+        "workflow_plan",
+        "adapter_preview",
+        "human_review"
+      ],
+      "maturity_note": "Meep/Gmsh preview path; material constants must be verified.",
+      "spec_path": "examples/optical_design/nanoparticle_plasmonics/spec.json",
+      "has_agent_trace": true,
+      "safety": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "example_id": "photonic_crystal_band",
+      "title": "Photonic Crystal Band Preview",
+      "title_zh": "光子晶体能带预览",
+      "design_goal": "Preview a photonic crystal band-structure workflow.",
+      "design_goal_zh": "预览 MPB 风格的光子晶体能带工作流。",
+      "category": "photonic_crystal",
+      "suggested_materials": [
+        "si",
+        "gaas",
+        "sio2",
+        "air"
+      ],
+      "suggested_adapter": "mpb",
+      "physical_system": "photonic_crystal",
+      "workflow_focus": [
+        "parse",
+        "validate",
+        "material_suggest",
+        "workflow_plan",
+        "adapter_preview",
+        "human_review"
+      ],
+      "maturity_note": "MPB preview path; no formal convergence proof claimed.",
+      "spec_path": "examples/optical_design/photonic_crystal_band/spec.json",
+      "has_agent_trace": true,
+      "safety": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "example_id": "thin_film_coating",
+      "title": "Thin Film Coating Preview",
+      "title_zh": "薄膜镀膜预览",
+      "design_goal": "Preview a thin-film coating stack workflow.",
+      "design_goal_zh": "预览一个薄膜叠层设计工作流，不新增求解器依赖。",
+      "category": "coating",
+      "suggested_materials": [
+        "sio2",
+        "tio2",
+        "al2o3"
+      ],
+      "suggested_adapter": "preview-only; future TMM adapter candidate",
+      "physical_system": "thin_film_stack",
+      "workflow_focus": [
+        "parse",
+        "validate",
+        "material_suggest",
+        "workflow_plan",
+        "artifact_preview",
+        "human_review"
+      ],
+      "maturity_note": "Preview-only; future TMM adapter candidate.",
+      "spec_path": "examples/optical_design/thin_film_coating/spec.json",
+      "has_agent_trace": true,
+      "safety": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "example_id": "waveguide_mode",
+      "title": "Waveguide Mode Preview",
+      "title_zh": "波导模式预览",
+      "design_goal": "Preview a waveguide mode workflow.",
+      "design_goal_zh": "预览波导模式设置和本地设计审阅流程。",
+      "category": "waveguide",
+      "suggested_materials": [
+        "si",
+        "sio2",
+        "si3n4"
+      ],
+      "suggested_adapter": "mpb or elmer preview",
+      "physical_system": "waveguide",
+      "workflow_focus": [
+        "parse",
+        "validate",
+        "material_suggest",
+        "workflow_plan",
+        "adapter_preview",
+        "human_review"
+      ],
+      "maturity_note": "MPB preview path; Elmer remains Level 2 + Level-3-ready, install deferred.",
+      "spec_path": "examples/optical_design/waveguide_mode/spec.json",
+      "has_agent_trace": true,
+      "safety": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    }
+  ],
+  "gallery_status": "local_preview_examples",
+  "gallery_note": "Examples are local preview workflows and do not run solvers or claim production-grade validation."
+}

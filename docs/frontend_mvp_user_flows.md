@@ -66,6 +66,11 @@
 
 ## User Flow 4: Optical design orientation and sub-agent trace
 
+- User action: open Example Gallery and choose `nanoparticle_plasmonics`.
+- API call: `GET /api/examples`, `GET /api/examples/{example_id}`.
+- Expected response: local example summary, spec, expected agent trace, material hints, adapter recommendation, workflow focus, and next actions.
+- UI state: show example cards and selected detail payload.
+- Safety boundary copy: "Examples are local preview workflows; no solver is executed."
 - User action: open Material Library and inspect a local preview material.
 - API call: `GET /api/materials`.
 - Expected response: local preview material catalog and warning that material
@@ -77,9 +82,11 @@
 - Expected response: preview material suggestions such as Au, Ag, SiO2, water, and air.
 - UI state: show suggested materials and verification reminder.
 - Safety boundary copy: "No external material database lookup was performed."
-- User action: open Agent Collaboration and load the nanoparticle trace.
-- API call: `POST /api/agent-trace`.
+- User action: open Agent Collaboration and generate the example Agent Trace Timeline.
+- API call: `POST /api/examples/{example_id}/agent-trace`.
 - Expected response: SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent,
-  WorkflowAgent, EvidenceAgent, SafetyAgent, and RecommendationAgent steps.
-- UI state: show sub-agent timeline and final recommendation.
+  WorkflowAgent, EvidenceAgent, SafetyAgent, and RecommendationAgent steps with
+  input summaries, output summaries, diagnostics, evidence refs, safety notes,
+  and recommendations.
+- UI state: show Agent Trace Timeline and final recommendation.
 - Safety boundary copy: "Sub-agent collaboration is a local deterministic trace."

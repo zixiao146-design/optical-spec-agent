@@ -12,6 +12,7 @@ def test_frontend_visual_smoke_plan_documents_future_checks():
         "Agent Studio Frontend Visual Smoke Plan",
         "Dashboard",
         "Spec Input",
+        "Example Gallery",
         "Adapter Matrix",
         "Material Library",
         "Workflow Plan",

@@ -76,13 +76,15 @@ OSA_QUICKSTART_WITH_VISUAL=1 OSA_QUICKSTART_NO_HOLD=1 ./scripts/run_quickstart_d
 ## 7. Guided Demo Steps
 
 1. Load example spec.
-2. Parse locally.
-3. Validate.
-4. View adapter matrix.
-5. Generate workflow plan.
-6. Preview artifact.
-7. Review validation evidence.
-8. Review Readiness / next actions.
+2. Browse Example Gallery.
+3. Parse locally.
+4. Validate.
+5. View adapter matrix and Material Library.
+6. Review Agent Trace Timeline.
+7. Generate workflow plan.
+8. Preview artifact.
+9. Review validation evidence.
+10. Review Readiness / next actions.
 
 The frontend guided demo panel maps each step to the Local Agent API endpoint
 used by Agent Studio.
@@ -91,6 +93,8 @@ Chinese quickstart prompt:
 Chinese step-by-step public-demo tutorial:
 `docs/agent_studio_chinese_guided_tutorial.md`; terminology:
 `docs/frontend_chinese_terminology.md`.
+Example Gallery and Agent Trace Timeline docs:
+`docs/example_gallery.md` and `docs/agent_trace_timeline.md`.
 
 ## 8. Expected Success
 

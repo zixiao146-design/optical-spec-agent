@@ -26,6 +26,9 @@ def test_agent_api_openapi_includes_agent_endpoints():
         "/api/materials",
         "/api/materials/{material_id}",
         "/api/materials/suggest",
+        "/api/examples",
+        "/api/examples/{example_id}",
+        "/api/examples/{example_id}/agent-trace",
         "/api/agent-trace",
     ]:
         assert path in paths
@@ -51,6 +54,9 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
         "/api/materials",
         "/api/materials/{material_id}",
         "/api/materials/suggest",
+        "/api/examples",
+        "/api/examples/{example_id}",
+        "/api/examples/{example_id}/agent-trace",
         "/api/agent-trace",
     ]:
         operation = paths[path]["get"] if "get" in paths[path] else paths[path]["post"]

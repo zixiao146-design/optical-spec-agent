@@ -13,6 +13,9 @@
 - Can render Material Library.
 - Can request local material suggestions.
 - Can render Agent Collaboration trace.
+- Can render Example Gallery with bundled optical design examples.
+- Can render Agent Trace Timeline with sub-agent input/output, diagnostics,
+  evidence refs, safety notes, and recommendations.
 - Can show loading, empty, error, and API disconnected states.
 - Can show demo fixture mode when the local API is unavailable.
 - Can load example/fixture requests into Spec Input, Workflow Plan, and Artifact
@@ -20,12 +23,13 @@
 - Can show API connected, API disconnected, and demo fixture mode with the API
   base URL.
 - Can render diagnostics and recommended next actions consistently.
-- Can show a guided quickstart demo with Load example spec, Parse locally,
-  Validate spec, Review adapter matrix, Generate workflow plan, Preview
-  artifact, Review validation evidence, and Review readiness / next action.
+- Can show a guided quickstart demo with Example Gallery, Load example spec,
+  Parse locally, Validate spec, Review adapter matrix, Material Library, Agent
+  Trace Timeline, Generate workflow plan, Preview artifact, Review validation
+  evidence, and Review readiness / next action.
 - Can switch between English and 中文 without refreshing the page.
-- Chinese guided demo shows 加载示例规格、本地解析、验证规格、查看适配器矩阵、
-  生成工作流计划、预览适配器产物、查看验证证据、查看 readiness / 下一步建议。
+- Chinese guided demo shows 示例库、加载示例规格、本地解析、验证规格、查看适配器矩阵、
+  材料库、多智能体协作轨迹、生成工作流计划、预览适配器产物、查看验证证据、查看 readiness / 下一步建议。
 - Can show a quickstart completion checklist with API connected,
   `0.9.0rc7.dev0`, `api_contract_version` 0.1, no solver executed, and no
   external LLM called.

@@ -23,6 +23,11 @@ def test_agent_trace_api_returns_all_roles_and_final_recommendation():
         "RecommendationAgent",
     }.issubset(names)
     assert payload["final_recommendation"]
+    assert payload["timeline_summary"]
+    assert payload["material_suggestions"]
+    assert payload["adapter_recommendation"]
+    assert all("step_index" in agent for agent in payload["agents"])
+    assert all("safety_notes" in agent for agent in payload["agents"])
     assert payload["external_solver_executed"] is False
     assert payload["external_llm_required"] is False
     assert payload["production_grade_validation_claimed"] is False

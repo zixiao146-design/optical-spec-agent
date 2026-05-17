@@ -5,11 +5,12 @@ const LOCAL_HOSTS = new Set(["127.0.0.1", "localhost"]);
 const pages = [
   { nav: "Dashboard", heading: "Local Agent API workbench" },
   { nav: "Spec Input", heading: "Parse and validate local optical specs" },
+  { nav: "Example Gallery", heading: "Optical design example gallery" },
   { nav: "Adapter Matrix", heading: "Adapter maturity and evidence" },
   { nav: "Material Library", heading: "Local preview material catalog" },
   { nav: "Workflow Plan", heading: "Generate a synchronous local workflow preview" },
   { nav: "Artifact Preview", heading: "Generate solver-native preview content" },
-  { nav: "Agent Collaboration", heading: "Sub-agent collaboration trace" },
+  { nav: "Agent Collaboration", heading: "Agent Trace Timeline" },
   { nav: "Validation Evidence", heading: "Evidence and limitations" },
   { nav: "System Status", heading: "Local API contract and schema" },
 ];
@@ -55,7 +56,7 @@ test("major Agent Studio pages render in local visual smoke", async ({ page }) =
 
   for (const entry of pages) {
     await page.getByRole("button", { name: entry.nav }).click();
-    await expect(page.getByRole("heading", { name: entry.heading })).toBeVisible();
+    await expect(page.getByRole("heading", { name: entry.heading, exact: true }).first()).toBeVisible();
     await expect(page.getByRole("main")).toContainText(entry.nav);
     await expectForbiddenControlsAbsent(page);
   }
@@ -98,6 +99,10 @@ test("fixture-backed interactions are visible without solver or LLM controls", a
   await page.getByRole("button", { name: "Material Library" }).click();
   await expect(page.getByText("not production-grade optical constants").first()).toBeVisible();
   await expect(page.getByRole("button", { name: "Suggest materials" })).toBeVisible();
+
+  await page.getByRole("button", { name: "Example Gallery" }).click();
+  await expect(page.locator("button", { hasText: "Load example" }).first()).toBeVisible();
+  await expect(page.locator("button", { hasText: "View agent trace" }).first()).toBeVisible();
 
   await page.getByRole("button", { name: "Agent Collaboration" }).click();
   await expect(page.getByRole("button", { name: "Load nanoparticle agent trace" })).toBeVisible();

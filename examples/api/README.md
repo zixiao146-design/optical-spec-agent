@@ -45,6 +45,9 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `material_suggestion_response.json`
 - `agent_trace_request_nanoparticle.json`
 - `agent_trace_response_nanoparticle.json`
+- `examples_response.json`
+- `example_detail_nanoparticle_response.json`
+- `example_agent_trace_nanoparticle_response.json`
 
 These fixtures are local preview/design-assist data only. They do not perform
 external material database lookup, solver execution, external LLM calls,

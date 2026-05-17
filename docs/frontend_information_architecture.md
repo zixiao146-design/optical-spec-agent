@@ -28,25 +28,34 @@ architecture.
 - Calls `GET /api/validation-evidence`.
 - Shows Gmsh / Meep / MPB / Optiland Level 3 and Elmer deferred.
 
-## 4. Workflow Plan
+## 4. Example Gallery
+
+- Calls `GET /api/examples`.
+- Calls `GET /api/examples/{example_id}`.
+- Calls `POST /api/examples/{example_id}/agent-trace`.
+- Shows bundled optical design examples, material suggestions, adapter
+  recommendations, workflow focus, maturity notes, and safety boundaries.
+- Does not run solvers or call external LLMs.
+
+## 5. Workflow Plan
 
 - Calls `POST /api/workflow-plan`.
 - Shows plan steps, diagnostics, and no solver execution.
 - Includes a workflow fixture loader.
 
-## 5. Artifact Preview
+## 6. Artifact Preview
 
 - Calls `POST /api/adapter-preview`.
 - Shows preview content and artifact summary.
 - Includes a minimal spec fixture loader and output language/extension summary.
 - Never runs solver by default.
 
-## 6. Validation Evidence
+## 7. Validation Evidence
 
 - Calls `GET /api/validation-evidence`.
 - Shows evidence reports and limitations.
 
-## 7. API / System Status
+## 8. API / System Status
 
 - Calls `GET /api/health`.
 - Calls `GET /api/version`.
@@ -62,16 +71,20 @@ architecture.
 - Optional Playwright visual smoke covers these seven pages manually and is not
   a default release gate.
 
-## 8. Material Library
+## 9. Material Library
 
 - Calls `GET /api/materials`.
 - Calls `POST /api/materials/suggest`.
 - Shows local preview materials and material suggestions.
+- Shows related examples where applicable.
 - States material data is not production-grade optical constants.
 
-## 9. Agent Collaboration
+## 10. Agent Collaboration
 
 - Calls `POST /api/agent-trace`.
+- Calls `POST /api/examples/{example_id}/agent-trace`.
 - Shows SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent, WorkflowAgent,
   EvidenceAgent, SafetyAgent, and RecommendationAgent.
-- Shows final recommendation and safety boundaries.
+- Shows timeline step index, input summary, output summary, diagnostics,
+  evidence refs, recommended next actions, final recommendation, and safety
+  boundaries.

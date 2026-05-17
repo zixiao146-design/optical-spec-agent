@@ -16,6 +16,8 @@ def test_frontend_material_library_page_exists_and_keeps_preview_claims():
     assert "材料库" in source
     assert "/api/materials" in source
     assert "/api/materials/suggest" in source
+    assert "Used in examples" in source
+    assert "适用示例" in source
     assert "not production-grade optical constants" in source
     assert "不声明生产级材料常数" in source
     assert "Upload to PyPI" not in source

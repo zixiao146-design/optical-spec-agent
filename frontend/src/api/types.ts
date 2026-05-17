@@ -177,13 +177,17 @@ export interface MaterialSuggestionResponse extends ApiResponseBase {
 }
 
 export interface AgentStep {
+  step_index: number;
   agent_name: string;
   role: string;
+  stage: string;
   input_summary: string;
   output_summary: string;
   diagnostics: string[];
   recommended_next_actions: string[];
   confidence: string;
+  status: string;
+  safety_notes: string[];
   evidence_refs: string[];
 }
 
@@ -195,8 +199,57 @@ export interface AgentTraceRequest {
 
 export interface AgentTraceResponse extends ApiResponseBase {
   trace_id: string;
+  example_id?: string | null;
+  design_goal: string;
+  timeline_summary: string;
   agents: AgentStep[];
   final_recommendation: string;
+  material_suggestions: string[];
+  adapter_recommendation: string;
+}
+
+export interface ExampleSafety {
+  external_solver_executed: boolean;
+  external_llm_required: boolean;
+  production_grade_validation_claimed: boolean;
+  formal_convergence_proof_claimed: boolean;
+}
+
+export interface OpticalDesignExampleSummary {
+  example_id: string;
+  title: string;
+  title_zh: string;
+  design_goal: string;
+  design_goal_zh: string;
+  category: string;
+  suggested_materials: string[];
+  suggested_adapter: string;
+  physical_system: string;
+  workflow_focus: string[];
+  maturity_note: string;
+  spec_path: string;
+  has_agent_trace: boolean;
+  safety: ExampleSafety;
+}
+
+export interface OpticalDesignExampleDetail {
+  summary: OpticalDesignExampleSummary;
+  spec: Record<string, unknown>;
+  expected_agent_trace: Record<string, unknown>;
+  recommended_next_actions: string[];
+  safety_boundaries: string[];
+}
+
+export interface ExamplesResponse extends ApiResponseBase {
+  examples: OpticalDesignExampleSummary[];
+  gallery_status: string;
+  gallery_note: string;
+}
+
+export interface ExampleDetailResponse extends ApiResponseBase {
+  example: OpticalDesignExampleDetail;
+  gallery_status: string;
+  gallery_note: string;
 }
 
 export interface ApiErrorResponse extends ApiResponseBase {

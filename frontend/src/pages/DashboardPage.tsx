@@ -7,7 +7,7 @@ import { ApiModeIndicator } from "../components/ApiModeIndicator";
 import { BoundaryBadge } from "../components/BoundaryBadge";
 import { ChineseGuidedTutorial } from "../components/ChineseGuidedTutorial";
 import { ErrorState } from "../components/ErrorState";
-import { GuidedDemoStepper } from "../components/GuidedDemoStepper";
+import { GuidedDemoStepper, type GuidedDemoPage } from "../components/GuidedDemoStepper";
 import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
 import { QuickstartPanel } from "../components/QuickstartPanel";
@@ -17,7 +17,7 @@ import { demoHealth, demoReadiness, demoVersion } from "../fixtures/demoData";
 import { useI18n } from "../i18n/useI18n";
 
 interface DashboardPageProps {
-  onNavigate?: (page: "Dashboard" | "Spec Input" | "Adapter Matrix" | "Material Library" | "Workflow Plan" | "Artifact Preview" | "Agent Collaboration" | "Validation Evidence" | "System Status") => void;
+  onNavigate?: (page: GuidedDemoPage) => void;
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {

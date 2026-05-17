@@ -13,6 +13,20 @@ import { RecommendedActions } from "../components/RecommendedActions";
 import { demoMaterialSuggestion, demoMaterials } from "../fixtures/demoData";
 import { useI18n } from "../i18n/useI18n";
 
+const RELATED_EXAMPLES: Record<string, string[]> = {
+  au: ["nanoparticle_plasmonics"],
+  ag: ["nanoparticle_plasmonics"],
+  sio2: ["nanoparticle_plasmonics", "thin_film_coating", "waveguide_mode", "photonic_crystal_band"],
+  tio2: ["thin_film_coating", "dielectric_metasurface_preview"],
+  al2o3: ["thin_film_coating"],
+  si: ["waveguide_mode", "photonic_crystal_band", "dielectric_metasurface_preview"],
+  si3n4: ["waveguide_mode", "dielectric_metasurface_preview"],
+  gaas: ["photonic_crystal_band"],
+  glass_bk7_preview: ["lens_raytrace_preview"],
+  glass_fused_silica_preview: ["lens_raytrace_preview"],
+  air: ["lens_raytrace_preview", "photonic_crystal_band"],
+};
+
 export function MaterialLibraryPage() {
   const { t } = useI18n();
   const [query, setQuery] = useState("");
@@ -113,6 +127,10 @@ export function MaterialLibraryPage() {
                 <code>{material.material_id}</code>
                 <p>{material.optical_role}</p>
                 <p>{material.common_use.join(", ")}</p>
+                <p>
+                  <strong>{t("materials.relatedExamples")}:</strong>{" "}
+                  {(RELATED_EXAMPLES[material.material_id] || [t("materials.relatedExamplesNone")]).join(", ")}
+                </p>
                 <BoundaryBadge>{t("materials.card.previewOnly")}</BoundaryBadge>
               </article>
             ))}
@@ -136,6 +154,7 @@ export function MaterialLibraryPage() {
               <li key={item.material_id}>
                 <strong>{item.display_name}</strong> <code>{item.material_id}</code>
                 <span>{item.optical_role}</span>
+                <span>{t("materials.usedInExamples")}: {(RELATED_EXAMPLES[item.material_id] || []).join(", ") || t("materials.relatedExamplesNone")}</span>
               </li>
             ))}
           </ul>

@@ -19,8 +19,15 @@
 | formal convergence proof is not claimed | 形式化收敛证明 |
 | material library | 材料库 |
 | material catalog | 材料目录 |
+| example gallery | 示例库 |
+| optical design examples | 光学设计示例 |
 | sub-agent collaboration | 子智能体协作 |
 | agent trace | agent trace / 协作轨迹 |
+| agent trace timeline | 多智能体协作轨迹 |
+| input summary | 输入摘要 |
+| output summary | 输出摘要 |
+| evidence refs | 证据引用 |
+| final recommendation | 最终建议 |
 
 ## 不翻译的内容
 

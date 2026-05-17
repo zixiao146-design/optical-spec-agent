@@ -77,18 +77,22 @@ OSA_QUICKSTART_WITH_VISUAL=1 OSA_QUICKSTART_NO_HOLD=1 ./scripts/run_quickstart_d
 
 1. 打开 Agent Studio。
 2. 查看 readiness / 系统状态。
-3. 加载中文纳米颗粒示例。
-4. 本地解析规格。
-5. 验证规格。
-6. 查看适配器矩阵。
-7. 生成工作流计划。
-8. 预览适配器产物。
-9. 查看验证证据和下一步建议。
+3. 查看示例库。
+4. 加载中文纳米颗粒示例。
+5. 本地解析规格。
+6. 验证规格。
+7. 查看适配器矩阵和材料库。
+8. 查看多智能体协作轨迹。
+9. 生成工作流计划。
+10. 预览适配器产物。
+11. 查看验证证据和下一步建议。
 
 Frontend 的中文手把手教程会显示每一步对应的用户操作、预期结果、Local Agent
 API endpoint 和安全边界。
 中文自然语言 quickstart 示例见
 `examples/quickstart/zh_nanoparticle_prompt.txt`。
+示例库和多智能体协作轨迹见 `docs/example_gallery.zh-CN.md` 与
+`docs/agent_trace_timeline.zh-CN.md`。
 
 ## 8. 成功标志
 

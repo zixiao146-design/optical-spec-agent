@@ -9,6 +9,7 @@ import { AgentCollaborationPage } from "./pages/AgentCollaborationPage";
 import { ArtifactPreviewPage } from "./pages/ArtifactPreviewPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { EvidencePage } from "./pages/EvidencePage";
+import { ExampleGalleryPage } from "./pages/ExampleGalleryPage";
 import { MaterialLibraryPage } from "./pages/MaterialLibraryPage";
 import { SpecInputPage } from "./pages/SpecInputPage";
 import { SystemStatusPage } from "./pages/SystemStatusPage";
@@ -17,6 +18,7 @@ import { WorkflowPlanPage } from "./pages/WorkflowPlanPage";
 const PAGES = [
   "Dashboard",
   "Spec Input",
+  "Example Gallery",
   "Adapter Matrix",
   "Material Library",
   "Workflow Plan",
@@ -31,6 +33,7 @@ type Page = (typeof PAGES)[number];
 const PAGE_LABEL_KEYS: Record<Page, string> = {
   Dashboard: "nav.dashboard",
   "Spec Input": "nav.specInput",
+  "Example Gallery": "nav.exampleGallery",
   "Adapter Matrix": "nav.adapterMatrix",
   "Material Library": "nav.materialLibrary",
   "Workflow Plan": "nav.workflowPlan",
@@ -44,6 +47,8 @@ function pageComponent(page: Page, onNavigate: (page: Page) => void) {
   switch (page) {
     case "Spec Input":
       return <SpecInputPage />;
+    case "Example Gallery":
+      return <ExampleGalleryPage />;
     case "Adapter Matrix":
       return <AdapterMatrixPage />;
     case "Material Library":

@@ -38,6 +38,7 @@ def test_playwright_smoke_covers_pages_safety_and_forbidden_controls():
     for phrase in [
         "Dashboard",
         "Spec Input",
+        "Example Gallery",
         "Adapter Matrix",
         "Material Library",
         "Workflow Plan",

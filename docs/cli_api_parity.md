@@ -36,7 +36,9 @@ Hardened frontend demo checks are documented in
 | `optical-spec adapter-generate ...` | `POST /api/adapter-preview` | Preview-ready | API returns preview content or artifact metadata only; it does not run the solver. |
 | material catalog | `GET /api/materials`, `GET /api/materials/{material_id}` | API-first | Local preview material catalog; no production-grade optical constants claim. |
 | material suggest | `POST /api/materials/suggest` | API-first | Local application-to-material hints; no network lookup. |
+| optical design examples | `GET /api/examples`, `GET /api/examples/{example_id}` | API-first | Local bundled Example Gallery; examples load from `examples/optical_design/`. |
 | agent collaboration | `POST /api/agent-trace` | API-first | Deterministic local sub-agent trace; no external LLM or solver call. |
+| example collaboration | `POST /api/examples/{example_id}/agent-trace` | API-first | Builds an Agent Trace Timeline for a bundled example. |
 
 ## Shared boundaries
 

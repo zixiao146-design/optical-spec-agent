@@ -16,6 +16,7 @@ The Agent Studio demo package references the same optional visual check through
 
 - Dashboard
 - Spec Input
+- Example Gallery
 - Adapter Matrix
 - Material Library
 - Workflow Plan

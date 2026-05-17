@@ -25,3 +25,7 @@ def test_build_agent_trace_returns_all_sub_agents_and_safety_flags():
     assert trace.external_llm_required is False
     assert trace.production_grade_validation_claimed is False
     assert trace.formal_convergence_proof_claimed is False
+    assert trace.timeline_summary
+    assert trace.material_suggestions
+    assert trace.adapter_recommendation
+    assert all(agent.step_index for agent in trace.agents)

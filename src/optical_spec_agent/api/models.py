@@ -7,6 +7,10 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 from optical_spec_agent.agents.models import AgentStep
+from optical_spec_agent.examples.models import (
+    OpticalDesignExampleDetail,
+    OpticalDesignExampleSummary,
+)
 from optical_spec_agent.materials.models import MaterialDetail, MaterialSummary
 
 
@@ -195,8 +199,28 @@ class AgentTraceRequest(ApiRequestBase):
 
 class AgentTraceResponse(ApiResponseBase):
     trace_id: str
+    example_id: str | None = None
+    design_goal: str = ""
+    timeline_summary: str = ""
     agents: list[AgentStep] = Field(default_factory=list)
     final_recommendation: str
+    material_suggestions: list[str] = Field(default_factory=list)
+    adapter_recommendation: str = ""
+
+
+class ExamplesResponse(ApiResponseBase):
+    examples: list[OpticalDesignExampleSummary] = Field(default_factory=list)
+    gallery_status: str = "local_preview_examples"
+    gallery_note: str = (
+        "Examples are local preview workflows and do not run solvers or claim "
+        "production-grade validation."
+    )
+
+
+class ExampleDetailResponse(ApiResponseBase):
+    example: OpticalDesignExampleDetail
+    gallery_status: str = "local_preview_examples"
+    gallery_note: str = "Use these examples for local Agent Studio workflow preview."
 
 
 class ApiErrorResponse(ApiResponseBase):

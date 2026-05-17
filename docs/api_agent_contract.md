@@ -66,6 +66,13 @@ maintainer explicitly approves freezing it.
 - `POST /api/adapter-preview`
 - `GET /api/validation-evidence`
 - `GET /api/readiness`
+- `GET /api/examples`
+- `GET /api/examples/{example_id}`
+- `POST /api/examples/{example_id}/agent-trace`
+- `GET /api/materials`
+- `GET /api/materials/{material_id}`
+- `POST /api/materials/suggest`
+- `POST /api/agent-trace`
 
 ## Response shape principles
 
@@ -122,11 +129,15 @@ design domain assistance:
 - `GET /api/materials`
 - `GET /api/materials/{material_id}`
 - `POST /api/materials/suggest`
+- `GET /api/examples`
+- `GET /api/examples/{example_id}`
+- `POST /api/examples/{example_id}/agent-trace`
 - `POST /api/agent-trace`
 
 These endpoints are frontend-readiness / candidate API surfaces. They do not
 run external solvers, do not call external LLMs, do not access external material
 databases, do not upload packages, and do not create tags/releases. Material
 records are local preview/design-assist hints, not production-grade optical
-constants. The agent trace is deterministic local collaboration visibility, not
-autonomous external agent execution.
+constants. Example Gallery responses load only local `examples/optical_design`
+files. The Agent Trace Timeline is deterministic local collaboration
+visibility, not autonomous external agent execution.

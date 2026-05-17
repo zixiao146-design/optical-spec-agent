@@ -20,6 +20,8 @@ from optical_spec_agent.api.models import (
     AdaptersResponse,
     ApiDiagnostic,
     ApiErrorResponse,
+    ExampleDetailResponse,
+    ExamplesResponse,
     HealthResponse,
     MaterialDetailResponse,
     MaterialSuggestionRequest,
@@ -43,6 +45,12 @@ from optical_spec_agent.adapters.registry import (
     dispatch_adapter,
     get_adapter,
     list_adapters,
+)
+from optical_spec_agent.examples.registry import (
+    ExampleRegistryError,
+    build_example_agent_trace,
+    get_optical_design_example,
+    list_optical_design_examples,
 )
 from optical_spec_agent.materials.catalog import (
     get_material,
@@ -617,6 +625,78 @@ def agent_material_detail(material_id: str):
     )
 
 
+@router.get("/api/examples", response_model=ExamplesResponse)
+def agent_examples():
+    return ExamplesResponse(
+        examples=list_optical_design_examples(),
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Examples are local preview workflows; no solver or external LLM was used."
+            ],
+            limitations=[
+                "Example outputs do not imply production-grade physical validation."
+            ],
+        ),
+        recommended_next_actions=[
+            "Load an example in Agent Studio Example Gallery.",
+            "Review materials, adapter recommendation, and agent trace timeline.",
+        ],
+    )
+
+
+@router.get(
+    "/api/examples/{example_id}",
+    response_model=ExampleDetailResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_example_detail(example_id: str):
+    try:
+        example = get_optical_design_example(example_id)
+    except ExampleRegistryError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=["Use /api/examples to inspect available local examples."],
+            )
+        )
+    return ExampleDetailResponse(
+        example=example,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Loaded local example only; no solver or external LLM was called."
+            ],
+            limitations=[
+                "Example material and adapter choices are preview guidance only."
+            ],
+        ),
+        recommended_next_actions=example.recommended_next_actions,
+    )
+
+
+@router.post(
+    "/api/examples/{example_id}/agent-trace",
+    response_model=AgentTraceResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_example_trace(example_id: str):
+    try:
+        trace = build_example_agent_trace(example_id)
+    except ExampleRegistryError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=["Use /api/examples to inspect available local examples."],
+            )
+        )
+    return _agent_trace_response(trace)
+
+
 @router.post(
     "/api/agent-trace",
     response_model=AgentTraceResponse,
@@ -641,11 +721,26 @@ def agent_collaboration_trace(req: AgentTraceRequest):
         request_payload["spec"] = req.spec
     if req.example_id is not None:
         request_payload["example_id"] = req.example_id
-    trace = build_agent_trace(request_payload)
+    if req.example_id is not None and req.text is None and req.spec is None:
+        try:
+            trace = build_example_agent_trace(req.example_id)
+        except ExampleRegistryError:
+            trace = build_agent_trace(request_payload)
+    else:
+        trace = build_agent_trace(request_payload)
+    return _agent_trace_response(trace)
+
+
+def _agent_trace_response(trace: Any) -> AgentTraceResponse:
     return AgentTraceResponse(
         trace_id=trace.trace_id,
+        example_id=trace.example_id,
+        design_goal=trace.design_goal,
+        timeline_summary=trace.timeline_summary,
         agents=trace.agents,
         final_recommendation=trace.final_recommendation,
+        material_suggestions=trace.material_suggestions,
+        adapter_recommendation=trace.adapter_recommendation,
         diagnostics=ApiDiagnostic(
             warnings=[
                 "Sub-agent collaboration is a deterministic local preview trace, not autonomous external agents."

@@ -1,4 +1,9 @@
 {
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
   "api_contract_version": "0.1",
   "status": "ok",
   "diagnostics": {
@@ -18,16 +23,16 @@
     "Open Agent Collaboration in the frontend.",
     "Use /api/adapter-preview for local scaffold output."
   ],
-  "external_solver_executed": false,
-  "external_llm_required": false,
-  "proprietary_solver_required": false,
-  "production_grade_validation_claimed": false,
-  "formal_convergence_proof_claimed": false,
-  "trace_id": "trace-demo",
+  "trace_id": "trace-e92ef88c57",
+  "example_id": "nanoparticle_plasmonics",
+  "design_goal": "nanoparticle plasmonics with Ag/Au preview materials and Meep/Gmsh workflow",
+  "timeline_summary": "Example Gallery -> Load example -> Material suggestions -> Adapter recommendation -> Agent trace timeline -> Workflow plan -> Artifact preview -> Evidence -> Next action",
   "agents": [
     {
+      "step_index": 1,
       "agent_name": "SpecAgent",
       "role": "Interprets user intent / spec and identifies missing fields.",
+      "stage": "spec_intake",
       "input_summary": "Request classified as nanoparticle plasmonics.",
       "output_summary": "Prepared a local preview intent summary for downstream agents.",
       "diagnostics": [
@@ -37,11 +42,17 @@
         "Review required wavelength, geometry, material, and output fields."
       ],
       "confidence": "candidate",
+      "status": "ok",
+      "safety_notes": [
+        "No external LLM was called for this preview trace."
+      ],
       "evidence_refs": []
     },
     {
+      "step_index": 2,
       "agent_name": "MaterialAgent",
       "role": "Suggests materials from the local preview material catalog.",
+      "stage": "material_selection",
       "input_summary": "Application: nanoparticle plasmonics.",
       "output_summary": "Suggested preview materials: au, ag, sio2, water, air.",
       "diagnostics": [
@@ -51,10 +62,152 @@
         "Verify optical constants before physical conclusions."
       ],
       "confidence": "preview",
+      "status": "ok",
+      "safety_notes": [
+        "Material suggestions are not production-grade optical constants."
+      ],
       "evidence_refs": [
         "docs/material_library.md"
       ]
+    },
+    {
+      "step_index": 3,
+      "agent_name": "GeometryAgent",
+      "role": "Identifies geometry family and required geometry fields.",
+      "stage": "geometry_review",
+      "input_summary": "Application: nanoparticle plasmonics.",
+      "output_summary": "Mapped the request to a preview geometry family and noted missing dimensions if any.",
+      "diagnostics": [
+        "Geometry output is a scaffold until reviewed by the user."
+      ],
+      "recommended_next_actions": [
+        "Confirm geometry dimensions, units, and boundary conditions."
+      ],
+      "confidence": "candidate",
+      "status": "ok",
+      "safety_notes": [
+        "Geometry remains a local preview scaffold."
+      ],
+      "evidence_refs": []
+    },
+    {
+      "step_index": 4,
+      "agent_name": "AdapterAgent",
+      "role": "Recommends adapter/tool and explains maturity / limitations.",
+      "stage": "adapter_recommendation",
+      "input_summary": "Application and material hints: nanoparticle plasmonics; au, ag, sio2, water, air.",
+      "output_summary": "Recommended adapter path: meep with gmsh geometry preview.",
+      "diagnostics": [
+        "Open-source-solver-first recommendation; no proprietary solver dependency."
+      ],
+      "recommended_next_actions": [
+        "Use adapter preview before any optional solver execution."
+      ],
+      "confidence": "candidate",
+      "status": "ok",
+      "safety_notes": [
+        "No proprietary solver is required by default."
+      ],
+      "evidence_refs": [
+        "docs/adapter_support_matrix.md"
+      ]
+    },
+    {
+      "step_index": 5,
+      "agent_name": "WorkflowAgent",
+      "role": "Creates local preview workflow plan and ensures no solver by default.",
+      "stage": "workflow_planning",
+      "input_summary": "Adapter path: meep with gmsh geometry preview.",
+      "output_summary": "Proposed parse -> validate -> adapter preview -> human review workflow.",
+      "diagnostics": [
+        "No solver execution is part of this trace."
+      ],
+      "recommended_next_actions": [
+        "Inspect workflow plan and preview artifact before any manual execution."
+      ],
+      "confidence": "preview",
+      "status": "ok",
+      "safety_notes": [
+        "No solver is executed by default."
+      ],
+      "evidence_refs": []
+    },
+    {
+      "step_index": 6,
+      "agent_name": "EvidenceAgent",
+      "role": "Attaches validation evidence / maturity and explains verified boundaries.",
+      "stage": "evidence_review",
+      "input_summary": "Adapter path: meep with gmsh geometry preview.",
+      "output_summary": "Attached adapter maturity and validation-evidence references where available.",
+      "diagnostics": [
+        "Evidence does not imply production-grade physical validation."
+      ],
+      "recommended_next_actions": [
+        "Review validation reports and scope limitations."
+      ],
+      "confidence": "preview",
+      "status": "ok",
+      "safety_notes": [
+        "No production-grade physical validation is claimed."
+      ],
+      "evidence_refs": [
+        "docs/validation_evidence_manifest.md"
+      ]
+    },
+    {
+      "step_index": 7,
+      "agent_name": "SafetyAgent",
+      "role": "Checks no overclaim and no default solver/LLM/publish/release actions.",
+      "stage": "safety_review",
+      "input_summary": "Collaboration trace safety boundary review.",
+      "output_summary": "Safety flags remain false; no solver, LLM, upload, tag, or release action.",
+      "diagnostics": [
+        "Production-grade physical validation and formal convergence proof are not claimed."
+      ],
+      "recommended_next_actions": [
+        "Keep preview and validation boundaries visible in the UI."
+      ],
+      "confidence": "validated",
+      "status": "ok",
+      "safety_notes": [
+        "No PyPI/TestPyPI upload control.",
+        "No GitHub tag/release control.",
+        "Formal convergence proof is not claimed."
+      ],
+      "evidence_refs": [
+        "docs/frontend_safety_policy.md"
+      ]
+    },
+    {
+      "step_index": 8,
+      "agent_name": "RecommendationAgent",
+      "role": "Proposes next actions.",
+      "stage": "next_actions",
+      "input_summary": "Trace for nanoparticle plasmonics.",
+      "output_summary": "Next step: load the example, validate spec fields, inspect materials, and preview the adapter artifact.",
+      "diagnostics": [
+        "Recommendations are local workflow guidance only."
+      ],
+      "recommended_next_actions": [
+        "Review material suggestions.",
+        "Generate a workflow plan.",
+        "Create an adapter preview without executing a solver."
+      ],
+      "confidence": "preview",
+      "status": "ok",
+      "safety_notes": [
+        "Recommended next actions stay local and preview-first."
+      ],
+      "evidence_refs": []
     }
   ],
-  "final_recommendation": "Use local preview material candidates, generate a workflow plan, and inspect adapter previews without executing a solver."
+  "final_recommendation": "Use au, ag, sio2, water, air as preview material candidates and follow meep with gmsh geometry preview; verify material constants and validation evidence before physical conclusions.",
+  "material_suggestions": [
+    "au",
+    "ag",
+    "sio2",
+    "water",
+    "air"
+  ],
+  "adapter_recommendation": "meep with gmsh geometry preview"
 }

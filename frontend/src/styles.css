@@ -706,6 +706,52 @@ td span {
   text-transform: uppercase;
 }
 
+.example-gallery-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.example-card {
+  border: 1px solid #e2e9e5;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.example-card h3,
+.example-card p,
+.example-card dl {
+  margin: 0;
+}
+
+.example-card > span {
+  color: #55706a;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.example-card dl,
+.timeline-details {
+  display: grid;
+  gap: 6px 10px;
+  grid-template-columns: minmax(120px, max-content) minmax(0, 1fr);
+}
+
+.example-card dt,
+.timeline-details dt {
+  color: #4e5b57;
+  font-weight: 800;
+}
+
+.example-card dd,
+.timeline-details dd {
+  margin: 0;
+  min-width: 0;
+}
+
 .compact-list {
   display: grid;
   gap: 10px;
@@ -730,24 +776,50 @@ td span {
   padding: 0;
 }
 
-.agent-trace-list li {
+.agent-trace-list .timeline-step {
   border: 1px solid #e2e9e5;
   border-radius: 8px;
   display: grid;
   gap: 10px;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: 42px minmax(0, 1fr);
   padding: 14px;
 }
 
 .agent-trace-list h4,
 .agent-trace-list p,
-.agent-trace-list ul {
+.agent-trace-list ul,
+.agent-trace-list dl {
   margin: 0;
 }
 
 .agent-trace-list span {
   color: #254f43;
   font-weight: 800;
+}
+
+.timeline-marker {
+  align-items: center;
+  background: #244f45;
+  border-radius: 999px;
+  color: #fff;
+  display: flex;
+  font-weight: 900;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.timeline-content {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.timeline-heading {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 @media (max-width: 940px) {

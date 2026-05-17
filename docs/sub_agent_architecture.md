@@ -18,7 +18,11 @@ Current roles:
 Input/output:
 - Input may be local text, a spec-like JSON object, or a local example ID.
 - Output is an AgentTrace with AgentStep entries and a final recommendation.
-- Each step includes diagnostics, recommended next actions, confidence, and evidence refs.
+- Each step includes `step_index`, `stage`, input summary, output summary,
+  diagnostics, recommended next actions, confidence, status, safety notes, and
+  evidence refs.
+- Example-specific traces are available through
+  `POST /api/examples/{example_id}/agent-trace`.
 
 Safety:
 - No external LLM is called by default.
@@ -29,5 +33,6 @@ Safety:
 
 Frontend visualization:
 - Agent Studio exposes an Agent Collaboration page.
-- The page renders each sub-agent as a card/timeline item.
+- The page renders each sub-agent as an Agent Trace Timeline item.
+- The Example Gallery can generate a trace for bundled optical design examples.
 - The page keeps preview and validation boundaries visible.

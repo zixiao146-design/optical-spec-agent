@@ -2,7 +2,7 @@
 
 ## 1. 目的
 
-这个教程帮助中文用户从零开始完成一次本地 Agent Studio 工作流：加载示例规格、本地解析、验证规格、查看适配器矩阵、生成工作流计划、预览适配器产物，并查看验证证据和下一步建议。
+这个教程帮助中文用户从零开始完成一次本地 Agent Studio 工作流：查看示例库、加载示例规格、本地解析、验证规格、查看适配器矩阵和材料库、查看多智能体协作轨迹、生成工作流计划、预览适配器产物，并查看验证证据和下一步建议。
 
 ## 2. 当前状态
 
@@ -31,49 +31,70 @@
 - 使用的 API endpoint：`GET /api/readiness`, `GET /api/version`, `GET /api/health`
 - 安全边界说明：readiness 只是状态展示，不执行外部求解器。
 
-### 3. 加载中文纳米颗粒示例
+### 3. 查看示例库
+
+- 用户操作：打开“示例库”，选择 `nanoparticle_plasmonics` 或其他光学设计示例。
+- 预期看到的结果：看到设计目标、推荐材料、推荐适配器、工作流重点和安全边界。
+- 使用的 API endpoint：`GET /api/examples`, `GET /api/examples/{example_id}`
+- 安全边界说明：示例库只读取本地示例，不运行外部求解器，也不调用外部 LLM。
+
+### 4. 加载中文纳米颗粒示例
 
 - 用户操作：进入 Spec Input，点击“加载中文纳米颗粒示例”。
 - 预期看到的结果：中文自然语言规格填入文本框，并提示“示例已加载。点击本地解析后才会调用 API。”
 - 使用的 API endpoint：无，加载示例不会调用 API。
 - 安全边界说明：示例加载不是 live validation，不调用外部 LLM。
 
-### 4. 本地解析规格
+### 5. 本地解析规格
 
 - 用户操作：点击“本地解析”。
 - 预期看到的结果：解析结果和 diagnostics 显示在页面中。
 - 使用的 API endpoint：`POST /api/parse`
 - 安全边界说明：默认使用本地解析路径，不调用外部 LLM。
 
-### 5. 验证规格
+### 6. 验证规格
 
 - 用户操作：在验证区使用 fixture 或 spec JSON，点击“验证 JSON”。
 - 预期看到的结果：看到 valid / invalid 状态、diagnostics 和下一步建议。
 - 使用的 API endpoint：`POST /api/validate`
 - 安全边界说明：验证检查 schema 和完整性，不代表生产级物理验证。
 
-### 6. 查看适配器矩阵
+### 7. 查看适配器矩阵
 
 - 用户操作：打开 Adapter Matrix。
 - 预期看到的结果：看到 Gmsh、Meep、MPB、Optiland、Elmer 的状态和证据摘要。
 - 使用的 API endpoint：`GET /api/adapters`, `GET /api/validation-evidence`
 - 安全边界说明：适配器矩阵只显示 metadata 和证据摘要，不运行外部求解器。
 
-### 7. 生成工作流计划
+### 8. 查看材料库和材料建议
+
+- 用户操作：打开“材料库”，搜索 `sio2` 或输入 `nanoparticle plasmonics` 获取材料建议。
+- 预期看到的结果：看到本地预览材料、用途建议、适用示例和“非生产级光学常数”提示。
+- 使用的 API endpoint：`GET /api/materials`, `POST /api/materials/suggest`
+- 安全边界说明：材料库是本地预览/设计辅助，不联网查询材料数据库，不代表生产级材料常数。
+
+### 9. 查看多智能体协作轨迹
+
+- 用户操作：打开“子智能体协作”，选择示例并生成协作时间线。
+- 预期看到的结果：看到 SpecAgent、MaterialAgent、GeometryAgent、AdapterAgent、WorkflowAgent、EvidenceAgent、SafetyAgent 和 RecommendationAgent 的输入、输出、诊断、证据、下一步建议和安全说明。
+- 使用的 API endpoint：`POST /api/examples/{example_id}/agent-trace`
+- 安全边界说明：子智能体协作轨迹是本地确定性预览，不调用外部 LLM，也不运行求解器。
+
+### 10. 生成工作流计划
 
 - 用户操作：打开 Workflow Plan，加载 workflow fixture 后点击“生成工作流计划”。
 - 预期看到的结果：看到 workflow steps、diagnostics 和 no-execute preview 边界。
 - 使用的 API endpoint：`POST /api/workflow-plan`
 - 安全边界说明：工作流计划是本地同步预览，默认不执行 solver。
 
-### 8. 预览适配器产物
+### 11. 预览适配器产物
 
 - 用户操作：打开 Artifact Preview，选择 `gmsh`、`meep`、`mpb`、`elmer` 或 `optiland`，点击“生成预览”。
 - 预期看到的结果：看到 preview content 或 artifact summary。
 - 使用的 API endpoint：`POST /api/adapter-preview`
 - 安全边界说明：预览产物不是生产级物理验证，默认不执行外部求解器。
 
-### 9. 查看验证证据和下一步建议
+### 12. 查看验证证据和下一步建议
 
 - 用户操作：打开 Validation Evidence，再回到 Dashboard 查看 recommended next actions。
 - 预期看到的结果：看到 Gmsh / Meep / MPB / Optiland Level 3，Elmer deferred，以及下一步建议。
@@ -102,20 +123,8 @@
 - 不声明生产级物理验证
 - 不声明形式化收敛证明
 
-## 6. 光学设计扩展步骤
+## 6. 示例库和协作时间线
 
-新增材料库和子智能体协作后，公开演示前的中文教程还应引导用户完成：
-
-### 10. 查看材料库和材料建议
-
-- 用户操作：打开“材料库”，搜索 `sio2` 或输入 `nanoparticle plasmonics` 获取材料建议。
-- 预期看到的结果：看到本地预览材料、用途建议和“非生产级光学常数”提示。
-- 使用的 API endpoint：`GET /api/materials`, `POST /api/materials/suggest`
-- 安全边界说明：材料库是本地预览/设计辅助，不联网查询材料数据库，不代表生产级材料常数。
-
-### 11. 查看子智能体协作轨迹
-
-- 用户操作：打开“子智能体协作”，加载 nanoparticle agent trace。
-- 预期看到的结果：看到 SpecAgent、MaterialAgent、GeometryAgent、AdapterAgent、WorkflowAgent、EvidenceAgent、SafetyAgent 和 RecommendationAgent 的贡献。
-- 使用的 API endpoint：`POST /api/agent-trace`
-- 安全边界说明：子智能体协作轨迹是本地确定性预览，不调用外部 LLM，也不运行求解器。
+- 示例库文档：`docs/example_gallery.zh-CN.md`
+- 多智能体协作轨迹文档：`docs/agent_trace_timeline.zh-CN.md`
+- 示例目录：`examples/optical_design/`

@@ -37,6 +37,7 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
     assert (FRONTEND / "src" / "i18n" / "useI18n.tsx").exists()
     assert (FRONTEND / "src" / "pages" / "MaterialLibraryPage.tsx").exists()
     assert (FRONTEND / "src" / "pages" / "AgentCollaborationPage.tsx").exists()
+    assert (FRONTEND / "src" / "pages" / "ExampleGalleryPage.tsx").exists()
 
     package_json = _read(FRONTEND / "package.json")
     assert '"dev"' in package_json
@@ -73,6 +74,8 @@ def test_frontend_source_has_no_release_or_upload_controls():
     assert "No external LLM" in source
     assert "This UI does not control PyPI/TestPyPI publication or GitHub releases." in source
     assert "Load example spec" in source
+    assert "Example Gallery" in source
+    assert "Agent Trace Timeline" in source
     assert "Load workflow fixture" in source
     assert "Load minimal spec" in source
     assert "agent-studio-language" in source

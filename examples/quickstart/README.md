@@ -10,6 +10,9 @@ These examples support the local Agent Studio quickstart.
   the bilingual Agent Studio demo.
 - `zh_quickstart_notes.md` records Chinese safety notes for the same local
   fixture path.
+- The broader Example Gallery lives in `examples/optical_design/` and connects
+  examples to material suggestions, adapter recommendations, Agent Trace
+  Timeline, workflow plans, previews, evidence, and next actions.
 
 Safety boundaries:
 

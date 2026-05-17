@@ -17,7 +17,9 @@ agent workflow 可视化，但不会引入自主外部 agent、外部 LLM 调用
 输入/输出：
 - 输入可以是本地文本、spec-like JSON object 或本地 example_id。
 - 输出是 AgentTrace，包含多个 AgentStep 和最终建议。
-- 每一步包含 diagnostics、recommended next actions、confidence 和 evidence refs。
+- 每一步包含 `step_index`、`stage`、输入摘要、输出摘要、diagnostics、
+  recommended next actions、confidence、status、safety notes 和 evidence refs。
+- 示例专用轨迹可通过 `POST /api/examples/{example_id}/agent-trace` 生成。
 
 安全边界：
 - 默认不调用外部 LLM。
@@ -28,5 +30,6 @@ agent workflow 可视化，但不会引入自主外部 agent、外部 LLM 调用
 
 前端可视化：
 - Agent Studio 提供“子智能体协作”页面。
-- 页面把每个子智能体显示为卡片/时间线。
+- 页面把每个子智能体显示为多智能体协作时间线。
+- 示例库可以为内置光学设计案例生成对应的协作轨迹。
 - 页面保持预览和验证边界可见。

@@ -315,6 +315,12 @@ Current v1.0 evidence artifacts:
   `docs/optiland_optional_validation_pilot.md` and
   `scripts/run_optional_optiland_validation.sh`; default tests, smoke, quality
   gates, and release validation do not run Optiland.
+- Agent Studio domain workflow evidence:
+  `docs/example_gallery.md`, `docs/agent_trace_timeline.md`,
+  `docs/material_library.md`, `examples/optical_design/`, and
+  `tests/test_example_registry.py`; Example Gallery and Agent Trace Timeline
+  are preview-first local UI/API surfaces and do not run solvers or call
+  external LLMs.
 
 ## Release Blockers
 

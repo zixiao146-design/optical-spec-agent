@@ -3,6 +3,12 @@ import { BoundaryBadge } from "./BoundaryBadge";
 
 export const GUIDED_DEMO_STEPS = [
   {
+    key: "exampleGallery",
+    label: "Browse Example Gallery",
+    endpoint: "GET /api/examples",
+    safety: "Examples are local preview workflows; no solver is executed.",
+  },
+  {
     key: "loadExample",
     label: "Load example spec",
     endpoint: "examples/quickstart/nanoparticle_demo_spec.json",
@@ -52,8 +58,8 @@ export const GUIDED_DEMO_STEPS = [
   },
   {
     key: "agentTrace",
-    label: "Review agent collaboration",
-    endpoint: "POST /api/agent-trace",
+    label: "Review agent trace timeline",
+    endpoint: "POST /api/examples/{example_id}/agent-trace",
     safety: "Sub-agent trace is deterministic, local, and does not call an external LLM.",
   },
   {
@@ -67,6 +73,7 @@ export const GUIDED_DEMO_STEPS = [
 export type GuidedDemoPage =
   | "Dashboard"
   | "Spec Input"
+  | "Example Gallery"
   | "Adapter Matrix"
   | "Material Library"
   | "Workflow Plan"
@@ -80,6 +87,7 @@ interface GuidedDemoStepperProps {
 }
 
 const STEP_PAGE: Record<string, GuidedDemoPage> = {
+  "Browse Example Gallery": "Example Gallery",
   "Load example spec": "Spec Input",
   "Parse locally": "Spec Input",
   "Validate spec": "Spec Input",
@@ -88,7 +96,7 @@ const STEP_PAGE: Record<string, GuidedDemoPage> = {
   "Generate workflow plan": "Workflow Plan",
   "Preview artifact": "Artifact Preview",
   "Review validation evidence": "Validation Evidence",
-  "Review agent collaboration": "Agent Collaboration",
+  "Review agent trace timeline": "Agent Collaboration",
   "Review readiness / next action": "Dashboard",
 };
 
@@ -96,6 +104,10 @@ const STEP_KEYS = {
   loadExample: {
     label: "guided.step.loadExample",
     safety: "guided.safety.fixture",
+  },
+  exampleGallery: {
+    label: "guided.step.exampleGallery",
+    safety: "guided.safety.examples",
   },
   parse: {
     label: "guided.step.parse",

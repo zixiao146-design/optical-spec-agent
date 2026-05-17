@@ -105,6 +105,10 @@ validation evidence.
 - Guided quickstart panel and quickstart completion checklist for first-time
   local users.
 - English / 中文 language switcher and Chinese guided demo copy.
+- Example Gallery for bundled optical design examples.
+- Material Library connections to examples and applications.
+- Agent Trace Timeline showing sub-agent input/output, diagnostics, evidence,
+  safety notes, and recommended next actions.
 
 ### Phase 3
 

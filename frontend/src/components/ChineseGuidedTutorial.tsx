@@ -20,6 +20,14 @@ export const CHINESE_GUIDED_TUTORIAL_STEPS = [
     safety: "guidedTutorial.step.status.safety",
   },
   {
+    key: "exampleGallery",
+    endpoint: "GET /api/examples",
+    title: "guidedTutorial.step.exampleGallery.title",
+    action: "guidedTutorial.step.exampleGallery.action",
+    expected: "guidedTutorial.step.exampleGallery.expected",
+    safety: "guidedTutorial.step.exampleGallery.safety",
+  },
+  {
     key: "loadChinese",
     endpoint: "examples/quickstart/zh_nanoparticle_prompt.txt",
     title: "guidedTutorial.step.loadChinese.title",
@@ -77,7 +85,7 @@ export const CHINESE_GUIDED_TUTORIAL_STEPS = [
   },
   {
     key: "agentTrace",
-    endpoint: "POST /api/agent-trace",
+    endpoint: "POST /api/examples/{example_id}/agent-trace",
     title: "guidedTutorial.step.agentTrace.title",
     action: "guidedTutorial.step.agentTrace.action",
     expected: "guidedTutorial.step.agentTrace.expected",

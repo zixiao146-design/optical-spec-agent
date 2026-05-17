@@ -6,6 +6,8 @@ import type {
   AdaptersResponse,
   ApiErrorResponse,
   ApiResult,
+  ExampleDetailResponse,
+  ExamplesResponse,
   HealthResponse,
   MaterialDetailResponse,
   MaterialSuggestionRequest,
@@ -113,4 +115,12 @@ export const agentApi = {
     post<MaterialSuggestionResponse, MaterialSuggestionRequest>("/api/materials/suggest", body),
   getAgentTrace: (body: AgentTraceRequest) =>
     post<AgentTraceResponse, AgentTraceRequest>("/api/agent-trace", body),
+  getExamples: () => request<ExamplesResponse>("/api/examples"),
+  getExample: (exampleId: string) =>
+    request<ExampleDetailResponse>(`/api/examples/${encodeURIComponent(exampleId)}`),
+  getExampleAgentTrace: (exampleId: string) =>
+    post<AgentTraceResponse, Record<string, never>>(
+      `/api/examples/${encodeURIComponent(exampleId)}/agent-trace`,
+      {},
+    ),
 };

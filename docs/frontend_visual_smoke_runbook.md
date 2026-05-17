@@ -50,6 +50,7 @@ visual smoke result still reports honestly.
 
 - Dashboard
 - Spec Input
+- Example Gallery
 - Adapter Matrix
 - Material Library
 - Workflow Plan

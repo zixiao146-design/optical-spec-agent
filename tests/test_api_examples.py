@@ -61,6 +61,9 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "material_detail_sio2_response.json" in response_files
     assert "material_suggestion_response.json" in response_files
     assert "agent_trace_response_nanoparticle.json" in response_files
+    assert "examples_response.json" in response_files
+    assert "example_detail_nanoparticle_response.json" in response_files
+    assert "example_agent_trace_nanoparticle_response.json" in response_files
     assert "parse_request_heuristic.json" in request_files
     assert "material_suggestion_request.json" in request_files
     assert "agent_trace_request_nanoparticle.json" in request_files

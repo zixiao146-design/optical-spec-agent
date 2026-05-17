@@ -84,6 +84,39 @@ material_suggestion = post("/api/materials/suggest", {"application": "nanopartic
 suggestion_ids = {item["material_id"] for item in material_suggestion["suggested_materials"]}
 require({"au", "ag", "sio2"}.issubset(suggestion_ids), "material suggestion missing plasmonics candidates")
 
+examples = get("/api/examples")
+example_ids = {item["example_id"] for item in examples["examples"]}
+require(
+    {
+        "nanoparticle_plasmonics",
+        "thin_film_coating",
+        "waveguide_mode",
+        "photonic_crystal_band",
+        "dielectric_metasurface_preview",
+        "lens_raytrace_preview",
+    }.issubset(example_ids),
+    "missing optical design examples",
+)
+
+example_detail = get("/api/examples/nanoparticle_plasmonics")
+require(example_detail["example"]["summary"]["example_id"] == "nanoparticle_plasmonics", "example detail missing")
+
+example_agent_trace = post("/api/examples/nanoparticle_plasmonics/agent-trace", {})
+example_agent_names = {item["agent_name"] for item in example_agent_trace["agents"]}
+require(
+    {
+        "SpecAgent",
+        "MaterialAgent",
+        "GeometryAgent",
+        "AdapterAgent",
+        "WorkflowAgent",
+        "EvidenceAgent",
+        "SafetyAgent",
+        "RecommendationAgent",
+    }.issubset(example_agent_names),
+    "example agent trace missing expected agents",
+)
+
 agent_trace = post("/api/agent-trace", {"example_id": "nanoparticle_plasmonics", "text": "nanoparticle plasmonics"})
 agent_names = {item["agent_name"] for item in agent_trace["agents"]}
 require({"SpecAgent", "MaterialAgent", "AdapterAgent", "SafetyAgent"}.issubset(agent_names), "agent trace missing expected agents")
@@ -102,6 +135,9 @@ for name, payload in {
     "materials": materials,
     "material_detail": material_detail,
     "material_suggestion": material_suggestion,
+    "examples": examples,
+    "example_detail": example_detail,
+    "example_agent_trace": example_agent_trace,
     "agent_trace": agent_trace,
 }.items():
     require(payload["external_solver_executed"] is False, f"{name} solver flag changed")
@@ -110,7 +146,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 14}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 17}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

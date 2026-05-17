@@ -46,4 +46,5 @@ Safety boundaries:
 Frontend use:
 - Agent Studio exposes a Material Library page.
 - The page shows local material records and material suggestions.
+- The page links materials to bundled Example Gallery cases where applicable.
 - The page must display that material data is preview-only.

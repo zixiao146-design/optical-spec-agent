@@ -84,6 +84,11 @@ future frontend developer to copy while building against `api_contract_version`
 ## Material Library And Agent Trace
 
 ```bash
+curl http://127.0.0.1:8000/api/examples
+curl http://127.0.0.1:8000/api/examples/nanoparticle_plasmonics
+curl -X POST http://127.0.0.1:8000/api/examples/nanoparticle_plasmonics/agent-trace \
+  -H "Content-Type: application/json" \
+  --data '{}'
 curl http://127.0.0.1:8000/api/materials
 curl http://127.0.0.1:8000/api/materials/sio2
 curl -X POST http://127.0.0.1:8000/api/materials/suggest \
@@ -94,6 +99,6 @@ curl -X POST http://127.0.0.1:8000/api/agent-trace \
   --data @examples/api/agent_trace_request_nanoparticle.json
 ```
 
-The material examples use the local preview material catalog only. The
-agent-trace example renders a deterministic sub-agent collaboration trace and
-does not call an external LLM.
+The Example Gallery and material examples use local repo files and the local
+preview material catalog only. The agent-trace examples render a deterministic
+Agent Trace Timeline and do not call an external LLM.

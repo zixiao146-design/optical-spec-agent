@@ -96,10 +96,15 @@ readiness status.
 
 ## Optical Design Domain Expansion
 
-The MVP now includes a Material Library page and an Agent Collaboration page.
+The MVP now includes an Example Gallery page, a Material Library page, and an
+Agent Collaboration / Agent Trace Timeline page.
+The Example Gallery loads bundled examples from `examples/optical_design/` and
+connects each case to material suggestions, adapter recommendations, workflow
+plans, previews, evidence, and next actions.
 The Material Library presents a local preview catalog and application-oriented
 suggestions. The Agent Collaboration page renders SpecAgent, MaterialAgent,
 GeometryAgent, AdapterAgent, WorkflowAgent, EvidenceAgent, SafetyAgent, and
-RecommendationAgent as a visible local trace. Both features preserve no
+RecommendationAgent as a visible timeline with input/output/diagnostics/evidence/recommendations.
+These features preserve no
 default solver execution, no external LLM calls, no production-grade physical
 validation claim, and no formal convergence proof claim.

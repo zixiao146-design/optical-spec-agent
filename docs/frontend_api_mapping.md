@@ -7,6 +7,9 @@
 | Spec Input | `/api/validate` | POST | `examples/api/validate_request_minimal.json` | `examples/api/validate_response_minimal.json` | Local spec validation only; no production-grade validation claim. |
 | Adapter Matrix | `/api/adapters` | GET | none | `examples/api/adapters_response.json` | Registry summary only; no solver execution. |
 | Adapter Matrix | `/api/validation-evidence` | GET | none | `examples/api/validation_evidence_response.json` | Shows evidence and limitations without expanding claims. |
+| Example Gallery | `/api/examples` | GET | none | `examples/api/examples_response.json` | Lists local optical design examples only; no solver or network. |
+| Example Gallery | `/api/examples/{example_id}` | GET | none | `examples/api/example_detail_nanoparticle_response.json` | Loads bundled spec and expected trace files from the repo. |
+| Example Gallery / Agent Collaboration | `/api/examples/{example_id}/agent-trace` | POST | none | `examples/api/example_agent_trace_nanoparticle_response.json` | Builds deterministic local Agent Trace Timeline; no external LLM. |
 | Workflow Plan | `/api/workflow-plan` | POST | `examples/api/workflow_plan_request.json` | `examples/api/workflow_plan_response.json` | Local synchronous preview only; `external_solver_executed=false`. |
 | Artifact Preview | `/api/adapter-preview` | POST | `examples/api/adapter_preview_gmsh_request.json` | `examples/api/adapter_preview_gmsh_response.json` | Preview artifact only; does not run solver. |
 | Evidence | `/api/validation-evidence` | GET | none | `examples/api/validation_evidence_response.json` | Gmsh/Meep/MPB/Optiland Level 3 evidence; Elmer deferred. |
