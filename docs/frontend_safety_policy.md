@@ -16,3 +16,8 @@
 - API disconnected/demo fixture mode must be labeled as not live validation.
 - Loading, empty, error, and API disconnected states must preserve the same
   no-solver/no-LLM/no-publication boundary copy.
+- Fixture loading buttons may populate local forms, but they must not trigger
+  solver execution, external LLM calls, upload, tag, or release actions.
+- API mode indicators must make live API versus demo fixture mode clear.
+- Diagnostics and recommended next actions must not imply production-grade
+  validation or a formal convergence proof.

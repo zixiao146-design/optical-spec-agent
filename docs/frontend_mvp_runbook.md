@@ -54,6 +54,21 @@ fixtures so the workbench remains navigable. Demo fixture mode is visibly
 marked as not live validation. It does not run solvers, call external LLMs,
 publish packages, create tags, or create releases.
 
+The Spec Input, Workflow Plan, and Artifact Preview pages include fixture
+loading buttons. Loading a fixture only fills the local form and shows
+`Demo fixture loaded - not live validation until submitted.` Live validation or
+preview generation starts only after the user submits the form to the local API.
+
+Dashboard and System Status include an API mode indicator with the configured
+API base URL. If the API is disconnected, the indicator recommends:
+
+```bash
+python -m uvicorn optical_spec_agent.api.app:app --reload --host 127.0.0.1 --port 8000
+```
+
+Diagnostics and recommended next actions are rendered in shared panels across
+parse, validate, workflow, preview, and readiness views.
+
 ## 5. Safety Notes
 
 - No solver execution.
@@ -74,3 +89,4 @@ publish packages, create tags, or create releases.
   badge.
 - Fixture mismatch: run `python scripts/check_api_fixtures.py`.
 - Frontend smoke: run `./scripts/smoke_frontend_mvp.sh`.
+- Visual smoke planning: review `docs/frontend_visual_smoke_plan.md`.

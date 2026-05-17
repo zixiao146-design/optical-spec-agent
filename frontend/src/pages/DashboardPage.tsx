@@ -3,10 +3,12 @@ import { agentApi } from "../api/client";
 import { INITIAL_LOADING_STATE, stateFromPayload, type RemoteState } from "../api/state";
 import type { HealthResponse, ReadinessResponse, VersionResponse } from "../api/types";
 import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
+import { ApiModeIndicator } from "../components/ApiModeIndicator";
 import { BoundaryBadge } from "../components/BoundaryBadge";
 import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
+import { RecommendedActions } from "../components/RecommendedActions";
 import { StatusCard } from "../components/StatusCard";
 import { demoHealth, demoReadiness, demoVersion } from "../fixtures/demoData";
 
@@ -55,6 +57,7 @@ export function DashboardPage() {
       </section>
 
       {isLoading ? <LoadingState label="Loading dashboard from the local Agent API..." /> : null}
+      <ApiModeIndicator statuses={[health.status, version.status, readiness.status]} />
       {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
       {error ? (
         <ErrorState
@@ -83,14 +86,9 @@ export function DashboardPage() {
       </section>
 
       <section className="page-panel wide">
-        <h3>Recommended next actions</h3>
-        <ul className="action-list">
-          {(readiness.data?.recommended_next_actions || ["Start the local API to load readiness."]).map(
-            (item) => (
-              <li key={item}>{item}</li>
-            ),
-          )}
-        </ul>
+        <RecommendedActions
+          actions={readiness.data?.recommended_next_actions || ["Start the local API to load readiness."]}
+        />
       </section>
 
       <JsonPanel title="Readiness payload" value={readiness.data || { status: readiness.status }} />

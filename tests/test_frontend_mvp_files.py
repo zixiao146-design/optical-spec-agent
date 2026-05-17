@@ -22,6 +22,10 @@ def test_frontend_mvp_files_exist_and_scripts_are_defined():
         "ErrorState.tsx",
         "SafetyNotice.tsx",
         "ApiDisconnectedNotice.tsx",
+        "ApiModeIndicator.tsx",
+        "DemoModeBanner.tsx",
+        "DiagnosticsPanel.tsx",
+        "RecommendedActions.tsx",
     ]:
         assert (FRONTEND / "src" / "components" / component).exists()
 
@@ -57,6 +61,9 @@ def test_frontend_source_has_no_release_or_upload_controls():
     assert "No solver run" in source
     assert "No external LLM" in source
     assert "This UI does not control PyPI/TestPyPI publication or GitHub releases." in source
+    assert "Load example spec" in source
+    assert "Load workflow fixture" in source
+    assert "Load minimal spec" in source
 
 
 def test_frontend_generated_artifacts_are_not_present():

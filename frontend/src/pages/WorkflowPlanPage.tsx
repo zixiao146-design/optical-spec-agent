@@ -4,22 +4,30 @@ import { jsonParseError, stateFromPayload, type RemoteState } from "../api/state
 import type { WorkflowPlanResponse } from "../api/types";
 import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { DemoModeBanner } from "../components/DemoModeBanner";
+import { DiagnosticsPanel } from "../components/DiagnosticsPanel";
 import { EmptyState } from "../components/EmptyState";
 import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
+import { RecommendedActions } from "../components/RecommendedActions";
 import { WorkflowPlanPanel } from "../components/WorkflowPlanPanel";
-import { demoWorkflowPlan } from "../fixtures/demoData";
-
-const DEFAULT_REQUEST = JSON.stringify(
-  { path: "examples/workflows/local_preview_request.json" },
-  null,
-  2,
-);
+import {
+  DEMO_FIXTURE_LOADED_MESSAGE,
+  demoWorkflowPlan,
+  demoWorkflowRequestText,
+} from "../fixtures/demoData";
 
 export function WorkflowPlanPage() {
-  const [requestText, setRequestText] = useState(DEFAULT_REQUEST);
+  const [requestText, setRequestText] = useState(demoWorkflowRequestText);
+  const [fixtureNotice, setFixtureNotice] = useState(DEMO_FIXTURE_LOADED_MESSAGE);
   const [response, setResponse] = useState<RemoteState<WorkflowPlanResponse>>({ status: "idle" });
+
+  function loadWorkflowFixture() {
+    setRequestText(demoWorkflowRequestText);
+    setFixtureNotice(DEMO_FIXTURE_LOADED_MESSAGE);
+    setResponse({ status: "idle" });
+  }
 
   async function generatePlan() {
     setResponse({ status: "loading", message: "Generating local workflow preview." });
@@ -48,6 +56,7 @@ export function WorkflowPlanPage() {
           <BoundaryBadge>Preview plan only</BoundaryBadge>
         </div>
       </section>
+      <DemoModeBanner message={fixtureNotice} />
       <section className="page-panel">
         <h3>Workflow request</h3>
         <label htmlFor="workflow-request">Workflow request JSON</label>
@@ -64,6 +73,10 @@ export function WorkflowPlanPage() {
         >
           {response.status === "loading" ? "Generating..." : "Generate workflow plan"}
         </button>
+        <button type="button" className="secondary-button" onClick={loadWorkflowFixture}>
+          Load workflow fixture
+        </button>
+        <p className="inline-boundary">No solver is executed by default.</p>
         <div id="workflow-status" className="sr-status" aria-live="polite">
           Workflow status: {response.status}
         </div>
@@ -80,7 +93,9 @@ export function WorkflowPlanPage() {
         ) : null}
         <WorkflowPlanPanel response={response.data} />
       </section>
-      <JsonPanel title="Workflow response" value={response.data || response.error || { status: response.status }} />
+      <DiagnosticsPanel diagnostics={response.data?.diagnostics || response.error?.diagnostics} title="Workflow diagnostics" />
+      <RecommendedActions actions={response.data?.recommended_next_actions || response.error?.recommended_next_actions} title="Workflow recommended next actions" />
+      <JsonPanel title="Workflow Plan" value={response.data || response.error || { status: response.status }} />
     </div>
   );
 }

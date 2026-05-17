@@ -5,24 +5,33 @@ import type { AdapterPreviewResponse } from "../api/types";
 import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { ArtifactPreviewPanel } from "../components/ArtifactPreviewPanel";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { DemoModeBanner } from "../components/DemoModeBanner";
+import { DiagnosticsPanel } from "../components/DiagnosticsPanel";
 import { EmptyState } from "../components/EmptyState";
 import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
-import { demoAdapterPreview } from "../fixtures/demoData";
-
-const DEFAULT_SPEC_REQUEST = JSON.stringify(
-  { path: "examples/specs/minimal_nanoparticle.json", tool: "gmsh" },
-  null,
-  2,
-);
+import { RecommendedActions } from "../components/RecommendedActions";
+import {
+  DEMO_FIXTURE_LOADED_MESSAGE,
+  demoAdapterPreview,
+  demoAdapterPreviewRequestText,
+} from "../fixtures/demoData";
 
 const TOOLS = ["gmsh", "meep", "mpb", "elmer", "optiland"];
 
 export function ArtifactPreviewPage() {
   const [tool, setTool] = useState("gmsh");
-  const [requestText, setRequestText] = useState(DEFAULT_SPEC_REQUEST);
+  const [requestText, setRequestText] = useState(demoAdapterPreviewRequestText);
+  const [fixtureNotice, setFixtureNotice] = useState(DEMO_FIXTURE_LOADED_MESSAGE);
   const [response, setResponse] = useState<RemoteState<AdapterPreviewResponse>>({ status: "idle" });
+
+  function loadMinimalSpec() {
+    setTool("gmsh");
+    setRequestText(demoAdapterPreviewRequestText);
+    setFixtureNotice(DEMO_FIXTURE_LOADED_MESSAGE);
+    setResponse({ status: "idle" });
+  }
 
   async function preview() {
     setResponse({ status: "loading", message: "Generating local preview artifact." });
@@ -54,6 +63,7 @@ export function ArtifactPreviewPage() {
           <BoundaryBadge>No solver was executed</BoundaryBadge>
         </div>
       </section>
+      <DemoModeBanner message={fixtureNotice} />
       <section className="page-panel">
         <h3>Preview request</h3>
         <label htmlFor="adapter-tool">
@@ -80,6 +90,10 @@ export function ArtifactPreviewPage() {
         >
           {response.status === "loading" ? "Generating..." : "Generate preview"}
         </button>
+        <button type="button" className="secondary-button" onClick={loadMinimalSpec}>
+          Load minimal spec
+        </button>
+        <p className="inline-boundary">Preview-only artifact. No solver is executed by default.</p>
         <div id="adapter-preview-status" className="sr-status" aria-live="polite">
           Adapter preview status: {response.status}
         </div>
@@ -96,7 +110,9 @@ export function ArtifactPreviewPage() {
         ) : null}
       </section>
       <ArtifactPreviewPanel response={response.data} />
-      <JsonPanel title="Preview response" value={response.data || response.error || { status: response.status }} />
+      <DiagnosticsPanel diagnostics={response.data?.diagnostics || response.error?.diagnostics} title="Preview diagnostics" />
+      <RecommendedActions actions={response.data?.recommended_next_actions || response.error?.recommended_next_actions} title="Preview recommended next actions" />
+      <JsonPanel title="Adapter Preview" value={response.data || response.error || { status: response.status }} />
     </div>
   );
 }

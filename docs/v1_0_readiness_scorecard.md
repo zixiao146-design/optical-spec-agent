@@ -187,6 +187,9 @@
   MVP.
 - Use `docs/frontend_mvp_qa_checklist.md` and `scripts/smoke_frontend_mvp.sh`
   before demoing or extending the frontend MVP.
+- Use `docs/frontend_visual_smoke_plan.md` before adding Playwright or
+  equivalent screenshot checks for Dashboard, Spec Input, Adapter Matrix,
+  Workflow Plan, Artifact Preview, Validation Evidence, and System Status.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
 - Continue `v0.9.0rc7.dev0` development; create any future `v0.9.0rc7` tag and

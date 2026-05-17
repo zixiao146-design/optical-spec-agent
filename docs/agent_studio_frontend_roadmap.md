@@ -36,6 +36,11 @@ validation evidence.
 - React + Vite + TypeScript MVP scaffold exists and remains local-first.
 - Loading, empty, error, API disconnected, and demo fixture states exist for
   local demos and continued development.
+- Fixture loading buttons, API mode indicator, diagnostics panels, recommended
+  action panels, and collapsible JSON payloads improve live API ergonomics.
+- Frontend visual smoke planning is documented in
+  `docs/frontend_visual_smoke_plan.md`; Playwright or equivalent can be added
+  later.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out
@@ -73,6 +78,8 @@ validation evidence.
 - Local API base URL configuration with `VITE_API_BASE_URL`.
 - Loading, empty, error, and API disconnected states.
 - Demo fixture mode that is explicitly not live validation.
+- Fixture-backed form defaults and live API/demo mode clarity.
+- Diagnostics and recommended next actions.
 
 ### Phase 3
 

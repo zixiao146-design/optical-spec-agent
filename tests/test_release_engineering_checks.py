@@ -192,6 +192,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "frontend_mvp_implementation_plan.md",
         "frontend_mvp_runbook.md",
         "frontend_mvp_qa_checklist.md",
+        "frontend_visual_smoke_plan.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",

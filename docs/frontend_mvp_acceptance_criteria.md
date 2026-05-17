@@ -12,6 +12,11 @@
 - Can render validation evidence.
 - Can show loading, empty, error, and API disconnected states.
 - Can show demo fixture mode when the local API is unavailable.
+- Can load example/fixture requests into Spec Input, Workflow Plan, and Artifact
+  Preview without calling the API until submitted.
+- Can show API connected, API disconnected, and demo fixture mode with the API
+  base URL.
+- Can render diagnostics and recommended next actions consistently.
 
 ## 2. Safety criteria
 
@@ -38,6 +43,10 @@
   `ApiDisconnectedNotice` components.
 - Buttons are disabled while the matching local API action is loading.
 - Status and error regions use `aria-live`.
+- JSON panels are labeled, scrollable, and can be collapsed for scan-friendly
+  local demos.
+- Visual smoke planning is documented in `docs/frontend_visual_smoke_plan.md`;
+  Playwright or equivalent can be added later.
 
 ## 4. Not required for MVP
 

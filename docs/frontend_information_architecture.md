@@ -12,12 +12,15 @@ architecture.
 - Shows current public prerelease, main development version, TestPyPI/PyPI
   status, and contract freeze status.
 - Shows recommended next actions.
+- Shows API mode indicator and API base URL.
 
 ## 2. Spec Input
 
 - Calls `POST /api/parse`.
 - Calls `POST /api/validate`.
 - Shows parsed spec, validation status, and diagnostics.
+- Includes fixture loading for local demos; fixture loading is not live
+  validation until submitted.
 
 ## 3. Adapter Matrix
 
@@ -29,11 +32,13 @@ architecture.
 
 - Calls `POST /api/workflow-plan`.
 - Shows plan steps, diagnostics, and no solver execution.
+- Includes a workflow fixture loader.
 
 ## 5. Artifact Preview
 
 - Calls `POST /api/adapter-preview`.
 - Shows preview content and artifact summary.
+- Includes a minimal spec fixture loader and output language/extension summary.
 - Never runs solver by default.
 
 ## 6. Validation Evidence
@@ -46,6 +51,7 @@ architecture.
 - Calls `GET /api/health`.
 - Calls `GET /api/version`.
 - Shows `api_contract_version`.
+- Shows API mode indicator and API base URL.
 
 ## MVP boundaries
 

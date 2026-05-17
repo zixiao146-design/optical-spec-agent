@@ -4,26 +4,35 @@ import { jsonParseError, stateFromPayload, type RemoteState } from "../api/state
 import type { ParseResponse, ValidateResponse } from "../api/types";
 import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
 import { BoundaryBadge } from "../components/BoundaryBadge";
+import { DemoModeBanner } from "../components/DemoModeBanner";
+import { DiagnosticsPanel } from "../components/DiagnosticsPanel";
 import { EmptyState } from "../components/EmptyState";
 import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
 import { LoadingState } from "../components/LoadingState";
-import { demoParseResponse, demoValidateResponse } from "../fixtures/demoData";
-
-const DEFAULT_TEXT =
-  "Use Meep FDTD to simulate an 80 nm gold nanoparticle on a 100 nm gold film with a 5 nm SiO2 gap, normal-incidence plane wave from 400-900 nm, and report the scattering spectrum.";
-
-const DEFAULT_VALIDATE_REQUEST = JSON.stringify(
-  { path: "examples/specs/minimal_nanoparticle.json" },
-  null,
-  2,
-);
+import { RecommendedActions } from "../components/RecommendedActions";
+import {
+  DEMO_FIXTURE_LOADED_MESSAGE,
+  demoNaturalLanguageSpec,
+  demoParseResponse,
+  demoValidateRequestText,
+  demoValidateResponse,
+} from "../fixtures/demoData";
 
 export function SpecInputPage() {
-  const [text, setText] = useState(DEFAULT_TEXT);
-  const [validateJson, setValidateJson] = useState(DEFAULT_VALIDATE_REQUEST);
+  const [text, setText] = useState(demoNaturalLanguageSpec);
+  const [validateJson, setValidateJson] = useState(demoValidateRequestText);
+  const [fixtureNotice, setFixtureNotice] = useState(DEMO_FIXTURE_LOADED_MESSAGE);
   const [parseResponse, setParseResponse] = useState<RemoteState<ParseResponse>>({ status: "idle" });
   const [validateResponse, setValidateResponse] = useState<RemoteState<ValidateResponse>>({ status: "idle" });
+
+  function loadExampleSpec() {
+    setText(demoNaturalLanguageSpec);
+    setValidateJson(demoValidateRequestText);
+    setFixtureNotice(DEMO_FIXTURE_LOADED_MESSAGE);
+    setParseResponse({ status: "idle" });
+    setValidateResponse({ status: "idle" });
+  }
 
   async function parseLocally() {
     setParseResponse({ status: "loading", message: "Parsing with the local deterministic parser." });
@@ -64,6 +73,8 @@ export function SpecInputPage() {
         </div>
       </section>
 
+      <DemoModeBanner message={fixtureNotice} />
+
       <section className="page-panel">
         <h3>Natural language spec</h3>
         <label htmlFor="spec-text">Natural language optical spec</label>
@@ -79,6 +90,9 @@ export function SpecInputPage() {
           disabled={parseResponse.status === "loading" || text.trim().length === 0}
         >
           {parseResponse.status === "loading" ? "Parsing..." : "Parse locally"}
+        </button>
+        <button type="button" className="secondary-button" onClick={loadExampleSpec}>
+          Load example spec
         </button>
         <div id="parse-status" className="sr-status" aria-live="polite">
           Parse status: {parseResponse.status}
@@ -100,6 +114,9 @@ export function SpecInputPage() {
           disabled={validateResponse.status === "loading" || validateJson.trim().length === 0}
         >
           {validateResponse.status === "loading" ? "Validating..." : "Validate JSON"}
+        </button>
+        <button type="button" className="secondary-button" onClick={loadExampleSpec}>
+          Load fixture
         </button>
         <div id="validate-status" className="sr-status" aria-live="polite">
           Validation status: {validateResponse.status}
@@ -133,8 +150,12 @@ export function SpecInputPage() {
         ) : null}
       </section>
 
-      <JsonPanel title="Parse response" value={parseResponse.data || { status: parseResponse.status }} />
-      <JsonPanel title="Validation response" value={validateResponse.data || { status: validateResponse.status }} />
+      <DiagnosticsPanel diagnostics={parseResponse.data?.diagnostics || parseResponse.error?.diagnostics} title="Parse diagnostics" />
+      <RecommendedActions actions={parseResponse.data?.recommended_next_actions || parseResponse.error?.recommended_next_actions} title="Parse recommended next actions" />
+      <DiagnosticsPanel diagnostics={validateResponse.data?.diagnostics || validateResponse.error?.diagnostics} title="Validation diagnostics" />
+      <RecommendedActions actions={validateResponse.data?.recommended_next_actions || validateResponse.error?.recommended_next_actions} title="Validation recommended next actions" />
+      <JsonPanel title="Parsed Spec" value={parseResponse.data || { status: parseResponse.status }} />
+      <JsonPanel title="Validation Result" value={validateResponse.data || { status: validateResponse.status }} />
     </div>
   );
 }

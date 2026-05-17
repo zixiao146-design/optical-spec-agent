@@ -3,6 +3,7 @@ import { agentApi } from "../api/client";
 import { INITIAL_LOADING_STATE, stateFromPayload, type RemoteState } from "../api/state";
 import type { HealthResponse, SchemaResponse, VersionResponse } from "../api/types";
 import { ApiDisconnectedNotice } from "../components/ApiDisconnectedNotice";
+import { ApiModeIndicator } from "../components/ApiModeIndicator";
 import { BoundaryBadge } from "../components/BoundaryBadge";
 import { ErrorState } from "../components/ErrorState";
 import { JsonPanel } from "../components/JsonPanel";
@@ -52,6 +53,7 @@ export function SystemStatusPage() {
         </div>
       </section>
       {isLoading ? <LoadingState label="Loading system status from the local API..." /> : null}
+      <ApiModeIndicator statuses={[health.status, version.status, schema.status]} />
       {demoMessage ? <ApiDisconnectedNotice message={demoMessage} /> : null}
       {error ? <ErrorState message={error.message} actions={error.recommended_next_actions} /> : null}
       <section className="status-grid wide">

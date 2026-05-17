@@ -136,7 +136,9 @@ frontend MVP planning package 见 `docs/frontend_mvp_product_spec.md`、
 和 `docs/frontend_mvp_implementation_plan.md`。Agent Studio frontend MVP 已在
 `frontend/` 中实现为本地 React + Vite + TypeScript app，运行说明见
 `docs/frontend_mvp_runbook.md`，本地 demo QA checklist 见
-`docs/frontend_mvp_qa_checklist.md`。它使用 Local Agent API，默认 API base 为
+`docs/frontend_mvp_qa_checklist.md`。交互加固包括 fixture loading 按钮、API
+mode indicator、diagnostics panel、recommended next actions 和可折叠 JSON
+payload；未来截图 smoke 规划见 `docs/frontend_visual_smoke_plan.md`。它使用 Local Agent API，默认 API base 为
 `http://127.0.0.1:8000`，不提供 upload、publish、tag、release、solver-run、
 external LLM、login、cloud 或 production deployment 控件。API 断开时 UI 会进入
 明确标注的 demo fixture mode；demo mode 不是 live validation。frontend smoke

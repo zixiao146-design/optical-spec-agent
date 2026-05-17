@@ -73,4 +73,10 @@ readiness status.
 - Loading, empty, error, API disconnected, and demo fixture states are included
   for local demos and continued development.
 - Demo fixture mode is labeled as not live validation.
+- Fixture loading buttons exist for spec input, workflow plan, and adapter
+  preview forms; loading a fixture does not call the API until submitted.
+- API mode indicators, diagnostics panels, recommended action panels, and
+  collapsible JSON panels are included for live API ergonomics.
+- Future visual smoke planning is documented in
+  `docs/frontend_visual_smoke_plan.md`.
 - Run instructions are documented in `docs/frontend_mvp_runbook.md`.

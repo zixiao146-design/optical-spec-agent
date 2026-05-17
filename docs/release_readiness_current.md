@@ -89,6 +89,8 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/frontend_mvp_qa_checklist.md`
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
+- Frontend visual smoke plan:
+  `docs/frontend_visual_smoke_plan.md`
 - Proprietary solvers are not default dependencies.
 - No proprietary license is required for default tests, smoke, examples, or
   release validation.
@@ -138,7 +140,7 @@ This document describes the current `main` branch. It is not a release tag.
 | API contract version | 0.1 candidate API | Frontend-readiness surface; not separately frozen as v1.0 API |
 | Frontend fixtures | API examples ready | `examples/api/`; frontend MVP implemented |
 | Frontend handoff | API handoff docs/scripts ready | Launch guide, handoff spec, curl examples, smoke script, fixture consistency script, frontend runbook |
-| Frontend MVP | Local MVP implemented and hardened | React + Vite + TypeScript under `frontend/`; loading/empty/error/API-disconnected/demo states; no upload/release/solver/LLM controls |
+| Frontend MVP | Local MVP implemented and hardened | React + Vite + TypeScript under `frontend/`; fixture loading, API mode indicator, diagnostics, recommended actions, loading/empty/error/API-disconnected/demo states; no upload/release/solver/LLM controls |
 | Bilingual README | RC ready | `README.md` links to `README.zh-CN.md`; Chinese README is complete |
 | Public contracts | v1.0-readiness foundation | CLI, schema/API, adapter, workflow, validation, and PyPI boundaries documented |
 

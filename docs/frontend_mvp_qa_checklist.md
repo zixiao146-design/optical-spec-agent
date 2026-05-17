@@ -17,6 +17,10 @@
 - Confirm Dashboard loads live health, version, readiness, and recommended next actions.
 - Confirm every page remains navigable if the API is disconnected.
 - Confirm demo fixture mode is visibly labeled as not live validation.
+- Confirm fixture loading buttons fill forms without calling the API until the
+  user submits.
+- Confirm Dashboard and System Status show the API mode indicator and API base
+  URL.
 - Confirm API disconnected state does not imply solver execution, external LLM calls, publication, tags, or releases.
 
 ## UX States
@@ -25,6 +29,11 @@
 - Empty state appears before parse, validate, workflow, or preview actions are run.
 - Error state appears for invalid JSON or API error responses.
 - API disconnected notice appears when the local API cannot be reached.
+- API mode indicator distinguishes API connected, API disconnected, and demo
+  fixture mode.
+- Diagnostics panels show warnings, missing fields, assumptions, and
+  limitations without hiding them.
+- Recommended next actions are visible when returned by the API.
 - Buttons are disabled while the matching action is loading.
 - Status and error regions use `aria-live`.
 
@@ -55,6 +64,7 @@
 - `python -m build`
 - `make check`
 - `./scripts/run_quality_gates.sh`
+- Future visual smoke plan: `docs/frontend_visual_smoke_plan.md`
 
 ## Generated Artifacts
 

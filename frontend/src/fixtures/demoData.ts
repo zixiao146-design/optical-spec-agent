@@ -11,6 +11,30 @@ import type {
   WorkflowPlanResponse,
 } from "../api/types";
 
+export const DEMO_FIXTURE_LOADED_MESSAGE =
+  "Demo fixture loaded - not live validation until submitted.";
+
+export const demoNaturalLanguageSpec =
+  "Use Meep FDTD to simulate an 80 nm gold nanoparticle on a 100 nm gold film with a 5 nm SiO2 gap, normal-incidence plane wave from 400-900 nm, and report the scattering spectrum.";
+
+export const demoValidateRequestText = JSON.stringify(
+  { path: "examples/specs/minimal_nanoparticle.json" },
+  null,
+  2,
+);
+
+export const demoWorkflowRequestText = JSON.stringify(
+  { path: "examples/workflows/local_preview_request.json" },
+  null,
+  2,
+);
+
+export const demoAdapterPreviewRequestText = JSON.stringify(
+  { path: "examples/specs/minimal_nanoparticle.json", tool: "gmsh" },
+  null,
+  2,
+);
+
 const base = {
   external_solver_executed: false,
   external_llm_required: false,

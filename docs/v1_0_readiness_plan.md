@@ -107,6 +107,10 @@ Recommended goals:
 - Use `docs/frontend_mvp_qa_checklist.md` and `scripts/smoke_frontend_mvp.sh`
   to keep frontend loading, empty, error, API disconnected, and demo fixture
   states suitable for local demos.
+- Use `docs/frontend_visual_smoke_plan.md` before adding Playwright or any
+  equivalent screenshot smoke checks. Visual smoke should cover API connected
+  and API disconnected/demo states and must confirm no upload, release, solver,
+  or external LLM controls are visible.
 - Keep API defaults local/synchronous/preview-first: no external solver
   execution, no external LLM call, no proprietary solver requirement, and no
   network dependency for documented examples.

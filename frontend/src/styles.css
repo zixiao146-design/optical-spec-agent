@@ -142,7 +142,11 @@ main {
 .page-panel,
 .json-panel,
 .artifact-preview,
-.workflow-panel {
+.workflow-panel,
+.diagnostics-panel,
+.recommended-actions,
+.api-mode-indicator,
+.demo-mode-banner {
   background: #ffffff;
   border: 1px solid #dfe5df;
   border-radius: 8px;
@@ -261,6 +265,16 @@ button:hover {
   background: #1f4d3e;
 }
 
+.secondary-button {
+  margin-left: 8px;
+  background: #e5eee9;
+  color: #23463c;
+}
+
+.secondary-button:hover {
+  background: #d3e3da;
+}
+
 button:disabled {
   background: #95a39d;
   cursor: not-allowed;
@@ -338,6 +352,48 @@ label {
   color: #76510d;
 }
 
+.demo-mode-banner,
+.api-mode-indicator {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 6px;
+}
+
+.demo-mode-banner {
+  border-color: #efdaaa;
+  background: #fff9ea;
+  color: #76510d;
+}
+
+.demo-mode-banner strong,
+.api-mode-indicator strong {
+  display: block;
+}
+
+.demo-mode-banner span,
+.api-mode-indicator span,
+.api-mode-indicator p {
+  margin: 0;
+  color: #4e5b57;
+}
+
+.api-mode-indicator {
+  border-color: #bfd8cc;
+  background: #f0f8f4;
+}
+
+.api-mode-demo {
+  border-color: #efdaaa;
+  background: #fff9ea;
+}
+
+.inline-boundary {
+  margin: 10px 0 0;
+  color: #176144;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .spinner {
   width: 18px;
   height: 18px;
@@ -360,6 +416,18 @@ label {
 
 .panel-heading {
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+summary.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+summary.panel-heading h3 {
+  display: inline;
 }
 
 pre {
@@ -443,6 +511,32 @@ td span {
   margin: 12px 0 0;
   padding-left: 20px;
   line-height: 1.7;
+}
+
+.diagnostics-panel,
+.recommended-actions {
+  min-width: 0;
+}
+
+.diagnostics-panel h3,
+.recommended-actions h3 {
+  margin: 0 0 10px;
+}
+
+.diagnostic-group {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.diagnostic-group strong {
+  color: #2f3d39;
+}
+
+.diagnostic-group ul {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.55;
 }
 
 @media (max-width: 940px) {

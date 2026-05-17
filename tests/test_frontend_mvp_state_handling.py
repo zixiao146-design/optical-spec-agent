@@ -17,6 +17,10 @@ def test_frontend_state_components_and_demo_fixtures_exist():
         "src/components/ErrorState.tsx",
         "src/components/SafetyNotice.tsx",
         "src/components/ApiDisconnectedNotice.tsx",
+        "src/components/ApiModeIndicator.tsx",
+        "src/components/DemoModeBanner.tsx",
+        "src/components/DiagnosticsPanel.tsx",
+        "src/components/RecommendedActions.tsx",
         "src/fixtures/demoData.ts",
     ]:
         assert (FRONTEND / relative).exists()
@@ -29,6 +33,7 @@ def test_frontend_state_components_and_demo_fixtures_exist():
 
     demo_text = _read(FRONTEND / "src" / "fixtures" / "demoData.ts")
     assert "Demo fixture mode: this is not live validation." in demo_text
+    assert "Demo fixture loaded - not live validation until submitted." in demo_text
     assert "0.9.0rc7.dev0" in demo_text
     assert "v0.9.0rc6" in demo_text
     assert "Level 2 + Level-3-ready" in demo_text
@@ -44,6 +49,9 @@ def test_frontend_pages_use_loading_empty_error_and_disconnected_states():
         "EmptyState",
         "ErrorState",
         "ApiDisconnectedNotice",
+        "ApiModeIndicator",
+        "DiagnosticsPanel",
+        "RecommendedActions",
         "disabled={",
         "aria-live",
     ]:

@@ -14,6 +14,8 @@ The implemented local MVP lives under `frontend/`, with run instructions in
 The hardened MVP includes loading, empty, error, and API disconnected states.
 When the API is unavailable, demo fixture mode keeps the UI navigable but is
 explicitly marked as not live validation.
+The interaction polish layer adds fixture loading buttons, API mode indicators,
+diagnostics panels, recommended action panels, and collapsible JSON payloads.
 
 ## API base
 
@@ -53,9 +55,14 @@ explicitly marked as not live validation.
 - It includes Dashboard, Spec Input, Adapter Matrix, Workflow Plan, Artifact
   Preview, Validation Evidence, and System Status views.
 - It includes shared `LoadingState`, `EmptyState`, `ErrorState`,
-  `SafetyNotice`, and `ApiDisconnectedNotice` components.
+  `SafetyNotice`, `ApiDisconnectedNotice`, `ApiModeIndicator`,
+  `DiagnosticsPanel`, `RecommendedActions`, and `DemoModeBanner` components.
 - It can fall back to demo fixtures for local walkthroughs without live API
   validation.
+- It includes fixture loading buttons for Spec Input, Workflow Plan, and
+  Artifact Preview. Loading fixtures fills local forms but does not call the
+  API until submitted.
+- Visual smoke planning is documented in `docs/frontend_visual_smoke_plan.md`.
 
 ## Not implemented beyond MVP
 

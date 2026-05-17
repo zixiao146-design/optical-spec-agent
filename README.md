@@ -122,6 +122,10 @@ a local React + Vite + TypeScript app; run instructions are in
 [`docs/frontend_mvp_runbook.md`](docs/frontend_mvp_runbook.md), and local demo
 QA is tracked in
 [`docs/frontend_mvp_qa_checklist.md`](docs/frontend_mvp_qa_checklist.md).
+Live API ergonomics include fixture loading buttons, an API mode indicator,
+diagnostics panels, recommended next actions, and collapsible JSON payloads.
+Future screenshot checks are planned in
+[`docs/frontend_visual_smoke_plan.md`](docs/frontend_visual_smoke_plan.md).
 It uses the Local Agent API, defaults to `http://127.0.0.1:8000`, and does not
 include upload, publish, tag, release, solver-run, external LLM, login, cloud,
 or production deployment controls. If the API is disconnected, the UI falls
