@@ -7,6 +7,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 from optical_spec_agent.agents.models import AgentStep
+from optical_spec_agent.agents.task_session import AgentArtifact, AgentPlanStep, PermissionGate
 from optical_spec_agent.examples.models import (
     OpticalDesignExampleDetail,
     OpticalDesignExampleSummary,
@@ -206,6 +207,25 @@ class AgentTraceResponse(ApiResponseBase):
     final_recommendation: str
     material_suggestions: list[str] = Field(default_factory=list)
     adapter_recommendation: str = ""
+
+
+class AgentSessionRequest(ApiRequestBase):
+    goal: str = Field(..., description="Natural language optical design goal")
+    example_id: str | None = Field(None, description="Optional local example identifier")
+    language: str | None = Field(None, description="Optional UI language hint: en or zh-CN")
+
+
+class AgentTaskSessionResponse(ApiResponseBase):
+    session_id: str
+    user_goal: str
+    optical_intent_summary: str
+    selected_example_id: str | None = None
+    design_case_summary: str
+    plan_steps: list[AgentPlanStep] = Field(default_factory=list)
+    agent_trace: AgentTraceResponse
+    artifacts: list[AgentArtifact] = Field(default_factory=list)
+    permission_gates: list[PermissionGate] = Field(default_factory=list)
+    final_recommendation: str
 
 
 class ExamplesResponse(ApiResponseBase):

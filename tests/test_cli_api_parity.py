@@ -23,6 +23,8 @@ def test_cli_api_parity_doc_maps_major_cli_surface_to_api():
         "POST /api/validate",
         "POST /api/workflow-plan",
         "POST /api/adapter-preview",
+        "POST /api/agent-session",
+        "command-center task session",
         "External solvers are not run by default",
         "External LLM access is not required by default",
         "Proprietary solvers are not required by default",

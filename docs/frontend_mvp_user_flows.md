@@ -1,5 +1,18 @@
 # Agent Studio Frontend MVP User Flows
 
+## User Flow 0: Natural language goal to Agent Task Session
+
+- User action: open Agent Command Center and enter a natural language optical
+  design goal.
+- API call: `POST /api/agent-session`.
+- Expected response: optical intent summary, selected design case, plan steps,
+  sub-agent trace, permission gates, artifacts, evidence, and recommended next
+  actions.
+- UI state: show a command-center task session with plan, blocked gates, local
+  artifacts, final recommendation, diagnostics, and raw JSON.
+- Safety boundary copy: "No external solver, external LLM, upload, tag, or
+  release action is performed."
+
 ## User Flow 1: Natural language spec to preview artifact
 
 - User action: paste a natural language optical task.

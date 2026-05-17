@@ -1,6 +1,8 @@
 import type {
   AgentTraceRequest,
   AgentTraceResponse,
+  AgentSessionRequest,
+  AgentTaskSessionResponse,
   AdapterPreviewRequest,
   AdapterPreviewResponse,
   AdaptersResponse,
@@ -115,6 +117,8 @@ export const agentApi = {
     post<MaterialSuggestionResponse, MaterialSuggestionRequest>("/api/materials/suggest", body),
   getAgentTrace: (body: AgentTraceRequest) =>
     post<AgentTraceResponse, AgentTraceRequest>("/api/agent-trace", body),
+  getAgentSession: (body: AgentSessionRequest) =>
+    post<AgentTaskSessionResponse, AgentSessionRequest>("/api/agent-session", body),
   getExamples: () => request<ExamplesResponse>("/api/examples"),
   getExample: (exampleId: string) =>
     request<ExampleDetailResponse>(`/api/examples/${encodeURIComponent(exampleId)}`),

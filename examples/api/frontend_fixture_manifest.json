@@ -227,6 +227,32 @@
       "proprietary_solver_required": false
     },
     {
+      "name": "agent-session-nanoparticle",
+      "endpoint": "/api/agent-session",
+      "method": "POST",
+      "request_file": "agent_session_request_nanoparticle.json",
+      "response_file": "agent_session_response_nanoparticle.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "error-agent-session-empty-goal",
+      "endpoint": "/api/agent-session",
+      "method": "POST",
+      "request_file": null,
+      "response_file": "agent_session_error_empty_goal_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
       "name": "error-invalid-spec",
       "endpoint": "/api/validate",
       "method": "POST",

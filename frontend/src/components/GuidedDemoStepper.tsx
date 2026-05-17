@@ -3,6 +3,12 @@ import { BoundaryBadge } from "./BoundaryBadge";
 
 export const GUIDED_DEMO_STEPS = [
   {
+    key: "commandCenter",
+    label: "Start local agent task",
+    endpoint: "POST /api/agent-session",
+    safety: "Command Center creates a local deterministic plan; no external tool action.",
+  },
+  {
     key: "exampleGallery",
     label: "Browse Example Gallery",
     endpoint: "GET /api/examples",
@@ -71,6 +77,7 @@ export const GUIDED_DEMO_STEPS = [
 ];
 
 export type GuidedDemoPage =
+  | "Agent Command Center"
   | "Dashboard"
   | "Spec Input"
   | "Example Gallery"
@@ -87,6 +94,7 @@ interface GuidedDemoStepperProps {
 }
 
 const STEP_PAGE: Record<string, GuidedDemoPage> = {
+  "Start local agent task": "Agent Command Center",
   "Browse Example Gallery": "Example Gallery",
   "Load example spec": "Spec Input",
   "Parse locally": "Spec Input",
@@ -101,6 +109,10 @@ const STEP_PAGE: Record<string, GuidedDemoPage> = {
 };
 
 const STEP_KEYS = {
+  commandCenter: {
+    label: "guided.step.commandCenter",
+    safety: "guided.safety.commandCenter",
+  },
   loadExample: {
     label: "guided.step.loadExample",
     safety: "guided.safety.fixture",

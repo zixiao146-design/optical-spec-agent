@@ -3,6 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 const LOCAL_HOSTS = new Set(["127.0.0.1", "localhost"]);
 
 const pages = [
+  { nav: "Agent Command Center", heading: "Agent Command Center" },
   { nav: "Dashboard", heading: "Local Agent API workbench" },
   { nav: "Spec Input", heading: "Parse and validate local optical specs" },
   { nav: "Example Gallery", heading: "Optical design example gallery" },
@@ -78,6 +79,12 @@ test("safety notices remain visible and conservative", async ({ page }) => {
 
 test("fixture-backed interactions are visible without solver or LLM controls", async ({ page }) => {
   await page.goto("/");
+
+  await page.getByRole("button", { name: "Agent Command Center" }).click();
+  await expect(page.getByLabel("Describe the local optical design task")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Start local agent task" })).toBeVisible();
+  await expect(page.getByText("Permission and safety gates")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Artifacts" })).toBeVisible();
 
   await page.getByRole("button", { name: "Spec Input" }).click();
   await expect(page.getByRole("button", { name: "Load example spec" })).toBeVisible();

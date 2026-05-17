@@ -98,6 +98,12 @@ This document describes the current `main` branch. It is not a release tag.
   upload, create tags/releases, run external solvers by default, call external
   LLMs by default, claim production-grade physical validation, or claim formal
   convergence proof.
+- Agent Command Center:
+  `POST /api/agent-session`, `docs/agent_command_center.md`, and
+  `docs/agent_command_center.zh-CN.md` provide a local deterministic task
+  session surface from natural language goal to optical intent, design case,
+  plan steps, sub-agent trace, artifacts, permission gates, evidence, and next
+  actions. This is not a release, PyPI, TestPyPI, tag, or GitHub release action.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:

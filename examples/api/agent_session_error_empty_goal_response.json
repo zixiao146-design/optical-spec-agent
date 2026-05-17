@@ -1,0 +1,24 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "error",
+  "diagnostics": {
+    "errors": [
+      "goal must be a non-empty string."
+    ],
+    "warnings": [],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Describe a local optical design goal, for example a nanoparticle scattering preview."
+  ],
+  "error_code": "invalid_workflow_request",
+  "message": "Agent task session requires a non-empty goal."
+}

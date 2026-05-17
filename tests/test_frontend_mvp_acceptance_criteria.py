@@ -16,6 +16,9 @@ def test_frontend_mvp_acceptance_criteria_cover_functional_safety_and_technical_
     assert "Safety criteria" in text
     assert "Technical criteria" in text
     assert "Can call all frontend-ready endpoints" in text
+    assert "Can render Agent Command Center" in text
+    assert "POST /api/agent-session" in text
+    assert "permission gates" in text
     assert "Can render adapter matrix" in text
     assert "Can render workflow plan" in text
     assert "Can show loading, empty, error, and API disconnected states" in text

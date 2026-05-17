@@ -100,6 +100,7 @@
 | Quickstart onboarding | Engineering track | Local quickstart docs/scripts/examples available | Useful for public-demo rehearsal, but not a release, PyPI, tag, or GitHub release action. |
 | Frontend localization | Engineering track | English / 中文 UI available | Improves local demos; does not change the API contract or release criteria. |
 | Example Gallery / Material Library / Agent Trace Timeline | Engineering track | Preview-first domain expansion | Useful for Agent Studio orientation, but does not expand validation claims or require v1.0 release gating. |
+| Agent Command Center | Engineering track | Local task-session surface available | Useful for maintainer demos; not a release, upload, tag, or PyPI publication trigger. |
 
 Material constants remain preview/design-assist data unless independently
 verified. Sub-agent trace is local/deterministic and does not call external

@@ -71,7 +71,8 @@ readiness status.
 - Frontend API client calls only the configured local API base URL and `/api/*`
   endpoints.
 - The MVP includes dashboard/readiness, spec input, adapter matrix, workflow
-  plan, artifact preview, validation evidence, and system status views.
+  plan, artifact preview, validation evidence, system status, and Agent Command
+  Center views.
 - No PyPI/TestPyPI upload controls, tag/release controls, solver-run controls,
   external LLM controls, login, cloud backend, or production deployment are
   included.
@@ -97,7 +98,10 @@ readiness status.
 ## Optical Design Domain Expansion
 
 The MVP now includes an Example Gallery page, a Material Library page, and an
-Agent Collaboration / Agent Trace Timeline page.
+Agent Collaboration / Agent Trace Timeline page. It also includes an Agent
+Command Center page that turns a natural language optical design goal into a
+task session with optical intent, design case, agent plan, artifacts,
+permission gates, evidence, and next actions.
 The Example Gallery loads bundled examples from `examples/optical_design/` and
 connects each case to material suggestions, adapter recommendations, workflow
 plans, previews, evidence, and next actions.

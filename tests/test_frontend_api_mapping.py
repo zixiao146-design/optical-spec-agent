@@ -14,6 +14,7 @@ def test_frontend_api_mapping_covers_endpoints_fixtures_and_safety_notes():
     text = path.read_text(encoding="utf-8")
     for endpoint in [
         "/api/readiness",
+        "/api/agent-session",
         "/api/parse",
         "/api/validate",
         "/api/adapters",
@@ -26,6 +27,8 @@ def test_frontend_api_mapping_covers_endpoints_fixtures_and_safety_notes():
         assert endpoint in text
     for fixture in [
         "examples/api/readiness_response.json",
+        "examples/api/agent_session_request_nanoparticle.json",
+        "examples/api/agent_session_response_nanoparticle.json",
         "examples/api/parse_request_heuristic.json",
         "examples/api/parse_response_heuristic.json",
         "examples/api/validate_request_minimal.json",

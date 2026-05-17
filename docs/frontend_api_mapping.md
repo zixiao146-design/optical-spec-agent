@@ -3,6 +3,7 @@
 | Frontend screen | API endpoint | Method | Request fixture | Response fixture | Safety notes |
 |---|---|---|---|---|---|
 | Dashboard | `/api/readiness` | GET | none | `examples/api/readiness_response.json` | Shows PyPI not published, v1.0.0 not released, and recommended next actions. |
+| Agent Command Center | `/api/agent-session` | POST | `examples/api/agent_session_request_nanoparticle.json` | `examples/api/agent_session_response_nanoparticle.json` | Converts a natural language goal into a deterministic local task session with plan, artifacts, permission gates, evidence, and next actions. |
 | Spec Input | `/api/parse` | POST | `examples/api/parse_request_heuristic.json` | `examples/api/parse_response_heuristic.json` | Uses local heuristic/rule parser by default; no external LLM. |
 | Spec Input | `/api/validate` | POST | `examples/api/validate_request_minimal.json` | `examples/api/validate_response_minimal.json` | Local spec validation only; no production-grade validation claim. |
 | Adapter Matrix | `/api/adapters` | GET | none | `examples/api/adapters_response.json` | Registry summary only; no solver execution. |

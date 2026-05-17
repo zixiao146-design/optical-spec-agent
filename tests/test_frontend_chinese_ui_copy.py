@@ -21,7 +21,9 @@ def test_chinese_dictionary_contains_core_pages_and_safety_boundaries():
         "不控制 PyPI/TestPyPI 上传",
         "中文手把手教程",
         "开始中文教程",
-        "打开 Agent Studio",
+        "Agent 命令中心",
+        "打开 Agent 命令中心",
+        "输入自然语言光学设计目标",
         "加载中文纳米颗粒示例",
         "查看验证证据和下一步建议",
     ]
@@ -33,6 +35,7 @@ def test_english_dictionary_still_contains_core_page_labels():
     english = (I18N / "en.ts").read_text(encoding="utf-8")
     for phrase in [
         "Dashboard",
+        "Agent Command Center",
         "Spec Input",
         "Adapter Matrix",
         "Workflow Plan",

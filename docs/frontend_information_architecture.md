@@ -6,7 +6,18 @@ execution by default.
 The implementation exists under `frontend/` and follows this information
 architecture.
 
-## 1. Dashboard / Readiness
+## 1. Agent Command Center
+
+- Calls `POST /api/agent-session`.
+- Shows natural language goal input, optical intent summary, selected design
+  case, agent plan, sub-agent trace, permission gates, artifacts, evidence, and
+  recommended next actions.
+- Keeps blocked gates visible for external solver, external LLM, upload,
+  publication, tag, and release actions.
+- Does not run solvers, call external LLMs, upload packages, or create
+  tags/releases.
+
+## 2. Dashboard / Readiness
 
 - Calls `GET /api/readiness`.
 - Shows current public prerelease, main development version, TestPyPI/PyPI
@@ -14,7 +25,7 @@ architecture.
 - Shows recommended next actions.
 - Shows API mode indicator and API base URL.
 
-## 2. Spec Input
+## 3. Spec Input
 
 - Calls `POST /api/parse`.
 - Calls `POST /api/validate`.
@@ -22,13 +33,13 @@ architecture.
 - Includes fixture loading for local demos; fixture loading is not live
   validation until submitted.
 
-## 3. Adapter Matrix
+## 4. Adapter Matrix
 
 - Calls `GET /api/adapters`.
 - Calls `GET /api/validation-evidence`.
 - Shows Gmsh / Meep / MPB / Optiland Level 3 and Elmer deferred.
 
-## 4. Example Gallery
+## 5. Example Gallery
 
 - Calls `GET /api/examples`.
 - Calls `GET /api/examples/{example_id}`.
@@ -37,25 +48,25 @@ architecture.
   recommendations, workflow focus, maturity notes, and safety boundaries.
 - Does not run solvers or call external LLMs.
 
-## 5. Workflow Plan
+## 6. Workflow Plan
 
 - Calls `POST /api/workflow-plan`.
 - Shows plan steps, diagnostics, and no solver execution.
 - Includes a workflow fixture loader.
 
-## 6. Artifact Preview
+## 7. Artifact Preview
 
 - Calls `POST /api/adapter-preview`.
 - Shows preview content and artifact summary.
 - Includes a minimal spec fixture loader and output language/extension summary.
 - Never runs solver by default.
 
-## 7. Validation Evidence
+## 8. Validation Evidence
 
 - Calls `GET /api/validation-evidence`.
 - Shows evidence reports and limitations.
 
-## 8. API / System Status
+## 9. API / System Status
 
 - Calls `GET /api/health`.
 - Calls `GET /api/version`.
@@ -71,7 +82,7 @@ architecture.
 - Optional Playwright visual smoke covers these seven pages manually and is not
   a default release gate.
 
-## 9. Material Library
+## 10. Material Library
 
 - Calls `GET /api/materials`.
 - Calls `POST /api/materials/suggest`.
@@ -79,7 +90,7 @@ architecture.
 - Shows related examples where applicable.
 - States material data is not production-grade optical constants.
 
-## 10. Agent Collaboration
+## 11. Agent Collaboration
 
 - Calls `POST /api/agent-trace`.
 - Calls `POST /api/examples/{example_id}/agent-trace`.

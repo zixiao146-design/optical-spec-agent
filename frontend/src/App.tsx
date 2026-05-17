@@ -6,6 +6,7 @@ import { SafetyNotice } from "./components/SafetyNotice";
 import { useI18n } from "./i18n/useI18n";
 import { AdapterMatrixPage } from "./pages/AdapterMatrixPage";
 import { AgentCollaborationPage } from "./pages/AgentCollaborationPage";
+import { AgentCommandCenterPage } from "./pages/AgentCommandCenterPage";
 import { ArtifactPreviewPage } from "./pages/ArtifactPreviewPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { EvidencePage } from "./pages/EvidencePage";
@@ -16,6 +17,7 @@ import { SystemStatusPage } from "./pages/SystemStatusPage";
 import { WorkflowPlanPage } from "./pages/WorkflowPlanPage";
 
 const PAGES = [
+  "Agent Command Center",
   "Dashboard",
   "Spec Input",
   "Example Gallery",
@@ -31,6 +33,7 @@ const PAGES = [
 type Page = (typeof PAGES)[number];
 
 const PAGE_LABEL_KEYS: Record<Page, string> = {
+  "Agent Command Center": "nav.agentCommandCenter",
   Dashboard: "nav.dashboard",
   "Spec Input": "nav.specInput",
   "Example Gallery": "nav.exampleGallery",
@@ -45,6 +48,8 @@ const PAGE_LABEL_KEYS: Record<Page, string> = {
 
 function pageComponent(page: Page, onNavigate: (page: Page) => void) {
   switch (page) {
+    case "Agent Command Center":
+      return <AgentCommandCenterPage />;
     case "Spec Input":
       return <SpecInputPage />;
     case "Example Gallery":
@@ -70,7 +75,7 @@ function pageComponent(page: Page, onNavigate: (page: Page) => void) {
 
 export default function App() {
   const { t } = useI18n();
-  const [activePage, setActivePage] = useState<Page>("Dashboard");
+  const [activePage, setActivePage] = useState<Page>("Agent Command Center");
   const content = useMemo(() => pageComponent(activePage, setActivePage), [activePage]);
 
   return (

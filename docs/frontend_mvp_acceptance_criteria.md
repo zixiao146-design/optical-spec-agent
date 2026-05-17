@@ -4,6 +4,10 @@
 
 - Can launch against local API.
 - Can call all frontend-ready endpoints.
+- Can render Agent Command Center.
+- Can submit a natural language goal to `POST /api/agent-session`.
+- Can render optical intent, design case, agent plan, artifacts, permission
+  gates, final recommendation, and recommended next actions.
 - Can render readiness state.
 - Can render adapter matrix.
 - Can submit parse and validate requests.
@@ -24,9 +28,9 @@
   base URL.
 - Can render diagnostics and recommended next actions consistently.
 - Can show a guided quickstart demo with Example Gallery, Load example spec,
-  Parse locally, Validate spec, Review adapter matrix, Material Library, Agent
-  Trace Timeline, Generate workflow plan, Preview artifact, Review validation
-  evidence, and Review readiness / next action.
+  Agent Command Center, Parse locally, Validate spec, Review adapter matrix,
+  Material Library, Agent Trace Timeline, Generate workflow plan, Preview
+  artifact, Review validation evidence, and Review readiness / next action.
 - Can switch between English and 中文 without refreshing the page.
 - Chinese guided demo shows 示例库、加载示例规格、本地解析、验证规格、查看适配器矩阵、
   材料库、多智能体协作轨迹、生成工作流计划、预览适配器产物、查看验证证据、查看 readiness / 下一步建议。
@@ -44,6 +48,8 @@
 - UI must not imply formal convergence proof.
 - UI must show material catalog is preview-only.
 - UI must show sub-agent trace does not call external LLMs.
+- UI must show permission gates for external solver, external LLM, upload,
+  publication, tag, and release actions.
 - Demo fixture mode must state that it is not live validation.
 - UI must show that it does not control PyPI/TestPyPI publication or GitHub
   releases.

@@ -14,6 +14,8 @@ def test_frontend_contains_chinese_guided_tutorial_surface():
     required = [
         "ChineseGuidedTutorial",
         "中文手把手教程",
+        "打开 Agent 命令中心",
+        "输入自然语言光学设计目标",
         "加载中文纳米颗粒示例",
         "示例库",
         "本地解析",
@@ -25,6 +27,7 @@ def test_frontend_contains_chinese_guided_tutorial_surface():
         "适配器产物",
         "验证证据",
         "下一步建议",
+        "POST /api/agent-session",
         "GET /api/examples",
         "POST /api/parse",
         "POST /api/validate",

@@ -37,6 +37,7 @@ def test_playwright_smoke_covers_pages_safety_and_forbidden_controls():
     )
     for phrase in [
         "Dashboard",
+        "Agent Command Center",
         "Spec Input",
         "Example Gallery",
         "Adapter Matrix",

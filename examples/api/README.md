@@ -48,10 +48,19 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `examples_response.json`
 - `example_detail_nanoparticle_response.json`
 - `example_agent_trace_nanoparticle_response.json`
+- `agent_session_request_nanoparticle.json`
+- `agent_session_response_nanoparticle.json`
+- `agent_session_error_empty_goal_response.json`
 
 These fixtures are local preview/design-assist data only. They do not perform
 external material database lookup, solver execution, external LLM calls,
 uploads, tags, or releases.
+
+The Agent Command Center fixtures exercise `POST /api/agent-session` and show
+how a natural language goal becomes optical intent, a design case, local plan
+steps, sub-agent trace, permission gates, local artifacts, evidence, and next
+actions. They preserve the same no-solver, no-external-LLM, no-upload, no-tag,
+and no-release boundaries.
 
 `scripts/check_api_fixtures.py` compares these fixtures with live FastAPI
 `TestClient` response top-level shapes. `scripts/smoke_agent_api.sh` exercises

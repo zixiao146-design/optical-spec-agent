@@ -75,16 +75,19 @@ OSA_QUICKSTART_WITH_VISUAL=1 OSA_QUICKSTART_NO_HOLD=1 ./scripts/run_quickstart_d
 
 ## 7. Guided Demo Steps
 
-1. Load example spec.
-2. Browse Example Gallery.
-3. Parse locally.
-4. Validate.
-5. View adapter matrix and Material Library.
-6. Review Agent Trace Timeline.
-7. Generate workflow plan.
-8. Preview artifact.
-9. Review validation evidence.
-10. Review Readiness / next actions.
+1. Start in Agent Command Center.
+2. Enter a natural language optical design goal.
+3. Review the agent plan, permission gates, and artifacts.
+4. Browse Example Gallery.
+5. Load example spec.
+6. Parse locally.
+7. Validate.
+8. View adapter matrix and Material Library.
+9. Review Agent Trace Timeline.
+10. Generate workflow plan.
+11. Preview artifact.
+12. Review validation evidence.
+13. Review Readiness / next actions.
 
 The frontend guided demo panel maps each step to the Local Agent API endpoint
 used by Agent Studio.
@@ -95,6 +98,8 @@ Chinese step-by-step public-demo tutorial:
 `docs/frontend_chinese_terminology.md`.
 Example Gallery and Agent Trace Timeline docs:
 `docs/example_gallery.md` and `docs/agent_trace_timeline.md`.
+Agent Command Center docs:
+`docs/agent_command_center.md`.
 
 ## 8. Expected Success
 

@@ -23,6 +23,8 @@ def test_api_curl_examples_cover_frontend_handoff_endpoints():
     assert "http://127.0.0.1:8000/api/adapter-preview" in text
     assert "curl http://127.0.0.1:8000/api/validation-evidence" in text
     assert "curl http://127.0.0.1:8000/api/readiness" in text
+    assert "http://127.0.0.1:8000/api/agent-session" in text
+    assert "@examples/api/agent_session_request_nanoparticle.json" in text
     assert "@examples/api/parse_request_heuristic.json" in text
     assert "@examples/api/validate_request_minimal.json" in text
     assert "@examples/api/workflow_plan_request.json" in text

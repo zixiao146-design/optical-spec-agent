@@ -71,6 +71,10 @@ The current domain expansion adds an Agent Studio
 [`sub-agent collaboration trace`](docs/sub_agent_architecture.md) that makes
 SpecAgent, MaterialAgent, GeometryAgent, AdapterAgent, WorkflowAgent,
 EvidenceAgent, SafetyAgent, and RecommendationAgent visible in Agent Studio.
+The new [`Agent Command Center`](docs/agent_command_center.md) turns a natural
+language optical design goal into a deterministic local task session with
+optical intent, design case, agent plan, permission gates, artifacts, evidence,
+and recommended next actions.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

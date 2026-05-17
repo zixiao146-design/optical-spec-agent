@@ -30,6 +30,7 @@ def test_agent_api_openapi_includes_agent_endpoints():
         "/api/examples/{example_id}",
         "/api/examples/{example_id}/agent-trace",
         "/api/agent-trace",
+        "/api/agent-session",
     ]:
         assert path in paths
 
@@ -58,6 +59,7 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
         "/api/examples/{example_id}",
         "/api/examples/{example_id}/agent-trace",
         "/api/agent-trace",
+        "/api/agent-session",
     ]:
         operation = paths[path]["get"] if "get" in paths[path] else paths[path]["post"]
         schema = operation["responses"]["200"]["content"]["application/json"]["schema"]
@@ -70,6 +72,7 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
         "/api/adapter-preview",
         "/api/materials/suggest",
         "/api/agent-trace",
+        "/api/agent-session",
     ]:
         operation = paths[path]["post"]
         assert operation["requestBody"]["content"]["application/json"]["schema"]

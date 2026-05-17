@@ -73,6 +73,7 @@ maintainer explicitly approves freezing it.
 - `GET /api/materials/{material_id}`
 - `POST /api/materials/suggest`
 - `POST /api/agent-trace`
+- `POST /api/agent-session`
 
 ## Response shape principles
 
@@ -141,3 +142,18 @@ records are local preview/design-assist hints, not production-grade optical
 constants. Example Gallery responses load only local `examples/optical_design`
 files. The Agent Trace Timeline is deterministic local collaboration
 visibility, not autonomous external agent execution.
+
+## Agent Command Center
+
+API contract version `0.1` also includes the task-driven command-center
+endpoint:
+
+- `POST /api/agent-session`
+
+This endpoint turns a natural language optical design goal into a
+deterministic local Agent Task Session: optical intent, selected design case, material
+suggestions, adapter recommendation, workflow plan steps, artifacts, evidence,
+permission gates, and recommended next actions. It reuses the local material
+catalog, local example registry, and deterministic sub-agent trace. It does not
+call an external LLM, does not execute a solver, does not access the network,
+does not upload packages, and does not create tags/releases.

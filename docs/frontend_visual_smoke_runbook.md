@@ -49,6 +49,7 @@ visual smoke result still reports honestly.
 ## 4. What It Checks
 
 - Dashboard
+- Agent Command Center
 - Spec Input
 - Example Gallery
 - Adapter Matrix

@@ -50,6 +50,10 @@ def test_frontend_chinese_terminology_doc_preserves_contract_names():
         "材料 ID",
         "SpecAgent",
         "MaterialAgent",
+        "Agent Command Center",
+        "Agent 命令中心",
+        "permission gates",
+        "权限门控",
     ]
     for phrase in required:
         assert phrase in text

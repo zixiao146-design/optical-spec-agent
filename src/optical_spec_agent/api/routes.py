@@ -14,6 +14,8 @@ from optical_spec_agent import __version__
 from optical_spec_agent.api.models import (
     AgentTraceRequest,
     AgentTraceResponse,
+    AgentSessionRequest,
+    AgentTaskSessionResponse,
     AdapterPreviewRequest as AgentAdapterPreviewRequest,
     AdapterPreviewResponse,
     AdapterSummary,
@@ -40,6 +42,7 @@ from optical_spec_agent.api.models import (
     WorkflowPlanResponse,
 )
 from optical_spec_agent.agents.orchestrator import build_agent_trace
+from optical_spec_agent.agents.task_session import build_agent_task_session
 from optical_spec_agent.adapters.registry import (
     AdapterRegistryError,
     dispatch_adapter,
@@ -731,6 +734,48 @@ def agent_collaboration_trace(req: AgentTraceRequest):
     return _agent_trace_response(trace)
 
 
+@router.post(
+    "/api/agent-session",
+    response_model=AgentTaskSessionResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_task_session(req: AgentSessionRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Agent task session requires a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=[
+                    "Describe a local optical design goal, for example a nanoparticle scattering preview."
+                ],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    try:
+        session = build_agent_task_session(goal, example_id=req.example_id)
+    except ExampleRegistryError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=["Use /api/examples to inspect available local design cases."],
+            )
+        )
+    return _agent_session_response(session)
+
+
 def _agent_trace_response(trace: Any) -> AgentTraceResponse:
     return AgentTraceResponse(
         trace_id=trace.trace_id,
@@ -750,6 +795,32 @@ def _agent_trace_response(trace: Any) -> AgentTraceResponse:
             ],
         ),
         recommended_next_actions=trace.recommended_next_actions,
+    )
+
+
+def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
+    trace = _agent_trace_response(session.agent_trace)
+    return AgentTaskSessionResponse(
+        status=session.status,
+        session_id=session.session_id,
+        user_goal=session.user_goal,
+        optical_intent_summary=session.optical_intent_summary,
+        selected_example_id=session.selected_example_id,
+        design_case_summary=session.design_case_summary,
+        plan_steps=session.plan_steps,
+        agent_trace=trace,
+        artifacts=session.artifacts,
+        permission_gates=session.permission_gates,
+        final_recommendation=session.final_recommendation,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Agent session is deterministic and local; it is not an autonomous external-agent run."
+            ],
+            limitations=[
+                "No external solver, external LLM, network, upload, tag, or release action was performed."
+            ],
+        ),
+        recommended_next_actions=session.recommended_next_actions,
     )
 
 

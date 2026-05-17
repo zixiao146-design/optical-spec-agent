@@ -55,8 +55,11 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
         "POST /api/adapter-preview",
         "GET /api/validation-evidence",
         "GET /api/readiness",
+        "POST /api/agent-session",
     ]:
         assert endpoint in text
+    assert "Agent Command Center" in text
+    assert "deterministic local Agent Task Session" in text
     assert "Frontend Agent Studio calls this API" in text
 
 

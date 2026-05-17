@@ -208,6 +208,69 @@ export interface AgentTraceResponse extends ApiResponseBase {
   adapter_recommendation: string;
 }
 
+export type AgentPlanStatus = "pending" | "completed" | "warning" | "blocked";
+export type PermissionGateStatus = "allowed" | "blocked" | "requires_explicit_approval";
+
+export interface AgentPlanStep {
+  step_index: number;
+  title: string;
+  title_zh: string;
+  description: string;
+  description_zh: string;
+  agent_name: string;
+  status: AgentPlanStatus;
+  endpoint_or_tool: string;
+  expected_output: string;
+  safety_note: string;
+}
+
+export interface AgentArtifact {
+  artifact_id: string;
+  label: string;
+  label_zh: string;
+  artifact_type:
+    | "spec"
+    | "workflow_plan"
+    | "adapter_preview"
+    | "agent_trace"
+    | "material_suggestions"
+    | "evidence";
+  summary: string;
+  preview_content?: string | null;
+  source_endpoint: string;
+  generated_by_agent: string;
+  production_grade: boolean;
+}
+
+export interface PermissionGate {
+  gate_id: string;
+  label: string;
+  label_zh: string;
+  status: PermissionGateStatus;
+  reason: string;
+  risk_level: "low" | "medium" | "high";
+  default_allowed: boolean;
+}
+
+export interface AgentSessionRequest {
+  goal: string;
+  example_id?: string | null;
+  language?: "en" | "zh-CN";
+}
+
+export interface AgentTaskSessionResponse extends ApiResponseBase {
+  session_id: string;
+  user_goal: string;
+  optical_intent_summary: string;
+  selected_example_id?: string | null;
+  design_case_summary: string;
+  plan_steps: AgentPlanStep[];
+  agent_trace: AgentTraceResponse;
+  artifacts: AgentArtifact[];
+  permission_gates: PermissionGate[];
+  final_recommendation: string;
+}
+
 export interface ExampleSafety {
   external_solver_executed: boolean;
   external_llm_required: boolean;

@@ -209,6 +209,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "example_gallery.zh-CN.md",
         "agent_trace_timeline.md",
         "agent_trace_timeline.zh-CN.md",
+        "agent_command_center.md",
+        "agent_command_center.zh-CN.md",
         "material_library.md",
         "material_library.zh-CN.md",
         "sub_agent_architecture.md",

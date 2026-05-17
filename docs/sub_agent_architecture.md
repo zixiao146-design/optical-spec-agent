@@ -36,3 +36,11 @@ Frontend visualization:
 - The page renders each sub-agent as an Agent Trace Timeline item.
 - The Example Gallery can generate a trace for bundled optical design examples.
 - The page keeps preview and validation boundaries visible.
+
+Agent Command Center:
+- `POST /api/agent-session` wraps the same sub-agent roles into a task-level
+  session for a natural language goal.
+- The session adds optical intent, selected design case, plan steps, local
+  artifacts, permission gates, final recommendation, and next actions.
+- Permission gates keep external solver, external LLM, upload, PyPI
+  publication, tag, and release actions blocked by default.

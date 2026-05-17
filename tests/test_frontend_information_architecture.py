@@ -14,6 +14,7 @@ def test_frontend_information_architecture_maps_pages_to_api():
     text = path.read_text(encoding="utf-8")
     for section in [
         "Dashboard / Readiness",
+        "Agent Command Center",
         "Spec Input",
         "Adapter Matrix",
         "Workflow Plan",
@@ -24,6 +25,7 @@ def test_frontend_information_architecture_maps_pages_to_api():
         assert section in text
     for endpoint in [
         "GET /api/readiness",
+        "POST /api/agent-session",
         "POST /api/parse",
         "POST /api/validate",
         "GET /api/adapters",

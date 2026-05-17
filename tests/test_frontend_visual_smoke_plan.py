@@ -11,6 +11,7 @@ def test_frontend_visual_smoke_plan_documents_future_checks():
     for phrase in [
         "Agent Studio Frontend Visual Smoke Plan",
         "Dashboard",
+        "Agent Command Center",
         "Spec Input",
         "Example Gallery",
         "Adapter Matrix",

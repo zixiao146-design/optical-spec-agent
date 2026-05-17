@@ -5,11 +5,19 @@ import { BoundaryBadge } from "./BoundaryBadge";
 export const CHINESE_GUIDED_TUTORIAL_STEPS = [
   {
     key: "open",
-    endpoint: "GET /api/health",
+    endpoint: "GET /api/health, GET /api/version",
     title: "guidedTutorial.step.open.title",
     action: "guidedTutorial.step.open.action",
     expected: "guidedTutorial.step.open.expected",
     safety: "guidedTutorial.step.open.safety",
+  },
+  {
+    key: "commandCenter",
+    endpoint: "POST /api/agent-session",
+    title: "guidedTutorial.step.commandCenter.title",
+    action: "guidedTutorial.step.commandCenter.action",
+    expected: "guidedTutorial.step.commandCenter.expected",
+    safety: "guidedTutorial.step.commandCenter.safety",
   },
   {
     key: "status",

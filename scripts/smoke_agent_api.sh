@@ -121,6 +121,19 @@ agent_trace = post("/api/agent-trace", {"example_id": "nanoparticle_plasmonics",
 agent_names = {item["agent_name"] for item in agent_trace["agents"]}
 require({"SpecAgent", "MaterialAgent", "AdapterAgent", "SafetyAgent"}.issubset(agent_names), "agent trace missing expected agents")
 
+agent_session = post(
+    "/api/agent-session",
+    {
+        "goal": "Create a local preview workflow for a silver nanoparticle scattering case.",
+        "example_id": "nanoparticle_plasmonics",
+        "language": "en",
+    },
+)
+require(agent_session["optical_intent_summary"], "agent session missing optical intent")
+require(agent_session["plan_steps"], "agent session missing plan steps")
+require(agent_session["artifacts"], "agent session missing artifacts")
+require(agent_session["permission_gates"], "agent session missing permission gates")
+
 for name, payload in {
     "health": health,
     "version": version,
@@ -139,6 +152,7 @@ for name, payload in {
     "example_detail": example_detail,
     "example_agent_trace": example_agent_trace,
     "agent_trace": agent_trace,
+    "agent_session": agent_session,
 }.items():
     require(payload["external_solver_executed"] is False, f"{name} solver flag changed")
     require(payload["external_llm_required"] is False, f"{name} LLM flag changed")
@@ -146,7 +160,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 17}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 18}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

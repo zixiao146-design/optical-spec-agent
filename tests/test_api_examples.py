@@ -64,9 +64,12 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "examples_response.json" in response_files
     assert "example_detail_nanoparticle_response.json" in response_files
     assert "example_agent_trace_nanoparticle_response.json" in response_files
+    assert "agent_session_response_nanoparticle.json" in response_files
+    assert "agent_session_error_empty_goal_response.json" in response_files
     assert "parse_request_heuristic.json" in request_files
     assert "material_suggestion_request.json" in request_files
     assert "agent_trace_request_nanoparticle.json" in request_files
+    assert "agent_session_request_nanoparticle.json" in request_files
 
 
 def test_api_version_and_readiness_fixtures_track_publication_state():
@@ -91,6 +94,7 @@ def test_api_error_fixtures_are_manifested_and_keep_safe_error_shape():
         "error_unsupported_adapter_response.json": "unsupported_adapter",
         "error_invalid_workflow_request_response.json": "invalid_workflow_request",
         "error_external_llm_not_enabled_response.json": "external_llm_not_enabled",
+        "agent_session_error_empty_goal_response.json": "invalid_workflow_request",
     }
     manifested = {entry["response_file"] for entry in manifest["fixtures"]}
     assert set(error_files).issubset(manifested)

@@ -28,6 +28,12 @@
 | output summary | 输出摘要 |
 | evidence refs | 证据引用 |
 | final recommendation | 最终建议 |
+| Agent Command Center | Agent 命令中心 |
+| optical intent | 光学意图 |
+| design case | 设计案例 |
+| task plan | 任务计划 |
+| permission gates | 权限门控 |
+| artifacts | 产物 |
 
 ## 不翻译的内容
 

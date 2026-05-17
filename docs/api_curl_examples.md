@@ -97,8 +97,13 @@ curl -X POST http://127.0.0.1:8000/api/materials/suggest \
 curl -X POST http://127.0.0.1:8000/api/agent-trace \
   -H "Content-Type: application/json" \
   --data @examples/api/agent_trace_request_nanoparticle.json
+curl -X POST http://127.0.0.1:8000/api/agent-session \
+  -H "Content-Type: application/json" \
+  --data @examples/api/agent_session_request_nanoparticle.json
 ```
 
 The Example Gallery and material examples use local repo files and the local
 preview material catalog only. The agent-trace examples render a deterministic
-Agent Trace Timeline and do not call an external LLM.
+Agent Trace Timeline. The agent-session example renders an Agent Command Center
+task session with permission gates and local artifacts. These examples do not
+call an external LLM, run solvers, upload packages, or create tags/releases.

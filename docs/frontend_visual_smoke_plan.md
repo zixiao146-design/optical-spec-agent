@@ -15,6 +15,7 @@ The Agent Studio demo package references the same optional visual check through
 ## Pages to Screenshot
 
 - Dashboard
+- Agent Command Center
 - Spec Input
 - Example Gallery
 - Adapter Matrix

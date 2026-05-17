@@ -9,7 +9,8 @@ def test_chinese_guided_tutorial_doc_has_safe_agent_workflow_steps():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
     required_steps = [
-        "打开 Agent Studio",
+        "打开 Agent 命令中心",
+        "输入自然语言光学设计目标",
         "查看 readiness / 系统状态",
         "查看示例库",
         "加载中文纳米颗粒示例",
@@ -29,6 +30,7 @@ def test_chinese_guided_tutorial_doc_has_safe_agent_workflow_steps():
         "预期看到的结果",
         "使用的 API endpoint",
         "安全边界说明",
+        "POST /api/agent-session",
         "POST /api/parse",
         "POST /api/validate",
         "GET /api/examples",

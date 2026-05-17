@@ -32,6 +32,7 @@ ERROR_PAYLOADS: dict[str, dict[str, Any]] = {
         "text": "Use MPB for a band diagram.",
         "parser": "llm",
     },
+    "error-agent-session-empty-goal": {"goal": "   "},
 }
 
 SAFETY_FLAGS = (

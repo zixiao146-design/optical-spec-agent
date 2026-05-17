@@ -27,3 +27,8 @@ Each timeline step exposes:
 - safety_notes
 
 The timeline is a deterministic local preview. No external LLM is called by default, no solver is executed by default, and the timeline does not claim production-grade physical validation or formal convergence proof.
+
+Agent Command Center builds on this trace through `POST /api/agent-session`.
+The command-center session adds natural language goal handling, optical intent
+summary, selected design case, task plan steps, artifacts, permission gates,
+and next actions around the same sub-agent collaboration timeline.

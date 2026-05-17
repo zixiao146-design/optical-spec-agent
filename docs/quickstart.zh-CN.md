@@ -73,19 +73,20 @@ OSA_QUICKSTART_WITH_VISUAL=1 OSA_QUICKSTART_NO_HOLD=1 ./scripts/run_quickstart_d
 
 ## 7. Guided Demo 步骤
 
-中文手把手教程会显示 9 个步骤：
+中文手把手教程会显示完整的本地 agent workflow：
 
-1. 打开 Agent Studio。
-2. 查看 readiness / 系统状态。
-3. 查看示例库。
-4. 加载中文纳米颗粒示例。
-5. 本地解析规格。
-6. 验证规格。
-7. 查看适配器矩阵和材料库。
-8. 查看多智能体协作轨迹。
-9. 生成工作流计划。
-10. 预览适配器产物。
-11. 查看验证证据和下一步建议。
+1. 打开 Agent 命令中心。
+2. 输入自然语言光学设计目标。
+3. 查看 agent 计划、权限门控和产物。
+4. 查看示例库。
+5. 加载中文纳米颗粒示例。
+6. 本地解析规格。
+7. 验证规格。
+8. 查看适配器矩阵和材料库。
+9. 查看多智能体协作轨迹。
+10. 生成工作流计划。
+11. 预览适配器产物。
+12. 查看验证证据和下一步建议。
 
 Frontend 的中文手把手教程会显示每一步对应的用户操作、预期结果、Local Agent
 API endpoint 和安全边界。
@@ -93,6 +94,7 @@ API endpoint 和安全边界。
 `examples/quickstart/zh_nanoparticle_prompt.txt`。
 示例库和多智能体协作轨迹见 `docs/example_gallery.zh-CN.md` 与
 `docs/agent_trace_timeline.zh-CN.md`。
+Agent 命令中心见 `docs/agent_command_center.zh-CN.md`。
 
 ## 8. 成功标志
 

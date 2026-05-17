@@ -6,6 +6,8 @@ from optical_spec_agent.api.models import (
     API_CONTRACT_VERSION,
     AdapterSummary,
     ApiErrorResponse,
+    AgentSessionRequest,
+    AgentTaskSessionResponse,
     HealthResponse,
     ParseRequest,
     ReadinessResponse,
@@ -93,6 +95,7 @@ def test_agent_api_request_models_reject_unknown_fields():
         (ParseRequest, {"text": "Use Meep.", "unexpected": True}),
         (ValidateRequest, {"path": "examples/specs/minimal_nanoparticle.json", "unexpected": True}),
         (WorkflowPlanRequest, {"text": "Use MPB.", "unexpected": True}),
+        (AgentSessionRequest, {"goal": "Plan a preview.", "unexpected": True}),
     ]:
         try:
             model.model_validate(payload)
@@ -100,3 +103,22 @@ def test_agent_api_request_models_reject_unknown_fields():
             assert "extra_forbidden" in str(exc)
         else:  # pragma: no cover - explicit failure path
             raise AssertionError(f"{model.__name__} accepted an unknown field")
+
+
+def test_agent_task_session_response_preserves_safety_defaults():
+    response = AgentTaskSessionResponse(
+        session_id="session-test",
+        user_goal="Plan a local preview.",
+        optical_intent_summary="general optical design preview",
+        design_case_summary="generic preview",
+        agent_trace={
+            "trace_id": "trace-test",
+            "final_recommendation": "Review the local preview.",
+        },
+        final_recommendation="Review the local preview.",
+    )
+    _assert_safety_defaults(response)
+    assert response.api_contract_version == "0.1"
+    assert response.plan_steps == []
+    assert response.artifacts == []
+    assert response.permission_gates == []
