@@ -47,6 +47,9 @@ validation evidence.
   `docs/agent_studio_demo_checklist.md`,
   `docs/agent_studio_demo_storyboard.md`, and
   `docs/agent_studio_demo_troubleshooting.md`.
+- Demo review capture and hardening backlog are tracked in
+  `docs/agent_studio_demo_feedback.md` and
+  `docs/frontend_hardening_backlog.md`.
 - No full production frontend, cloud backend, login system, solver-run control,
   external LLM control, upload control, or tag/release control is included.
 - Agent Studio frontend should call the local Agent API instead of shelling out
@@ -89,6 +92,7 @@ validation evidence.
 - Optional/manual Playwright visual smoke for major local pages and safety copy.
 - Local maintainer demo package that ties API launch, frontend launch, smoke
   checks, optional visual smoke, and a guided walkthrough together.
+- Demo feedback review loop and prioritized hardening backlog.
 
 ### Phase 3
 

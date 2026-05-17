@@ -81,3 +81,5 @@
   `docs/agent_studio_demo_checklist.md`,
   `docs/agent_studio_demo_storyboard.md`, and
   `docs/agent_studio_demo_troubleshooting.md` aligned with the current MVP.
+- Record maintainer demo observations in `docs/agent_studio_demo_feedback.md`.
+- Track prioritized follow-up work in `docs/frontend_hardening_backlog.md`.

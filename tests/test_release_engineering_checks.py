@@ -198,6 +198,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "agent_studio_demo_checklist.md",
         "agent_studio_demo_storyboard.md",
         "agent_studio_demo_troubleshooting.md",
+        "agent_studio_demo_feedback.md",
+        "frontend_hardening_backlog.md",
         "cli_api_parity.md",
         "publication_decision_record.md",
         "release_readiness_v0.9.0rc5.md",
@@ -313,6 +315,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Agent Studio Demo Checklist" in combined
     assert "Agent Studio Demo Storyboard" in combined
     assert "Agent Studio Demo Troubleshooting" in combined
+    assert "Agent Studio Demo Feedback" in combined
+    assert "Frontend Hardening Backlog" in combined
     assert "scripts/demo_agent_studio.sh" in combined
     assert "No external solver execution by default" in combined
     assert "No external LLM call by default" in combined

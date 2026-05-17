@@ -34,6 +34,8 @@ def test_frontend_mvp_qa_checklist_documents_demo_safety_and_verification():
         "docs/frontend_visual_smoke_runbook.md",
         "docs/agent_studio_demo_storyboard.md",
         "docs/agent_studio_demo_troubleshooting.md",
+        "docs/agent_studio_demo_feedback.md",
+        "docs/frontend_hardening_backlog.md",
         "Do not commit `node_modules`",
         "Do not commit `frontend/dist`",
         "Do not commit `frontend/test-results`",

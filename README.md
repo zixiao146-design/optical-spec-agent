@@ -140,6 +140,9 @@ the wrapper is [`scripts/demo_agent_studio.sh`](scripts/demo_agent_studio.sh).
 It ties together API launch, frontend launch, smoke checks, optional visual
 smoke, and a guided local walkthrough without upload, tag, release, solver, or
 external LLM actions.
+Local demo review and follow-up hardening are tracked in
+[`docs/agent_studio_demo_feedback.md`](docs/agent_studio_demo_feedback.md) and
+[`docs/frontend_hardening_backlog.md`](docs/frontend_hardening_backlog.md).
 It uses the Local Agent API, defaults to `http://127.0.0.1:8000`, and does not
 include upload, publish, tag, release, solver-run, external LLM, login, cloud,
 or production deployment controls. If the API is disconnected, the UI falls

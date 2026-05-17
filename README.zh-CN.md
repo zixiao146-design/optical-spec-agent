@@ -145,7 +145,10 @@ demo package 见 `docs/agent_studio_demo_runbook.md`、
 `docs/agent_studio_demo_checklist.md`、`docs/agent_studio_demo_storyboard.md`、
 `docs/agent_studio_demo_troubleshooting.md` 和 `scripts/demo_agent_studio.sh`；
 它把 API 启动、frontend 启动、smoke checks、可选 visual smoke 和 guided
-walkthrough 串在一起，但不上传、不创建 tag/release、不运行 solver、不调用外部 LLM。它使用 Local Agent API，默认 API base 为
+walkthrough 串在一起，但不上传、不创建 tag/release、不运行 solver、不调用外部 LLM。
+本地 demo review 与后续 hardening backlog 见
+`docs/agent_studio_demo_feedback.md` 和 `docs/frontend_hardening_backlog.md`。
+它使用 Local Agent API，默认 API base 为
 `http://127.0.0.1:8000`，不提供 upload、publish、tag、release、solver-run、
 external LLM、login、cloud 或 production deployment 控件。API 断开时 UI 会进入
 明确标注的 demo fixture mode；demo mode 不是 live validation。frontend smoke
