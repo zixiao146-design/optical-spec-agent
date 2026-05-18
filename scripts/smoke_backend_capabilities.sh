@@ -35,6 +35,8 @@ internal_tools = {item["tool_name"] for item in cap_payload["internal_tools"]}
 require("optical_calculators" in internal_tools, "optical calculators missing")
 require("source_monitor_inference" in internal_tools, "source/monitor inference missing")
 require("missing_input_diagnostics" in internal_tools, "missing-input diagnostics missing")
+require("observable_diagnostics" in internal_tools, "observable diagnostics missing")
+require("adapter_native_mapping" in internal_tools, "adapter-native mapping missing")
 
 session = client.post(
     "/api/agent-session",
@@ -50,8 +52,18 @@ ledger = {entry["tool_name"]: entry for entry in session_payload["tool_call_ledg
 require(ledger["material_catalog.suggest"]["executed"] is True, "material catalog not executed")
 require(ledger["optical_language.infer_source_monitor"]["executed"] is True, "source/monitor inference not executed")
 require(ledger["optical_language.diagnose_missing_inputs"]["executed"] is True, "missing-input diagnostics not executed")
+require(ledger["optical_language.diagnose_observable"]["executed"] is True, "observable diagnostics not executed")
+require(
+    ledger["optical_language.map_source_monitor_to_adapter"]["executed"] is True,
+    "adapter source/monitor mapping not executed",
+)
 require(ledger["external_llm"]["executed"] is False, "external LLM unexpectedly executed")
 require(ledger["pypi_publish"]["executed"] is False, "PyPI publish unexpectedly executed")
+require(session_payload["observable_diagnostics"], "agent session missing observable diagnostics")
+require(
+    session_payload["adapter_source_monitor_mapping"],
+    "agent session missing adapter source/monitor mapping",
+)
 
 source_monitor = client.post(
     "/api/optical-language/infer",
@@ -78,6 +90,63 @@ require(diagnostics.status_code == 200, "/api/optical-language/diagnose failed")
 diag_payload = diagnostics.json()
 require(diag_payload["safe_to_preview"] is True, "diagnostics should be preview-safe")
 require(diag_payload["safe_to_run_solver"] is False, "diagnostics should block solver by default")
+
+observable = client.post(
+    "/api/optical-language/observables/diagnose",
+    json={
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(observable.status_code == 200, "/api/optical-language/observables/diagnose failed")
+observable_payload = observable.json()
+observable_kinds = {item["observable_kind"] for item in observable_payload["observable_diagnostics"]}
+require("scattering_spectrum" in observable_kinds, "scattering observable diagnostic missing")
+require(
+    observable_payload["production_grade_validation_claimed"] is False,
+    "observable diagnostics overclaimed validation",
+)
+
+adapter_mapping = client.post(
+    "/api/optical-language/adapter-mapping",
+    json={
+        "adapter_name": "meep",
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(adapter_mapping.status_code == 200, "/api/optical-language/adapter-mapping failed")
+mapping_payload = adapter_mapping.json()
+require(
+    mapping_payload["adapter_source_monitor_mapping"]["adapter_name"] == "meep",
+    "adapter mapping did not preserve adapter name",
+)
+require(
+    "scattering_spectrum"
+    in mapping_payload["adapter_source_monitor_mapping"]["supported_observables"],
+    "Meep mapping missing scattering support metadata",
+)
+require(
+    mapping_payload["adapter_source_monitor_mapping"]["external_solver_executed"] is False,
+    "adapter mapping executed solver",
+)
+
+adapter_preview = client.post(
+    "/api/adapter-preview",
+    json={"path": "examples/specs/minimal_nanoparticle.json", "tool": "meep"},
+)
+require(adapter_preview.status_code == 200, "/api/adapter-preview source/monitor metadata failed")
+preview_payload = adapter_preview.json()
+require(preview_payload["source_model"], "adapter preview missing source model")
+require(preview_payload["monitor_model"], "adapter preview missing monitor model")
+require(preview_payload["observable_diagnostics"], "adapter preview missing observable diagnostics")
+require(
+    preview_payload["adapter_source_monitor_mapping"],
+    "adapter preview missing adapter source/monitor mapping",
+)
+require(preview_payload["external_solver_executed"] is False, "adapter preview executed solver")
 
 requests = [
     (
@@ -187,12 +256,16 @@ require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity c
 print("CALCULATOR SANITY CHECKS PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
+print("OBSERVABLE DIAGNOSTICS PASSED")
+print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
 print("Backend capabilities smoke passed")
 PY
 
 echo "CALCULATOR SANITY CHECKS PASSED"
 echo "SOURCE/MONITOR INFERENCE PASSED"
 echo "MISSING INPUT DIAGNOSTICS PASSED"
+echo "OBSERVABLE DIAGNOSTICS PASSED"
+echo "ADAPTER SOURCE/MONITOR MAPPING PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

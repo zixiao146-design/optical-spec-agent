@@ -1201,11 +1201,14 @@ See [`docs/open_source_stack.md`](docs/open_source_stack.md) for per-tool detail
 ## Backend Optical-Language Diagnostics
 
 The backend now exposes deterministic source/monitor inference through
-`/api/optical-language/infer`, `/api/optical-language/diagnose`, and
-`/api/agent-session`. For nanoparticle scattering previews, the default
-metadata is a plane-wave-like source, 400-900 nm band, `linear_x`
-polarization, and scattering/extinction spectrum monitor. These are
-preview/design-assist assumptions only; no external solver monitor is executed.
+`/api/optical-language/infer`, `/api/optical-language/diagnose`,
+`/api/optical-language/observables/diagnose`,
+`/api/optical-language/adapter-mapping`, and `/api/agent-session`. For
+nanoparticle scattering previews, the default metadata is a plane-wave-like
+source, 400-900 nm band, `linear_x` polarization, and scattering/extinction
+spectrum monitor. The backend can now explain how that intent maps into Meep,
+MPB, Gmsh, Elmer, or Optiland preview semantics. These are preview/design-assist
+assumptions only; no external solver monitor is executed.
 
 ## License
 

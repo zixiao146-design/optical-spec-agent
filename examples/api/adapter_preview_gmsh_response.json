@@ -10,14 +10,19 @@
     "errors": [],
     "warnings": [
       "Spec does not explicitly target Gmsh; generating forced preview scaffold.",
-      "Missing geometry_definition; .geo will be an annotated placeholder."
+      "Missing geometry_definition; .geo will be an annotated placeholder.",
+      "No scattering spectrum has been computed by this preview.",
+      "Incident/reference normalization must be reviewed before solver use.",
+      "No optical observable is computed by Gmsh alone."
     ],
     "missing_fields": [],
     "assumptions": [],
     "limitations": [
       "Preview scaffold only; does not run gmsh.",
       "Geometry is schematic unless OpticalSpec contains explicit geometry dimensions.",
-      "Physical groups are placeholders for downstream FEM workflows."
+      "Physical groups are placeholders for downstream FEM workflows.",
+      "Adapter-native source/monitor mapping is preview metadata only.",
+      "No real solver monitor result was produced."
     ],
     "details": {}
   },
@@ -64,6 +69,104 @@
       ],
       "preview_only": true
     },
+    "observable_diagnostics": [
+      {
+        "observable_kind": "scattering_spectrum",
+        "user_facing_label": "Scattering spectrum",
+        "user_facing_label_zh": "散射谱",
+        "required_inputs": [
+          "wavelength_range_nm",
+          "source polarization",
+          "flux/field monitor region"
+        ],
+        "default_assumptions": [
+          "Spectrum is normalized preview metadata until a solver run exists."
+        ],
+        "adapter_compatibility": {
+          "meep": "preview metadata; real FDTD result requires Meep execution",
+          "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+          "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+          "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+          "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+        },
+        "preview_supported": true,
+        "solver_execution_required_for_real_result": true,
+        "notes": [
+          "Useful for nanoparticle/FDTD preview planning.",
+          "Source and monitor metadata are preview-only."
+        ],
+        "warnings": [
+          "No scattering spectrum has been computed by this preview."
+        ],
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "observable_kind": "extinction_spectrum",
+        "user_facing_label": "Extinction spectrum",
+        "user_facing_label_zh": "消光谱",
+        "required_inputs": [
+          "incident flux reference",
+          "scattered/total flux monitor"
+        ],
+        "default_assumptions": [
+          "Extinction is treated as a planned observable, not a result."
+        ],
+        "adapter_compatibility": {
+          "meep": "preview metadata; real FDTD result requires Meep execution",
+          "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+          "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+          "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+          "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+        },
+        "preview_supported": true,
+        "solver_execution_required_for_real_result": true,
+        "notes": [
+          "Pairs with scattering/absorption diagnostics in FDTD-style workflows.",
+          "Source and monitor metadata are preview-only."
+        ],
+        "warnings": [
+          "Incident/reference normalization must be reviewed before solver use."
+        ],
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    ],
+    "adapter_source_monitor_mapping": {
+      "adapter_name": "gmsh",
+      "source_mapping_summary": "Gmsh does not execute optical sources; source intent is attached as geometry/mesh annotation metadata.",
+      "monitor_mapping_summary": "Monitor intent maps to physical group / mesh region annotations, not optical fields.",
+      "native_source_terms": [
+        "geometry comments",
+        "mesh-size hints",
+        "source-region annotation"
+      ],
+      "native_monitor_terms": [
+        "Physical Surface/Volume groups",
+        "monitor-region annotation"
+      ],
+      "supported_observables": [],
+      "unsupported_observables": [
+        "scattering_spectrum",
+        "extinction_spectrum"
+      ],
+      "preview_metadata": {
+        "source_annotation": "plane_wave",
+        "monitor_annotation": "closed flux box or equivalent far-field proxy around nanoparticle",
+        "observable": "scattering/extinction spectrum preview"
+      },
+      "requires_solver_for_real_result": true,
+      "external_solver_executed": false,
+      "diagnostics": [
+        "Gmsh preview can preserve optical intent as mesh annotations."
+      ],
+      "warnings": [
+        "No optical observable is computed by Gmsh alone."
+      ],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
     "observable_summary": "scattering/extinction spectrum preview",
     "source_monitor_default_assumptions": [
       "Default to normal-incidence plane-wave-like source.",
@@ -72,6 +175,144 @@
       "Default observable is scattering/extinction spectrum preview.",
       "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
     ],
+    "preview_only": true,
+    "solver_execution_required_for_real_result": true
+  },
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": 400.0,
+    "wavelength_stop_nm": 900.0,
+    "wavelength_nm": null,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+    "defaulted_fields": [
+      "wavelength_range_nm",
+      "polarization",
+      "incidence_direction"
+    ],
     "preview_only": true
-  }
+  },
+  "monitor_model": {
+    "monitor_type": "scattering_spectrum",
+    "observable": "scattering/extinction spectrum preview",
+    "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+    "frequency_or_wavelength_sampling": "400-900 nm preview band",
+    "output_units": "normalized preview spectrum",
+    "notes": "Monitor metadata only; no FDTD monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region",
+      "sampling"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "scattering_spectrum",
+      "user_facing_label": "Scattering spectrum",
+      "user_facing_label_zh": "散射谱",
+      "required_inputs": [
+        "wavelength_range_nm",
+        "source polarization",
+        "flux/field monitor region"
+      ],
+      "default_assumptions": [
+        "Spectrum is normalized preview metadata until a solver run exists."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for nanoparticle/FDTD preview planning.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No scattering spectrum has been computed by this preview."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "extinction_spectrum",
+      "user_facing_label": "Extinction spectrum",
+      "user_facing_label_zh": "消光谱",
+      "required_inputs": [
+        "incident flux reference",
+        "scattered/total flux monitor"
+      ],
+      "default_assumptions": [
+        "Extinction is treated as a planned observable, not a result."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Pairs with scattering/absorption diagnostics in FDTD-style workflows.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "Incident/reference normalization must be reviewed before solver use."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "gmsh",
+    "source_mapping_summary": "Gmsh does not execute optical sources; source intent is attached as geometry/mesh annotation metadata.",
+    "monitor_mapping_summary": "Monitor intent maps to physical group / mesh region annotations, not optical fields.",
+    "native_source_terms": [
+      "geometry comments",
+      "mesh-size hints",
+      "source-region annotation"
+    ],
+    "native_monitor_terms": [
+      "Physical Surface/Volume groups",
+      "monitor-region annotation"
+    ],
+    "supported_observables": [],
+    "unsupported_observables": [
+      "scattering_spectrum",
+      "extinction_spectrum"
+    ],
+    "preview_metadata": {
+      "source_annotation": "plane_wave",
+      "monitor_annotation": "closed flux box or equivalent far-field proxy around nanoparticle",
+      "observable": "scattering/extinction spectrum preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "Gmsh preview can preserve optical intent as mesh annotations."
+    ],
+    "warnings": [
+      "No optical observable is computed by Gmsh alone."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "preview_only": true,
+  "solver_execution_required_for_real_result": true,
+  "warnings": [
+    "Spec does not explicitly target Gmsh; generating forced preview scaffold.",
+    "Missing geometry_definition; .geo will be an annotated placeholder.",
+    "No scattering spectrum has been computed by this preview.",
+    "Incident/reference normalization must be reviewed before solver use.",
+    "No optical observable is computed by Gmsh alone."
+  ]
 }

@@ -32,6 +32,10 @@ and `POST /api/design-requirements/match`.
 | Agent trace builder | yes | yes | yes |
 | Agent task session builder | yes | yes | yes |
 | Tool-call ledger | yes | yes | yes |
+| Source/monitor inference | yes | yes | yes |
+| Source/monitor missing-input diagnostics | yes | yes | yes |
+| Observable diagnostics | yes | yes | yes |
+| Adapter-native source/monitor mapping | yes | yes | yes |
 | Thin-film preview calculator | yes | yes | yes |
 | Thin-film spectrum / quarter-wave AR helper | yes | yes | yes |
 | Paraxial lens preview calculator | yes | yes | yes |
@@ -99,10 +103,13 @@ Backend source/monitor functionality is implemented as local Python helpers:
 
 - `optical_language.infer_source_monitor`
 - `optical_language.diagnose_missing_inputs`
+- `optical_language.diagnose_observable`
+- `optical_language.map_source_monitor_to_adapter`
 
 These helpers are included in backend capability reports and agent-session
 tool-call ledgers. They infer preview source/monitor metadata and report
-missing inputs without running solvers or calling external LLMs.
+missing inputs, observable requirements, and adapter-native preview semantics
+without running solvers or calling external LLMs.
 
 Both scripts are local-only and print:
 

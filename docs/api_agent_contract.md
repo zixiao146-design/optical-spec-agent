@@ -204,10 +204,16 @@ behavior. These endpoints do not run external solvers, call external LLMs,
 upload packages, create tags/releases, or claim production-grade physical
 validation.
 
-`POST /api/optical-language/infer` and
-`POST /api/optical-language/diagnose` expose source/monitor/observable
-metadata and missing-input diagnostics. `POST /api/agent-session` includes
-the same `source_model`, `monitor_model`, and `optical_language_diagnostics`
-fields plus ledger entries for `optical_language.infer_source_monitor` and
-`optical_language.diagnose_missing_inputs`. Monitor definitions are
+`POST /api/optical-language/infer`,
+`POST /api/optical-language/diagnose`,
+`POST /api/optical-language/observables/diagnose`, and
+`POST /api/optical-language/adapter-mapping` expose source/monitor/observable
+metadata, missing-input diagnostics, observable taxonomy, and adapter-native
+preview semantics. `POST /api/agent-session` includes the same `source_model`,
+`monitor_model`, `optical_language_diagnostics`, `observable_diagnostics`, and
+`adapter_source_monitor_mapping` fields plus ledger entries for
+`optical_language.infer_source_monitor`,
+`optical_language.diagnose_missing_inputs`,
+`optical_language.diagnose_observable`, and
+`optical_language.map_source_monitor_to_adapter`. Monitor definitions are
 preview-only metadata, not external solver monitor results.

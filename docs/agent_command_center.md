@@ -108,12 +108,16 @@ Agent sessions include `source_model`, `monitor_model`, and
 
 - infer source and monitor
 - check missing source/monitor inputs
+- diagnose observables
+- map source/monitor intent into adapter-native preview semantics
 - record default assumptions
 - keep `safe_to_run_solver=false`
 
 For nanoparticle/FDTD previews, the default is a plane-wave-like source,
 400-900 nm band, `linear_x` polarization, and scattering/extinction spectrum
-monitor metadata. No external solver monitor is executed.
+monitor metadata. The backend can explain how this maps to Meep flux/DFT
+preview metadata or Gmsh mesh-region annotations, but no external solver
+monitor is executed.
 
 ## Safety Boundaries
 

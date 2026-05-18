@@ -1,0 +1,199 @@
+{
+  "spec": {
+    "task": {
+      "task_id": "",
+      "task_name": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "task_type": {
+        "value": "simulation",
+        "status": "confirmed",
+        "note": ""
+      },
+      "research_goal": {
+        "value": "simulate gap plasmon",
+        "status": "confirmed",
+        "note": ""
+      }
+    },
+    "physics": {
+      "physical_system": {
+        "value": "nanoparticle_on_film",
+        "status": "confirmed",
+        "note": ""
+      },
+      "physical_mechanism": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "model_dimension": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "structure_type": {
+        "value": "sphere_on_film",
+        "status": "confirmed",
+        "note": ""
+      }
+    },
+    "geometry_material": {
+      "geometry_definition": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "material_system": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "material_model": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "substrate_or_film_info": {
+        "value": {
+          "has_substrate": false,
+          "substrate_material": "",
+          "substrate_thickness": "",
+          "has_film": true,
+          "film_material": "Au",
+          "film_thickness": "100 nm",
+          "notes": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "particle_info": {
+        "value": {
+          "particle_type": "sphere",
+          "material": "Au",
+          "dimensions": {
+            "直径": "80 nm"
+          },
+          "notes": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "gap_medium": {
+        "value": "SiO2",
+        "status": "confirmed",
+        "note": ""
+      },
+      "key_parameters": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      }
+    },
+    "simulation": {
+      "solver_method": {
+        "value": "fdtd",
+        "status": "confirmed",
+        "note": ""
+      },
+      "software_tool": {
+        "value": "meep",
+        "status": "confirmed",
+        "note": ""
+      },
+      "sweep_plan": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "excitation_source": {
+        "value": "plane_wave",
+        "status": "confirmed",
+        "note": ""
+      },
+      "source_setting": {
+        "value": {
+          "source_type": "plane_wave",
+          "wavelength_range": "400-900 nm",
+          "polarization": null,
+          "incident_angle": "0 deg",
+          "amplitude": null,
+          "description": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "polarization": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "incident_direction": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "boundary_condition": {
+        "value": {
+          "x_min": "PML",
+          "x_max": "PML",
+          "y_min": "PML",
+          "y_max": "PML",
+          "z_min": "PML",
+          "z_max": "PML",
+          "description": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "symmetry_setting": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "mesh_setting": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "stability_setting": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      },
+      "monitor_setting": {
+        "value": {
+          "monitor_type": "frequency_domain"
+        },
+        "status": "confirmed",
+        "note": ""
+      }
+    },
+    "output": {
+      "output_observables": {
+        "value": [
+          "scattering_spectrum"
+        ],
+        "status": "confirmed",
+        "note": ""
+      },
+      "postprocess_target": {
+        "value": null,
+        "status": "missing",
+        "note": ""
+      }
+    },
+    "confirmed_fields": {},
+    "inferred_fields": {},
+    "missing_fields": [],
+    "assumption_log": [],
+    "validation_status": {
+      "is_executable": false,
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "tool": "meep"
+}

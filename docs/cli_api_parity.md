@@ -69,3 +69,8 @@ Hardened frontend demo checks are documented in
   `/api/optical-language/infer`, `/api/optical-language/diagnose`, and
   `/api/agent-session`; it remains local deterministic metadata, not executed
   solver monitor output.
+- Observable diagnostics and adapter-native mapping are also API/backend-only
+  through `/api/optical-language/observables/diagnose`,
+  `/api/optical-language/adapter-mapping`, `/api/adapter-preview`, and
+  `/api/agent-session`; these calls explain preview semantics without running
+  Meep, MPB, Gmsh, Elmer, or Optiland.

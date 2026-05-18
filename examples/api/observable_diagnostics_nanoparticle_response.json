@@ -1,0 +1,121 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "No scattering spectrum has been computed by this preview.",
+      "Incident/reference normalization must be reviewed before solver use."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Observable diagnostics are preview/design-assist metadata.",
+      "Real solver results require explicit solver execution outside this endpoint."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Review required_inputs for each observable before solver setup.",
+    "Use /api/optical-language/adapter-mapping to inspect adapter-native preview semantics."
+  ],
+  "matched_template_id": "nanoparticle_plasmonics",
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": 400.0,
+    "wavelength_stop_nm": 900.0,
+    "wavelength_nm": null,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+    "defaulted_fields": [
+      "wavelength_range_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "scattering_spectrum",
+    "observable": "scattering/extinction spectrum preview",
+    "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+    "frequency_or_wavelength_sampling": "400-900 nm preview band",
+    "output_units": "normalized preview spectrum",
+    "notes": "Monitor metadata only; no FDTD monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region",
+      "sampling"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "scattering_spectrum",
+      "user_facing_label": "Scattering spectrum",
+      "user_facing_label_zh": "散射谱",
+      "required_inputs": [
+        "wavelength_range_nm",
+        "source polarization",
+        "flux/field monitor region"
+      ],
+      "default_assumptions": [
+        "Spectrum is normalized preview metadata until a solver run exists."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for nanoparticle/FDTD preview planning.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No scattering spectrum has been computed by this preview."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "extinction_spectrum",
+      "user_facing_label": "Extinction spectrum",
+      "user_facing_label_zh": "消光谱",
+      "required_inputs": [
+        "incident flux reference",
+        "scattered/total flux monitor"
+      ],
+      "default_assumptions": [
+        "Extinction is treated as a planned observable, not a result."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Pairs with scattering/absorption diagnostics in FDTD-style workflows.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "Incident/reference normalization must be reviewed before solver use."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ]
+}

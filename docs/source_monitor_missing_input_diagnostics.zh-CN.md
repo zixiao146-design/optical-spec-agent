@@ -44,14 +44,22 @@
 
 - `POST /api/optical-language/infer`
 - `POST /api/optical-language/diagnose`
+- `POST /api/optical-language/observables/diagnose`
+- `POST /api/optical-language/adapter-mapping`
 - `POST /api/agent-session`
 
 Agent session 也会记录工具调用：
 
 - `optical_language.infer_source_monitor`
 - `optical_language.diagnose_missing_inputs`
+- `optical_language.diagnose_observable`
+- `optical_language.map_source_monitor_to_adapter`
 
 ## 安全边界
 
 默认不执行外部求解器。默认不调用外部 LLM。不联网查询材料数据库。
 诊断输出是 preview/design-assist，不声明生产级物理验证，也不声明形式化收敛证明。
+
+观测量诊断和适配器原生光源/监测器映射会进一步说明必需观测量输入，以及
+Meep/MPB/Gmsh/Elmer/Optiland 的预览语义。这些内容仍然只是元数据，不是真实外部
+求解器 monitor 结果。

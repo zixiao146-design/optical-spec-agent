@@ -49,6 +49,8 @@ require({item["calculator_name"] for item in report["optical_calculators"]} == {
 internal_tools = {item["tool_name"]: item for item in report["internal_tools"]}
 require(internal_tools["source_monitor_inference"]["executed_in_sample"] is True, "source/monitor inference not executed in sample")
 require(internal_tools["missing_input_diagnostics"]["executed_in_sample"] is True, "missing-input diagnostics not executed in sample")
+require(internal_tools["observable_diagnostics"]["executed_in_sample"] is True, "observable diagnostics not executed in sample")
+require(internal_tools["adapter_native_mapping"]["executed_in_sample"] is True, "adapter-native mapping not executed in sample")
 require(all(action["executed"] is False for action in report["blocked_external_actions"]), "external action executed")
 require(report["production_grade_validation_claimed"] is False, "production claim changed")
 require(report["formal_convergence_proof_claimed"] is False, "convergence claim changed")
@@ -142,11 +144,57 @@ diagnose = client.post(
 require(diagnose.status_code == 200, "optical-language diagnostics failed")
 require(diagnose.json()["safe_to_run_solver"] is False, "diagnostics changed solver safety")
 
+observable = client.post(
+    "/api/optical-language/observables/diagnose",
+    json={
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(observable.status_code == 200, "observable diagnostics failed")
+require(
+    "scattering_spectrum"
+    in {item["observable_kind"] for item in observable.json()["observable_diagnostics"]},
+    "observable diagnostics missing scattering spectrum",
+)
+
+mapping = client.post(
+    "/api/optical-language/adapter-mapping",
+    json={
+        "adapter_name": "meep",
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(mapping.status_code == 200, "adapter source/monitor mapping failed")
+mapping_payload = mapping.json()
+require(
+    mapping_payload["adapter_source_monitor_mapping"]["adapter_name"] == "meep",
+    "adapter mapping adapter name mismatch",
+)
+require(
+    mapping_payload["adapter_source_monitor_mapping"]["external_solver_executed"] is False,
+    "adapter mapping executed solver",
+)
+
+preview = client.post(
+    "/api/adapter-preview",
+    json={"path": "examples/specs/minimal_nanoparticle.json", "tool": "meep"},
+)
+require(preview.status_code == 200, "adapter preview source/monitor metadata failed")
+preview_payload = preview.json()
+require(preview_payload["observable_diagnostics"], "adapter preview missing observable diagnostics")
+require(preview_payload["adapter_source_monitor_mapping"], "adapter preview missing mapping")
+
 print("BACKEND CAPABILITY REPORT PASSED")
 print("DESIGN CASE CROSS-CHECKS PASSED")
 print("DESIGN REQUIREMENT MATCHING PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
+print("OBSERVABLE DIAGNOSTICS PASSED")
+print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

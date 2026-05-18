@@ -131,13 +131,20 @@ def _get_sf_value(spec: OpticalSpec, dotted: str):
     return None
 
 
+def _value_attr(raw, name: str, default=None):
+    """Read a field from either a pydantic object or a JSON-decoded dict."""
+    if isinstance(raw, dict):
+        return raw.get(name, default)
+    return getattr(raw, name, default)
+
+
 def _parse_wavelength_range(source_setting) -> tuple[float, float] | None:
     """Parse wavelength range from SourceSetting or string, return (min_um, max_um)."""
     if source_setting is None:
         return None
 
     # If it's a SourceSetting object
-    wl_raw = getattr(source_setting, "wavelength_range", "")
+    wl_raw = _value_attr(source_setting, "wavelength_range", "")
     if not wl_raw:
         return None
 
@@ -188,7 +195,7 @@ def _extract_gap_thickness_nm(spec: OpticalSpec) -> float | None:
     """Resolve a fixed gap thickness from geometry_definition or key_parameters."""
     geom_raw = _get_sf_value(spec, "geometry_material.geometry_definition")
     if geom_raw:
-        dims = getattr(geom_raw, "dimensions", {}) or {}
+        dims = _value_attr(geom_raw, "dimensions", {}) or {}
         for key in ("gap_thickness_nm", "gap_nm", "gap", "间隙"):
             parsed = _parse_length_nm(dims.get(key))
             if parsed is not None:
@@ -216,10 +223,10 @@ def _resolve_wavelength_range(spec: OpticalSpec) -> tuple[tuple[float, float] | 
 
     if not wl_range:
         sweep_raw = _get_sf_value(spec, "simulation.sweep_plan")
-        if sweep_raw and getattr(sweep_raw, "sweep_type", "") == "wavelength":
-            sw_start = getattr(sweep_raw, "range_start", None)
-            sw_end = getattr(sweep_raw, "range_end", None)
-            sw_unit = getattr(sweep_raw, "unit", "nm")
+        if sweep_raw and _value_attr(sweep_raw, "sweep_type", "") == "wavelength":
+            sw_start = _value_attr(sweep_raw, "range_start", None)
+            sw_end = _value_attr(sweep_raw, "range_end", None)
+            sw_unit = _value_attr(sweep_raw, "unit", "nm")
             if sw_start is not None and sw_end is not None:
                 factor = 0.001 if sw_unit == "nm" else 1.0
                 wl_range = (sw_start * factor, sw_end * factor)
@@ -371,9 +378,9 @@ class MeepAdapter(BaseAdapter):
         if not particle_raw:
             errors.append("缺少 geometry_material.particle_info")
         else:
-            p_type = getattr(particle_raw, "particle_type", "") or ""
-            p_mat = getattr(particle_raw, "material", "") or ""
-            p_dims = getattr(particle_raw, "dimensions", {}) or {}
+            p_type = _value_attr(particle_raw, "particle_type", "") or ""
+            p_mat = _value_attr(particle_raw, "material", "") or ""
+            p_dims = _value_attr(particle_raw, "dimensions", {}) or {}
 
             if p_type not in _SHAPE_MAP:
                 errors.append("particle_info.particle_type 必须是 sphere/cube/rod 之一")
@@ -391,10 +398,10 @@ class MeepAdapter(BaseAdapter):
         if not film_raw:
             errors.append("缺少 geometry_material.substrate_or_film_info")
         else:
-            film_mat = getattr(film_raw, "film_material", "") or ""
+            film_mat = _value_attr(film_raw, "film_material", "") or ""
             if not film_mat:
                 errors.append("缺少 substrate_or_film_info.film_material")
-            film_thick_nm = _parse_length_nm(getattr(film_raw, "film_thickness", "") or "")
+            film_thick_nm = _parse_length_nm(_value_attr(film_raw, "film_thickness", "") or "")
             if film_thick_nm is None:
                 defaults_applied.append(f"film_thickness: {_DEFAULT_FILM_THICKNESS_NM:.0f} nm")
                 warnings.append("film_thickness 缺失，Meep adapter 将使用 100 nm 默认金膜厚度")
@@ -417,8 +424,8 @@ class MeepAdapter(BaseAdapter):
         sweep_raw = _get_sf_value(spec, "simulation.sweep_plan")
         has_gap_sweep = bool(
             sweep_raw
-            and getattr(sweep_raw, "sweep_type", "") == "parameter"
-            and "gap" in (getattr(sweep_raw, "variable", "") or "").lower()
+            and _value_attr(sweep_raw, "sweep_type", "") == "parameter"
+            and "gap" in (_value_attr(sweep_raw, "variable", "") or "").lower()
         )
         if gap_thick_nm is None and not has_gap_sweep:
             defaults_applied.append(f"gap_thickness: {_ADAPTER_DEFAULTS['gap_thickness_nm']:.0f} nm")
@@ -549,9 +556,9 @@ class MeepAdapter(BaseAdapter):
         if not particle_raw:
             raise AdapterError("missing_required_field", "geometry_material.particle_info")
 
-        p_type = getattr(particle_raw, "particle_type", "") or ""
-        p_mat = getattr(particle_raw, "material", "") or ""
-        p_dims = getattr(particle_raw, "dimensions", {}) or {}
+        p_type = _value_attr(particle_raw, "particle_type", "") or ""
+        p_mat = _value_attr(particle_raw, "material", "") or ""
+        p_dims = _value_attr(particle_raw, "dimensions", {}) or {}
 
         shape = _SHAPE_MAP.get(p_type)
         if not shape:
@@ -582,11 +589,11 @@ class MeepAdapter(BaseAdapter):
         if not film_raw:
             raise AdapterError("missing_required_field", "geometry_material.substrate_or_film_info")
 
-        film_mat = getattr(film_raw, "film_material", "") or ""
+        film_mat = _value_attr(film_raw, "film_material", "") or ""
         if not film_mat:
             raise AdapterError("missing_required_field", "substrate_or_film_info.film_material")
 
-        film_thick_str = getattr(film_raw, "film_thickness", "") or ""
+        film_thick_str = _value_attr(film_raw, "film_thickness", "") or ""
         film_thick_nm = _DEFAULT_FILM_THICKNESS_NM
         parsed_film_thickness = _parse_length_nm(film_thick_str)
         if parsed_film_thickness is not None:
@@ -629,14 +636,14 @@ class MeepAdapter(BaseAdapter):
         sweep_end = None
         sweep_steps = None
 
-        if sweep_raw and getattr(sweep_raw, "sweep_type", "") == "parameter":
-            var = getattr(sweep_raw, "variable", "") or ""
+        if sweep_raw and _value_attr(sweep_raw, "sweep_type", "") == "parameter":
+            var = _value_attr(sweep_raw, "variable", "") or ""
             if "gap" in var.lower():
                 sweep_variable = "gap_thickness_um"
-                r_start = getattr(sweep_raw, "range_start", None)
-                r_end = getattr(sweep_raw, "range_end", None)
-                step = getattr(sweep_raw, "step", None)
-                unit = getattr(sweep_raw, "unit", "nm")
+                r_start = _value_attr(sweep_raw, "range_start", None)
+                r_end = _value_attr(sweep_raw, "range_end", None)
+                step = _value_attr(sweep_raw, "step", None)
+                unit = _value_attr(sweep_raw, "unit", "nm")
                 factor = 0.001 if unit == "nm" else 1.0
                 if r_start is not None and r_end is not None:
                     sweep_start = r_start * factor

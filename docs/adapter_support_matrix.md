@@ -18,6 +18,10 @@ optical-spec-agent is open-source-solver-first. Adapter outputs are local
 generated artifacts. They do not run external solvers by default and do not
 claim production-grade physical validation. Adapter listing and evidence tests
 do not require external LLM providers, proprietary licenses, or network access.
+Adapter previews now carry source/monitor, observable diagnostics, and
+adapter-native mapping metadata. These mappings describe preview semantics only;
+real solver monitor results require explicit solver execution outside the
+default backend.
 
 Registry `current_status` values are `preview` for Meep and `mvp` for MPB,
 Gmsh, Elmer, and Optiland. No production-grade physical validation is claimed.

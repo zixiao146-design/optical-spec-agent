@@ -24,6 +24,8 @@ from optical_spec_agent.examples.requirements import (
 )
 from optical_spec_agent.materials.models import MaterialDetail, MaterialSummary
 from optical_spec_agent.optical_language import (
+    AdapterSourceMonitorMapping,
+    ObservableDiagnostic,
     OpticalLanguageDiagnostics,
     OpticalMonitorModel,
     OpticalSourceModel,
@@ -151,6 +153,13 @@ class AdapterPreviewResponse(ApiResponseBase):
     output_extension: str
     preview_content: str = ""
     artifact_summary: dict[str, Any] = Field(default_factory=dict)
+    source_model: OpticalSourceModel | None = None
+    monitor_model: OpticalMonitorModel | None = None
+    observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
+    adapter_source_monitor_mapping: AdapterSourceMonitorMapping | None = None
+    preview_only: bool = True
+    solver_execution_required_for_real_result: bool = False
+    warnings: list[str] = Field(default_factory=list)
 
 
 class ValidationEvidenceItem(BaseModel):
@@ -242,6 +251,8 @@ class AgentTaskSessionResponse(ApiResponseBase):
     optical_language_diagnostics: OpticalLanguageDiagnostics = Field(
         default_factory=OpticalLanguageDiagnostics
     )
+    observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
+    adapter_source_monitor_mapping: AdapterSourceMonitorMapping | None = None
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
@@ -282,10 +293,48 @@ class OpticalLanguageDiagnoseResponse(ApiResponseBase):
     safe_to_run_solver: bool = False
 
 
+class OpticalLanguageObservableDiagnoseRequest(ApiRequestBase):
+    goal: str = Field(..., description="Natural language optical design goal")
+    template_id: str | None = Field(None, description="Optional design requirement template id")
+    source_model: OpticalSourceModel | None = None
+    monitor_model: OpticalMonitorModel | None = None
+    language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+class OpticalLanguageObservableDiagnoseResponse(ApiResponseBase):
+    matched_template_id: str | None = None
+    source_model: OpticalSourceModel
+    monitor_model: OpticalMonitorModel
+    observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
+
+
+class OpticalLanguageAdapterMappingRequest(ApiRequestBase):
+    adapter_name: str = Field(..., description="Adapter name such as meep, mpb, gmsh, elmer, optiland")
+    goal: str = Field(..., description="Natural language optical design goal")
+    template_id: str | None = Field(None, description="Optional design requirement template id")
+    source_model: OpticalSourceModel | None = None
+    monitor_model: OpticalMonitorModel | None = None
+    language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+class OpticalLanguageAdapterMappingResponse(ApiResponseBase):
+    matched_template_id: str | None = None
+    source_model: OpticalSourceModel
+    monitor_model: OpticalMonitorModel
+    observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
+    adapter_source_monitor_mapping: AdapterSourceMonitorMapping
+
+
 __all_optical_language_models__ = [
+    "AdapterSourceMonitorMapping",
+    "ObservableDiagnostic",
+    "OpticalLanguageAdapterMappingRequest",
+    "OpticalLanguageAdapterMappingResponse",
     "OpticalLanguageDiagnoseResponse",
     "OpticalLanguageInferRequest",
     "OpticalLanguageDiagnoseRequest",
+    "OpticalLanguageObservableDiagnoseRequest",
+    "OpticalLanguageObservableDiagnoseResponse",
     "SourceMonitorInference",
 ]
 

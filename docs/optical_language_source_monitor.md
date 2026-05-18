@@ -13,7 +13,8 @@ metadata before an agent session creates workflow, adapter, calculator, or
 evidence artifacts. This makes the path explicit:
 
 natural language goal -> optical intent -> source model -> monitor model ->
-observable -> missing-input diagnostics.
+observable -> observable diagnostics -> adapter-native source/monitor mapping ->
+missing-input diagnostics.
 
 No external solver is executed. No external LLM is called. The metadata is
 preview/design-assist only.
@@ -58,3 +59,10 @@ preview/design-assist only.
 Monitor definitions are metadata only. They are not external solver monitor
 results. They do not claim production-grade physical validation or formal
 convergence proof.
+
+See also:
+
+- `docs/observable_diagnostics.md` for observable taxonomy, required inputs,
+  and preview-vs-real-result boundaries.
+- `docs/adapter_native_source_monitor_mapping.md` for Meep, MPB, Gmsh, Elmer,
+  and Optiland preview mapping semantics.

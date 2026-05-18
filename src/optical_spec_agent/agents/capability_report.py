@@ -24,8 +24,10 @@ from optical_spec_agent.examples.requirements import (
 )
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
 from optical_spec_agent.optical_language import (
+    diagnose_observable,
     diagnose_missing_inputs,
     infer_source_monitor_from_goal,
+    map_source_monitor_to_adapter,
 )
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
@@ -233,6 +235,20 @@ def _internal_tool_capabilities(
             diagnose_missing_inputs,
             "optical_language.diagnose_missing_inputs",
             "Reports missing source/monitor inputs, default assumptions, and solver safety state.",
+        ),
+        (
+            "observable_diagnostics",
+            "optical_spec_agent.optical_language",
+            diagnose_observable,
+            "optical_language.diagnose_observable",
+            "Classifies observables, required inputs, and preview-vs-real-result boundaries.",
+        ),
+        (
+            "adapter_native_mapping",
+            "optical_spec_agent.optical_language",
+            map_source_monitor_to_adapter,
+            "optical_language.map_source_monitor_to_adapter",
+            "Maps source/monitor/observable intent to adapter-native preview semantics.",
         ),
         (
             "optical_calculators",

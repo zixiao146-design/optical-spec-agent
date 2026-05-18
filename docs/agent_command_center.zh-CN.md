@@ -105,11 +105,14 @@ Agent session 包含 `source_model`、`monitor_model` 和
 
 - 推断光源和监测器
 - 检查缺失的光源/监测器输入
+- 诊断观测量
+- 映射到适配器原生预览语义
 - 记录默认假设
 - 保持 `safe_to_run_solver=false`
 
 纳米颗粒/FDTD 预览默认是平面波式光源、400-900 nm 波段、`linear_x` 偏振、
-散射/消光谱监测器元数据。不会执行外部求解器 monitor。
+散射/消光谱监测器元数据。后端可以说明这些意图如何映射到 Meep flux/DFT
+预览元数据或 Gmsh mesh-region 注释，但不会执行外部求解器 monitor。
 
 ## 安全边界
 

@@ -172,4 +172,17 @@ curl -X POST http://127.0.0.1:8000/api/optical-language/infer \
 curl -X POST http://127.0.0.1:8000/api/optical-language/diagnose \
   -H "Content-Type: application/json" \
   --data @examples/api/optical_language_diagnose_nanoparticle_request.json
+
+curl -X POST http://127.0.0.1:8000/api/optical-language/observables/diagnose \
+  -H "Content-Type: application/json" \
+  --data @examples/api/observable_diagnostics_nanoparticle_request.json
+
+curl -X POST http://127.0.0.1:8000/api/optical-language/adapter-mapping \
+  -H "Content-Type: application/json" \
+  --data @examples/api/adapter_mapping_meep_nanoparticle_request.json
 ```
+
+Observable diagnostics and adapter-native mapping are preview metadata only.
+They explain how Meep, MPB, Gmsh, Elmer, or Optiland would interpret source,
+monitor, and observable intent. They do not produce real solver monitor results
+and do not change the no-production-validation boundary.

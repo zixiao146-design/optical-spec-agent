@@ -21,6 +21,7 @@
   "recommended_next_actions": [
     "Review the optical intent and selected design case.",
     "Inspect permission gates before any optional external action.",
+    "Inspect observable diagnostics and adapter-native source/monitor mapping.",
     "Open the Agent Trace Timeline to review sub-agent contributions.",
     "Generate local workflow and adapter-preview artifacts only."
   ],
@@ -82,6 +83,107 @@
     "blocking_questions": [],
     "safe_to_preview": true,
     "safe_to_run_solver": false
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "scattering_spectrum",
+      "user_facing_label": "Scattering spectrum",
+      "user_facing_label_zh": "散射谱",
+      "required_inputs": [
+        "wavelength_range_nm",
+        "source polarization",
+        "flux/field monitor region"
+      ],
+      "default_assumptions": [
+        "Spectrum is normalized preview metadata until a solver run exists."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for nanoparticle/FDTD preview planning.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No scattering spectrum has been computed by this preview."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "extinction_spectrum",
+      "user_facing_label": "Extinction spectrum",
+      "user_facing_label_zh": "消光谱",
+      "required_inputs": [
+        "incident flux reference",
+        "scattered/total flux monitor"
+      ],
+      "default_assumptions": [
+        "Extinction is treated as a planned observable, not a result."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Pairs with scattering/absorption diagnostics in FDTD-style workflows.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "Incident/reference normalization must be reviewed before solver use."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "meep",
+    "source_mapping_summary": "plane_wave maps to Meep source metadata; broadband bands map to GaussianSource/broadband pulse preview terms.",
+    "monitor_mapping_summary": "scattering_spectrum maps to Meep flux/DFT monitor metadata only.",
+    "native_source_terms": [
+      "mp.Source",
+      "GaussianSource/broadband pulse metadata",
+      "planewave-like current source placeholder"
+    ],
+    "native_monitor_terms": [
+      "flux monitor metadata",
+      "DFT field monitor metadata",
+      "closed flux box / incident-flux normalization plan"
+    ],
+    "supported_observables": [
+      "scattering_spectrum",
+      "extinction_spectrum"
+    ],
+    "unsupported_observables": [],
+    "preview_metadata": {
+      "wavelength_start_nm": 400.0,
+      "wavelength_stop_nm": 900.0,
+      "polarization": "linear_x",
+      "monitor_region": "closed flux box or equivalent far-field proxy around nanoparticle",
+      "observable": "scattering/extinction spectrum preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "Meep preview generation can describe source and monitor intent."
+    ],
+    "warnings": [
+      "Real flux, DFT field, scattering, or extinction results require a Meep run."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
   },
   "selected_example_id": "nanoparticle_plasmonics",
   "design_case_summary": "nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview",
@@ -189,6 +291,30 @@
     },
     {
       "step_index": 8,
+      "title": "Diagnose observables",
+      "title_zh": "诊断观测量",
+      "description": "Classify requested observables and mark preview-vs-real-result boundaries.",
+      "description_zh": "分类请求的观测量，并标记预览与真实结果的边界。",
+      "agent_name": "EvidenceAgent",
+      "status": "completed",
+      "endpoint_or_tool": "optical_language.diagnose_observable",
+      "expected_output": "observable_diagnostics",
+      "safety_note": "Observable diagnostics are metadata; no solver result is claimed."
+    },
+    {
+      "step_index": 9,
+      "title": "Map source/monitor to adapter preview",
+      "title_zh": "映射光源/监测器到适配器预览",
+      "description": "Translate source, monitor, and observable intent into adapter-native preview terms.",
+      "description_zh": "将光源、监测器和观测量意图转换为适配器原生预览语义。",
+      "agent_name": "AdapterAgent",
+      "status": "completed",
+      "endpoint_or_tool": "optical_language.map_source_monitor_to_adapter",
+      "expected_output": "adapter_source_monitor_mapping",
+      "safety_note": "Mapping is preview/design-assist metadata, not a solver monitor result."
+    },
+    {
+      "step_index": 10,
       "title": "Plan local tool calls",
       "title_zh": "规划本地工具调用",
       "description": "Plan parse, validate, preview, evidence, and human review steps.",
@@ -200,7 +326,7 @@
       "safety_note": "No solver is executed by default."
     },
     {
-      "step_index": 9,
+      "step_index": 11,
       "title": "Preview artifacts and evidence",
       "title_zh": "预览产物和证据",
       "description": "Prepare preview artifacts and validation evidence references.",
@@ -212,7 +338,7 @@
       "safety_note": "No production-grade physical validation is claimed."
     },
     {
-      "step_index": 10,
+      "step_index": 12,
       "title": "Check permission gates",
       "title_zh": "检查权限门控",
       "description": "Block solver, LLM, upload, publish, tag, and release actions by default.",
@@ -505,6 +631,28 @@
       "production_grade": false
     },
     {
+      "artifact_id": "observable-diagnostics",
+      "label": "Observable diagnostics",
+      "label_zh": "观测量诊断",
+      "artifact_type": "evidence",
+      "summary": "scattering_spectrum, extinction_spectrum",
+      "preview_content": "[{'observable_kind': 'scattering_spectrum', 'user_facing_label': 'Scattering spectrum', 'user_facing_label_zh': '散射谱', 'required_inputs': ['wavelength_range_nm', 'source polarization', 'flux/field monitor region'], 'default_assumptions': ['Spectrum is normalized preview metadata until a solver run exists.'], 'adapter_compatibility': {'meep': 'preview metadata; real FDTD result requires Meep execution', 'mpb': 'preview metadata only unless the observable is eigenmode/band-oriented', 'gmsh': 'geometry/mesh annotation only; no optical observable computed by Gmsh alone', 'elmer': 'FEM placeholder metadata; real result requires ElmerSolver execution', 'optiland': 'ray/object/image metadata only unless ray tracing is explicitly run'}, 'preview_supported': True, 'solver_execution_required_for_real_result': True, 'notes': ['Useful for nanoparticle/FDTD preview planning.', 'Source and monitor metadata are preview-only.'], 'warnings': ['No scattering spectrum has been computed by this preview.'], 'production_grade_validation_claimed': False, 'formal_convergence_proof_claimed': False}, {'observable_kind': 'extinction_spectrum', 'user_facing_label': 'Extinction spectrum', 'user_facing_label_zh': '消光谱', 'required_inputs': ['incident flux reference', 'scattered/total flux monitor'], 'default_assumptions': ['Extinction is treated as a planned observable, not a result.'], 'adapter_compatibility': {'meep': 'preview metadata; real FDTD result requires Meep execution', 'mpb': 'preview metadata only unless the observable is eigenmode/band-oriented', 'gmsh': 'geometry/mesh annotation only; no optical observable computed by Gmsh alone', 'elmer': 'FEM placeholder metadata; real result requires ElmerSolver execution', 'optiland': 'ray/object/image metadata only unless ray tracing is explicitly run'}, 'preview_supported': True, 'solver_execution_required_for_real_result': True, 'notes': ['Pairs with scattering/absorption diagnostics in FDTD-style workflows.', 'Source and monitor metadata are preview-only.'], 'warnings': ['Incident/reference normalization must be reviewed before solver use.'], 'production_grade_validation_claimed': False, 'formal_convergence_proof_claimed': False}]",
+      "source_endpoint": "/api/optical-language/observables/diagnose",
+      "generated_by_agent": "EvidenceAgent",
+      "production_grade": false
+    },
+    {
+      "artifact_id": "adapter-native-source-monitor-preview",
+      "label": "Adapter-native source/monitor preview",
+      "label_zh": "适配器原生光源/监测器预览",
+      "artifact_type": "adapter_preview",
+      "summary": "meep: scattering_spectrum, extinction_spectrum; preview metadata only.",
+      "preview_content": "{'adapter_name': 'meep', 'source_mapping_summary': 'plane_wave maps to Meep source metadata; broadband bands map to GaussianSource/broadband pulse preview terms.', 'monitor_mapping_summary': 'scattering_spectrum maps to Meep flux/DFT monitor metadata only.', 'native_source_terms': ['mp.Source', 'GaussianSource/broadband pulse metadata', 'planewave-like current source placeholder'], 'native_monitor_terms': ['flux monitor metadata', 'DFT field monitor metadata', 'closed flux box / incident-flux normalization plan'], 'supported_observables': ['scattering_spectrum', 'extinction_spectrum'], 'unsupported_observables': [], 'preview_metadata': {'wavelength_start_nm': 400.0, 'wavelength_stop_nm': 900.0, 'polarization': 'linear_x', 'monitor_region': 'closed flux box or equivalent far-field proxy around nanoparticle', 'observable': 'scattering/extinction spectrum preview'}, 'requires_solver_for_real_result': True, 'external_solver_executed': False, 'diagnostics': ['Meep preview generation can describe source and monitor intent.'], 'warnings': ['Real flux, DFT field, scattering, or extinction results require a Meep run.'], 'preview_only': True, 'production_grade_validation_claimed': False, 'formal_convergence_proof_claimed': False}",
+      "source_endpoint": "/api/optical-language/adapter-mapping",
+      "generated_by_agent": "AdapterAgent",
+      "production_grade": false
+    },
+    {
       "artifact_id": "validation-evidence",
       "label": "Validation evidence",
       "label_zh": "验证证据",
@@ -660,6 +808,32 @@
       "output_summary": "missing=0; safe_to_preview=True; safe_to_run_solver=False",
       "reason": "Missing source/monitor inputs and defaults must be explicit.",
       "safety_note": "safe_to_run_solver is false by default."
+    },
+    {
+      "call_id": "optical-language-diagnose-observable",
+      "tool_name": "optical_language.diagnose_observable",
+      "tool_kind": "internal_python",
+      "called_by_agent": "EvidenceAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "scattering/extinction spectrum preview",
+      "output_summary": "observables=scattering_spectrum, extinction_spectrum",
+      "reason": "Requested observables must be classified before adapter-native mapping.",
+      "safety_note": "Observable diagnostics are preview metadata; no solver result was computed."
+    },
+    {
+      "call_id": "optical-language-map-source-monitor-to-adapter",
+      "tool_name": "optical_language.map_source_monitor_to_adapter",
+      "tool_kind": "internal_python",
+      "called_by_agent": "AdapterAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "adapter=meep with gmsh geometry preview; monitor=scattering_spectrum",
+      "output_summary": "meep: supported=scattering_spectrum, extinction_spectrum; unsupported=none",
+      "reason": "Adapter preview needs native source/monitor semantics.",
+      "safety_note": "Adapter mapping is preview/design-assist metadata; no adapter solver was executed."
     },
     {
       "call_id": "material-catalog-suggest",
@@ -857,5 +1031,5 @@
       "safety_note": "NO RELEASE CREATED."
     }
   ],
-  "final_recommendation": "Use the local nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview path, inspect material candidates au, ag, sio2, water, air, then review any calculator preview, workflow plan, and adapter preview via meep with gmsh geometry preview. Calculator outputs are design-assist only."
+  "final_recommendation": "Use the local nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview path, inspect material candidates au, ag, sio2, water, air, then review any calculator preview, workflow plan, and adapter preview via meep with gmsh geometry preview. Observable previews supported by the adapter mapping: scattering_spectrum, extinction_spectrum. Real solver monitor results require explicit solver execution when applicable."
 }

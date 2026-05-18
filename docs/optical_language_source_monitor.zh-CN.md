@@ -10,7 +10,7 @@ Current public prerelease: v0.9.0rc6。Current main development version:
 自然语言光学目标会先被转换为预览级光学语言：
 
 自然语言目标 -> 光学意图 -> 光源模型 -> 监测器模型 -> 观测量 ->
-缺失输入诊断。
+观测量诊断 -> 适配器原生光源/监测器映射 -> 缺失输入诊断。
 
 默认不执行外部求解器。默认不调用外部 LLM。所有光源/监测器信息都是
 preview/design-assist 元数据。
@@ -53,3 +53,9 @@ preview/design-assist 元数据。
 
 监测器定义只是元数据，不是外部求解器运行得到的 monitor 结果。
 不声明生产级物理验证，也不声明形式化收敛证明。
+
+相关文档：
+
+- `docs/observable_diagnostics.zh-CN.md`：观测量分类、必需输入和预览/真实结果边界。
+- `docs/adapter_native_source_monitor_mapping.zh-CN.md`：Meep、MPB、Gmsh、Elmer 和
+  Optiland 的预览映射语义。

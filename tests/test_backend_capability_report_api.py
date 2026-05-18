@@ -20,6 +20,8 @@ def test_backend_capability_report_api_returns_expected_sections():
         "example_registry",
         "source_monitor_inference",
         "missing_input_diagnostics",
+        "observable_diagnostics",
+        "adapter_native_mapping",
         "optical_calculators",
     }
     assert {item["calculator_name"] for item in body["optical_calculators"]} == {

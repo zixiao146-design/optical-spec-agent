@@ -195,6 +195,42 @@ optical_language_diagnose = post(
 require(optical_language_diagnose["safe_to_preview"] is True, "diagnostics should be safe to preview")
 require(optical_language_diagnose["safe_to_run_solver"] is False, "solver safety should remain false")
 
+observable_diagnostics = post(
+    "/api/optical-language/observables/diagnose",
+    {
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(
+    "scattering_spectrum"
+    in {item["observable_kind"] for item in observable_diagnostics["observable_diagnostics"]},
+    "observable diagnostics missing scattering spectrum",
+)
+
+adapter_mapping = post(
+    "/api/optical-language/adapter-mapping",
+    {
+        "adapter_name": "meep",
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(
+    adapter_mapping["adapter_source_monitor_mapping"]["adapter_name"] == "meep",
+    "adapter source/monitor mapping failed",
+)
+require(
+    adapter_mapping["adapter_source_monitor_mapping"]["external_solver_executed"] is False,
+    "adapter source/monitor mapping executed solver",
+)
+require(preview_payload["observable_diagnostics"], "adapter preview missing observable diagnostics")
+require(preview_payload["adapter_source_monitor_mapping"], "adapter preview missing adapter mapping")
+require(agent_session["observable_diagnostics"], "agent session missing observable diagnostics")
+require(agent_session["adapter_source_monitor_mapping"], "agent session missing adapter mapping")
+
 thin_film = post(
     "/api/optics/thin-film",
     {"incident_n": 1.0, "substrate_n": 1.5, "wavelength_nm": 550.0, "layers": [{"n": 1.22, "thickness_nm": 112.7}]},
@@ -279,6 +315,8 @@ for name, payload in {
     "design_requirement_match": design_requirement_match,
     "optical_language_infer": optical_language_infer,
     "optical_language_diagnose": optical_language_diagnose,
+    "observable_diagnostics": observable_diagnostics,
+    "adapter_mapping": adapter_mapping,
     "thin_film": thin_film,
     "thin_film_spectrum": thin_film_spectrum,
     "quarter_wave_ar": quarter_wave_ar,
@@ -298,7 +336,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 38}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 40}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

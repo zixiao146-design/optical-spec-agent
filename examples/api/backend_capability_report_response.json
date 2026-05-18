@@ -180,6 +180,24 @@
       ]
     },
     {
+      "tool_name": "observable_diagnostics",
+      "importable": true,
+      "callable": true,
+      "executed_in_sample": true,
+      "notes": [
+        "Classifies observables, required inputs, and preview-vs-real-result boundaries."
+      ]
+    },
+    {
+      "tool_name": "adapter_native_mapping",
+      "importable": true,
+      "callable": true,
+      "executed_in_sample": true,
+      "notes": [
+        "Maps source/monitor/observable intent to adapter-native preview semantics."
+      ]
+    },
+    {
       "tool_name": "optical_calculators",
       "importable": true,
       "callable": true,
@@ -436,6 +454,8 @@
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -482,6 +502,8 @@
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -531,6 +553,8 @@
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -578,6 +602,8 @@
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -624,6 +650,8 @@
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -672,6 +700,8 @@
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",

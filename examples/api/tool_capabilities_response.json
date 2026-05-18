@@ -79,6 +79,50 @@
       ]
     },
     {
+      "tool_name": "source_monitor_inference",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.optical_language",
+      "notes": [
+        "Infers preview source, monitor, observable, and defaults with local heuristics."
+      ]
+    },
+    {
+      "tool_name": "missing_input_diagnostics",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.optical_language",
+      "notes": [
+        "Reports source/monitor missing inputs, ambiguity notes, and safe_to_run_solver=false."
+      ]
+    },
+    {
+      "tool_name": "observable_diagnostics",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.optical_language",
+      "notes": [
+        "Diagnoses observable taxonomy, required inputs, and preview-vs-real-result boundaries."
+      ]
+    },
+    {
+      "tool_name": "adapter_native_mapping",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.optical_language",
+      "notes": [
+        "Maps source/monitor/observable intent to adapter-native preview semantics."
+      ]
+    },
+    {
       "tool_name": "optical_calculators",
       "tool_kind": "internal_python",
       "available": true,

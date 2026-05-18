@@ -602,6 +602,84 @@
       "name": "design-case-cross-checks",
       "endpoint": "/api/design-case-cross-checks",
       "response_file": "design_case_cross_checks_response.json"
+    },
+    {
+      "name": "observable-diagnostics-nanoparticle",
+      "endpoint": "/api/optical-language/observables/diagnose",
+      "method": "POST",
+      "request_file": "observable_diagnostics_nanoparticle_request.json",
+      "response_file": "observable_diagnostics_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-mapping-meep-nanoparticle",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_mapping_meep_nanoparticle_request.json",
+      "response_file": "adapter_mapping_meep_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-mapping-gmsh-mesh",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_mapping_gmsh_mesh_request.json",
+      "response_file": "adapter_mapping_gmsh_mesh_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-mapping-mpb-photonic-crystal",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_mapping_mpb_photonic_crystal_request.json",
+      "response_file": "adapter_mapping_mpb_photonic_crystal_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-preview-meep-source-monitor",
+      "endpoint": "/api/adapter-preview",
+      "method": "POST",
+      "request_file": "adapter_preview_meep_request.json",
+      "response_file": "adapter_preview_meep_source_monitor_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "agent-session-adapter-mapping-nanoparticle",
+      "endpoint": "/api/agent-session",
+      "method": "POST",
+      "request_file": "agent_session_request_nanoparticle.json",
+      "response_file": "agent_session_adapter_mapping_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     }
   ]
 }

@@ -1,0 +1,154 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "No optical observable is computed by Gmsh alone."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Adapter-native mapping is preview metadata only.",
+      "No adapter or external solver process was executed."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Inspect supported_observables and unsupported_observables.",
+    "Use /api/adapter-preview for scaffold content; run solvers only after explicit approval."
+  ],
+  "matched_template_id": "dielectric_metasurface_preview",
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 633.0,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Normal-incidence plane-wave metadata for metasurface phase preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "phase_profile",
+    "observable": "phase profile / far-field preview",
+    "region": "transmission plane or far-field proxy",
+    "frequency_or_wavelength_sampling": "single design wavelength",
+    "output_units": "phase radians / normalized field preview",
+    "notes": "No FDTD/RCWA field monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "phase_profile",
+      "user_facing_label": "Phase profile",
+      "user_facing_label_zh": "相位分布",
+      "required_inputs": [
+        "wavelength",
+        "polarization",
+        "monitor plane"
+      ],
+      "default_assumptions": [
+        "Phase profile is planned metadata unless solver/RCWA output exists."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for metasurface preview workflows.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No phase map has been computed."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "far_field",
+      "user_facing_label": "Far-field pattern",
+      "user_facing_label_zh": "远场分布",
+      "required_inputs": [
+        "near-to-far region or equivalent",
+        "angular sampling"
+      ],
+      "default_assumptions": [
+        "Far-field is a planned observable unless solver output exists."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for metasurface and scattering preview workflows.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No angular far-field result has been computed."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "gmsh",
+    "source_mapping_summary": "Gmsh does not execute optical sources; source intent is attached as geometry/mesh annotation metadata.",
+    "monitor_mapping_summary": "Monitor intent maps to physical group / mesh region annotations, not optical fields.",
+    "native_source_terms": [
+      "geometry comments",
+      "mesh-size hints",
+      "source-region annotation"
+    ],
+    "native_monitor_terms": [
+      "Physical Surface/Volume groups",
+      "monitor-region annotation"
+    ],
+    "supported_observables": [],
+    "unsupported_observables": [
+      "phase_profile",
+      "far_field"
+    ],
+    "preview_metadata": {
+      "source_annotation": "plane_wave",
+      "monitor_annotation": "transmission plane or far-field proxy",
+      "observable": "phase profile / far-field preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "Gmsh preview can preserve optical intent as mesh annotations."
+    ],
+    "warnings": [
+      "No optical observable is computed by Gmsh alone."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

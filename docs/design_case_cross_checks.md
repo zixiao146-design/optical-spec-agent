@@ -16,6 +16,8 @@ For each example under `examples/optical_design/`, the backend verifies:
 - A local agent task session can be built.
 - Material suggestions are produced.
 - An adapter recommendation is present.
+- Source/monitor inference, observable diagnostics, and adapter-native mapping
+  metadata are present in agent sessions.
 - Expected calculator calls are recorded when the design family has a scalar
   preview calculator.
 - Safety flags remain false.

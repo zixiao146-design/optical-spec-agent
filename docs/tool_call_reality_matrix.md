@@ -54,6 +54,8 @@ cross-checks, and blocked external actions in one structured payload.
 | `optics.waveguide.sweep` | yes for waveguide goals | yes | V-number sweep and single-mode range preview. |
 | `backend_capability_report.generate` | yes through smoke/report script and API | yes | Reports importable/callable/executed backend reality. |
 | `design_case_cross_checks.run` | yes through smoke/report script and API | yes | Verifies examples map to expected calculator or adapter trace behavior. |
+| `optical_language.diagnose_observable` | yes through API and agent session | yes | Reports observable taxonomy, required inputs, and preview-vs-real-result boundaries. |
+| `optical_language.map_source_monitor_to_adapter` | yes through API and agent session | yes | Maps source/monitor/observable intent to adapter-native preview semantics. |
 
 ## External Solvers
 
@@ -92,6 +94,9 @@ The following are not exposed as backend Agent Studio actions:
 - Source/monitor inference and missing-input diagnostics are internal Python
   calls: `optical_language.infer_source_monitor` and
   `optical_language.diagnose_missing_inputs`.
+- Observable diagnostics and adapter-native mapping are internal Python calls:
+  `optical_language.diagnose_observable` and
+  `optical_language.map_source_monitor_to_adapter`.
 - Monitor definitions are preview metadata, not executed external solver monitor
   results.
 - Production-grade physical validation is not claimed.

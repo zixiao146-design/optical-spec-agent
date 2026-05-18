@@ -1,0 +1,6 @@
+{
+  "adapter_name": "gmsh",
+  "goal": "Create a dielectric metasurface mesh-region preview with no solver execution.",
+  "template_id": "dielectric_metasurface_preview",
+  "language": "en"
+}

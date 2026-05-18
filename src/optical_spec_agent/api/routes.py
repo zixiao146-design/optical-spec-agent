@@ -37,7 +37,11 @@ from optical_spec_agent.api.models import (
     OpticalCalculatorResponse,
     OpticalLanguageDiagnoseRequest,
     OpticalLanguageDiagnoseResponse,
+    OpticalLanguageAdapterMappingRequest,
+    OpticalLanguageAdapterMappingResponse,
     OpticalLanguageInferRequest,
+    OpticalLanguageObservableDiagnoseRequest,
+    OpticalLanguageObservableDiagnoseResponse,
     ParaxialSystemRequest,
     ParaxialLensRequest,
     QuarterWaveARRequest,
@@ -94,8 +98,10 @@ from optical_spec_agent.examples.requirements import (
     match_goal_to_template,
 )
 from optical_spec_agent.optical_language import (
+    diagnose_observable,
     diagnose_missing_inputs,
     infer_source_monitor_from_goal,
+    map_source_monitor_to_adapter,
 )
 from optical_spec_agent.materials.catalog import (
     get_material,
@@ -534,6 +540,27 @@ def agent_adapter_preview(req: AgentAdapterPreviewRequest):
 
     status = "ok" if not result.errors else "needs_review"
     source_monitor = infer_source_monitor_from_goal(_workflow_text_from_spec(spec))
+    observable_diagnostics = diagnose_observable(
+        source_monitor.source_model,
+        source_monitor.monitor_model,
+        template_id=source_monitor.matched_template_id,
+    )
+    adapter_mapping = map_source_monitor_to_adapter(
+        result.tool,
+        source_monitor.source_model,
+        source_monitor.monitor_model,
+        observable_diagnostics,
+    )
+    observable_warnings = [
+        warning
+        for diagnostic in observable_diagnostics
+        for warning in diagnostic.warnings
+    ]
+    all_warnings = [
+        *result.warnings,
+        *observable_warnings,
+        *adapter_mapping.warnings,
+    ]
     return AdapterPreviewResponse(
         status=status,
         tool=result.tool,
@@ -541,6 +568,15 @@ def agent_adapter_preview(req: AgentAdapterPreviewRequest):
         output_language=result.language,
         output_extension=metadata.output_extension,
         preview_content=result.content,
+        source_model=source_monitor.source_model,
+        monitor_model=source_monitor.monitor_model,
+        observable_diagnostics=observable_diagnostics,
+        adapter_source_monitor_mapping=adapter_mapping,
+        preview_only=True,
+        solver_execution_required_for_real_result=(
+            adapter_mapping.requires_solver_for_real_result
+        ),
+        warnings=all_warnings,
         artifact_summary={
             "content_length": len(result.content),
             "generated_files": result.generated_files,
@@ -548,16 +584,27 @@ def agent_adapter_preview(req: AgentAdapterPreviewRequest):
             "defaults_applied": result.defaults_applied,
             "source_model": source_monitor.source_model.model_dump(mode="json"),
             "monitor_model": source_monitor.monitor_model.model_dump(mode="json"),
+            "observable_diagnostics": [
+                item.model_dump(mode="json") for item in observable_diagnostics
+            ],
+            "adapter_source_monitor_mapping": adapter_mapping.model_dump(mode="json"),
             "observable_summary": source_monitor.monitor_model.observable,
             "source_monitor_default_assumptions": (
                 source_monitor.diagnostics.default_assumptions_applied
             ),
             "preview_only": True,
+            "solver_execution_required_for_real_result": (
+                adapter_mapping.requires_solver_for_real_result
+            ),
         },
         diagnostics=ApiDiagnostic(
-            warnings=result.warnings,
+            warnings=all_warnings,
             errors=result.errors,
-            limitations=result.limitations,
+            limitations=[
+                *result.limitations,
+                "Adapter-native source/monitor mapping is preview metadata only.",
+                "No real solver monitor result was produced.",
+            ],
         ),
     )
 
@@ -684,6 +731,28 @@ def agent_tool_capabilities():
             detection_method="import optical_spec_agent.optical_language",
             notes=[
                 "Reports source/monitor missing inputs, ambiguity notes, and safe_to_run_solver=false."
+            ],
+        ),
+        ToolCapabilityItem(
+            tool_name="observable_diagnostics",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.optical_language",
+            notes=[
+                "Diagnoses observable taxonomy, required inputs, and preview-vs-real-result boundaries."
+            ],
+        ),
+        ToolCapabilityItem(
+            tool_name="adapter_native_mapping",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.optical_language",
+            notes=[
+                "Maps source/monitor/observable intent to adapter-native preview semantics."
             ],
         ),
         ToolCapabilityItem(
@@ -1317,6 +1386,122 @@ def agent_optical_language_diagnose(req: OpticalLanguageDiagnoseRequest):
     )
 
 
+@router.post(
+    "/api/optical-language/observables/diagnose",
+    response_model=OpticalLanguageObservableDiagnoseResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_observable_diagnose(req: OpticalLanguageObservableDiagnoseRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Observable diagnostics require a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=["Provide a local optical design goal."],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    inference = infer_source_monitor_from_goal(goal, template_id=req.template_id)
+    source_model = req.source_model or inference.source_model
+    monitor_model = req.monitor_model or inference.monitor_model
+    observable_diagnostics = diagnose_observable(
+        source_model,
+        monitor_model,
+        template_id=inference.matched_template_id,
+    )
+    warnings = [
+        warning
+        for diagnostic in observable_diagnostics
+        for warning in diagnostic.warnings
+    ]
+    return OpticalLanguageObservableDiagnoseResponse(
+        matched_template_id=inference.matched_template_id,
+        source_model=source_model,
+        monitor_model=monitor_model,
+        observable_diagnostics=observable_diagnostics,
+        diagnostics=ApiDiagnostic(
+            warnings=warnings,
+            limitations=[
+                "Observable diagnostics are preview/design-assist metadata.",
+                "Real solver results require explicit solver execution outside this endpoint.",
+            ],
+        ),
+        recommended_next_actions=[
+            "Review required_inputs for each observable before solver setup.",
+            "Use /api/optical-language/adapter-mapping to inspect adapter-native preview semantics.",
+        ],
+    )
+
+
+@router.post(
+    "/api/optical-language/adapter-mapping",
+    response_model=OpticalLanguageAdapterMappingResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_adapter_source_monitor_mapping(req: OpticalLanguageAdapterMappingRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Adapter source/monitor mapping requires a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=["Provide a local optical design goal."],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    inference = infer_source_monitor_from_goal(goal, template_id=req.template_id)
+    source_model = req.source_model or inference.source_model
+    monitor_model = req.monitor_model or inference.monitor_model
+    observable_diagnostics = diagnose_observable(
+        source_model,
+        monitor_model,
+        template_id=inference.matched_template_id,
+    )
+    adapter_mapping = map_source_monitor_to_adapter(
+        req.adapter_name,
+        source_model,
+        monitor_model,
+        observable_diagnostics,
+    )
+    return OpticalLanguageAdapterMappingResponse(
+        matched_template_id=inference.matched_template_id,
+        source_model=source_model,
+        monitor_model=monitor_model,
+        observable_diagnostics=observable_diagnostics,
+        adapter_source_monitor_mapping=adapter_mapping,
+        diagnostics=ApiDiagnostic(
+            warnings=adapter_mapping.warnings,
+            limitations=[
+                "Adapter-native mapping is preview metadata only.",
+                "No adapter or external solver process was executed.",
+            ],
+        ),
+        recommended_next_actions=[
+            "Inspect supported_observables and unsupported_observables.",
+            "Use /api/adapter-preview for scaffold content; run solvers only after explicit approval.",
+        ],
+    )
+
+
 @router.get(
     "/api/examples/{example_id}",
     response_model=ExampleDetailResponse,
@@ -1480,6 +1665,8 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
         source_model=session.source_model,
         monitor_model=session.monitor_model,
         optical_language_diagnostics=session.optical_language_diagnostics,
+        observable_diagnostics=session.observable_diagnostics,
+        adapter_source_monitor_mapping=session.adapter_source_monitor_mapping,
         selected_example_id=session.selected_example_id,
         design_case_summary=session.design_case_summary,
         missing_required_inputs=session.missing_required_inputs,

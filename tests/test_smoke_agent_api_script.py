@@ -37,6 +37,8 @@ def test_smoke_agent_api_script_exists_and_does_not_publish_or_release():
         "/api/design-requirements/match",
         "/api/optical-language/infer",
         "/api/optical-language/diagnose",
+        "/api/optical-language/observables/diagnose",
+        "/api/optical-language/adapter-mapping",
         "/api/optics/thin-film",
         "/api/optics/thin-film-spectrum",
         "/api/optics/quarter-wave-ar",

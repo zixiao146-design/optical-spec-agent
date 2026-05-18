@@ -18,10 +18,14 @@ from optical_spec_agent.examples.requirements import (
 )
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
 from optical_spec_agent.optical_language import (
+    AdapterSourceMonitorMapping,
+    ObservableDiagnostic,
     OpticalLanguageDiagnostics,
     OpticalMonitorModel,
     OpticalSourceModel,
+    diagnose_observable,
     infer_source_monitor_from_goal,
+    map_source_monitor_to_adapter,
 )
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
@@ -123,6 +127,8 @@ class AgentTaskSession(BaseModel):
     optical_language_diagnostics: OpticalLanguageDiagnostics = Field(
         default_factory=OpticalLanguageDiagnostics
     )
+    observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
+    adapter_source_monitor_mapping: AdapterSourceMonitorMapping | None = None
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
@@ -201,6 +207,17 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
 
     adapter_recommendation = trace.adapter_recommendation or _adapter_for_intent(optical_intent)
     trace.adapter_recommendation = adapter_recommendation
+    observable_diagnostics = diagnose_observable(
+        source_monitor.source_model,
+        source_monitor.monitor_model,
+        template_id=requirement_match.matched_template_id,
+    )
+    adapter_mapping = map_source_monitor_to_adapter(
+        adapter_recommendation,
+        source_monitor.source_model,
+        source_monitor.monitor_model,
+        observable_diagnostics,
+    )
     session_hash = hashlib.sha1(f"{goal}|{selected_example_id or ''}".encode("utf-8")).hexdigest()[:10]
     design_case_summary = _design_case_summary(
         optical_intent,
@@ -217,6 +234,8 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         source_model=source_monitor.source_model,
         monitor_model=source_monitor.monitor_model,
         optical_language_diagnostics=source_monitor.diagnostics,
+        observable_diagnostics=observable_diagnostics,
+        adapter_source_monitor_mapping=adapter_mapping,
         selected_example_id=selected_example_id,
         design_case_summary=design_case_summary,
         missing_required_inputs=sorted(
@@ -236,6 +255,8 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             adapter_recommendation=adapter_recommendation,
             source_model=source_monitor.source_model,
             monitor_model=source_monitor.monitor_model,
+            observable_diagnostics=observable_diagnostics,
+            adapter_mapping=adapter_mapping,
         ),
         permission_gates=_permission_gates(),
         tool_call_ledger=_tool_call_ledger(
@@ -244,16 +265,21 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             adapter_recommendation=adapter_recommendation,
             requirement_match=requirement_match,
             source_monitor=source_monitor,
+            observable_diagnostics=observable_diagnostics,
+            adapter_mapping=adapter_mapping,
         ),
         final_recommendation=(
             f"Use the local {design_case_summary} path, inspect material candidates "
             f"{', '.join(trace.material_suggestions) or 'from the material catalog'}, "
             f"then review any calculator preview, workflow plan, and adapter preview via "
-            f"{adapter_recommendation}. Calculator outputs are design-assist only."
+            f"{adapter_recommendation}. Observable previews supported by the adapter mapping: "
+            f"{', '.join(adapter_mapping.supported_observables) or 'review required'}. "
+            "Real solver monitor results require explicit solver execution when applicable."
         ),
         recommended_next_actions=[
             "Review the optical intent and selected design case.",
             "Inspect permission gates before any optional external action.",
+            "Inspect observable diagnostics and adapter-native source/monitor mapping.",
             "Open the Agent Trace Timeline to review sub-agent contributions.",
             "Generate local workflow and adapter-preview artifacts only.",
         ],
@@ -412,6 +438,28 @@ def _plan_steps(
         ),
         AgentPlanStep(
             step_index=8,
+            title="Diagnose observables",
+            title_zh="诊断观测量",
+            description="Classify requested observables and mark preview-vs-real-result boundaries.",
+            description_zh="分类请求的观测量，并标记预览与真实结果的边界。",
+            agent_name="EvidenceAgent",
+            endpoint_or_tool="optical_language.diagnose_observable",
+            expected_output="observable_diagnostics",
+            safety_note="Observable diagnostics are metadata; no solver result is claimed.",
+        ),
+        AgentPlanStep(
+            step_index=9,
+            title="Map source/monitor to adapter preview",
+            title_zh="映射光源/监测器到适配器预览",
+            description="Translate source, monitor, and observable intent into adapter-native preview terms.",
+            description_zh="将光源、监测器和观测量意图转换为适配器原生预览语义。",
+            agent_name="AdapterAgent",
+            endpoint_or_tool="optical_language.map_source_monitor_to_adapter",
+            expected_output="adapter_source_monitor_mapping",
+            safety_note="Mapping is preview/design-assist metadata, not a solver monitor result.",
+        ),
+        AgentPlanStep(
+            step_index=10,
             title="Plan local tool calls",
             title_zh="规划本地工具调用",
             description="Plan parse, validate, preview, evidence, and human review steps.",
@@ -422,7 +470,7 @@ def _plan_steps(
             safety_note="No solver is executed by default.",
         ),
         AgentPlanStep(
-            step_index=9,
+            step_index=11,
             title="Preview artifacts and evidence",
             title_zh="预览产物和证据",
             description="Prepare preview artifacts and validation evidence references.",
@@ -433,7 +481,7 @@ def _plan_steps(
             safety_note="No production-grade physical validation is claimed.",
         ),
         AgentPlanStep(
-            step_index=10,
+            step_index=12,
             title="Check permission gates",
             title_zh="检查权限门控",
             description="Block solver, LLM, upload, publish, tag, and release actions by default.",
@@ -454,6 +502,8 @@ def _artifacts(
     adapter_recommendation: str,
     source_model: OpticalSourceModel | None,
     monitor_model: OpticalMonitorModel | None,
+    observable_diagnostics: list[ObservableDiagnostic],
+    adapter_mapping: AdapterSourceMonitorMapping,
 ) -> list[AgentArtifact]:
     example_path = (
         f"examples/optical_design/{selected_example_id}/spec.json"
@@ -522,6 +572,34 @@ def _artifacts(
             artifact_type="adapter_preview",
             summary="Preview-only solver-native scaffold; no solver execution.",
             source_endpoint="/api/adapter-preview",
+            generated_by_agent="AdapterAgent",
+        ),
+        AgentArtifact(
+            artifact_id="observable-diagnostics",
+            label="Observable diagnostics",
+            label_zh="观测量诊断",
+            artifact_type="evidence",
+            summary=(
+                ", ".join(item.observable_kind for item in observable_diagnostics)
+                if observable_diagnostics
+                else "No observable diagnostics produced."
+            ),
+            preview_content=str([item.model_dump(mode="json") for item in observable_diagnostics]),
+            source_endpoint="/api/optical-language/observables/diagnose",
+            generated_by_agent="EvidenceAgent",
+        ),
+        AgentArtifact(
+            artifact_id="adapter-native-source-monitor-preview",
+            label="Adapter-native source/monitor preview",
+            label_zh="适配器原生光源/监测器预览",
+            artifact_type="adapter_preview",
+            summary=(
+                f"{adapter_mapping.adapter_name}: "
+                f"{', '.join(adapter_mapping.supported_observables) or 'review observables'}; "
+                "preview metadata only."
+            ),
+            preview_content=str(adapter_mapping.model_dump(mode="json")),
+            source_endpoint="/api/optical-language/adapter-mapping",
             generated_by_agent="AdapterAgent",
         ),
         AgentArtifact(
@@ -625,6 +703,8 @@ def _tool_call_ledger(
     adapter_recommendation: str,
     requirement_match: RequirementMatchResult,
     source_monitor: Any,
+    observable_diagnostics: list[ObservableDiagnostic],
+    adapter_mapping: AdapterSourceMonitorMapping,
 ) -> list[ToolCallRecord]:
     ledger = [
         ToolCallRecord(
@@ -695,6 +775,40 @@ def _tool_call_ledger(
             ),
             reason="Missing source/monitor inputs and defaults must be explicit.",
             safety_note="safe_to_run_solver is false by default.",
+        ),
+        ToolCallRecord(
+            call_id="optical-language-diagnose-observable",
+            tool_name="optical_language.diagnose_observable",
+            tool_kind="internal_python",
+            called_by_agent="EvidenceAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=source_monitor.monitor_model.observable,
+            output_summary=(
+                f"observables={', '.join(item.observable_kind for item in observable_diagnostics)}"
+                if observable_diagnostics
+                else "No observable diagnostics produced."
+            ),
+            reason="Requested observables must be classified before adapter-native mapping.",
+            safety_note="Observable diagnostics are preview metadata; no solver result was computed.",
+        ),
+        ToolCallRecord(
+            call_id="optical-language-map-source-monitor-to-adapter",
+            tool_name="optical_language.map_source_monitor_to_adapter",
+            tool_kind="internal_python",
+            called_by_agent="AdapterAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=f"adapter={adapter_recommendation}; monitor={source_monitor.monitor_model.monitor_type}",
+            output_summary=(
+                f"{adapter_mapping.adapter_name}: "
+                f"supported={', '.join(adapter_mapping.supported_observables) or 'none'}; "
+                f"unsupported={', '.join(adapter_mapping.unsupported_observables) or 'none'}"
+            ),
+            reason="Adapter preview needs native source/monitor semantics.",
+            safety_note="Adapter mapping is preview/design-assist metadata; no adapter solver was executed.",
         ),
         ToolCallRecord(
             call_id="material-catalog-suggest",

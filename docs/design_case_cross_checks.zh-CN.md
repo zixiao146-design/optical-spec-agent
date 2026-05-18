@@ -16,6 +16,7 @@ Current public prerelease: v0.9.0rc6。Current main development version:
 - 能否构建本地 agent task session。
 - 是否生成材料建议。
 - 是否生成适配器建议。
+- agent session 中是否包含光源/监测器推断、观测量诊断和适配器原生映射元数据。
 - 如果该设计族有标量预览计算器，是否记录了预期计算器调用。
 - 安全 flags 是否保持 false。
 

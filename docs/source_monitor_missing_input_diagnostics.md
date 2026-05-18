@@ -45,15 +45,24 @@ Defaults make a case safe to preview, not safe to run an external solver.
 
 - `POST /api/optical-language/infer`
 - `POST /api/optical-language/diagnose`
+- `POST /api/optical-language/observables/diagnose`
+- `POST /api/optical-language/adapter-mapping`
 - `POST /api/agent-session`
 
 Agent sessions also include tool-call ledger entries:
 
 - `optical_language.infer_source_monitor`
 - `optical_language.diagnose_missing_inputs`
+- `optical_language.diagnose_observable`
+- `optical_language.map_source_monitor_to_adapter`
 
 ## Safety Boundary
 
 No external solver is executed. No external LLM is called. No network material
 lookup is performed. Diagnostics are preview/design-assist and do not claim
 production-grade physical validation or formal convergence proof.
+
+Observable diagnostics and adapter-native source/monitor mapping extend these
+diagnostics with required observable inputs and Meep/MPB/Gmsh/Elmer/Optiland
+preview semantics. They are metadata only, not executed external solver monitor
+results.

@@ -17,6 +17,8 @@ def test_agent_session_includes_tool_call_ledger():
         "requirements.extract_optical_intent",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -68,6 +70,8 @@ def test_backend_report_and_cross_checks_reflect_ledger_reality():
     assert any(tool.tool_name == "optical_calculators" for tool in report.internal_tools)
     assert any(tool.tool_name == "source_monitor_inference" for tool in report.internal_tools)
     assert any(tool.tool_name == "missing_input_diagnostics" for tool in report.internal_tools)
+    assert any(tool.tool_name == "observable_diagnostics" for tool in report.internal_tools)
+    assert any(tool.tool_name == "adapter_native_mapping" for tool in report.internal_tools)
     assert all(action.executed is False for action in report.blocked_external_actions)
     assert any(
         check.example_id == "thin_film_coating"

@@ -1,0 +1,154 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Real band frequencies or mode fields require MPB execution."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Adapter-native mapping is preview metadata only.",
+      "No adapter or external solver process was executed."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Inspect supported_observables and unsupported_observables.",
+    "Use /api/adapter-preview for scaffold content; run solvers only after explicit approval."
+  ],
+  "matched_template_id": "photonic_crystal_band_preview",
+  "source_model": {
+    "source_type": "mode_source",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": null,
+    "polarization": null,
+    "incidence_direction": null,
+    "beam_waist_um": null,
+    "mode_index": 0,
+    "notes": "Eigenmode/band-structure context; no time-domain source is executed.",
+    "defaulted_fields": [
+      "mode_index"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "band_structure",
+    "observable": "band diagram preview",
+    "region": "reciprocal-space k-path",
+    "frequency_or_wavelength_sampling": "k-path / band index scaffold",
+    "output_units": "normalized frequency preview",
+    "notes": "MPB adapter metadata only; no band solver was run.",
+    "defaulted_fields": [
+      "sampling"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "band_structure",
+      "user_facing_label": "Band structure",
+      "user_facing_label_zh": "能带结构",
+      "required_inputs": [
+        "lattice",
+        "k-point path",
+        "number of bands"
+      ],
+      "default_assumptions": [
+        "MPB k-point/band metadata remains a scaffold."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Maps to MPB band-frequency planning.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No eigenfrequency solve was run."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "mode_frequency",
+      "user_facing_label": "Mode frequency / effective index",
+      "user_facing_label_zh": "模式频率 / 有效折射率",
+      "required_inputs": [
+        "mode index",
+        "wavelength/frequency",
+        "geometry cross-section"
+      ],
+      "default_assumptions": [
+        "Mode metadata is scalar/design-assist unless a mode solver runs."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for waveguide and MPB/Elmer preview paths.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No vector eigenmode has been solved."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "mpb",
+    "source_mapping_summary": "Time-domain source metadata is interpreted as eigenmode/band context; MPB does not use a driven FDTD source in this preview.",
+    "monitor_mapping_summary": "band_structure maps to k-point, band-frequency, or mode metadata.",
+    "native_source_terms": [
+      "lattice/eigenmode context",
+      "mode parity / mode index metadata"
+    ],
+    "native_monitor_terms": [
+      "k-points",
+      "num_bands",
+      "band frequencies",
+      "mode field output plan"
+    ],
+    "supported_observables": [
+      "band_structure",
+      "mode_frequency"
+    ],
+    "unsupported_observables": [],
+    "preview_metadata": {
+      "mode_index": 0,
+      "sampling": "k-path / band index scaffold",
+      "observable": "band diagram preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "MPB mapping is meaningful for band/eigenmode-oriented observables."
+    ],
+    "warnings": [
+      "Real band frequencies or mode fields require MPB execution."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}
