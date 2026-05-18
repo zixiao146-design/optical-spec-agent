@@ -74,6 +74,9 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "design_requirement_thin_film_response.json" in response_files
     assert "design_requirement_match_thin_film_response.json" in response_files
     assert "design_requirement_match_nanoparticle_zh_response.json" in response_files
+    assert "optical_language_infer_nanoparticle_response.json" in response_files
+    assert "optical_language_diagnose_nanoparticle_response.json" in response_files
+    assert "agent_session_source_monitor_nanoparticle_response.json" in response_files
     assert "thin_film_response.json" in response_files
     assert "thin_film_spectrum_response.json" in response_files
     assert "quarter_wave_ar_response.json" in response_files
@@ -92,6 +95,8 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "agent_session_request_nanoparticle.json" in request_files
     assert "design_requirement_match_thin_film_request.json" in request_files
     assert "design_requirement_match_nanoparticle_zh_request.json" in request_files
+    assert "optical_language_infer_nanoparticle_request.json" in request_files
+    assert "optical_language_diagnose_nanoparticle_request.json" in request_files
     assert "thin_film_request.json" in request_files
     assert "thin_film_spectrum_request.json" in request_files
     assert "quarter_wave_ar_request.json" in request_files
@@ -123,6 +128,9 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "design_requirement_thin_film_response.json",
         "design_requirement_match_thin_film_response.json",
         "design_requirement_match_nanoparticle_zh_response.json",
+        "optical_language_infer_nanoparticle_response.json",
+        "optical_language_diagnose_nanoparticle_response.json",
+        "agent_session_source_monitor_nanoparticle_response.json",
     ]:
         payload = _load_json(API_EXAMPLES / calculator_response)
         if "quality" in payload:

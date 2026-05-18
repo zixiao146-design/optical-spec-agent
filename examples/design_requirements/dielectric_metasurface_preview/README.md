@@ -57,3 +57,27 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: plane_wave
+- Source wavelength start: None
+- Source wavelength stop: None
+- Polarization: linear_x
+- Incidence direction: normal
+- Monitor type: phase_profile
+- Observable: phase profile / far-field preview
+- Monitor region: transmission plane or far-field proxy
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- wavelength_nm
+- polarization
+- incidence_direction
+
+Required monitor inputs:
+- observable
+- monitor_region
+
+Default source/monitor assumptions:
+- Default to normal-incidence linear_x plane wave at 633 nm.
+- Default monitor is phase-profile/far-field preview metadata.

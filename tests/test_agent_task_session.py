@@ -18,6 +18,10 @@ def test_agent_task_session_builds_local_optical_design_session():
     assert session.requirement_template_id == "nanoparticle_plasmonics"
     assert "nanoparticle" in session.optical_intent_summary
     assert session.optical_language_summary["physical_system"] == "nanoparticle_on_film"
+    assert session.source_model.source_type == "plane_wave"
+    assert session.monitor_model.monitor_type == "scattering_spectrum"
+    assert session.optical_language_diagnostics.safe_to_preview is True
+    assert session.optical_language_diagnostics.safe_to_run_solver is False
     assert session.selected_example_id == "nanoparticle_plasmonics"
     assert session.missing_required_inputs
     assert session.default_assumptions_applied
@@ -35,6 +39,8 @@ def test_agent_task_session_builds_local_optical_design_session():
     assert session.formal_convergence_proof_claimed is False
     assert any(entry.tool_name == "material_catalog.suggest" for entry in session.tool_call_ledger)
     assert any(entry.tool_name == "requirements.match_template" for entry in session.tool_call_ledger)
+    assert any(entry.tool_name == "optical_language.infer_source_monitor" for entry in session.tool_call_ledger)
+    assert any(entry.tool_name == "optical_language.diagnose_missing_inputs" for entry in session.tool_call_ledger)
     assert any(entry.tool_name == "agent_trace.build" for entry in session.tool_call_ledger)
 
 

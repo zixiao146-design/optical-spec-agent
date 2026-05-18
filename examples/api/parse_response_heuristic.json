@@ -7,10 +7,31 @@
   "api_contract_version": "0.1",
   "status": "ok",
   "diagnostics": {
-    "errors": [],
-    "warnings": [],
-    "missing_fields": [],
-    "assumptions": [],
+    "errors": [
+      "缺少必填字段: simulation.excitation_source",
+      "缺少必填字段: simulation.monitor_setting"
+    ],
+    "warnings": [
+      "建议补充字段: geometry_material.key_parameters"
+    ],
+    "missing_fields": [
+      "physics.model_dimension",
+      "geometry_material.substrate_or_film_info",
+      "geometry_material.gap_medium",
+      "geometry_material.key_parameters",
+      "simulation.sweep_plan",
+      "simulation.excitation_source",
+      "simulation.symmetry_setting",
+      "simulation.mesh_setting",
+      "simulation.stability_setting",
+      "simulation.monitor_setting",
+      "output.postprocess_target"
+    ],
+    "assumptions": [
+      "[task.research_goal] 从用户描述推断",
+      "[geometry_material.material_model] 默认金属光学常数来源",
+      "[simulation.incident_direction] 默认入射方向"
+    ],
     "limitations": [],
     "details": {}
   },
@@ -21,10 +42,290 @@
   "parser": "rule",
   "spec": {
     "task": {
+      "task_id": "670dff87",
       "task_name": {
-        "value": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum"
+        "value": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum",
+        "status": "confirmed",
+        "note": ""
+      },
+      "task_type": {
+        "value": "simulation",
+        "status": "confirmed",
+        "note": ""
+      },
+      "research_goal": {
+        "value": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum.",
+        "status": "inferred",
+        "note": "从用户描述推断"
       }
+    },
+    "physics": {
+      "physical_system": {
+        "value": "single_particle",
+        "status": "confirmed",
+        "note": ""
+      },
+      "physical_mechanism": {
+        "value": "scattering",
+        "status": "confirmed",
+        "note": ""
+      },
+      "model_dimension": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定维度"
+      },
+      "structure_type": {
+        "value": "single_particle",
+        "status": "confirmed",
+        "note": ""
+      }
+    },
+    "geometry_material": {
+      "geometry_definition": {
+        "value": {
+          "geometry_type": "ring",
+          "description": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum",
+          "dimensions": {},
+          "units": "nm"
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "material_system": {
+        "value": {
+          "materials": [
+            {
+              "name": "Au",
+              "role": "particle",
+              "model": null,
+              "refractive_index": null,
+              "notes": ""
+            }
+          ],
+          "description": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "material_model": {
+        "value": "Johnson-Christy",
+        "status": "inferred",
+        "note": "默认金属光学常数来源"
+      },
+      "substrate_or_film_info": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定基底/薄膜"
+      },
+      "particle_info": {
+        "value": {
+          "particle_type": "ring",
+          "material": "Au",
+          "dimensions": {},
+          "notes": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "gap_medium": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定间隙介质"
+      },
+      "key_parameters": {
+        "value": null,
+        "status": "missing",
+        "note": "未提取到关键参数"
+      }
+    },
+    "simulation": {
+      "solver_method": {
+        "value": "fdtd",
+        "status": "confirmed",
+        "note": ""
+      },
+      "software_tool": {
+        "value": "meep",
+        "status": "confirmed",
+        "note": ""
+      },
+      "sweep_plan": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定扫描计划"
+      },
+      "excitation_source": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定激励源"
+      },
+      "source_setting": {
+        "value": {
+          "source_type": null,
+          "wavelength_range": "",
+          "polarization": "TE",
+          "incident_angle": "0 deg",
+          "amplitude": null,
+          "description": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "polarization": {
+        "value": "TE",
+        "status": "confirmed",
+        "note": ""
+      },
+      "incident_direction": {
+        "value": "正入射",
+        "status": "inferred",
+        "note": "默认入射方向"
+      },
+      "boundary_condition": {
+        "value": {
+          "x_min": "PML",
+          "x_max": "PML",
+          "y_min": "PML",
+          "y_max": "PML",
+          "z_min": "PML",
+          "z_max": "PML",
+          "description": ""
+        },
+        "status": "confirmed",
+        "note": ""
+      },
+      "symmetry_setting": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定对称性设置"
+      },
+      "mesh_setting": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定网格设置"
+      },
+      "stability_setting": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定稳定性设置"
+      },
+      "monitor_setting": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定监视器设置"
+      }
+    },
+    "output": {
+      "output_observables": {
+        "value": [
+          "scattering_spectrum"
+        ],
+        "status": "confirmed",
+        "note": ""
+      },
+      "postprocess_target": {
+        "value": null,
+        "status": "missing",
+        "note": "未指定后处理目标"
+      }
+    },
+    "confirmed_fields": {
+      "task.task_name": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum",
+      "task.task_type": "simulation",
+      "physics.physical_system": "single_particle",
+      "physics.physical_mechanism": "scattering",
+      "physics.structure_type": "single_particle",
+      "geometry_material.geometry_definition": {
+        "geometry_type": "ring",
+        "description": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum",
+        "dimensions": {},
+        "units": "nm"
+      },
+      "geometry_material.material_system": {
+        "materials": [
+          {
+            "name": "Au",
+            "role": "particle",
+            "model": null,
+            "refractive_index": null,
+            "notes": ""
+          }
+        ],
+        "description": ""
+      },
+      "geometry_material.particle_info": {
+        "particle_type": "ring",
+        "material": "Au",
+        "dimensions": {},
+        "notes": ""
+      },
+      "simulation.solver_method": "fdtd",
+      "simulation.software_tool": "meep",
+      "simulation.source_setting": {
+        "source_type": null,
+        "wavelength_range": "",
+        "polarization": "TE",
+        "incident_angle": "0 deg",
+        "amplitude": null,
+        "description": ""
+      },
+      "simulation.polarization": "TE",
+      "simulation.boundary_condition": {
+        "x_min": "PML",
+        "x_max": "PML",
+        "y_min": "PML",
+        "y_max": "PML",
+        "z_min": "PML",
+        "z_max": "PML",
+        "description": ""
+      },
+      "output.output_observables": [
+        "scattering_spectrum"
+      ]
+    },
+    "inferred_fields": {
+      "task.research_goal": {
+        "value": "Use Meep FDTD to simulate a gold nanoparticle scattering spectrum.",
+        "note": "从用户描述推断"
+      },
+      "geometry_material.material_model": {
+        "value": "Johnson-Christy",
+        "note": "默认金属光学常数来源"
+      },
+      "simulation.incident_direction": {
+        "value": "正入射",
+        "note": "默认入射方向"
+      }
+    },
+    "missing_fields": [
+      "physics.model_dimension",
+      "geometry_material.substrate_or_film_info",
+      "geometry_material.gap_medium",
+      "geometry_material.key_parameters",
+      "simulation.sweep_plan",
+      "simulation.excitation_source",
+      "simulation.symmetry_setting",
+      "simulation.mesh_setting",
+      "simulation.stability_setting",
+      "simulation.monitor_setting",
+      "output.postprocess_target"
+    ],
+    "assumption_log": [
+      "[task.research_goal] 从用户描述推断",
+      "[geometry_material.material_model] 默认金属光学常数来源",
+      "[simulation.incident_direction] 默认入射方向"
+    ],
+    "validation_status": {
+      "is_executable": false,
+      "errors": [
+        "缺少必填字段: simulation.excitation_source",
+        "缺少必填字段: simulation.monitor_setting"
+      ],
+      "warnings": [
+        "建议补充字段: geometry_material.key_parameters"
+      ]
     }
   },
-  "summary": "Local heuristic parse preview for a Meep scattering task."
+  "summary": "============================================================\n  Optical Spec Agent — Summary\n============================================================\n\n  Task ID:    670dff87\n   Task Name:  [C] Use Meep FDTD to simulate a gold nanoparticle scattering ...\n   Task Type:  [C] simulation\n   Goal:       [~] Use Meep FDTD to simulate a gold nanoparticle scattering spectrum.\n\n  Physical System:  [C] single_particle\n   Mechanism:        [C] scattering\n   Dimension:        ---\n   Structure:        [C] single_particle\n\n  Geometry:         [C] geometry_type='ring', description='Use Meep FDTD to simulate ..., units='nm'\n   Materials:        [C] materials=[{'name': 'Au', 'role': 'pa...\n   Material Model:   [~] Johnson-Christy\n   Substrate/Film:   ---\n   Particle:         [C] particle_type='ring', material='Au'\n   Gap Medium:       ---\n   Key Params:       ---\n\n  Solver:           [C] fdtd\n   Software:         [C] meep\n   Sweep:            ---\n   Source:           ---\n   Source Setting:   [C] polarization='TE', incident_angle='0 deg'\n   Polarization:     [C] TE\n   Direction:        [~] 正入射\n   Boundary:         [C] x_min='PML', x_max='PML', y_min='PML', y_max='PML', z_min...\n   Symmetry:         ---\n   Mesh:             ---\n   Stability:        ---\n   Monitor:          ---\n\n  Observables:      [C] [\"scattering_spectrum\"]\n   Post-process:     ---\n\n  Confirmed (14):\n     task.task_name = Use Meep FDTD to simulate a gold nanoparticle s...\n     task.task_type = simulation\n     physics.physical_system = single_particle\n     physics.physical_mechanism = scattering\n     physics.structure_type = single_particle\n     geometry_material.geometry_definition = geometry_type='ring', description='Use Meep FDT...\n     geometry_material.material_system = materials=[{'name': 'Au', 'role': 'pa...\n     geometry_material.particle_info = particle_type='ring', material='Au'\n     ... +6 more\n\n  Inferred (3):\n     task.research_goal = Use Meep FDTD to simulate a gold nanoparticle s...\n     geometry_material.material_model = Johnson-Christy\n     simulation.incident_direction = 正入射\n\n  [NOT EXECUTABLE] Executable: False\n   Errors:\n     - 缺少必填字段: simulation.excitation_source\n     - 缺少必填字段: simulation.monitor_setting\n   Warnings:\n     - 建议补充字段: geometry_material.key_parameters\n\n  Missing Fields (11):\n     - physics.model_dimension\n     - geometry_material.substrate_or_film_info\n     - geometry_material.gap_medium\n     - geometry_material.key_parameters\n     - simulation.sweep_plan\n     - simulation.excitation_source\n     - simulation.symmetry_setting\n     - simulation.mesh_setting\n     - simulation.stability_setting\n     - simulation.monitor_setting\n     - output.postprocess_target\n\n  Assumptions (3):\n     - [task.research_goal] 从用户描述推断\n     - [geometry_material.material_model] 默认金属光学常数来源\n     - [simulation.incident_direction] 默认入射方向\n\n============================================================"
 }

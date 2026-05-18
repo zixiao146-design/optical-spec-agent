@@ -50,6 +50,9 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert report["production_grade_validation_claimed"] is False
     assert report["formal_convergence_proof_claimed"] is False
     assert len(report["requirements_templates"]) == 7
+    tools = {item["tool_name"]: item for item in report["internal_tools"]}
+    assert tools["source_monitor_inference"]["executed_in_sample"] is True
+    assert tools["missing_input_diagnostics"]["executed_in_sample"] is True
     assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")

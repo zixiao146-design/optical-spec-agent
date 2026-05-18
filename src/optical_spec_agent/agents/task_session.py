@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -17,6 +17,12 @@ from optical_spec_agent.examples.requirements import (
     match_goal_to_template,
 )
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
+from optical_spec_agent.optical_language import (
+    OpticalLanguageDiagnostics,
+    OpticalMonitorModel,
+    OpticalSourceModel,
+    infer_source_monitor_from_goal,
+)
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
     calculate_thin_film_spectrum,
@@ -112,6 +118,11 @@ class AgentTaskSession(BaseModel):
     requirement_template_id: str | None = None
     optical_intent_summary: str
     optical_language_summary: dict[str, str] = Field(default_factory=dict)
+    source_model: OpticalSourceModel | None = None
+    monitor_model: OpticalMonitorModel | None = None
+    optical_language_diagnostics: OpticalLanguageDiagnostics = Field(
+        default_factory=OpticalLanguageDiagnostics
+    )
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
@@ -156,6 +167,10 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
 
     requirement_match = match_goal_to_template(goal)
     matched_template = requirement_match.matched_template
+    source_monitor = infer_source_monitor_from_goal(
+        goal,
+        template_id=requirement_match.matched_template_id,
+    )
     optical_intent = (
         matched_template.optical_intent
         if matched_template is not None
@@ -199,10 +214,19 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         requirement_template_id=requirement_match.matched_template_id,
         optical_intent_summary=optical_intent,
         optical_language_summary=requirement_match.optical_language_summary,
+        source_model=source_monitor.source_model,
+        monitor_model=source_monitor.monitor_model,
+        optical_language_diagnostics=source_monitor.diagnostics,
         selected_example_id=selected_example_id,
         design_case_summary=design_case_summary,
-        missing_required_inputs=requirement_match.missing_required_inputs,
-        default_assumptions_applied=requirement_match.default_assumptions,
+        missing_required_inputs=sorted(
+            set(requirement_match.missing_required_inputs)
+            | set(source_monitor.diagnostics.missing_required_inputs)
+        ),
+        default_assumptions_applied=[
+            *requirement_match.default_assumptions,
+            *source_monitor.diagnostics.default_assumptions_applied,
+        ],
         plan_steps=_plan_steps(optical_intent, selected_example_id, adapter_recommendation),
         agent_trace=trace,
         artifacts=_artifacts(
@@ -210,6 +234,8 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             optical_intent=optical_intent,
             materials=trace.material_suggestions,
             adapter_recommendation=adapter_recommendation,
+            source_model=source_monitor.source_model,
+            monitor_model=source_monitor.monitor_model,
         ),
         permission_gates=_permission_gates(),
         tool_call_ledger=_tool_call_ledger(
@@ -217,6 +243,7 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             selected_example_id=selected_example_id,
             adapter_recommendation=adapter_recommendation,
             requirement_match=requirement_match,
+            source_monitor=source_monitor,
         ),
         final_recommendation=(
             f"Use the local {design_case_summary} path, inspect material candidates "
@@ -330,6 +357,28 @@ def _plan_steps(
         ),
         AgentPlanStep(
             step_index=3,
+            title="Infer source and monitor",
+            title_zh="推断光源和监测器",
+            description="Infer preview source, monitor, observable, and default assumptions.",
+            description_zh="推断预览光源、监测器、观测量和默认假设。",
+            agent_name="SpecAgent",
+            endpoint_or_tool="optical_language.infer_source_monitor",
+            expected_output="source_model, monitor_model, and optical_language_diagnostics",
+            safety_note="Monitor definitions are preview metadata; no external solver monitor was executed.",
+        ),
+        AgentPlanStep(
+            step_index=4,
+            title="Check missing source/monitor inputs",
+            title_zh="检查缺失的光源/监测器输入",
+            description="Report missing inputs, ambiguity notes, and blocking questions before solver use.",
+            description_zh="在任何求解器使用前报告缺失输入、歧义说明和阻断问题。",
+            agent_name="SafetyAgent",
+            endpoint_or_tool="optical_language.diagnose_missing_inputs",
+            expected_output="missing_required_inputs and safe_to_run_solver=false",
+            safety_note="safe_to_preview can be true while safe_to_run_solver remains false.",
+        ),
+        AgentPlanStep(
+            step_index=5,
             title="Suggest materials",
             title_zh="推荐材料",
             description="Use the local preview material catalog for candidate materials.",
@@ -340,7 +389,7 @@ def _plan_steps(
             safety_note="Material data is preview/design-assist, not production-grade optical constants.",
         ),
         AgentPlanStep(
-            step_index=4,
+            step_index=6,
             title="Review geometry",
             title_zh="审阅几何",
             description="Identify the geometry family and missing geometry fields.",
@@ -351,7 +400,7 @@ def _plan_steps(
             safety_note="Geometry remains a scaffold until reviewed.",
         ),
         AgentPlanStep(
-            step_index=5,
+            step_index=7,
             title="Recommend adapter",
             title_zh="推荐适配器",
             description=f"Choose an open-source-first adapter path: {adapter_recommendation}.",
@@ -362,7 +411,7 @@ def _plan_steps(
             safety_note="No proprietary solver is required by default.",
         ),
         AgentPlanStep(
-            step_index=6,
+            step_index=8,
             title="Plan local tool calls",
             title_zh="规划本地工具调用",
             description="Plan parse, validate, preview, evidence, and human review steps.",
@@ -373,7 +422,7 @@ def _plan_steps(
             safety_note="No solver is executed by default.",
         ),
         AgentPlanStep(
-            step_index=7,
+            step_index=9,
             title="Preview artifacts and evidence",
             title_zh="预览产物和证据",
             description="Prepare preview artifacts and validation evidence references.",
@@ -384,7 +433,7 @@ def _plan_steps(
             safety_note="No production-grade physical validation is claimed.",
         ),
         AgentPlanStep(
-            step_index=8,
+            step_index=10,
             title="Check permission gates",
             title_zh="检查权限门控",
             description="Block solver, LLM, upload, publish, tag, and release actions by default.",
@@ -403,6 +452,8 @@ def _artifacts(
     optical_intent: str,
     materials: list[str],
     adapter_recommendation: str,
+    source_model: OpticalSourceModel | None,
+    monitor_model: OpticalMonitorModel | None,
 ) -> list[AgentArtifact]:
     example_path = (
         f"examples/optical_design/{selected_example_id}/spec.json"
@@ -446,6 +497,23 @@ def _artifacts(
             summary=f"Local parse -> validate -> preview workflow for {adapter_recommendation}.",
             source_endpoint="/api/workflow-plan",
             generated_by_agent="WorkflowAgent",
+        ),
+        AgentArtifact(
+            artifact_id="source-monitor-metadata",
+            label="Source and monitor metadata",
+            label_zh="光源和监测器元数据",
+            artifact_type="spec",
+            summary=(
+                f"Source={source_model.source_type if source_model else 'unknown'}; "
+                f"monitor={monitor_model.monitor_type if monitor_model else 'unknown'}; "
+                "preview metadata only."
+            ),
+            preview_content=(
+                f"source={source_model.model_dump(mode='json') if source_model else {}}; "
+                f"monitor={monitor_model.model_dump(mode='json') if monitor_model else {}}"
+            ),
+            source_endpoint="/api/optical-language/infer",
+            generated_by_agent="SpecAgent",
         ),
         AgentArtifact(
             artifact_id="adapter-preview",
@@ -556,6 +624,7 @@ def _tool_call_ledger(
     selected_example_id: str | None,
     adapter_recommendation: str,
     requirement_match: RequirementMatchResult,
+    source_monitor: Any,
 ) -> list[ToolCallRecord]:
     ledger = [
         ToolCallRecord(
@@ -593,6 +662,39 @@ def _tool_call_ledger(
             ),
             reason="The backend exposes the natural language -> optical language step explicitly.",
             safety_note="Optical language extraction is local heuristic logic, not an external model.",
+        ),
+        ToolCallRecord(
+            call_id="optical-language-infer-source-monitor",
+            tool_name="optical_language.infer_source_monitor",
+            tool_kind="internal_python",
+            called_by_agent="SpecAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=requirement_match.matched_template_id or optical_intent,
+            output_summary=(
+                f"source={source_monitor.source_model.source_type}; "
+                f"monitor={source_monitor.monitor_model.monitor_type}"
+            ),
+            reason="Source, monitor, and observable assumptions must be visible before preview artifacts.",
+            safety_note="No external solver monitor was executed.",
+        ),
+        ToolCallRecord(
+            call_id="optical-language-diagnose-missing-inputs",
+            tool_name="optical_language.diagnose_missing_inputs",
+            tool_kind="internal_python",
+            called_by_agent="SafetyAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Goal, requirement template, source model, and monitor model.",
+            output_summary=(
+                f"missing={len(source_monitor.diagnostics.missing_required_inputs)}; "
+                f"safe_to_preview={source_monitor.diagnostics.safe_to_preview}; "
+                f"safe_to_run_solver={source_monitor.diagnostics.safe_to_run_solver}"
+            ),
+            reason="Missing source/monitor inputs and defaults must be explicit.",
+            safety_note="safe_to_run_solver is false by default.",
         ),
         ToolCallRecord(
             call_id="material-catalog-suggest",

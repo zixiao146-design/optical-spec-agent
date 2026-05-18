@@ -57,3 +57,28 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: mode_source
+- Source wavelength start: None
+- Source wavelength stop: None
+- Polarization: TE-like
+- Incidence direction: guided
+- Monitor type: mode_overlap
+- Observable: V-number and single-mode likelihood preview
+- Monitor region: slab core/cladding cross-section
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- wavelength_nm
+- mode_index
+- polarization
+
+Required monitor inputs:
+- observable
+- monitor_region
+
+Default source/monitor assumptions:
+- Default wavelength is 1550 nm.
+- Default to fundamental TE-like mode-source metadata.
+- Default observable is scalar V-number/single-mode preview.

@@ -58,3 +58,28 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: plane_wave
+- Source wavelength start: 400.0
+- Source wavelength stop: 800.0
+- Polarization: s
+- Incidence direction: normal
+- Monitor type: reflectance_transmittance
+- Observable: R/T spectrum preview
+- Monitor region: incident and substrate half-spaces
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- wavelength_range_nm
+- polarization
+- incidence_direction
+
+Required monitor inputs:
+- observable
+- sampling
+
+Default source/monitor assumptions:
+- Default to normal incidence.
+- Default wavelength sweep is 400-800 nm with a 550 nm design point.
+- Default observable is reflectance/transmittance from local thin-film preview formulas.

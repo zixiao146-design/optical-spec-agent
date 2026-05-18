@@ -47,6 +47,8 @@ PyPI：未发布
 
 - `requirements.match_template`
 - `requirements.extract_optical_intent`
+- `optical_language.infer_source_monitor`
+- `optical_language.diagnose_missing_inputs`
 - `material_catalog.suggest`
 - 有本地设计案例时执行 `example_registry.load`
 - `agent_trace.build`
@@ -54,6 +56,17 @@ PyPI：未发布
 - `adapter_preview.generate`
 
 计算器支持的案例会额外记录对应的本地光学计算器调用。这些调用都是内部 Python 预览/设计辅助函数。
+
+每个模板也包含：
+
+- `source_model`
+- `monitor_model`
+- `required_source_inputs`
+- `required_monitor_inputs`
+- `default_source_assumptions`
+- `default_monitor_assumptions`
+
+这些字段让光源、监测器和观测量假设在工作流或适配器预览前显式可见。
 
 ## 安全边界
 
@@ -64,4 +77,3 @@ PyPI：未发布
 - 输出仅用于 preview/design-assist。
 - 不声明生产级物理验证。
 - 不声明形式化收敛证明。
-

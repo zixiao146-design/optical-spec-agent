@@ -713,6 +713,13 @@ release dry-run。默认 CI 不依赖外部 solver 或外部 LLM。
 - Meep execution 仍是 optional/local。
 - 真实研究使用前必须人工审查几何、材料模型、边界条件、网格、监视器和收敛性。
 
+## 后端光学语言诊断
+
+后端现在通过 `/api/optical-language/infer`、`/api/optical-language/diagnose`
+和 `/api/agent-session` 暴露确定性的光源/监测器推断。纳米颗粒散射预览默认是
+平面波式光源、400-900 nm 波段、`linear_x` 偏振，以及散射/消光谱监测器。
+这些只是 preview/design-assist 假设，不是外部求解器执行后的 monitor 结果。
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

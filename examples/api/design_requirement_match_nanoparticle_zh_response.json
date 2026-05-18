@@ -21,6 +21,55 @@
       "Material constants must be verified before conclusions.",
       "No FDTD solver execution by default."
     ],
+    "source_model": {
+      "source_type": "plane_wave",
+      "wavelength_start_nm": 400.0,
+      "wavelength_stop_nm": 900.0,
+      "wavelength_nm": null,
+      "polarization": "linear_x",
+      "incidence_direction": "normal",
+      "beam_waist_um": null,
+      "mode_index": null,
+      "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+      "defaulted_fields": [
+        "wavelength_range_nm",
+        "polarization",
+        "incidence_direction"
+      ],
+      "preview_only": true
+    },
+    "monitor_model": {
+      "monitor_type": "scattering_spectrum",
+      "observable": "scattering/extinction spectrum preview",
+      "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+      "frequency_or_wavelength_sampling": "400-900 nm preview band",
+      "output_units": "normalized preview spectrum",
+      "notes": "Monitor metadata only; no FDTD monitor was executed.",
+      "defaulted_fields": [
+        "monitor_region",
+        "sampling"
+      ],
+      "preview_only": true
+    },
+    "required_source_inputs": [
+      "wavelength_range_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "required_monitor_inputs": [
+      "observable",
+      "monitor_region",
+      "sampling"
+    ],
+    "default_source_assumptions": [
+      "Default to normal-incidence plane-wave-like source.",
+      "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
+      "Default polarization is linear_x until specified."
+    ],
+    "default_monitor_assumptions": [
+      "Default observable is scattering/extinction spectrum preview.",
+      "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
+    ],
     "suggested_materials": [
       "ag",
       "au",
@@ -33,6 +82,8 @@
     "expected_tool_calls": [
       "requirements.match_template",
       "requirements.extract_optical_intent",
+      "optical_language.infer_source_monitor",
+      "optical_language.diagnose_missing_inputs",
       "material_catalog.suggest",
       "example_registry.load",
       "agent_trace.build",

@@ -17,14 +17,264 @@
   "recommended_next_actions": [],
   "schema_name": "OpticalSpec",
   "schema": {
-    "title": "OpticalSpec",
-    "type": "object",
+    "$defs": {
+      "GeometryMaterialSection": {
+        "description": "Geometry definition and material system.",
+        "properties": {
+          "geometry_definition": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Structured geometry: type, dimensions, units"
+          },
+          "material_system": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Structured material system: list of materials with roles and models"
+          },
+          "material_model": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Primary dispersion model: Drude, Johnson-Christy, etc."
+          },
+          "substrate_or_film_info": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Substrate / film details: material, thickness"
+          },
+          "particle_info": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Nanoparticle details: type, material, dimensions"
+          },
+          "gap_medium": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Medium filling the gap (e.g. SiO2, water, air)"
+          },
+          "key_parameters": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Key named parameters extracted from description (list of strings)"
+          }
+        },
+        "title": "GeometryMaterialSection",
+        "type": "object"
+      },
+      "OutputSection": {
+        "description": "Desired outputs and post-processing.",
+        "properties": {
+          "output_observables": {
+            "$ref": "#/$defs/StatusField",
+            "description": "List of observable types: spectrum, cross_section, field_distribution, etc."
+          },
+          "postprocess_target": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Post-processing targets: lorentzian_fit, fwhm_extraction, T2_extraction, etc."
+          }
+        },
+        "title": "OutputSection",
+        "type": "object"
+      },
+      "PhysicsSection": {
+        "description": "Physical system and mechanism.",
+        "properties": {
+          "physical_system": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Physical system type, e.g. nanoparticle_on_film, single_particle, waveguide"
+          },
+          "physical_mechanism": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Dominant mechanism: plasmon, scattering, waveguide, resonance, etc."
+          },
+          "model_dimension": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Simulation dimensionality: 2d | 3d | axisymmetric"
+          },
+          "structure_type": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Structure type: single_particle, array, film, waveguide, etc."
+          }
+        },
+        "title": "PhysicsSection",
+        "type": "object"
+      },
+      "SimulationSection": {
+        "description": "Solver and simulation settings.",
+        "properties": {
+          "solver_method": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Solver: fdtd | fem | rcwa | analytical | coupled_oscillator"
+          },
+          "software_tool": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Software: meep, lumerical, comsol, matlab, or free-form string"
+          },
+          "sweep_plan": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Parameter sweep plan: type, range, step, unit"
+          },
+          "excitation_source": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Excitation type: plane_wave, tfsf, dipole, mode_source, etc."
+          },
+          "source_setting": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Source configuration: wavelength range, polarization, angle, amplitude"
+          },
+          "polarization": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Polarization: linear_x, linear_y, TM, TE, circular, etc."
+          },
+          "incident_direction": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Incident direction: normal, oblique, etc."
+          },
+          "boundary_condition": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Boundary conditions per direction: PML, periodic, PEC, PMC, Bloch"
+          },
+          "symmetry_setting": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Symmetry exploitation: mirror, rotational, periodic"
+          },
+          "mesh_setting": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Mesh config: type, accuracy, size limits, override regions"
+          },
+          "stability_setting": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Stability: time step, auto-shutoff, simulation time"
+          },
+          "monitor_setting": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Monitor placement: type, locations, frequency points"
+          }
+        },
+        "title": "SimulationSection",
+        "type": "object"
+      },
+      "StatusField": {
+        "description": "A value annotated with its provenance (confirmed / inferred / missing).",
+        "properties": {
+          "value": {
+            "default": null,
+            "title": "Value"
+          },
+          "status": {
+            "default": "missing",
+            "title": "Status",
+            "type": "string"
+          },
+          "note": {
+            "default": "",
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "title": "StatusField",
+        "type": "object"
+      },
+      "TaskSection": {
+        "description": "Task metadata.",
+        "properties": {
+          "task_id": {
+            "default": "",
+            "description": "Unique task identifier (auto-generated if empty)",
+            "title": "Task Id",
+            "type": "string"
+          },
+          "task_name": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Short human-readable task name"
+          },
+          "task_type": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Task category: modeling | simulation | fitting | data_analysis | plotting | writing"
+          },
+          "research_goal": {
+            "$ref": "#/$defs/StatusField",
+            "description": "Free-text research goal or objective"
+          }
+        },
+        "title": "TaskSection",
+        "type": "object"
+      },
+      "ValidationStatus": {
+        "description": "Outcome of validating a full spec.",
+        "properties": {
+          "is_executable": {
+            "default": false,
+            "title": "Is Executable",
+            "type": "boolean"
+          },
+          "errors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "title": "ValidationStatus",
+        "type": "object"
+      }
+    },
+    "description": "The unified optical simulation specification.",
     "properties": {
-      "task": {},
-      "physics": {},
-      "geometry_material": {},
-      "simulation": {},
-      "output": {}
-    }
+      "task": {
+        "$ref": "#/$defs/TaskSection",
+        "description": "Task metadata"
+      },
+      "physics": {
+        "$ref": "#/$defs/PhysicsSection",
+        "description": "Physical system description"
+      },
+      "geometry_material": {
+        "$ref": "#/$defs/GeometryMaterialSection",
+        "description": "Geometry and materials"
+      },
+      "simulation": {
+        "$ref": "#/$defs/SimulationSection",
+        "description": "Solver and simulation settings"
+      },
+      "output": {
+        "$ref": "#/$defs/OutputSection",
+        "description": "Output and post-processing"
+      },
+      "confirmed_fields": {
+        "additionalProperties": true,
+        "description": "All fields with status='confirmed' — path → value",
+        "title": "Confirmed Fields",
+        "type": "object"
+      },
+      "inferred_fields": {
+        "additionalProperties": true,
+        "description": "All fields with status='inferred' — path → {value, note}",
+        "title": "Inferred Fields",
+        "type": "object"
+      },
+      "missing_fields": {
+        "description": "List of dotted paths for all missing fields",
+        "items": {
+          "type": "string"
+        },
+        "title": "Missing Fields",
+        "type": "array"
+      },
+      "assumption_log": {
+        "description": "Human-readable assumption statements from inferred fields",
+        "items": {
+          "type": "string"
+        },
+        "title": "Assumption Log",
+        "type": "array"
+      },
+      "validation_status": {
+        "$ref": "#/$defs/ValidationStatus",
+        "description": "Validation outcome: is_executable, errors, warnings"
+      }
+    },
+    "title": "OpticalSpec",
+    "type": "object"
   }
 }

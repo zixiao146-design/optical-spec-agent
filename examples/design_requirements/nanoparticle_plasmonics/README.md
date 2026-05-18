@@ -58,3 +58,31 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: plane_wave
+- Source wavelength start: 400.0
+- Source wavelength stop: 900.0
+- Polarization: linear_x
+- Incidence direction: normal
+- Monitor type: scattering_spectrum
+- Observable: scattering/extinction spectrum preview
+- Monitor region: closed flux box or equivalent far-field proxy around nanoparticle
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- wavelength_range_nm
+- polarization
+- incidence_direction
+
+Required monitor inputs:
+- observable
+- monitor_region
+- sampling
+
+Default source/monitor assumptions:
+- Default to normal-incidence plane-wave-like source.
+- Default wavelength band is 400-900 nm for nanoparticle scattering previews.
+- Default polarization is linear_x until specified.
+- Default observable is scattering/extinction spectrum preview.
+- Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed.

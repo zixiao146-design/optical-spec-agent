@@ -16,6 +16,8 @@ def test_agent_session_includes_requirement_template_and_optical_language():
     ledger = {entry.tool_name: entry for entry in session.tool_call_ledger}
     assert ledger["requirements.match_template"].executed is True
     assert ledger["requirements.extract_optical_intent"].executed is True
+    assert ledger["optical_language.infer_source_monitor"].executed is True
+    assert ledger["optical_language.diagnose_missing_inputs"].executed is True
     assert ledger["optics.thin_film.spectrum"].executed is True
     assert "natural language" in session.plan_steps[0].title.lower()
 
@@ -50,4 +52,3 @@ def test_expected_calculator_ledgers_for_design_requirement_goals():
         assert ledger[tool_name].executed is True
         assert session.external_solver_executed is False
         assert session.external_llm_required is False
-

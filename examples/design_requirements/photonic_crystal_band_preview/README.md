@@ -57,3 +57,25 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: mode_source
+- Source wavelength start: None
+- Source wavelength stop: None
+- Polarization: None
+- Incidence direction: None
+- Monitor type: band_structure
+- Observable: band diagram preview
+- Monitor region: reciprocal-space k-path
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- mode_index
+
+Required monitor inputs:
+- observable
+- sampling
+
+Default source/monitor assumptions:
+- Treat the case as an eigenmode/band-structure preview, not a driven source simulation.
+- Default monitor is band-structure metadata over a k-path scaffold.

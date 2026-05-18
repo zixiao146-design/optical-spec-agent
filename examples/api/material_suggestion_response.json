@@ -1,4 +1,9 @@
 {
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
   "api_contract_version": "0.1",
   "status": "ok",
   "diagnostics": {
@@ -19,11 +24,6 @@
     "Inspect the suggested material records.",
     "Verify wavelength-dependent n/k before physical interpretation."
   ],
-  "external_solver_executed": false,
-  "external_llm_required": false,
-  "proprietary_solver_required": false,
-  "production_grade_validation_claimed": false,
-  "formal_convergence_proof_claimed": false,
   "application": "nanoparticle plasmonics",
   "suggested_materials": [
     {
@@ -39,6 +39,75 @@
         "antenna"
       ],
       "optical_role": "plasmonic metal",
+      "production_grade": false,
+      "validation_level": "preview",
+      "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions."
+    },
+    {
+      "material_id": "ag",
+      "display_name": "Silver (Ag)",
+      "aliases": [
+        "silver"
+      ],
+      "category": "metal",
+      "common_use": [
+        "nanoparticle plasmonics",
+        "film",
+        "antenna"
+      ],
+      "optical_role": "plasmonic metal",
+      "production_grade": false,
+      "validation_level": "preview",
+      "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions."
+    },
+    {
+      "material_id": "sio2",
+      "display_name": "Silicon dioxide (SiO2)",
+      "aliases": [
+        "silica",
+        "oxide",
+        "fused_silica"
+      ],
+      "category": "dielectric",
+      "common_use": [
+        "thin film coating",
+        "waveguide cladding",
+        "spacer"
+      ],
+      "optical_role": "low-index dielectric",
+      "production_grade": false,
+      "validation_level": "preview",
+      "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions."
+    },
+    {
+      "material_id": "water",
+      "display_name": "Water",
+      "aliases": [
+        "h2o"
+      ],
+      "category": "liquid",
+      "common_use": [
+        "biosensing",
+        "nanoparticle environment"
+      ],
+      "optical_role": "dielectric surrounding medium",
+      "production_grade": false,
+      "validation_level": "preview",
+      "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions."
+    },
+    {
+      "material_id": "air",
+      "display_name": "Air",
+      "aliases": [
+        "vacuum",
+        "background"
+      ],
+      "category": "ambient",
+      "common_use": [
+        "background medium",
+        "ray optics"
+      ],
+      "optical_role": "ambient reference medium",
       "production_grade": false,
       "validation_level": "preview",
       "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions."

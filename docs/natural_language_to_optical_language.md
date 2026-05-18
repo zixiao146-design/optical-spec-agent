@@ -49,3 +49,20 @@ Maps to:
 - No external solver or external LLM is used by default.
 - No production-grade physical validation or formal convergence proof is claimed.
 
+## Source and Monitor Step
+
+The optical-language path now includes deterministic source/monitor inference:
+
+- `source_model`: source type, wavelength band, polarization, incidence
+  direction, beam waist or mode index when relevant.
+- `monitor_model`: monitor type, observable, region, sampling, and units.
+- `optical_language_diagnostics`: missing inputs, defaults, ambiguity notes,
+  blocking questions, `safe_to_preview`, and `safe_to_run_solver=false`.
+
+For nanoparticle scattering previews, the default metadata is a
+plane-wave-like source, 400-900 nm band, `linear_x` polarization, and a
+scattering/extinction spectrum monitor. This is metadata only; no external
+solver monitor result is produced.
+
+See `docs/optical_language_source_monitor.md` and
+`docs/source_monitor_missing_input_diagnostics.md`.

@@ -49,6 +49,8 @@ python scripts/generate_backend_capability_report.py \
 
 ## 安全边界
 
+- 内部工具现在包含光源/监测器推断和缺失输入诊断。它们是本地 Python 调用，
+  在 sample agent session 中会作为已执行的内部工具显示。
 - 默认不执行外部求解器。
 - 默认不调用外部 LLM。
 - 不执行上传。

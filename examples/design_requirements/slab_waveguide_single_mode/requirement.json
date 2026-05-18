@@ -17,6 +17,51 @@
     "Uses approximate single-mode threshold only.",
     "Does not solve ridge/asymmetric vector modes."
   ],
+  "source_model": {
+    "source_type": "mode_source",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 1550.0,
+    "polarization": "TE-like",
+    "incidence_direction": "guided",
+    "beam_waist_um": null,
+    "mode_index": 0,
+    "notes": "Mode-source metadata for scalar slab-waveguide estimate.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "mode_index",
+      "polarization"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "mode_overlap",
+    "observable": "V-number and single-mode likelihood preview",
+    "region": "slab core/cladding cross-section",
+    "frequency_or_wavelength_sampling": "single wavelength",
+    "output_units": "dimensionless V-number",
+    "notes": "Local scalar estimate, not a mode-solver monitor.",
+    "defaulted_fields": [
+      "observable"
+    ],
+    "preview_only": true
+  },
+  "required_source_inputs": [
+    "wavelength_nm",
+    "mode_index",
+    "polarization"
+  ],
+  "required_monitor_inputs": [
+    "observable",
+    "monitor_region"
+  ],
+  "default_source_assumptions": [
+    "Default wavelength is 1550 nm.",
+    "Default to fundamental TE-like mode-source metadata."
+  ],
+  "default_monitor_assumptions": [
+    "Default observable is scalar V-number/single-mode preview."
+  ],
   "suggested_materials": [
     "si3n4",
     "sio2",
@@ -30,6 +75,8 @@
   "expected_tool_calls": [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",

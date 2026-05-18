@@ -35,6 +35,9 @@ from optical_spec_agent.api.models import (
     MaterialSuggestionResponse,
     MaterialsResponse,
     OpticalCalculatorResponse,
+    OpticalLanguageDiagnoseRequest,
+    OpticalLanguageDiagnoseResponse,
+    OpticalLanguageInferRequest,
     ParaxialSystemRequest,
     ParaxialLensRequest,
     QuarterWaveARRequest,
@@ -61,6 +64,7 @@ from optical_spec_agent.api.models import (
     WaveguideSweepRequest,
     WorkflowPlanRequest as AgentWorkflowPlanRequest,
     WorkflowPlanResponse,
+    SourceMonitorInference,
 )
 from optical_spec_agent.agents.orchestrator import build_agent_trace
 from optical_spec_agent.agents.capability_report import (
@@ -88,6 +92,10 @@ from optical_spec_agent.examples.requirements import (
     get_requirement_template,
     list_requirement_templates,
     match_goal_to_template,
+)
+from optical_spec_agent.optical_language import (
+    diagnose_missing_inputs,
+    infer_source_monitor_from_goal,
 )
 from optical_spec_agent.materials.catalog import (
     get_material,
@@ -525,6 +533,7 @@ def agent_adapter_preview(req: AgentAdapterPreviewRequest):
         )
 
     status = "ok" if not result.errors else "needs_review"
+    source_monitor = infer_source_monitor_from_goal(_workflow_text_from_spec(spec))
     return AdapterPreviewResponse(
         status=status,
         tool=result.tool,
@@ -537,6 +546,13 @@ def agent_adapter_preview(req: AgentAdapterPreviewRequest):
             "generated_files": result.generated_files,
             "missing_required": result.missing_required,
             "defaults_applied": result.defaults_applied,
+            "source_model": source_monitor.source_model.model_dump(mode="json"),
+            "monitor_model": source_monitor.monitor_model.model_dump(mode="json"),
+            "observable_summary": source_monitor.monitor_model.observable,
+            "source_monitor_default_assumptions": (
+                source_monitor.diagnostics.default_assumptions_applied
+            ),
+            "preview_only": True,
         },
         diagnostics=ApiDiagnostic(
             warnings=result.warnings,
@@ -647,6 +663,28 @@ def agent_tool_capabilities():
             status="available",
             detection_method="adapter registry dispatch",
             notes=["Generates preview scaffold content only."],
+        ),
+        ToolCapabilityItem(
+            tool_name="source_monitor_inference",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.optical_language",
+            notes=[
+                "Infers preview source, monitor, observable, and defaults with local heuristics."
+            ],
+        ),
+        ToolCapabilityItem(
+            tool_name="missing_input_diagnostics",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.optical_language",
+            notes=[
+                "Reports source/monitor missing inputs, ambiguity notes, and safe_to_run_solver=false."
+            ],
         ),
         ToolCapabilityItem(
             tool_name="optical_calculators",
@@ -1174,6 +1212,111 @@ def agent_design_requirement_detail(template_id: str):
     )
 
 
+@router.post(
+    "/api/optical-language/infer",
+    response_model=SourceMonitorInference,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optical_language_infer(req: OpticalLanguageInferRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Optical-language inference requires a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=[
+                    "Provide a local optical design goal with source and observable context."
+                ],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    if req.template_id is not None:
+        try:
+            get_requirement_template(req.template_id)
+        except ValueError as exc:
+            return _agent_error_response(
+                AgentApiError(
+                    "invalid_workflow_request",
+                    str(exc),
+                    status_code=404,
+                    diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                    recommended_next_actions=[
+                        "Use /api/design-requirements to inspect supported templates."
+                    ],
+                )
+            )
+    return infer_source_monitor_from_goal(goal, template_id=req.template_id)
+
+
+@router.post(
+    "/api/optical-language/diagnose",
+    response_model=OpticalLanguageDiagnoseResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optical_language_diagnose(req: OpticalLanguageDiagnoseRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Optical-language diagnostics require a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=["Provide a local optical design goal."],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    inference = infer_source_monitor_from_goal(goal, template_id=req.template_id)
+    diagnostics = diagnose_missing_inputs(
+        goal=goal,
+        template_id=inference.matched_template_id,
+        spec=req.spec,
+    )
+    # Re-run with template defaults when the caller did not provide explicit spec constraints.
+    if not req.spec:
+        diagnostics = inference.diagnostics
+    return OpticalLanguageDiagnoseResponse(
+        status="ok" if diagnostics.safe_to_preview else "needs_review",
+        matched_template_id=inference.matched_template_id,
+        missing_required_inputs=diagnostics.missing_required_inputs,
+        default_assumptions_applied=diagnostics.default_assumptions_applied,
+        ambiguity_notes=diagnostics.ambiguity_notes,
+        blocking_questions=diagnostics.blocking_questions,
+        safe_to_preview=diagnostics.safe_to_preview,
+        safe_to_run_solver=diagnostics.safe_to_run_solver,
+        diagnostics=ApiDiagnostic(
+            missing_fields=diagnostics.missing_required_inputs,
+            assumptions=diagnostics.default_assumptions_applied,
+            warnings=diagnostics.ambiguity_notes,
+            limitations=[
+                "Diagnostics are preview/design-assist only.",
+                "safe_to_run_solver is false by default.",
+            ],
+        ),
+        recommended_next_actions=[
+            "Review missing source/monitor inputs.",
+            "Confirm default assumptions before optional solver setup.",
+            "Use /api/agent-session to inspect the full tool-call ledger.",
+        ],
+    )
+
+
 @router.get(
     "/api/examples/{example_id}",
     response_model=ExampleDetailResponse,
@@ -1334,6 +1477,9 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
         requirement_template_id=session.requirement_template_id,
         optical_intent_summary=session.optical_intent_summary,
         optical_language_summary=session.optical_language_summary,
+        source_model=session.source_model,
+        monitor_model=session.monitor_model,
+        optical_language_diagnostics=session.optical_language_diagnostics,
         selected_example_id=session.selected_example_id,
         design_case_summary=session.design_case_summary,
         missing_required_inputs=session.missing_required_inputs,

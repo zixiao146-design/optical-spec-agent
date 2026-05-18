@@ -22,6 +22,55 @@
         "Material constants must be verified before conclusions.",
         "No FDTD solver execution by default."
       ],
+      "source_model": {
+        "source_type": "plane_wave",
+        "wavelength_start_nm": 400.0,
+        "wavelength_stop_nm": 900.0,
+        "wavelength_nm": null,
+        "polarization": "linear_x",
+        "incidence_direction": "normal",
+        "beam_waist_um": null,
+        "mode_index": null,
+        "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+        "defaulted_fields": [
+          "wavelength_range_nm",
+          "polarization",
+          "incidence_direction"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "scattering_spectrum",
+        "observable": "scattering/extinction spectrum preview",
+        "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+        "frequency_or_wavelength_sampling": "400-900 nm preview band",
+        "output_units": "normalized preview spectrum",
+        "notes": "Monitor metadata only; no FDTD monitor was executed.",
+        "defaulted_fields": [
+          "monitor_region",
+          "sampling"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "wavelength_range_nm",
+        "polarization",
+        "incidence_direction"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "monitor_region",
+        "sampling"
+      ],
+      "default_source_assumptions": [
+        "Default to normal-incidence plane-wave-like source.",
+        "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
+        "Default polarization is linear_x until specified."
+      ],
+      "default_monitor_assumptions": [
+        "Default observable is scattering/extinction spectrum preview.",
+        "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
+      ],
       "suggested_materials": [
         "ag",
         "au",
@@ -34,6 +83,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -91,6 +142,51 @@
         "Lossless constant-index preview.",
         "Single-layer quarter-wave helper before any validated stack model."
       ],
+      "source_model": {
+        "source_type": "plane_wave",
+        "wavelength_start_nm": 400.0,
+        "wavelength_stop_nm": 800.0,
+        "wavelength_nm": 550.0,
+        "polarization": "s",
+        "incidence_direction": "normal",
+        "beam_waist_um": null,
+        "mode_index": null,
+        "notes": "Normal-incidence plane-wave preview for thin-film reflectance/transmittance.",
+        "defaulted_fields": [
+          "wavelength_range_nm",
+          "polarization",
+          "incidence_direction"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "reflectance_transmittance",
+        "observable": "R/T spectrum preview",
+        "region": "incident and substrate half-spaces",
+        "frequency_or_wavelength_sampling": "400-800 nm preview sweep",
+        "output_units": "dimensionless R/T/A",
+        "notes": "Local calculator output, not an external solver monitor.",
+        "defaulted_fields": [
+          "sampling"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "wavelength_range_nm",
+        "polarization",
+        "incidence_direction"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "sampling"
+      ],
+      "default_source_assumptions": [
+        "Default to normal incidence.",
+        "Default wavelength sweep is 400-800 nm with a 550 nm design point."
+      ],
+      "default_monitor_assumptions": [
+        "Default observable is reflectance/transmittance from local thin-film preview formulas."
+      ],
       "suggested_materials": [
         "sio2",
         "tio2",
@@ -104,6 +200,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -161,6 +259,49 @@
         "Ideal thin lens.",
         "No aberration, clipping, or vector-field effects."
       ],
+      "source_model": {
+        "source_type": "gaussian_beam",
+        "wavelength_start_nm": null,
+        "wavelength_stop_nm": null,
+        "wavelength_nm": 1064.0,
+        "polarization": "scalar_paraxial",
+        "incidence_direction": "z_plus",
+        "beam_waist_um": 10.0,
+        "mode_index": null,
+        "notes": "Paraxial scalar Gaussian beam preview.",
+        "defaulted_fields": [
+          "wavelength_nm",
+          "beam_waist_um"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "focal_spot",
+        "observable": "beam radius and focused waist preview",
+        "region": "propagation axis / focal plane",
+        "frequency_or_wavelength_sampling": "single design wavelength",
+        "output_units": "um and mm",
+        "notes": "Calculator metadata only; no field monitor was executed.",
+        "defaulted_fields": [
+          "monitor_region"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "wavelength_nm",
+        "beam_waist_um"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "monitor_region"
+      ],
+      "default_source_assumptions": [
+        "Default to a 1064 nm scalar Gaussian beam when not specified.",
+        "Default waist is 10 um for propagation preview."
+      ],
+      "default_monitor_assumptions": [
+        "Default monitor is focal spot / beam radius preview."
+      ],
       "suggested_materials": [
         "air",
         "glass_bk7_preview",
@@ -173,6 +314,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -230,6 +373,51 @@
         "Uses approximate single-mode threshold only.",
         "Does not solve ridge/asymmetric vector modes."
       ],
+      "source_model": {
+        "source_type": "mode_source",
+        "wavelength_start_nm": null,
+        "wavelength_stop_nm": null,
+        "wavelength_nm": 1550.0,
+        "polarization": "TE-like",
+        "incidence_direction": "guided",
+        "beam_waist_um": null,
+        "mode_index": 0,
+        "notes": "Mode-source metadata for scalar slab-waveguide estimate.",
+        "defaulted_fields": [
+          "wavelength_nm",
+          "mode_index",
+          "polarization"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "mode_overlap",
+        "observable": "V-number and single-mode likelihood preview",
+        "region": "slab core/cladding cross-section",
+        "frequency_or_wavelength_sampling": "single wavelength",
+        "output_units": "dimensionless V-number",
+        "notes": "Local scalar estimate, not a mode-solver monitor.",
+        "defaulted_fields": [
+          "observable"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "wavelength_nm",
+        "mode_index",
+        "polarization"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "monitor_region"
+      ],
+      "default_source_assumptions": [
+        "Default wavelength is 1550 nm.",
+        "Default to fundamental TE-like mode-source metadata."
+      ],
+      "default_monitor_assumptions": [
+        "Default observable is scalar V-number/single-mode preview."
+      ],
       "suggested_materials": [
         "si3n4",
         "sio2",
@@ -243,6 +431,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -300,6 +490,48 @@
         "First-order paraxial model.",
         "No aberration, aperture stop, or material dispersion model."
       ],
+      "source_model": {
+        "source_type": "ray_bundle",
+        "wavelength_start_nm": null,
+        "wavelength_stop_nm": null,
+        "wavelength_nm": 550.0,
+        "polarization": "not_applicable_first_order",
+        "incidence_direction": "z_plus",
+        "beam_waist_um": null,
+        "mode_index": null,
+        "notes": "First-order ray-bundle metadata for paraxial lens preview.",
+        "defaulted_fields": [
+          "wavelength_nm",
+          "incidence_direction"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "image_plane",
+        "observable": "image distance and magnification preview",
+        "region": "paraxial image plane",
+        "frequency_or_wavelength_sampling": "single design wavelength",
+        "output_units": "mm and dimensionless magnification",
+        "notes": "ABCD calculator output, not ray-trace validation.",
+        "defaulted_fields": [
+          "observable"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "wavelength_nm",
+        "incidence_direction"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "monitor_region"
+      ],
+      "default_source_assumptions": [
+        "Default to a first-order ray bundle at 550 nm."
+      ],
+      "default_monitor_assumptions": [
+        "Default monitor is paraxial image-plane estimate."
+      ],
       "suggested_materials": [
         "glass_bk7_preview",
         "glass_fused_silica_preview",
@@ -312,6 +544,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -370,6 +604,46 @@
         "MPB adapter preview only.",
         "No convergence proof or solver run."
       ],
+      "source_model": {
+        "source_type": "mode_source",
+        "wavelength_start_nm": null,
+        "wavelength_stop_nm": null,
+        "wavelength_nm": null,
+        "polarization": null,
+        "incidence_direction": null,
+        "beam_waist_um": null,
+        "mode_index": 0,
+        "notes": "Eigenmode/band-structure context; no time-domain source is executed.",
+        "defaulted_fields": [
+          "mode_index"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "band_structure",
+        "observable": "band diagram preview",
+        "region": "reciprocal-space k-path",
+        "frequency_or_wavelength_sampling": "k-path / band index scaffold",
+        "output_units": "normalized frequency preview",
+        "notes": "MPB adapter metadata only; no band solver was run.",
+        "defaulted_fields": [
+          "sampling"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "mode_index"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "sampling"
+      ],
+      "default_source_assumptions": [
+        "Treat the case as an eigenmode/band-structure preview, not a driven source simulation."
+      ],
+      "default_monitor_assumptions": [
+        "Default monitor is band-structure metadata over a k-path scaffold."
+      ],
       "suggested_materials": [
         "si",
         "gaas",
@@ -381,6 +655,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -438,6 +714,50 @@
         "Material indices are preview values.",
         "No FDTD solver execution by default."
       ],
+      "source_model": {
+        "source_type": "plane_wave",
+        "wavelength_start_nm": null,
+        "wavelength_stop_nm": null,
+        "wavelength_nm": 633.0,
+        "polarization": "linear_x",
+        "incidence_direction": "normal",
+        "beam_waist_um": null,
+        "mode_index": null,
+        "notes": "Normal-incidence plane-wave metadata for metasurface phase preview.",
+        "defaulted_fields": [
+          "wavelength_nm",
+          "polarization",
+          "incidence_direction"
+        ],
+        "preview_only": true
+      },
+      "monitor_model": {
+        "monitor_type": "phase_profile",
+        "observable": "phase profile / far-field preview",
+        "region": "transmission plane or far-field proxy",
+        "frequency_or_wavelength_sampling": "single design wavelength",
+        "output_units": "phase radians / normalized field preview",
+        "notes": "No FDTD/RCWA field monitor was executed.",
+        "defaulted_fields": [
+          "monitor_region"
+        ],
+        "preview_only": true
+      },
+      "required_source_inputs": [
+        "wavelength_nm",
+        "polarization",
+        "incidence_direction"
+      ],
+      "required_monitor_inputs": [
+        "observable",
+        "monitor_region"
+      ],
+      "default_source_assumptions": [
+        "Default to normal-incidence linear_x plane wave at 633 nm."
+      ],
+      "default_monitor_assumptions": [
+        "Default monitor is phase-profile/far-field preview metadata."
+      ],
       "suggested_materials": [
         "tio2",
         "si3n4",
@@ -449,6 +769,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",

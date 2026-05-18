@@ -18,6 +18,8 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert {item["tool_name"] for item in body["internal_tools"]} >= {
         "material_catalog",
         "example_registry",
+        "source_monitor_inference",
+        "missing_input_diagnostics",
         "optical_calculators",
     }
     assert {item["calculator_name"] for item in body["optical_calculators"]} == {

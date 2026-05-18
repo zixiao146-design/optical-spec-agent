@@ -89,5 +89,10 @@ The following are not exposed as backend Agent Studio actions:
 - Optical calculators are preview/design-assist only.
 - Calculator quality fields and reference cases are sanity checks only.
 - Backend capability reports and design case cross-checks are preview/design-assist evidence only.
+- Source/monitor inference and missing-input diagnostics are internal Python
+  calls: `optical_language.infer_source_monitor` and
+  `optical_language.diagnose_missing_inputs`.
+- Monitor definitions are preview metadata, not executed external solver monitor
+  results.
 - Production-grade physical validation is not claimed.
 - Formal convergence proof is not claimed.

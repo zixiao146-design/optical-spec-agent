@@ -46,6 +46,9 @@ require({item["calculator_name"] for item in report["optical_calculators"]} == {
     "gaussian_beam",
     "waveguide",
 }, "calculator list mismatch")
+internal_tools = {item["tool_name"]: item for item in report["internal_tools"]}
+require(internal_tools["source_monitor_inference"]["executed_in_sample"] is True, "source/monitor inference not executed in sample")
+require(internal_tools["missing_input_diagnostics"]["executed_in_sample"] is True, "missing-input diagnostics not executed in sample")
 require(all(action["executed"] is False for action in report["blocked_external_actions"]), "external action executed")
 require(report["production_grade_validation_claimed"] is False, "production claim changed")
 require(report["formal_convergence_proof_claimed"] is False, "convergence claim changed")
@@ -112,11 +115,38 @@ ledger = {entry["tool_name"]: entry for entry in thin_payload["tool_call_ledger"
 require(thin_payload["requirement_template_id"] == "thin_film_ar_coating", "thin-film session template mismatch")
 require(ledger["requirements.match_template"]["executed"] is True, "requirements match not executed")
 require(ledger["requirements.extract_optical_intent"]["executed"] is True, "intent extraction not executed")
+require(ledger["optical_language.infer_source_monitor"]["executed"] is True, "source/monitor inference not executed")
+require(ledger["optical_language.diagnose_missing_inputs"]["executed"] is True, "missing-input diagnostics not executed")
 require(ledger["optics.thin_film.spectrum"]["executed"] is True, "thin-film calculator not executed")
+
+infer = client.post(
+    "/api/optical-language/infer",
+    json={
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(infer.status_code == 200, "optical-language inference failed")
+require(infer.json()["source_model"]["source_type"] == "plane_wave", "source inference mismatch")
+require(infer.json()["monitor_model"]["monitor_type"] == "scattering_spectrum", "monitor inference mismatch")
+
+diagnose = client.post(
+    "/api/optical-language/diagnose",
+    json={
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(diagnose.status_code == 200, "optical-language diagnostics failed")
+require(diagnose.json()["safe_to_run_solver"] is False, "diagnostics changed solver safety")
 
 print("BACKEND CAPABILITY REPORT PASSED")
 print("DESIGN CASE CROSS-CHECKS PASSED")
 print("DESIGN REQUIREMENT MATCHING PASSED")
+print("SOURCE/MONITOR INFERENCE PASSED")
+print("MISSING INPUT DIAGNOSTICS PASSED")
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

@@ -33,6 +33,8 @@ require(cap_payload["external_solver_executed"] is False, "tool capabilities cha
 require(cap_payload["external_llm_required"] is False, "tool capabilities changed LLM flag")
 internal_tools = {item["tool_name"] for item in cap_payload["internal_tools"]}
 require("optical_calculators" in internal_tools, "optical calculators missing")
+require("source_monitor_inference" in internal_tools, "source/monitor inference missing")
+require("missing_input_diagnostics" in internal_tools, "missing-input diagnostics missing")
 
 session = client.post(
     "/api/agent-session",
@@ -46,8 +48,36 @@ session_payload = session.json()
 require(session_payload["tool_call_ledger"], "tool_call_ledger missing")
 ledger = {entry["tool_name"]: entry for entry in session_payload["tool_call_ledger"]}
 require(ledger["material_catalog.suggest"]["executed"] is True, "material catalog not executed")
+require(ledger["optical_language.infer_source_monitor"]["executed"] is True, "source/monitor inference not executed")
+require(ledger["optical_language.diagnose_missing_inputs"]["executed"] is True, "missing-input diagnostics not executed")
 require(ledger["external_llm"]["executed"] is False, "external LLM unexpectedly executed")
 require(ledger["pypi_publish"]["executed"] is False, "PyPI publish unexpectedly executed")
+
+source_monitor = client.post(
+    "/api/optical-language/infer",
+    json={
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(source_monitor.status_code == 200, "/api/optical-language/infer failed")
+source_payload = source_monitor.json()
+require(source_payload["source_model"]["source_type"] == "plane_wave", "source inference mismatch")
+require(source_payload["monitor_model"]["monitor_type"] == "scattering_spectrum", "monitor inference mismatch")
+
+diagnostics = client.post(
+    "/api/optical-language/diagnose",
+    json={
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(diagnostics.status_code == 200, "/api/optical-language/diagnose failed")
+diag_payload = diagnostics.json()
+require(diag_payload["safe_to_preview"] is True, "diagnostics should be preview-safe")
+require(diag_payload["safe_to_run_solver"] is False, "diagnostics should block solver by default")
 
 requests = [
     (
@@ -155,10 +185,14 @@ waveguide_reference = slab_waveguide_v_number(2.0, 1.5, 0.3, 1550.0)
 require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity check failed")
 
 print("CALCULATOR SANITY CHECKS PASSED")
+print("SOURCE/MONITOR INFERENCE PASSED")
+print("MISSING INPUT DIAGNOSTICS PASSED")
 print("Backend capabilities smoke passed")
 PY
 
 echo "CALCULATOR SANITY CHECKS PASSED"
+echo "SOURCE/MONITOR INFERENCE PASSED"
+echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

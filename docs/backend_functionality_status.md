@@ -95,6 +95,15 @@ python scripts/audit_sub_agents.py
 ./scripts/smoke_backend_report.sh
 ```
 
+Backend source/monitor functionality is implemented as local Python helpers:
+
+- `optical_language.infer_source_monitor`
+- `optical_language.diagnose_missing_inputs`
+
+These helpers are included in backend capability reports and agent-session
+tool-call ledgers. They infer preview source/monitor metadata and report
+missing inputs without running solvers or calling external LLMs.
+
 Both scripts are local-only and print:
 
 - NO SOLVER EXECUTION PERFORMED

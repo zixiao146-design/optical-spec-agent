@@ -170,6 +170,31 @@ require(
     "design requirement match failed",
 )
 
+optical_language_infer = post(
+    "/api/optical-language/infer",
+    {
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(optical_language_infer["source_model"]["source_type"] == "plane_wave", "source inference failed")
+require(
+    optical_language_infer["monitor_model"]["monitor_type"] == "scattering_spectrum",
+    "monitor inference failed",
+)
+
+optical_language_diagnose = post(
+    "/api/optical-language/diagnose",
+    {
+        "goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流。",
+        "template_id": "nanoparticle_plasmonics",
+        "language": "zh-CN",
+    },
+)
+require(optical_language_diagnose["safe_to_preview"] is True, "diagnostics should be safe to preview")
+require(optical_language_diagnose["safe_to_run_solver"] is False, "solver safety should remain false")
+
 thin_film = post(
     "/api/optics/thin-film",
     {"incident_n": 1.0, "substrate_n": 1.5, "wavelength_nm": 550.0, "layers": [{"n": 1.22, "thickness_nm": 112.7}]},
@@ -252,6 +277,8 @@ for name, payload in {
     "design_requirements": design_requirements,
     "design_requirement_detail": design_requirement_detail,
     "design_requirement_match": design_requirement_match,
+    "optical_language_infer": optical_language_infer,
+    "optical_language_diagnose": optical_language_diagnose,
     "thin_film": thin_film,
     "thin_film_spectrum": thin_film_spectrum,
     "quarter_wave_ar": quarter_wave_ar,
@@ -271,7 +298,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 36}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 38}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

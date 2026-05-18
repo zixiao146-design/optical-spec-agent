@@ -383,6 +383,45 @@
       "proprietary_solver_required": false
     },
     {
+      "name": "optical-language-infer-nanoparticle",
+      "endpoint": "/api/optical-language/infer",
+      "method": "POST",
+      "request_file": "optical_language_infer_nanoparticle_request.json",
+      "response_file": "optical_language_infer_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "optical-language-diagnose-nanoparticle",
+      "endpoint": "/api/optical-language/diagnose",
+      "method": "POST",
+      "request_file": "optical_language_diagnose_nanoparticle_request.json",
+      "response_file": "optical_language_diagnose_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "agent-session-source-monitor-nanoparticle",
+      "endpoint": "/api/agent-session",
+      "method": "POST",
+      "request_file": "agent_session_request_nanoparticle.json",
+      "response_file": "agent_session_source_monitor_nanoparticle_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
       "name": "error-invalid-spec",
       "endpoint": "/api/validate",
       "method": "POST",

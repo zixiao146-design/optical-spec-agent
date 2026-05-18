@@ -33,6 +33,45 @@
     "missing_required": [
       "geometry_material.geometry_definition"
     ],
-    "defaults_applied": []
+    "defaults_applied": [],
+    "source_model": {
+      "source_type": "plane_wave",
+      "wavelength_start_nm": 400.0,
+      "wavelength_stop_nm": 900.0,
+      "wavelength_nm": null,
+      "polarization": "linear_x",
+      "incidence_direction": "normal",
+      "beam_waist_um": null,
+      "mode_index": null,
+      "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+      "defaulted_fields": [
+        "wavelength_range_nm",
+        "polarization",
+        "incidence_direction"
+      ],
+      "preview_only": true
+    },
+    "monitor_model": {
+      "monitor_type": "scattering_spectrum",
+      "observable": "scattering/extinction spectrum preview",
+      "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+      "frequency_or_wavelength_sampling": "400-900 nm preview band",
+      "output_units": "normalized preview spectrum",
+      "notes": "Monitor metadata only; no FDTD monitor was executed.",
+      "defaulted_fields": [
+        "monitor_region",
+        "sampling"
+      ],
+      "preview_only": true
+    },
+    "observable_summary": "scattering/extinction spectrum preview",
+    "source_monitor_default_assumptions": [
+      "Default to normal-incidence plane-wave-like source.",
+      "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
+      "Default polarization is linear_x until specified.",
+      "Default observable is scattering/extinction spectrum preview.",
+      "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
+    ],
+    "preview_only": true
   }
 }

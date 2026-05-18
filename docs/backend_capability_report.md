@@ -57,6 +57,9 @@ For smoke verification:
 
 ## Safety Boundaries
 
+- Internal tools now include source/monitor inference and missing-input
+  diagnostics. These are local Python calls and appear as executed internal
+  tools when a sample agent session is built.
 - NO SOLVER EXECUTION PERFORMED.
 - No solver is executed by default.
 - No external LLM is called by default.

@@ -49,3 +49,17 @@
 - 默认不执行外部求解器，也不调用外部 LLM。
 - 不声明生产级物理验证，也不声明形式化收敛证明。
 
+## 光源和监测器步骤
+
+光学语言路径现在包含确定性的光源/监测器推断：
+
+- `source_model`：光源类型、波长范围、偏振、入射方向、光腰或模式编号。
+- `monitor_model`：监测器类型、观测量、区域、采样和单位。
+- `optical_language_diagnostics`：缺失输入、默认假设、歧义说明、阻断问题、
+  `safe_to_preview` 和 `safe_to_run_solver=false`。
+
+纳米颗粒散射预览默认使用平面波式光源、400-900 nm 波段、`linear_x` 偏振，
+以及散射/消光谱监测器。这只是元数据，不是外部求解器 monitor 结果。
+
+参见 `docs/optical_language_source_monitor.zh-CN.md` 和
+`docs/source_monitor_missing_input_diagnostics.zh-CN.md`。

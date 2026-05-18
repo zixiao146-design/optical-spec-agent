@@ -18,6 +18,50 @@
     "Material indices are preview values.",
     "No FDTD solver execution by default."
   ],
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 633.0,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Normal-incidence plane-wave metadata for metasurface phase preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "phase_profile",
+    "observable": "phase profile / far-field preview",
+    "region": "transmission plane or far-field proxy",
+    "frequency_or_wavelength_sampling": "single design wavelength",
+    "output_units": "phase radians / normalized field preview",
+    "notes": "No FDTD/RCWA field monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region"
+    ],
+    "preview_only": true
+  },
+  "required_source_inputs": [
+    "wavelength_nm",
+    "polarization",
+    "incidence_direction"
+  ],
+  "required_monitor_inputs": [
+    "observable",
+    "monitor_region"
+  ],
+  "default_source_assumptions": [
+    "Default to normal-incidence linear_x plane wave at 633 nm."
+  ],
+  "default_monitor_assumptions": [
+    "Default monitor is phase-profile/far-field preview metadata."
+  ],
   "suggested_materials": [
     "tio2",
     "si3n4",
@@ -29,6 +73,8 @@
   "expected_tool_calls": [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",

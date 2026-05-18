@@ -1,0 +1,62 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "matched_template_id": "nanoparticle_plasmonics",
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": 400.0,
+    "wavelength_stop_nm": 900.0,
+    "wavelength_nm": null,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+    "defaulted_fields": [
+      "wavelength_range_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "scattering_spectrum",
+    "observable": "scattering/extinction spectrum preview",
+    "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+    "frequency_or_wavelength_sampling": "400-900 nm preview band",
+    "output_units": "normalized preview spectrum",
+    "notes": "Monitor metadata only; no FDTD monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region",
+      "sampling"
+    ],
+    "preview_only": true
+  },
+  "diagnostics": {
+    "missing_required_inputs": [],
+    "default_assumptions_applied": [
+      "Default to normal-incidence plane-wave-like source.",
+      "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
+      "Default polarization is linear_x until specified.",
+      "Default observable is scattering/extinction spectrum preview.",
+      "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
+    ],
+    "ambiguity_notes": [
+      "Polarization was defaulted; confirm before solver execution.",
+      "Wavelength range was defaulted; confirm the design band."
+    ],
+    "blocking_questions": [],
+    "safe_to_preview": true,
+    "safe_to_run_solver": false
+  },
+  "recommended_next_actions": [
+    "Review source and monitor defaults before adapter preview.",
+    "Answer blocking questions before any optional solver execution.",
+    "Treat monitor metadata as preview-only; no solver monitor was executed."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

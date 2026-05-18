@@ -23,6 +23,12 @@ from optical_spec_agent.examples.requirements import (
     RequirementMatchResult,
 )
 from optical_spec_agent.materials.models import MaterialDetail, MaterialSummary
+from optical_spec_agent.optical_language import (
+    OpticalLanguageDiagnostics,
+    OpticalMonitorModel,
+    OpticalSourceModel,
+    SourceMonitorInference,
+)
 
 
 API_CONTRACT_VERSION = "0.1"
@@ -231,6 +237,11 @@ class AgentTaskSessionResponse(ApiResponseBase):
     requirement_template_id: str | None = None
     optical_intent_summary: str
     optical_language_summary: dict[str, str] = Field(default_factory=dict)
+    source_model: OpticalSourceModel | None = None
+    monitor_model: OpticalMonitorModel | None = None
+    optical_language_diagnostics: OpticalLanguageDiagnostics = Field(
+        default_factory=OpticalLanguageDiagnostics
+    )
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
@@ -246,6 +257,37 @@ class AgentTaskSessionResponse(ApiResponseBase):
 class DesignRequirementMatchRequest(ApiRequestBase):
     goal: str = Field(..., description="Natural language optical design goal")
     language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+class OpticalLanguageInferRequest(ApiRequestBase):
+    goal: str = Field(..., description="Natural language optical design goal")
+    template_id: str | None = Field(None, description="Optional design requirement template id")
+    language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+class OpticalLanguageDiagnoseRequest(ApiRequestBase):
+    goal: str = Field(..., description="Natural language optical design goal")
+    spec: dict[str, Any] | None = Field(None, description="Optional partial spec payload")
+    template_id: str | None = Field(None, description="Optional design requirement template id")
+    language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+class OpticalLanguageDiagnoseResponse(ApiResponseBase):
+    matched_template_id: str | None = None
+    missing_required_inputs: list[str] = Field(default_factory=list)
+    default_assumptions_applied: list[str] = Field(default_factory=list)
+    ambiguity_notes: list[str] = Field(default_factory=list)
+    blocking_questions: list[str] = Field(default_factory=list)
+    safe_to_preview: bool = True
+    safe_to_run_solver: bool = False
+
+
+__all_optical_language_models__ = [
+    "OpticalLanguageDiagnoseResponse",
+    "OpticalLanguageInferRequest",
+    "OpticalLanguageDiagnoseRequest",
+    "SourceMonitorInference",
+]
 
 
 __all_requirement_models__ = [

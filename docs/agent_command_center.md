@@ -101,6 +101,20 @@ Blocked or requiring explicit approval outside Agent Studio:
 - Git tag creation
 - GitHub release creation
 
+## Source / Monitor Diagnostics
+
+Agent sessions include `source_model`, `monitor_model`, and
+`optical_language_diagnostics`. The plan explicitly records:
+
+- infer source and monitor
+- check missing source/monitor inputs
+- record default assumptions
+- keep `safe_to_run_solver=false`
+
+For nanoparticle/FDTD previews, the default is a plane-wave-like source,
+400-900 nm band, `linear_x` polarization, and scattering/extinction spectrum
+monitor metadata. No external solver monitor is executed.
+
 ## Safety Boundaries
 
 - No external solver execution by default.

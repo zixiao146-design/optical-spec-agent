@@ -377,6 +377,8 @@ Current v1.0 evidence artifacts:
 - Mock LLM evaluation is deterministic and not a real model-quality proof.
 - Adapter outputs remain scaffold/MVP unless separately validated.
 - Meep execution remains optional/local.
+- Source/monitor inference and missing-input diagnostics are backend preview
+  metadata only; they do not represent executed solver monitor results.
 
 ## Manual Release Checklist
 

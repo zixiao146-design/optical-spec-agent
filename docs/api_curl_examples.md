@@ -161,3 +161,15 @@ installed, callable, executed, or blocked without changing the preview-only
 safety boundary.
 Design requirement calls show deterministic natural-language goal matching and
 the resulting optical language summary without external LLM calls.
+Source/monitor calls show deterministic source, monitor, observable, default,
+and missing-input diagnostics:
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/optical-language/infer \
+  -H "Content-Type: application/json" \
+  --data @examples/api/optical_language_infer_nanoparticle_request.json
+
+curl -X POST http://127.0.0.1:8000/api/optical-language/diagnose \
+  -H "Content-Type: application/json" \
+  --data @examples/api/optical_language_diagnose_nanoparticle_request.json
+```

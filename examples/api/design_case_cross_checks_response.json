@@ -19,6 +19,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -63,6 +65,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -110,6 +114,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -155,6 +161,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -199,6 +207,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -245,6 +255,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -286,6 +298,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -316,6 +330,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -345,6 +361,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -374,6 +392,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -403,6 +423,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -432,6 +454,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -462,6 +486,8 @@
       "expected_tool_calls": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",

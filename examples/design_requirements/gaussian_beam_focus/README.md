@@ -56,3 +56,27 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: gaussian_beam
+- Source wavelength start: None
+- Source wavelength stop: None
+- Polarization: scalar_paraxial
+- Incidence direction: z_plus
+- Monitor type: focal_spot
+- Observable: beam radius and focused waist preview
+- Monitor region: propagation axis / focal plane
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- wavelength_nm
+- beam_waist_um
+
+Required monitor inputs:
+- observable
+- monitor_region
+
+Default source/monitor assumptions:
+- Default to a 1064 nm scalar Gaussian beam when not specified.
+- Default waist is 10 um for propagation preview.
+- Default monitor is focal spot / beam radius preview.

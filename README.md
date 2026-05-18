@@ -1198,6 +1198,15 @@ optical-spec-agent/
 
 See [`docs/open_source_stack.md`](docs/open_source_stack.md) for per-tool details and [`docs/open_source_integration_focus.md`](docs/open_source_integration_focus.md) for priority tiers.
 
+## Backend Optical-Language Diagnostics
+
+The backend now exposes deterministic source/monitor inference through
+`/api/optical-language/infer`, `/api/optical-language/diagnose`, and
+`/api/agent-session`. For nanoparticle scattering previews, the default
+metadata is a plane-wave-like source, 400-900 nm band, `linear_x`
+polarization, and scattering/extinction spectrum monitor. These are
+preview/design-assist assumptions only; no external solver monitor is executed.
+
 ## License
 
 [MIT](LICENSE)

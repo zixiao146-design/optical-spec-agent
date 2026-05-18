@@ -18,9 +18,13 @@ def test_smoke_backend_report_script_exists_and_has_safety_markers():
     assert "/api/design-case-cross-checks" in text
     assert "/api/design-requirements" in text
     assert "/api/design-requirements/match" in text
+    assert "/api/optical-language/infer" in text
+    assert "/api/optical-language/diagnose" in text
     assert "BACKEND CAPABILITY REPORT PASSED" in text
     assert "DESIGN CASE CROSS-CHECKS PASSED" in text
     assert "DESIGN REQUIREMENT MATCHING PASSED" in text
+    assert "SOURCE/MONITOR INFERENCE PASSED" in text
+    assert "MISSING INPUT DIAGNOSTICS PASSED" in text
     assert "NO SOLVER EXECUTION PERFORMED" in text
     assert "NO EXTERNAL LLM CALLED" in text
     assert "NO UPLOAD PERFORMED" in text
@@ -43,3 +47,4 @@ def test_smoke_backend_report_script_runs_successfully():
     assert result.returncode == 0, result.stdout + result.stderr
     assert "BACKEND CAPABILITY REPORT PASSED" in result.stdout
     assert "DESIGN CASE CROSS-CHECKS PASSED" in result.stdout
+    assert "SOURCE/MONITOR INFERENCE PASSED" in result.stdout

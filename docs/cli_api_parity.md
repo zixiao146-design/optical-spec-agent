@@ -65,3 +65,7 @@ Hardened frontend demo checks are documented in
   `scripts/smoke_backend_report.sh` provide backend capability reporting and
   design-case cross-check smoke without solver, LLM, upload, tag, or release
   actions.
+- Source/monitor inference is currently API/backend-only through
+  `/api/optical-language/infer`, `/api/optical-language/diagnose`, and
+  `/api/agent-session`; it remains local deterministic metadata, not executed
+  solver monitor output.

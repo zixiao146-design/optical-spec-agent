@@ -56,3 +56,26 @@ Safety boundaries:
 - No production-grade physical validation is claimed.
 - Formal convergence proof is not claimed.
 - No upload, tag, or release action is performed.
+
+Source and monitor preview metadata:
+- Source type: ray_bundle
+- Source wavelength start: None
+- Source wavelength stop: None
+- Polarization: not_applicable_first_order
+- Incidence direction: z_plus
+- Monitor type: image_plane
+- Observable: image distance and magnification preview
+- Monitor region: paraxial image plane
+- Monitor definitions are preview metadata; no external solver monitor is executed.
+
+Required source inputs:
+- wavelength_nm
+- incidence_direction
+
+Required monitor inputs:
+- observable
+- monitor_region
+
+Default source/monitor assumptions:
+- Default to a first-order ray bundle at 550 nm.
+- Default monitor is paraxial image-plane estimate.

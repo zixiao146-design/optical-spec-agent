@@ -47,6 +47,8 @@ Every matched template expects:
 
 - `requirements.match_template`
 - `requirements.extract_optical_intent`
+- `optical_language.infer_source_monitor`
+- `optical_language.diagnose_missing_inputs`
 - `material_catalog.suggest`
 - `example_registry.load` when a local design case is available
 - `agent_trace.build`
@@ -54,6 +56,18 @@ Every matched template expects:
 - `adapter_preview.generate`
 
 Calculator-backed cases add the relevant local optical calculator call. These calls are internal Python preview/design-assist functions.
+
+Each template also includes:
+
+- `source_model`
+- `monitor_model`
+- `required_source_inputs`
+- `required_monitor_inputs`
+- `default_source_assumptions`
+- `default_monitor_assumptions`
+
+These fields make source, monitor, and observable assumptions visible before
+workflow or adapter preview.
 
 ## Safety Boundaries
 
@@ -64,4 +78,3 @@ Calculator-backed cases add the relevant local optical calculator call. These ca
 - Outputs are preview/design-assist only.
 - No production-grade physical validation is claimed.
 - No formal convergence proof is claimed.
-

@@ -21,6 +21,51 @@
       "Lossless constant-index preview.",
       "Single-layer quarter-wave helper before any validated stack model."
     ],
+    "source_model": {
+      "source_type": "plane_wave",
+      "wavelength_start_nm": 400.0,
+      "wavelength_stop_nm": 800.0,
+      "wavelength_nm": 550.0,
+      "polarization": "s",
+      "incidence_direction": "normal",
+      "beam_waist_um": null,
+      "mode_index": null,
+      "notes": "Normal-incidence plane-wave preview for thin-film reflectance/transmittance.",
+      "defaulted_fields": [
+        "wavelength_range_nm",
+        "polarization",
+        "incidence_direction"
+      ],
+      "preview_only": true
+    },
+    "monitor_model": {
+      "monitor_type": "reflectance_transmittance",
+      "observable": "R/T spectrum preview",
+      "region": "incident and substrate half-spaces",
+      "frequency_or_wavelength_sampling": "400-800 nm preview sweep",
+      "output_units": "dimensionless R/T/A",
+      "notes": "Local calculator output, not an external solver monitor.",
+      "defaulted_fields": [
+        "sampling"
+      ],
+      "preview_only": true
+    },
+    "required_source_inputs": [
+      "wavelength_range_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "required_monitor_inputs": [
+      "observable",
+      "sampling"
+    ],
+    "default_source_assumptions": [
+      "Default to normal incidence.",
+      "Default wavelength sweep is 400-800 nm with a 550 nm design point."
+    ],
+    "default_monitor_assumptions": [
+      "Default observable is reflectance/transmittance from local thin-film preview formulas."
+    ],
     "suggested_materials": [
       "sio2",
       "tio2",
@@ -34,6 +79,8 @@
     "expected_tool_calls": [
       "requirements.match_template",
       "requirements.extract_optical_intent",
+      "optical_language.infer_source_monitor",
+      "optical_language.diagnose_missing_inputs",
       "material_catalog.suggest",
       "example_registry.load",
       "agent_trace.build",

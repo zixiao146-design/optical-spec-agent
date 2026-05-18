@@ -18,6 +18,46 @@
     "MPB adapter preview only.",
     "No convergence proof or solver run."
   ],
+  "source_model": {
+    "source_type": "mode_source",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": null,
+    "polarization": null,
+    "incidence_direction": null,
+    "beam_waist_um": null,
+    "mode_index": 0,
+    "notes": "Eigenmode/band-structure context; no time-domain source is executed.",
+    "defaulted_fields": [
+      "mode_index"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "band_structure",
+    "observable": "band diagram preview",
+    "region": "reciprocal-space k-path",
+    "frequency_or_wavelength_sampling": "k-path / band index scaffold",
+    "output_units": "normalized frequency preview",
+    "notes": "MPB adapter metadata only; no band solver was run.",
+    "defaulted_fields": [
+      "sampling"
+    ],
+    "preview_only": true
+  },
+  "required_source_inputs": [
+    "mode_index"
+  ],
+  "required_monitor_inputs": [
+    "observable",
+    "sampling"
+  ],
+  "default_source_assumptions": [
+    "Treat the case as an eigenmode/band-structure preview, not a driven source simulation."
+  ],
+  "default_monitor_assumptions": [
+    "Default monitor is band-structure metadata over a k-path scaffold."
+  ],
   "suggested_materials": [
     "si",
     "gaas",
@@ -29,6 +69,8 @@
   "expected_tool_calls": [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",

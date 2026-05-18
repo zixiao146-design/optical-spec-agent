@@ -11,6 +11,12 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from optical_spec_agent.optical_language import (
+    OpticalMonitorModel,
+    OpticalSourceModel,
+    template_source_monitor_defaults,
+)
+
 
 MatchConfidence = Literal["high", "medium", "low"]
 
@@ -35,6 +41,12 @@ class OpticalDesignRequirementTemplate(BaseModel):
     physical_system: str
     required_inputs: list[str] = Field(default_factory=list)
     default_assumptions: list[str] = Field(default_factory=list)
+    source_model: OpticalSourceModel | None = None
+    monitor_model: OpticalMonitorModel | None = None
+    required_source_inputs: list[str] = Field(default_factory=list)
+    required_monitor_inputs: list[str] = Field(default_factory=list)
+    default_source_assumptions: list[str] = Field(default_factory=list)
+    default_monitor_assumptions: list[str] = Field(default_factory=list)
     suggested_materials: list[str] = Field(default_factory=list)
     suggested_adapter: str
     expected_calculators: list[str] = Field(default_factory=list)
@@ -256,6 +268,14 @@ def _template(
     solver_or_adapter_family: str,
     calculator_or_tool_path: str,
 ) -> OpticalDesignRequirementTemplate:
+    (
+        source_model,
+        monitor_model,
+        required_source_inputs,
+        required_monitor_inputs,
+        default_source_assumptions,
+        default_monitor_assumptions,
+    ) = template_source_monitor_defaults(template_id)
     return OpticalDesignRequirementTemplate(
         template_id=template_id,
         title=title,
@@ -266,6 +286,12 @@ def _template(
         physical_system=physical_system,
         required_inputs=required_inputs,
         default_assumptions=default_assumptions,
+        source_model=source_model,
+        monitor_model=monitor_model,
+        required_source_inputs=required_source_inputs,
+        required_monitor_inputs=required_monitor_inputs,
+        default_source_assumptions=default_source_assumptions,
+        default_monitor_assumptions=default_monitor_assumptions,
         suggested_materials=suggested_materials,
         suggested_adapter=suggested_adapter,
         expected_calculators=expected_calculators,
@@ -300,6 +326,8 @@ def _generic_optical_language_summary(goal: str) -> dict[str, str]:
 COMMON_LOCAL_TOOL_CALLS = [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",

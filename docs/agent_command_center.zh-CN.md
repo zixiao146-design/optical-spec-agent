@@ -98,6 +98,19 @@ tool-call ledger 会记录真实本地 Python 调用，例如
 - Git tag 创建
 - GitHub release 创建
 
+## 光源/监测器诊断
+
+Agent session 包含 `source_model`、`monitor_model` 和
+`optical_language_diagnostics`。计划步骤会显式记录：
+
+- 推断光源和监测器
+- 检查缺失的光源/监测器输入
+- 记录默认假设
+- 保持 `safe_to_run_solver=false`
+
+纳米颗粒/FDTD 预览默认是平面波式光源、400-900 nm 波段、`linear_x` 偏振、
+散射/消光谱监测器元数据。不会执行外部求解器 monitor。
+
 ## 安全边界
 
 - 默认不执行外部求解器。

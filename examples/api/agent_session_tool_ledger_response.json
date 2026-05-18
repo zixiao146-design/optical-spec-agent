@@ -36,19 +36,71 @@
     "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
     "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result."
   },
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": 400.0,
+    "wavelength_stop_nm": 900.0,
+    "wavelength_nm": null,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Preview plane-wave-like broadband excitation for nanoparticle scattering.",
+    "defaulted_fields": [
+      "wavelength_range_nm",
+      "polarization",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "scattering_spectrum",
+    "observable": "scattering/extinction spectrum preview",
+    "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+    "frequency_or_wavelength_sampling": "400-900 nm preview band",
+    "output_units": "normalized preview spectrum",
+    "notes": "Monitor metadata only; no FDTD monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region",
+      "sampling"
+    ],
+    "preview_only": true
+  },
+  "optical_language_diagnostics": {
+    "missing_required_inputs": [],
+    "default_assumptions_applied": [
+      "Default to normal-incidence plane-wave-like source.",
+      "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
+      "Default polarization is linear_x until specified.",
+      "Default observable is scattering/extinction spectrum preview.",
+      "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
+    ],
+    "ambiguity_notes": [
+      "Polarization was defaulted; confirm before solver execution.",
+      "Wavelength range was defaulted; confirm the design band."
+    ],
+    "blocking_questions": [],
+    "safe_to_preview": true,
+    "safe_to_run_solver": false
+  },
   "selected_example_id": "nanoparticle_plasmonics",
   "design_case_summary": "nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview",
   "missing_required_inputs": [
-    "particle_material",
-    "particle_size_nm",
     "film_material",
     "gap_nm",
+    "particle_material",
+    "particle_size_nm",
     "wavelength_range_nm"
   ],
   "default_assumptions_applied": [
     "Open-source-first Meep/Gmsh preview path.",
     "Material constants must be verified before conclusions.",
-    "No FDTD solver execution by default."
+    "No FDTD solver execution by default.",
+    "Default to normal-incidence plane-wave-like source.",
+    "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
+    "Default polarization is linear_x until specified.",
+    "Default observable is scattering/extinction spectrum preview.",
+    "Default monitor is metadata for a flux/far-field proxy; no solver monitor was executed."
   ],
   "plan_steps": [
     {
@@ -77,6 +129,30 @@
     },
     {
       "step_index": 3,
+      "title": "Infer source and monitor",
+      "title_zh": "推断光源和监测器",
+      "description": "Infer preview source, monitor, observable, and default assumptions.",
+      "description_zh": "推断预览光源、监测器、观测量和默认假设。",
+      "agent_name": "SpecAgent",
+      "status": "completed",
+      "endpoint_or_tool": "optical_language.infer_source_monitor",
+      "expected_output": "source_model, monitor_model, and optical_language_diagnostics",
+      "safety_note": "Monitor definitions are preview metadata; no external solver monitor was executed."
+    },
+    {
+      "step_index": 4,
+      "title": "Check missing source/monitor inputs",
+      "title_zh": "检查缺失的光源/监测器输入",
+      "description": "Report missing inputs, ambiguity notes, and blocking questions before solver use.",
+      "description_zh": "在任何求解器使用前报告缺失输入、歧义说明和阻断问题。",
+      "agent_name": "SafetyAgent",
+      "status": "completed",
+      "endpoint_or_tool": "optical_language.diagnose_missing_inputs",
+      "expected_output": "missing_required_inputs and safe_to_run_solver=false",
+      "safety_note": "safe_to_preview can be true while safe_to_run_solver remains false."
+    },
+    {
+      "step_index": 5,
       "title": "Suggest materials",
       "title_zh": "推荐材料",
       "description": "Use the local preview material catalog for candidate materials.",
@@ -88,7 +164,7 @@
       "safety_note": "Material data is preview/design-assist, not production-grade optical constants."
     },
     {
-      "step_index": 4,
+      "step_index": 6,
       "title": "Review geometry",
       "title_zh": "审阅几何",
       "description": "Identify the geometry family and missing geometry fields.",
@@ -100,7 +176,7 @@
       "safety_note": "Geometry remains a scaffold until reviewed."
     },
     {
-      "step_index": 5,
+      "step_index": 7,
       "title": "Recommend adapter",
       "title_zh": "推荐适配器",
       "description": "Choose an open-source-first adapter path: meep with gmsh geometry preview.",
@@ -112,7 +188,7 @@
       "safety_note": "No proprietary solver is required by default."
     },
     {
-      "step_index": 6,
+      "step_index": 8,
       "title": "Plan local tool calls",
       "title_zh": "规划本地工具调用",
       "description": "Plan parse, validate, preview, evidence, and human review steps.",
@@ -124,7 +200,7 @@
       "safety_note": "No solver is executed by default."
     },
     {
-      "step_index": 7,
+      "step_index": 9,
       "title": "Preview artifacts and evidence",
       "title_zh": "预览产物和证据",
       "description": "Prepare preview artifacts and validation evidence references.",
@@ -136,7 +212,7 @@
       "safety_note": "No production-grade physical validation is claimed."
     },
     {
-      "step_index": 8,
+      "step_index": 10,
       "title": "Check permission gates",
       "title_zh": "检查权限门控",
       "description": "Block solver, LLM, upload, publish, tag, and release actions by default.",
@@ -407,6 +483,17 @@
       "production_grade": false
     },
     {
+      "artifact_id": "source-monitor-metadata",
+      "label": "Source and monitor metadata",
+      "label_zh": "光源和监测器元数据",
+      "artifact_type": "spec",
+      "summary": "Source=plane_wave; monitor=scattering_spectrum; preview metadata only.",
+      "preview_content": "source={'source_type': 'plane_wave', 'wavelength_start_nm': 400.0, 'wavelength_stop_nm': 900.0, 'wavelength_nm': None, 'polarization': 'linear_x', 'incidence_direction': 'normal', 'beam_waist_um': None, 'mode_index': None, 'notes': 'Preview plane-wave-like broadband excitation for nanoparticle scattering.', 'defaulted_fields': ['wavelength_range_nm', 'polarization', 'incidence_direction'], 'preview_only': True}; monitor={'monitor_type': 'scattering_spectrum', 'observable': 'scattering/extinction spectrum preview', 'region': 'closed flux box or equivalent far-field proxy around nanoparticle', 'frequency_or_wavelength_sampling': '400-900 nm preview band', 'output_units': 'normalized preview spectrum', 'notes': 'Monitor metadata only; no FDTD monitor was executed.', 'defaulted_fields': ['monitor_region', 'sampling'], 'preview_only': True}",
+      "source_endpoint": "/api/optical-language/infer",
+      "generated_by_agent": "SpecAgent",
+      "production_grade": false
+    },
+    {
       "artifact_id": "adapter-preview",
       "label": "Adapter preview",
       "label_zh": "适配器预览",
@@ -547,6 +634,32 @@
       "output_summary": "/api/adapter-preview and /api/agent-trace",
       "reason": "The backend exposes the natural language -> optical language step explicitly.",
       "safety_note": "Optical language extraction is local heuristic logic, not an external model."
+    },
+    {
+      "call_id": "optical-language-infer-source-monitor",
+      "tool_name": "optical_language.infer_source_monitor",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SpecAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "nanoparticle_plasmonics",
+      "output_summary": "source=plane_wave; monitor=scattering_spectrum",
+      "reason": "Source, monitor, and observable assumptions must be visible before preview artifacts.",
+      "safety_note": "No external solver monitor was executed."
+    },
+    {
+      "call_id": "optical-language-diagnose-missing-inputs",
+      "tool_name": "optical_language.diagnose_missing_inputs",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SafetyAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Goal, requirement template, source model, and monitor model.",
+      "output_summary": "missing=0; safe_to_preview=True; safe_to_run_solver=False",
+      "reason": "Missing source/monitor inputs and defaults must be explicit.",
+      "safety_note": "safe_to_run_solver is false by default."
     },
     {
       "call_id": "material-catalog-suggest",

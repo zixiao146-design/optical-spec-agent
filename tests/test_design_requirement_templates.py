@@ -28,6 +28,14 @@ def test_all_design_requirement_templates_exist_and_are_safe():
         assert template.expected_tool_calls
         assert "requirements.match_template" in template.expected_tool_calls
         assert "requirements.extract_optical_intent" in template.expected_tool_calls
+        assert "optical_language.infer_source_monitor" in template.expected_tool_calls
+        assert "optical_language.diagnose_missing_inputs" in template.expected_tool_calls
+        assert template.source_model is not None
+        assert template.monitor_model is not None
+        assert template.required_source_inputs
+        assert template.required_monitor_inputs
+        assert template.default_source_assumptions
+        assert template.default_monitor_assumptions
         assert template.safety.no_solver_by_default is True
         assert template.safety.no_external_llm is True
         assert template.safety.production_grade_validation_claimed is False
@@ -49,7 +57,11 @@ def test_design_requirement_example_files_exist():
         requirement = json.loads((folder / "requirement.json").read_text(encoding="utf-8"))
         expected = json.loads((folder / "expected_tool_calls.json").read_text(encoding="utf-8"))
         assert requirement["template_id"] == template.template_id
+        assert requirement["source_model"]["preview_only"] is True
+        assert requirement["monitor_model"]["preview_only"] is True
+        assert requirement["required_source_inputs"]
+        assert requirement["required_monitor_inputs"]
         assert expected["expected_tool_calls"]
+        assert "optical_language.infer_source_monitor" in expected["expected_tool_calls"]
         assert expected["external_solver_executed"] is False
         assert expected["external_llm_required"] is False
-

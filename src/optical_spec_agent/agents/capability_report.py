@@ -23,6 +23,10 @@ from optical_spec_agent.examples.requirements import (
     match_goal_to_template,
 )
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
+from optical_spec_agent.optical_language import (
+    diagnose_missing_inputs,
+    infer_source_monitor_from_goal,
+)
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
     calculate_thin_film_spectrum,
@@ -215,6 +219,20 @@ def _internal_tool_capabilities(
             plan_workflow,
             "workflow_plan.preview",
             "Plans local no-execute workflows.",
+        ),
+        (
+            "source_monitor_inference",
+            "optical_spec_agent.optical_language",
+            infer_source_monitor_from_goal,
+            "optical_language.infer_source_monitor",
+            "Infers preview source, monitor, observable, and defaults from local heuristics.",
+        ),
+        (
+            "missing_input_diagnostics",
+            "optical_spec_agent.optical_language",
+            diagnose_missing_inputs,
+            "optical_language.diagnose_missing_inputs",
+            "Reports missing source/monitor inputs, default assumptions, and solver safety state.",
         ),
         (
             "optical_calculators",

@@ -17,6 +17,49 @@
     "Ideal thin lens.",
     "No aberration, clipping, or vector-field effects."
   ],
+  "source_model": {
+    "source_type": "gaussian_beam",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 1064.0,
+    "polarization": "scalar_paraxial",
+    "incidence_direction": "z_plus",
+    "beam_waist_um": 10.0,
+    "mode_index": null,
+    "notes": "Paraxial scalar Gaussian beam preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "beam_waist_um"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "focal_spot",
+    "observable": "beam radius and focused waist preview",
+    "region": "propagation axis / focal plane",
+    "frequency_or_wavelength_sampling": "single design wavelength",
+    "output_units": "um and mm",
+    "notes": "Calculator metadata only; no field monitor was executed.",
+    "defaulted_fields": [
+      "monitor_region"
+    ],
+    "preview_only": true
+  },
+  "required_source_inputs": [
+    "wavelength_nm",
+    "beam_waist_um"
+  ],
+  "required_monitor_inputs": [
+    "observable",
+    "monitor_region"
+  ],
+  "default_source_assumptions": [
+    "Default to a 1064 nm scalar Gaussian beam when not specified.",
+    "Default waist is 10 um for propagation preview."
+  ],
+  "default_monitor_assumptions": [
+    "Default monitor is focal spot / beam radius preview."
+  ],
   "suggested_materials": [
     "air",
     "glass_bk7_preview",
@@ -29,6 +72,8 @@
   "expected_tool_calls": [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",

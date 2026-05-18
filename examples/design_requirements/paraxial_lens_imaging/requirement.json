@@ -17,6 +17,48 @@
     "First-order paraxial model.",
     "No aberration, aperture stop, or material dispersion model."
   ],
+  "source_model": {
+    "source_type": "ray_bundle",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 550.0,
+    "polarization": "not_applicable_first_order",
+    "incidence_direction": "z_plus",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "First-order ray-bundle metadata for paraxial lens preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "image_plane",
+    "observable": "image distance and magnification preview",
+    "region": "paraxial image plane",
+    "frequency_or_wavelength_sampling": "single design wavelength",
+    "output_units": "mm and dimensionless magnification",
+    "notes": "ABCD calculator output, not ray-trace validation.",
+    "defaulted_fields": [
+      "observable"
+    ],
+    "preview_only": true
+  },
+  "required_source_inputs": [
+    "wavelength_nm",
+    "incidence_direction"
+  ],
+  "required_monitor_inputs": [
+    "observable",
+    "monitor_region"
+  ],
+  "default_source_assumptions": [
+    "Default to a first-order ray bundle at 550 nm."
+  ],
+  "default_monitor_assumptions": [
+    "Default monitor is paraxial image-plane estimate."
+  ],
   "suggested_materials": [
     "glass_bk7_preview",
     "glass_fused_silica_preview",
@@ -29,6 +71,8 @@
   "expected_tool_calls": [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",

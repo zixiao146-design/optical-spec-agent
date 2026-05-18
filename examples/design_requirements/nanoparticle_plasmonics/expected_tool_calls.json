@@ -3,6 +3,8 @@
   "expected_tool_calls": [
     "requirements.match_template",
     "requirements.extract_optical_intent",
+    "optical_language.infer_source_monitor",
+    "optical_language.diagnose_missing_inputs",
     "material_catalog.suggest",
     "example_registry.load",
     "agent_trace.build",
@@ -10,14 +12,11 @@
     "adapter_preview.generate"
   ],
   "expected_calculators": [],
-  "expected_artifacts": [
-    "requirement_match",
-    "material_suggestions",
-    "agent_trace",
-    "adapter_preview"
-  ],
+  "no_solver_by_default": true,
+  "no_external_llm": true,
   "external_solver_executed": false,
   "external_llm_required": false,
+  "proprietary_solver_required": false,
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false
 }
