@@ -121,6 +121,9 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
     schemas = openapi["components"]["schemas"]
     for schema_name in ("VersionResponse", "ReadinessResponse", "ApiErrorResponse"):
         assert "api_contract_version" in schemas[schema_name]["properties"]
+    calculator_properties = schemas["OpticalCalculatorResponse"]["properties"]
+    assert "quality" in calculator_properties
+    assert "warnings" in calculator_properties
 
     forbidden_api_paths = {
         "/api/workflow-run",

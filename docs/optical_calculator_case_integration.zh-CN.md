@@ -18,6 +18,10 @@
 对应计算器记录会以 `tool_kind=internal_python` 和 `executed=true` 记录下来。
 外部求解器、外部 LLM、上传、发布、tag 和 release 记录仍保持 `executed=false`。
 
+每个计算器产物现在都会携带 `quality.quality_level=sanity_checked_preview`。
+适用时，`quality.reference_case` 会指向
+`docs/optical_calculator_reference_cases.zh-CN.md` 中记录的公式 sanity check。
+
 ## 安全边界
 
 所有计算器集成都保持本地、确定性和 preview/design-assist：

@@ -9,7 +9,8 @@
   "diagnostics": {
     "errors": [],
     "warnings": [
-      "Calculator output is preview/design-assist only."
+      "Calculator output is preview/design-assist only.",
+      "Use MPB/Elmer or another validated mode solver for physical conclusions."
     ],
     "missing_fields": [],
     "assumptions": [],
@@ -37,11 +38,41 @@
   },
   "assumptions": [
     "Symmetric slab-waveguide preview.",
-    "Uses scalar V-number orientation only.",
+    "Uses scalar V-number formula V = (2*pi/lambda) * thickness * sqrt(n_core^2 - n_clad^2).",
+    "Single-mode likely means V < pi in this preview convention.",
     "Does not solve vector eigenmodes."
   ],
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [
+    "Use MPB/Elmer or another validated mode solver for physical conclusions."
+  ],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "slab_waveguide_v_number_formula",
+    "assumptions": [
+      "Symmetric slab-waveguide preview.",
+      "Uses scalar V-number formula V = (2*pi/lambda) * thickness * sqrt(n_core^2 - n_clad^2).",
+      "Single-mode likely means V < pi in this preview convention.",
+      "Does not solve vector eigenmodes."
+    ],
+    "limitations": [
+      "Does not solve vector eigenmodes.",
+      "Does not account for ridge geometry, asymmetric claddings, leakage, or material dispersion.",
+      "Not production-grade physical validation."
+    ],
+    "warnings": [
+      "Use MPB/Elmer or another validated mode solver for physical conclusions."
+    ],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "core_thickness_um": "positive",
+      "core_n": "greater than cladding_n",
+      "cladding_n": "positive"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

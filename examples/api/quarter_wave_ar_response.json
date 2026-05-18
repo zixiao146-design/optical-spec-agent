@@ -42,11 +42,40 @@
   },
   "assumptions": [
     "Single-layer quarter-wave AR design at normal incidence.",
+    "Quarter-wave condition d = lambda / (4n).",
+    "Ideal coating index is sqrt(incident_n * substrate_n).",
     "Coating material is treated as lossless unless caller later supplies k.",
     "Substrate and incident media are non-dispersive preview indices."
   ],
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "quarter_wave_ar_normal_incidence",
+    "assumptions": [
+      "Single-layer quarter-wave AR design at normal incidence.",
+      "Quarter-wave condition d = lambda / (4n).",
+      "Ideal coating index is sqrt(incident_n * substrate_n).",
+      "Coating material is treated as lossless unless caller later supplies k.",
+      "Substrate and incident media are non-dispersive preview indices."
+    ],
+    "limitations": [
+      "Normal-incidence coherent transfer-matrix preview.",
+      "Not production-grade physical validation.",
+      "Verify material constants and stack model before physical conclusions."
+    ],
+    "warnings": [],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "incident_n": "positive real preview index",
+      "substrate_n": "positive real preview index",
+      "layer_n": "positive real preview index",
+      "layer_thickness_nm": "positive for physical layers; use no layer for single interface"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

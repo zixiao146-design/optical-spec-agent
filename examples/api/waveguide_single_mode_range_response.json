@@ -9,7 +9,8 @@
   "diagnostics": {
     "errors": [],
     "warnings": [
-      "Calculator output is preview/design-assist only."
+      "Calculator output is preview/design-assist only.",
+      "Treat this as a design starting point, not a mode-solver result."
     ],
     "missing_fields": [],
     "assumptions": [],
@@ -44,5 +45,33 @@
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [
+    "Treat this as a design starting point, not a mode-solver result."
+  ],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "slab_waveguide_single_mode_range",
+    "assumptions": [
+      "Symmetric slab-waveguide scalar V-number estimate.",
+      "Upper bound is from V < pi.",
+      "Fabrication limits, vector modes, and asymmetric claddings are not included."
+    ],
+    "limitations": [
+      "Does not solve vector eigenmodes.",
+      "Does not account for ridge geometry, asymmetric claddings, leakage, or material dispersion.",
+      "Not production-grade physical validation."
+    ],
+    "warnings": [
+      "Treat this as a design starting point, not a mode-solver result."
+    ],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "core_thickness_um": "positive",
+      "core_n": "greater than cladding_n",
+      "cladding_n": "positive"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

@@ -1,0 +1,19 @@
+{
+  "case_id": "thin_film_quarter_wave_ar_550nm",
+  "calculator": "quarter_wave_ar",
+  "description": "Ideal quarter-wave anti-reflection coating sanity case at 550 nm.",
+  "input": {
+    "incident_n": 1.0,
+    "substrate_n": 1.5,
+    "target_wavelength_nm": 550.0
+  },
+  "expected": {
+    "ideal_coating_n": 1.224744871391589,
+    "quarter_wave_thickness_nm": 112.26827987756234,
+    "estimated_target_reflectance_max": 1e-6
+  },
+  "formula": "n_coating = sqrt(n0 * ns), d = lambda / (4 * n_coating)",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

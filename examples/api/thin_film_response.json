@@ -42,5 +42,30 @@
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": null,
+    "assumptions": [
+      "Coherent planar stack preview.",
+      "Material n/k values are caller-provided preview values.",
+      "Normal-incidence transfer matrix is used for the numerical estimate."
+    ],
+    "limitations": [
+      "Normal-incidence coherent transfer-matrix preview.",
+      "Not production-grade physical validation.",
+      "Verify material constants and stack model before physical conclusions."
+    ],
+    "warnings": [],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "incident_n": "positive real preview index",
+      "substrate_n": "positive real preview index",
+      "layer_n": "positive real preview index",
+      "layer_thickness_nm": "positive for physical layers; use no layer for single interface"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

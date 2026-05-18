@@ -9,7 +9,8 @@
   "diagnostics": {
     "errors": [],
     "warnings": [
-      "Calculator output is preview/design-assist only."
+      "Calculator output is preview/design-assist only.",
+      "High-NA focusing requires a vector diffraction model, not this preview estimate."
     ],
     "missing_fields": [],
     "assumptions": [],
@@ -37,10 +38,39 @@
   "assumptions": [
     "Collimated Gaussian beam at a thin lens.",
     "Diffraction-limited paraxial focus estimate.",
+    "Approximate focus formula w_f = lambda * f / (pi * w_in).",
     "Aberrations, truncation, M^2, and aperture clipping are not included."
   ],
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [
+    "High-NA focusing requires a vector diffraction model, not this preview estimate."
+  ],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "gaussian_thin_lens_focus_preview",
+    "assumptions": [
+      "Collimated Gaussian beam at a thin lens.",
+      "Diffraction-limited paraxial focus estimate.",
+      "Approximate focus formula w_f = lambda * f / (pi * w_in).",
+      "Aberrations, truncation, M^2, and aperture clipping are not included."
+    ],
+    "limitations": [
+      "Scalar Gaussian beam preview only.",
+      "Aberrations, truncation, M^2, aperture clipping, and non-vacuum media are not included unless noted.",
+      "Not production-grade physical validation."
+    ],
+    "warnings": [
+      "High-NA focusing requires a vector diffraction model, not this preview estimate."
+    ],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "waist_um": "positive",
+      "z_mm": "finite real preview distance"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

@@ -217,6 +217,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "optical_calculators.zh-CN.md",
         "optical_calculator_case_integration.md",
         "optical_calculator_case_integration.zh-CN.md",
+        "optical_calculator_reference_cases.md",
+        "optical_calculator_reference_cases.zh-CN.md",
         "material_library.md",
         "material_library.zh-CN.md",
         "sub_agent_architecture.md",
@@ -253,6 +255,13 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "quickstart" / "quickstart_workflow_request.json").exists()
     assert (ROOT / "examples" / "quickstart" / "zh_nanoparticle_prompt.txt").exists()
     assert (ROOT / "examples" / "quickstart" / "zh_quickstart_notes.md").exists()
+    assert (ROOT / "examples" / "optics_reference_cases" / "README.md").exists()
+    assert (
+        ROOT / "examples" / "optics_reference_cases" / "thin_film_single_interface_air_glass.json"
+    ).exists()
+    assert (
+        ROOT / "examples" / "optics_reference_cases" / "gaussian_beam_rayleigh_range.json"
+    ).exists()
     assert (ROOT / "examples" / "optical_design" / "nanoparticle_plasmonics" / "spec.json").exists()
     assert (ROOT / "examples" / "optical_design" / "thin_film_coating" / "spec.json").exists()
     assert (ROOT / "examples" / "optical_design" / "waveguide_mode" / "spec.json").exists()

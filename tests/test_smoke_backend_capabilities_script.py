@@ -28,6 +28,7 @@ def test_smoke_backend_capabilities_script_is_safe_and_covers_endpoints():
         "/api/optics/waveguide-estimate",
         "/api/optics/waveguide-sweep",
         "/api/optics/waveguide-single-mode-range",
+        "CALCULATOR SANITY CHECKS PASSED",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",
         "NO UPLOAD PERFORMED",

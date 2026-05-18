@@ -5,6 +5,7 @@ external solvers, do not call external LLMs, and do not claim production-grade
 physical validation.
 """
 
+from .models import CalculatorQuality
 from .gaussian_beam import (
     focus_gaussian_beam_thin_lens,
     gaussian_beam_parameters,
@@ -39,6 +40,7 @@ __all__ = [
     "analyze_two_lens_relay",
     "calculate_thin_film_spectrum",
     "calculate_thin_film_stack",
+    "CalculatorQuality",
     "compose_abcd",
     "design_quarter_wave_ar_coating",
     "focus_gaussian_beam_thin_lens",

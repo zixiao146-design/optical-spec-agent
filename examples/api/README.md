@@ -87,6 +87,8 @@ how a natural language goal becomes optical intent, a design case, local plan
 steps, sub-agent trace, permission gates, a tool-call ledger, local artifacts,
 evidence, and next actions. The tool capabilities and optical calculator
 fixtures show backend tool-call reality and preview/design-assist calculations.
+Calculator fixtures include `quality`, `warnings`, `assumptions`, and
+`limitations` fields; `quality.quality_level` is `sanity_checked_preview`.
 They preserve the same no-solver, no-external-LLM, no-upload, no-tag, and
 no-release boundaries.
 

@@ -1290,9 +1290,12 @@ def _optical_calculator_response(result: Any) -> OpticalCalculatorResponse:
         result=result.result,
         assumptions=result.assumptions,
         limitations=result.limitations,
+        warnings=result.warnings,
+        quality=result.quality.model_dump(mode="json") if hasattr(result.quality, "model_dump") else result.quality,
         diagnostics=ApiDiagnostic(
             warnings=[
-                "Calculator output is preview/design-assist only."
+                "Calculator output is preview/design-assist only.",
+                *result.warnings,
             ],
             limitations=result.limitations,
             details={"calculator_diagnostics": result.diagnostics},

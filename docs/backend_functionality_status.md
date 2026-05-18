@@ -36,6 +36,11 @@ Agent task sessions now attach calculator result summaries where applicable:
 These calls are internal Python design-assist calculations and are recorded in
 `tool_call_ledger`; external solvers remain unexecuted.
 
+Calculator responses now expose `quality`, `warnings`, `assumptions`, and
+`limitations`. Formula-level reference cases are documented in
+`docs/optical_calculator_reference_cases.md`; they are sanity checks, not
+production-grade validation.
+
 ## Sub-agent Reality
 
 The current sub-agents are deterministic backend roles, not separate installed

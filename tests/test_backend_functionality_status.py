@@ -20,6 +20,8 @@ def test_backend_functionality_status_records_reality_and_boundaries():
         "Thin-film preview calculator",
         "Thin-film spectrum / quarter-wave AR helper",
         "Case Integration",
+        "Calculator responses now expose `quality`",
+        "optical_calculator_reference_cases.md",
         "External solvers are not run by default",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",

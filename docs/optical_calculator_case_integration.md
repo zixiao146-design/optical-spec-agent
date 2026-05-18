@@ -20,6 +20,10 @@ detected, the relevant calculator record is marked `executed=true` with
 `tool_kind=internal_python`. External solver, external LLM, upload, publish, tag,
 and release records remain `executed=false`.
 
+Each calculator artifact now carries `quality.quality_level=sanity_checked_preview`.
+Where applicable, `quality.reference_case` points to a formula sanity check
+documented in `docs/optical_calculator_reference_cases.md`.
+
 ## Safety boundary
 
 All calculator integration is local and deterministic:

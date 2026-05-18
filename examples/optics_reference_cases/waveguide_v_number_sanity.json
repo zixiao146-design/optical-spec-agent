@@ -1,0 +1,19 @@
+{
+  "case_id": "waveguide_v_number_sanity",
+  "calculator": "waveguide_v_number",
+  "description": "Scalar slab-waveguide V-number sanity case.",
+  "input": {
+    "core_n": 2.0,
+    "cladding_n": 1.5,
+    "core_thickness_um": 0.3,
+    "wavelength_nm": 1550.0
+  },
+  "expected": {
+    "v_number": 1.6087495900773061,
+    "single_mode_likely": true
+  },
+  "formula": "V = (2*pi/lambda) * thickness * sqrt(n_core^2 - n_clad^2)",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

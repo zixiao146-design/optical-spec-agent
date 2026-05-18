@@ -12,6 +12,10 @@ python - <<'PY'
 from fastapi.testclient import TestClient
 
 from optical_spec_agent.api.app import app
+from optical_spec_agent.optics.gaussian_beam import gaussian_beam_parameters, propagate_gaussian_beam
+from optical_spec_agent.optics.paraxial import thin_lens
+from optical_spec_agent.optics.thin_film import calculate_thin_film_stack
+from optical_spec_agent.optics.waveguide import slab_waveguide_v_number
 
 
 client = TestClient(app)
@@ -129,9 +133,32 @@ for endpoint, payload in requests:
     require(body["production_grade_validation_claimed"] is False, f"{endpoint} overclaimed validation")
     require(body["formal_convergence_proof_claimed"] is False, f"{endpoint} overclaimed convergence")
 
+thin_film_reference = calculate_thin_film_stack([], 550.0, incident_n=1.0, substrate_n=1.5)
+require(
+    abs(thin_film_reference.result["reflectance"] - 0.04) < 1e-12,
+    "thin-film single-interface sanity check failed",
+)
+
+gaussian_reference = gaussian_beam_parameters(1000.0, 10.0)
+z_rayleigh_mm = gaussian_reference.result["rayleigh_range_mm"]
+beam_at_zr = propagate_gaussian_beam(1000.0, 10.0, z_rayleigh_mm)
+require(
+    abs(beam_at_zr.result["beam_radius_um"] - (10.0 * 2**0.5)) < 1e-12,
+    "Gaussian Rayleigh-range sanity check failed",
+)
+
+paraxial_reference = thin_lens(50.0, 100.0)
+require(paraxial_reference.result["image_distance_mm"] == 100.0, "paraxial thin-lens sanity check failed")
+require(paraxial_reference.result["magnification"] == -1.0, "paraxial magnification sanity check failed")
+
+waveguide_reference = slab_waveguide_v_number(2.0, 1.5, 0.3, 1550.0)
+require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity check failed")
+
+print("CALCULATOR SANITY CHECKS PASSED")
 print("Backend capabilities smoke passed")
 PY
 
+echo "CALCULATOR SANITY CHECKS PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

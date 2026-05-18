@@ -9,7 +9,8 @@
   "diagnostics": {
     "errors": [],
     "warnings": [
-      "Calculator output is preview/design-assist only."
+      "Calculator output is preview/design-assist only.",
+      "Two-lens relay preview is first-order only; inspect sign conventions before use."
     ],
     "missing_fields": [],
     "assumptions": [],
@@ -49,10 +50,39 @@
   "assumptions": [
     "Sequential ideal thin-lens imaging.",
     "Paraxial small-angle approximation.",
+    "4f relay reference uses front/back focal-plane convention when applicable.",
     "No stop, aperture, aberration, or field curvature analysis included."
   ],
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [
+    "Two-lens relay preview is first-order only; inspect sign conventions before use."
+  ],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": null,
+    "assumptions": [
+      "Sequential ideal thin-lens imaging.",
+      "Paraxial small-angle approximation.",
+      "4f relay reference uses front/back focal-plane convention when applicable.",
+      "No stop, aperture, aberration, or field curvature analysis included."
+    ],
+    "limitations": [
+      "No aberrations, diffraction, aperture stops, field curvature, or material dispersion.",
+      "Preview/design-assist calculation only.",
+      "Not production-grade physical validation."
+    ],
+    "warnings": [
+      "Two-lens relay preview is first-order only; inspect sign conventions before use."
+    ],
+    "valid_input_range": {
+      "focal_length_mm": "non-zero",
+      "object_distance_mm": "non-zero",
+      "distance_mm": "finite real preview distance"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

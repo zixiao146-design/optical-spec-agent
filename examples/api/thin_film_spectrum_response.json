@@ -82,5 +82,30 @@
   "limitations": [
     "Preview/design-assist calculation only.",
     "Verify with appropriate validated tools and material data before physical conclusions."
-  ]
+  ],
+  "warnings": [],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "thin_film_wavelength_sweep_preview",
+    "assumptions": [
+      "Wavelength sweep reuses the normal-incidence preview transfer matrix at each point.",
+      "Material dispersion is not modeled unless caller changes n/k externally.",
+      "Use this as design-assist orientation only."
+    ],
+    "limitations": [
+      "Normal-incidence coherent transfer-matrix preview.",
+      "Not production-grade physical validation.",
+      "Verify material constants and stack model before physical conclusions."
+    ],
+    "warnings": [],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "incident_n": "positive real preview index",
+      "substrate_n": "positive real preview index",
+      "layer_n": "positive real preview index",
+      "layer_thickness_nm": "positive for physical layers; use no layer for single interface"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
 }

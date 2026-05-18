@@ -339,6 +339,8 @@ class OpticalCalculatorResponse(ApiResponseBase):
     result: dict[str, Any] = Field(default_factory=dict)
     assumptions: list[str] = Field(default_factory=list)
     limitations: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+    quality: dict[str, Any] = Field(default_factory=dict)
 
 
 class ExamplesResponse(ApiResponseBase):

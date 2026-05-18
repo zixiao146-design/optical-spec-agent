@@ -77,5 +77,6 @@ The following are not exposed as backend Agent Studio actions:
 - No tag is created.
 - No release is created.
 - Optical calculators are preview/design-assist only.
+- Calculator quality fields and reference cases are sanity checks only.
 - Production-grade physical validation is not claimed.
 - Formal convergence proof is not claimed.

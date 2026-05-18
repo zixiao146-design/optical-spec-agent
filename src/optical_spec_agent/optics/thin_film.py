@@ -6,7 +6,36 @@ import cmath
 import math
 from typing import Any
 
-from .models import CalculatorResult, ThinFilmLayer
+from .models import CalculatorQuality, CalculatorResult, ThinFilmLayer
+
+
+def _calculator_quality(
+    *,
+    reference_case: str | None = None,
+    assumptions: list[str] | None = None,
+    limitations: list[str] | None = None,
+    warnings: list[str] | None = None,
+    valid_input_range: dict[str, Any] | None = None,
+) -> CalculatorQuality:
+    return CalculatorQuality(
+        reference_case=reference_case,
+        assumptions=assumptions or ["Preview/design-assist calculation only."],
+        limitations=limitations
+        or [
+            "Normal-incidence coherent transfer-matrix preview.",
+            "Not production-grade physical validation.",
+            "Verify material constants and stack model before physical conclusions.",
+        ],
+        warnings=warnings or [],
+        valid_input_range=valid_input_range
+        or {
+            "wavelength_nm": "positive",
+            "incident_n": "positive real preview index",
+            "substrate_n": "positive real preview index",
+            "layer_n": "positive real preview index",
+            "layer_thickness_nm": "positive for physical layers; use no layer for single interface",
+        },
+    )
 
 
 def _matmul(a: tuple[complex, complex, complex, complex], b: tuple[complex, complex, complex, complex]) -> tuple[complex, complex, complex, complex]:
@@ -36,12 +65,16 @@ def calculate_thin_film_stack(
 
     if wavelength_nm <= 0:
         raise ValueError("wavelength_nm must be positive.")
+    if incident_n <= 0 or substrate_n <= 0:
+        raise ValueError("incident_n and substrate_n must be positive.")
     parsed_layers = [
         layer if isinstance(layer, ThinFilmLayer) else ThinFilmLayer.model_validate(layer)
         for layer in layers
     ]
-    if any(layer.thickness_nm < 0 for layer in parsed_layers):
-        raise ValueError("Layer thickness must be non-negative.")
+    if any(layer.n <= 0 for layer in parsed_layers):
+        raise ValueError("Layer refractive index n must be positive.")
+    if any(layer.thickness_nm <= 0 for layer in parsed_layers):
+        raise ValueError("Layer thickness must be positive; use an empty layer list for a single interface.")
     angle = abs(incidence_angle_deg)
     assumptions = [
         "Coherent planar stack preview.",
@@ -49,12 +82,17 @@ def calculate_thin_film_stack(
         "Normal-incidence transfer matrix is used for the numerical estimate.",
     ]
     diagnostics: list[str] = []
+    warnings: list[str] = []
     if angle > 1e-6:
-        diagnostics.append(
+        warnings.append(
             f"incidence_angle_deg={incidence_angle_deg} recorded, but preview calculation uses normal incidence."
         )
     if polarization.lower() not in {"s", "p"}:
-        diagnostics.append(f"Unknown polarization '{polarization}', treated as preview metadata only.")
+        warnings.append(f"Unknown polarization '{polarization}', treated as preview metadata only.")
+    if any(layer.k for layer in parsed_layers):
+        warnings.append(
+            "Lossy k values are included in the transfer matrix, but absorptance remains a preview estimate."
+        )
 
     matrix = (1 + 0j, 0 + 0j, 0 + 0j, 1 + 0j)
     for layer in parsed_layers:
@@ -97,6 +135,16 @@ def calculate_thin_film_stack(
         },
         assumptions=assumptions,
         diagnostics=diagnostics,
+        warnings=warnings,
+        quality=_calculator_quality(
+            reference_case=(
+                "single_interface_air_glass_normal_incidence"
+                if not parsed_layers and abs(incident_n - 1.0) < 1e-12 and abs(substrate_n - 1.5) < 1e-12
+                else None
+            ),
+            assumptions=assumptions,
+            warnings=warnings,
+        ),
     )
 
 
@@ -130,6 +178,7 @@ def calculate_thin_film_spectrum(
         "Material dispersion is not modeled unless caller changes n/k externally.",
         "Use this as design-assist orientation only.",
     ]
+    warnings: list[str] = []
     min_reflectance = 1.0
     min_wavelength = wavelengths[0]
     for wavelength in wavelengths:
@@ -142,6 +191,7 @@ def calculate_thin_film_spectrum(
             polarization=polarization,
         )
         diagnostics.extend(item for item in result.diagnostics if item not in diagnostics)
+        warnings.extend(item for item in result.warnings if item not in warnings)
         reflectance = float(result.result["reflectance"])
         transmittance = float(result.result["transmittance"])
         absorptance = float(result.result["absorptance_estimate"])
@@ -175,6 +225,12 @@ def calculate_thin_film_spectrum(
         },
         assumptions=assumptions,
         diagnostics=diagnostics,
+        warnings=warnings,
+        quality=_calculator_quality(
+            reference_case="thin_film_wavelength_sweep_preview",
+            assumptions=assumptions,
+            warnings=warnings,
+        ),
     )
 
 
@@ -204,10 +260,18 @@ def design_quarter_wave_ar_coating(
         substrate_n=substrate_n,
     )
     diagnostics = list(stack.diagnostics)
+    warnings = list(stack.warnings)
     if coating_n is not None and abs(coating_n - ideal_n) / ideal_n > 0.05:
-        diagnostics.append(
+        warnings.append(
             "Provided coating_n differs from the ideal sqrt(incident_n * substrate_n) by more than 5%."
         )
+    assumptions = [
+        "Single-layer quarter-wave AR design at normal incidence.",
+        "Quarter-wave condition d = lambda / (4n).",
+        "Ideal coating index is sqrt(incident_n * substrate_n).",
+        "Coating material is treated as lossless unless caller later supplies k.",
+        "Substrate and incident media are non-dispersive preview indices.",
+    ]
     return CalculatorResult(
         result={
             "incident_n": incident_n,
@@ -223,12 +287,14 @@ def design_quarter_wave_ar_coating(
                 f"thickness={thickness_nm:.2f} nm at {target_wavelength_nm:.1f} nm."
             ),
         },
-        assumptions=[
-            "Single-layer quarter-wave AR design at normal incidence.",
-            "Coating material is treated as lossless unless caller later supplies k.",
-            "Substrate and incident media are non-dispersive preview indices.",
-        ],
+        assumptions=assumptions,
         diagnostics=diagnostics,
+        warnings=warnings,
+        quality=_calculator_quality(
+            reference_case="quarter_wave_ar_normal_incidence",
+            assumptions=assumptions,
+            warnings=warnings,
+        ),
     )
 
 

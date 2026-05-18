@@ -341,7 +341,9 @@ Current v1.0 evidence artifacts:
   thin-film spectra, quarter-wave AR, Gaussian beam series/focus, paraxial
   systems/two-lens relays, and waveguide sweeps/single-mode ranges. They are
   preview/design-assist only and do not claim production-grade physical
-  validation.
+  validation. Reference sanity cases and quality fields are documented in
+  `docs/optical_calculator_reference_cases.md` and
+  `docs/optical_calculator_reference_cases.zh-CN.md`.
 
 ## Release Blockers
 

@@ -68,6 +68,10 @@ def test_optical_calculator_api_endpoints_return_safe_preview_results():
         assert body["status"] == "ok"
         assert body["result"]
         assert body["assumptions"]
+        assert "warnings" in body
+        assert body["quality"]["quality_level"] == "sanity_checked_preview"
+        assert body["quality"]["production_grade_validation_claimed"] is False
+        assert body["quality"]["formal_convergence_proof_claimed"] is False
         assert body["external_solver_executed"] is False
         assert body["external_llm_required"] is False
         assert body["production_grade_validation_claimed"] is False

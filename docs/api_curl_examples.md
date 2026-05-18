@@ -143,6 +143,9 @@ The Example Gallery and material examples use local repo files and the local
 preview material catalog only. The agent-trace examples render a deterministic
 Agent Trace Timeline. The agent-session example renders an Agent Command Center
 task session with permission gates, a tool-call ledger, and local artifacts.
+Optical calculator responses include `quality`, `warnings`, `assumptions`, and
+`limitations`; these are sanity-checked preview fields, not production-grade
+validation.
 Tool capabilities and optical calculator examples are backend reality checks
 and design-assist previews. These examples do not call an external LLM, run
 solvers, upload packages, or create tags/releases.

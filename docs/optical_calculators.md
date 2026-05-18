@@ -44,9 +44,29 @@ external solvers, call external LLMs, or access network material databases.
 ## Result summaries
 
 Calculator responses include `status`, `result`, `assumptions`, `diagnostics`,
-and conservative safety flags. Sweep responses include sample counts and compact
-summary fields so an agent session can show what was actually computed without
-claiming physical validation.
+`warnings`, `limitations`, `quality`, and conservative safety flags. The
+`quality.quality_level` is `sanity_checked_preview`, and
+`quality.reference_case` is populated for local formula sanity checks such as
+single-interface Fresnel reflection, quarter-wave AR, Gaussian Rayleigh range,
+thin-lens 1:1 imaging, and slab-waveguide V-number. Sweep responses include
+sample counts and compact summary fields so an agent session can show what was
+actually computed without claiming physical validation.
+
+## Reference formulas
+
+- Thin-film single interface: `R = |(n0 - ns) / (n0 + ns)|^2`.
+- Quarter-wave AR: `n_coating = sqrt(n0 * ns)` and
+  `d = lambda / (4 * n_coating)`.
+- Gaussian beam: `z_R = pi * w0^2 / lambda` and
+  `w(z_R) = w0 * sqrt(2)`.
+- Thin lens: `1/f = 1/s + 1/s'`.
+- ABCD free space: `[[1, d], [0, 1]]`; thin lens:
+  `[[1, 0], [-1/f, 1]]`.
+- Waveguide V-number:
+  `V = (2*pi/lambda) * thickness * sqrt(n_core^2 - n_clad^2)`.
+
+Reference case details live in
+[`optical_calculator_reference_cases.md`](optical_calculator_reference_cases.md).
 
 ## Limitations
 

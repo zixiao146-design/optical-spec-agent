@@ -15,17 +15,37 @@ class CalculatorSafety(BaseModel):
     formal_convergence_proof_claimed: bool = False
 
 
+class CalculatorQuality(BaseModel):
+    quality_level: str = "sanity_checked_preview"
+    reference_case: str | None = None
+    assumptions: list[str] = Field(
+        default_factory=lambda: ["Preview/design-assist calculation only."]
+    )
+    limitations: list[str] = Field(
+        default_factory=lambda: [
+            "Not production-grade physical validation.",
+            "Verify against validated tools and material data before physical conclusions.",
+        ]
+    )
+    warnings: list[str] = Field(default_factory=list)
+    valid_input_range: dict[str, Any] = Field(default_factory=dict)
+    production_grade_validation_claimed: bool = False
+    formal_convergence_proof_claimed: bool = False
+
+
 class CalculatorResult(CalculatorSafety):
     status: str = "ok"
     result: dict[str, Any] = Field(default_factory=dict)
     assumptions: list[str] = Field(default_factory=list)
     diagnostics: list[str] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
     limitations: list[str] = Field(
         default_factory=lambda: [
             "Preview/design-assist calculation only.",
             "Verify with appropriate validated tools and material data before physical conclusions.",
         ]
     )
+    quality: CalculatorQuality = Field(default_factory=CalculatorQuality)
 
 
 class SpectrumSample(BaseModel):

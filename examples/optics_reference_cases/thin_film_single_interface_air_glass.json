@@ -1,0 +1,21 @@
+{
+  "case_id": "thin_film_single_interface_air_glass",
+  "calculator": "thin_film",
+  "description": "Normal-incidence single-interface Fresnel sanity case: air to n=1.5 glass.",
+  "input": {
+    "incident_n": 1.0,
+    "substrate_n": 1.5,
+    "layers": [],
+    "wavelength_nm": 550.0
+  },
+  "expected": {
+    "reflectance": 0.04,
+    "transmittance": 0.96,
+    "absorptance_estimate": 0.0,
+    "tolerance": 1e-12
+  },
+  "formula": "R = |(n0 - ns) / (n0 + ns)|^2",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

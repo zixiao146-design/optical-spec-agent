@@ -1,0 +1,18 @@
+{
+  "case_id": "gaussian_beam_rayleigh_range",
+  "calculator": "gaussian_beam",
+  "description": "Rayleigh range and beam-radius sanity case.",
+  "input": {
+    "wavelength_nm": 1000.0,
+    "waist_um": 10.0
+  },
+  "expected": {
+    "rayleigh_range_mm": 0.3141592653589793,
+    "beam_radius_at_z0_um": 10.0,
+    "beam_radius_at_zr_um": 14.142135623730951
+  },
+  "formula": "z_R = pi * w0^2 / lambda; w(z_R) = w0 * sqrt(2)",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

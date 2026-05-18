@@ -1,0 +1,17 @@
+{
+  "case_id": "paraxial_thin_lens_1to1",
+  "calculator": "paraxial_lens",
+  "description": "Thin-lens 1:1 imaging sanity case.",
+  "input": {
+    "focal_length_mm": 50.0,
+    "object_distance_mm": 100.0
+  },
+  "expected": {
+    "image_distance_mm": 100.0,
+    "magnification": -1.0
+  },
+  "formula": "1/f = 1/s + 1/s'",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

@@ -177,3 +177,9 @@ publication/release controls without executing external tools. The optics
 endpoints provide preview/design-assist calculations only. These endpoints do
 not call an external LLM, do not execute a solver, do not access the network,
 do not upload packages, and do not create tags/releases.
+
+Calculator responses expose explicit `quality`, `warnings`, `assumptions`, and
+`limitations` fields. The current quality level is
+`sanity_checked_preview`; reference-case formulas are documented in
+`docs/optical_calculator_reference_cases.md`. These fields improve numeric
+sanity evidence without changing the no-production-validation boundary.
