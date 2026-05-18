@@ -147,6 +147,28 @@ require(all(item["executed"] is False for item in backend_report["blocked_extern
 design_case_cross_checks = get("/api/design-case-cross-checks")
 require(design_case_cross_checks["summary"]["total"] == 6, "design case cross-check count mismatch")
 require(design_case_cross_checks["summary"]["fail"] == 0, "design case cross-check failed")
+require(
+    design_case_cross_checks["summary"]["requirement_templates_fail"] == 0,
+    "requirement template cross-check failed",
+)
+
+design_requirements = get("/api/design-requirements")
+require(design_requirements["template_count"] == 7, "design requirement template count mismatch")
+
+design_requirement_detail = get("/api/design-requirements/thin_film_ar_coating")
+require(
+    design_requirement_detail["template"]["template_id"] == "thin_film_ar_coating",
+    "design requirement detail mismatch",
+)
+
+design_requirement_match = post(
+    "/api/design-requirements/match",
+    {"goal": "Design an anti-reflection coating for glass at 550 nm.", "language": "en"},
+)
+require(
+    design_requirement_match["matched_template_id"] == "thin_film_ar_coating",
+    "design requirement match failed",
+)
 
 thin_film = post(
     "/api/optics/thin-film",
@@ -227,6 +249,9 @@ for name, payload in {
     "tool_capabilities": tool_capabilities,
     "backend_report": backend_report,
     "design_case_cross_checks": design_case_cross_checks,
+    "design_requirements": design_requirements,
+    "design_requirement_detail": design_requirement_detail,
+    "design_requirement_match": design_requirement_match,
     "thin_film": thin_film,
     "thin_film_spectrum": thin_film_spectrum,
     "quarter_wave_ar": quarter_wave_ar,
@@ -246,7 +271,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 33}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 36}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

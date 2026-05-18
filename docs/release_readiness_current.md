@@ -330,6 +330,7 @@ Current v1.0 evidence artifacts:
 - Backend tool-call reality evidence:
   `docs/tool_call_reality_matrix.md`, `docs/backend_functionality_status.md`,
   `docs/backend_capability_report.md`, `docs/design_case_cross_checks.md`,
+  `docs/design_requirement_templates.md`, `docs/natural_language_to_optical_language.md`,
   `scripts/audit_sub_agents.py`, `scripts/smoke_backend_capabilities.sh`, and
   `scripts/smoke_backend_report.sh`;
   these document installed/callable/executed status, task-session tool-call

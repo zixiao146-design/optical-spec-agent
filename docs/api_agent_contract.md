@@ -69,11 +69,19 @@ maintainer explicitly approves freezing it.
 - `GET /api/examples`
 - `GET /api/examples/{example_id}`
 - `POST /api/examples/{example_id}/agent-trace`
+- `GET /api/design-requirements`
+- `GET /api/design-requirements/{template_id}`
+- `POST /api/design-requirements/match`
 - `GET /api/materials`
 - `GET /api/materials/{material_id}`
 - `POST /api/materials/suggest`
 - `POST /api/agent-trace`
 - `POST /api/agent-session`
+
+The design requirements endpoints expose deterministic natural-language goal
+matching for seven optical design templates. They make the natural language ->
+optical language -> design case -> expected tool calls path explicit without
+calling an external LLM.
 
 ## Response shape principles
 

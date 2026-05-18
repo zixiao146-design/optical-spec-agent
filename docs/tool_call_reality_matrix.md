@@ -37,6 +37,8 @@ cross-checks, and blocked external actions in one structured payload.
 
 | Tool | Called? | Default allowed? | Status |
 | --- | --- | --- | --- |
+| `requirements.match_template` | yes | yes | Maps natural-language goals to deterministic design requirement templates. |
+| `requirements.extract_optical_intent` | yes | yes | Produces optical language summary fields without external LLM calls. |
 | `material_catalog.suggest` | yes | yes | Executes local preview material suggestions. |
 | `example_registry.load` | yes when an example matches | yes | Loads repo-local JSON examples. |
 | `agent_trace.build` | yes | yes | Builds deterministic eight-role trace. |

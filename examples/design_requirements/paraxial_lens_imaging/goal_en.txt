@@ -1,0 +1,1 @@
+Preview a simple lens imaging or two-lens relay design using ABCD matrices, then produce a local ray-optics workflow without running Optiland.

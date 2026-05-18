@@ -17,6 +17,7 @@ def test_backend_capability_report_docs_exist_and_describe_reality():
         text = doc.read_text(encoding="utf-8")
         assert "backend capability report" in text.lower() or "后端能力报告" in text
         assert "sub-agent" in text.lower() or "子智能体" in text
+        assert "requirements_templates" in text
         assert "tool_call_ledger" in text
         assert "production-grade" in text or "生产级" in text
         assert "formal convergence proof" in text or "形式化收敛证明" in text
@@ -33,6 +34,7 @@ def test_design_case_cross_check_docs_exist_and_document_statuses():
         assert "thin_film_coating" in text
         assert "waveguide_mode" in text
         assert "lens_raytrace_preview" in text
+        assert "examples/design_requirements" in text
         assert "pass" in text
         assert "warning" in text
         assert "fail" in text

@@ -1,0 +1,1 @@
+Preview Gaussian beam propagation and thin-lens focusing for a 1064 nm beam, including waist, Rayleigh range, and focused spot estimate without calling external tools.

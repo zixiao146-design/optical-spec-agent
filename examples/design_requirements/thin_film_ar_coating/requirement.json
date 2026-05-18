@@ -1,0 +1,71 @@
+{
+  "template_id": "thin_film_ar_coating",
+  "title": "Thin-film anti-reflection coating",
+  "title_zh": "薄膜增透镀膜",
+  "natural_language_goal_en": "Design a local preview for a single-layer anti-reflection coating on glass at 550 nm, estimate the quarter-wave thickness, and inspect a wavelength sweep without running solvers.",
+  "natural_language_goal_zh": "为玻璃基底上的单层增透薄膜做本地预览设计，目标波长 550 nm，估算四分之一波厚度，并查看反射率随波长变化，不运行外部求解器。",
+  "optical_intent": "thin film coating preview",
+  "physical_system": "thin_film_stack",
+  "required_inputs": [
+    "incident_n",
+    "substrate_n",
+    "target_wavelength_nm",
+    "coating_n or material choice",
+    "wavelength_range_nm"
+  ],
+  "default_assumptions": [
+    "Normal incidence.",
+    "Lossless constant-index preview.",
+    "Single-layer quarter-wave helper before any validated stack model."
+  ],
+  "suggested_materials": [
+    "sio2",
+    "tio2",
+    "al2o3",
+    "glass_fused_silica_preview"
+  ],
+  "suggested_adapter": "preview-only; future TMM adapter candidate",
+  "expected_calculators": [
+    "optics.thin_film.spectrum"
+  ],
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate",
+    "optics.thin_film.spectrum"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "thin_film_spectrum",
+    "quarter_wave_ar",
+    "workflow_plan"
+  ],
+  "evidence_boundary": "Sanity-checked preview formulas only; verify material constants and stack physics before conclusions.",
+  "next_actions": [
+    "Confirm coating material/index and substrate index.",
+    "Inspect spectrum and quarter-wave helper output.",
+    "Use validated thin-film tooling later if physical conclusions are needed."
+  ],
+  "design_case_id": "thin_film_coating",
+  "optical_language_summary": {
+    "physical_system": "thin_film_stack",
+    "material_system": "SiO2/TiO2/Al2O3 preview coating candidates on glass",
+    "geometry_model": "one-dimensional layer stack",
+    "solver_or_adapter_family": "local thin-film calculator; future TMM adapter candidate",
+    "calculator_or_tool_path": "/api/optics/thin-film-spectrum and /api/optics/quarter-wave-ar",
+    "evidence_boundary": "Sanity-checked preview formulas only; verify material constants and stack physics before conclusions."
+  },
+  "safety": {
+    "no_solver_by_default": true,
+    "no_external_llm": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

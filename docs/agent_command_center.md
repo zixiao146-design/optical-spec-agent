@@ -5,8 +5,14 @@
 Agent Command Center is the task-driven Agent Studio surface for local optical design work. It turns a natural language goal into a deterministic local task session:
 
 ```text
-user goal -> optical intent -> design case -> materials -> adapters -> workflow -> artifacts -> evidence -> next actions
+user goal -> requirement template -> optical language -> design case -> materials -> adapters/calculators -> workflow -> artifacts -> evidence -> next actions
 ```
+
+Compatibility summary: user goal -> optical intent -> design case.
+
+The requirement-template layer is documented in
+`docs/design_requirement_templates.md`; the optical language mapping is
+documented in `docs/natural_language_to_optical_language.md`.
 
 It is inspired by coding-agent style task sessions, but it is not a clone of any external product and does not copy external branding, wording, or assets.
 
@@ -24,6 +30,8 @@ It is inspired by coding-agent style task sessions, but it is not a clone of any
 The command center uses:
 
 - `POST /api/agent-session`
+- `GET /api/design-requirements`
+- `POST /api/design-requirements/match`
 - `GET /api/examples`
 - `GET /api/materials`
 - `POST /api/materials/suggest`

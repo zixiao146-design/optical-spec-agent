@@ -1,0 +1,1 @@
+Generate a local preview workflow for silver or gold nanoparticle scattering on a thin film, suggest materials and an open-source adapter path, and do not run external solvers.

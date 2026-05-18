@@ -41,6 +41,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "sub_agents",
         "internal_tools",
         "optical_calculators",
+        "requirements_templates",
         "design_case_cross_checks",
         "blocked_external_actions",
     ]:
@@ -48,6 +49,8 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert report["package"]["package_version"] == "0.9.0rc7.dev0"
     assert report["production_grade_validation_claimed"] is False
     assert report["formal_convergence_proof_claimed"] is False
+    assert len(report["requirements_templates"]) == 7
+    assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")
     assert "Backend Capability Report" in text

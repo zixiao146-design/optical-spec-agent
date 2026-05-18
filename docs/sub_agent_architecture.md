@@ -6,7 +6,9 @@ external agents, external LLM calls, solver execution, uploads, tags, or
 releases.
 
 Current roles:
-- SpecAgent: interprets user intent or an OpticalSpec and identifies missing fields.
+- SpecAgent: interprets user intent or an OpticalSpec, runs
+  `requirements.match_template` / `requirements.extract_optical_intent`, and
+  identifies missing fields.
 - MaterialAgent: suggests materials from the local preview material catalog.
 - GeometryAgent: identifies geometry family and required geometry fields.
 - AdapterAgent: recommends an open-source-first adapter/tool and explains limitations.

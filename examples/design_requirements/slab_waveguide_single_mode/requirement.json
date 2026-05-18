@@ -1,0 +1,70 @@
+{
+  "template_id": "slab_waveguide_single_mode",
+  "title": "Slab waveguide single-mode estimate",
+  "title_zh": "平板波导单模估计",
+  "natural_language_goal_en": "Estimate whether a SiN slab waveguide is likely single-mode near 1550 nm, sweep core thickness, and keep the result as a local design-assist preview.",
+  "natural_language_goal_zh": "估算 1550 nm 附近 SiN 平板波导是否可能单模，扫描芯层厚度，并保持为本地设计辅助预览。",
+  "optical_intent": "waveguide mode preview",
+  "physical_system": "slab_waveguide",
+  "required_inputs": [
+    "core_n",
+    "cladding_n",
+    "core_thickness_um",
+    "wavelength_nm"
+  ],
+  "default_assumptions": [
+    "Symmetric slab-waveguide scalar V-number preview.",
+    "Uses approximate single-mode threshold only.",
+    "Does not solve ridge/asymmetric vector modes."
+  ],
+  "suggested_materials": [
+    "si3n4",
+    "sio2",
+    "si",
+    "air"
+  ],
+  "suggested_adapter": "mpb or elmer preview",
+  "expected_calculators": [
+    "optics.waveguide.sweep"
+  ],
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate",
+    "optics.waveguide.sweep"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "waveguide_v_number_sweep",
+    "single_mode_range",
+    "workflow_plan"
+  ],
+  "evidence_boundary": "Scalar V-number orientation only; not a mode-solver result.",
+  "next_actions": [
+    "Confirm refractive indices and core thickness range.",
+    "Inspect V-number sweep before adapter preview.",
+    "Use MPB/Elmer validation only after explicit solver approval."
+  ],
+  "design_case_id": "waveguide_mode",
+  "optical_language_summary": {
+    "physical_system": "slab_waveguide",
+    "material_system": "Si3N4/SiO2/air preview waveguide candidates",
+    "geometry_model": "symmetric slab-waveguide approximation",
+    "solver_or_adapter_family": "MPB or Elmer preview path",
+    "calculator_or_tool_path": "/api/optics/waveguide-sweep and /api/optics/waveguide-single-mode-range",
+    "evidence_boundary": "Scalar V-number orientation only; not a mode-solver result."
+  },
+  "safety": {
+    "no_solver_by_default": true,
+    "no_external_llm": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

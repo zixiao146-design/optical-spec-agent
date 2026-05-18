@@ -43,6 +43,7 @@ Hardened frontend demo checks are documented in
 | backend tool capabilities | `GET /api/tool-capabilities` | API-first | Reports internal tools, external solver detection, and disabled publication/release controls without executing solvers. |
 | backend capability report | `GET /api/backend-capability-report` | API-first | Reports package, sub-agent, internal tool, calculator, design-case, and blocked action reality. |
 | design case cross-checks | `GET /api/design-case-cross-checks` | API-first | Cross-checks bundled examples against expected calculator or adapter-trace behavior. |
+| design requirement templates | `GET /api/design-requirements`, `POST /api/design-requirements/match` | API-first | Maps natural-language goals to optical language and expected backend tool calls. |
 | optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/thin-film-spectrum`, `POST /api/optics/quarter-wave-ar`, `POST /api/optics/paraxial-lens`, `POST /api/optics/paraxial-system`, `POST /api/optics/two-lens-relay`, `POST /api/optics/gaussian-beam`, `POST /api/optics/gaussian-beam-series`, `POST /api/optics/gaussian-beam-focus`, `POST /api/optics/waveguide-estimate`, `POST /api/optics/waveguide-sweep`, `POST /api/optics/waveguide-single-mode-range` | API-first | Local preview/design-assist calculators with sweeps and case helpers; no production-grade validation claim. |
 
 ## Shared boundaries

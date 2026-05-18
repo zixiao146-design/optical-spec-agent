@@ -1,0 +1,1 @@
+Estimate whether a SiN slab waveguide is likely single-mode near 1550 nm, sweep core thickness, and keep the result as a local design-assist preview.

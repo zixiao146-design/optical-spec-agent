@@ -1,0 +1,68 @@
+{
+  "template_id": "dielectric_metasurface_preview",
+  "title": "Dielectric metasurface preview",
+  "title_zh": "介质超表面预览",
+  "natural_language_goal_en": "Create a local preview workflow for a dielectric metasurface unit-cell array, suggest materials and adapters, and keep all outputs preview-only.",
+  "natural_language_goal_zh": "为介质超表面单元阵列创建本地预览工作流，推荐材料和适配器，并保持所有输出为预览。",
+  "optical_intent": "dielectric metasurface preview",
+  "physical_system": "metasurface",
+  "required_inputs": [
+    "target_wavelength_nm",
+    "phase_profile",
+    "period",
+    "meta_atom_geometry",
+    "substrate_material"
+  ],
+  "default_assumptions": [
+    "Unit-cell/array geometry remains schematic.",
+    "Material indices are preview values.",
+    "No FDTD solver execution by default."
+  ],
+  "suggested_materials": [
+    "tio2",
+    "si3n4",
+    "si",
+    "sio2"
+  ],
+  "suggested_adapter": "meep with gmsh geometry preview",
+  "expected_calculators": [],
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "material_suggestions",
+    "meep_gmsh_preview",
+    "agent_trace"
+  ],
+  "evidence_boundary": "Geometry/material preview only; no metasurface efficiency validation.",
+  "next_actions": [
+    "Confirm phase target, period, and meta-atom geometry.",
+    "Inspect material suggestions and adapter preview.",
+    "Add solver validation later only with explicit approval."
+  ],
+  "design_case_id": "dielectric_metasurface_preview",
+  "optical_language_summary": {
+    "physical_system": "metasurface",
+    "material_system": "TiO2/Si3N4/Si/SiO2 preview candidates",
+    "geometry_model": "periodic meta-atom array scaffold",
+    "solver_or_adapter_family": "Meep with Gmsh geometry preview",
+    "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
+    "evidence_boundary": "Geometry/material preview only; no metasurface efficiency validation."
+  },
+  "safety": {
+    "no_solver_by_default": true,
+    "no_external_llm": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

@@ -266,6 +266,58 @@
       "proprietary_solver_required": false
     },
     {
+      "name": "design-requirements",
+      "endpoint": "/api/design-requirements",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "design_requirements_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "design-requirement-thin-film",
+      "endpoint": "/api/design-requirements/thin_film_ar_coating",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "design_requirement_thin_film_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "design-requirement-match-thin-film",
+      "endpoint": "/api/design-requirements/match",
+      "method": "POST",
+      "request_file": "design_requirement_match_thin_film_request.json",
+      "response_file": "design_requirement_match_thin_film_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "design-requirement-match-nanoparticle-zh",
+      "endpoint": "/api/design-requirements/match",
+      "method": "POST",
+      "request_file": "design_requirement_match_nanoparticle_zh_request.json",
+      "response_file": "design_requirement_match_nanoparticle_zh_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
       "name": "agent-session-tool-ledger",
       "endpoint": "/api/agent-session",
       "method": "POST",

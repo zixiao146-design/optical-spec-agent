@@ -1,0 +1,1 @@
+Create a local preview workflow for a dielectric metasurface unit-cell array, suggest materials and adapters, and keep all outputs preview-only.

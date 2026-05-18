@@ -24,42 +24,63 @@
     "Open the Agent Trace Timeline to review sub-agent contributions.",
     "Generate local workflow and adapter-preview artifacts only."
   ],
-  "session_id": "session-0d78cf4e19",
-  "user_goal": "Create a local preview workflow for a silver nanoparticle scattering case.",
+  "session_id": "session-acd87c78d4",
+  "user_goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流，优先使用开源工具，不运行外部求解器。",
+  "requirement_template_id": "nanoparticle_plasmonics",
   "optical_intent_summary": "nanoparticle plasmonics / scattering preview",
+  "optical_language_summary": {
+    "physical_system": "nanoparticle_on_film",
+    "material_system": "Ag/Au nanoparticle with SiO2/water/air environment preview",
+    "geometry_model": "sphere-on-film or nanoparticle-on-film scaffold",
+    "solver_or_adapter_family": "Meep with optional Gmsh geometry preview",
+    "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
+    "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result."
+  },
   "selected_example_id": "nanoparticle_plasmonics",
-  "design_case_summary": "nanoparticle_plasmonics example-backed nanoparticle plasmonics / scattering preview",
+  "design_case_summary": "nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview",
+  "missing_required_inputs": [
+    "particle_material",
+    "particle_size_nm",
+    "film_material",
+    "gap_nm",
+    "wavelength_range_nm"
+  ],
+  "default_assumptions_applied": [
+    "Open-source-first Meep/Gmsh preview path.",
+    "Material constants must be verified before conclusions.",
+    "No FDTD solver execution by default."
+  ],
   "plan_steps": [
     {
       "step_index": 1,
-      "title": "Interpret optical goal",
-      "title_zh": "\u7406\u89e3\u5149\u5b66\u76ee\u6807",
-      "description": "Translate the natural language goal into nanoparticle plasmonics / scattering preview.",
-      "description_zh": "\u5c06\u81ea\u7136\u8bed\u8a00\u76ee\u6807\u8f6c\u6362\u4e3a nanoparticle plasmonics / scattering preview\u3002",
+      "title": "Natural language -> optical language",
+      "title_zh": "自然语言 -> 光学语言",
+      "description": "Translate the natural language goal into optical intent: nanoparticle plasmonics / scattering preview.",
+      "description_zh": "将自然语言目标转换为光学意图：nanoparticle plasmonics / scattering preview。",
       "agent_name": "SpecAgent",
       "status": "completed",
-      "endpoint_or_tool": "local heuristic intent detector",
-      "expected_output": "optical_intent_summary",
+      "endpoint_or_tool": "requirements.match_template and requirements.extract_optical_intent",
+      "expected_output": "optical_intent_summary and optical_language_summary",
       "safety_note": "No external LLM is called by default."
     },
     {
       "step_index": 2,
-      "title": "Select design case",
-      "title_zh": "\u9009\u62e9\u8bbe\u8ba1\u6848\u4f8b",
+      "title": "Optical language -> design case",
+      "title_zh": "光学语言 -> 设计案例",
       "description": "Match the goal to nanoparticle_plasmonics.",
-      "description_zh": "\u5c06\u76ee\u6807\u5339\u914d\u5230 nanoparticle_plasmonics\u3002",
+      "description_zh": "将目标匹配到 nanoparticle_plasmonics。",
       "agent_name": "SpecAgent",
       "status": "completed",
-      "endpoint_or_tool": "/api/examples",
-      "expected_output": "selected_example_id and design_case_summary",
+      "endpoint_or_tool": "/api/design-requirements and /api/examples",
+      "expected_output": "requirement_template_id, selected_example_id, and design_case_summary",
       "safety_note": "Examples are local preview cases only."
     },
     {
       "step_index": 3,
       "title": "Suggest materials",
-      "title_zh": "\u63a8\u8350\u6750\u6599",
+      "title_zh": "推荐材料",
       "description": "Use the local preview material catalog for candidate materials.",
-      "description_zh": "\u4f7f\u7528\u672c\u5730\u9884\u89c8\u6750\u6599\u5e93\u751f\u6210\u5019\u9009\u6750\u6599\u3002",
+      "description_zh": "使用本地预览材料库生成候选材料。",
       "agent_name": "MaterialAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/materials/suggest",
@@ -69,9 +90,9 @@
     {
       "step_index": 4,
       "title": "Review geometry",
-      "title_zh": "\u5ba1\u9605\u51e0\u4f55",
+      "title_zh": "审阅几何",
       "description": "Identify the geometry family and missing geometry fields.",
-      "description_zh": "\u8bc6\u522b\u51e0\u4f55\u7c7b\u578b\u5e76\u6807\u51fa\u7f3a\u5931\u51e0\u4f55\u5b57\u6bb5\u3002",
+      "description_zh": "识别几何类型并标出缺失几何字段。",
       "agent_name": "GeometryAgent",
       "status": "completed",
       "endpoint_or_tool": "local geometry review",
@@ -81,9 +102,9 @@
     {
       "step_index": 5,
       "title": "Recommend adapter",
-      "title_zh": "\u63a8\u8350\u9002\u914d\u5668",
+      "title_zh": "推荐适配器",
       "description": "Choose an open-source-first adapter path: meep with gmsh geometry preview.",
-      "description_zh": "\u9009\u62e9\u5f00\u6e90\u4f18\u5148\u7684\u9002\u914d\u5668\u8def\u5f84\uff1ameep with gmsh geometry preview\u3002",
+      "description_zh": "选择开源优先的适配器路径：meep with gmsh geometry preview。",
       "agent_name": "AdapterAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/adapters",
@@ -92,22 +113,22 @@
     },
     {
       "step_index": 6,
-      "title": "Plan local workflow",
-      "title_zh": "\u89c4\u5212\u672c\u5730\u5de5\u4f5c\u6d41",
+      "title": "Plan local tool calls",
+      "title_zh": "规划本地工具调用",
       "description": "Plan parse, validate, preview, evidence, and human review steps.",
-      "description_zh": "\u89c4\u5212\u89e3\u6790\u3001\u9a8c\u8bc1\u3001\u9884\u89c8\u3001\u8bc1\u636e\u548c\u4eba\u5de5\u5ba1\u9605\u6b65\u9aa4\u3002",
+      "description_zh": "规划解析、验证、预览、证据和人工审阅步骤。",
       "agent_name": "WorkflowAgent",
       "status": "completed",
-      "endpoint_or_tool": "/api/workflow-plan",
-      "expected_output": "workflow_plan artifact",
+      "endpoint_or_tool": "/api/workflow-plan and local optical calculators when applicable",
+      "expected_output": "workflow_plan artifact and tool_call_ledger",
       "safety_note": "No solver is executed by default."
     },
     {
       "step_index": 7,
       "title": "Preview artifacts and evidence",
-      "title_zh": "\u9884\u89c8\u4ea7\u7269\u548c\u8bc1\u636e",
+      "title_zh": "预览产物和证据",
       "description": "Prepare preview artifacts and validation evidence references.",
-      "description_zh": "\u51c6\u5907\u9884\u89c8\u4ea7\u7269\u548c\u9a8c\u8bc1\u8bc1\u636e\u5f15\u7528\u3002",
+      "description_zh": "准备预览产物和验证证据引用。",
       "agent_name": "EvidenceAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/adapter-preview and /api/validation-evidence",
@@ -117,9 +138,9 @@
     {
       "step_index": 8,
       "title": "Check permission gates",
-      "title_zh": "\u68c0\u67e5\u6743\u9650\u95e8\u63a7",
+      "title_zh": "检查权限门控",
       "description": "Block solver, LLM, upload, publish, tag, and release actions by default.",
-      "description_zh": "\u9ed8\u8ba4\u963b\u65ad\u6c42\u89e3\u5668\u3001LLM\u3001\u4e0a\u4f20\u3001\u53d1\u5e03\u3001tag \u548c release \u52a8\u4f5c\u3002",
+      "description_zh": "默认阻断求解器、LLM、上传、发布、tag 和 release 动作。",
       "agent_name": "SafetyAgent",
       "status": "completed",
       "endpoint_or_tool": "local permission gate policy",
@@ -154,7 +175,7 @@
     ],
     "trace_id": "trace-5011bf2c85",
     "example_id": "nanoparticle_plasmonics",
-    "design_goal": "Create a local preview workflow for a silver nanoparticle scattering case.",
+    "design_goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流，优先使用开源工具，不运行外部求解器。",
     "timeline_summary": "Example Gallery -> Material suggestions -> Adapter recommendation -> Agent trace timeline -> Workflow plan -> Artifact preview -> Evidence -> Next action",
     "agents": [
       {
@@ -344,7 +365,7 @@
     {
       "artifact_id": "spec-preview",
       "label": "Spec preview",
-      "label_zh": "\u89c4\u683c\u9884\u89c8",
+      "label_zh": "规格预览",
       "artifact_type": "spec",
       "summary": "Design intent mapped to nanoparticle plasmonics / scattering preview; source: examples/optical_design/nanoparticle_plasmonics/spec.json.",
       "preview_content": "examples/optical_design/nanoparticle_plasmonics/spec.json",
@@ -355,7 +376,7 @@
     {
       "artifact_id": "material-suggestions",
       "label": "Material suggestions",
-      "label_zh": "\u6750\u6599\u5efa\u8bae",
+      "label_zh": "材料建议",
       "artifact_type": "material_suggestions",
       "summary": "au, ag, sio2, water, air",
       "preview_content": null,
@@ -366,7 +387,7 @@
     {
       "artifact_id": "agent-trace",
       "label": "Sub-agent trace",
-      "label_zh": "\u5b50\u667a\u80fd\u4f53\u8f68\u8ff9",
+      "label_zh": "子智能体轨迹",
       "artifact_type": "agent_trace",
       "summary": "Eight-agent deterministic collaboration trace.",
       "preview_content": null,
@@ -377,7 +398,7 @@
     {
       "artifact_id": "workflow-plan",
       "label": "Workflow plan",
-      "label_zh": "\u5de5\u4f5c\u6d41\u8ba1\u5212",
+      "label_zh": "工作流计划",
       "artifact_type": "workflow_plan",
       "summary": "Local parse -> validate -> preview workflow for meep with gmsh geometry preview.",
       "preview_content": null,
@@ -388,7 +409,7 @@
     {
       "artifact_id": "adapter-preview",
       "label": "Adapter preview",
-      "label_zh": "\u9002\u914d\u5668\u9884\u89c8",
+      "label_zh": "适配器预览",
       "artifact_type": "adapter_preview",
       "summary": "Preview-only solver-native scaffold; no solver execution.",
       "preview_content": null,
@@ -399,7 +420,7 @@
     {
       "artifact_id": "validation-evidence",
       "label": "Validation evidence",
-      "label_zh": "\u9a8c\u8bc1\u8bc1\u636e",
+      "label_zh": "验证证据",
       "artifact_type": "evidence",
       "summary": "Adapter maturity and validation evidence references.",
       "preview_content": null,
@@ -412,7 +433,7 @@
     {
       "gate_id": "parse_local_spec",
       "label": "Parse local spec",
-      "label_zh": "\u672c\u5730\u89e3\u6790\u89c4\u683c",
+      "label_zh": "本地解析规格",
       "status": "allowed",
       "reason": "Local deterministic parsing is part of the preview workflow.",
       "risk_level": "low",
@@ -421,7 +442,7 @@
     {
       "gate_id": "read_local_material_catalog",
       "label": "Read local material catalog",
-      "label_zh": "\u8bfb\u53d6\u672c\u5730\u6750\u6599\u5e93",
+      "label_zh": "读取本地材料库",
       "status": "allowed",
       "reason": "The catalog is bundled and preview-only.",
       "risk_level": "low",
@@ -430,7 +451,7 @@
     {
       "gate_id": "generate_workflow_plan",
       "label": "Generate workflow plan",
-      "label_zh": "\u751f\u6210\u5de5\u4f5c\u6d41\u8ba1\u5212",
+      "label_zh": "生成工作流计划",
       "status": "allowed",
       "reason": "Workflow planning is local and does not execute solvers.",
       "risk_level": "low",
@@ -439,7 +460,7 @@
     {
       "gate_id": "generate_adapter_preview",
       "label": "Generate adapter preview",
-      "label_zh": "\u751f\u6210\u9002\u914d\u5668\u9884\u89c8",
+      "label_zh": "生成适配器预览",
       "status": "allowed",
       "reason": "Adapter preview produces scaffold content only.",
       "risk_level": "low",
@@ -448,7 +469,7 @@
     {
       "gate_id": "run_external_solver",
       "label": "External solver execution",
-      "label_zh": "\u5916\u90e8\u6c42\u89e3\u5668\u6267\u884c",
+      "label_zh": "外部求解器执行",
       "status": "requires_explicit_approval",
       "reason": "External solvers are never executed by default.",
       "risk_level": "high",
@@ -457,7 +478,7 @@
     {
       "gate_id": "call_external_llm",
       "label": "External LLM call",
-      "label_zh": "\u5916\u90e8 LLM \u8c03\u7528",
+      "label_zh": "外部 LLM 调用",
       "status": "requires_explicit_approval",
       "reason": "The command center is deterministic and local by default.",
       "risk_level": "high",
@@ -466,7 +487,7 @@
     {
       "gate_id": "upload_testpypi",
       "label": "TestPyPI upload",
-      "label_zh": "TestPyPI \u4e0a\u4f20",
+      "label_zh": "TestPyPI 上传",
       "status": "blocked",
       "reason": "Publishing controls are not exposed in Agent Studio.",
       "risk_level": "high",
@@ -475,7 +496,7 @@
     {
       "gate_id": "publish_pypi",
       "label": "PyPI publication",
-      "label_zh": "PyPI \u53d1\u5e03",
+      "label_zh": "PyPI 发布",
       "status": "blocked",
       "reason": "PyPI publication requires separate maintainer approval outside this UI.",
       "risk_level": "high",
@@ -484,7 +505,7 @@
     {
       "gate_id": "create_git_tag",
       "label": "Git tag creation",
-      "label_zh": "Git tag \u521b\u5efa",
+      "label_zh": "Git tag 创建",
       "status": "blocked",
       "reason": "Release/tag operations are out of scope for the local command center.",
       "risk_level": "high",
@@ -493,7 +514,7 @@
     {
       "gate_id": "create_github_release",
       "label": "GitHub release creation",
-      "label_zh": "GitHub release \u521b\u5efa",
+      "label_zh": "GitHub release 创建",
       "status": "blocked",
       "reason": "GitHub release operations are not controlled from Agent Studio.",
       "risk_level": "high",
@@ -501,6 +522,32 @@
     }
   ],
   "tool_call_ledger": [
+    {
+      "call_id": "requirements-match-template",
+      "tool_name": "requirements.match_template",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SpecAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Natural-language goal.",
+      "output_summary": "Matched nanoparticle_plasmonics with high confidence.",
+      "reason": "The command center starts from deterministic requirement-template matching.",
+      "safety_note": "No external LLM is called by default."
+    },
+    {
+      "call_id": "requirements-extract-optical-intent",
+      "tool_name": "requirements.extract_optical_intent",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SpecAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "nanoparticle_plasmonics",
+      "output_summary": "/api/adapter-preview and /api/agent-trace",
+      "reason": "The backend exposes the natural language -> optical language step explicitly.",
+      "safety_note": "Optical language extraction is local heuristic logic, not an external model."
+    },
     {
       "call_id": "material-catalog-suggest",
       "tool_name": "material_catalog.suggest",
@@ -697,5 +744,5 @@
       "safety_note": "NO RELEASE CREATED."
     }
   ],
-  "final_recommendation": "Use the local nanoparticle_plasmonics example-backed nanoparticle plasmonics / scattering preview path, inspect material candidates au, ag, sio2, water, air, then review any calculator preview, workflow plan, and adapter preview via meep with gmsh geometry preview. Calculator outputs are design-assist only."
+  "final_recommendation": "Use the local nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview path, inspect material candidates au, ag, sio2, water, air, then review any calculator preview, workflow plan, and adapter preview via meep with gmsh geometry preview. Calculator outputs are design-assist only."
 }

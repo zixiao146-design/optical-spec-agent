@@ -17,6 +17,11 @@ from optical_spec_agent.examples.models import (
     OpticalDesignExampleDetail,
     OpticalDesignExampleSummary,
 )
+from optical_spec_agent.examples.requirements import (
+    DesignRequirementDetailResponse,
+    DesignRequirementsResponse,
+    RequirementMatchResult,
+)
 from optical_spec_agent.materials.models import MaterialDetail, MaterialSummary
 
 
@@ -223,15 +228,31 @@ class AgentSessionRequest(ApiRequestBase):
 class AgentTaskSessionResponse(ApiResponseBase):
     session_id: str
     user_goal: str
+    requirement_template_id: str | None = None
     optical_intent_summary: str
+    optical_language_summary: dict[str, str] = Field(default_factory=dict)
     selected_example_id: str | None = None
     design_case_summary: str
+    missing_required_inputs: list[str] = Field(default_factory=list)
+    default_assumptions_applied: list[str] = Field(default_factory=list)
     plan_steps: list[AgentPlanStep] = Field(default_factory=list)
     agent_trace: AgentTraceResponse
     artifacts: list[AgentArtifact] = Field(default_factory=list)
     permission_gates: list[PermissionGate] = Field(default_factory=list)
     tool_call_ledger: list[ToolCallRecord] = Field(default_factory=list)
     final_recommendation: str
+
+
+class DesignRequirementMatchRequest(ApiRequestBase):
+    goal: str = Field(..., description="Natural language optical design goal")
+    language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+__all_requirement_models__ = [
+    "DesignRequirementDetailResponse",
+    "DesignRequirementsResponse",
+    "RequirementMatchResult",
+]
 
 
 class ToolCapabilityItem(BaseModel):

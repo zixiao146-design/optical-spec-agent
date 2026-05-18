@@ -103,6 +103,11 @@ curl -X POST http://127.0.0.1:8000/api/agent-session \
 curl http://127.0.0.1:8000/api/tool-capabilities
 curl http://127.0.0.1:8000/api/backend-capability-report
 curl http://127.0.0.1:8000/api/design-case-cross-checks
+curl http://127.0.0.1:8000/api/design-requirements
+curl http://127.0.0.1:8000/api/design-requirements/thin_film_ar_coating
+curl -X POST http://127.0.0.1:8000/api/design-requirements/match \
+  -H "Content-Type: application/json" \
+  --data @examples/api/design_requirement_match_thin_film_request.json
 curl -X POST http://127.0.0.1:8000/api/optics/thin-film \
   -H "Content-Type: application/json" \
   --data @examples/api/thin_film_request.json
@@ -154,3 +159,5 @@ solvers, upload packages, or create tags/releases.
 Backend capability report and design case cross-check calls prove what is
 installed, callable, executed, or blocked without changing the preview-only
 safety boundary.
+Design requirement calls show deterministic natural-language goal matching and
+the resulting optical language summary without external LLM calls.

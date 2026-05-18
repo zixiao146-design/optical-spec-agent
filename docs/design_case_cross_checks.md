@@ -20,6 +20,15 @@ For each example under `examples/optical_design/`, the backend verifies:
   preview calculator.
 - Safety flags remain false.
 
+For each template under `examples/design_requirements/`, the backend verifies:
+
+- `requirement.json`, `goal_en.txt`, `goal_zh.txt`, `expected_tool_calls.json`,
+  and `README.md` exist.
+- English and Chinese goals match the expected template.
+- Expected local tool calls appear in the `AgentTaskSession` ledger.
+- Calculator-backed templates execute the expected preview calculator.
+- Safety flags remain false.
+
 ## Example To Calculator Mapping
 
 | Example | Expected calculator behavior |

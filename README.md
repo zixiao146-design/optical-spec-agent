@@ -94,6 +94,13 @@ solvers, call external LLMs, or claim production-grade validation.
 The capability report proves which sub-agents and internal tools execute in
 sample sessions, which calculators are sanity-checked previews, and which
 external solver/LLM/upload/tag/release actions remain blocked.
+The backend also includes
+[`design requirement templates`](docs/design_requirement_templates.md) and a
+[`natural language to optical language`](docs/natural_language_to_optical_language.md)
+mapping layer. These deterministic templates connect first-run goals to optical
+intent, required inputs, default assumptions, material/geometry choices,
+expected calculators or adapters, tool-call ledger entries, and preview
+artifacts without using an external LLM.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

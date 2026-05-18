@@ -111,6 +111,23 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
     lines.extend(
         [
             "",
+            "## Requirement Templates",
+            "",
+            "| Template | EN goal | ZH goal | Heuristic match | Cross-check | Preview only |",
+            "| --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for item in payload["requirements_templates"]:
+        lines.append(
+            "| {template_id} | {goal_en_present} | {goal_zh_present} | "
+            "{matched_by_heuristic} | {cross_check_status} | {preview_only} |".format(
+                **item
+            )
+        )
+
+    lines.extend(
+        [
+            "",
             "## Blocked External Actions",
             "",
             "| Action | Default allowed | Executed | Reason |",
@@ -145,6 +162,7 @@ def _print_summary(report: BackendCapabilityReport) -> None:
     print(f"sub_agents={len(payload['sub_agents'])}")
     print(f"internal_tools={len(payload['internal_tools'])}")
     print(f"optical_calculators={len(payload['optical_calculators'])}")
+    print(f"requirements_templates={len(payload['requirements_templates'])}")
     print(f"design_case_cross_checks={len(payload['design_case_cross_checks'])}")
     print(
         "blocked_external_actions="

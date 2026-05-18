@@ -1,0 +1,26 @@
+{
+  "template_id": "gaussian_beam_focus",
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate",
+    "optics.gaussian_beam.series"
+  ],
+  "expected_calculators": [
+    "optics.gaussian_beam.series"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "gaussian_beam_series",
+    "gaussian_focus",
+    "workflow_plan"
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

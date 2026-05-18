@@ -5,7 +5,8 @@ agent workflow 可视化，但不会引入自主外部 agent、外部 LLM 调用
 执行、上传、tag 或 release 操作。
 
 当前角色：
-- SpecAgent：理解用户意图或 OpticalSpec，并识别缺失字段。
+- SpecAgent：理解用户意图或 OpticalSpec，运行
+  `requirements.match_template` / `requirements.extract_optical_intent`，并识别缺失字段。
 - MaterialAgent：从本地预览材料库推荐材料。
 - GeometryAgent：识别几何类型和必要几何字段。
 - AdapterAgent：推荐开源优先的 adapter/tool，并解释限制。

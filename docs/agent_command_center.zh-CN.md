@@ -5,8 +5,13 @@
 Agent 命令中心是 Agent Studio 中面向任务的本地光学设计入口。它把自然语言目标转换成确定性的本地任务会话：
 
 ```text
-用户目标 -> 光学意图 -> 设计案例 -> 材料 -> 适配器 -> 工作流 -> 产物 -> 证据 -> 下一步建议
+用户目标 -> 需求模板 -> 光学语言 -> 设计案例 -> 材料 -> 适配器/计算器 -> 工作流 -> 产物 -> 证据 -> 下一步建议
 ```
+
+兼容摘要：用户目标 -> 光学意图 -> 设计案例。
+
+需求模板层见 `docs/design_requirement_templates.zh-CN.md`，自然语言到光学语言映射见
+`docs/natural_language_to_optical_language.zh-CN.md`。
 
 它借鉴 coding-agent 风格的任务会话体验，但不是任何外部产品的复制品，也不复制外部品牌、文案或设计资产。
 
@@ -24,6 +29,8 @@ Agent 命令中心是 Agent Studio 中面向任务的本地光学设计入口。
 命令中心使用：
 
 - `POST /api/agent-session`
+- `GET /api/design-requirements`
+- `POST /api/design-requirements/match`
 - `GET /api/examples`
 - `GET /api/materials`
 - `POST /api/materials/suggest`

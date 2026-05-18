@@ -17,12 +17,16 @@ python scripts/generate_backend_capability_report.py \
 ```
 
 The live API surfaces are `GET /api/backend-capability-report` and
-`GET /api/design-case-cross-checks`.
+`GET /api/design-case-cross-checks`. Requirement templates are exposed through
+`GET /api/design-requirements`, `GET /api/design-requirements/{template_id}`,
+and `POST /api/design-requirements/match`.
 
 ## Installed / Callable / Executed
 
 | Capability | Installed/importable | Callable | Executed in backend smoke |
 | --- | --- | --- | --- |
+| Design requirement templates | yes | yes | yes |
+| Natural-language goal matching | yes | yes | yes |
 | Material library | yes | yes | yes |
 | Optical design example registry | yes | yes | yes |
 | Agent trace builder | yes | yes | yes |

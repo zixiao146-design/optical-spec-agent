@@ -259,6 +259,131 @@
       "formal_convergence_proof_claimed": false
     }
   ],
+  "requirements_templates": [
+    {
+      "template_id": "nanoparticle_plasmonics",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    },
+    {
+      "template_id": "thin_film_ar_coating",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.thin_film.spectrum"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    },
+    {
+      "template_id": "gaussian_beam_focus",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.gaussian_beam.series"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    },
+    {
+      "template_id": "slab_waveguide_single_mode",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.waveguide.sweep"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    },
+    {
+      "template_id": "paraxial_lens_imaging",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.paraxial.two_lens_relay"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    },
+    {
+      "template_id": "photonic_crystal_band_preview",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    },
+    {
+      "template_id": "dielectric_metasurface_preview",
+      "goal_en_present": true,
+      "goal_zh_present": true,
+      "matched_by_heuristic": true,
+      "expected_tools": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "cross_check_status": "pass",
+      "preview_only": true
+    }
+  ],
   "design_case_cross_checks": [
     {
       "example_id": "dielectric_metasurface_preview",
@@ -275,6 +400,8 @@
       ],
       "adapter_recommendation": "optiland",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -317,6 +444,8 @@
       ],
       "adapter_recommendation": "optiland",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -362,6 +491,8 @@
       ],
       "adapter_recommendation": "meep with gmsh geometry preview",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -405,6 +536,8 @@
       ],
       "adapter_recommendation": "mpb",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -447,6 +580,8 @@
       ],
       "adapter_recommendation": "preview-only; future TMM adapter candidate",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -491,6 +626,8 @@
       ],
       "adapter_recommendation": "mpb or elmer preview",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",

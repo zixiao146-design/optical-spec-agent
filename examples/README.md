@@ -62,3 +62,12 @@ optical-spec workflow-plan examples/e2e/local_optical_workflow.json --json
 The e2e fixture is preview/diagnostics evidence only. It does not require
 network access, external solvers, external LLM providers, or proprietary optical
 software.
+
+## Design requirement templates
+
+`examples/design_requirements/` contains seven realistic first-run requirement
+templates. Each folder includes `requirement.json`, English and Chinese natural
+language goals, expected tool calls, and a README. These fixtures demonstrate
+the backend path from natural language -> optical language -> design case ->
+tool-call ledger. They are preview/design-assist examples only and do not run
+solvers, call external LLMs, upload packages, create tags, or create releases.

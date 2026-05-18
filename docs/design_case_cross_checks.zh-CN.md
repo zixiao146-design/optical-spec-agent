@@ -19,6 +19,15 @@ Current public prerelease: v0.9.0rc6。Current main development version:
 - 如果该设计族有标量预览计算器，是否记录了预期计算器调用。
 - 安全 flags 是否保持 false。
 
+每个 `examples/design_requirements/` 模板会检查：
+
+- `requirement.json`、`goal_en.txt`、`goal_zh.txt`、`expected_tool_calls.json`
+  和 `README.md` 是否存在。
+- 英文和中文目标是否能匹配到预期模板。
+- 预期本地工具调用是否出现在 `AgentTaskSession` 的 tool-call ledger 中。
+- 有计算器支持的模板是否执行预期 preview calculator。
+- 安全 flags 是否保持 false。
+
 ## 示例到计算器映射
 
 | 示例 | 预期计算器行为 |

@@ -1,0 +1,69 @@
+{
+  "template_id": "gaussian_beam_focus",
+  "title": "Gaussian beam focus preview",
+  "title_zh": "高斯光束聚焦预览",
+  "natural_language_goal_en": "Preview Gaussian beam propagation and thin-lens focusing for a 1064 nm beam, including waist, Rayleigh range, and focused spot estimate without calling external tools.",
+  "natural_language_goal_zh": "预览 1064 nm 高斯光束的传播和薄透镜聚焦，给出光腰、瑞利长度和焦斑估计，不调用外部工具。",
+  "optical_intent": "gaussian beam propagation preview",
+  "physical_system": "gaussian_beam",
+  "required_inputs": [
+    "wavelength_nm",
+    "input_waist_um",
+    "propagation_range_mm",
+    "focal_length_mm"
+  ],
+  "default_assumptions": [
+    "Fundamental paraxial Gaussian beam.",
+    "Ideal thin lens.",
+    "No aberration, clipping, or vector-field effects."
+  ],
+  "suggested_materials": [
+    "air",
+    "glass_bk7_preview",
+    "glass_fused_silica_preview"
+  ],
+  "suggested_adapter": "local Gaussian beam calculator; no solver adapter required",
+  "expected_calculators": [
+    "optics.gaussian_beam.series"
+  ],
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate",
+    "optics.gaussian_beam.series"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "gaussian_beam_series",
+    "gaussian_focus",
+    "workflow_plan"
+  ],
+  "evidence_boundary": "Paraxial Gaussian formulas only; not a vector diffraction or full lens validation.",
+  "next_actions": [
+    "Confirm beam waist, wavelength, and focal length.",
+    "Inspect Rayleigh range and focused waist estimates.",
+    "Use a diffraction or ray-trace solver later if aperture/aberration effects matter."
+  ],
+  "design_case_id": null,
+  "optical_language_summary": {
+    "physical_system": "gaussian_beam",
+    "material_system": "air/glass preview propagation path",
+    "geometry_model": "paraxial Gaussian beam plus ideal thin lens",
+    "solver_or_adapter_family": "local Gaussian beam calculator",
+    "calculator_or_tool_path": "/api/optics/gaussian-beam-series and /api/optics/gaussian-beam-focus",
+    "evidence_boundary": "Paraxial Gaussian formulas only; not a vector diffraction or full lens validation."
+  },
+  "safety": {
+    "no_solver_by_default": true,
+    "no_external_llm": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

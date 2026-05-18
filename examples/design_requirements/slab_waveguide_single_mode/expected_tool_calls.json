@@ -1,0 +1,26 @@
+{
+  "template_id": "slab_waveguide_single_mode",
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate",
+    "optics.waveguide.sweep"
+  ],
+  "expected_calculators": [
+    "optics.waveguide.sweep"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "waveguide_v_number_sweep",
+    "single_mode_range",
+    "workflow_plan"
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

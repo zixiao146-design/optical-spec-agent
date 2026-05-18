@@ -18,6 +18,10 @@ from optical_spec_agent.examples.cross_check import (
     cross_check_all_design_cases,
 )
 from optical_spec_agent.examples.registry import list_optical_design_examples
+from optical_spec_agent.examples.requirements import (
+    list_requirement_templates,
+    match_goal_to_template,
+)
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
@@ -72,6 +76,16 @@ class BlockedExternalAction(BaseModel):
     reason: str
 
 
+class RequirementTemplateCapability(BaseModel):
+    template_id: str
+    goal_en_present: bool
+    goal_zh_present: bool
+    matched_by_heuristic: bool
+    expected_tools: list[str] = Field(default_factory=list)
+    cross_check_status: str
+    preview_only: bool = True
+
+
 class BackendCapabilityReport(BaseModel):
     api_contract_version: str = "0.1"
     status: str = "ok"
@@ -79,6 +93,7 @@ class BackendCapabilityReport(BaseModel):
     sub_agents: list[SubAgentCapability] = Field(default_factory=list)
     internal_tools: list[InternalToolCapabilityReport] = Field(default_factory=list)
     optical_calculators: list[OpticalCalculatorCapability] = Field(default_factory=list)
+    requirements_templates: list[RequirementTemplateCapability] = Field(default_factory=list)
     design_case_cross_checks: list[DesignCaseCrossCheck] = Field(default_factory=list)
     blocked_external_actions: list[BlockedExternalAction] = Field(default_factory=list)
     external_solver_executed: bool = False
@@ -119,6 +134,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         sub_agents=_sub_agent_capabilities(sample_session),
         internal_tools=_internal_tool_capabilities(all_sample_tool_names),
         optical_calculators=_optical_calculator_capabilities(),
+        requirements_templates=_requirement_template_capabilities(),
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
         recommended_next_actions=[
@@ -298,6 +314,32 @@ def _optical_calculator_capabilities() -> list[OpticalCalculatorCapability]:
         ),
     ]
     return calculators
+
+
+def _requirement_template_capabilities() -> list[RequirementTemplateCapability]:
+    capabilities: list[RequirementTemplateCapability] = []
+    for template in list_requirement_templates():
+        match_en = match_goal_to_template(template.natural_language_goal_en)
+        match_zh = match_goal_to_template(template.natural_language_goal_zh)
+        matched = (
+            match_en.matched_template_id == template.template_id
+            and match_zh.matched_template_id == template.template_id
+        )
+        capabilities.append(
+            RequirementTemplateCapability(
+                template_id=template.template_id,
+                goal_en_present=bool(template.natural_language_goal_en),
+                goal_zh_present=bool(template.natural_language_goal_zh),
+                matched_by_heuristic=matched,
+                expected_tools=template.expected_tool_calls,
+                cross_check_status="pass" if matched else "fail",
+                preview_only=(
+                    template.safety.production_grade_validation_claimed is False
+                    and template.safety.formal_convergence_proof_claimed is False
+                ),
+            )
+        )
+    return capabilities
 
 
 def _blocked_external_actions(sample_session: Any) -> list[BlockedExternalAction]:

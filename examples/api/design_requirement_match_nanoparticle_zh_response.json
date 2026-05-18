@@ -1,0 +1,109 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "matched_template": {
+    "template_id": "nanoparticle_plasmonics",
+    "title": "Nanoparticle plasmonics scattering preview",
+    "title_zh": "纳米颗粒等离激元散射预览",
+    "natural_language_goal_en": "Generate a local preview workflow for silver or gold nanoparticle scattering on a thin film, suggest materials and an open-source adapter path, and do not run external solvers.",
+    "natural_language_goal_zh": "为银或金纳米颗粒位于薄膜上的散射问题生成本地预览工作流，推荐材料和开源适配器路径，不运行外部求解器。",
+    "optical_intent": "nanoparticle plasmonics / scattering preview",
+    "physical_system": "nanoparticle_on_film",
+    "required_inputs": [
+      "particle_material",
+      "particle_size_nm",
+      "film_material",
+      "gap_nm",
+      "wavelength_range_nm"
+    ],
+    "default_assumptions": [
+      "Open-source-first Meep/Gmsh preview path.",
+      "Material constants must be verified before conclusions.",
+      "No FDTD solver execution by default."
+    ],
+    "suggested_materials": [
+      "ag",
+      "au",
+      "sio2",
+      "water",
+      "air"
+    ],
+    "suggested_adapter": "meep with gmsh geometry preview",
+    "expected_calculators": [],
+    "expected_tool_calls": [
+      "requirements.match_template",
+      "requirements.extract_optical_intent",
+      "material_catalog.suggest",
+      "example_registry.load",
+      "agent_trace.build",
+      "workflow_plan.preview",
+      "adapter_preview.generate"
+    ],
+    "expected_artifacts": [
+      "requirement_match",
+      "material_suggestions",
+      "agent_trace",
+      "adapter_preview"
+    ],
+    "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result.",
+    "next_actions": [
+      "Confirm particle size, gap, film, and wavelength range.",
+      "Review Meep/Gmsh preview artifacts.",
+      "Verify metal optical constants before any physical conclusions."
+    ],
+    "design_case_id": "nanoparticle_plasmonics",
+    "optical_language_summary": {
+      "physical_system": "nanoparticle_on_film",
+      "material_system": "Ag/Au nanoparticle with SiO2/water/air environment preview",
+      "geometry_model": "sphere-on-film or nanoparticle-on-film scaffold",
+      "solver_or_adapter_family": "Meep with optional Gmsh geometry preview",
+      "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
+      "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result."
+    },
+    "safety": {
+      "no_solver_by_default": true,
+      "no_external_llm": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  },
+  "matched_template_id": "nanoparticle_plasmonics",
+  "optical_language_summary": {
+    "physical_system": "nanoparticle_on_film",
+    "material_system": "Ag/Au nanoparticle with SiO2/water/air environment preview",
+    "geometry_model": "sphere-on-film or nanoparticle-on-film scaffold",
+    "solver_or_adapter_family": "Meep with optional Gmsh geometry preview",
+    "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
+    "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result."
+  },
+  "confidence": "high",
+  "missing_required_inputs": [
+    "particle_material",
+    "particle_size_nm",
+    "film_material",
+    "gap_nm",
+    "wavelength_range_nm"
+  ],
+  "default_assumptions": [
+    "Open-source-first Meep/Gmsh preview path.",
+    "Material constants must be verified before conclusions.",
+    "No FDTD solver execution by default."
+  ],
+  "recommended_next_actions": [
+    "Confirm particle size, gap, film, and wavelength range.",
+    "Review Meep/Gmsh preview artifacts.",
+    "Verify metal optical constants before any physical conclusions."
+  ],
+  "diagnostics": [
+    "Matched with deterministic keyword heuristics; no external LLM was called.",
+    "Template outputs are preview/design-assist and require human review."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

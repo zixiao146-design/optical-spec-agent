@@ -17,6 +17,8 @@
       ],
       "adapter_recommendation": "optiland",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -59,6 +61,8 @@
       ],
       "adapter_recommendation": "optiland",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -104,6 +108,8 @@
       ],
       "adapter_recommendation": "meep with gmsh geometry preview",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -147,6 +153,8 @@
       ],
       "adapter_recommendation": "mpb",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -189,6 +197,8 @@
       ],
       "adapter_recommendation": "preview-only; future TMM adapter candidate",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -233,6 +243,8 @@
       ],
       "adapter_recommendation": "mpb or elmer preview",
       "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
@@ -263,11 +275,223 @@
       }
     }
   ],
+  "requirement_template_checks": [
+    {
+      "template_id": "nanoparticle_plasmonics",
+      "status": "pass",
+      "design_case_id": "nanoparticle_plasmonics",
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [
+        "Template uses material/adapter/workflow trace without scalar calculator."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "thin_film_ar_coating",
+      "status": "pass",
+      "design_case_id": "thin_film_coating",
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.thin_film.spectrum"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "gaussian_beam_focus",
+      "status": "pass",
+      "design_case_id": null,
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.gaussian_beam.series"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "slab_waveguide_single_mode",
+      "status": "pass",
+      "design_case_id": "waveguide_mode",
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.waveguide.sweep"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "paraxial_lens_imaging",
+      "status": "pass",
+      "design_case_id": "lens_raytrace_preview",
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.paraxial.two_lens_relay"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "photonic_crystal_band_preview",
+      "status": "pass",
+      "design_case_id": "photonic_crystal_band",
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [
+        "Template uses material/adapter/workflow trace without scalar calculator."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "dielectric_metasurface_preview",
+      "status": "pass",
+      "design_case_id": "dielectric_metasurface_preview",
+      "requirement_files_exist": true,
+      "goal_en_matches_template": true,
+      "goal_zh_matches_template": true,
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "missing_tool_calls": [],
+      "calculator_expectations_met": true,
+      "diagnostics": [],
+      "warnings": [
+        "Template uses material/adapter/workflow trace without scalar calculator."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    }
+  ],
   "summary": {
     "total": 6,
     "pass": 6,
     "warning": 0,
-    "fail": 0
+    "fail": 0,
+    "requirement_templates_total": 7,
+    "requirement_templates_pass": 7,
+    "requirement_templates_warning": 0,
+    "requirement_templates_fail": 0
   },
   "external_solver_executed": false,
   "external_llm_required": false,
@@ -277,6 +501,7 @@
   "recommended_next_actions": [
     "Review warning/fail diagnostics before public demo use.",
     "Use calculator-backed cases to inspect tool_call_ledger evidence.",
+    "Use requirement_template_checks to verify natural-language goal matching.",
     "Keep all cross-check results labeled as preview/design-assist."
   ]
 }

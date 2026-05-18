@@ -26,6 +26,8 @@ def test_backend_capability_report_api_returns_expected_sections():
         "gaussian_beam",
         "waveguide",
     }
+    assert len(body["requirements_templates"]) == 7
+    assert all(item["matched_by_heuristic"] for item in body["requirements_templates"])
     assert body["design_case_cross_checks"]
     assert all(action["executed"] is False for action in body["blocked_external_actions"])
     assert body["external_solver_executed"] is False
@@ -40,6 +42,9 @@ def test_design_case_cross_checks_api_returns_safe_results():
     assert body["api_contract_version"] == "0.1"
     assert body["summary"]["total"] == 6
     assert body["summary"]["fail"] == 0
+    assert body["summary"]["requirement_templates_total"] == 7
+    assert body["summary"]["requirement_templates_fail"] == 0
+    assert body["requirement_template_checks"]
     assert all(check["status"] == "pass" for check in body["cross_checks"])
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False

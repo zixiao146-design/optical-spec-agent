@@ -24,6 +24,9 @@ from optical_spec_agent.api.models import (
     AdaptersResponse,
     ApiDiagnostic,
     ApiErrorResponse,
+    DesignRequirementDetailResponse,
+    DesignRequirementMatchRequest,
+    DesignRequirementsResponse,
     ExampleDetailResponse,
     ExamplesResponse,
     HealthResponse,
@@ -38,6 +41,7 @@ from optical_spec_agent.api.models import (
     ParseRequest as AgentParseRequest,
     ParseResponse as AgentParseResponse,
     ReadinessResponse,
+    RequirementMatchResult,
     SchemaResponse,
     ThinFilmSpectrumRequest,
     ThinFilmCalculatorRequest,
@@ -79,6 +83,11 @@ from optical_spec_agent.examples.registry import (
 from optical_spec_agent.examples.cross_check import (
     DesignCaseCrossChecksResponse,
     cross_check_all_design_cases,
+)
+from optical_spec_agent.examples.requirements import (
+    get_requirement_template,
+    list_requirement_templates,
+    match_goal_to_template,
 )
 from optical_spec_agent.materials.catalog import (
     get_material,
@@ -1095,6 +1104,76 @@ def agent_examples():
     )
 
 
+@router.get("/api/design-requirements", response_model=DesignRequirementsResponse)
+def agent_design_requirements():
+    templates = list_requirement_templates()
+    return DesignRequirementsResponse(
+        templates=templates,
+        template_count=len(templates),
+        recommended_next_actions=[
+            "Use /api/design-requirements/match to map a natural-language goal.",
+            "Inspect expected_tool_calls before running an agent session.",
+            "Keep outputs preview/design-assist and review missing inputs.",
+        ],
+    )
+
+
+@router.post(
+    "/api/design-requirements/match",
+    response_model=RequirementMatchResult,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_design_requirement_match(req: DesignRequirementMatchRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Design requirement matching requires a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=[
+                    "Provide a natural-language optical design goal."
+                ],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    return match_goal_to_template(goal)
+
+
+@router.get(
+    "/api/design-requirements/{template_id}",
+    response_model=DesignRequirementDetailResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_design_requirement_detail(template_id: str):
+    try:
+        template = get_requirement_template(template_id)
+    except ValueError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=[
+                    "Use /api/design-requirements to inspect available templates."
+                ],
+            )
+        )
+    return DesignRequirementDetailResponse(
+        template=template,
+        recommended_next_actions=template.next_actions,
+    )
+
+
 @router.get(
     "/api/examples/{example_id}",
     response_model=ExampleDetailResponse,
@@ -1252,9 +1331,13 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
         status=session.status,
         session_id=session.session_id,
         user_goal=session.user_goal,
+        requirement_template_id=session.requirement_template_id,
         optical_intent_summary=session.optical_intent_summary,
+        optical_language_summary=session.optical_language_summary,
         selected_example_id=session.selected_example_id,
         design_case_summary=session.design_case_summary,
+        missing_required_inputs=session.missing_required_inputs,
+        default_assumptions_applied=session.default_assumptions_applied,
         plan_steps=session.plan_steps,
         agent_trace=trace,
         artifacts=session.artifacts,

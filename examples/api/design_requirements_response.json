@@ -1,0 +1,502 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "templates": [
+    {
+      "template_id": "nanoparticle_plasmonics",
+      "title": "Nanoparticle plasmonics scattering preview",
+      "title_zh": "纳米颗粒等离激元散射预览",
+      "natural_language_goal_en": "Generate a local preview workflow for silver or gold nanoparticle scattering on a thin film, suggest materials and an open-source adapter path, and do not run external solvers.",
+      "natural_language_goal_zh": "为银或金纳米颗粒位于薄膜上的散射问题生成本地预览工作流，推荐材料和开源适配器路径，不运行外部求解器。",
+      "optical_intent": "nanoparticle plasmonics / scattering preview",
+      "physical_system": "nanoparticle_on_film",
+      "required_inputs": [
+        "particle_material",
+        "particle_size_nm",
+        "film_material",
+        "gap_nm",
+        "wavelength_range_nm"
+      ],
+      "default_assumptions": [
+        "Open-source-first Meep/Gmsh preview path.",
+        "Material constants must be verified before conclusions.",
+        "No FDTD solver execution by default."
+      ],
+      "suggested_materials": [
+        "ag",
+        "au",
+        "sio2",
+        "water",
+        "air"
+      ],
+      "suggested_adapter": "meep with gmsh geometry preview",
+      "expected_calculators": [],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "material_suggestions",
+        "agent_trace",
+        "adapter_preview"
+      ],
+      "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result.",
+      "next_actions": [
+        "Confirm particle size, gap, film, and wavelength range.",
+        "Review Meep/Gmsh preview artifacts.",
+        "Verify metal optical constants before any physical conclusions."
+      ],
+      "design_case_id": "nanoparticle_plasmonics",
+      "optical_language_summary": {
+        "physical_system": "nanoparticle_on_film",
+        "material_system": "Ag/Au nanoparticle with SiO2/water/air environment preview",
+        "geometry_model": "sphere-on-film or nanoparticle-on-film scaffold",
+        "solver_or_adapter_family": "Meep with optional Gmsh geometry preview",
+        "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
+        "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "thin_film_ar_coating",
+      "title": "Thin-film anti-reflection coating",
+      "title_zh": "薄膜增透镀膜",
+      "natural_language_goal_en": "Design a local preview for a single-layer anti-reflection coating on glass at 550 nm, estimate the quarter-wave thickness, and inspect a wavelength sweep without running solvers.",
+      "natural_language_goal_zh": "为玻璃基底上的单层增透薄膜做本地预览设计，目标波长 550 nm，估算四分之一波厚度，并查看反射率随波长变化，不运行外部求解器。",
+      "optical_intent": "thin film coating preview",
+      "physical_system": "thin_film_stack",
+      "required_inputs": [
+        "incident_n",
+        "substrate_n",
+        "target_wavelength_nm",
+        "coating_n or material choice",
+        "wavelength_range_nm"
+      ],
+      "default_assumptions": [
+        "Normal incidence.",
+        "Lossless constant-index preview.",
+        "Single-layer quarter-wave helper before any validated stack model."
+      ],
+      "suggested_materials": [
+        "sio2",
+        "tio2",
+        "al2o3",
+        "glass_fused_silica_preview"
+      ],
+      "suggested_adapter": "preview-only; future TMM adapter candidate",
+      "expected_calculators": [
+        "optics.thin_film.spectrum"
+      ],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.thin_film.spectrum"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "thin_film_spectrum",
+        "quarter_wave_ar",
+        "workflow_plan"
+      ],
+      "evidence_boundary": "Sanity-checked preview formulas only; verify material constants and stack physics before conclusions.",
+      "next_actions": [
+        "Confirm coating material/index and substrate index.",
+        "Inspect spectrum and quarter-wave helper output.",
+        "Use validated thin-film tooling later if physical conclusions are needed."
+      ],
+      "design_case_id": "thin_film_coating",
+      "optical_language_summary": {
+        "physical_system": "thin_film_stack",
+        "material_system": "SiO2/TiO2/Al2O3 preview coating candidates on glass",
+        "geometry_model": "one-dimensional layer stack",
+        "solver_or_adapter_family": "local thin-film calculator; future TMM adapter candidate",
+        "calculator_or_tool_path": "/api/optics/thin-film-spectrum and /api/optics/quarter-wave-ar",
+        "evidence_boundary": "Sanity-checked preview formulas only; verify material constants and stack physics before conclusions."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "gaussian_beam_focus",
+      "title": "Gaussian beam focus preview",
+      "title_zh": "高斯光束聚焦预览",
+      "natural_language_goal_en": "Preview Gaussian beam propagation and thin-lens focusing for a 1064 nm beam, including waist, Rayleigh range, and focused spot estimate without calling external tools.",
+      "natural_language_goal_zh": "预览 1064 nm 高斯光束的传播和薄透镜聚焦，给出光腰、瑞利长度和焦斑估计，不调用外部工具。",
+      "optical_intent": "gaussian beam propagation preview",
+      "physical_system": "gaussian_beam",
+      "required_inputs": [
+        "wavelength_nm",
+        "input_waist_um",
+        "propagation_range_mm",
+        "focal_length_mm"
+      ],
+      "default_assumptions": [
+        "Fundamental paraxial Gaussian beam.",
+        "Ideal thin lens.",
+        "No aberration, clipping, or vector-field effects."
+      ],
+      "suggested_materials": [
+        "air",
+        "glass_bk7_preview",
+        "glass_fused_silica_preview"
+      ],
+      "suggested_adapter": "local Gaussian beam calculator; no solver adapter required",
+      "expected_calculators": [
+        "optics.gaussian_beam.series"
+      ],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.gaussian_beam.series"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "gaussian_beam_series",
+        "gaussian_focus",
+        "workflow_plan"
+      ],
+      "evidence_boundary": "Paraxial Gaussian formulas only; not a vector diffraction or full lens validation.",
+      "next_actions": [
+        "Confirm beam waist, wavelength, and focal length.",
+        "Inspect Rayleigh range and focused waist estimates.",
+        "Use a diffraction or ray-trace solver later if aperture/aberration effects matter."
+      ],
+      "design_case_id": null,
+      "optical_language_summary": {
+        "physical_system": "gaussian_beam",
+        "material_system": "air/glass preview propagation path",
+        "geometry_model": "paraxial Gaussian beam plus ideal thin lens",
+        "solver_or_adapter_family": "local Gaussian beam calculator",
+        "calculator_or_tool_path": "/api/optics/gaussian-beam-series and /api/optics/gaussian-beam-focus",
+        "evidence_boundary": "Paraxial Gaussian formulas only; not a vector diffraction or full lens validation."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "slab_waveguide_single_mode",
+      "title": "Slab waveguide single-mode estimate",
+      "title_zh": "平板波导单模估计",
+      "natural_language_goal_en": "Estimate whether a SiN slab waveguide is likely single-mode near 1550 nm, sweep core thickness, and keep the result as a local design-assist preview.",
+      "natural_language_goal_zh": "估算 1550 nm 附近 SiN 平板波导是否可能单模，扫描芯层厚度，并保持为本地设计辅助预览。",
+      "optical_intent": "waveguide mode preview",
+      "physical_system": "slab_waveguide",
+      "required_inputs": [
+        "core_n",
+        "cladding_n",
+        "core_thickness_um",
+        "wavelength_nm"
+      ],
+      "default_assumptions": [
+        "Symmetric slab-waveguide scalar V-number preview.",
+        "Uses approximate single-mode threshold only.",
+        "Does not solve ridge/asymmetric vector modes."
+      ],
+      "suggested_materials": [
+        "si3n4",
+        "sio2",
+        "si",
+        "air"
+      ],
+      "suggested_adapter": "mpb or elmer preview",
+      "expected_calculators": [
+        "optics.waveguide.sweep"
+      ],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.waveguide.sweep"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "waveguide_v_number_sweep",
+        "single_mode_range",
+        "workflow_plan"
+      ],
+      "evidence_boundary": "Scalar V-number orientation only; not a mode-solver result.",
+      "next_actions": [
+        "Confirm refractive indices and core thickness range.",
+        "Inspect V-number sweep before adapter preview.",
+        "Use MPB/Elmer validation only after explicit solver approval."
+      ],
+      "design_case_id": "waveguide_mode",
+      "optical_language_summary": {
+        "physical_system": "slab_waveguide",
+        "material_system": "Si3N4/SiO2/air preview waveguide candidates",
+        "geometry_model": "symmetric slab-waveguide approximation",
+        "solver_or_adapter_family": "MPB or Elmer preview path",
+        "calculator_or_tool_path": "/api/optics/waveguide-sweep and /api/optics/waveguide-single-mode-range",
+        "evidence_boundary": "Scalar V-number orientation only; not a mode-solver result."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "paraxial_lens_imaging",
+      "title": "Paraxial lens imaging preview",
+      "title_zh": "近轴透镜成像预览",
+      "natural_language_goal_en": "Preview a simple lens imaging or two-lens relay design using ABCD matrices, then produce a local ray-optics workflow without running Optiland.",
+      "natural_language_goal_zh": "使用 ABCD 矩阵预览简单透镜成像或双透镜中继设计，然后生成本地光线光学工作流，不运行 Optiland。",
+      "optical_intent": "lens ray tracing preview",
+      "physical_system": "paraxial_lens_system",
+      "required_inputs": [
+        "focal_length_mm",
+        "object_distance_mm",
+        "lens_separation_mm optional",
+        "wavelength optional"
+      ],
+      "default_assumptions": [
+        "Ideal thin lenses.",
+        "First-order paraxial model.",
+        "No aberration, aperture stop, or material dispersion model."
+      ],
+      "suggested_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "suggested_adapter": "optiland",
+      "expected_calculators": [
+        "optics.paraxial.two_lens_relay"
+      ],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.paraxial.two_lens_relay"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "paraxial_system",
+        "two_lens_relay",
+        "adapter_preview"
+      ],
+      "evidence_boundary": "First-order paraxial preview only; not ray-trace validation.",
+      "next_actions": [
+        "Confirm focal length, object distance, and lens sequence.",
+        "Inspect paraxial image distance/magnification before adapter preview.",
+        "Use validated ray tracing later if aberrations or tolerances matter."
+      ],
+      "design_case_id": "lens_raytrace_preview",
+      "optical_language_summary": {
+        "physical_system": "paraxial_lens_system",
+        "material_system": "preview glass candidates plus air",
+        "geometry_model": "ideal thin-lens / ABCD system",
+        "solver_or_adapter_family": "Optiland preview path",
+        "calculator_or_tool_path": "/api/optics/paraxial-lens and /api/optics/two-lens-relay",
+        "evidence_boundary": "First-order paraxial preview only; not ray-trace validation."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "photonic_crystal_band_preview",
+      "title": "Photonic crystal band preview",
+      "title_zh": "光子晶体能带预览",
+      "natural_language_goal_en": "Prepare a local photonic crystal band-structure preview workflow for MPB, including lattice/material assumptions and no solver execution.",
+      "natural_language_goal_zh": "为 MPB 准备本地光子晶体能带预览工作流，包含晶格和材料假设，不执行求解器。",
+      "optical_intent": "photonic crystal band preview",
+      "physical_system": "photonic_crystal",
+      "required_inputs": [
+        "lattice_type",
+        "period",
+        "material_indices",
+        "num_bands",
+        "k_path"
+      ],
+      "default_assumptions": [
+        "Schematic periodic lattice until geometry is reviewed.",
+        "MPB adapter preview only.",
+        "No convergence proof or solver run."
+      ],
+      "suggested_materials": [
+        "si",
+        "gaas",
+        "sio2",
+        "air"
+      ],
+      "suggested_adapter": "mpb",
+      "expected_calculators": [],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "mpb_adapter_preview",
+        "workflow_plan",
+        "agent_trace"
+      ],
+      "evidence_boundary": "Adapter preview only; no band solver execution or formal convergence proof.",
+      "next_actions": [
+        "Confirm lattice, material contrast, and k-path.",
+        "Inspect MPB preview input before any optional solver execution.",
+        "Add convergence criteria before physical interpretation."
+      ],
+      "design_case_id": "photonic_crystal_band",
+      "optical_language_summary": {
+        "physical_system": "photonic_crystal",
+        "material_system": "Si/GaAs/SiO2/air preview candidates",
+        "geometry_model": "periodic lattice scaffold",
+        "solver_or_adapter_family": "MPB preview path",
+        "calculator_or_tool_path": "/api/adapter-preview and /api/workflow-plan",
+        "evidence_boundary": "Adapter preview only; no band solver execution or formal convergence proof."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    },
+    {
+      "template_id": "dielectric_metasurface_preview",
+      "title": "Dielectric metasurface preview",
+      "title_zh": "介质超表面预览",
+      "natural_language_goal_en": "Create a local preview workflow for a dielectric metasurface unit-cell array, suggest materials and adapters, and keep all outputs preview-only.",
+      "natural_language_goal_zh": "为介质超表面单元阵列创建本地预览工作流，推荐材料和适配器，并保持所有输出为预览。",
+      "optical_intent": "dielectric metasurface preview",
+      "physical_system": "metasurface",
+      "required_inputs": [
+        "target_wavelength_nm",
+        "phase_profile",
+        "period",
+        "meta_atom_geometry",
+        "substrate_material"
+      ],
+      "default_assumptions": [
+        "Unit-cell/array geometry remains schematic.",
+        "Material indices are preview values.",
+        "No FDTD solver execution by default."
+      ],
+      "suggested_materials": [
+        "tio2",
+        "si3n4",
+        "si",
+        "sio2"
+      ],
+      "suggested_adapter": "meep with gmsh geometry preview",
+      "expected_calculators": [],
+      "expected_tool_calls": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate"
+      ],
+      "expected_artifacts": [
+        "requirement_match",
+        "material_suggestions",
+        "meep_gmsh_preview",
+        "agent_trace"
+      ],
+      "evidence_boundary": "Geometry/material preview only; no metasurface efficiency validation.",
+      "next_actions": [
+        "Confirm phase target, period, and meta-atom geometry.",
+        "Inspect material suggestions and adapter preview.",
+        "Add solver validation later only with explicit approval."
+      ],
+      "design_case_id": "dielectric_metasurface_preview",
+      "optical_language_summary": {
+        "physical_system": "metasurface",
+        "material_system": "TiO2/Si3N4/Si/SiO2 preview candidates",
+        "geometry_model": "periodic meta-atom array scaffold",
+        "solver_or_adapter_family": "Meep with Gmsh geometry preview",
+        "calculator_or_tool_path": "/api/adapter-preview and /api/agent-trace",
+        "evidence_boundary": "Geometry/material preview only; no metasurface efficiency validation."
+      },
+      "safety": {
+        "no_solver_by_default": true,
+        "no_external_llm": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    }
+  ],
+  "template_count": 7,
+  "catalog_status": "local_preview_requirement_templates",
+  "recommended_next_actions": [
+    "Use /api/design-requirements/match to map a natural-language goal.",
+    "Inspect expected_tool_calls before running an agent session.",
+    "Keep outputs preview/design-assist and review missing inputs."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

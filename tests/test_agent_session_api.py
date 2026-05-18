@@ -21,8 +21,12 @@ def test_agent_session_api_returns_task_session():
     assert response.status_code == 200
     payload = response.json()
     assert payload["api_contract_version"] == "0.1"
+    assert payload["requirement_template_id"] == "nanoparticle_plasmonics"
     assert payload["optical_intent_summary"]
+    assert payload["optical_language_summary"]["physical_system"] == "nanoparticle_on_film"
     assert payload["selected_example_id"] == "nanoparticle_plasmonics"
+    assert payload["missing_required_inputs"]
+    assert payload["default_assumptions_applied"]
     assert payload["plan_steps"]
     assert payload["artifacts"]
     assert payload["permission_gates"]
@@ -33,6 +37,8 @@ def test_agent_session_api_returns_task_session():
     assert payload["production_grade_validation_claimed"] is False
     assert payload["formal_convergence_proof_claimed"] is False
     ledger = {entry["tool_name"]: entry for entry in payload["tool_call_ledger"]}
+    assert ledger["requirements.match_template"]["executed"] is True
+    assert ledger["requirements.extract_optical_intent"]["executed"] is True
     assert ledger["material_catalog.suggest"]["executed"] is True
     assert ledger["external_solver.meep"]["executed"] is False
     assert ledger["external_llm"]["executed"] is False

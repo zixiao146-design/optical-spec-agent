@@ -1,0 +1,68 @@
+{
+  "template_id": "photonic_crystal_band_preview",
+  "title": "Photonic crystal band preview",
+  "title_zh": "光子晶体能带预览",
+  "natural_language_goal_en": "Prepare a local photonic crystal band-structure preview workflow for MPB, including lattice/material assumptions and no solver execution.",
+  "natural_language_goal_zh": "为 MPB 准备本地光子晶体能带预览工作流，包含晶格和材料假设，不执行求解器。",
+  "optical_intent": "photonic crystal band preview",
+  "physical_system": "photonic_crystal",
+  "required_inputs": [
+    "lattice_type",
+    "period",
+    "material_indices",
+    "num_bands",
+    "k_path"
+  ],
+  "default_assumptions": [
+    "Schematic periodic lattice until geometry is reviewed.",
+    "MPB adapter preview only.",
+    "No convergence proof or solver run."
+  ],
+  "suggested_materials": [
+    "si",
+    "gaas",
+    "sio2",
+    "air"
+  ],
+  "suggested_adapter": "mpb",
+  "expected_calculators": [],
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "mpb_adapter_preview",
+    "workflow_plan",
+    "agent_trace"
+  ],
+  "evidence_boundary": "Adapter preview only; no band solver execution or formal convergence proof.",
+  "next_actions": [
+    "Confirm lattice, material contrast, and k-path.",
+    "Inspect MPB preview input before any optional solver execution.",
+    "Add convergence criteria before physical interpretation."
+  ],
+  "design_case_id": "photonic_crystal_band",
+  "optical_language_summary": {
+    "physical_system": "photonic_crystal",
+    "material_system": "Si/GaAs/SiO2/air preview candidates",
+    "geometry_model": "periodic lattice scaffold",
+    "solver_or_adapter_family": "MPB preview path",
+    "calculator_or_tool_path": "/api/adapter-preview and /api/workflow-plan",
+    "evidence_boundary": "Adapter preview only; no band solver execution or formal convergence proof."
+  },
+  "safety": {
+    "no_solver_by_default": true,
+    "no_external_llm": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

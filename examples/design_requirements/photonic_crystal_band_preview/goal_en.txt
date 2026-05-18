@@ -1,0 +1,1 @@
+Prepare a local photonic crystal band-structure preview workflow for MPB, including lattice/material assumptions and no solver execution.

@@ -1,0 +1,1 @@
+Design a local preview for a single-layer anti-reflection coating on glass at 550 nm, estimate the quarter-wave thickness, and inspect a wavelength sweep without running solvers.

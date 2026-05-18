@@ -70,6 +70,10 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "tool_capabilities_response.json" in response_files
     assert "backend_capability_report_response.json" in response_files
     assert "design_case_cross_checks_response.json" in response_files
+    assert "design_requirements_response.json" in response_files
+    assert "design_requirement_thin_film_response.json" in response_files
+    assert "design_requirement_match_thin_film_response.json" in response_files
+    assert "design_requirement_match_nanoparticle_zh_response.json" in response_files
     assert "thin_film_response.json" in response_files
     assert "thin_film_spectrum_response.json" in response_files
     assert "quarter_wave_ar_response.json" in response_files
@@ -86,6 +90,8 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "material_suggestion_request.json" in request_files
     assert "agent_trace_request_nanoparticle.json" in request_files
     assert "agent_session_request_nanoparticle.json" in request_files
+    assert "design_requirement_match_thin_film_request.json" in request_files
+    assert "design_requirement_match_nanoparticle_zh_request.json" in request_files
     assert "thin_film_request.json" in request_files
     assert "thin_film_spectrum_request.json" in request_files
     assert "quarter_wave_ar_request.json" in request_files
@@ -113,6 +119,10 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "waveguide_single_mode_range_response.json",
         "backend_capability_report_response.json",
         "design_case_cross_checks_response.json",
+        "design_requirements_response.json",
+        "design_requirement_thin_film_response.json",
+        "design_requirement_match_thin_film_response.json",
+        "design_requirement_match_nanoparticle_zh_response.json",
     ]:
         payload = _load_json(API_EXAMPLES / calculator_response)
         if "quality" in payload:

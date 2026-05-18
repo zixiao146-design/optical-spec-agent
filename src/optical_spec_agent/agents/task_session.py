@@ -12,6 +12,10 @@ from optical_spec_agent.examples.registry import (
     build_example_agent_trace,
     get_optical_design_example,
 )
+from optical_spec_agent.examples.requirements import (
+    RequirementMatchResult,
+    match_goal_to_template,
+)
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
@@ -105,9 +109,13 @@ class ToolCallRecord(BaseModel):
 class AgentTaskSession(BaseModel):
     session_id: str
     user_goal: str
+    requirement_template_id: str | None = None
     optical_intent_summary: str
+    optical_language_summary: dict[str, str] = Field(default_factory=dict)
     selected_example_id: str | None = None
     design_case_summary: str
+    missing_required_inputs: list[str] = Field(default_factory=list)
+    default_assumptions_applied: list[str] = Field(default_factory=list)
     plan_steps: list[AgentPlanStep] = Field(default_factory=list)
     agent_trace: AgentTrace
     artifacts: list[AgentArtifact] = Field(default_factory=list)
@@ -146,8 +154,16 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
     if not goal:
         raise ValueError("Agent task session requires a non-empty goal.")
 
-    optical_intent = _detect_optical_intent(goal)
-    selected_example_id = example_id or EXAMPLE_BY_INTENT.get(optical_intent)
+    requirement_match = match_goal_to_template(goal)
+    matched_template = requirement_match.matched_template
+    optical_intent = (
+        matched_template.optical_intent
+        if matched_template is not None
+        else _detect_optical_intent(goal)
+    )
+    selected_example_id = example_id or (
+        matched_template.design_case_id if matched_template is not None else EXAMPLE_BY_INTENT.get(optical_intent)
+    )
     example_detail = None
     if selected_example_id:
         try:
@@ -171,14 +187,22 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
     adapter_recommendation = trace.adapter_recommendation or _adapter_for_intent(optical_intent)
     trace.adapter_recommendation = adapter_recommendation
     session_hash = hashlib.sha1(f"{goal}|{selected_example_id or ''}".encode("utf-8")).hexdigest()[:10]
-    design_case_summary = _design_case_summary(optical_intent, selected_example_id)
+    design_case_summary = _design_case_summary(
+        optical_intent,
+        selected_example_id,
+        requirement_match,
+    )
 
     return AgentTaskSession(
         session_id=f"session-{session_hash}",
         user_goal=goal,
+        requirement_template_id=requirement_match.matched_template_id,
         optical_intent_summary=optical_intent,
+        optical_language_summary=requirement_match.optical_language_summary,
         selected_example_id=selected_example_id,
         design_case_summary=design_case_summary,
+        missing_required_inputs=requirement_match.missing_required_inputs,
+        default_assumptions_applied=requirement_match.default_assumptions,
         plan_steps=_plan_steps(optical_intent, selected_example_id, adapter_recommendation),
         agent_trace=trace,
         artifacts=_artifacts(
@@ -192,6 +216,7 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             optical_intent=optical_intent,
             selected_example_id=selected_example_id,
             adapter_recommendation=adapter_recommendation,
+            requirement_match=requirement_match,
         ),
         final_recommendation=(
             f"Use the local {design_case_summary} path, inspect material candidates "
@@ -213,6 +238,8 @@ def _detect_optical_intent(goal: str) -> str:
     lowered = goal.lower()
     if any(token in lowered for token in ("nanoparticle", "plasmon", "scattering", "纳米", "散射")):
         return "nanoparticle plasmonics / scattering preview"
+    if any(token in lowered for token in ("gaussian", "beam waist", "rayleigh", "高斯光束", "光腰")):
+        return "gaussian beam propagation preview"
     if any(token in lowered for token in ("waveguide", "mode", "波导", "模式")):
         return "waveguide mode preview"
     if any(token in lowered for token in ("thin film", "coating", "膜", "镀膜")):
@@ -223,8 +250,6 @@ def _detect_optical_intent(goal: str) -> str:
         return "dielectric metasurface preview"
     if any(token in lowered for token in ("lens", "ray", "透镜", "光线")):
         return "lens ray tracing preview"
-    if any(token in lowered for token in ("gaussian", "beam waist", "rayleigh", "高斯光束")):
-        return "gaussian beam propagation preview"
     return "general optical design preview"
 
 
@@ -260,7 +285,15 @@ def _adapter_for_intent(intent: str) -> str:
     return "adapter auto-selection preview"
 
 
-def _design_case_summary(intent: str, selected_example_id: str | None) -> str:
+def _design_case_summary(
+    intent: str,
+    selected_example_id: str | None,
+    requirement_match: RequirementMatchResult,
+) -> str:
+    if requirement_match.matched_template is not None:
+        template = requirement_match.matched_template
+        case = selected_example_id or "template-only case"
+        return f"{template.template_id} requirement template -> {case} -> {intent}"
     if selected_example_id:
         return f"{selected_example_id} example-backed {intent}"
     return f"generic {intent}"
@@ -275,24 +308,24 @@ def _plan_steps(
     return [
         AgentPlanStep(
             step_index=1,
-            title="Interpret optical goal",
-            title_zh="理解光学目标",
-            description=f"Translate the natural language goal into {intent}.",
-            description_zh=f"将自然语言目标转换为 {intent}。",
+            title="Natural language -> optical language",
+            title_zh="自然语言 -> 光学语言",
+            description=f"Translate the natural language goal into optical intent: {intent}.",
+            description_zh=f"将自然语言目标转换为光学意图：{intent}。",
             agent_name="SpecAgent",
-            endpoint_or_tool="local heuristic intent detector",
-            expected_output="optical_intent_summary",
+            endpoint_or_tool="requirements.match_template and requirements.extract_optical_intent",
+            expected_output="optical_intent_summary and optical_language_summary",
             safety_note="No external LLM is called by default.",
         ),
         AgentPlanStep(
             step_index=2,
-            title="Select design case",
-            title_zh="选择设计案例",
+            title="Optical language -> design case",
+            title_zh="光学语言 -> 设计案例",
             description=f"Match the goal to {example_note}.",
             description_zh=f"将目标匹配到 {example_note}。",
             agent_name="SpecAgent",
-            endpoint_or_tool="/api/examples",
-            expected_output="selected_example_id and design_case_summary",
+            endpoint_or_tool="/api/design-requirements and /api/examples",
+            expected_output="requirement_template_id, selected_example_id, and design_case_summary",
             safety_note="Examples are local preview cases only.",
         ),
         AgentPlanStep(
@@ -330,13 +363,13 @@ def _plan_steps(
         ),
         AgentPlanStep(
             step_index=6,
-            title="Plan local workflow",
-            title_zh="规划本地工作流",
+            title="Plan local tool calls",
+            title_zh="规划本地工具调用",
             description="Plan parse, validate, preview, evidence, and human review steps.",
             description_zh="规划解析、验证、预览、证据和人工审阅步骤。",
             agent_name="WorkflowAgent",
-            endpoint_or_tool="/api/workflow-plan",
-            expected_output="workflow_plan artifact",
+            endpoint_or_tool="/api/workflow-plan and local optical calculators when applicable",
+            expected_output="workflow_plan artifact and tool_call_ledger",
             safety_note="No solver is executed by default.",
         ),
         AgentPlanStep(
@@ -522,8 +555,45 @@ def _tool_call_ledger(
     optical_intent: str,
     selected_example_id: str | None,
     adapter_recommendation: str,
+    requirement_match: RequirementMatchResult,
 ) -> list[ToolCallRecord]:
     ledger = [
+        ToolCallRecord(
+            call_id="requirements-match-template",
+            tool_name="requirements.match_template",
+            tool_kind="internal_python",
+            called_by_agent="SpecAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Natural-language goal.",
+            output_summary=(
+                f"Matched {requirement_match.matched_template_id} with "
+                f"{requirement_match.confidence} confidence."
+                if requirement_match.matched_template_id
+                else "No template matched; returned generic safe preview guidance."
+            ),
+            reason="The command center starts from deterministic requirement-template matching.",
+            safety_note="No external LLM is called by default.",
+        ),
+        ToolCallRecord(
+            call_id="requirements-extract-optical-intent",
+            tool_name="requirements.extract_optical_intent",
+            tool_kind="internal_python",
+            called_by_agent="SpecAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary=requirement_match.matched_template_id or optical_intent,
+            output_summary=(
+                requirement_match.optical_language_summary.get(
+                    "calculator_or_tool_path",
+                    "Generic optical language summary produced.",
+                )
+            ),
+            reason="The backend exposes the natural language -> optical language step explicitly.",
+            safety_note="Optical language extraction is local heuristic logic, not an external model.",
+        ),
         ToolCallRecord(
             call_id="material-catalog-suggest",
             tool_name="material_catalog.suggest",

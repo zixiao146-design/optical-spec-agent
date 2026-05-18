@@ -217,6 +217,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "backend_capability_report.zh-CN.md",
         "design_case_cross_checks.md",
         "design_case_cross_checks.zh-CN.md",
+        "design_requirement_templates.md",
+        "design_requirement_templates.zh-CN.md",
+        "natural_language_to_optical_language.md",
+        "natural_language_to_optical_language.zh-CN.md",
         "optical_calculators.md",
         "optical_calculators.zh-CN.md",
         "optical_calculator_case_integration.md",
@@ -260,6 +264,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "examples" / "quickstart" / "zh_nanoparticle_prompt.txt").exists()
     assert (ROOT / "examples" / "quickstart" / "zh_quickstart_notes.md").exists()
     assert (ROOT / "examples" / "optics_reference_cases" / "README.md").exists()
+    assert (ROOT / "examples" / "design_requirements" / "thin_film_ar_coating" / "requirement.json").exists()
+    assert (ROOT / "examples" / "design_requirements" / "nanoparticle_plasmonics" / "goal_zh.txt").exists()
     assert (
         ROOT / "examples" / "optics_reference_cases" / "thin_film_single_interface_air_glass.json"
     ).exists()

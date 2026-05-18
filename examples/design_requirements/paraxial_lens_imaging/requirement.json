@@ -1,0 +1,69 @@
+{
+  "template_id": "paraxial_lens_imaging",
+  "title": "Paraxial lens imaging preview",
+  "title_zh": "近轴透镜成像预览",
+  "natural_language_goal_en": "Preview a simple lens imaging or two-lens relay design using ABCD matrices, then produce a local ray-optics workflow without running Optiland.",
+  "natural_language_goal_zh": "使用 ABCD 矩阵预览简单透镜成像或双透镜中继设计，然后生成本地光线光学工作流，不运行 Optiland。",
+  "optical_intent": "lens ray tracing preview",
+  "physical_system": "paraxial_lens_system",
+  "required_inputs": [
+    "focal_length_mm",
+    "object_distance_mm",
+    "lens_separation_mm optional",
+    "wavelength optional"
+  ],
+  "default_assumptions": [
+    "Ideal thin lenses.",
+    "First-order paraxial model.",
+    "No aberration, aperture stop, or material dispersion model."
+  ],
+  "suggested_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview",
+    "air"
+  ],
+  "suggested_adapter": "optiland",
+  "expected_calculators": [
+    "optics.paraxial.two_lens_relay"
+  ],
+  "expected_tool_calls": [
+    "requirements.match_template",
+    "requirements.extract_optical_intent",
+    "material_catalog.suggest",
+    "example_registry.load",
+    "agent_trace.build",
+    "workflow_plan.preview",
+    "adapter_preview.generate",
+    "optics.paraxial.two_lens_relay"
+  ],
+  "expected_artifacts": [
+    "requirement_match",
+    "paraxial_system",
+    "two_lens_relay",
+    "adapter_preview"
+  ],
+  "evidence_boundary": "First-order paraxial preview only; not ray-trace validation.",
+  "next_actions": [
+    "Confirm focal length, object distance, and lens sequence.",
+    "Inspect paraxial image distance/magnification before adapter preview.",
+    "Use validated ray tracing later if aberrations or tolerances matter."
+  ],
+  "design_case_id": "lens_raytrace_preview",
+  "optical_language_summary": {
+    "physical_system": "paraxial_lens_system",
+    "material_system": "preview glass candidates plus air",
+    "geometry_model": "ideal thin-lens / ABCD system",
+    "solver_or_adapter_family": "Optiland preview path",
+    "calculator_or_tool_path": "/api/optics/paraxial-lens and /api/optics/two-lens-relay",
+    "evidence_boundary": "First-order paraxial preview only; not ray-trace validation."
+  },
+  "safety": {
+    "no_solver_by_default": true,
+    "no_external_llm": true,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

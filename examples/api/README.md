@@ -55,6 +55,12 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `tool_capabilities_response.json`
 - `backend_capability_report_response.json`
 - `design_case_cross_checks_response.json`
+- `design_requirements_response.json`
+- `design_requirement_thin_film_response.json`
+- `design_requirement_match_thin_film_request.json`
+- `design_requirement_match_thin_film_response.json`
+- `design_requirement_match_nanoparticle_zh_request.json`
+- `design_requirement_match_nanoparticle_zh_response.json`
 - `thin_film_request.json`
 - `thin_film_response.json`
 - `thin_film_spectrum_request.json`
@@ -93,7 +99,9 @@ Calculator fixtures include `quality`, `warnings`, `assumptions`, and
 `limitations` fields; `quality.quality_level` is `sanity_checked_preview`.
 Backend capability report fixtures show package status, sub-agent execution,
 internal tool calls, calculator reference-case status, design-case cross-checks,
-and blocked external actions.
+design requirement template status, and blocked external actions. Design
+requirement fixtures show deterministic natural-language goal matching and the
+resulting optical language summary without external LLM calls.
 They preserve the same no-solver, no-external-LLM, no-upload, no-tag, and
 no-release boundaries.
 

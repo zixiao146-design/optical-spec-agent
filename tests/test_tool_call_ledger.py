@@ -13,6 +13,8 @@ def test_agent_session_includes_tool_call_ledger():
     ledger = {entry.tool_name: entry for entry in session.tool_call_ledger}
 
     for internal in [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
         "material_catalog.suggest",
         "example_registry.load",
         "agent_trace.build",
