@@ -1,0 +1,79 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": [
+        "Use MPB/Elmer or another validated mode solver for physical conclusions."
+      ]
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "result": {
+    "samples": [
+      {
+        "core_thickness_um": 0.1,
+        "v_number": 0.5626280820228255,
+        "single_mode_likely": true
+      },
+      {
+        "core_thickness_um": 0.2,
+        "v_number": 1.125256164045651,
+        "single_mode_likely": true
+      },
+      {
+        "core_thickness_um": 0.30000000000000004,
+        "v_number": 1.6878842460684766,
+        "single_mode_likely": true
+      },
+      {
+        "core_thickness_um": 0.4,
+        "v_number": 2.250512328091302,
+        "single_mode_likely": true
+      },
+      {
+        "core_thickness_um": 0.5,
+        "v_number": 2.8131404101141277,
+        "single_mode_likely": true
+      },
+      {
+        "core_thickness_um": 0.6,
+        "v_number": 3.3757684921369533,
+        "single_mode_likely": false
+      }
+    ],
+    "sample_count": 6,
+    "single_mode_sample_count": 5,
+    "core_n": 2.0,
+    "cladding_n": 1.44,
+    "wavelength_nm": 1550.0,
+    "summary": "Waveguide preview sampled 6 thickness values; 5 are single-mode likely by scalar V-number."
+  },
+  "assumptions": [
+    "Symmetric slab-waveguide scalar V-number sweep.",
+    "Single-mode likely means V < pi in this preview convention.",
+    "Does not solve vector modes or account for ridge/asymmetric effects."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ]
+}

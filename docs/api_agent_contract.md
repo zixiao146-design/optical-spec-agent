@@ -151,17 +151,28 @@ endpoint:
 - `POST /api/agent-session`
 - `GET /api/tool-capabilities`
 - `POST /api/optics/thin-film`
+- `POST /api/optics/thin-film-spectrum`
+- `POST /api/optics/quarter-wave-ar`
 - `POST /api/optics/paraxial-lens`
+- `POST /api/optics/paraxial-system`
+- `POST /api/optics/two-lens-relay`
 - `POST /api/optics/gaussian-beam`
+- `POST /api/optics/gaussian-beam-series`
+- `POST /api/optics/gaussian-beam-focus`
 - `POST /api/optics/waveguide-estimate`
+- `POST /api/optics/waveguide-sweep`
+- `POST /api/optics/waveguide-single-mode-range`
 
 This endpoint turns a natural language optical design goal into a
 deterministic local Agent Task Session: optical intent, selected design case, material
 suggestions, adapter recommendation, workflow plan steps, artifacts, evidence,
 permission gates, a tool-call ledger, and recommended next actions. It reuses
 the local material catalog, local example registry, deterministic sub-agent
-trace, and preview optical calculators when applicable. `/api/tool-capabilities`
-reports internal tools, external solver availability detection, and disabled
+trace, and preview optical calculators when applicable. Calculator-backed cases
+now include thin-film spectrum and quarter-wave AR previews, Gaussian beam
+series/focus previews, paraxial system and two-lens relay previews, and
+waveguide sweep/single-mode range previews. `/api/tool-capabilities` reports
+internal tools, external solver availability detection, and disabled
 publication/release controls without executing external tools. The optics
 endpoints provide preview/design-assist calculations only. These endpoints do
 not call an external LLM, do not execute a solver, do not access the network,

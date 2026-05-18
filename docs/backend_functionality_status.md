@@ -16,9 +16,25 @@ block.
 | Agent task session builder | yes | yes | yes |
 | Tool-call ledger | yes | yes | yes |
 | Thin-film preview calculator | yes | yes | yes |
+| Thin-film spectrum / quarter-wave AR helper | yes | yes | yes |
 | Paraxial lens preview calculator | yes | yes | yes |
+| Paraxial system / two-lens relay helper | yes | yes | yes |
 | Gaussian beam preview calculator | yes | yes | yes |
+| Gaussian beam series / focus helper | yes | yes | yes |
 | Waveguide V-number preview calculator | yes | yes | yes |
+| Waveguide sweep / single-mode range helper | yes | yes | yes |
+
+## Case Integration
+
+Agent task sessions now attach calculator result summaries where applicable:
+
+- `thin_film_coating` records thin-film spectrum and quarter-wave AR helpers.
+- `waveguide_mode` records waveguide V-number sweep and single-mode range helpers.
+- `lens_raytrace_preview` records a paraxial two-lens relay helper.
+- Gaussian beam goals record propagation series and thin-lens focus helpers.
+
+These calls are internal Python design-assist calculations and are recorded in
+`tool_call_ledger`; external solvers remain unexecuted.
 
 ## Sub-agent Reality
 
@@ -57,4 +73,3 @@ Both scripts are local-only and print:
 - NO UPLOAD PERFORMED
 - NO TAG CREATED
 - NO RELEASE CREATED
-

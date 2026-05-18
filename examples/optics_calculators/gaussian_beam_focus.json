@@ -1,0 +1,20 @@
+{
+  "calculator": "gaussian_beam_focus",
+  "endpoint": "/api/optics/gaussian-beam-focus",
+  "description": "Preview thin-lens Gaussian focus estimate.",
+  "request": {
+    "wavelength_nm": 1064.0,
+    "input_waist_um": 1000.0,
+    "focal_length_mm": 50.0
+  },
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Collimated Gaussian at a thin lens.",
+    "No aberration or aperture clipping."
+  ]
+}

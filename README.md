@@ -80,8 +80,13 @@ The backend now also records a
 [`backend functionality status`](docs/backend_functionality_status.md), and
 local preview [`optical calculators`](docs/optical_calculators.md) for
 thin-film stacks, paraxial lenses, Gaussian beams, and waveguide V-number
-estimates. These calculators are design-assist previews only; they do not run
-external solvers, call external LLMs, or claim production-grade validation.
+estimates. The calculator layer now includes case-oriented helpers for thin-film
+spectra, quarter-wave AR coatings, Gaussian beam series/focus estimates,
+paraxial systems and two-lens relays, and waveguide sweeps/single-mode range
+estimates; see
+[`optical calculator case integration`](docs/optical_calculator_case_integration.md).
+These calculators are design-assist previews only; they do not run external
+solvers, call external LLMs, or claim production-grade validation.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

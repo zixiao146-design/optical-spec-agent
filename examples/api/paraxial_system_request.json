@@ -1,0 +1,12 @@
+{
+  "elements": [
+    {
+      "type": "free_space",
+      "distance_mm": 25.0
+    },
+    {
+      "type": "thin_lens",
+      "focal_length_mm": 50.0
+    }
+  ]
+}

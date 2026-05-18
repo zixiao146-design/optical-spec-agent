@@ -28,6 +28,27 @@ class CalculatorResult(CalculatorSafety):
     )
 
 
+class SpectrumSample(BaseModel):
+    wavelength_nm: float
+    reflectance: float | None = None
+    transmittance: float | None = None
+    absorptance_estimate: float | None = None
+
+
+class SweepSample(BaseModel):
+    parameter_value: float
+    parameter_name: str
+    result: dict[str, Any] = Field(default_factory=dict)
+
+
+class CalculatorSummary(BaseModel):
+    title: str
+    summary: str
+    key_values: dict[str, Any] = Field(default_factory=dict)
+    assumptions: list[str] = Field(default_factory=list)
+    diagnostics: list[str] = Field(default_factory=list)
+
+
 class ThinFilmLayer(BaseModel):
     n: float
     thickness_nm: float

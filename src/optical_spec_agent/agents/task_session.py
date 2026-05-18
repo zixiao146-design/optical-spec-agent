@@ -13,6 +13,17 @@ from optical_spec_agent.examples.registry import (
     get_optical_design_example,
 )
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
+from optical_spec_agent.optics import (
+    analyze_two_lens_relay,
+    calculate_thin_film_spectrum,
+    design_quarter_wave_ar_coating,
+    focus_gaussian_beam_thin_lens,
+    propagate_gaussian_beam_series,
+    slab_waveguide_sweep,
+    suggest_single_mode_thickness_range,
+    summarize_paraxial_system,
+    summarize_thin_film_result,
+)
 
 from .models import AgentTrace
 from .orchestrator import build_agent_trace
@@ -36,6 +47,7 @@ ArtifactType = Literal[
     "workflow_plan",
     "adapter_preview",
     "agent_trace",
+    "calculator_result",
     "material_suggestions",
     "evidence",
 ]
@@ -184,7 +196,8 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         final_recommendation=(
             f"Use the local {design_case_summary} path, inspect material candidates "
             f"{', '.join(trace.material_suggestions) or 'from the material catalog'}, "
-            f"then generate a workflow plan and adapter preview via {adapter_recommendation}."
+            f"then review any calculator preview, workflow plan, and adapter preview via "
+            f"{adapter_recommendation}. Calculator outputs are design-assist only."
         ),
         recommended_next_actions=[
             "Review the optical intent and selected design case.",
@@ -363,7 +376,7 @@ def _artifacts(
         if selected_example_id
         else "generated local preview spec summary"
     )
-    return [
+    artifacts = [
         AgentArtifact(
             artifact_id="spec-preview",
             label="Spec preview",
@@ -420,6 +433,88 @@ def _artifacts(
             generated_by_agent="EvidenceAgent",
         ),
     ]
+    calculator_summary = _calculator_artifact_summary(optical_intent)
+    if calculator_summary is not None:
+        artifacts.append(
+            AgentArtifact(
+                artifact_id="calculator-preview",
+                label="Calculator preview",
+                label_zh="计算器预览",
+                artifact_type="calculator_result",
+                summary=calculator_summary["summary"],
+                preview_content=str(calculator_summary),
+                source_endpoint=calculator_summary["source_endpoint"],
+                generated_by_agent="WorkflowAgent",
+            )
+        )
+    return artifacts
+
+
+def _calculator_artifact_summary(optical_intent: str) -> dict[str, str] | None:
+    if "thin film" in optical_intent:
+        spectrum = calculate_thin_film_spectrum(
+            [{"n": 1.38, "thickness_nm": 100.0}],
+            450.0,
+            700.0,
+            6,
+            incident_n=1.0,
+            substrate_n=1.5,
+        )
+        ar = design_quarter_wave_ar_coating(substrate_n=1.5, target_wavelength_nm=550.0)
+        return {
+            "summary": (
+                f"{summarize_thin_film_result(spectrum)['summary']} "
+                f"{summarize_thin_film_result(ar)['summary']}"
+            ),
+            "source_endpoint": "/api/optics/thin-film-spectrum and /api/optics/quarter-wave-ar",
+        }
+    if "lens" in optical_intent:
+        relay = analyze_two_lens_relay(
+            f1_mm=50.0,
+            f2_mm=100.0,
+            separation_mm=150.0,
+            object_distance_mm=100.0,
+        )
+        return {
+            "summary": str(summarize_paraxial_system(relay)["summary"]),
+            "source_endpoint": "/api/optics/two-lens-relay",
+        }
+    if "waveguide" in optical_intent:
+        sweep = slab_waveguide_sweep(
+            core_n=2.0,
+            cladding_n=1.44,
+            wavelength_nm=1550.0,
+            thickness_start_um=0.1,
+            thickness_stop_um=0.6,
+            points=6,
+        )
+        single_mode = suggest_single_mode_thickness_range(
+            core_n=2.0,
+            cladding_n=1.44,
+            wavelength_nm=1550.0,
+        )
+        return {
+            "summary": f"{sweep.result['summary']} {single_mode.result['summary']}",
+            "source_endpoint": "/api/optics/waveguide-sweep and /api/optics/waveguide-single-mode-range",
+        }
+    if "gaussian" in optical_intent.lower():
+        series = propagate_gaussian_beam_series(
+            wavelength_nm=1064.0,
+            waist_um=10.0,
+            z_start_mm=0.0,
+            z_stop_mm=10.0,
+            points=5,
+        )
+        focus = focus_gaussian_beam_thin_lens(
+            wavelength_nm=1064.0,
+            input_waist_um=1000.0,
+            focal_length_mm=50.0,
+        )
+        return {
+            "summary": f"{series.result['summary']} {focus.result['summary']}",
+            "source_endpoint": "/api/optics/gaussian-beam-series and /api/optics/gaussian-beam-focus",
+        }
+    return None
 
 
 def _tool_call_ledger(
@@ -509,57 +604,57 @@ def _tool_call_ledger(
 def _calculator_tool_call(optical_intent: str) -> ToolCallRecord | None:
     if "thin film" in optical_intent:
         return ToolCallRecord(
-            call_id="optics-thin-film-calculate",
-            tool_name="optics.thin_film.calculate",
+            call_id="optics-thin-film-spectrum",
+            tool_name="optics.thin_film.spectrum",
             tool_kind="internal_python",
             called_by_agent="WorkflowAgent",
             executed=True,
             default_allowed=True,
             status="executed",
             input_summary="Thin-film/coating intent detected.",
-            output_summary="Prepared preview transfer-matrix estimate for coating review.",
-            reason="Thin-film stack estimates are deterministic local design-assist tools.",
+            output_summary="Prepared wavelength-sweep and quarter-wave AR preview calculations.",
+            reason="Thin-film spectrum and AR helper are deterministic local design-assist tools.",
             safety_note="Calculator output is preview/design-assist, not production validation.",
         )
     if "lens" in optical_intent:
         return ToolCallRecord(
-            call_id="optics-paraxial-thin-lens",
-            tool_name="optics.paraxial.thin_lens",
+            call_id="optics-paraxial-two-lens-relay",
+            tool_name="optics.paraxial.two_lens_relay",
             tool_kind="internal_python",
             called_by_agent="WorkflowAgent",
             executed=True,
             default_allowed=True,
             status="executed",
             input_summary="Lens/ray optics intent detected.",
-            output_summary="Prepared thin-lens/paraxial preview estimate.",
+            output_summary="Prepared two-lens relay and paraxial system preview estimate.",
             reason="Paraxial estimates are deterministic local design-assist tools.",
             safety_note="Paraxial preview is not full ray-trace validation.",
         )
     if "waveguide" in optical_intent:
         return ToolCallRecord(
-            call_id="optics-waveguide-v-number",
-            tool_name="optics.waveguide.v_number",
+            call_id="optics-waveguide-sweep",
+            tool_name="optics.waveguide.sweep",
             tool_kind="internal_python",
             called_by_agent="WorkflowAgent",
             executed=True,
             default_allowed=True,
             status="executed",
             input_summary="Waveguide intent detected.",
-            output_summary="Prepared slab waveguide V-number preview estimate.",
+            output_summary="Prepared slab waveguide V-number sweep and single-mode range preview.",
             reason="V-number estimates provide local design orientation before solver setup.",
             safety_note="Waveguide estimate is not a mode-solver result.",
         )
     if "gaussian" in optical_intent.lower():
         return ToolCallRecord(
-            call_id="optics-gaussian-beam-propagate",
-            tool_name="optics.gaussian_beam.propagate",
+            call_id="optics-gaussian-beam-series",
+            tool_name="optics.gaussian_beam.series",
             tool_kind="internal_python",
             called_by_agent="WorkflowAgent",
             executed=True,
             default_allowed=True,
             status="executed",
             input_summary="Gaussian beam intent detected.",
-            output_summary="Prepared Gaussian beam propagation preview estimate.",
+            output_summary="Prepared Gaussian beam series and thin-lens focus preview estimates.",
             reason="Gaussian beam formulas provide local design-assist calculations.",
             safety_note="Gaussian beam output is paraxial preview only.",
         )

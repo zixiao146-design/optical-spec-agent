@@ -29,9 +29,17 @@ Agent 命令中心是 Agent Studio 中面向任务的本地光学设计入口。
 - `POST /api/materials/suggest`
 - `GET /api/tool-capabilities`
 - `POST /api/optics/thin-film`
+- `POST /api/optics/thin-film-spectrum`
+- `POST /api/optics/quarter-wave-ar`
 - `POST /api/optics/paraxial-lens`
+- `POST /api/optics/paraxial-system`
+- `POST /api/optics/two-lens-relay`
 - `POST /api/optics/gaussian-beam`
+- `POST /api/optics/gaussian-beam-series`
+- `POST /api/optics/gaussian-beam-focus`
 - `POST /api/optics/waveguide-estimate`
+- `POST /api/optics/waveguide-sweep`
+- `POST /api/optics/waveguide-single-mode-range`
 - `POST /api/workflow-plan`
 - `POST /api/adapter-preview`
 - `GET /api/validation-evidence`
@@ -59,6 +67,11 @@ tool-call ledger 会记录真实本地 Python 调用，例如
 `material_catalog.suggest`、`example_registry.load`、`agent_trace.build`、
 `workflow_plan.preview`、`adapter_preview.generate` 和适用的 `optics.*`
 预览计算器；同时记录被阻断的外部求解器、LLM、上传、tag 和 release 动作。
+
+案例级计算器集成现在会记录更具体的 design-assist 调用：薄膜镀膜会记录光谱扫描和
+四分之一波长 AR helper，波导案例会记录 V-number 厚度扫描和单模范围 helper，
+透镜案例会记录双透镜 relay helper，高斯光束目标会记录传播序列和聚焦 helper。
+这些都只是内部 Python 预览计算。
 
 ## 权限门控
 

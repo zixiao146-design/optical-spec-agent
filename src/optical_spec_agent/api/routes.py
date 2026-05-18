@@ -32,11 +32,14 @@ from optical_spec_agent.api.models import (
     MaterialSuggestionResponse,
     MaterialsResponse,
     OpticalCalculatorResponse,
+    ParaxialSystemRequest,
     ParaxialLensRequest,
+    QuarterWaveARRequest,
     ParseRequest as AgentParseRequest,
     ParseResponse as AgentParseResponse,
     ReadinessResponse,
     SchemaResponse,
+    ThinFilmSpectrumRequest,
     ThinFilmCalculatorRequest,
     ToolCapabilitiesResponse,
     ToolCapabilityItem,
@@ -45,8 +48,13 @@ from optical_spec_agent.api.models import (
     ValidationEvidenceItem,
     ValidationEvidenceResponse,
     VersionResponse,
+    GaussianBeamFocusRequest,
     GaussianBeamRequest,
+    GaussianBeamSeriesRequest,
+    TwoLensRelayRequest,
+    WaveguideSingleModeRangeRequest,
     WaveguideEstimateRequest,
+    WaveguideSweepRequest,
     WorkflowPlanRequest as AgentWorkflowPlanRequest,
     WorkflowPlanResponse,
 )
@@ -71,11 +79,19 @@ from optical_spec_agent.materials.catalog import (
 )
 from optical_spec_agent.models.spec import OpticalSpec
 from optical_spec_agent.optics import (
+    analyze_two_lens_relay,
+    calculate_thin_film_spectrum,
     calculate_thin_film_stack,
+    compose_abcd,
+    design_quarter_wave_ar_coating,
+    focus_gaussian_beam_thin_lens,
     gaussian_beam_parameters,
     propagate_gaussian_beam,
+    propagate_gaussian_beam_series,
+    slab_waveguide_sweep,
     thin_lens,
     slab_waveguide_v_number,
+    suggest_single_mode_thickness_range,
 )
 from optical_spec_agent.services.spec_service import SpecService
 from optical_spec_agent.utils.format import spec_to_summary
@@ -703,6 +719,58 @@ def agent_optics_thin_film(req: ThinFilmCalculatorRequest):
 
 
 @router.post(
+    "/api/optics/thin-film-spectrum",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_thin_film_spectrum(req: ThinFilmSpectrumRequest):
+    try:
+        result = calculate_thin_film_spectrum(
+            req.layers,
+            req.wavelength_start_nm,
+            req.wavelength_stop_nm,
+            req.points,
+            incident_n=req.incident_n,
+            substrate_n=req.substrate_n,
+            incidence_angle_deg=req.incidence_angle_deg,
+            polarization=req.polarization,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/quarter-wave-ar",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_quarter_wave_ar(req: QuarterWaveARRequest):
+    try:
+        result = design_quarter_wave_ar_coating(
+            req.substrate_n,
+            req.target_wavelength_nm,
+            incident_n=req.incident_n,
+            coating_n=req.coating_n,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
     "/api/optics/paraxial-lens",
     response_model=OpticalCalculatorResponse,
     responses=API_ERROR_RESPONSES,
@@ -710,6 +778,49 @@ def agent_optics_thin_film(req: ThinFilmCalculatorRequest):
 def agent_optics_paraxial_lens(req: ParaxialLensRequest):
     try:
         result = thin_lens(req.focal_length_mm, req.object_distance_mm)
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/paraxial-system",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_paraxial_system(req: ParaxialSystemRequest):
+    try:
+        result = compose_abcd(req.elements)
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/two-lens-relay",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_two_lens_relay(req: TwoLensRelayRequest):
+    try:
+        result = analyze_two_lens_relay(
+            req.f1_mm,
+            req.f2_mm,
+            req.separation_mm,
+            req.object_distance_mm,
+        )
     except Exception as exc:  # noqa: BLE001
         return _agent_error_response(
             AgentApiError(
@@ -744,6 +855,54 @@ def agent_optics_gaussian_beam(req: GaussianBeamRequest):
 
 
 @router.post(
+    "/api/optics/gaussian-beam-series",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_gaussian_beam_series(req: GaussianBeamSeriesRequest):
+    try:
+        result = propagate_gaussian_beam_series(
+            req.wavelength_nm,
+            req.waist_um,
+            req.z_start_mm,
+            req.z_stop_mm,
+            req.points,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/gaussian-beam-focus",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_gaussian_beam_focus(req: GaussianBeamFocusRequest):
+    try:
+        result = focus_gaussian_beam_thin_lens(
+            req.wavelength_nm,
+            req.input_waist_um,
+            req.focal_length_mm,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
     "/api/optics/waveguide-estimate",
     response_model=OpticalCalculatorResponse,
     responses=API_ERROR_RESPONSES,
@@ -754,6 +913,55 @@ def agent_optics_waveguide_estimate(req: WaveguideEstimateRequest):
             req.core_n,
             req.cladding_n,
             req.core_thickness_um,
+            req.wavelength_nm,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/waveguide-sweep",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_waveguide_sweep(req: WaveguideSweepRequest):
+    try:
+        result = slab_waveguide_sweep(
+            req.core_n,
+            req.cladding_n,
+            req.wavelength_nm,
+            req.thickness_start_um,
+            req.thickness_stop_um,
+            req.points,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/waveguide-single-mode-range",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_waveguide_single_mode_range(req: WaveguideSingleModeRangeRequest):
+    try:
+        result = suggest_single_mode_thickness_range(
+            req.core_n,
+            req.cladding_n,
             req.wavelength_nm,
         )
     except Exception as exc:  # noqa: BLE001

@@ -1,7 +1,19 @@
 {
   "example_id": "waveguide_mode",
-  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "expected_agents": [
+    "SpecAgent",
+    "MaterialAgent",
+    "GeometryAgent",
+    "AdapterAgent",
+    "WorkflowAgent",
+    "EvidenceAgent",
+    "SafetyAgent",
+    "RecommendationAgent"
+  ],
   "material_agent": "Suggest Si, SiO2, and Si3N4 for waveguide preview.",
   "adapter_agent": "Recommend MPB or Elmer preview while keeping Elmer Level 3 deferred.",
-  "safety_agent": "No solver execution and no production-grade validation claim."
+  "safety_agent": "No solver execution and no production-grade validation claim.",
+  "workflow_agent": "Execute local slab waveguide V-number sweep and single-mode range design-assist calculators.",
+  "calculator_tool_call": "optics.waveguide.sweep",
+  "calculator_endpoint": "/api/optics/waveguide-sweep and /api/optics/waveguide-single-mode-range"
 }

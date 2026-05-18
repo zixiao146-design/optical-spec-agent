@@ -31,9 +31,17 @@ def test_smoke_agent_api_script_exists_and_does_not_publish_or_release():
         "/api/readiness",
         "/api/tool-capabilities",
         "/api/optics/thin-film",
+        "/api/optics/thin-film-spectrum",
+        "/api/optics/quarter-wave-ar",
         "/api/optics/paraxial-lens",
+        "/api/optics/paraxial-system",
+        "/api/optics/two-lens-relay",
         "/api/optics/gaussian-beam",
+        "/api/optics/gaussian-beam-series",
+        "/api/optics/gaussian-beam-focus",
         "/api/optics/waveguide-estimate",
+        "/api/optics/waveguide-sweep",
+        "/api/optics/waveguide-single-mode-range",
     ]:
         assert phrase in text
     lowered = text.lower()

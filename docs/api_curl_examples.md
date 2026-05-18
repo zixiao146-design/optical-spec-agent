@@ -104,15 +104,39 @@ curl http://127.0.0.1:8000/api/tool-capabilities
 curl -X POST http://127.0.0.1:8000/api/optics/thin-film \
   -H "Content-Type: application/json" \
   --data @examples/api/thin_film_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/thin-film-spectrum \
+  -H "Content-Type: application/json" \
+  --data @examples/api/thin_film_spectrum_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/quarter-wave-ar \
+  -H "Content-Type: application/json" \
+  --data @examples/api/quarter_wave_ar_request.json
 curl -X POST http://127.0.0.1:8000/api/optics/paraxial-lens \
   -H "Content-Type: application/json" \
   --data @examples/api/paraxial_lens_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/paraxial-system \
+  -H "Content-Type: application/json" \
+  --data @examples/api/paraxial_system_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/two-lens-relay \
+  -H "Content-Type: application/json" \
+  --data @examples/api/two_lens_relay_request.json
 curl -X POST http://127.0.0.1:8000/api/optics/gaussian-beam \
   -H "Content-Type: application/json" \
   --data @examples/api/gaussian_beam_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/gaussian-beam-series \
+  -H "Content-Type: application/json" \
+  --data @examples/api/gaussian_beam_series_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/gaussian-beam-focus \
+  -H "Content-Type: application/json" \
+  --data @examples/api/gaussian_beam_focus_request.json
 curl -X POST http://127.0.0.1:8000/api/optics/waveguide-estimate \
   -H "Content-Type: application/json" \
   --data @examples/api/waveguide_estimate_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/waveguide-sweep \
+  -H "Content-Type: application/json" \
+  --data @examples/api/waveguide_sweep_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/waveguide-single-mode-range \
+  -H "Content-Type: application/json" \
+  --data @examples/api/waveguide_single_mode_range_request.json
 ```
 
 The Example Gallery and material examples use local repo files and the local

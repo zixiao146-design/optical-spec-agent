@@ -29,9 +29,17 @@ The command center uses:
 - `POST /api/materials/suggest`
 - `GET /api/tool-capabilities`
 - `POST /api/optics/thin-film`
+- `POST /api/optics/thin-film-spectrum`
+- `POST /api/optics/quarter-wave-ar`
 - `POST /api/optics/paraxial-lens`
+- `POST /api/optics/paraxial-system`
+- `POST /api/optics/two-lens-relay`
 - `POST /api/optics/gaussian-beam`
+- `POST /api/optics/gaussian-beam-series`
+- `POST /api/optics/gaussian-beam-focus`
 - `POST /api/optics/waveguide-estimate`
+- `POST /api/optics/waveguide-sweep`
+- `POST /api/optics/waveguide-single-mode-range`
 - `POST /api/workflow-plan`
 - `POST /api/adapter-preview`
 - `GET /api/validation-evidence`
@@ -60,6 +68,12 @@ The tool-call ledger records actual local Python calls such as
 `workflow_plan.preview`, `adapter_preview.generate`, and applicable
 `optics.*` preview calculators. It also records blocked external solver, LLM,
 upload, tag, and release actions.
+
+Case-level calculator integration now records richer design-assist calls:
+thin-film coating sessions include spectrum and quarter-wave AR helpers,
+waveguide sessions include V-number sweep and single-mode range helpers,
+lens sessions include a two-lens relay helper, and Gaussian beam goals include
+series/focus helpers. These are internal Python previews only.
 
 ## Permission Gates
 

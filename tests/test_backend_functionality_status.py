@@ -18,9 +18,10 @@ def test_backend_functionality_status_records_reality_and_boundaries():
         "Agent task session builder",
         "Tool-call ledger",
         "Thin-film preview calculator",
+        "Thin-film spectrum / quarter-wave AR helper",
+        "Case Integration",
         "External solvers are not run by default",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",
     ]:
         assert phrase in text
-

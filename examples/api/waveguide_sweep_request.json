@@ -1,0 +1,8 @@
+{
+  "core_n": 2.0,
+  "cladding_n": 1.44,
+  "wavelength_nm": 1550.0,
+  "thickness_start_um": 0.1,
+  "thickness_stop_um": 0.6,
+  "points": 6
+}

@@ -11,7 +11,13 @@ These local JSON fixtures exercise preview/design-assist calculators only.
 ## Fixtures
 
 - `thin_film_ar_coating.json`: simple anti-reflection coating preview.
+- `thin_film_spectrum_ar_coating.json`: wavelength sweep for an AR coating preview.
+- `quarter_wave_ar_design.json`: single-layer quarter-wave AR helper.
 - `paraxial_lens_imaging.json`: thin-lens imaging preview.
+- `paraxial_two_lens_relay.json`: two-lens relay preview.
 - `gaussian_beam_propagation.json`: Gaussian beam propagation preview.
+- `gaussian_beam_series.json`: Gaussian beam propagation series preview.
+- `gaussian_beam_focus.json`: thin-lens Gaussian focus preview.
 - `slab_waveguide_v_number.json`: slab waveguide V-number preview.
-
+- `waveguide_sweep.json`: V-number sweep over core thickness.
+- `waveguide_single_mode_range.json`: scalar single-mode thickness range helper.

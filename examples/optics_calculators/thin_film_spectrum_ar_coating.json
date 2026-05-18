@@ -1,0 +1,29 @@
+{
+  "calculator": "thin_film_spectrum",
+  "endpoint": "/api/optics/thin-film-spectrum",
+  "description": "Preview AR coating reflectance spectrum over a wavelength band.",
+  "request": {
+    "incident_n": 1.0,
+    "substrate_n": 1.5,
+    "wavelength_start_nm": 450.0,
+    "wavelength_stop_nm": 700.0,
+    "points": 6,
+    "layers": [
+      {
+        "n": 1.38,
+        "k": 0.0,
+        "thickness_nm": 100.0
+      }
+    ]
+  },
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Normal-incidence transfer matrix preview.",
+    "No material dispersion unless caller supplies wavelength-dependent n/k."
+  ]
+}

@@ -41,7 +41,7 @@ Hardened frontend demo checks are documented in
 | example collaboration | `POST /api/examples/{example_id}/agent-trace` | API-first | Builds an Agent Trace Timeline for a bundled example. |
 | command-center task session | `POST /api/agent-session` | API-first | Natural language goal to optical intent, design case, plan, artifacts, permission gates, tool-call ledger, evidence, and next actions. |
 | backend tool capabilities | `GET /api/tool-capabilities` | API-first | Reports internal tools, external solver detection, and disabled publication/release controls without executing solvers. |
-| optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/paraxial-lens`, `POST /api/optics/gaussian-beam`, `POST /api/optics/waveguide-estimate` | API-first | Local preview/design-assist calculators; no production-grade validation claim. |
+| optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/thin-film-spectrum`, `POST /api/optics/quarter-wave-ar`, `POST /api/optics/paraxial-lens`, `POST /api/optics/paraxial-system`, `POST /api/optics/two-lens-relay`, `POST /api/optics/gaussian-beam`, `POST /api/optics/gaussian-beam-series`, `POST /api/optics/gaussian-beam-focus`, `POST /api/optics/waveguide-estimate`, `POST /api/optics/waveguide-sweep`, `POST /api/optics/waveguide-single-mode-range` | API-first | Local preview/design-assist calculators with sweeps and case helpers; no production-grade validation claim. |
 
 ## Shared boundaries
 

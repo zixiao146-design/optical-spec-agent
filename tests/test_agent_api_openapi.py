@@ -33,9 +33,17 @@ def test_agent_api_openapi_includes_agent_endpoints():
         "/api/agent-session",
         "/api/tool-capabilities",
         "/api/optics/thin-film",
+        "/api/optics/thin-film-spectrum",
+        "/api/optics/quarter-wave-ar",
         "/api/optics/paraxial-lens",
+        "/api/optics/paraxial-system",
+        "/api/optics/two-lens-relay",
         "/api/optics/gaussian-beam",
+        "/api/optics/gaussian-beam-series",
+        "/api/optics/gaussian-beam-focus",
         "/api/optics/waveguide-estimate",
+        "/api/optics/waveguide-sweep",
+        "/api/optics/waveguide-single-mode-range",
     ]:
         assert path in paths
 
@@ -67,9 +75,17 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
         "/api/agent-session",
         "/api/tool-capabilities",
         "/api/optics/thin-film",
+        "/api/optics/thin-film-spectrum",
+        "/api/optics/quarter-wave-ar",
         "/api/optics/paraxial-lens",
+        "/api/optics/paraxial-system",
+        "/api/optics/two-lens-relay",
         "/api/optics/gaussian-beam",
+        "/api/optics/gaussian-beam-series",
+        "/api/optics/gaussian-beam-focus",
         "/api/optics/waveguide-estimate",
+        "/api/optics/waveguide-sweep",
+        "/api/optics/waveguide-single-mode-range",
     ]:
         operation = paths[path]["get"] if "get" in paths[path] else paths[path]["post"]
         schema = operation["responses"]["200"]["content"]["application/json"]["schema"]
@@ -84,9 +100,17 @@ def test_agent_api_openapi_uses_response_models_and_excludes_publish_or_run_api(
         "/api/agent-trace",
         "/api/agent-session",
         "/api/optics/thin-film",
+        "/api/optics/thin-film-spectrum",
+        "/api/optics/quarter-wave-ar",
         "/api/optics/paraxial-lens",
+        "/api/optics/paraxial-system",
+        "/api/optics/two-lens-relay",
         "/api/optics/gaussian-beam",
+        "/api/optics/gaussian-beam-series",
+        "/api/optics/gaussian-beam-focus",
         "/api/optics/waveguide-estimate",
+        "/api/optics/waveguide-sweep",
+        "/api/optics/waveguide-single-mode-range",
     ]:
         operation = paths[path]["post"]
         assert operation["requestBody"]["content"]["application/json"]["schema"]

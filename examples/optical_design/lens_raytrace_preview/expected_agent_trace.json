@@ -1,7 +1,19 @@
 {
   "example_id": "lens_raytrace_preview",
-  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "expected_agents": [
+    "SpecAgent",
+    "MaterialAgent",
+    "GeometryAgent",
+    "AdapterAgent",
+    "WorkflowAgent",
+    "EvidenceAgent",
+    "SafetyAgent",
+    "RecommendationAgent"
+  ],
   "material_agent": "Suggest preview optical glasses and air.",
   "adapter_agent": "Recommend Optiland preview.",
-  "safety_agent": "No solver execution and no production-grade validation claim."
+  "safety_agent": "No solver execution and no production-grade validation claim.",
+  "workflow_agent": "Execute local paraxial two-lens relay design-assist calculator.",
+  "calculator_tool_call": "optics.paraxial.two_lens_relay",
+  "calculator_endpoint": "/api/optics/two-lens-relay"
 }

@@ -36,10 +36,14 @@ report.
 | `agent_trace.build` | yes | yes | Builds deterministic eight-role trace. |
 | `workflow_plan.preview` | yes | yes | Builds local no-execute workflow preview. |
 | `adapter_preview.generate` | yes | yes | Generates preview scaffold metadata/content only. |
-| `optics.thin_film.calculate` | yes for coating goals | yes | Preview transfer-matrix estimate. |
-| `optics.paraxial.thin_lens` | yes for lens goals | yes | Preview paraxial lens estimate. |
-| `optics.gaussian_beam.propagate` | yes for Gaussian beam goals | yes | Preview Gaussian beam estimate. |
-| `optics.waveguide.v_number` | yes for waveguide goals | yes | Preview slab V-number estimate. |
+| `optics.thin_film.calculate` | yes through API | yes | Single-wavelength transfer-matrix preview. |
+| `optics.thin_film.spectrum` | yes for coating goals | yes | Wavelength sweep and quarter-wave AR preview. |
+| `optics.paraxial.thin_lens` | yes through API | yes | Single thin-lens preview. |
+| `optics.paraxial.two_lens_relay` | yes for lens goals | yes | Two-lens relay / ABCD preview. |
+| `optics.gaussian_beam.propagate` | yes through API | yes | Single-distance Gaussian beam preview. |
+| `optics.gaussian_beam.series` | yes for Gaussian beam goals | yes | Propagation series and focus preview. |
+| `optics.waveguide.v_number` | yes through API | yes | Single slab V-number estimate. |
+| `optics.waveguide.sweep` | yes for waveguide goals | yes | V-number sweep and single-mode range preview. |
 
 ## External Solvers
 
@@ -75,4 +79,3 @@ The following are not exposed as backend Agent Studio actions:
 - Optical calculators are preview/design-assist only.
 - Production-grade physical validation is not claimed.
 - Formal convergence proof is not claimed.
-

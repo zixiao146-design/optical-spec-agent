@@ -1,0 +1,22 @@
+{
+  "calculator": "gaussian_beam_series",
+  "endpoint": "/api/optics/gaussian-beam-series",
+  "description": "Preview Gaussian beam radius over propagation distance.",
+  "request": {
+    "wavelength_nm": 1064.0,
+    "waist_um": 10.0,
+    "z_start_mm": 0.0,
+    "z_stop_mm": 10.0,
+    "points": 5
+  },
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Ideal fundamental Gaussian beam.",
+    "Paraxial approximation."
+  ]
+}

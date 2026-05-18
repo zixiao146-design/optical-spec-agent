@@ -1,0 +1,46 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": []
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "result": {
+    "wavelength_nm": 1064.0,
+    "input_waist_um": 1000.0,
+    "focal_length_mm": 50.0,
+    "approx_focused_waist_um": 16.934085944977664,
+    "focused_rayleigh_range_mm": 0.846704297248883,
+    "input_rayleigh_range_mm": 2952.6246744264968,
+    "summary": "Thin-lens Gaussian focus preview estimates waist 16.934 um."
+  },
+  "assumptions": [
+    "Collimated Gaussian beam at a thin lens.",
+    "Diffraction-limited paraxial focus estimate.",
+    "Aberrations, truncation, M^2, and aperture clipping are not included."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ]
+}

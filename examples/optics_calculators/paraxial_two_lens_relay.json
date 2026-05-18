@@ -1,0 +1,21 @@
+{
+  "calculator": "two_lens_relay",
+  "endpoint": "/api/optics/two-lens-relay",
+  "description": "Preview a two-lens paraxial relay.",
+  "request": {
+    "f1_mm": 50.0,
+    "f2_mm": 100.0,
+    "separation_mm": 150.0,
+    "object_distance_mm": 100.0
+  },
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Ideal thin lenses.",
+    "No aberration or stop analysis."
+  ]
+}

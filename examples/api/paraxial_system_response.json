@@ -1,0 +1,63 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": []
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "result": {
+    "matrix": [
+      [
+        1.0,
+        25.0
+      ],
+      [
+        -0.02,
+        0.5
+      ]
+    ],
+    "elements": [
+      {
+        "index": 0,
+        "type": "free_space",
+        "distance_mm": 25.0
+      },
+      {
+        "index": 1,
+        "type": "thin_lens",
+        "focal_length_mm": 50.0
+      }
+    ],
+    "element_count": 2,
+    "summary": "Composed 2 paraxial ABCD elements."
+  },
+  "assumptions": [
+    "Paraxial ABCD matrix composition.",
+    "Element order follows input order from object side to image side.",
+    "Thin lenses are ideal and free-space sections are homogeneous."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ]
+}

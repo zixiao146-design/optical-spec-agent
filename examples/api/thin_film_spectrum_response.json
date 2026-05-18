@@ -1,0 +1,86 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": []
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "result": {
+    "samples": [
+      {
+        "wavelength_nm": 450.0,
+        "reflectance": 0.01733038371825893,
+        "transmittance": 0.982669616281741,
+        "absorptance_estimate": 1.1102230246251565e-16
+      },
+      {
+        "wavelength_nm": 500.0,
+        "reflectance": 0.014813225526092277,
+        "transmittance": 0.9851867744739075,
+        "absorptance_estimate": 2.220446049250313e-16
+      },
+      {
+        "wavelength_nm": 550.0,
+        "reflectance": 0.014111326104148243,
+        "transmittance": 0.9858886738958519,
+        "absorptance_estimate": 0.0
+      },
+      {
+        "wavelength_nm": 600.0,
+        "reflectance": 0.014527933120916874,
+        "transmittance": 0.9854720668790833,
+        "absorptance_estimate": 0.0
+      },
+      {
+        "wavelength_nm": 650.0,
+        "reflectance": 0.015571853662947974,
+        "transmittance": 0.9844281463370521,
+        "absorptance_estimate": 0.0
+      },
+      {
+        "wavelength_nm": 700.0,
+        "reflectance": 0.016928704471524555,
+        "transmittance": 0.9830712955284757,
+        "absorptance_estimate": 0.0
+      }
+    ],
+    "sample_count": 6,
+    "wavelength_start_nm": 450.0,
+    "wavelength_stop_nm": 700.0,
+    "minimum_reflectance": 0.014111326104148243,
+    "minimum_reflectance_wavelength_nm": 550.0,
+    "incident_n": 1.0,
+    "substrate_n": 1.5,
+    "layer_count": 1,
+    "summary": "Preview sweep found minimum reflectance 0.0141 near 550.0 nm."
+  },
+  "assumptions": [
+    "Wavelength sweep reuses the normal-incidence preview transfer matrix at each point.",
+    "Material dispersion is not modeled unless caller changes n/k externally.",
+    "Use this as design-assist orientation only."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ]
+}

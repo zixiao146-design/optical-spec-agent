@@ -259,8 +259,37 @@ class ThinFilmCalculatorRequest(ApiRequestBase):
     polarization: str = "s"
 
 
+class ThinFilmSpectrumRequest(ApiRequestBase):
+    incident_n: float = 1.0
+    substrate_n: float = 1.5
+    layers: list[dict[str, Any]] = Field(default_factory=list)
+    wavelength_start_nm: float
+    wavelength_stop_nm: float
+    points: int = 11
+    incidence_angle_deg: float = 0.0
+    polarization: str = "s"
+
+
+class QuarterWaveARRequest(ApiRequestBase):
+    incident_n: float = 1.0
+    substrate_n: float
+    target_wavelength_nm: float
+    coating_n: float | None = None
+
+
 class ParaxialLensRequest(ApiRequestBase):
     focal_length_mm: float
+    object_distance_mm: float
+
+
+class ParaxialSystemRequest(ApiRequestBase):
+    elements: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class TwoLensRelayRequest(ApiRequestBase):
+    f1_mm: float
+    f2_mm: float
+    separation_mm: float
     object_distance_mm: float
 
 
@@ -270,10 +299,39 @@ class GaussianBeamRequest(ApiRequestBase):
     z_mm: float = 0.0
 
 
+class GaussianBeamSeriesRequest(ApiRequestBase):
+    wavelength_nm: float
+    waist_um: float
+    z_start_mm: float
+    z_stop_mm: float
+    points: int = 11
+
+
+class GaussianBeamFocusRequest(ApiRequestBase):
+    wavelength_nm: float
+    input_waist_um: float
+    focal_length_mm: float
+
+
 class WaveguideEstimateRequest(ApiRequestBase):
     core_n: float
     cladding_n: float
     core_thickness_um: float
+    wavelength_nm: float
+
+
+class WaveguideSweepRequest(ApiRequestBase):
+    core_n: float
+    cladding_n: float
+    wavelength_nm: float
+    thickness_start_um: float
+    thickness_stop_um: float
+    points: int = 11
+
+
+class WaveguideSingleModeRangeRequest(ApiRequestBase):
+    core_n: float
+    cladding_n: float
     wavelength_nm: float
 
 

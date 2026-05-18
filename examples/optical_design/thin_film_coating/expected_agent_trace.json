@@ -1,7 +1,19 @@
 {
   "example_id": "thin_film_coating",
-  "expected_agents": ["SpecAgent", "MaterialAgent", "GeometryAgent", "AdapterAgent", "WorkflowAgent", "EvidenceAgent", "SafetyAgent", "RecommendationAgent"],
+  "expected_agents": [
+    "SpecAgent",
+    "MaterialAgent",
+    "GeometryAgent",
+    "AdapterAgent",
+    "WorkflowAgent",
+    "EvidenceAgent",
+    "SafetyAgent",
+    "RecommendationAgent"
+  ],
   "material_agent": "Suggest SiO2, TiO2, and Al2O3 as coating candidates.",
   "adapter_agent": "Mark this as preview-only until a TMM adapter is explicitly implemented.",
-  "safety_agent": "No solver execution and no production-grade validation claim."
+  "safety_agent": "No solver execution and no production-grade validation claim.",
+  "workflow_agent": "Execute local thin-film spectrum and quarter-wave AR design-assist calculators.",
+  "calculator_tool_call": "optics.thin_film.spectrum",
+  "calculator_endpoint": "/api/optics/thin-film-spectrum and /api/optics/quarter-wave-ar"
 }

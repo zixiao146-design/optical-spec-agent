@@ -1,0 +1,20 @@
+{
+  "calculator": "quarter_wave_ar",
+  "endpoint": "/api/optics/quarter-wave-ar",
+  "description": "Preview single-layer quarter-wave anti-reflection design.",
+  "request": {
+    "incident_n": 1.0,
+    "substrate_n": 1.5,
+    "target_wavelength_nm": 550.0
+  },
+  "safety": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "assumptions": [
+    "Single wavelength.",
+    "Lossless coating preview index."
+  ]
+}

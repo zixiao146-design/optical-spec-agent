@@ -55,12 +55,28 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `tool_capabilities_response.json`
 - `thin_film_request.json`
 - `thin_film_response.json`
+- `thin_film_spectrum_request.json`
+- `thin_film_spectrum_response.json`
+- `quarter_wave_ar_request.json`
+- `quarter_wave_ar_response.json`
 - `paraxial_lens_request.json`
 - `paraxial_lens_response.json`
+- `paraxial_system_request.json`
+- `paraxial_system_response.json`
+- `two_lens_relay_request.json`
+- `two_lens_relay_response.json`
 - `gaussian_beam_request.json`
 - `gaussian_beam_response.json`
+- `gaussian_beam_series_request.json`
+- `gaussian_beam_series_response.json`
+- `gaussian_beam_focus_request.json`
+- `gaussian_beam_focus_response.json`
 - `waveguide_estimate_request.json`
 - `waveguide_estimate_response.json`
+- `waveguide_sweep_request.json`
+- `waveguide_sweep_response.json`
+- `waveguide_single_mode_range_request.json`
+- `waveguide_single_mode_range_response.json`
 
 These fixtures are local preview/design-assist data only. They do not perform
 external material database lookup, solver execution, external LLM calls,

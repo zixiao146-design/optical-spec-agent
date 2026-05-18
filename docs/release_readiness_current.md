@@ -335,7 +335,11 @@ Current v1.0 evidence artifacts:
   preview calculators.
 - Optical calculator evidence:
   `docs/optical_calculators.md`, `docs/optical_calculators.zh-CN.md`,
-  `examples/optics_calculators/`, and `/api/optics/*`; calculators are
+  `docs/optical_calculator_case_integration.md`,
+  `docs/optical_calculator_case_integration.zh-CN.md`,
+  `examples/optics_calculators/`, and `/api/optics/*`; calculators now cover
+  thin-film spectra, quarter-wave AR, Gaussian beam series/focus, paraxial
+  systems/two-lens relays, and waveguide sweeps/single-mode ranges. They are
   preview/design-assist only and do not claim production-grade physical
   validation.
 

@@ -18,7 +18,7 @@ def test_agent_session_includes_tool_call_ledger():
         "agent_trace.build",
         "workflow_plan.preview",
         "adapter_preview.generate",
-        "optics.thin_film.calculate",
+        "optics.thin_film.spectrum",
     ]:
         assert ledger[internal].executed is True
         assert ledger[internal].default_allowed is True
@@ -46,13 +46,12 @@ def test_agent_session_includes_tool_call_ledger():
 def test_calculator_ledger_entries_are_intent_dependent():
     waveguide = build_agent_task_session("Plan a local waveguide V-number preview.")
     names = {entry.tool_name for entry in waveguide.tool_call_ledger}
-    assert "optics.waveguide.v_number" in names
+    assert "optics.waveguide.sweep" in names
 
     lens = build_agent_task_session("Plan a paraxial lens imaging preview.")
     names = {entry.tool_name for entry in lens.tool_call_ledger}
-    assert "optics.paraxial.thin_lens" in names
+    assert "optics.paraxial.two_lens_relay" in names
 
     gaussian = build_agent_task_session("Plan a Gaussian beam propagation preview.")
     names = {entry.tool_name for entry in gaussian.tool_call_ledger}
-    assert "optics.gaussian_beam.propagate" in names
-
+    assert "optics.gaussian_beam.series" in names

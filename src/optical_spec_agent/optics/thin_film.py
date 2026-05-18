@@ -98,3 +98,170 @@ def calculate_thin_film_stack(
         assumptions=assumptions,
         diagnostics=diagnostics,
     )
+
+
+def _linspace(start: float, stop: float, points: int) -> list[float]:
+    if points < 2:
+        raise ValueError("points must be at least 2.")
+    if stop <= start:
+        raise ValueError("stop value must be greater than start value.")
+    step = (stop - start) / (points - 1)
+    return [start + index * step for index in range(points)]
+
+
+def calculate_thin_film_spectrum(
+    layers: list[dict[str, Any] | ThinFilmLayer],
+    wavelength_start_nm: float,
+    wavelength_stop_nm: float,
+    points: int,
+    *,
+    incident_n: float = 1.0,
+    substrate_n: float = 1.5,
+    incidence_angle_deg: float = 0.0,
+    polarization: str = "s",
+) -> CalculatorResult:
+    """Preview a wavelength sweep for a thin-film stack."""
+
+    wavelengths = _linspace(wavelength_start_nm, wavelength_stop_nm, points)
+    samples: list[dict[str, float]] = []
+    diagnostics: list[str] = []
+    assumptions = [
+        "Wavelength sweep reuses the normal-incidence preview transfer matrix at each point.",
+        "Material dispersion is not modeled unless caller changes n/k externally.",
+        "Use this as design-assist orientation only.",
+    ]
+    min_reflectance = 1.0
+    min_wavelength = wavelengths[0]
+    for wavelength in wavelengths:
+        result = calculate_thin_film_stack(
+            layers,
+            wavelength,
+            incident_n=incident_n,
+            substrate_n=substrate_n,
+            incidence_angle_deg=incidence_angle_deg,
+            polarization=polarization,
+        )
+        diagnostics.extend(item for item in result.diagnostics if item not in diagnostics)
+        reflectance = float(result.result["reflectance"])
+        transmittance = float(result.result["transmittance"])
+        absorptance = float(result.result["absorptance_estimate"])
+        if reflectance < min_reflectance:
+            min_reflectance = reflectance
+            min_wavelength = wavelength
+        samples.append(
+            {
+                "wavelength_nm": wavelength,
+                "reflectance": reflectance,
+                "transmittance": transmittance,
+                "absorptance_estimate": absorptance,
+            }
+        )
+
+    return CalculatorResult(
+        result={
+            "samples": samples,
+            "sample_count": len(samples),
+            "wavelength_start_nm": wavelength_start_nm,
+            "wavelength_stop_nm": wavelength_stop_nm,
+            "minimum_reflectance": min_reflectance,
+            "minimum_reflectance_wavelength_nm": min_wavelength,
+            "incident_n": incident_n,
+            "substrate_n": substrate_n,
+            "layer_count": len(layers),
+            "summary": (
+                f"Preview sweep found minimum reflectance {min_reflectance:.4f} "
+                f"near {min_wavelength:.1f} nm."
+            ),
+        },
+        assumptions=assumptions,
+        diagnostics=diagnostics,
+    )
+
+
+def design_quarter_wave_ar_coating(
+    substrate_n: float,
+    target_wavelength_nm: float,
+    *,
+    incident_n: float = 1.0,
+    coating_n: float | None = None,
+) -> CalculatorResult:
+    """Return a simple quarter-wave anti-reflection coating preview."""
+
+    if substrate_n <= 0 or incident_n <= 0:
+        raise ValueError("incident_n and substrate_n must be positive.")
+    if target_wavelength_nm <= 0:
+        raise ValueError("target_wavelength_nm must be positive.")
+    ideal_n = math.sqrt(incident_n * substrate_n)
+    selected_n = coating_n or ideal_n
+    if selected_n <= 0:
+        raise ValueError("coating_n must be positive when provided.")
+    thickness_nm = target_wavelength_nm / (4 * selected_n)
+    coating = {"n": selected_n, "k": 0.0, "thickness_nm": thickness_nm}
+    stack = calculate_thin_film_stack(
+        [coating],
+        target_wavelength_nm,
+        incident_n=incident_n,
+        substrate_n=substrate_n,
+    )
+    diagnostics = list(stack.diagnostics)
+    if coating_n is not None and abs(coating_n - ideal_n) / ideal_n > 0.05:
+        diagnostics.append(
+            "Provided coating_n differs from the ideal sqrt(incident_n * substrate_n) by more than 5%."
+        )
+    return CalculatorResult(
+        result={
+            "incident_n": incident_n,
+            "substrate_n": substrate_n,
+            "ideal_coating_n": ideal_n,
+            "selected_coating_n": selected_n,
+            "target_wavelength_nm": target_wavelength_nm,
+            "quarter_wave_thickness_nm": thickness_nm,
+            "coating_layer": coating,
+            "estimated_target_reflectance": stack.result["reflectance"],
+            "summary": (
+                f"Quarter-wave AR preview: n={selected_n:.3f}, "
+                f"thickness={thickness_nm:.2f} nm at {target_wavelength_nm:.1f} nm."
+            ),
+        },
+        assumptions=[
+            "Single-layer quarter-wave AR design at normal incidence.",
+            "Coating material is treated as lossless unless caller later supplies k.",
+            "Substrate and incident media are non-dispersive preview indices.",
+        ],
+        diagnostics=diagnostics,
+    )
+
+
+def summarize_thin_film_result(result: CalculatorResult) -> dict[str, Any]:
+    """Create a compact human-readable summary payload for thin-film results."""
+
+    payload = result.result
+    if "samples" in payload:
+        return {
+            "summary": payload.get("summary", "Thin-film spectrum preview generated."),
+            "sample_count": payload.get("sample_count"),
+            "minimum_reflectance": payload.get("minimum_reflectance"),
+            "minimum_reflectance_wavelength_nm": payload.get("minimum_reflectance_wavelength_nm"),
+            "assumption_count": len(result.assumptions),
+            "diagnostic_count": len(result.diagnostics),
+        }
+    if "quarter_wave_thickness_nm" in payload:
+        return {
+            "summary": payload.get("summary", "Quarter-wave AR preview generated."),
+            "quarter_wave_thickness_nm": payload.get("quarter_wave_thickness_nm"),
+            "selected_coating_n": payload.get("selected_coating_n"),
+            "estimated_target_reflectance": payload.get("estimated_target_reflectance"),
+            "assumption_count": len(result.assumptions),
+            "diagnostic_count": len(result.diagnostics),
+        }
+    return {
+        "summary": (
+            f"Thin-film preview at {payload.get('wavelength_nm')} nm: "
+            f"R={payload.get('reflectance')}, T={payload.get('transmittance')}."
+        ),
+        "reflectance": payload.get("reflectance"),
+        "transmittance": payload.get("transmittance"),
+        "absorptance_estimate": payload.get("absorptance_estimate"),
+        "assumption_count": len(result.assumptions),
+        "diagnostic_count": len(result.diagnostics),
+    }

@@ -1,0 +1,7 @@
+{
+  "wavelength_nm": 1064.0,
+  "waist_um": 10.0,
+  "z_start_mm": 0.0,
+  "z_stop_mm": 10.0,
+  "points": 5
+}

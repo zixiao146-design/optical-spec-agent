@@ -24,18 +24,18 @@
     "Open the Agent Trace Timeline to review sub-agent contributions.",
     "Generate local workflow and adapter-preview artifacts only."
   ],
-  "session_id": "session-acd87c78d4",
-  "user_goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流，优先使用开源工具，不运行外部求解器。",
-  "optical_intent_summary": "nanoparticle plasmonics / scattering preview",
-  "selected_example_id": "nanoparticle_plasmonics",
-  "design_case_summary": "nanoparticle_plasmonics example-backed nanoparticle plasmonics / scattering preview",
+  "session_id": "session-b6135c11d9",
+  "user_goal": "Plan a local thin film coating preview with no external solver.",
+  "optical_intent_summary": "thin film coating preview",
+  "selected_example_id": "thin_film_coating",
+  "design_case_summary": "thin_film_coating example-backed thin film coating preview",
   "plan_steps": [
     {
       "step_index": 1,
       "title": "Interpret optical goal",
-      "title_zh": "理解光学目标",
-      "description": "Translate the natural language goal into nanoparticle plasmonics / scattering preview.",
-      "description_zh": "将自然语言目标转换为 nanoparticle plasmonics / scattering preview。",
+      "title_zh": "\u7406\u89e3\u5149\u5b66\u76ee\u6807",
+      "description": "Translate the natural language goal into thin film coating preview.",
+      "description_zh": "\u5c06\u81ea\u7136\u8bed\u8a00\u76ee\u6807\u8f6c\u6362\u4e3a thin film coating preview\u3002",
       "agent_name": "SpecAgent",
       "status": "completed",
       "endpoint_or_tool": "local heuristic intent detector",
@@ -45,9 +45,9 @@
     {
       "step_index": 2,
       "title": "Select design case",
-      "title_zh": "选择设计案例",
-      "description": "Match the goal to nanoparticle_plasmonics.",
-      "description_zh": "将目标匹配到 nanoparticle_plasmonics。",
+      "title_zh": "\u9009\u62e9\u8bbe\u8ba1\u6848\u4f8b",
+      "description": "Match the goal to thin_film_coating.",
+      "description_zh": "\u5c06\u76ee\u6807\u5339\u914d\u5230 thin_film_coating\u3002",
       "agent_name": "SpecAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/examples",
@@ -57,9 +57,9 @@
     {
       "step_index": 3,
       "title": "Suggest materials",
-      "title_zh": "推荐材料",
+      "title_zh": "\u63a8\u8350\u6750\u6599",
       "description": "Use the local preview material catalog for candidate materials.",
-      "description_zh": "使用本地预览材料库生成候选材料。",
+      "description_zh": "\u4f7f\u7528\u672c\u5730\u9884\u89c8\u6750\u6599\u5e93\u751f\u6210\u5019\u9009\u6750\u6599\u3002",
       "agent_name": "MaterialAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/materials/suggest",
@@ -69,9 +69,9 @@
     {
       "step_index": 4,
       "title": "Review geometry",
-      "title_zh": "审阅几何",
+      "title_zh": "\u5ba1\u9605\u51e0\u4f55",
       "description": "Identify the geometry family and missing geometry fields.",
-      "description_zh": "识别几何类型并标出缺失几何字段。",
+      "description_zh": "\u8bc6\u522b\u51e0\u4f55\u7c7b\u578b\u5e76\u6807\u51fa\u7f3a\u5931\u51e0\u4f55\u5b57\u6bb5\u3002",
       "agent_name": "GeometryAgent",
       "status": "completed",
       "endpoint_or_tool": "local geometry review",
@@ -81,9 +81,9 @@
     {
       "step_index": 5,
       "title": "Recommend adapter",
-      "title_zh": "推荐适配器",
-      "description": "Choose an open-source-first adapter path: meep with gmsh geometry preview.",
-      "description_zh": "选择开源优先的适配器路径：meep with gmsh geometry preview。",
+      "title_zh": "\u63a8\u8350\u9002\u914d\u5668",
+      "description": "Choose an open-source-first adapter path: preview-only; future TMM adapter candidate.",
+      "description_zh": "\u9009\u62e9\u5f00\u6e90\u4f18\u5148\u7684\u9002\u914d\u5668\u8def\u5f84\uff1apreview-only; future TMM adapter candidate\u3002",
       "agent_name": "AdapterAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/adapters",
@@ -93,9 +93,9 @@
     {
       "step_index": 6,
       "title": "Plan local workflow",
-      "title_zh": "规划本地工作流",
+      "title_zh": "\u89c4\u5212\u672c\u5730\u5de5\u4f5c\u6d41",
       "description": "Plan parse, validate, preview, evidence, and human review steps.",
-      "description_zh": "规划解析、验证、预览、证据和人工审阅步骤。",
+      "description_zh": "\u89c4\u5212\u89e3\u6790\u3001\u9a8c\u8bc1\u3001\u9884\u89c8\u3001\u8bc1\u636e\u548c\u4eba\u5de5\u5ba1\u9605\u6b65\u9aa4\u3002",
       "agent_name": "WorkflowAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/workflow-plan",
@@ -105,9 +105,9 @@
     {
       "step_index": 7,
       "title": "Preview artifacts and evidence",
-      "title_zh": "预览产物和证据",
+      "title_zh": "\u9884\u89c8\u4ea7\u7269\u548c\u8bc1\u636e",
       "description": "Prepare preview artifacts and validation evidence references.",
-      "description_zh": "准备预览产物和验证证据引用。",
+      "description_zh": "\u51c6\u5907\u9884\u89c8\u4ea7\u7269\u548c\u9a8c\u8bc1\u8bc1\u636e\u5f15\u7528\u3002",
       "agent_name": "EvidenceAgent",
       "status": "completed",
       "endpoint_or_tool": "/api/adapter-preview and /api/validation-evidence",
@@ -117,9 +117,9 @@
     {
       "step_index": 8,
       "title": "Check permission gates",
-      "title_zh": "检查权限门控",
+      "title_zh": "\u68c0\u67e5\u6743\u9650\u95e8\u63a7",
       "description": "Block solver, LLM, upload, publish, tag, and release actions by default.",
-      "description_zh": "默认阻断求解器、LLM、上传、发布、tag 和 release 动作。",
+      "description_zh": "\u9ed8\u8ba4\u963b\u65ad\u6c42\u89e3\u5668\u3001LLM\u3001\u4e0a\u4f20\u3001\u53d1\u5e03\u3001tag \u548c release \u52a8\u4f5c\u3002",
       "agent_name": "SafetyAgent",
       "status": "completed",
       "endpoint_or_tool": "local permission gate policy",
@@ -152,9 +152,9 @@
       "Open Agent Collaboration in the frontend.",
       "Use /api/adapter-preview for local scaffold output."
     ],
-    "trace_id": "trace-5011bf2c85",
-    "example_id": "nanoparticle_plasmonics",
-    "design_goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流，优先使用开源工具，不运行外部求解器。",
+    "trace_id": "trace-18350e503a",
+    "example_id": "thin_film_coating",
+    "design_goal": "Plan a local thin film coating preview with no external solver.",
     "timeline_summary": "Example Gallery -> Material suggestions -> Adapter recommendation -> Agent trace timeline -> Workflow plan -> Artifact preview -> Evidence -> Next action",
     "agents": [
       {
@@ -162,7 +162,7 @@
         "agent_name": "SpecAgent",
         "role": "Interprets user intent / spec and identifies missing fields.",
         "stage": "spec_intake",
-        "input_summary": "Request classified as nanoparticle plasmonics.",
+        "input_summary": "Request classified as thin film coating.",
         "output_summary": "Prepared a local preview intent summary for downstream agents.",
         "diagnostics": [
           "Spec interpretation is deterministic and local."
@@ -182,8 +182,8 @@
         "agent_name": "MaterialAgent",
         "role": "Suggests materials from the local preview material catalog.",
         "stage": "material_selection",
-        "input_summary": "Application: nanoparticle plasmonics.",
-        "output_summary": "Suggested preview materials: au, ag, sio2, water, air.",
+        "input_summary": "Application: thin film coating.",
+        "output_summary": "Suggested preview materials: sio2, tio2, al2o3.",
         "diagnostics": [
           "Material constants are preview/design-assist values only."
         ],
@@ -204,7 +204,7 @@
         "agent_name": "GeometryAgent",
         "role": "Identifies geometry family and required geometry fields.",
         "stage": "geometry_review",
-        "input_summary": "Application: nanoparticle plasmonics.",
+        "input_summary": "Application: thin film coating.",
         "output_summary": "Mapped the request to a preview geometry family and noted missing dimensions if any.",
         "diagnostics": [
           "Geometry output is a scaffold until reviewed by the user."
@@ -224,8 +224,8 @@
         "agent_name": "AdapterAgent",
         "role": "Recommends adapter/tool and explains maturity / limitations.",
         "stage": "adapter_recommendation",
-        "input_summary": "Application and material hints: nanoparticle plasmonics; au, ag, sio2, water, air.",
-        "output_summary": "Recommended adapter path: meep with gmsh geometry preview.",
+        "input_summary": "Application and material hints: thin film coating; sio2, tio2, al2o3.",
+        "output_summary": "Recommended adapter path: preview-only; future TMM adapter candidate.",
         "diagnostics": [
           "Open-source-solver-first recommendation; no proprietary solver dependency."
         ],
@@ -246,7 +246,7 @@
         "agent_name": "WorkflowAgent",
         "role": "Creates local preview workflow plan and ensures no solver by default.",
         "stage": "workflow_planning",
-        "input_summary": "Adapter path: meep with gmsh geometry preview.",
+        "input_summary": "Adapter path: preview-only; future TMM adapter candidate.",
         "output_summary": "Proposed parse -> validate -> adapter preview -> human review workflow.",
         "diagnostics": [
           "No solver execution is part of this trace."
@@ -266,7 +266,7 @@
         "agent_name": "EvidenceAgent",
         "role": "Attaches validation evidence / maturity and explains verified boundaries.",
         "stage": "evidence_review",
-        "input_summary": "Adapter path: meep with gmsh geometry preview.",
+        "input_summary": "Adapter path: preview-only; future TMM adapter candidate.",
         "output_summary": "Attached adapter maturity and validation-evidence references where available.",
         "diagnostics": [
           "Evidence does not imply production-grade physical validation."
@@ -312,7 +312,7 @@
         "agent_name": "RecommendationAgent",
         "role": "Proposes next actions.",
         "stage": "next_actions",
-        "input_summary": "Trace for nanoparticle plasmonics.",
+        "input_summary": "Trace for thin film coating.",
         "output_summary": "Next step: load the example, validate spec fields, inspect materials, and preview the adapter artifact.",
         "diagnostics": [
           "Recommendations are local workflow guidance only."
@@ -330,24 +330,22 @@
         "evidence_refs": []
       }
     ],
-    "final_recommendation": "Use au, ag, sio2, water, air as preview material candidates and follow meep with gmsh geometry preview; verify material constants and validation evidence before physical conclusions.",
+    "final_recommendation": "Use sio2, tio2, al2o3 as preview material candidates and follow preview-only; future TMM adapter candidate; verify material constants and validation evidence before physical conclusions.",
     "material_suggestions": [
-      "au",
-      "ag",
       "sio2",
-      "water",
-      "air"
+      "tio2",
+      "al2o3"
     ],
-    "adapter_recommendation": "meep with gmsh geometry preview"
+    "adapter_recommendation": "preview-only; future TMM adapter candidate"
   },
   "artifacts": [
     {
       "artifact_id": "spec-preview",
       "label": "Spec preview",
-      "label_zh": "规格预览",
+      "label_zh": "\u89c4\u683c\u9884\u89c8",
       "artifact_type": "spec",
-      "summary": "Design intent mapped to nanoparticle plasmonics / scattering preview; source: examples/optical_design/nanoparticle_plasmonics/spec.json.",
-      "preview_content": "examples/optical_design/nanoparticle_plasmonics/spec.json",
+      "summary": "Design intent mapped to thin film coating preview; source: examples/optical_design/thin_film_coating/spec.json.",
+      "preview_content": "examples/optical_design/thin_film_coating/spec.json",
       "source_endpoint": "/api/agent-session",
       "generated_by_agent": "SpecAgent",
       "production_grade": false
@@ -355,9 +353,9 @@
     {
       "artifact_id": "material-suggestions",
       "label": "Material suggestions",
-      "label_zh": "材料建议",
+      "label_zh": "\u6750\u6599\u5efa\u8bae",
       "artifact_type": "material_suggestions",
-      "summary": "au, ag, sio2, water, air",
+      "summary": "sio2, tio2, al2o3",
       "preview_content": null,
       "source_endpoint": "/api/materials/suggest",
       "generated_by_agent": "MaterialAgent",
@@ -366,7 +364,7 @@
     {
       "artifact_id": "agent-trace",
       "label": "Sub-agent trace",
-      "label_zh": "子智能体轨迹",
+      "label_zh": "\u5b50\u667a\u80fd\u4f53\u8f68\u8ff9",
       "artifact_type": "agent_trace",
       "summary": "Eight-agent deterministic collaboration trace.",
       "preview_content": null,
@@ -377,9 +375,9 @@
     {
       "artifact_id": "workflow-plan",
       "label": "Workflow plan",
-      "label_zh": "工作流计划",
+      "label_zh": "\u5de5\u4f5c\u6d41\u8ba1\u5212",
       "artifact_type": "workflow_plan",
-      "summary": "Local parse -> validate -> preview workflow for meep with gmsh geometry preview.",
+      "summary": "Local parse -> validate -> preview workflow for preview-only; future TMM adapter candidate.",
       "preview_content": null,
       "source_endpoint": "/api/workflow-plan",
       "generated_by_agent": "WorkflowAgent",
@@ -388,7 +386,7 @@
     {
       "artifact_id": "adapter-preview",
       "label": "Adapter preview",
-      "label_zh": "适配器预览",
+      "label_zh": "\u9002\u914d\u5668\u9884\u89c8",
       "artifact_type": "adapter_preview",
       "summary": "Preview-only solver-native scaffold; no solver execution.",
       "preview_content": null,
@@ -399,12 +397,23 @@
     {
       "artifact_id": "validation-evidence",
       "label": "Validation evidence",
-      "label_zh": "验证证据",
+      "label_zh": "\u9a8c\u8bc1\u8bc1\u636e",
       "artifact_type": "evidence",
       "summary": "Adapter maturity and validation evidence references.",
       "preview_content": null,
       "source_endpoint": "/api/validation-evidence",
       "generated_by_agent": "EvidenceAgent",
+      "production_grade": false
+    },
+    {
+      "artifact_id": "calculator-preview",
+      "label": "Calculator preview",
+      "label_zh": "\u8ba1\u7b97\u5668\u9884\u89c8",
+      "artifact_type": "calculator_result",
+      "summary": "Preview sweep found minimum reflectance 0.0141 near 550.0 nm. Quarter-wave AR preview: n=1.225, thickness=112.27 nm at 550.0 nm.",
+      "preview_content": "{'summary': 'Preview sweep found minimum reflectance 0.0141 near 550.0 nm. Quarter-wave AR preview: n=1.225, thickness=112.27 nm at 550.0 nm.', 'source_endpoint': '/api/optics/thin-film-spectrum and /api/optics/quarter-wave-ar'}",
+      "source_endpoint": "/api/optics/thin-film-spectrum and /api/optics/quarter-wave-ar",
+      "generated_by_agent": "WorkflowAgent",
       "production_grade": false
     }
   ],
@@ -412,7 +421,7 @@
     {
       "gate_id": "parse_local_spec",
       "label": "Parse local spec",
-      "label_zh": "本地解析规格",
+      "label_zh": "\u672c\u5730\u89e3\u6790\u89c4\u683c",
       "status": "allowed",
       "reason": "Local deterministic parsing is part of the preview workflow.",
       "risk_level": "low",
@@ -421,7 +430,7 @@
     {
       "gate_id": "read_local_material_catalog",
       "label": "Read local material catalog",
-      "label_zh": "读取本地材料库",
+      "label_zh": "\u8bfb\u53d6\u672c\u5730\u6750\u6599\u5e93",
       "status": "allowed",
       "reason": "The catalog is bundled and preview-only.",
       "risk_level": "low",
@@ -430,7 +439,7 @@
     {
       "gate_id": "generate_workflow_plan",
       "label": "Generate workflow plan",
-      "label_zh": "生成工作流计划",
+      "label_zh": "\u751f\u6210\u5de5\u4f5c\u6d41\u8ba1\u5212",
       "status": "allowed",
       "reason": "Workflow planning is local and does not execute solvers.",
       "risk_level": "low",
@@ -439,7 +448,7 @@
     {
       "gate_id": "generate_adapter_preview",
       "label": "Generate adapter preview",
-      "label_zh": "生成适配器预览",
+      "label_zh": "\u751f\u6210\u9002\u914d\u5668\u9884\u89c8",
       "status": "allowed",
       "reason": "Adapter preview produces scaffold content only.",
       "risk_level": "low",
@@ -448,7 +457,7 @@
     {
       "gate_id": "run_external_solver",
       "label": "External solver execution",
-      "label_zh": "外部求解器执行",
+      "label_zh": "\u5916\u90e8\u6c42\u89e3\u5668\u6267\u884c",
       "status": "requires_explicit_approval",
       "reason": "External solvers are never executed by default.",
       "risk_level": "high",
@@ -457,7 +466,7 @@
     {
       "gate_id": "call_external_llm",
       "label": "External LLM call",
-      "label_zh": "外部 LLM 调用",
+      "label_zh": "\u5916\u90e8 LLM \u8c03\u7528",
       "status": "requires_explicit_approval",
       "reason": "The command center is deterministic and local by default.",
       "risk_level": "high",
@@ -466,7 +475,7 @@
     {
       "gate_id": "upload_testpypi",
       "label": "TestPyPI upload",
-      "label_zh": "TestPyPI 上传",
+      "label_zh": "TestPyPI \u4e0a\u4f20",
       "status": "blocked",
       "reason": "Publishing controls are not exposed in Agent Studio.",
       "risk_level": "high",
@@ -475,7 +484,7 @@
     {
       "gate_id": "publish_pypi",
       "label": "PyPI publication",
-      "label_zh": "PyPI 发布",
+      "label_zh": "PyPI \u53d1\u5e03",
       "status": "blocked",
       "reason": "PyPI publication requires separate maintainer approval outside this UI.",
       "risk_level": "high",
@@ -484,7 +493,7 @@
     {
       "gate_id": "create_git_tag",
       "label": "Git tag creation",
-      "label_zh": "Git tag 创建",
+      "label_zh": "Git tag \u521b\u5efa",
       "status": "blocked",
       "reason": "Release/tag operations are out of scope for the local command center.",
       "risk_level": "high",
@@ -493,7 +502,7 @@
     {
       "gate_id": "create_github_release",
       "label": "GitHub release creation",
-      "label_zh": "GitHub release 创建",
+      "label_zh": "GitHub release \u521b\u5efa",
       "status": "blocked",
       "reason": "GitHub release operations are not controlled from Agent Studio.",
       "risk_level": "high",
@@ -509,7 +518,7 @@
       "executed": true,
       "default_allowed": true,
       "status": "executed",
-      "input_summary": "Application inferred from nanoparticle plasmonics / scattering preview.",
+      "input_summary": "Application inferred from thin film coating preview.",
       "output_summary": "Returned local preview material candidates.",
       "reason": "Material suggestions are needed before adapter/workflow planning.",
       "safety_note": "Local preview catalog only; not production-grade optical constants."
@@ -522,8 +531,8 @@
       "executed": true,
       "default_allowed": true,
       "status": "executed",
-      "input_summary": "nanoparticle_plasmonics",
-      "output_summary": "Loaded nanoparticle_plasmonics from examples/optical_design.",
+      "input_summary": "thin_film_coating",
+      "output_summary": "Loaded thin_film_coating from examples/optical_design.",
       "reason": "Use local examples when the user goal matches a known optical design case.",
       "safety_note": "Example loading is repo-local and does not access the network."
     },
@@ -548,7 +557,7 @@
       "executed": true,
       "default_allowed": true,
       "status": "executed",
-      "input_summary": "Adapter path: meep with gmsh geometry preview.",
+      "input_summary": "Adapter path: preview-only; future TMM adapter candidate.",
       "output_summary": "Prepared local workflow-plan preview steps.",
       "reason": "Workflow planning is a local preview operation.",
       "safety_note": "No solver execution is part of workflow planning by default."
@@ -561,10 +570,23 @@
       "executed": true,
       "default_allowed": true,
       "status": "executed",
-      "input_summary": "Preview adapter path: meep with gmsh geometry preview.",
+      "input_summary": "Preview adapter path: preview-only; future TMM adapter candidate.",
       "output_summary": "Prepared preview scaffold metadata; solver process not launched.",
       "reason": "Adapter preview makes artifacts inspectable without running a solver.",
       "safety_note": "Preview generation is not production-grade physical validation."
+    },
+    {
+      "call_id": "optics-thin-film-spectrum",
+      "tool_name": "optics.thin_film.spectrum",
+      "tool_kind": "internal_python",
+      "called_by_agent": "WorkflowAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Thin-film/coating intent detected.",
+      "output_summary": "Prepared wavelength-sweep and quarter-wave AR preview calculations.",
+      "reason": "Thin-film spectrum and AR helper are deterministic local design-assist tools.",
+      "safety_note": "Calculator output is preview/design-assist, not production validation."
     },
     {
       "call_id": "external-solver-meep",
@@ -697,5 +719,5 @@
       "safety_note": "NO RELEASE CREATED."
     }
   ],
-  "final_recommendation": "Use the local nanoparticle_plasmonics example-backed nanoparticle plasmonics / scattering preview path, inspect material candidates au, ag, sio2, water, air, then generate a workflow plan and adapter preview via meep with gmsh geometry preview."
+  "final_recommendation": "Use the local thin_film_coating example-backed thin film coating preview path, inspect material candidates sio2, tio2, al2o3, then review any calculator preview, workflow plan, and adapter preview via preview-only; future TMM adapter candidate. Calculator outputs are design-assist only."
 }
