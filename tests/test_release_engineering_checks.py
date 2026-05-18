@@ -213,6 +213,10 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "agent_command_center.zh-CN.md",
         "tool_call_reality_matrix.md",
         "backend_functionality_status.md",
+        "backend_capability_report.md",
+        "backend_capability_report.zh-CN.md",
+        "design_case_cross_checks.md",
+        "design_case_cross_checks.zh-CN.md",
         "optical_calculators.md",
         "optical_calculators.zh-CN.md",
         "optical_calculator_case_integration.md",
@@ -272,6 +276,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "check_api_fixtures.py").exists()
     assert (ROOT / "scripts" / "smoke_frontend_mvp.sh").exists()
     assert (ROOT / "scripts" / "smoke_frontend_visual.sh").exists()
+    assert (ROOT / "scripts" / "generate_backend_capability_report.py").exists()
+    assert (ROOT / "scripts" / "smoke_backend_report.sh").exists()
     assert (ROOT / "scripts" / "demo_agent_studio.sh").exists()
     assert (ROOT / "scripts" / "bootstrap_demo_env.sh").exists()
     assert (ROOT / "scripts" / "run_quickstart_demo.sh").exists()
@@ -353,6 +359,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "scripts/check_api_fixtures.py" in combined
     assert "scripts/smoke_frontend_mvp.sh" in combined
     assert "scripts/smoke_frontend_visual.sh" in combined
+    assert "Backend Capability Report" in combined
+    assert "Design Case Cross-Checks" in combined
+    assert "scripts/smoke_backend_report.sh" in combined
     assert "Frontend Visual Smoke Runbook" in combined
     assert "Playwright visual smoke" in combined
     assert "Agent Studio Demo Runbook" in combined
@@ -460,6 +469,8 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "run_optional_optiland_validation.sh",
         ROOT / "scripts" / "run_optional_elmer_validation.sh",
         ROOT / "scripts" / "smoke_agent_api.sh",
+        ROOT / "scripts" / "smoke_backend_report.sh",
+        ROOT / "scripts" / "generate_backend_capability_report.py",
         ROOT / "scripts" / "smoke_frontend_mvp.sh",
         ROOT / "scripts" / "smoke_frontend_visual.sh",
         ROOT / "Makefile",

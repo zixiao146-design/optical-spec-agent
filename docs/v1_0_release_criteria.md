@@ -103,6 +103,7 @@
 | Agent Command Center | Engineering track | Local task-session surface available | Useful for maintainer demos; not a release, upload, tag, or PyPI publication trigger. |
 | Tool-call reality ledger | Engineering track | Backend task sessions include ledger records | Helps prove which local tools were called and which external actions were blocked; not a release trigger. |
 | Optical calculators | Engineering track | Preview/design-assist endpoints available, including sweeps, case helpers, quality fields, and formula sanity reference cases | Useful backend functionality; not production-grade physical validation and not a v1.0 blocker by itself. |
+| Backend capability report | Engineering track | JSON/Markdown script and API endpoints available | Proves installed/callable/executed backend reality and design-case cross-checks; not a release/upload/tag trigger. |
 
 Material constants remain preview/design-assist data unless independently
 verified. Sub-agent trace is local/deterministic and does not call external

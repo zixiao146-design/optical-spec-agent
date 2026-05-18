@@ -139,6 +139,15 @@ tool_capabilities = get("/api/tool-capabilities")
 internal_tools = {item["tool_name"] for item in tool_capabilities["internal_tools"]}
 require("optical_calculators" in internal_tools, "tool capabilities missing optical calculators")
 
+backend_report = get("/api/backend-capability-report")
+require(backend_report["package"]["package_version"] == "0.9.0rc7.dev0", "backend report package mismatch")
+require(backend_report["design_case_cross_checks"], "backend report missing design case checks")
+require(all(item["executed"] is False for item in backend_report["blocked_external_actions"]), "blocked action executed")
+
+design_case_cross_checks = get("/api/design-case-cross-checks")
+require(design_case_cross_checks["summary"]["total"] == 6, "design case cross-check count mismatch")
+require(design_case_cross_checks["summary"]["fail"] == 0, "design case cross-check failed")
+
 thin_film = post(
     "/api/optics/thin-film",
     {"incident_n": 1.0, "substrate_n": 1.5, "wavelength_nm": 550.0, "layers": [{"n": 1.22, "thickness_nm": 112.7}]},
@@ -216,6 +225,8 @@ for name, payload in {
     "agent_trace": agent_trace,
     "agent_session": agent_session,
     "tool_capabilities": tool_capabilities,
+    "backend_report": backend_report,
+    "design_case_cross_checks": design_case_cross_checks,
     "thin_film": thin_film,
     "thin_film_spectrum": thin_film_spectrum,
     "quarter_wave_ar": quarter_wave_ar,
@@ -235,7 +246,7 @@ for name, payload in {
     require(payload["production_grade_validation_claimed"] is False, f"{name} production claim changed")
     require(payload["formal_convergence_proof_claimed"] is False, f"{name} convergence claim changed")
 
-print(json.dumps({"status": "ok", "checked_endpoints": 31}, indent=2))
+print(json.dumps({"status": "ok", "checked_endpoints": 33}, indent=2))
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

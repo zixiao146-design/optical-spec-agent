@@ -485,6 +485,32 @@
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "proprietary_solver_required": false
+    },
+    {
+      "method": "GET",
+      "request_file": null,
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false,
+      "name": "backend-capability-report",
+      "endpoint": "/api/backend-capability-report",
+      "response_file": "backend_capability_report_response.json"
+    },
+    {
+      "method": "GET",
+      "request_file": null,
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false,
+      "name": "design-case-cross-checks",
+      "endpoint": "/api/design-case-cross-checks",
+      "response_file": "design_case_cross_checks_response.json"
     }
   ]
 }

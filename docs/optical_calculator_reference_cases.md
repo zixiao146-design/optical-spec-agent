@@ -90,6 +90,8 @@ responses with safety flags preserved.
 ## Artifacts
 
 Reference JSON cases live under `examples/optics_reference_cases/`.
+Backend capability reporting in `docs/backend_capability_report.md` lists these
+reference cases alongside calculator endpoints and failure modes.
 
 ## Safety
 

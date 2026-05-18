@@ -41,6 +41,8 @@ Hardened frontend demo checks are documented in
 | example collaboration | `POST /api/examples/{example_id}/agent-trace` | API-first | Builds an Agent Trace Timeline for a bundled example. |
 | command-center task session | `POST /api/agent-session` | API-first | Natural language goal to optical intent, design case, plan, artifacts, permission gates, tool-call ledger, evidence, and next actions. |
 | backend tool capabilities | `GET /api/tool-capabilities` | API-first | Reports internal tools, external solver detection, and disabled publication/release controls without executing solvers. |
+| backend capability report | `GET /api/backend-capability-report` | API-first | Reports package, sub-agent, internal tool, calculator, design-case, and blocked action reality. |
+| design case cross-checks | `GET /api/design-case-cross-checks` | API-first | Cross-checks bundled examples against expected calculator or adapter-trace behavior. |
 | optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/thin-film-spectrum`, `POST /api/optics/quarter-wave-ar`, `POST /api/optics/paraxial-lens`, `POST /api/optics/paraxial-system`, `POST /api/optics/two-lens-relay`, `POST /api/optics/gaussian-beam`, `POST /api/optics/gaussian-beam-series`, `POST /api/optics/gaussian-beam-focus`, `POST /api/optics/waveguide-estimate`, `POST /api/optics/waveguide-sweep`, `POST /api/optics/waveguide-single-mode-range` | API-first | Local preview/design-assist calculators with sweeps and case helpers; no production-grade validation claim. |
 
 ## Shared boundaries
@@ -58,3 +60,7 @@ Hardened frontend demo checks are documented in
 - `scripts/smoke_agent_api.sh` and `scripts/check_api_fixtures.py` provide
   local API smoke and fixture consistency checks without uploading, publishing,
   creating tags, or creating releases.
+- `scripts/generate_backend_capability_report.py` and
+  `scripts/smoke_backend_report.sh` provide backend capability reporting and
+  design-case cross-check smoke without solver, LLM, upload, tag, or release
+  actions.

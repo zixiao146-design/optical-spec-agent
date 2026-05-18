@@ -27,6 +27,12 @@ Run `python scripts/audit_sub_agents.py` for the live audit. If
 `OSA_SUB_AGENT_AUDIT_JSON=/tmp/audit.json` is set, the script writes a JSON
 report.
 
+For the fuller backend capability report, run
+`python scripts/generate_backend_capability_report.py` or call
+`GET /api/backend-capability-report`. That report records sub-agent execution,
+internal tool calls, calculator reference-case status, design-case
+cross-checks, and blocked external actions in one structured payload.
+
 ## Internal Python Tools
 
 | Tool | Called? | Default allowed? | Status |
@@ -44,6 +50,8 @@ report.
 | `optics.gaussian_beam.series` | yes for Gaussian beam goals | yes | Propagation series and focus preview. |
 | `optics.waveguide.v_number` | yes through API | yes | Single slab V-number estimate. |
 | `optics.waveguide.sweep` | yes for waveguide goals | yes | V-number sweep and single-mode range preview. |
+| `backend_capability_report.generate` | yes through smoke/report script and API | yes | Reports importable/callable/executed backend reality. |
+| `design_case_cross_checks.run` | yes through smoke/report script and API | yes | Verifies examples map to expected calculator or adapter trace behavior. |
 
 ## External Solvers
 
@@ -78,5 +86,6 @@ The following are not exposed as backend Agent Studio actions:
 - No release is created.
 - Optical calculators are preview/design-assist only.
 - Calculator quality fields and reference cases are sanity checks only.
+- Backend capability reports and design case cross-checks are preview/design-assist evidence only.
 - Production-grade physical validation is not claimed.
 - Formal convergence proof is not claimed.

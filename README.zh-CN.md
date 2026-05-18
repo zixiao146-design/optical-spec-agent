@@ -55,13 +55,18 @@ GeometryAgent、AdapterAgent、WorkflowAgent、EvidenceAgent、SafetyAgent 和
 RecommendationAgent 的协作贡献。新增 `docs/agent_command_center.zh-CN.md`
 Agent 命令中心会把自然语言光学设计目标转换成确定性的本地任务会话：光学意图、设计案例、agent 计划、权限门控、产物、证据和下一步建议。后端现在还记录
 `docs/tool_call_reality_matrix.md` tool-call reality matrix、
-`docs/backend_functionality_status.md` 后端能力状态，并加入
+`docs/backend_functionality_status.md` 后端能力状态、
+`docs/backend_capability_report.zh-CN.md` 后端能力报告、
+`docs/design_case_cross_checks.zh-CN.md` 设计案例交叉检查，并加入
 `docs/optical_calculators.zh-CN.md` 本地光学预览计算器：薄膜叠层、近轴透镜、高斯光束和波导 V-number。
 计算器层现在还包含面向案例的薄膜光谱、四分之一波长 AR、高斯光束序列/聚焦、
 近轴系统/双透镜 relay、波导厚度扫描/单模范围等 helper，见
 `docs/optical_calculator_case_integration.zh-CN.md`。参考 sanity cases 和响应
 quality 字段见 `docs/optical_calculator_reference_cases.zh-CN.md`。这些计算器只用于
 design-assist 预览，不运行外部求解器、不调用外部 LLM，也不声明生产级验证。
+后端能力报告会说明哪些子智能体和内部工具在样例 session 中实际执行，
+哪些计算器只是 sanity-checked preview，以及哪些外部 solver/LLM/upload/tag/release
+动作仍被默认阻断。
 示例库会把示例、材料建议、适配器推荐、工作流计划、产物预览、验证证据和下一步建议串起来。这些能力仍保持 preview-first：默认不执行外部
 solver、默认不调用外部 LLM、材料值不是生产级光学常数，也不会提供
 PyPI/TestPyPI 上传或 GitHub tag/release 控制。

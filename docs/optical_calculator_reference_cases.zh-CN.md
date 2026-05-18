@@ -83,6 +83,8 @@ API endpoint 保持稳定错误响应，并保留安全标记。
 ## 示例文件
 
 参考 JSON 算例位于 `examples/optics_reference_cases/`。
+`docs/backend_capability_report.zh-CN.md` 会把这些 reference cases 和计算器
+endpoint、failure modes 一起列入后端能力报告。
 
 ## 安全边界
 

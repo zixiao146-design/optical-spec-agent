@@ -53,6 +53,8 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `agent_session_tool_ledger_response.json`
 - `agent_session_error_empty_goal_response.json`
 - `tool_capabilities_response.json`
+- `backend_capability_report_response.json`
+- `design_case_cross_checks_response.json`
 - `thin_film_request.json`
 - `thin_film_response.json`
 - `thin_film_spectrum_request.json`
@@ -89,6 +91,9 @@ evidence, and next actions. The tool capabilities and optical calculator
 fixtures show backend tool-call reality and preview/design-assist calculations.
 Calculator fixtures include `quality`, `warnings`, `assumptions`, and
 `limitations` fields; `quality.quality_level` is `sanity_checked_preview`.
+Backend capability report fixtures show package status, sub-agent execution,
+internal tool calls, calculator reference-case status, design-case cross-checks,
+and blocked external actions.
 They preserve the same no-solver, no-external-LLM, no-upload, no-tag, and
 no-release boundaries.
 

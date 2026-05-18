@@ -77,7 +77,9 @@ optical intent, design case, agent plan, permission gates, artifacts, evidence,
 and recommended next actions.
 The backend now also records a
 [`tool-call reality matrix`](docs/tool_call_reality_matrix.md), live
-[`backend functionality status`](docs/backend_functionality_status.md), and
+[`backend functionality status`](docs/backend_functionality_status.md),
+generated [`backend capability report`](docs/backend_capability_report.md),
+[`design case cross-checks`](docs/design_case_cross_checks.md), and
 local preview [`optical calculators`](docs/optical_calculators.md) for
 thin-film stacks, paraxial lenses, Gaussian beams, and waveguide V-number
 estimates. The calculator layer now includes case-oriented helpers for thin-film
@@ -89,6 +91,9 @@ Reference sanity cases and response quality fields are documented in
 [`optical calculator reference cases`](docs/optical_calculator_reference_cases.md).
 These calculators are design-assist previews only; they do not run external
 solvers, call external LLMs, or claim production-grade validation.
+The capability report proves which sub-agents and internal tools execute in
+sample sessions, which calculators are sanity-checked previews, and which
+external solver/LLM/upload/tag/release actions remain blocked.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

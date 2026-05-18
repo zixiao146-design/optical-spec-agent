@@ -30,6 +30,8 @@ def test_smoke_agent_api_script_exists_and_does_not_publish_or_release():
         "/api/validation-evidence",
         "/api/readiness",
         "/api/tool-capabilities",
+        "/api/backend-capability-report",
+        "/api/design-case-cross-checks",
         "/api/optics/thin-film",
         "/api/optics/thin-film-spectrum",
         "/api/optics/quarter-wave-ar",

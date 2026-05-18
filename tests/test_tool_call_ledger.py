@@ -55,3 +55,17 @@ def test_calculator_ledger_entries_are_intent_dependent():
     gaussian = build_agent_task_session("Plan a Gaussian beam propagation preview.")
     names = {entry.tool_name for entry in gaussian.tool_call_ledger}
     assert "optics.gaussian_beam.series" in names
+
+
+def test_backend_report_and_cross_checks_reflect_ledger_reality():
+    from optical_spec_agent.agents.capability_report import generate_backend_capability_report
+
+    report = generate_backend_capability_report()
+    assert any(tool.tool_name == "optical_calculators" for tool in report.internal_tools)
+    assert all(action.executed is False for action in report.blocked_external_actions)
+    assert any(
+        check.example_id == "thin_film_coating"
+        and check.status == "pass"
+        and check.expected_calculator == "optics.thin_film"
+        for check in report.design_case_cross_checks
+    )

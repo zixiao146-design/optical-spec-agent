@@ -6,6 +6,19 @@ Current public prerelease: v0.9.0rc6. Current main development version:
 This document records what the backend can actually import, call, execute, or
 block.
 
+The generated backend capability report now provides the same reality check in
+machine-readable and Markdown form:
+
+```bash
+python scripts/generate_backend_capability_report.py \
+  --json-out /tmp/osa-backend-capability-report.json \
+  --markdown-out /tmp/osa-backend-capability-report.md
+./scripts/smoke_backend_report.sh
+```
+
+The live API surfaces are `GET /api/backend-capability-report` and
+`GET /api/design-case-cross-checks`.
+
 ## Installed / Callable / Executed
 
 | Capability | Installed/importable | Callable | Executed in backend smoke |
@@ -23,6 +36,8 @@ block.
 | Gaussian beam series / focus helper | yes | yes | yes |
 | Waveguide V-number preview calculator | yes | yes | yes |
 | Waveguide sweep / single-mode range helper | yes | yes | yes |
+| Backend capability report generator | yes | yes | yes |
+| Design case cross-check module | yes | yes | yes |
 
 ## Case Integration
 
@@ -35,6 +50,10 @@ Agent task sessions now attach calculator result summaries where applicable:
 
 These calls are internal Python design-assist calculations and are recorded in
 `tool_call_ledger`; external solvers remain unexecuted.
+
+`docs/design_case_cross_checks.md` records the current example-to-calculator
+mapping and pass/warning/fail semantics. The bundled cases currently cross-check
+as local preview/design-assist workflows, not production-grade validation.
 
 Calculator responses now expose `quality`, `warnings`, `assumptions`, and
 `limitations`. Formula-level reference cases are documented in
@@ -69,6 +88,7 @@ Use:
 ```bash
 python scripts/audit_sub_agents.py
 ./scripts/smoke_backend_capabilities.sh
+./scripts/smoke_backend_report.sh
 ```
 
 Both scripts are local-only and print:

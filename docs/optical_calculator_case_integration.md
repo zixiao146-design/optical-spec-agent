@@ -24,6 +24,11 @@ Each calculator artifact now carries `quality.quality_level=sanity_checked_previ
 Where applicable, `quality.reference_case` points to a formula sanity check
 documented in `docs/optical_calculator_reference_cases.md`.
 
+`docs/design_case_cross_checks.md` and `GET /api/design-case-cross-checks`
+now verify the current case mapping against real `AgentTaskSession` output. The
+cross-checks prove which examples call calculators and which examples rely on
+material/adapter traces only.
+
 ## Safety boundary
 
 All calculator integration is local and deterministic:

@@ -59,6 +59,10 @@ from optical_spec_agent.api.models import (
     WorkflowPlanResponse,
 )
 from optical_spec_agent.agents.orchestrator import build_agent_trace
+from optical_spec_agent.agents.capability_report import (
+    BackendCapabilityReport,
+    generate_backend_capability_report,
+)
 from optical_spec_agent.agents.task_session import build_agent_task_session
 from optical_spec_agent.adapters.registry import (
     AdapterRegistryError,
@@ -71,6 +75,10 @@ from optical_spec_agent.examples.registry import (
     build_example_agent_trace,
     get_optical_design_example,
     list_optical_design_examples,
+)
+from optical_spec_agent.examples.cross_check import (
+    DesignCaseCrossChecksResponse,
+    cross_check_all_design_cases,
 )
 from optical_spec_agent.materials.catalog import (
     get_material,
@@ -690,6 +698,20 @@ def agent_tool_capabilities():
             "Run scripts/audit_sub_agents.py for installed/callable/executed status.",
         ],
     )
+
+
+@router.get("/api/backend-capability-report", response_model=BackendCapabilityReport)
+def agent_backend_capability_report():
+    """Report what backend capabilities are importable, callable, and executed."""
+
+    return generate_backend_capability_report()
+
+
+@router.get("/api/design-case-cross-checks", response_model=DesignCaseCrossChecksResponse)
+def agent_design_case_cross_checks():
+    """Cross-check local optical design examples against backend task sessions."""
+
+    return cross_check_all_design_cases()
 
 
 @router.post(

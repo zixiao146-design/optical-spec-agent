@@ -22,6 +22,10 @@
 适用时，`quality.reference_case` 会指向
 `docs/optical_calculator_reference_cases.zh-CN.md` 中记录的公式 sanity check。
 
+`docs/design_case_cross_checks.zh-CN.md` 和 `GET /api/design-case-cross-checks`
+会把当前案例映射和真实 `AgentTaskSession` 输出交叉检查，说明哪些示例调用了计算器，
+哪些示例只需要材料/适配器 trace。
+
 ## 安全边界
 
 所有计算器集成都保持本地、确定性和 preview/design-assist：

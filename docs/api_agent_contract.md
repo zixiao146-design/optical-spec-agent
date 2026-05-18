@@ -162,6 +162,8 @@ endpoint:
 - `POST /api/optics/waveguide-estimate`
 - `POST /api/optics/waveguide-sweep`
 - `POST /api/optics/waveguide-single-mode-range`
+- `GET /api/backend-capability-report`
+- `GET /api/design-case-cross-checks`
 
 This endpoint turns a natural language optical design goal into a
 deterministic local Agent Task Session: optical intent, selected design case, material
@@ -183,3 +185,13 @@ Calculator responses expose explicit `quality`, `warnings`, `assumptions`, and
 `sanity_checked_preview`; reference-case formulas are documented in
 `docs/optical_calculator_reference_cases.md`. These fields improve numeric
 sanity evidence without changing the no-production-validation boundary.
+
+The backend-readiness report endpoints add maintainer-facing proof of backend
+reality. `GET /api/backend-capability-report` returns package status,
+sub-agent execution status, internal tool import/call/execution status,
+calculator quality/reference-case status, design-case cross-check summaries,
+and blocked external actions. `GET /api/design-case-cross-checks` verifies
+bundled optical design examples against expected calculator or adapter-trace
+behavior. These endpoints do not run external solvers, call external LLMs,
+upload packages, create tags/releases, or claim production-grade physical
+validation.

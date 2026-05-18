@@ -329,10 +329,13 @@ Current v1.0 evidence artifacts:
   external LLMs.
 - Backend tool-call reality evidence:
   `docs/tool_call_reality_matrix.md`, `docs/backend_functionality_status.md`,
-  `scripts/audit_sub_agents.py`, and `scripts/smoke_backend_capabilities.sh`;
+  `docs/backend_capability_report.md`, `docs/design_case_cross_checks.md`,
+  `scripts/audit_sub_agents.py`, `scripts/smoke_backend_capabilities.sh`, and
+  `scripts/smoke_backend_report.sh`;
   these document installed/callable/executed status, task-session tool-call
   ledgers, blocked solver/LLM/upload/tag/release actions, and local optical
-  preview calculators.
+  preview calculators. The generated report also cross-checks bundled design
+  cases against expected calculator or adapter-trace behavior.
 - Optical calculator evidence:
   `docs/optical_calculators.md`, `docs/optical_calculators.zh-CN.md`,
   `docs/optical_calculator_case_integration.md`,

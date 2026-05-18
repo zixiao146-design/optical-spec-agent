@@ -101,6 +101,8 @@ curl -X POST http://127.0.0.1:8000/api/agent-session \
   -H "Content-Type: application/json" \
   --data @examples/api/agent_session_request_nanoparticle.json
 curl http://127.0.0.1:8000/api/tool-capabilities
+curl http://127.0.0.1:8000/api/backend-capability-report
+curl http://127.0.0.1:8000/api/design-case-cross-checks
 curl -X POST http://127.0.0.1:8000/api/optics/thin-film \
   -H "Content-Type: application/json" \
   --data @examples/api/thin_film_request.json
@@ -149,3 +151,6 @@ validation.
 Tool capabilities and optical calculator examples are backend reality checks
 and design-assist previews. These examples do not call an external LLM, run
 solvers, upload packages, or create tags/releases.
+Backend capability report and design case cross-check calls prove what is
+installed, callable, executed, or blocked without changing the preview-only
+safety boundary.
