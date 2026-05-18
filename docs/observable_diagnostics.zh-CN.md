@@ -39,6 +39,10 @@ plane、mode index 或 geometry region。如果目标中缺少某个值，后端
 tool-call ledger。真实光场、频谱、raytrace 或 band 结果通常需要显式批准后执行外部
 求解器；默认不会产生真实 solver monitor result。
 
+`examples/adapter_native_golden/` 中的 adapter-native golden cases 会检查
+observable diagnostics 是否能稳定进入 Meep 纳米颗粒散射、MPB 光子晶体能带、
+Gmsh 网格区域、Elmer FEM placeholder 和 Optiland 像面预览的 adapter mapping。
+
 ## 安全边界
 
 不声明生产级物理验证。不声明形式化收敛证明。观测量诊断是本地 design-assist 元数据，

@@ -1,0 +1,64 @@
+[
+  {
+    "observable_kind": "image_plane",
+    "user_facing_label": "Image plane",
+    "user_facing_label_zh": "像面",
+    "required_inputs": [
+      "object distance",
+      "focal length",
+      "ray/image plane convention"
+    ],
+    "default_assumptions": [
+      "First-order paraxial approximation."
+    ],
+    "adapter_compatibility": {
+      "meep": "preview metadata; real FDTD result requires Meep execution",
+      "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+      "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+      "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+      "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+    },
+    "preview_supported": true,
+    "solver_execution_required_for_real_result": false,
+    "notes": [
+      "Local paraxial calculators can estimate image distance.",
+      "Source and monitor metadata are preview-only."
+    ],
+    "warnings": [
+      "No real raytrace/MTF/spot diagram has been computed."
+    ],
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  {
+    "observable_kind": "ray_fan",
+    "user_facing_label": "Ray fan",
+    "user_facing_label_zh": "光线扇形图",
+    "required_inputs": [
+      "ray bundle",
+      "surface sequence",
+      "image plane"
+    ],
+    "default_assumptions": [
+      "Ray fan remains an Optiland preview concept."
+    ],
+    "adapter_compatibility": {
+      "meep": "preview metadata; real FDTD result requires Meep execution",
+      "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+      "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+      "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+      "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+    },
+    "preview_supported": true,
+    "solver_execution_required_for_real_result": true,
+    "notes": [
+      "Maps to ray-tracing preview metadata.",
+      "Source and monitor metadata are preview-only."
+    ],
+    "warnings": [
+      "No ray fan has been traced."
+    ],
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+]

@@ -20,6 +20,11 @@ adapter-native preview mapping -> adapter preview metadata -> tool-call ledger
 The mapping tells maintainers what a real solver setup would need later; it is
 not a real solver monitor result.
 
+Golden preview cases for the five registered adapter families are documented in
+`docs/adapter_native_golden_cases.md` and stored under
+`examples/adapter_native_golden/`. They lock expected source, monitor,
+observable, and adapter-native fragments without executing solvers.
+
 ## Meep
 
 - Plane-wave-like source intent maps to Meep source metadata.
@@ -68,6 +73,9 @@ Agent sessions record `optical_language.diagnose_observable` and
 `optical_language.map_source_monitor_to_adapter` as executed internal Python
 tool calls. External solver records remain `executed=false` and blocked or
 explicit-approval-only.
+
+`scripts/check_adapter_native_golden.py` verifies the Meep, MPB, Gmsh, Elmer,
+and Optiland golden preview cases through local API/TestClient calls.
 
 ## Safety Boundary
 

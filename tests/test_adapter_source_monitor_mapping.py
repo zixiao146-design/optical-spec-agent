@@ -62,6 +62,7 @@ def test_optiland_mapping_includes_ray_bundle_and_image_plane():
     assert mapping.adapter_name == "optiland"
     assert any("ray bundle" in term.lower() for term in mapping.native_source_terms)
     assert any("image plane" in term.lower() for term in mapping.native_monitor_terms)
+    assert any("focal spot" in term.lower() for term in mapping.native_monitor_terms)
 
 
 def test_unknown_adapter_mapping_returns_stable_diagnostics():

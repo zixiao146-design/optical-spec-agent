@@ -66,3 +66,16 @@ def test_real_observable_results_require_solver_where_appropriate():
     )
     assert any(item.solver_execution_required_for_real_result for item in diagnostics)
     assert any("preview" in " ".join(item.notes).lower() for item in diagnostics)
+
+
+def test_mesh_region_observable_can_support_gmsh_golden_case():
+    inference = infer_source_monitor_from_goal("mesh region physical group preview")
+    monitor = inference.monitor_model.model_copy(
+        update={
+            "monitor_type": "unknown",
+            "observable": "mesh region / physical group preview",
+            "region": "source and monitor physical groups",
+        }
+    )
+    diagnostics = diagnose_observable(inference.source_model, monitor)
+    assert {item.observable_kind for item in diagnostics} == {"mesh_region"}

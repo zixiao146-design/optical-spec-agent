@@ -1,0 +1,11 @@
+meep
+plane_wave
+broadband
+GaussianSource
+flux monitor metadata
+DFT field monitor metadata
+scattering_spectrum
+extinction_spectrum
+requires_solver_for_real_result
+external_solver_executed
+false

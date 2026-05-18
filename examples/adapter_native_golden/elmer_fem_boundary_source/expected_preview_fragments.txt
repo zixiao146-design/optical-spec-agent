@@ -1,0 +1,11 @@
+elmer
+FEM source/boundary placeholders
+Boundary Condition placeholders
+Body Force/source section metadata
+ResultOutputSolver placeholder
+ElmerSolver
+mode_overlap
+mode_frequency
+requires_solver_for_real_result
+external_solver_executed
+false

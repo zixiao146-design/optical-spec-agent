@@ -1,0 +1,34 @@
+{
+  "adapter_name": "gmsh",
+  "source_mapping_summary": "Gmsh does not execute optical sources; source intent is attached as geometry/mesh annotation metadata.",
+  "monitor_mapping_summary": "Monitor intent maps to physical group / mesh region annotations, not optical fields.",
+  "native_source_terms": [
+    "geometry comments",
+    "mesh-size hints",
+    "source-region annotation"
+  ],
+  "native_monitor_terms": [
+    "Physical Surface/Volume groups",
+    "monitor-region annotation"
+  ],
+  "supported_observables": [
+    "mesh_region"
+  ],
+  "unsupported_observables": [],
+  "preview_metadata": {
+    "source_annotation": "plane_wave",
+    "monitor_annotation": "source and monitor physical groups",
+    "observable": "mesh region / physical group preview"
+  },
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "diagnostics": [
+    "Gmsh preview can preserve optical intent as mesh annotations."
+  ],
+  "warnings": [
+    "No optical observable is computed by Gmsh alone."
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

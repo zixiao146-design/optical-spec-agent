@@ -14,6 +14,7 @@ def test_smoke_backend_capabilities_script_is_safe_and_covers_endpoints():
     text = path.read_text(encoding="utf-8")
     for phrase in [
         "scripts/audit_sub_agents.py",
+        "scripts/check_adapter_native_golden.py",
         "/api/tool-capabilities",
         "/api/agent-session",
         "/api/optical-language/infer",
@@ -37,6 +38,7 @@ def test_smoke_backend_capabilities_script_is_safe_and_covers_endpoints():
         "MISSING INPUT DIAGNOSTICS PASSED",
         "OBSERVABLE DIAGNOSTICS PASSED",
         "ADAPTER SOURCE/MONITOR MAPPING PASSED",
+        "ADAPTER NATIVE GOLDEN CHECKS PASSED",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",
         "NO UPLOAD PERFORMED",

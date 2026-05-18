@@ -248,7 +248,7 @@ def _optiland_mapping(
             f"{monitor_model.monitor_type} maps to image-plane, spot, or ray-fan preview metadata."
         ),
         native_source_terms=["object point/field metadata", "ray bundle", "Gaussian beam note"],
-        native_monitor_terms=["image plane", "spot diagram plan", "ray fan plan"],
+        native_monitor_terms=["image plane", "focal spot", "spot diagram plan", "ray fan plan"],
         supported_observables=supported,
         unsupported_observables=unsupported,
         preview_metadata={

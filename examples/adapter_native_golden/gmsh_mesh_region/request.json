@@ -1,0 +1,29 @@
+{
+  "adapter_name": "gmsh",
+  "goal": "Create local mesh region physical group annotations for source and monitor metadata.",
+  "language": "en",
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_nm": 633.0,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "notes": "Geometry-only source annotation for mesh preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "polarization"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "unknown",
+    "observable": "mesh region / physical group preview",
+    "region": "source and monitor physical groups",
+    "frequency_or_wavelength_sampling": "not applicable",
+    "output_units": "mesh annotations",
+    "notes": "Mesh region metadata only; no optical field monitor is executed.",
+    "defaulted_fields": [
+      "monitor_region"
+    ],
+    "preview_only": true
+  }
+}

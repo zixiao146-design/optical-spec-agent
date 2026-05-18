@@ -7,6 +7,7 @@ set -euo pipefail
 # - no upload, tag, or release actions
 
 python scripts/audit_sub_agents.py
+python scripts/check_adapter_native_golden.py
 
 python - <<'PY'
 from fastapi.testclient import TestClient
@@ -258,6 +259,7 @@ print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
 print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
+print("ADAPTER NATIVE GOLDEN CHECKS PASSED")
 print("Backend capabilities smoke passed")
 PY
 
@@ -266,6 +268,7 @@ echo "SOURCE/MONITOR INFERENCE PASSED"
 echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "OBSERVABLE DIAGNOSTICS PASSED"
 echo "ADAPTER SOURCE/MONITOR MAPPING PASSED"
+echo "ADAPTER NATIVE GOLDEN CHECKS PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

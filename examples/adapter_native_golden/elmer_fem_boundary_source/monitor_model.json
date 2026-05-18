@@ -1,0 +1,12 @@
+{
+  "monitor_type": "mode_overlap",
+  "observable": "V-number and single-mode likelihood preview",
+  "region": "slab core/cladding cross-section",
+  "frequency_or_wavelength_sampling": "single wavelength",
+  "output_units": "dimensionless V-number",
+  "notes": "Local scalar estimate, not a mode-solver monitor.",
+  "defaulted_fields": [
+    "observable"
+  ],
+  "preview_only": true
+}

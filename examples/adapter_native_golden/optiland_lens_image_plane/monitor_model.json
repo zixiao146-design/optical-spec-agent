@@ -1,0 +1,12 @@
+{
+  "monitor_type": "image_plane",
+  "observable": "image distance and magnification preview",
+  "region": "paraxial image plane",
+  "frequency_or_wavelength_sampling": "single design wavelength",
+  "output_units": "mm and dimensionless magnification",
+  "notes": "ABCD calculator output, not ray-trace validation.",
+  "defaulted_fields": [
+    "observable"
+  ],
+  "preview_only": true
+}

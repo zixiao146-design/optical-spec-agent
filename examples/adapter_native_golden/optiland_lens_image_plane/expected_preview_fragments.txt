@@ -1,0 +1,10 @@
+optiland
+ray bundle
+image plane
+focal spot
+ray_fan
+spot diagram plan
+Real raytrace
+requires_solver_for_real_result
+external_solver_executed
+false

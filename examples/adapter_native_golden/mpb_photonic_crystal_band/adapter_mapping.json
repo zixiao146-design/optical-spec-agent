@@ -1,0 +1,36 @@
+{
+  "adapter_name": "mpb",
+  "source_mapping_summary": "Time-domain source metadata is interpreted as eigenmode/band context; MPB does not use a driven FDTD source in this preview.",
+  "monitor_mapping_summary": "band_structure maps to k-point, band-frequency, or mode metadata.",
+  "native_source_terms": [
+    "lattice/eigenmode context",
+    "mode parity / mode index metadata"
+  ],
+  "native_monitor_terms": [
+    "k-points",
+    "num_bands",
+    "band frequencies",
+    "mode field output plan"
+  ],
+  "supported_observables": [
+    "band_structure",
+    "mode_frequency"
+  ],
+  "unsupported_observables": [],
+  "preview_metadata": {
+    "mode_index": 0,
+    "sampling": "k-path / band index scaffold",
+    "observable": "band diagram preview"
+  },
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "diagnostics": [
+    "MPB mapping is meaningful for band/eigenmode-oriented observables."
+  ],
+  "warnings": [
+    "Real band frequencies or mode fields require MPB execution."
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

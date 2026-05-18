@@ -1,0 +1,16 @@
+{
+  "source_type": "plane_wave",
+  "wavelength_start_nm": null,
+  "wavelength_stop_nm": null,
+  "wavelength_nm": 633.0,
+  "polarization": "linear_x",
+  "incidence_direction": "normal",
+  "beam_waist_um": null,
+  "mode_index": null,
+  "notes": "Geometry-only source annotation for mesh preview.",
+  "defaulted_fields": [
+    "wavelength_nm",
+    "polarization"
+  ],
+  "preview_only": true
+}

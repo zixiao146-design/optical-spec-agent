@@ -1,0 +1,17 @@
+{
+  "source_type": "mode_source",
+  "wavelength_start_nm": null,
+  "wavelength_stop_nm": null,
+  "wavelength_nm": 1550.0,
+  "polarization": "TE-like",
+  "incidence_direction": "guided",
+  "beam_waist_um": null,
+  "mode_index": 0,
+  "notes": "Mode-source metadata for scalar slab-waveguide estimate.",
+  "defaulted_fields": [
+    "wavelength_nm",
+    "mode_index",
+    "polarization"
+  ],
+  "preview_only": true
+}

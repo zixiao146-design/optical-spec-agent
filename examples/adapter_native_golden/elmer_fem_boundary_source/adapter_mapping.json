@@ -1,0 +1,34 @@
+{
+  "adapter_name": "elmer",
+  "source_mapping_summary": "mode_source maps to FEM source/boundary placeholders.",
+  "monitor_mapping_summary": "mode_overlap maps to FEM solver/output section placeholders.",
+  "native_source_terms": [
+    "Boundary Condition placeholders",
+    "Body Force/source section metadata"
+  ],
+  "native_monitor_terms": [
+    "ResultOutputSolver placeholder",
+    "field/output variable plan"
+  ],
+  "supported_observables": [
+    "mode_overlap",
+    "mode_frequency"
+  ],
+  "unsupported_observables": [],
+  "preview_metadata": {
+    "source_boundary_placeholder": "mode_source",
+    "monitor_output_placeholder": "mode_overlap",
+    "observable": "V-number and single-mode likelihood preview"
+  },
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "diagnostics": [
+    "Elmer preview preserves source/monitor intent as SIF placeholders."
+  ],
+  "warnings": [
+    "Real FEM fields require ElmerSolver execution and reviewed mesh/material setup."
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

@@ -1,0 +1,157 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Real raytrace, spot, or ray fan results require Optiland execution."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Adapter-native mapping is preview metadata only.",
+      "No adapter or external solver process was executed."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Inspect supported_observables and unsupported_observables.",
+    "Use /api/adapter-preview for scaffold content; run solvers only after explicit approval."
+  ],
+  "matched_template_id": "paraxial_lens_imaging",
+  "source_model": {
+    "source_type": "ray_bundle",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 550.0,
+    "polarization": "not_applicable_first_order",
+    "incidence_direction": "z_plus",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "First-order ray-bundle metadata for paraxial lens preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "incidence_direction"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "image_plane",
+    "observable": "image distance and magnification preview",
+    "region": "paraxial image plane",
+    "frequency_or_wavelength_sampling": "single design wavelength",
+    "output_units": "mm and dimensionless magnification",
+    "notes": "ABCD calculator output, not ray-trace validation.",
+    "defaulted_fields": [
+      "observable"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "image_plane",
+      "user_facing_label": "Image plane",
+      "user_facing_label_zh": "像面",
+      "required_inputs": [
+        "object distance",
+        "focal length",
+        "ray/image plane convention"
+      ],
+      "default_assumptions": [
+        "First-order paraxial approximation."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": false,
+      "notes": [
+        "Local paraxial calculators can estimate image distance.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No real raytrace/MTF/spot diagram has been computed."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "ray_fan",
+      "user_facing_label": "Ray fan",
+      "user_facing_label_zh": "光线扇形图",
+      "required_inputs": [
+        "ray bundle",
+        "surface sequence",
+        "image plane"
+      ],
+      "default_assumptions": [
+        "Ray fan remains an Optiland preview concept."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Maps to ray-tracing preview metadata.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No ray fan has been traced."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "optiland",
+    "source_mapping_summary": "ray_bundle maps to object/ray-bundle metadata for ray optics previews.",
+    "monitor_mapping_summary": "image_plane maps to image-plane, spot, or ray-fan preview metadata.",
+    "native_source_terms": [
+      "object point/field metadata",
+      "ray bundle",
+      "Gaussian beam note"
+    ],
+    "native_monitor_terms": [
+      "image plane",
+      "focal spot",
+      "spot diagram plan",
+      "ray fan plan"
+    ],
+    "supported_observables": [
+      "image_plane",
+      "ray_fan"
+    ],
+    "unsupported_observables": [],
+    "preview_metadata": {
+      "wavelength_nm": 550.0,
+      "beam_waist_um": null,
+      "monitor_region": "paraxial image plane",
+      "observable": "image distance and magnification preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "Optiland preview can carry ray source and image-plane intent."
+    ],
+    "warnings": [
+      "Real raytrace, spot, or ray fan results require Optiland execution."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

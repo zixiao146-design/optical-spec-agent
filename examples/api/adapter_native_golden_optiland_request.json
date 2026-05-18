@@ -1,0 +1,6 @@
+{
+  "adapter_name": "optiland",
+  "goal": "Create a lens imaging preview with a ray bundle and image plane focal spot diagnostics.",
+  "template_id": "paraxial_lens_imaging",
+  "language": "en"
+}

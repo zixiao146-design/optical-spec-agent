@@ -47,6 +47,8 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Source/monitor missing-input diagnostics zh-CN](source_monitor_missing_input_diagnostics.zh-CN.md)
 - [Adapter-native source/monitor mapping](adapter_native_source_monitor_mapping.md)
 - [Adapter-native source/monitor mapping zh-CN](adapter_native_source_monitor_mapping.zh-CN.md)
+- [Adapter-native golden preview cases](adapter_native_golden_cases.md)
+- [Adapter-native golden preview cases zh-CN](adapter_native_golden_cases.zh-CN.md)
 - [Observable diagnostics](observable_diagnostics.md)
 - [Observable diagnostics zh-CN](observable_diagnostics.zh-CN.md)
 - [Optical calculators](optical_calculators.md)
@@ -180,6 +182,8 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Source/monitor missing-input diagnostics zh-CN](source_monitor_missing_input_diagnostics.zh-CN.md)
 - [Adapter-native source/monitor mapping](adapter_native_source_monitor_mapping.md)
 - [Adapter-native source/monitor mapping zh-CN](adapter_native_source_monitor_mapping.zh-CN.md)
+- [Adapter-native golden preview cases](adapter_native_golden_cases.md)
+- [Adapter-native golden preview cases zh-CN](adapter_native_golden_cases.zh-CN.md)
 - [Observable diagnostics](observable_diagnostics.md)
 - [Observable diagnostics zh-CN](observable_diagnostics.zh-CN.md)
 - [Optical calculators](optical_calculators.md)
@@ -266,6 +270,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - Optical calculator examples: `../examples/optics_calculators/`
 - Backend sub-agent audit script: `../scripts/audit_sub_agents.py`
 - Backend capabilities smoke script: `../scripts/smoke_backend_capabilities.sh`
+- Adapter-native golden preview checker: `../scripts/check_adapter_native_golden.py`
 - [Examples manifest](../examples/examples_manifest.json)
 
 ## Decisions

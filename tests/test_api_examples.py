@@ -80,6 +80,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "adapter_mapping_meep_nanoparticle_response.json" in response_files
     assert "adapter_mapping_gmsh_mesh_response.json" in response_files
     assert "adapter_mapping_mpb_photonic_crystal_response.json" in response_files
+    assert "adapter_native_golden_meep_response.json" in response_files
+    assert "adapter_native_golden_mpb_response.json" in response_files
+    assert "adapter_native_golden_gmsh_response.json" in response_files
+    assert "adapter_native_golden_elmer_response.json" in response_files
+    assert "adapter_native_golden_optiland_response.json" in response_files
     assert "adapter_preview_meep_source_monitor_response.json" in response_files
     assert "agent_session_adapter_mapping_nanoparticle_response.json" in response_files
     assert "agent_session_source_monitor_nanoparticle_response.json" in response_files
@@ -107,6 +112,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "adapter_mapping_meep_nanoparticle_request.json" in request_files
     assert "adapter_mapping_gmsh_mesh_request.json" in request_files
     assert "adapter_mapping_mpb_photonic_crystal_request.json" in request_files
+    assert "adapter_native_golden_meep_request.json" in request_files
+    assert "adapter_native_golden_mpb_request.json" in request_files
+    assert "adapter_native_golden_gmsh_request.json" in request_files
+    assert "adapter_native_golden_elmer_request.json" in request_files
+    assert "adapter_native_golden_optiland_request.json" in request_files
     assert "adapter_preview_meep_request.json" in request_files
     assert "thin_film_request.json" in request_files
     assert "thin_film_spectrum_request.json" in request_files
@@ -145,6 +155,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "adapter_mapping_meep_nanoparticle_response.json",
         "adapter_mapping_gmsh_mesh_response.json",
         "adapter_mapping_mpb_photonic_crystal_response.json",
+        "adapter_native_golden_meep_response.json",
+        "adapter_native_golden_mpb_response.json",
+        "adapter_native_golden_gmsh_response.json",
+        "adapter_native_golden_elmer_response.json",
+        "adapter_native_golden_optiland_response.json",
         "adapter_preview_meep_source_monitor_response.json",
         "agent_session_adapter_mapping_nanoparticle_response.json",
         "agent_session_source_monitor_nanoparticle_response.json",

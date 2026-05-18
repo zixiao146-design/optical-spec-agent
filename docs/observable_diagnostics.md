@@ -43,6 +43,11 @@ an adapter preview, and record it in the tool-call ledger. A real field,
 spectrum, raytrace, or band result usually requires explicit external solver
 execution and is not produced by default.
 
+The adapter-native golden cases in `examples/adapter_native_golden/` check that
+observable diagnostics survive adapter mapping for Meep nanoparticle
+scattering, MPB photonic-crystal bands, Gmsh mesh regions, Elmer FEM
+placeholders, and Optiland image-plane previews.
+
 ## Safety Boundary
 
 No production-grade physical validation is claimed. No formal convergence proof

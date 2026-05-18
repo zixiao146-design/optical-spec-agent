@@ -1,0 +1,64 @@
+[
+  {
+    "observable_kind": "band_structure",
+    "user_facing_label": "Band structure",
+    "user_facing_label_zh": "能带结构",
+    "required_inputs": [
+      "lattice",
+      "k-point path",
+      "number of bands"
+    ],
+    "default_assumptions": [
+      "MPB k-point/band metadata remains a scaffold."
+    ],
+    "adapter_compatibility": {
+      "meep": "preview metadata; real FDTD result requires Meep execution",
+      "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+      "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+      "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+      "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+    },
+    "preview_supported": true,
+    "solver_execution_required_for_real_result": true,
+    "notes": [
+      "Maps to MPB band-frequency planning.",
+      "Source and monitor metadata are preview-only."
+    ],
+    "warnings": [
+      "No eigenfrequency solve was run."
+    ],
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  {
+    "observable_kind": "mode_frequency",
+    "user_facing_label": "Mode frequency / effective index",
+    "user_facing_label_zh": "模式频率 / 有效折射率",
+    "required_inputs": [
+      "mode index",
+      "wavelength/frequency",
+      "geometry cross-section"
+    ],
+    "default_assumptions": [
+      "Mode metadata is scalar/design-assist unless a mode solver runs."
+    ],
+    "adapter_compatibility": {
+      "meep": "preview metadata; real FDTD result requires Meep execution",
+      "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+      "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+      "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+      "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+    },
+    "preview_supported": true,
+    "solver_execution_required_for_real_result": true,
+    "notes": [
+      "Useful for waveguide and MPB/Elmer preview paths.",
+      "Source and monitor metadata are preview-only."
+    ],
+    "warnings": [
+      "No vector eigenmode has been solved."
+    ],
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+]

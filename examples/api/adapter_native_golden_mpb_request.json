@@ -1,0 +1,6 @@
+{
+  "adapter_name": "mpb",
+  "goal": "Create a photonic crystal band structure preview with k-points and mode frequencies.",
+  "template_id": "photonic_crystal_band_preview",
+  "language": "en"
+}

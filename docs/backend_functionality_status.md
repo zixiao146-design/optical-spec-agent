@@ -36,6 +36,7 @@ and `POST /api/design-requirements/match`.
 | Source/monitor missing-input diagnostics | yes | yes | yes |
 | Observable diagnostics | yes | yes | yes |
 | Adapter-native source/monitor mapping | yes | yes | yes |
+| Adapter-native golden preview checker | yes | yes | yes |
 | Thin-film preview calculator | yes | yes | yes |
 | Thin-film spectrum / quarter-wave AR helper | yes | yes | yes |
 | Paraxial lens preview calculator | yes | yes | yes |
@@ -110,6 +111,12 @@ These helpers are included in backend capability reports and agent-session
 tool-call ledgers. They infer preview source/monitor metadata and report
 missing inputs, observable requirements, and adapter-native preview semantics
 without running solvers or calling external LLMs.
+
+Adapter-native golden preview cases are stored under
+`examples/adapter_native_golden/` and checked by
+`python scripts/check_adapter_native_golden.py`. They verify Meep, MPB, Gmsh,
+Elmer, and Optiland source/monitor/observable fragments against live local API
+responses.
 
 Both scripts are local-only and print:
 

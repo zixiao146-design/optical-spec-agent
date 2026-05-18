@@ -680,6 +680,71 @@
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-native-golden-meep",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_native_golden_meep_request.json",
+      "response_file": "adapter_native_golden_meep_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-native-golden-mpb",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_native_golden_mpb_request.json",
+      "response_file": "adapter_native_golden_mpb_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-native-golden-gmsh",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_native_golden_gmsh_request.json",
+      "response_file": "adapter_native_golden_gmsh_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-native-golden-elmer",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_native_golden_elmer_request.json",
+      "response_file": "adapter_native_golden_elmer_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-native-golden-optiland",
+      "endpoint": "/api/optical-language/adapter-mapping",
+      "method": "POST",
+      "request_file": "adapter_native_golden_optiland_request.json",
+      "response_file": "adapter_native_golden_optiland_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     }
   ]
 }

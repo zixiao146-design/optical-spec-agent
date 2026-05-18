@@ -17,6 +17,11 @@ Current public prerelease: v0.9.0rc6. Current main development version:
 
 这些映射用于说明将来真正 solver 设置需要什么，不是真实 solver monitor 结果。
 
+五个已注册 adapter family 的 golden preview cases 记录在
+`docs/adapter_native_golden_cases.zh-CN.md`，fixture 位于
+`examples/adapter_native_golden/`。它们锁定 source、monitor、observable 和
+adapter-native fragments，但不执行 solver。
+
 ## Meep
 
 - 平面波式光源意图映射为 Meep source 元数据。
@@ -55,6 +60,9 @@ Current public prerelease: v0.9.0rc6. Current main development version:
 Agent session 会把 `optical_language.diagnose_observable` 和
 `optical_language.map_source_monitor_to_adapter` 记录为已执行的内部 Python
 tool call。外部 solver 记录仍为 `executed=false`，并保持 blocked 或需要显式批准。
+
+`scripts/check_adapter_native_golden.py` 会通过本地 API/TestClient 调用验证
+Meep、MPB、Gmsh、Elmer 和 Optiland 的 golden preview cases。
 
 ## 安全边界
 

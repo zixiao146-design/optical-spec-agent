@@ -1,0 +1,6 @@
+{
+  "adapter_name": "elmer",
+  "goal": "Create a FEM boundary source and result output placeholder preview for waveguide mode diagnostics.",
+  "template_id": "slab_waveguide_single_mode",
+  "language": "en"
+}

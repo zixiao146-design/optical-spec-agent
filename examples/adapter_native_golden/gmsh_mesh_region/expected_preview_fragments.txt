@@ -1,0 +1,10 @@
+gmsh
+geometry/mesh annotation metadata
+physical group
+mesh region
+Physical Surface/Volume groups
+mesh_region
+No optical observable is computed by Gmsh alone
+requires_solver_for_real_result
+external_solver_executed
+false

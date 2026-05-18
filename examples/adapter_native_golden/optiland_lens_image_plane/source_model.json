@@ -1,0 +1,16 @@
+{
+  "source_type": "ray_bundle",
+  "wavelength_start_nm": null,
+  "wavelength_stop_nm": null,
+  "wavelength_nm": 550.0,
+  "polarization": "not_applicable_first_order",
+  "incidence_direction": "z_plus",
+  "beam_waist_um": null,
+  "mode_index": null,
+  "notes": "First-order ray-bundle metadata for paraxial lens preview.",
+  "defaulted_fields": [
+    "wavelength_nm",
+    "incidence_direction"
+  ],
+  "preview_only": true
+}

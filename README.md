@@ -1210,6 +1210,13 @@ spectrum monitor. The backend can now explain how that intent maps into Meep,
 MPB, Gmsh, Elmer, or Optiland preview semantics. These are preview/design-assist
 assumptions only; no external solver monitor is executed.
 
+Adapter-native golden preview cases now live in
+[`examples/adapter_native_golden/`](examples/adapter_native_golden/) and are
+documented in
+[`docs/adapter_native_golden_cases.md`](docs/adapter_native_golden_cases.md).
+They check Meep, MPB, Gmsh, Elmer, and Optiland source/monitor/observable
+fragments against local API responses without running solvers.
+
 ## License
 
 [MIT](LICENSE)

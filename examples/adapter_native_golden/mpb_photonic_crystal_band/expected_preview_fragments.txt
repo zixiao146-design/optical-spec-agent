@@ -1,0 +1,10 @@
+mpb
+eigenmode/band context
+k-points
+band frequencies
+band_structure
+mode_frequency
+does not use a driven FDTD source
+requires_solver_for_real_result
+external_solver_executed
+false

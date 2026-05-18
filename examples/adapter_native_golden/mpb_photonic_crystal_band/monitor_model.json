@@ -1,0 +1,12 @@
+{
+  "monitor_type": "band_structure",
+  "observable": "band diagram preview",
+  "region": "reciprocal-space k-path",
+  "frequency_or_wavelength_sampling": "k-path / band index scaffold",
+  "output_units": "normalized frequency preview",
+  "notes": "MPB adapter metadata only; no band solver was run.",
+  "defaulted_fields": [
+    "sampling"
+  ],
+  "preview_only": true
+}

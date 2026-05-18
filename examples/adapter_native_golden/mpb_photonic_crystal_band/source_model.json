@@ -1,0 +1,15 @@
+{
+  "source_type": "mode_source",
+  "wavelength_start_nm": null,
+  "wavelength_stop_nm": null,
+  "wavelength_nm": null,
+  "polarization": null,
+  "incidence_direction": null,
+  "beam_waist_um": null,
+  "mode_index": 0,
+  "notes": "Eigenmode/band-structure context; no time-domain source is executed.",
+  "defaulted_fields": [
+    "mode_index"
+  ],
+  "preview_only": true
+}

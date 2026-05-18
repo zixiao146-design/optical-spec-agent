@@ -56,6 +56,7 @@ cross-checks, and blocked external actions in one structured payload.
 | `design_case_cross_checks.run` | yes through smoke/report script and API | yes | Verifies examples map to expected calculator or adapter trace behavior. |
 | `optical_language.diagnose_observable` | yes through API and agent session | yes | Reports observable taxonomy, required inputs, and preview-vs-real-result boundaries. |
 | `optical_language.map_source_monitor_to_adapter` | yes through API and agent session | yes | Maps source/monitor/observable intent to adapter-native preview semantics. |
+| `adapter_native_golden.check` | yes through backend smoke script | yes | Verifies five adapter-native golden preview cases without solver execution. |
 
 ## External Solvers
 
@@ -97,6 +98,8 @@ The following are not exposed as backend Agent Studio actions:
 - Observable diagnostics and adapter-native mapping are internal Python calls:
   `optical_language.diagnose_observable` and
   `optical_language.map_source_monitor_to_adapter`.
+- Adapter-native golden checks are local fixture checks only; they do not run
+  adapter solvers.
 - Monitor definitions are preview metadata, not executed external solver monitor
   results.
 - Production-grade physical validation is not claimed.

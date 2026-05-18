@@ -1,0 +1,87 @@
+# Adapter-Native Golden Preview Cases
+
+These golden cases prove how source, monitor, and observable intent maps into
+adapter-native preview semantics without executing external solvers. They are
+local backend fixtures for maintainers and tests, not physical validation
+results.
+
+Current status:
+
+- Current public prerelease: `v0.9.0rc6`
+- Current main development version: `0.9.0rc7.dev0`
+- PyPI: not published
+- TestPyPI: only `0.9.0rc6.dev0` uploaded and verified
+
+## Purpose
+
+The golden cases check that the backend preserves the path:
+
+```text
+natural-language goal
+-> source/monitor inference
+-> observable diagnostics
+-> adapter-native source/monitor mapping
+-> preview metadata
+```
+
+The checks are deterministic and local. They do not run Meep, MPB, Gmsh,
+ElmerSolver, Optiland, external LLMs, uploads, tags, or GitHub releases.
+
+## Golden Cases
+
+| Case | Adapter | Source intent | Monitor / observable intent | Expected native preview semantics |
+| --- | --- | --- | --- | --- |
+| `meep_nanoparticle_scattering` | Meep | plane-wave-like broadband 400-900 nm, `linear_x` | scattering / extinction spectrum | `mp.Source`, broadband / `GaussianSource` metadata, flux / DFT monitor metadata |
+| `mpb_photonic_crystal_band` | MPB | eigenmode / band context | band structure, mode frequencies | k-points, band frequencies, no driven time-domain source |
+| `gmsh_mesh_region` | Gmsh | geometry annotation only | mesh region / physical groups | physical groups and mesh-region annotations; no optical observable computed by Gmsh alone |
+| `elmer_fem_boundary_source` | Elmer | FEM source / boundary placeholder | FEM output / result placeholder | boundary condition, source term, solver/output section placeholders |
+| `optiland_lens_image_plane` | Optiland | ray bundle / object metadata | image plane, focal spot, ray fan | ray bundle, image plane, focal spot, spot diagram, ray fan preview metadata |
+
+Each case lives under `examples/adapter_native_golden/` and contains:
+
+- `request.json`
+- `source_model.json`
+- `monitor_model.json`
+- `observable_diagnostics.json`
+- `adapter_mapping.json`
+- `expected_preview_fragments.txt`
+- `README.md`
+
+## What Is Checked
+
+`scripts/check_adapter_native_golden.py` loads each case, calls the local
+`/api/optical-language/adapter-mapping` endpoint through FastAPI `TestClient`,
+and checks:
+
+- source model fixture matches the generated source model
+- monitor model fixture matches the generated monitor model
+- observable diagnostics fixture matches generated diagnostics
+- adapter mapping fixture matches generated mapping
+- expected fragments appear in generated mapping metadata
+- `external_solver_executed=false`
+- `external_llm_required=false`
+- `production_grade_validation_claimed=false`
+- `formal_convergence_proof_claimed=false`
+
+Run:
+
+```bash
+python scripts/check_adapter_native_golden.py
+```
+
+Optional JSON report:
+
+```bash
+OSA_ADAPTER_NATIVE_GOLDEN_REPORT=/tmp/osa-adapter-native-golden.json \
+  python scripts/check_adapter_native_golden.py
+```
+
+## Preview-Only Limitation
+
+These cases are adapter-native preview metadata. They are not real solver
+monitor outputs. Real flux spectra, band diagrams, FEM field outputs, ray fans,
+or focal spot results require explicit solver execution and separate validation
+evidence.
+
+No production-grade physical validation is claimed. No formal convergence proof
+is claimed.

@@ -1,0 +1,12 @@
+{
+  "monitor_type": "unknown",
+  "observable": "mesh region / physical group preview",
+  "region": "source and monitor physical groups",
+  "frequency_or_wavelength_sampling": "not applicable",
+  "output_units": "mesh annotations",
+  "notes": "Mesh region metadata only; no optical field monitor is executed.",
+  "defaulted_fields": [
+    "monitor_region"
+  ],
+  "preview_only": true
+}

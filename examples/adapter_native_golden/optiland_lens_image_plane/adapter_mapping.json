@@ -1,0 +1,38 @@
+{
+  "adapter_name": "optiland",
+  "source_mapping_summary": "ray_bundle maps to object/ray-bundle metadata for ray optics previews.",
+  "monitor_mapping_summary": "image_plane maps to image-plane, spot, or ray-fan preview metadata.",
+  "native_source_terms": [
+    "object point/field metadata",
+    "ray bundle",
+    "Gaussian beam note"
+  ],
+  "native_monitor_terms": [
+    "image plane",
+    "focal spot",
+    "spot diagram plan",
+    "ray fan plan"
+  ],
+  "supported_observables": [
+    "image_plane",
+    "ray_fan"
+  ],
+  "unsupported_observables": [],
+  "preview_metadata": {
+    "wavelength_nm": 550.0,
+    "beam_waist_um": null,
+    "monitor_region": "paraxial image plane",
+    "observable": "image distance and magnification preview"
+  },
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "diagnostics": [
+    "Optiland preview can carry ray source and image-plane intent."
+  ],
+  "warnings": [
+    "Real raytrace, spot, or ray fan results require Optiland execution."
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

@@ -217,3 +217,6 @@ preview semantics. `POST /api/agent-session` includes the same `source_model`,
 `optical_language.diagnose_observable`, and
 `optical_language.map_source_monitor_to_adapter`. Monitor definitions are
 preview-only metadata, not external solver monitor results.
+Adapter-native golden fixtures under `examples/adapter_native_golden/` and
+`examples/api/adapter_native_golden_*_response.json` lock expected preview
+semantics for Meep, MPB, Gmsh, Elmer, and Optiland without running solvers.

@@ -1,0 +1,33 @@
+[
+  {
+    "observable_kind": "mesh_region",
+    "user_facing_label": "Mesh/geometry region",
+    "user_facing_label_zh": "网格/几何区域",
+    "required_inputs": [
+      "geometry region",
+      "physical group or mesh size"
+    ],
+    "default_assumptions": [
+      "Mesh regions are geometry annotations, not optical observables."
+    ],
+    "adapter_compatibility": {
+      "meep": "preview metadata; real FDTD result requires Meep execution",
+      "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+      "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+      "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+      "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+    },
+    "preview_supported": true,
+    "solver_execution_required_for_real_result": false,
+    "notes": [
+      "Maps to Gmsh physical groups / region annotations.",
+      "Source and monitor metadata are preview-only."
+    ],
+    "warnings": [
+      "No optical field quantity is computed by mesh generation alone.",
+      "Monitor type is unknown; confirm observable before solver setup."
+    ],
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+]

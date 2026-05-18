@@ -1,0 +1,13 @@
+{
+  "monitor_type": "scattering_spectrum",
+  "observable": "scattering/extinction spectrum preview",
+  "region": "closed flux box or equivalent far-field proxy around nanoparticle",
+  "frequency_or_wavelength_sampling": "400-900 nm preview band",
+  "output_units": "normalized preview spectrum",
+  "notes": "Monitor metadata only; no FDTD monitor was executed.",
+  "defaulted_fields": [
+    "monitor_region",
+    "sampling"
+  ],
+  "preview_only": true
+}

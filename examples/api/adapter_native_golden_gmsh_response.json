@@ -1,0 +1,122 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "No optical observable is computed by Gmsh alone."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Adapter-native mapping is preview metadata only.",
+      "No adapter or external solver process was executed."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Inspect supported_observables and unsupported_observables.",
+    "Use /api/adapter-preview for scaffold content; run solvers only after explicit approval."
+  ],
+  "matched_template_id": null,
+  "source_model": {
+    "source_type": "plane_wave",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 633.0,
+    "polarization": "linear_x",
+    "incidence_direction": "normal",
+    "beam_waist_um": null,
+    "mode_index": null,
+    "notes": "Geometry-only source annotation for mesh preview.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "polarization"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "unknown",
+    "observable": "mesh region / physical group preview",
+    "region": "source and monitor physical groups",
+    "frequency_or_wavelength_sampling": "not applicable",
+    "output_units": "mesh annotations",
+    "notes": "Mesh region metadata only; no optical field monitor is executed.",
+    "defaulted_fields": [
+      "monitor_region"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "mesh_region",
+      "user_facing_label": "Mesh/geometry region",
+      "user_facing_label_zh": "网格/几何区域",
+      "required_inputs": [
+        "geometry region",
+        "physical group or mesh size"
+      ],
+      "default_assumptions": [
+        "Mesh regions are geometry annotations, not optical observables."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": false,
+      "notes": [
+        "Maps to Gmsh physical groups / region annotations.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No optical field quantity is computed by mesh generation alone.",
+        "Monitor type is unknown; confirm observable before solver setup."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "gmsh",
+    "source_mapping_summary": "Gmsh does not execute optical sources; source intent is attached as geometry/mesh annotation metadata.",
+    "monitor_mapping_summary": "Monitor intent maps to physical group / mesh region annotations, not optical fields.",
+    "native_source_terms": [
+      "geometry comments",
+      "mesh-size hints",
+      "source-region annotation"
+    ],
+    "native_monitor_terms": [
+      "Physical Surface/Volume groups",
+      "monitor-region annotation"
+    ],
+    "supported_observables": [
+      "mesh_region"
+    ],
+    "unsupported_observables": [],
+    "preview_metadata": {
+      "source_annotation": "plane_wave",
+      "monitor_annotation": "source and monitor physical groups",
+      "observable": "mesh region / physical group preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "Gmsh preview can preserve optical intent as mesh annotations."
+    ],
+    "warnings": [
+      "No optical observable is computed by Gmsh alone."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "adapter_name": "meep",
+  "goal": "Create a broadband nanoparticle scattering preview from 400 to 900 nm with linear x plane-wave illumination.",
+  "template_id": "nanoparticle_plasmonics",
+  "language": "en"
+}

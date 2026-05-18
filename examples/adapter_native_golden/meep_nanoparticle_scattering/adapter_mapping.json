@@ -1,0 +1,38 @@
+{
+  "adapter_name": "meep",
+  "source_mapping_summary": "plane_wave maps to Meep source metadata; broadband bands map to GaussianSource/broadband pulse preview terms.",
+  "monitor_mapping_summary": "scattering_spectrum maps to Meep flux/DFT monitor metadata only.",
+  "native_source_terms": [
+    "mp.Source",
+    "GaussianSource/broadband pulse metadata",
+    "planewave-like current source placeholder"
+  ],
+  "native_monitor_terms": [
+    "flux monitor metadata",
+    "DFT field monitor metadata",
+    "closed flux box / incident-flux normalization plan"
+  ],
+  "supported_observables": [
+    "scattering_spectrum",
+    "extinction_spectrum"
+  ],
+  "unsupported_observables": [],
+  "preview_metadata": {
+    "wavelength_start_nm": 400.0,
+    "wavelength_stop_nm": 900.0,
+    "polarization": "linear_x",
+    "monitor_region": "closed flux box or equivalent far-field proxy around nanoparticle",
+    "observable": "scattering/extinction spectrum preview"
+  },
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "diagnostics": [
+    "Meep preview generation can describe source and monitor intent."
+  ],
+  "warnings": [
+    "Real flux, DFT field, scattering, or extinction results require a Meep run."
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

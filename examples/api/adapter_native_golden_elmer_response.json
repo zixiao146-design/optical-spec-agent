@@ -1,0 +1,154 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Real FEM fields require ElmerSolver execution and reviewed mesh/material setup."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Adapter-native mapping is preview metadata only.",
+      "No adapter or external solver process was executed."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Inspect supported_observables and unsupported_observables.",
+    "Use /api/adapter-preview for scaffold content; run solvers only after explicit approval."
+  ],
+  "matched_template_id": "slab_waveguide_single_mode",
+  "source_model": {
+    "source_type": "mode_source",
+    "wavelength_start_nm": null,
+    "wavelength_stop_nm": null,
+    "wavelength_nm": 1550.0,
+    "polarization": "TE-like",
+    "incidence_direction": "guided",
+    "beam_waist_um": null,
+    "mode_index": 0,
+    "notes": "Mode-source metadata for scalar slab-waveguide estimate.",
+    "defaulted_fields": [
+      "wavelength_nm",
+      "mode_index",
+      "polarization"
+    ],
+    "preview_only": true
+  },
+  "monitor_model": {
+    "monitor_type": "mode_overlap",
+    "observable": "V-number and single-mode likelihood preview",
+    "region": "slab core/cladding cross-section",
+    "frequency_or_wavelength_sampling": "single wavelength",
+    "output_units": "dimensionless V-number",
+    "notes": "Local scalar estimate, not a mode-solver monitor.",
+    "defaulted_fields": [
+      "observable"
+    ],
+    "preview_only": true
+  },
+  "observable_diagnostics": [
+    {
+      "observable_kind": "mode_overlap",
+      "user_facing_label": "Mode overlap",
+      "user_facing_label_zh": "模式重叠",
+      "required_inputs": [
+        "input mode",
+        "target mode",
+        "overlap region"
+      ],
+      "default_assumptions": [
+        "Mode overlap is planned metadata in this backend sprint."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Maps to waveguide/mode-solver planning.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No overlap integral has been computed."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "observable_kind": "mode_frequency",
+      "user_facing_label": "Mode frequency / effective index",
+      "user_facing_label_zh": "模式频率 / 有效折射率",
+      "required_inputs": [
+        "mode index",
+        "wavelength/frequency",
+        "geometry cross-section"
+      ],
+      "default_assumptions": [
+        "Mode metadata is scalar/design-assist unless a mode solver runs."
+      ],
+      "adapter_compatibility": {
+        "meep": "preview metadata; real FDTD result requires Meep execution",
+        "mpb": "preview metadata only unless the observable is eigenmode/band-oriented",
+        "gmsh": "geometry/mesh annotation only; no optical observable computed by Gmsh alone",
+        "elmer": "FEM placeholder metadata; real result requires ElmerSolver execution",
+        "optiland": "ray/object/image metadata only unless ray tracing is explicitly run"
+      },
+      "preview_supported": true,
+      "solver_execution_required_for_real_result": true,
+      "notes": [
+        "Useful for waveguide and MPB/Elmer preview paths.",
+        "Source and monitor metadata are preview-only."
+      ],
+      "warnings": [
+        "No vector eigenmode has been solved."
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "adapter_source_monitor_mapping": {
+    "adapter_name": "elmer",
+    "source_mapping_summary": "mode_source maps to FEM source/boundary placeholders.",
+    "monitor_mapping_summary": "mode_overlap maps to FEM solver/output section placeholders.",
+    "native_source_terms": [
+      "Boundary Condition placeholders",
+      "Body Force/source section metadata"
+    ],
+    "native_monitor_terms": [
+      "ResultOutputSolver placeholder",
+      "field/output variable plan"
+    ],
+    "supported_observables": [
+      "mode_overlap",
+      "mode_frequency"
+    ],
+    "unsupported_observables": [],
+    "preview_metadata": {
+      "source_boundary_placeholder": "mode_source",
+      "monitor_output_placeholder": "mode_overlap",
+      "observable": "V-number and single-mode likelihood preview"
+    },
+    "requires_solver_for_real_result": true,
+    "external_solver_executed": false,
+    "diagnostics": [
+      "Elmer preview preserves source/monitor intent as SIF placeholders."
+    ],
+    "warnings": [
+      "Real FEM fields require ElmerSolver execution and reviewed mesh/material setup."
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}
