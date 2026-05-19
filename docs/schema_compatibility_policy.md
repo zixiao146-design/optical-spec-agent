@@ -1,7 +1,7 @@
 # Schema Compatibility Policy
 
-Current main release draft: `0.9.0rc7`.
-Current public prerelease: `v0.9.0rc6`.
+Current main development version: `0.9.0rc8.dev0`.
+Current public prerelease: `v0.9.0rc7`.
 
 Schema/API compatibility is being stabilized before `v1.0`. Public fields
 documented in `docs/schema_contract.md`, `docs/cli_contract.md`, and exported
@@ -29,5 +29,5 @@ metadata, warnings, and defaults, but they do not assert solver-backed physical
 correctness.
 
 PyPI remains unpublished. TestPyPI contains the `0.9.0rc6.dev0` development
-package. `v0.9.0rc6` is the current public prerelease, and the `v0.9.0rc7` tag
+package. `v0.9.0rc7` is the current public prerelease, and the `v0.9.0rc8` tag
 has not been created.

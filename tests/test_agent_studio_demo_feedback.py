@@ -9,8 +9,8 @@ def test_agent_studio_demo_feedback_records_review_without_overclaiming():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
     required = [
-        "Current public prerelease: v0.9.0rc6",
-        "Current main release draft: 0.9.0rc7",
+        "Current public prerelease: v0.9.0rc7",
+        "Current main development version: 0.9.0rc8.dev0",
         "Latest localized frontend commit reviewed: 212b880",
         "Demo was run locally: yes",
         "MilesLee",

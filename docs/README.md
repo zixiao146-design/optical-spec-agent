@@ -1,14 +1,17 @@
 # optical-spec-agent Docs
 
-Current public prerelease: v0.9.0rc6.
-Current main release draft: `0.9.0rc7`.
+Current public prerelease: v0.9.0rc7.
+Current main development version: `0.9.0rc8.dev0`.
 
 ## Release / Readiness
 
 - [Current release readiness](release_readiness_current.md)
+- [v0.9.0rc8 development readiness](release_readiness_v0.9.0rc8.md)
+- [TestPyPI upload approval for v0.9.0rc8.dev0](testpypi_upload_approval_v0.9.0rc8.dev0.md)
 - [v0.9.0rc7 release draft readiness](release_readiness_v0.9.0rc7.md)
 - [v0.9.0rc7 GitHub release draft](github_release_draft_v0.9.0rc7.md)
 - [v0.9.0rc7 release notes](release_notes_v0.9.0rc7.md)
+- [v0.9.0rc7 post-release status](post_release_status_v0.9.0rc7.md)
 - [TestPyPI upload approval for v0.9.0rc7](testpypi_upload_approval_v0.9.0rc7.md)
 - [v0.9.0rc6 release draft readiness](release_readiness_v0.9.0rc6.md)
 - [v0.9.0rc6 GitHub release draft](github_release_draft_v0.9.0rc6.md)
@@ -133,6 +136,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Publication decision record](publication_decision_record.md)
 - [TestPyPI upload approval for 0.9.0rc6.dev0](testpypi_upload_approval_v0.9.0rc6.dev0.md)
 - [TestPyPI upload approval for v0.9.0rc6](testpypi_upload_approval_v0.9.0rc6.md)
+- [TestPyPI upload approval for 0.9.0rc8.dev0](testpypi_upload_approval_v0.9.0rc8.dev0.md)
 - [TestPyPI upload approval for 0.9.0rc7](testpypi_upload_approval_v0.9.0rc7.md)
 - [TestPyPI upload attempt for 0.9.0rc6.dev0](testpypi_upload_attempt_v0.9.0rc6.dev0.md)
 - [TestPyPI status for 0.9.0rc6.dev0](testpypi_status_v0.9.0rc6.dev0.md)

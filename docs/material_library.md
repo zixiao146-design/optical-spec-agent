@@ -5,8 +5,8 @@ It helps Agent Studio suggest starter materials for examples and workflow
 planning, but it is not a production-grade optical constants database.
 
 Current status:
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - API contract version: 0.1
 - Material catalog status: local preview / design-assist
 - PyPI: not published

@@ -9,8 +9,8 @@ readiness status.
 
 ## Current status
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - API contract version: 0.1
 - Frontend implementation: MVP implemented under `frontend/`
 - PyPI: not published

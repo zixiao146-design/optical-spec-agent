@@ -1,9 +1,9 @@
 # Validation Gate
 
-Version scope: current public prerelease `v0.9.0rc6`; current `main` development
-version `0.9.0rc7`. The `v0.9.0rc7` tag has not been created, PyPI remains
+Version scope: current public prerelease `v0.9.0rc7`; current `main` development
+version `0.9.0rc8.dev0`. The `v0.9.0rc8` tag has not been created, PyPI remains
 unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
-TestPyPI upload for `0.9.0rc7` has not been performed.
+TestPyPI upload for `0.9.0rc8.dev0` has not been performed.
 
 The validation strategy is open-source-solver-first. Proprietary solvers are not
 default dependencies, and no proprietary license is required for default tests,
@@ -104,10 +104,10 @@ maintainers.
 - No proprietary solver validation is part of the default gate.
 - `scripts/open_solver_validation_preflight.sh` must remain no-execution and
   safe when solvers are unavailable.
-- Current public prerelease remains `v0.9.0rc6`, current main release draft is
-  `0.9.0rc7`, the `v0.9.0rc7` tag has not been created, PyPI remains
+- Current public prerelease remains `v0.9.0rc7`, current main development version is
+  `0.9.0rc8.dev0`, the `v0.9.0rc8` tag has not been created, PyPI remains
   unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
-  TestPyPI upload for `0.9.0rc7` has not been performed.
+  TestPyPI upload for `0.9.0rc8.dev0` has not been performed.
 
 ## v1.0 validation target
 

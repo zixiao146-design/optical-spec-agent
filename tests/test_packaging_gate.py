@@ -16,7 +16,7 @@ def _pyproject() -> dict:
 def test_pyproject_core_packaging_metadata_present():
     project = _pyproject()["project"]
     assert project["name"] == "optical-spec-agent"
-    assert project["version"] == "0.9.0rc7"
+    assert project["version"] == "0.9.0rc8.dev0"
     assert project["description"]
     assert project["readme"] == "README.md"
     assert project["requires-python"].startswith(">=3.11")
@@ -36,10 +36,10 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     pypi_decision = (ROOT / "docs" / "pypi_publication_decision.md").read_text(encoding="utf-8")
     assert "PyPI status: not published" in packaging_gate
     assert "TestPyPI status: uploaded for 0.9.0rc6.dev0" in packaging_gate
-    assert "TestPyPI upload for 0.9.0rc7: not performed" in packaging_gate
-    assert "Current main release draft version: `0.9.0rc7`" in packaging_gate
-    assert "Current public prerelease: `v0.9.0rc6`" in packaging_gate
-    assert "`v0.9.0rc7` tag: not created" in packaging_gate
+    assert "TestPyPI upload for 0.9.0rc8.dev0: not performed" in packaging_gate
+    assert "Current main development version: `0.9.0rc8.dev0`" in packaging_gate
+    assert "Current public prerelease: `v0.9.0rc7`" in packaging_gate
+    assert "`v0.9.0rc8` tag: not created" in packaging_gate
     assert "docs/testpypi_dry_run_gate.md" in packaging_gate
     assert "scripts/testpypi_preflight.sh" in packaging_gate
     assert "python -m twine check dist/*" in packaging_gate
@@ -52,10 +52,10 @@ def test_packaging_gate_docs_and_pypi_decision_are_present():
     assert "Do not publish automatically from release scripts" in packaging_gate
     assert "PyPI published: no" in pypi_decision
     assert "TestPyPI uploaded: yes, for `0.9.0rc6.dev0`" in pypi_decision
-    assert "TestPyPI upload for `0.9.0rc7`: not performed" in pypi_decision
-    assert "Current main release draft: `0.9.0rc7`" in pypi_decision
+    assert "TestPyPI upload for `0.9.0rc8.dev0`: not performed" in pypi_decision
+    assert "Current main development version: `0.9.0rc8.dev0`" in pypi_decision
     assert "explicit maintainer approval" in pypi_decision
-    assert "TestPyPI upload approval status for 0.9.0rc7: pending" in pypi_decision
+    assert "TestPyPI upload approval status for 0.9.0rc8.dev0: pending" in pypi_decision
     assert "TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0" in pypi_decision
     assert "TestPyPI clean install verification: passed" in pypi_decision
     assert "PyPI publication approval: not granted" in pypi_decision

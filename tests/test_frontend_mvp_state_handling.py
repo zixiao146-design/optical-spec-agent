@@ -34,8 +34,8 @@ def test_frontend_state_components_and_demo_fixtures_exist():
     demo_text = _read(FRONTEND / "src" / "fixtures" / "demoData.ts")
     assert "Demo fixture mode: this is not live validation." in demo_text
     assert "Demo fixture loaded - not live validation until submitted." in demo_text
-    assert "0.9.0rc7" in demo_text
-    assert "v0.9.0rc6" in demo_text
+    assert "0.9.0rc8.dev0" in demo_text
+    assert "v0.9.0rc7" in demo_text
     assert "Level 2 + Level-3-ready" in demo_text
 
 

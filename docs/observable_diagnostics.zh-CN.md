@@ -1,7 +1,7 @@
 # 观测量诊断
 
-Current public prerelease: v0.9.0rc6. Current main release draft:
-`0.9.0rc7`。
+Current public prerelease: v0.9.0rc7. Current main development version:
+`0.9.0rc8.dev0`。
 
 观测量诊断会把推断出的监测器意图转成明确的预览观测量元数据。它会列出必需输入、
 默认假设、适配器兼容性，以及真实结果是否需要外部求解器执行。该诊断默认不执行外部

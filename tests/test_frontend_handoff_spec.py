@@ -14,7 +14,7 @@ def test_frontend_handoff_spec_maps_screens_to_endpoints_and_limits_scope():
     text = path.read_text(encoding="utf-8")
     assert "Frontend Handoff Spec" in text
     assert "API contract version: 0.1" in text
-    assert "Package version: 0.9.0rc7" in text
+    assert "Package version: 0.9.0rc8.dev0" in text
     assert "docs/frontend_mvp_product_spec.md" in text
     assert "docs/frontend_information_architecture.md" in text
     assert "docs/frontend_api_mapping.md" in text

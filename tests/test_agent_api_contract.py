@@ -41,9 +41,9 @@ def test_agent_api_health_and_version_are_local_first():
     version = CLIENT.get("/api/version")
     assert version.status_code == 200
     version_payload = version.json()
-    assert version_payload["package_version"] == "0.9.0rc7"
-    assert version_payload["current_public_prerelease"] == "v0.9.0rc6"
-    assert version_payload["main_development_version"] == "0.9.0rc7"
+    assert version_payload["package_version"] == "0.9.0rc8.dev0"
+    assert version_payload["current_public_prerelease"] == "v0.9.0rc7"
+    assert version_payload["main_development_version"] == "0.9.0rc8.dev0"
     assert version_payload["pypi_published"] is False
     assert version_payload["testpypi_verified"] is True
     _assert_status_and_diagnostics(version_payload)
@@ -159,8 +159,8 @@ def test_agent_api_validation_evidence_and_readiness_bound_claims():
     readiness = CLIENT.get("/api/readiness")
     assert readiness.status_code == 200
     readiness_payload = readiness.json()
-    assert readiness_payload["current_public_prerelease"] == "v0.9.0rc6"
-    assert readiness_payload["main_development_version"] == "0.9.0rc7"
+    assert readiness_payload["current_public_prerelease"] == "v0.9.0rc7"
+    assert readiness_payload["main_development_version"] == "0.9.0rc8.dev0"
     assert readiness_payload["testpypi"]["uploaded_and_verified"] is True
     assert readiness_payload["pypi"]["published"] is False
     assert readiness_payload["public_contract_freeze"]["status"] == "approved"

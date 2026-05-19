@@ -1,7 +1,7 @@
 # Backend Capability Report
 
-Current public prerelease: v0.9.0rc6. Current main release draft:
-`0.9.0rc7`.
+Current public prerelease: v0.9.0rc7. Current main development version:
+`0.9.0rc8.dev0`.
 
 The backend capability report is a maintainer-facing proof of what the local
 Agent Studio backend can actually import, call, execute, or block today. It is

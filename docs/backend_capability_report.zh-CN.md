@@ -1,7 +1,7 @@
 # 后端能力报告
 
-Current public prerelease: v0.9.0rc6。Current main release draft:
-`0.9.0rc7`。
+Current public prerelease: v0.9.0rc7。Current main development version:
+`0.9.0rc8.dev0`。
 
 后端能力报告用于向维护者说明：当前本地 Agent Studio 后端到底能
 import 什么、调用什么、执行了什么，以及默认阻断了什么。报告由

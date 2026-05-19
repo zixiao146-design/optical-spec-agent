@@ -1,6 +1,6 @@
 {
-  "version_scope": "0.9.0rc7",
-  "current_public_prerelease": "v0.9.0rc6",
+  "version_scope": "0.9.0rc8.dev0",
+  "current_public_prerelease": "v0.9.0rc7",
   "open_source_solver_first": true,
   "examples": [
     {

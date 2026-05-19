@@ -2,12 +2,12 @@
 
 ## Current Status
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - Agent Studio demo package: exists
 - Demo was run locally: yes
 - PyPI published: no
-- v0.9.0rc7 tag: not created
+- v0.9.0rc8 tag: not created
 - v1.0.0 tag: not created
 
 ## P0 Must Fix Before Public Demo

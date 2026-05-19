@@ -102,9 +102,10 @@ maintainer review artifact only, not a release, upload, tag, or publication
 action.
 The maintainer
 [`backend evidence review decision`](docs/backend_evidence_review_decision.md)
-records backend evidence as sufficient to prepare a `v0.9.0rc7` release draft,
-while keeping `v0.9.0rc7` tag/release approval, PyPI publication, TestPyPI
-upload, and `v1.0.0` approval separate and not granted.
+recorded backend evidence as sufficient for the `v0.9.0rc7` release draft,
+which has now been published as the current GitHub prerelease. PyPI
+publication, TestPyPI upload for `0.9.0rc8.dev0`, a future `v0.9.0rc8` tag,
+and `v1.0.0` approval remain separate and not granted.
 The backend also includes
 [`design requirement templates`](docs/design_requirement_templates.md) and a
 [`natural language to optical language`](docs/natural_language_to_optical_language.md)
@@ -119,17 +120,17 @@ external LLM is called by default, material values are not production-grade
 optical constants, and PyPI/TestPyPI upload or GitHub tag/release controls are
 not exposed.
 
-Release status: the current public release candidate is `v0.9.0rc6`, while the
-current `main` release draft is `0.9.0rc7`. The `v0.9.0rc7` tag has
-not been created, no `v0.9.0rc7` GitHub release exists, and `0.9.0rc7` is
+Release status: the current public release candidate is `v0.9.0rc7`, while the
+current `main` development version is `0.9.0rc8.dev0`. The `v0.9.0rc8` tag has
+not been created, no `v0.9.0rc8` GitHub release exists, and `0.9.0rc8.dev0` is
 not a public release.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
 orchestration foundation work as preview/scaffold/evaluation capabilities.
-The `v0.9.0rc6` git tag and GitHub prerelease were created after maintainer
-review and supersede `v0.9.0rc5` as the current release candidate. PyPI remains
+The `v0.9.0rc7` git tag and GitHub prerelease were created after maintainer
+review and supersede `v0.9.0rc6` as the current release candidate. PyPI remains
 unpublished. TestPyPI upload completed for `0.9.0rc6.dev0` through manual
-Trusted Publishing, but TestPyPI upload for `0.9.0rc7` has not been performed;
+Trusted Publishing, but TestPyPI upload for `0.9.0rc8.dev0` has not been performed;
 this repository state is not a final stable `1.0` release, and PyPI
 publication remains separately gated.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
@@ -139,9 +140,13 @@ current release policy and release-readiness matrix. Use
 for the repeatable RC procedure and
 [`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
 the current RC line toward `v1.0`.
-Current rc7 release draft readiness and publication gates are tracked in
+Current rc8 development readiness and publication gates are tracked in
+[`docs/release_readiness_v0.9.0rc8.md`](docs/release_readiness_v0.9.0rc8.md),
+[`docs/testpypi_upload_approval_v0.9.0rc8.dev0.md`](docs/testpypi_upload_approval_v0.9.0rc8.dev0.md),
+while rc7 release records remain in
 [`docs/release_readiness_v0.9.0rc7.md`](docs/release_readiness_v0.9.0rc7.md),
 [`docs/testpypi_upload_approval_v0.9.0rc7.md`](docs/testpypi_upload_approval_v0.9.0rc7.md),
+[`docs/post_release_status_v0.9.0rc7.md`](docs/post_release_status_v0.9.0rc7.md),
 and the historical rc6 release documents:
 [`docs/release_readiness_v0.9.0rc6.md`](docs/release_readiness_v0.9.0rc6.md),
 [`docs/github_release_draft_v0.9.0rc6.md`](docs/github_release_draft_v0.9.0rc6.md),
@@ -339,8 +344,9 @@ optical-spec-agent 是一个开源仿真工具链优先的光学仿真工作流 
 一个面向光学仿真的规格编译层：它把中英文自然语言
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
-pre-release 是 `v0.9.0rc6`，当前 `main` package version 是
-`0.9.0rc7` release-draft state。`v0.9.0rc7` tag 尚未创建，也不是最终稳定版。
+pre-release 是 `v0.9.0rc7`，当前 `main` package version 是
+`0.9.0rc8.dev0` post-rc7 development state。`v0.9.0rc8` tag 尚未创建，
+也不是最终稳定版。
 本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
 
@@ -368,9 +374,9 @@ Policy docs:
 [`optional open-source solver validation plan`](docs/open_source_solver_validation_plan.md),
 and [`examples manifest`](examples/examples_manifest.json).
 
-For `v0.9.0rc6`, maintainers created the GitHub prerelease after release
+For `v0.9.0rc7`, maintainers created the GitHub prerelease after release
 smoke validation. Do not move the `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`,
-`v0.9.0rc4`, `v0.9.0rc5`, or `v0.9.0rc6` tags; use a new candidate tag for future
+`v0.9.0rc4`, `v0.9.0rc5`, `v0.9.0rc6`, or `v0.9.0rc7` tags; use a new candidate tag for future
 post-release fixes.
 
 ## Why this project?
@@ -382,7 +388,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (main `0.9.0rc7`: post-v0.9.0rc6 development)
+## Current scope (main `0.9.0rc8.dev0`: post-v0.9.0rc7 development)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -481,8 +487,8 @@ no-proprietary-solver flow, see
 [`examples/e2e/README.md`](examples/e2e/README.md).
 
 The checked-in fixtures under [`examples/`](examples/README.md) are the
-canonical no-network examples for the current `0.9.0rc7` main branch and
-the public `v0.9.0rc6` RC line:
+canonical no-network examples for the current `0.9.0rc8.dev0` main branch and
+the public `v0.9.0rc7` RC line:
 
 ```bash
 optical-spec validate examples/specs/minimal_nanoparticle.json

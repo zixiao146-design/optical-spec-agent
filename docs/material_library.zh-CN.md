@@ -4,8 +4,8 @@
 为示例和工作流计划推荐 starter materials，但它不是生产级光学常数数据库。
 
 当前状态：
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - API contract version: 0.1
 - 材料库状态：本地预览 / 设计辅助
 - PyPI：未发布

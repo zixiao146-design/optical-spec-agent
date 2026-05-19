@@ -2,8 +2,8 @@
 
 ## Current baseline
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - v1.0 public contract freeze: approved
 - TestPyPI uploaded and verified for 0.9.0rc6.dev0
 - PyPI published: no
@@ -41,9 +41,10 @@
   `api_contract_version`, package version, or release status.
 - Backend evidence review decision:
   `docs/backend_evidence_review_decision.md` records backend evidence as
-  sufficient to prepare a `v0.9.0rc7` release draft. It does not approve a
-  `v0.9.0rc7` tag, GitHub release, PyPI publication, TestPyPI upload, or
-  `v1.0.0` release.
+  sufficient to prepare the `v0.9.0rc7` release draft. The `v0.9.0rc7`
+  GitHub prerelease has since been created and verified; PyPI publication,
+  TestPyPI upload for `0.9.0rc8.dev0`, future `v0.9.0rc8` tag/release work,
+  and `v1.0.0` release approval remain separate and not granted.
 
 ## Required before v1.0.0
 
@@ -110,7 +111,7 @@
 | Optical calculators | Engineering track | Preview/design-assist endpoints available, including sweeps, case helpers, quality fields, and formula sanity reference cases | Useful backend functionality; not production-grade physical validation and not a v1.0 blocker by itself. |
 | Backend capability report | Engineering track | JSON/Markdown script and API endpoints available | Proves installed/callable/executed backend reality and design-case cross-checks; not a release/upload/tag trigger. |
 | Backend evidence review pack | Engineering track | JSON/Markdown generator, smoke script, docs, and API summary available | Bundles maintainer review evidence; not production-grade validation and not a release/upload/tag trigger. |
-| Backend evidence review decision | Engineering track | Backend evidence sufficient to prepare `v0.9.0rc7` release draft | Draft preparation only; tag/release/PyPI/TestPyPI/v1.0 approval remains separate and not granted. |
+| Backend evidence review decision | Engineering track | Backend evidence sufficient for the `v0.9.0rc7` release draft; rc7 GitHub prerelease created and verified | PyPI/TestPyPI/future rc8 tag/release/v1.0 approval remains separate and not granted. |
 
 Material constants remain preview/design-assist data unless independently
 verified. Sub-agent trace is local/deterministic and does not call external

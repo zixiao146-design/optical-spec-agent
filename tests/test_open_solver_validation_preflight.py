@@ -64,7 +64,7 @@ def test_open_solver_preflight_runs_without_installed_solvers_and_writes_json(tm
     assert "NO SOLVER EXECUTION PERFORMED" in result.stdout
     assert "NO PROPRIETARY SOLVER REQUIRED" in result.stdout
     data = json.loads(report.read_text(encoding="utf-8"))
-    assert data["package_version"] == "0.9.0rc7"
+    assert data["package_version"] == "0.9.0rc8.dev0"
     assert data["executed_solvers"] is False
     assert data["proprietary_required"] is False
     assert set(data["checked_commands"]) == {"meep", "mpb", "gmsh", "ElmerSolver", "optiland"}

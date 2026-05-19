@@ -230,7 +230,7 @@ export const zhCN: I18nDictionary = {
   "quickstartSuccess.title": "Quickstart 完成检查",
   "quickstartSuccess.description": "把这里当作第一次运行的成功状态。Live API 结果可以替换 demo fixtures，但安全边界保持不变。",
   "quickstartSuccess.apiConnected": "API 已连接。",
-  "quickstartSuccess.packageVersion": "包版本 0.9.0rc7.dev0。",
+  "quickstartSuccess.packageVersion": "包版本 0.9.0rc8.dev0。",
   "quickstartSuccess.apiContract": "api_contract_version 0.1。",
   "quickstartSuccess.spec": "规格已解析和验证，或者 demo fixture 模式已清楚标注。",
   "quickstartSuccess.workflow": "工作流计划已作为预览生成。",

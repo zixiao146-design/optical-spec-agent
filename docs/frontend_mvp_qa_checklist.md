@@ -2,12 +2,12 @@
 
 ## Current Status
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: `0.9.0rc7`
+- Current public prerelease: v0.9.0rc7
+- Current main development version: `0.9.0rc8.dev0`
 - API contract version: 0.1
 - Frontend MVP: implemented under `frontend/`
 - PyPI: not published
-- v0.9.0rc7 tag: not created
+- v0.9.0rc8 tag: not created
 - v1.0.0 tag: not created
 
 ## Local Demo Readiness

@@ -13,8 +13,8 @@ def test_frontend_mvp_product_spec_exists_and_bounds_mvp_scope():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
     assert "Agent Studio Frontend MVP Product Spec" in text
-    assert "Current public prerelease: v0.9.0rc6" in text
-    assert "Current main release draft: 0.9.0rc7" in text
+    assert "Current public prerelease: v0.9.0rc7" in text
+    assert "Current main development version: 0.9.0rc8.dev0" in text
     assert "API contract version: 0.1" in text
     assert "Frontend implementation: MVP implemented under `frontend/`" in text
     assert "make the project feel like an agent" in text.lower()

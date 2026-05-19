@@ -7,8 +7,8 @@ without making Meep a default dependency.
 
 ## Current Scope
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - Adapter: meep
 - Default tests do not run Meep.
 - Default smoke does not run Meep.

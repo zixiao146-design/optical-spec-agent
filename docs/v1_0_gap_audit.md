@@ -2,13 +2,13 @@
 
 ## Current baseline
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
-- v0.9.0rc7 tag: not created
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
+- v0.9.0rc8 tag: not created
 - PyPI: not published
 - TestPyPI: uploaded for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc7: not performed
-- TestPyPI upload approval for 0.9.0rc7: pending
+- TestPyPI upload for 0.9.0rc8.dev0: not performed
+- TestPyPI upload approval for 0.9.0rc8.dev0: pending
 - PyPI publication approval: not granted
 
 ## Strong areas
@@ -55,7 +55,7 @@
 - v1.0 public contract freeze is approved and recorded in
   `docs/v1_0_public_contract_freeze_status.md`.
 - `docs/publication_decision_record.md` records that TestPyPI is completed for
-  `0.9.0rc6.dev0`; the `0.9.0rc7` upload is not performed and PyPI remains not
+  `0.9.0rc6.dev0`; the `0.9.0rc8.dev0` upload is not performed and PyPI remains not
   granted.
 - `docs/pypi_publication_readiness_checklist.md` exists and keeps PyPI
   publication blocked until explicit maintainer approval, final version choice,

@@ -28,8 +28,8 @@ def test_api_examples_readme_and_manifest_exist():
     manifest_path = API_EXAMPLES / "frontend_fixture_manifest.json"
     assert manifest_path.exists()
     manifest = _load_json(manifest_path)
-    assert manifest["current_public_prerelease"] == "v0.9.0rc6"
-    assert manifest["current_main_development_version"] == "0.9.0rc7"
+    assert manifest["current_public_prerelease"] == "v0.9.0rc7"
+    assert manifest["current_main_development_version"] == "0.9.0rc8.dev0"
     assert manifest["api_contract_version"] == "0.1"
     assert manifest["frontend_implementation"] == "mvp implemented under frontend/"
     assert "not live validation" in manifest["demo_mode"]
@@ -180,13 +180,13 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
 
 def test_api_version_and_readiness_fixtures_track_publication_state():
     version = _load_json(API_EXAMPLES / "version_response.json")
-    assert version["package_version"] == "0.9.0rc7"
-    assert version["current_public_prerelease"] == "v0.9.0rc6"
+    assert version["package_version"] == "0.9.0rc8.dev0"
+    assert version["current_public_prerelease"] == "v0.9.0rc7"
     assert version["pypi_published"] is False
     _assert_no_claim_expansion(version)
 
     readiness = _load_json(API_EXAMPLES / "readiness_response.json")
-    assert readiness["main_development_version"] == "0.9.0rc7"
+    assert readiness["main_development_version"] == "0.9.0rc8.dev0"
     assert readiness["testpypi"]["uploaded_and_verified"] is True
     assert readiness["pypi"]["published"] is False
     assert readiness["v1_0_0_released"] is False

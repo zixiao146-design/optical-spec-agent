@@ -3,19 +3,21 @@
 ## Current status
 
 - TestPyPI uploaded: yes, for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc7: not performed
+- TestPyPI upload for 0.9.0rc8.dev0: not performed
 - PyPI published: no
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: `0.9.0rc7`
+- Current public prerelease: v0.9.0rc7
+- Current main development version: `0.9.0rc8.dev0`
 - Product positioning: open-source-solver-first
 - Proprietary solvers are not default dependencies
-- v0.9.0rc7 tag: not created
+- v0.9.0rc8 tag: not created
 - GitHub release: not created
 - PyPI remains unpublished; TestPyPI contains 0.9.0rc6.dev0
 - The rc6 approval record is `docs/testpypi_upload_approval_v0.9.0rc6.md` and
   remains pending.
 - The rc7 approval record is
   `docs/testpypi_upload_approval_v0.9.0rc7.md` and remains pending.
+- The rc8 development approval record is
+  `docs/testpypi_upload_approval_v0.9.0rc8.dev0.md` and remains pending.
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt:
@@ -27,9 +29,9 @@
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml`
 - TestPyPI Trusted Publishing workflow status: passed for 0.9.0rc6.dev0
-- TestPyPI upload approval status for 0.9.0rc7: pending
-- TestPyPI upload authorized for rc7: no
-- Upload command authorized for 0.9.0rc7: no
+- TestPyPI upload approval status for 0.9.0rc8.dev0: pending
+- TestPyPI upload authorized for rc8.dev0: no
+- Upload command authorized for 0.9.0rc8.dev0: no
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - TestPyPI clean install verification: passed
 - PyPI publication approval: not granted

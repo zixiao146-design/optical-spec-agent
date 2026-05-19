@@ -30,9 +30,10 @@ expected sections and safety markers.
 The maintained review decision is recorded in
 [`backend_evidence_review_decision.md`](backend_evidence_review_decision.md).
 That decision records backend evidence as sufficient to prepare a
-`v0.9.0rc7` release draft, while keeping `v0.9.0rc7` tag creation, GitHub
-release creation, PyPI publication, TestPyPI upload, and `v1.0.0` release
-approval separate and not granted.
+`v0.9.0rc7` release draft. Maintainers later approved and completed the
+`v0.9.0rc7` GitHub prerelease, while PyPI publication, TestPyPI upload for
+`0.9.0rc8.dev0`, future `v0.9.0rc8` tag/release work, and `v1.0.0` release
+approval remain separate and not granted.
 
 ## Sections
 

@@ -30,7 +30,7 @@ def test_frontend_hardening_backlog_prioritizes_work_and_keeps_boundaries():
         "No formal convergence proof claim",
         "Elmer Level 3 validation remains deferred",
         "PyPI published: no",
-        "v0.9.0rc7 tag: not created",
+        "v0.9.0rc8 tag: not created",
         "v1.0.0 tag: not created",
     ]
     for phrase in required:

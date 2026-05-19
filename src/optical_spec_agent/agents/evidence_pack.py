@@ -227,7 +227,7 @@ def generate_backend_evidence_pack(
             },
         ],
         maintainer_review_questions=[
-            "Is backend evidence sufficient for a v0.9.0rc7 draft?",
+            "Is backend evidence sufficient for continued v0.9.0rc8.dev0 readiness work?",
             "Is PyPI still deferred?",
             "Should the frontend display backend evidence next?",
             "Which calculator or optical design domain should deepen next?",

@@ -2,20 +2,30 @@
 
 ## Current state
 
-- Current public prerelease: v0.9.0rc6
-- Current main release draft: 0.9.0rc7
+- Current public prerelease: v0.9.0rc7
+- Current main development version: 0.9.0rc8.dev0
 - PyPI published: no
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
-- v0.9.0rc7 tag created: no
+- v0.9.0rc7 tag created: yes
+- v0.9.0rc7 GitHub prerelease created: yes
+- v0.9.0rc8 tag created: no
+- TestPyPI upload for 0.9.0rc8.dev0: not performed
 - v1.0.0 released: no
 
-## Review conclusion
+## Original Review Conclusion
 
 - Backend evidence status: sufficient to prepare v0.9.0rc7 release draft
-- v0.9.0rc7 tag creation approval: not granted
-- GitHub release approval: not granted
+- v0.9.0rc7 tag creation approval at decision time: not granted
+- GitHub release approval at decision time: not granted
 - PyPI publication approval: not granted
 - v1.0.0 release approval: not granted
+
+## Post-v0.9.0rc7 Transition
+
+- The maintainer later approved the v0.9.0rc7 annotated tag and GitHub prerelease.
+- v0.9.0rc7 is now the current public prerelease.
+- main has moved to 0.9.0rc8.dev0 development.
+- This transition does not approve TestPyPI upload, PyPI publication, a v0.9.0rc8 tag, or v1.0.0 release.
 
 ## Evidence reviewed
 
@@ -51,7 +61,8 @@
 - It does not prove real external solver results.
 - It does not prove Elmer Level 3 validation.
 - It does not authorize PyPI publication.
-- It does not authorize tag/release creation.
+- It did not authorize tag/release creation at the original decision time.
+- It does not authorize v0.9.0rc8 tag/release creation.
 
 ## Remaining limitations
 
@@ -64,6 +75,6 @@
 
 ## Recommended next step
 
-- Prepare v0.9.0rc7 release draft.
+- Continue 0.9.0rc8.dev0 backend/v1.0 readiness work.
 - Keep PyPI publication deferred.
-- Keep tag/release approval separate.
+- Keep future tag/release approval separate.

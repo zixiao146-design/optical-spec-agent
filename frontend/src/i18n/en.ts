@@ -230,7 +230,7 @@ export const en: I18nDictionary = {
   "quickstartSuccess.title": "Quickstart completion checklist",
   "quickstartSuccess.description": "Use this as the first-run success state. Live API results may replace demo fixtures, but the safety boundaries stay the same.",
   "quickstartSuccess.apiConnected": "API connected.",
-  "quickstartSuccess.packageVersion": "Package version 0.9.0rc7.dev0.",
+  "quickstartSuccess.packageVersion": "Package version 0.9.0rc8.dev0.",
   "quickstartSuccess.apiContract": "api_contract_version 0.1.",
   "quickstartSuccess.spec": "Spec parsed and validated, or demo fixture mode clearly labeled.",
   "quickstartSuccess.workflow": "Workflow plan generated as a preview.",

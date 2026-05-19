@@ -1,7 +1,7 @@
 # 适配器原生光源/监测器映射
 
-Current public prerelease: v0.9.0rc6. Current main release draft:
-`0.9.0rc7`。
+Current public prerelease: v0.9.0rc7. Current main development version:
+`0.9.0rc8.dev0`。
 
 本文说明本地后端如何把光源、监测器和观测量意图映射到各个开源适配器族的
 原生预览语义。这里的映射都是 preview/design-assist 元数据。默认不执行外部

@@ -33,7 +33,7 @@ try:
     import uvicorn
 except Exception:
     raise SystemExit(1)
-raise SystemExit(0 if optical_spec_agent.__version__ == "0.9.0rc7" else 1)
+raise SystemExit(0 if optical_spec_agent.__version__ == "0.9.0rc8.dev0" else 1)
 PY
 }
 
