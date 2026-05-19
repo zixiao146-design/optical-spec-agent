@@ -283,17 +283,20 @@ DOMAINS: dict[str, ApplicationDomain] = {
         linked_requirement_templates=["gaussian_beam_focus", "slab_waveguide_single_mode"],
         suggested_materials=["glass_fused_silica_preview", "sio2", "si3n4", "air"],
         unsuitable_materials=["ag", "au"],
-        expected_calculators=["optics.gaussian_beam.focus", "optics.waveguide.sweep"],
+        expected_calculators=["optics.fiber_coupling.gaussian_mode_overlap"],
         expected_adapters=["mpb", "optiland"],
         required_inputs=["mode_field_diameter", "wavelength_nm", "alignment_tolerance", "target_mode"],
         optional_inputs=["fiber_na", "waveguide_mode_index", "lens_focal_length"],
         common_missing_inputs=["mode_field_diameter", "target_mode", "alignment_tolerance"],
-        default_assumptions=["Gaussian/fiber mode overlap is a future preview approximation.", "No coupled-mode solver is run by default."],
+        default_assumptions=[
+            "Scalar Gaussian fiber-mode overlap preview.",
+            "No coupled-mode solver is run by default.",
+        ],
         recommended_questions=[
             "What fiber mode field diameter and wavelength should be assumed?",
             "Is the target coupling into a fiber, waveguide, or free-space focus?",
         ],
-        evidence_boundary="Partial domain coverage; scalar Gaussian/waveguide previews only, no real coupling efficiency solver.",
+        evidence_boundary="Scalar Gaussian mode-overlap preview; real coupling efficiency still requires explicit solver or measurement validation.",
     ),
     "polarization_optics_preview": ApplicationDomain(
         domain_id="polarization_optics_preview",
@@ -305,17 +308,20 @@ DOMAINS: dict[str, ApplicationDomain] = {
         linked_requirement_templates=["dielectric_metasurface_preview"],
         suggested_materials=["tio2", "si3n4", "sio2", "glass_fused_silica_preview"],
         unsuitable_materials=["ag", "au"],
-        expected_calculators=[],
+        expected_calculators=["optics.polarization.jones"],
         expected_adapters=["meep"],
         required_inputs=["input_polarization", "target_polarization_transform", "wavelength_nm"],
         optional_inputs=["retardance", "axis_angle", "bandwidth"],
         common_missing_inputs=["input_polarization", "target_polarization_transform", "retardance"],
-        default_assumptions=["Polarization handling is preview metadata unless a domain calculator is added.", "No Jones/Mueller production model is claimed."],
+        default_assumptions=[
+            "Ideal Jones-calculus polarizer/waveplate preview.",
+            "No Jones/Mueller production model is claimed.",
+        ],
         recommended_questions=[
             "What input and output polarization states should be transformed?",
             "Is the target a polarizer, waveplate, or metasurface polarization element?",
         ],
-        evidence_boundary="Deferred/partial coverage; no production polarization model or solver result is claimed.",
+        evidence_boundary="Jones-calculus preview only; real vector EM or measured Mueller/Jones validation is deferred.",
     ),
 }
 
@@ -447,4 +453,3 @@ def linked_templates_exist(domain: ApplicationDomain) -> bool:
     for template_id in domain.linked_requirement_templates:
         get_requirement_template(template_id)
     return True
-

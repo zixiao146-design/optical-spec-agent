@@ -12,6 +12,10 @@ from .gaussian_beam import (
     propagate_gaussian_beam,
     propagate_gaussian_beam_series,
 )
+from .fiber_coupling import (
+    gaussian_mode_overlap,
+    suggest_fiber_coupling_inputs,
+)
 from .paraxial import (
     abcd_free_space,
     abcd_thin_lens,
@@ -26,6 +30,12 @@ from .thin_film import (
     calculate_thin_film_stack,
     design_quarter_wave_ar_coating,
     summarize_thin_film_result,
+)
+from .polarization import (
+    jones_linear_polarizer,
+    jones_waveplate,
+    linear_polarization,
+    summarize_polarization_state,
 )
 from .waveguide import (
     single_mode_estimate,
@@ -45,13 +55,19 @@ __all__ = [
     "design_quarter_wave_ar_coating",
     "focus_gaussian_beam_thin_lens",
     "gaussian_beam_parameters",
+    "gaussian_mode_overlap",
+    "jones_linear_polarizer",
+    "jones_waveplate",
+    "linear_polarization",
     "propagate_gaussian_beam",
     "propagate_gaussian_beam_series",
     "propagate_ray",
     "single_mode_estimate",
     "slab_waveguide_sweep",
     "slab_waveguide_v_number",
+    "suggest_fiber_coupling_inputs",
     "suggest_single_mode_thickness_range",
+    "summarize_polarization_state",
     "summarize_paraxial_system",
     "summarize_thin_film_result",
     "thin_lens",

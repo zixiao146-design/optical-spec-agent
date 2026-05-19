@@ -65,6 +65,8 @@ decision.
 | Gaussian beam series / focus helper | yes | yes | yes |
 | Waveguide V-number preview calculator | yes | yes | yes |
 | Waveguide sweep / single-mode range helper | yes | yes | yes |
+| Fiber coupling Gaussian mode-overlap preview calculator | yes | yes | yes |
+| Polarization Jones-calculus preview calculator | yes | yes | yes |
 | Backend capability report generator | yes | yes | yes |
 | Backend evidence review pack generator | yes | yes | yes |
 | Design case cross-check module | yes | yes | yes |
@@ -77,6 +79,8 @@ Agent task sessions now attach calculator result summaries where applicable:
 - `waveguide_mode` records waveguide V-number sweep and single-mode range helpers.
 - `lens_raytrace_preview` records a paraxial two-lens relay helper.
 - Gaussian beam goals record propagation series and thin-lens focus helpers.
+- Fiber coupling goals record a scalar Gaussian mode-overlap helper.
+- Polarization optics goals record ideal Jones polarizer/waveplate helpers.
 
 These calls are internal Python design-assist calculations and are recorded in
 `tool_call_ledger`; external solvers remain unexecuted.
@@ -172,6 +176,13 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+Fiber coupling and polarization optics now close the former benchmark warning
+cases with deterministic preview calculators. The fiber coupling helper
+estimates scalar Gaussian mode overlap and the polarization helper applies
+ideal Jones-calculus elements. These are still preview/design-assist tools; real
+coupling validation, vector EM propagation, device fabrication effects, and
+measured performance require explicit solver or experimental evidence.
 
 The same domain registry is benchmarked through
 `examples/application_domain_benchmarks/`,

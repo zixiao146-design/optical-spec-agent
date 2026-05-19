@@ -73,6 +73,8 @@ from optical_spec_agent.api.models import (
     GaussianBeamFocusRequest,
     GaussianBeamRequest,
     GaussianBeamSeriesRequest,
+    FiberCouplingRequest,
+    PolarizationJonesRequest,
     TwoLensRelayRequest,
     WaveguideSingleModeRangeRequest,
     WaveguideEstimateRequest,
@@ -150,6 +152,11 @@ from optical_spec_agent.optics import (
     design_quarter_wave_ar_coating,
     focus_gaussian_beam_thin_lens,
     gaussian_beam_parameters,
+    gaussian_mode_overlap,
+    jones_linear_polarizer,
+    jones_waveplate,
+    linear_polarization,
+    summarize_polarization_state,
     propagate_gaussian_beam,
     propagate_gaussian_beam_series,
     slab_waveguide_sweep,
@@ -861,7 +868,9 @@ def agent_tool_capabilities():
             default_allowed=True,
             status="available",
             detection_method="import optical_spec_agent.optics",
-            notes=["Thin-film, paraxial, Gaussian beam, and waveguide preview calculators."],
+            notes=[
+                "Thin-film, paraxial, Gaussian beam, waveguide, fiber-coupling, and polarization preview calculators."
+            ],
         ),
     ]
     external = [
@@ -1326,6 +1335,66 @@ def agent_optics_gaussian_beam_focus(req: GaussianBeamFocusRequest):
             req.input_waist_um,
             req.focal_length_mm,
         )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/fiber-coupling",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_fiber_coupling(req: FiberCouplingRequest):
+    try:
+        result = gaussian_mode_overlap(
+            waist_input_um=req.waist_input_um,
+            waist_fiber_um=req.waist_fiber_um,
+            lateral_offset_um=req.lateral_offset_um,
+            angular_tilt_mrad=req.angular_tilt_mrad,
+            wavelength_nm=req.wavelength_nm,
+        )
+    except Exception as exc:  # noqa: BLE001
+        return _agent_error_response(
+            AgentApiError(
+                "preview_generation_error",
+                str(exc),
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+            )
+        )
+    return _optical_calculator_response(result)
+
+
+@router.post(
+    "/api/optics/polarization-jones",
+    response_model=OpticalCalculatorResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_optics_polarization_jones(req: PolarizationJonesRequest):
+    try:
+        input_jones = req.input_jones
+        if input_jones is None:
+            input_state = linear_polarization(req.input_angle_deg)
+            input_jones = input_state.result["output_jones"]
+        element_type = req.element_type.lower()
+        if element_type == "polarizer":
+            result = jones_linear_polarizer(input_jones, req.angle_deg)
+        elif element_type == "state":
+            result = (
+                linear_polarization(req.input_angle_deg)
+                if req.input_jones is None
+                else summarize_polarization_state(input_jones)
+            )
+        elif element_type == "waveplate":
+            result = jones_waveplate(input_jones, req.retardance_rad, req.fast_axis_deg)
+        else:
+            raise ValueError("element_type must be waveplate, polarizer, or state.")
     except Exception as exc:  # noqa: BLE001
         return _agent_error_response(
             AgentApiError(

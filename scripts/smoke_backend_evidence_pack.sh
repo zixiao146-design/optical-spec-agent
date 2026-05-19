@@ -61,7 +61,7 @@ require(
 )
 require(
     {item["calculator_name"] for item in payload["optical_calculators"]}
-    == {"thin_film", "paraxial", "gaussian_beam", "waveguide"},
+    == {"thin_film", "paraxial", "gaussian_beam", "waveguide", "fiber_coupling", "polarization"},
     "calculator evidence mismatch",
 )
 golden = payload["adapter_native_golden_coverage"]
@@ -88,6 +88,7 @@ require(payload["material_template_cross_checks"]["total"] == 10, "material-temp
 require(payload["material_template_cross_checks"]["fail_count"] == 0, "material-template cross-check failed")
 require(payload["application_domain_benchmarks"]["scenario_count"] >= 19, "benchmark scenario count mismatch")
 require(payload["application_domain_benchmarks"]["fail_count"] == 0, "application domain benchmark failed")
+require(payload["application_domain_benchmarks"]["warn_count"] == 0, "application domain benchmark warning remained")
 require(payload["application_domain_benchmarks"]["unsupported_requests_blocked_or_deferred"] is True, "unsupported benchmark policy missing")
 
 markdown = markdown_path.read_text(encoding="utf-8")
@@ -118,8 +119,12 @@ print("BACKEND EVIDENCE PACK PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("APPLICATION DOMAIN BENCHMARKS PASSED")
+print("FIBER COUPLING PREVIEW PASSED")
+print("POLARIZATION PREVIEW PASSED")
 PY
 
+echo "FIBER COUPLING PREVIEW PASSED"
+echo "POLARIZATION PREVIEW PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

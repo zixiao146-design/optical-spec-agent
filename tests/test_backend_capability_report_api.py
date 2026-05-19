@@ -38,6 +38,8 @@ def test_backend_capability_report_api_returns_expected_sections():
         "paraxial",
         "gaussian_beam",
         "waveguide",
+        "fiber_coupling",
+        "polarization",
     }
     assert len(body["requirements_templates"]) == 7
     assert body["material_provenance_coverage"]["material_count"] >= 10
@@ -51,6 +53,7 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["material_template_cross_checks"]["fail_count"] == 0
     assert body["application_domain_benchmarks"]["scenario_count"] >= 19
     assert body["application_domain_benchmarks"]["fail_count"] == 0
+    assert body["application_domain_benchmarks"]["warn_count"] == 0
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",
@@ -81,6 +84,7 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["application_domain_coverage"]["domain_count"] == 10
     assert body["material_template_cross_checks"]["fail_count"] == 0
     assert body["application_domain_benchmarks"]["fail_count"] == 0
+    assert body["application_domain_benchmarks"]["warn_count"] == 0
     assert body["external_solver_executed"] is False
 
 

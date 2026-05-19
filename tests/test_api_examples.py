@@ -118,6 +118,10 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "waveguide_estimate_response.json" in response_files
     assert "waveguide_sweep_response.json" in response_files
     assert "waveguide_single_mode_range_response.json" in response_files
+    assert "fiber_coupling_response.json" in response_files
+    assert "polarization_jones_response.json" in response_files
+    assert "agent_session_fiber_coupling_response.json" in response_files
+    assert "agent_session_polarization_response.json" in response_files
     assert "parse_request_heuristic.json" in request_files
     assert "material_suggestion_request.json" in request_files
     assert "material_diagnose_ag_plasmonics_request.json" in request_files
@@ -154,6 +158,10 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "waveguide_estimate_request.json" in request_files
     assert "waveguide_sweep_request.json" in request_files
     assert "waveguide_single_mode_range_request.json" in request_files
+    assert "fiber_coupling_request.json" in request_files
+    assert "polarization_jones_request.json" in request_files
+    assert "agent_session_fiber_coupling_request.json" in request_files
+    assert "agent_session_polarization_request.json" in request_files
     for calculator_response in [
         "thin_film_response.json",
         "thin_film_spectrum_response.json",
@@ -167,6 +175,8 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "waveguide_estimate_response.json",
         "waveguide_sweep_response.json",
         "waveguide_single_mode_range_response.json",
+        "fiber_coupling_response.json",
+        "polarization_jones_response.json",
         "backend_capability_report_response.json",
         "backend_evidence_summary_response.json",
         "design_case_cross_checks_response.json",
@@ -205,6 +215,8 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "application_domain_benchmark_eval_ambiguous_response.json",
         "application_domain_benchmark_results_response.json",
         "agent_session_domain_nanoparticle_response.json",
+        "agent_session_fiber_coupling_response.json",
+        "agent_session_polarization_response.json",
     ]:
         payload = _load_json(API_EXAMPLES / calculator_response)
         if "quality" in payload:

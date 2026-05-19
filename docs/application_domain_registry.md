@@ -18,8 +18,8 @@ solver, or query an online material database.
 | `lens_ray_optics` | `paraxial_lens_imaging` | BK7 preview, fused silica preview, air | paraxial calculator and Optiland preview |
 | `gaussian_beam_focusing` | `gaussian_beam_focus` | air, fused silica preview | Gaussian beam series/focus preview |
 | `imaging_system_preview` | `paraxial_lens_imaging` | BK7 preview, fused silica preview, air | paraxial relay and Optiland preview |
-| `fiber_coupling_preview` | `gaussian_beam_focus`, `slab_waveguide_single_mode` | fused silica preview, SiO2, Si3N4 | partial Gaussian/waveguide preview; coupling solver deferred |
-| `polarization_optics_preview` | `dielectric_metasurface_preview` | TiO2, Si3N4, SiO2, fused silica preview | partial metadata; dedicated polarization model deferred |
+| `fiber_coupling_preview` | `gaussian_beam_focus`, `slab_waveguide_single_mode` | fused silica preview, SiO2, Si3N4 | Gaussian mode-overlap preview; coupling solver validation deferred |
+| `polarization_optics_preview` | `dielectric_metasurface_preview` | TiO2, Si3N4, SiO2, fused silica preview | Jones polarizer/waveplate preview; vector EM validation deferred |
 
 ## API
 

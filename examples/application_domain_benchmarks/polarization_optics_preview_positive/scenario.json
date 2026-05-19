@@ -13,8 +13,12 @@
     "si3n4",
     "sio2"
   ],
-  "expected_calculators": [],
-  "expected_adapters": [],
+  "expected_calculators": [
+    "optics.polarization.jones"
+  ],
+  "expected_adapters": [
+    "meep"
+  ],
   "expected_missing_critical_inputs": [],
   "expected_missing_optional_inputs": [],
   "expected_recommended_questions": [],

@@ -29,4 +29,6 @@ def test_application_domain_registry_has_ten_preview_domains():
         assert domain.preview_only is True
         assert domain.production_grade_validation_claimed is False
         assert domain.formal_convergence_proof_claimed is False
-
+    by_id = {domain.domain_id: domain for domain in domains}
+    assert "optics.fiber_coupling.gaussian_mode_overlap" in by_id["fiber_coupling_preview"].expected_calculators
+    assert "optics.polarization.jones" in by_id["polarization_optics_preview"].expected_calculators

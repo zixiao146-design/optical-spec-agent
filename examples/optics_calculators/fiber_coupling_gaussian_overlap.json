@@ -1,0 +1,80 @@
+{
+  "example_id": "fiber_coupling_gaussian_overlap",
+  "endpoint": "/api/optics/fiber-coupling",
+  "request": {
+    "waist_input_um": 5.2,
+    "waist_fiber_um": 5.2,
+    "lateral_offset_um": 0.5,
+    "angular_tilt_mrad": 1.0,
+    "wavelength_nm": 1550.0
+  },
+  "expected_result_snippet": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "status": "ok",
+    "result": {
+      "wavelength_nm": 1550.0,
+      "waist_input_um": 5.2,
+      "waist_fiber_um": 5.2,
+      "lateral_offset_um": 0.5,
+      "angular_tilt_mrad": 1.0,
+      "mode_mismatch_factor": 1.0,
+      "offset_factor": 0.9907970466641784,
+      "tilt_factor": 0.9997778610111665,
+      "coupling_efficiency_estimate": 0.9905769520100932,
+      "summary": "Gaussian fiber-coupling preview estimates 0.9906 coupling efficiency."
+    },
+    "assumptions": [
+      "Scalar circular Gaussian field overlap preview.",
+      "Mode mismatch factor eta_w = (2 w_in w_f / (w_in^2 + w_f^2))^2.",
+      "Lateral offset and angular tilt are modeled as independent Gaussian penalty factors.",
+      "Polarization overlap, Fresnel loss, NA clipping, and aberrations are not included."
+    ],
+    "diagnostics": [
+      "Efficiency is bounded to [0, 1].",
+      "Perfect waist match with zero offset/tilt is the local sanity reference."
+    ],
+    "warnings": [
+      "Use a validated mode-overlap calculation or measured alignment data before physical conclusions."
+    ],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "quality": {
+      "quality_level": "sanity_checked_preview",
+      "reference_case": null,
+      "assumptions": [
+        "Scalar circular Gaussian field overlap preview.",
+        "Mode mismatch factor eta_w = (2 w_in w_f / (w_in^2 + w_f^2))^2.",
+        "Lateral offset and angular tilt are modeled as independent Gaussian penalty factors.",
+        "Polarization overlap, Fresnel loss, NA clipping, and aberrations are not included."
+      ],
+      "limitations": [
+        "Scalar Gaussian overlap preview only.",
+        "Ignores vector polarization overlap, Fresnel reflections, aberrations, NA clipping, and mode-solver effects.",
+        "Not production-grade physical validation."
+      ],
+      "warnings": [
+        "Use a validated mode-overlap calculation or measured alignment data before physical conclusions."
+      ],
+      "valid_input_range": {
+        "wavelength_nm": "positive",
+        "waist_input_um": "positive",
+        "waist_fiber_um": "positive",
+        "lateral_offset_um": "non-negative preview offset",
+        "angular_tilt_mrad": "finite preview tilt"
+      },
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  },
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

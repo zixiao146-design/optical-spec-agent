@@ -26,11 +26,12 @@ def test_core_domains_pass_material_template_tool_checks():
         assert check.expected_tool_status == "covered"
 
 
-def test_fiber_and_polarization_are_partial_with_explanation():
+def test_fiber_and_polarization_preview_domains_are_covered_with_calculators():
     for domain_id in ("fiber_coupling_preview", "polarization_optics_preview"):
         check = cross_check_application_domain(domain_id)
-        assert check.status == "warning"
-        assert check.deferred_capability
+        assert check.status == "pass"
+        assert check.deferred_capability is None
+        assert check.expected_tool_status == "covered"
+        assert check.expected_calculators
         assert check.external_solver_executed is False
         assert check.preview_only is True
-

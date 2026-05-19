@@ -14,8 +14,10 @@ python - <<'PY'
 from fastapi.testclient import TestClient
 
 from optical_spec_agent.api.app import app
+from optical_spec_agent.optics.fiber_coupling import gaussian_mode_overlap
 from optical_spec_agent.optics.gaussian_beam import gaussian_beam_parameters, propagate_gaussian_beam
 from optical_spec_agent.optics.paraxial import thin_lens
+from optical_spec_agent.optics.polarization import jones_linear_polarizer, linear_polarization
 from optical_spec_agent.optics.thin_film import calculate_thin_film_stack
 from optical_spec_agent.optics.waveguide import slab_waveguide_v_number
 
@@ -109,6 +111,7 @@ benchmark_results = client.get("/api/application-domain-benchmark-results")
 require(benchmark_results.status_code == 200, "/api/application-domain-benchmark-results failed")
 benchmark_results_payload = benchmark_results.json()
 require(benchmark_results_payload["summary"]["fail"] == 0, "application benchmark failed")
+require(benchmark_results_payload["summary"]["warn"] == 0, "application benchmark warning remained")
 require(benchmark_results_payload["external_solver_executed"] is False, "benchmark executed solver")
 
 golden_coverage = client.get("/api/adapter-native-golden-coverage")
@@ -329,6 +332,25 @@ requests = [
         "/api/optics/waveguide-single-mode-range",
         {"core_n": 2.0, "cladding_n": 1.44, "wavelength_nm": 1550.0},
     ),
+    (
+        "/api/optics/fiber-coupling",
+        {
+            "waist_input_um": 5.2,
+            "waist_fiber_um": 5.2,
+            "lateral_offset_um": 0.0,
+            "angular_tilt_mrad": 0.0,
+            "wavelength_nm": 1550.0,
+        },
+    ),
+    (
+        "/api/optics/polarization-jones",
+        {
+            "element_type": "waveplate",
+            "input_angle_deg": 0.0,
+            "retardance_rad": 3.141592653589793,
+            "fast_axis_deg": 45.0,
+        },
+    ),
 ]
 for endpoint, payload in requests:
     response = client.post(endpoint, json=payload)
@@ -361,12 +383,21 @@ require(paraxial_reference.result["magnification"] == -1.0, "paraxial magnificat
 waveguide_reference = slab_waveguide_v_number(2.0, 1.5, 0.3, 1550.0)
 require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity check failed")
 
+fiber_reference = gaussian_mode_overlap(5.2, 5.2, wavelength_nm=1550.0)
+require(abs(fiber_reference.result["coupling_efficiency_estimate"] - 1.0) < 1e-12, "fiber coupling sanity check failed")
+
+horizontal = linear_polarization(0.0)
+crossed = jones_linear_polarizer(horizontal.result["output_jones"], 90.0)
+require(crossed.result["intensity"] < 1e-24, "polarization crossed-polarizer sanity check failed")
+
 print("CALCULATOR SANITY CHECKS PASSED")
 print("MATERIAL PROVENANCE DIAGNOSTICS PASSED")
 print("AMBIGUOUS REQUIREMENT MATCHING PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("APPLICATION DOMAIN BENCHMARKS PASSED")
+print("FIBER COUPLING PREVIEW PASSED")
+print("POLARIZATION PREVIEW PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
@@ -383,6 +414,8 @@ echo "AMBIGUOUS REQUIREMENT MATCHING PASSED"
 echo "APPLICATION DOMAIN COVERAGE PASSED"
 echo "MATERIAL TEMPLATE CROSS-CHECKS PASSED"
 echo "APPLICATION DOMAIN BENCHMARKS PASSED"
+echo "FIBER COUPLING PREVIEW PASSED"
+echo "POLARIZATION PREVIEW PASSED"
 echo "SOURCE/MONITOR INFERENCE PASSED"
 echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "OBSERVABLE DIAGNOSTICS PASSED"

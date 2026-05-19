@@ -18,26 +18,26 @@ from optical_spec_agent.examples.models import (
     OpticalDesignExampleSummary,
 )
 from optical_spec_agent.examples.application_domains import (
-    ApplicationDomain,
-    ApplicationDomainDetailResponse,
-    ApplicationDomainMatchResult,
-    ApplicationDomainsResponse,
+    ApplicationDomain as ApplicationDomain,
+    ApplicationDomainDetailResponse as ApplicationDomainDetailResponse,
+    ApplicationDomainMatchResult as ApplicationDomainMatchResult,
+    ApplicationDomainsResponse as ApplicationDomainsResponse,
 )
 from optical_spec_agent.examples.domain_cross_check import (
-    ApplicationDomainCrossCheck,
-    ApplicationDomainCrossChecksResponse,
+    ApplicationDomainCrossCheck as ApplicationDomainCrossCheck,
+    ApplicationDomainCrossChecksResponse as ApplicationDomainCrossChecksResponse,
 )
 from optical_spec_agent.examples.domain_benchmarks import (
-    ApplicationDomainBenchmarkResponse,
-    ApplicationDomainBenchmarkResultResponse,
-    ApplicationDomainScenario,
-    ApplicationDomainScenarioResponse,
-    ApplicationDomainScenarioResult,
+    ApplicationDomainBenchmarkResponse as ApplicationDomainBenchmarkResponse,
+    ApplicationDomainBenchmarkResultResponse as ApplicationDomainBenchmarkResultResponse,
+    ApplicationDomainScenario as ApplicationDomainScenario,
+    ApplicationDomainScenarioResponse as ApplicationDomainScenarioResponse,
+    ApplicationDomainScenarioResult as ApplicationDomainScenarioResult,
 )
 from optical_spec_agent.examples.requirements import (
-    DesignRequirementDetailResponse,
-    DesignRequirementsResponse,
-    RequirementMatchResult,
+    DesignRequirementDetailResponse as DesignRequirementDetailResponse,
+    DesignRequirementsResponse as DesignRequirementsResponse,
+    RequirementMatchResult as RequirementMatchResult,
 )
 from optical_spec_agent.materials.models import (
     MaterialDetail,
@@ -50,7 +50,7 @@ from optical_spec_agent.optical_language import (
     OpticalLanguageDiagnostics,
     OpticalMonitorModel,
     OpticalSourceModel,
-    SourceMonitorInference,
+    SourceMonitorInference as SourceMonitorInference,
 )
 
 
@@ -485,6 +485,23 @@ class GaussianBeamFocusRequest(ApiRequestBase):
     wavelength_nm: float
     input_waist_um: float
     focal_length_mm: float
+
+
+class FiberCouplingRequest(ApiRequestBase):
+    waist_input_um: float
+    waist_fiber_um: float
+    lateral_offset_um: float = 0.0
+    angular_tilt_mrad: float = 0.0
+    wavelength_nm: float = 1550.0
+
+
+class PolarizationJonesRequest(ApiRequestBase):
+    input_jones: list[Any] | None = None
+    input_angle_deg: float = 0.0
+    element_type: str = Field("waveplate", description="waveplate, polarizer, or state")
+    angle_deg: float = 0.0
+    retardance_rad: float = 3.141592653589793
+    fast_axis_deg: float = 0.0
 
 
 class WaveguideEstimateRequest(ApiRequestBase):

@@ -41,6 +41,9 @@ from optical_spec_agent.optics import (
     calculate_thin_film_spectrum,
     design_quarter_wave_ar_coating,
     focus_gaussian_beam_thin_lens,
+    gaussian_mode_overlap,
+    jones_waveplate,
+    linear_polarization,
     propagate_gaussian_beam_series,
     slab_waveguide_sweep,
     suggest_single_mode_thickness_range,
@@ -214,6 +217,10 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         if matched_template is not None
         else _detect_optical_intent(goal)
     )
+    if application_domain_id == "fiber_coupling_preview":
+        optical_intent = "fiber coupling preview"
+    elif application_domain_id == "polarization_optics_preview":
+        optical_intent = "polarization optics preview"
     selected_example_id = example_id or (
         matched_template.design_case_id if matched_template is not None else EXAMPLE_BY_INTENT.get(optical_intent)
     )
@@ -238,6 +245,10 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         trace.material_suggestions = material_suggestions
 
     adapter_recommendation = trace.adapter_recommendation or _adapter_for_intent(optical_intent)
+    if application_domain_id == "fiber_coupling_preview":
+        adapter_recommendation = "optiland"
+    elif application_domain_id == "polarization_optics_preview":
+        adapter_recommendation = "meep"
     trace.adapter_recommendation = adapter_recommendation
     observable_diagnostics = diagnose_observable(
         source_monitor.source_model,
@@ -309,6 +320,7 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         artifacts=_artifacts(
             selected_example_id=selected_example_id,
             optical_intent=optical_intent,
+            application_domain_id=application_domain_id,
             materials=trace.material_suggestions,
             adapter_recommendation=adapter_recommendation,
             source_model=source_monitor.source_model,
@@ -319,6 +331,7 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         permission_gates=_permission_gates(),
         tool_call_ledger=_tool_call_ledger(
             optical_intent=optical_intent,
+            application_domain_id=application_domain_id,
             selected_example_id=selected_example_id,
             adapter_recommendation=adapter_recommendation,
             requirement_match=requirement_match,
@@ -354,6 +367,10 @@ def _detect_optical_intent(goal: str) -> str:
         return "nanoparticle plasmonics / scattering preview"
     if any(token in lowered for token in ("gaussian", "beam waist", "rayleigh", "高斯光束", "光腰")):
         return "gaussian beam propagation preview"
+    if any(token in lowered for token in ("fiber coupling", "mode overlap", "光纤耦合", "模式重叠")):
+        return "fiber coupling preview"
+    if any(token in lowered for token in ("polarization", "polarizer", "waveplate", "jones", "偏振", "波片")):
+        return "polarization optics preview"
     if any(token in lowered for token in ("waveguide", "mode", "波导", "模式")):
         return "waveguide mode preview"
     if any(token in lowered for token in ("thin film", "coating", "膜", "镀膜")):
@@ -382,6 +399,10 @@ def _application_for_intent(intent: str) -> str:
         return "lens/ray optics"
     if "gaussian" in intent:
         return "gaussian beam"
+    if "fiber coupling" in intent:
+        return "fiber coupling preview"
+    if "polarization" in intent:
+        return "polarization optics preview"
     return "general optical preview"
 
 
@@ -390,6 +411,10 @@ def _adapter_for_intent(intent: str) -> str:
         return "mpb"
     if "lens" in intent:
         return "optiland"
+    if "fiber coupling" in intent:
+        return "optiland"
+    if "polarization" in intent:
+        return "meep"
     if "waveguide" in intent:
         return "mpb or elmer preview"
     if "thin film" in intent:
@@ -612,6 +637,7 @@ def _artifacts(
     *,
     selected_example_id: str | None,
     optical_intent: str,
+    application_domain_id: str | None,
     materials: list[str],
     adapter_recommendation: str,
     source_model: OpticalSourceModel | None,
@@ -726,7 +752,7 @@ def _artifacts(
             generated_by_agent="EvidenceAgent",
         ),
     ]
-    calculator_summary = _calculator_artifact_summary(optical_intent)
+    calculator_summary = _calculator_artifact_summary(optical_intent, application_domain_id)
     if calculator_summary is not None:
         artifacts.append(
             AgentArtifact(
@@ -743,7 +769,29 @@ def _artifacts(
     return artifacts
 
 
-def _calculator_artifact_summary(optical_intent: str) -> dict[str, str] | None:
+def _calculator_artifact_summary(
+    optical_intent: str,
+    application_domain_id: str | None = None,
+) -> dict[str, str] | None:
+    if application_domain_id == "fiber_coupling_preview" or "fiber coupling" in optical_intent:
+        overlap = gaussian_mode_overlap(
+            waist_input_um=5.2,
+            waist_fiber_um=5.2,
+            lateral_offset_um=0.5,
+            angular_tilt_mrad=0.2,
+            wavelength_nm=1550.0,
+        )
+        return {
+            "summary": overlap.result["summary"],
+            "source_endpoint": "/api/optics/fiber-coupling",
+        }
+    if application_domain_id == "polarization_optics_preview" or "polarization" in optical_intent:
+        input_state = linear_polarization(0.0)
+        waveplate = jones_waveplate(input_state.result["output_jones"], 3.141592653589793, 45.0)
+        return {
+            "summary": waveplate.result["summary"],
+            "source_endpoint": "/api/optics/polarization-jones",
+        }
     if "thin film" in optical_intent:
         spectrum = calculate_thin_film_spectrum(
             [{"n": 1.38, "thickness_nm": 100.0}],
@@ -813,6 +861,7 @@ def _calculator_artifact_summary(optical_intent: str) -> dict[str, str] | None:
 def _tool_call_ledger(
     *,
     optical_intent: str,
+    application_domain_id: str | None,
     selected_example_id: str | None,
     adapter_recommendation: str,
     requirement_match: RequirementMatchResult,
@@ -1063,14 +1112,45 @@ def _tool_call_ledger(
             safety_note="Preview generation is not production-grade physical validation.",
         ),
     ]
-    calculator_record = _calculator_tool_call(optical_intent)
+    calculator_record = _calculator_tool_call(optical_intent, application_domain_id)
     if calculator_record is not None:
         ledger.append(calculator_record)
     ledger.extend(_blocked_tool_calls())
     return ledger
 
 
-def _calculator_tool_call(optical_intent: str) -> ToolCallRecord | None:
+def _calculator_tool_call(
+    optical_intent: str,
+    application_domain_id: str | None = None,
+) -> ToolCallRecord | None:
+    if application_domain_id == "fiber_coupling_preview" or "fiber coupling" in optical_intent:
+        return ToolCallRecord(
+            call_id="optics-fiber-coupling-gaussian-mode-overlap",
+            tool_name="optics.fiber_coupling.gaussian_mode_overlap",
+            tool_kind="internal_python",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Fiber coupling preview domain detected.",
+            output_summary="Prepared Gaussian mode-overlap, offset, and tilt preview estimate.",
+            reason="Fiber coupling benchmark coverage needs a deterministic local overlap calculator.",
+            safety_note="Fiber coupling output is scalar preview/design-assist, not solver validation.",
+        )
+    if application_domain_id == "polarization_optics_preview" or "polarization" in optical_intent:
+        return ToolCallRecord(
+            call_id="optics-polarization-jones",
+            tool_name="optics.polarization.jones",
+            tool_kind="internal_python",
+            called_by_agent="WorkflowAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Polarization optics preview domain detected.",
+            output_summary="Prepared deterministic Jones polarizer/waveplate preview estimate.",
+            reason="Polarization benchmark coverage needs a local Jones-calculus preview calculator.",
+            safety_note="Jones output is preview/design-assist, not vector EM validation.",
+        )
     if "thin film" in optical_intent:
         return ToolCallRecord(
             call_id="optics-thin-film-spectrum",

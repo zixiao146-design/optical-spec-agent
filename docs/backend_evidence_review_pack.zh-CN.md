@@ -36,14 +36,16 @@ python scripts/generate_backend_evidence_pack.py \
   状态，以及没有 tag/release 动作。
 - Sub-agent reality：每个确定性后端角色是否存在，并且是否在样例 session 中执行。
 - Tool-call reality：已执行的内部工具、已执行的计算器工具，以及被阻止的外部动作。
-- Optical calculators：薄膜、近轴、Gaussian beam、波导 preview 计算器，以及 sanity
-  reference cases 和 failure modes。
+- Optical calculators：薄膜、近轴、Gaussian beam、波导、光纤耦合和 Jones 偏振
+  preview 计算器，以及 sanity reference cases 和 failure modes。
 - Design-case cross-checks：光学设计案例如何映射到预期计算器、适配器和 tool-call
   ledger。
 - Source / monitor / observable diagnostics：确定性 source/monitor 推断、缺失输入诊断、
   observable taxonomy 和 adapter-native mapping。
 - Adapter-native golden coverage：Meep、MPB、Gmsh、Elmer、Optiland 的 golden preview
   case，以及 metadata、fragment、safety 检查。
+- Application-domain benchmarks：此前 fiber coupling 和 polarization 的 warning
+  场景现在由确定性 preview 计算器覆盖，但真实耦合/矢量偏振验证仍需显式求解器或实验依据。
 - Blocked or deferred capabilities：外部求解器、外部 LLM、发布、tag/release、Elmer
   Level 3、生产级验证、形式化收敛证明等被阻止或延后能力。
 - Maintainer review questions：供维护者决定下一步审查或深化方向的问题。

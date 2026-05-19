@@ -45,6 +45,25 @@ def test_optical_calculator_api_endpoints_return_safe_preview_results():
             {"wavelength_nm": 1064.0, "input_waist_um": 1000.0, "focal_length_mm": 50.0},
         ),
         (
+            "/api/optics/fiber-coupling",
+            {
+                "waist_input_um": 5.2,
+                "waist_fiber_um": 5.2,
+                "lateral_offset_um": 0.5,
+                "angular_tilt_mrad": 0.2,
+                "wavelength_nm": 1550.0,
+            },
+        ),
+        (
+            "/api/optics/polarization-jones",
+            {
+                "input_angle_deg": 0.0,
+                "element_type": "waveplate",
+                "retardance_rad": 3.141592653589793,
+                "fast_axis_deg": 45.0,
+            },
+        ),
+        (
             "/api/optics/waveguide-estimate",
             {"core_n": 3.48, "cladding_n": 1.44, "core_thickness_um": 0.22, "wavelength_nm": 1550.0},
         ),

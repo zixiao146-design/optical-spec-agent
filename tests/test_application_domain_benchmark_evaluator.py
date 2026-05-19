@@ -13,6 +13,7 @@ def test_application_domain_benchmark_evaluator_has_no_failures():
     assert response.status == "ok"
     assert response.summary["total"] >= 19
     assert response.summary["fail"] == 0
+    assert response.summary["warn"] == 0
     assert response.summary["positive"] >= 10
     assert response.summary["ambiguous"] >= 3
     assert response.summary["underconstrained"] >= 3
@@ -27,7 +28,7 @@ def test_positive_scenarios_pass_or_warn_without_unsafe_calls():
     positives = [item for item in response.results if item.scenario_id.endswith("_positive")]
     assert positives
     for result in positives:
-        assert result.status in {"pass", "warn"}
+        assert result.status == "pass"
         assert result.external_solver_executed is False
         assert result.external_llm_required is False
         assert result.production_grade_validation_claimed is False

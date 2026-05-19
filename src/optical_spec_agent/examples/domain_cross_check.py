@@ -60,14 +60,7 @@ def cross_check_application_domain(domain_id: str) -> ApplicationDomainCrossChec
 
     expected_tool_status = "covered"
     deferred_capability = None
-    if domain.domain_id in {"fiber_coupling_preview", "polarization_optics_preview"}:
-        expected_tool_status = "partial_deferred"
-        deferred_capability = (
-            "Domain has preview material/template context, but dedicated calculator or "
-            "solver-backed physical result remains deferred."
-        )
-        diagnostics.append(deferred_capability)
-    elif not domain.expected_calculators and not domain.expected_adapters:
+    if not domain.expected_calculators and not domain.expected_adapters:
         expected_tool_status = "needs_review"
         diagnostics.append("Domain has no expected calculator or adapter path.")
 
@@ -146,4 +139,3 @@ def _material_coverage(
             }
         )
     return ok and bool(summary), summary
-

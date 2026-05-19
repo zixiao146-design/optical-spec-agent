@@ -14,7 +14,7 @@ This benchmark scenario is a positive coverage case for a supported local previe
 - Expected candidate domains: `none`
 - Expected confidence: `high`
 - Expected requirement template: `gaussian_beam_focus`
-- Expected calculators: `optics.gaussian_beam.series`
+- Expected calculators: `optics.fiber_coupling.gaussian_mode_overlap`
 - Expected adapters: `mpb, optiland`
 - Expected blocked actions: `none`
 

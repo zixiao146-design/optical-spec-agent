@@ -82,11 +82,14 @@ generated [`backend capability report`](docs/backend_capability_report.md),
 maintainer [`backend evidence review pack`](docs/backend_evidence_review_pack.md),
 [`design case cross-checks`](docs/design_case_cross_checks.md), and
 local preview [`optical calculators`](docs/optical_calculators.md) for
-thin-film stacks, paraxial lenses, Gaussian beams, and waveguide V-number
+thin-film stacks, paraxial lenses, Gaussian beams, waveguide V-number,
+fiber coupling mode overlap, and Jones-calculus polarization
 estimates. The calculator layer now includes case-oriented helpers for thin-film
 spectra, quarter-wave AR coatings, Gaussian beam series/focus estimates,
 paraxial systems and two-lens relays, and waveguide sweeps/single-mode range
-estimates; see
+estimates, plus
+[`fiber coupling`](docs/fiber_coupling_preview_calculator.md) and
+[`polarization`](docs/polarization_preview_calculator.md) preview helpers; see
 [`optical calculator case integration`](docs/optical_calculator_case_integration.md).
 Reference sanity cases and response quality fields are documented in
 [`optical calculator reference cases`](docs/optical_calculator_reference_cases.md).
@@ -134,7 +137,9 @@ local scenario suite covering positive, ambiguous, underconstrained,
 unsupported, and unsafe/blocked optical-design requests. The evaluator checks
 expected domain/template matching, material/calculator/adapter behavior,
 missing-input questions, and blocked actions without running solvers or calling
-external LLMs.
+external LLMs. The former fiber coupling and polarization warning scenarios now
+pass through deterministic preview calculators, while real coupling validation
+and vector EM polarization validation remain outside the default backend path.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

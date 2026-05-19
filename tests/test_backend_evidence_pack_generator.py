@@ -67,6 +67,15 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert payload["material_template_cross_checks"]["fail_count"] == 0
     assert payload["application_domain_benchmarks"]["scenario_count"] >= 19
     assert payload["application_domain_benchmarks"]["fail_count"] == 0
+    assert payload["application_domain_benchmarks"]["warn_count"] == 0
+    assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
+        "thin_film",
+        "paraxial",
+        "gaussian_beam",
+        "waveguide",
+        "fiber_coupling",
+        "polarization",
+    }
     markdown = markdown_out.read_text(encoding="utf-8")
     for heading in [
         "Sub-agent reality",

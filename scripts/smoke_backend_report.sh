@@ -52,6 +52,8 @@ require({item["calculator_name"] for item in report["optical_calculators"]} == {
     "paraxial",
     "gaussian_beam",
     "waveguide",
+    "fiber_coupling",
+    "polarization",
 }, "calculator list mismatch")
 internal_tools = {item["tool_name"]: item for item in report["internal_tools"]}
 require(internal_tools["source_monitor_inference"]["executed_in_sample"] is True, "source/monitor inference not executed in sample")
@@ -76,6 +78,7 @@ require(report["material_template_cross_checks"]["total"] == 10, "material-templ
 require(report["material_template_cross_checks"]["fail_count"] == 0, "material-template cross-check failed")
 require(report["application_domain_benchmarks"]["scenario_count"] >= 19, "benchmark scenario count mismatch")
 require(report["application_domain_benchmarks"]["fail_count"] == 0, "application domain benchmark failed")
+require(report["application_domain_benchmarks"]["warn_count"] == 0, "application domain benchmark warning remained")
 require(len(report["requirements_templates"]) == 7, "requirement template count mismatch")
 require(
     all(item["matched_by_heuristic"] for item in report["requirements_templates"]),
@@ -116,6 +119,7 @@ require(benchmark_eval.json()["status"] in {"pass", "warn"}, "ambiguous benchmar
 benchmark_results = client.get("/api/application-domain-benchmark-results")
 require(benchmark_results.status_code == 200, "/api/application-domain-benchmark-results failed")
 require(benchmark_results.json()["summary"]["fail"] == 0, "application benchmark failed")
+require(benchmark_results.json()["summary"]["warn"] == 0, "application benchmark warning remained")
 
 golden_api = client.get("/api/adapter-native-golden-coverage")
 require(golden_api.status_code == 200, "/api/adapter-native-golden-coverage failed")
@@ -256,6 +260,8 @@ print("DESIGN REQUIREMENT MATCHING PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("APPLICATION DOMAIN BENCHMARKS PASSED")
+print("FIBER COUPLING PREVIEW PASSED")
+print("POLARIZATION PREVIEW PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
@@ -264,6 +270,8 @@ print("ADAPTER NATIVE METADATA DIFF PASSED")
 print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
 PY
 
+echo "FIBER COUPLING PREVIEW PASSED"
+echo "POLARIZATION PREVIEW PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

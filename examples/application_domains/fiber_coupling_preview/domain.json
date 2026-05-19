@@ -34,8 +34,7 @@
     "au"
   ],
   "expected_calculators": [
-    "optics.gaussian_beam.focus",
-    "optics.waveguide.sweep"
+    "optics.fiber_coupling.gaussian_mode_overlap"
   ],
   "expected_adapters": [
     "mpb",
@@ -58,14 +57,14 @@
     "alignment_tolerance"
   ],
   "default_assumptions": [
-    "Gaussian/fiber mode overlap is a future preview approximation.",
+    "Scalar Gaussian fiber-mode overlap preview.",
     "No coupled-mode solver is run by default."
   ],
   "recommended_questions": [
     "What fiber mode field diameter and wavelength should be assumed?",
     "Is the target coupling into a fiber, waveguide, or free-space focus?"
   ],
-  "evidence_boundary": "Partial domain coverage; scalar Gaussian/waveguide previews only, no real coupling efficiency solver.",
+  "evidence_boundary": "Scalar Gaussian mode-overlap preview; real coupling efficiency still requires explicit solver or measurement validation.",
   "preview_only": true,
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false

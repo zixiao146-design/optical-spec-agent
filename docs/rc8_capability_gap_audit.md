@@ -35,9 +35,9 @@ not production-grade physical validation.
 | Adapter golden coverage | Strict metadata diffs cover five golden cases | Coverage is narrow per adapter | Adapter changes can pass without broader semantic coverage | Add one additional case per adapter when adapter previews change. |
 | Design requirement templates | Seven templates and deterministic matching exist | Requirements lack tolerance/optimization constraints | Goals may not capture design acceptance criteria | Add tolerance, sweep, and pass/fail fields for candidate templates. |
 | Natural-language to optical-language matching | Deterministic heuristic EN/ZH matching, candidate templates, confidence, and questions exist | Novel phrasing may still need more negative examples | Unexpected matches can produce misleading plans | Keep adding ambiguous/negative cases and confidence-threshold tests. |
-| Application domain coverage | Ten domains map to templates, materials, calculators/adapters, and missing-input questions | Fiber coupling and polarization optics remain partial/deferred | Domain coverage could be mistaken for full physical validation | Keep pass/warning/fail semantics explicit and deepen deferred domains only with tests. |
+| Application domain coverage | Ten domains map to templates, materials, calculators/adapters, and missing-input questions | Fiber coupling and polarization now have deterministic preview calculators, but real coupling/vector validation remains deferred | Domain coverage could be mistaken for full physical validation | Keep pass/warning/fail semantics explicit and require explicit solver or experimental evidence for physical validation. |
 | Material-template cross-checks | Domain checks verify templates, local materials, expected tools, and questions | Cross-checks are preview metadata, not solver evidence | Users may overread pass status as production readiness | Keep preview-only wording and material user-verification flags prominent. |
-| Application-domain benchmarks | Positive, ambiguous, underconstrained, unsupported, and unsafe/blocked scenarios exercise domain behavior | Warnings remain for partial fiber coupling and polarization optics coverage | Benchmark pass could be mistaken for physical validation | Keep benchmark result policy explicit and add scenarios as new domains are introduced. |
+| Application-domain benchmarks | Positive, ambiguous, underconstrained, unsupported, and unsafe/blocked scenarios exercise domain behavior | Fiber coupling and polarization warning cases are closed by preview calculators | Benchmark pass could be mistaken for physical validation | Keep benchmark result policy explicit and add scenarios as new domains are introduced. |
 | Frontend Agent Studio | Local MVP exists | Backend evidence is not yet summarized in UI | Maintainer review remains docs/scripts-first | Defer until backend evidence shape stabilizes. |
 | PyPI publication | Deferred and not approved | No final PyPI approval path executed | Publishing before decision could create irreversible public surface | Keep PyPI gate closed until explicit approval. |
 | v1.0.0 criteria | Public contract freeze approved | PyPI decision, final release readiness, and validation boundaries remain open | Premature v1.0.0 could overstate maturity | Use rc8 gap closure and separate v1.0 planning package. |
@@ -74,7 +74,8 @@ not production-grade physical validation.
 - Backend evidence pack, backend capability report, sub-agent audit, and
   adapter golden coverage are available.
 - Application-domain registry and material-template cross-checks are available
-  for ten preview domains, with partial/deferred domains explicitly marked.
+  for ten preview domains, including fiber coupling and polarization preview
+  calculators with solver validation still deferred.
 - Tool-call ledger records blocked solver/LLM/publication/release actions.
 - PyPI is not published and publication approval remains not granted.
 - No `v0.9.0rc8` or `v1.0.0` tag is created.

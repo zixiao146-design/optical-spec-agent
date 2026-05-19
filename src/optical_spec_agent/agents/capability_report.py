@@ -50,7 +50,9 @@ from optical_spec_agent.optical_language import (
 from optical_spec_agent.optics import (
     analyze_two_lens_relay,
     calculate_thin_film_spectrum,
+    gaussian_mode_overlap,
     gaussian_beam_parameters,
+    jones_waveplate,
     slab_waveguide_sweep,
 )
 from optical_spec_agent.workflows import plan_workflow
@@ -512,6 +514,32 @@ def _optical_calculator_capabilities() -> list[OpticalCalculatorCapability]:
                 "invalid sweep points",
             ],
         ),
+        OpticalCalculatorCapability(
+            calculator_name="fiber_coupling",
+            implemented=callable(gaussian_mode_overlap),
+            api_endpoints=["/api/optics/fiber-coupling"],
+            reference_cases=["fiber_gaussian_perfect_overlap"],
+            failure_modes=[
+                "negative wavelength",
+                "zero waist",
+                "negative lateral offset",
+            ],
+        ),
+        OpticalCalculatorCapability(
+            calculator_name="polarization",
+            implemented=callable(jones_waveplate),
+            api_endpoints=["/api/optics/polarization-jones"],
+            reference_cases=[
+                "jones_linear_polarization",
+                "jones_linear_polarizer_projection",
+                "jones_half_waveplate_preview",
+            ],
+            failure_modes=[
+                "zero Jones-vector intensity",
+                "invalid Jones-vector shape",
+                "non-finite retardance",
+            ],
+        ),
     ]
     return calculators
 
@@ -603,7 +631,7 @@ def _application_domain_coverage(
         failed_domains=[check.domain_id for check in checks if check.status == "fail"],
         notes=[
             "Application domains are local preview coverage anchors, not production validation.",
-            "Fiber coupling and polarization optics can be partial/deferred until dedicated calculators or solver workflows are added.",
+            "Fiber coupling and polarization optics now have deterministic local preview calculators; solver-backed validation remains deferred.",
             "No external solver, external LLM, or material database lookup is required.",
         ],
     )

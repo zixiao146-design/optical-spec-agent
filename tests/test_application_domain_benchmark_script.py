@@ -35,4 +35,5 @@ def test_application_domain_benchmark_script_runs_and_writes_report(tmp_path: Pa
     assert "NO RELEASE CREATED" in result.stdout
     payload = json.loads(report.read_text(encoding="utf-8"))
     assert payload["summary"]["fail"] == 0
+    assert payload["summary"]["warn"] == 0
     assert payload["external_solver_executed"] is False

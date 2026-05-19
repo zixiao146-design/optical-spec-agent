@@ -22,12 +22,14 @@ adapters, and missing-input questions.
   is explicit.
 - `fail`: a required local coverage item is missing.
 
-## Deferred Domains
+## Former Warning Domains
 
-`fiber_coupling_preview` and `polarization_optics_preview` are intentionally
-partial. They are useful as planning domains, but real coupling efficiency or
-polarization-device results require future dedicated calculators or explicit
-solver validation.
+`fiber_coupling_preview` and `polarization_optics_preview` now have local
+deterministic preview calculators. Fiber coupling uses a scalar Gaussian
+mode-overlap estimate, and polarization optics uses ideal Jones-calculus
+polarizer/waveplate helpers. Real coupling validation, vector EM behavior,
+fabrication effects, depolarization, and measured device performance still
+require explicit solver or experimental validation.
 
 ## Benchmark Link
 

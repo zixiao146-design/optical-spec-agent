@@ -11,7 +11,7 @@ Materials: tio2, si3n4, sio2, glass_fused_silica_preview
 
 Linked requirement templates: dielectric_metasurface_preview
 
-Expected calculators: none; adapter/material preview path
+Expected calculators: optics.polarization.jones
 
 Expected adapters: meep
 
@@ -20,6 +20,6 @@ Missing-input questions:
 - What input and output polarization states should be transformed?
 - Is the target a polarizer, waveplate, or metasurface polarization element?
 
-Evidence boundary: Deferred/partial coverage; no production polarization model or solver result is claimed.
+Evidence boundary: ideal Jones-calculus preview only; no vector EM polarization propagation or measured device result is claimed.
 
 This case is preview/design-assist only. It performs no solver execution, calls no external LLM, performs no network material database lookup, and claims no production-grade physical validation or formal convergence proof.

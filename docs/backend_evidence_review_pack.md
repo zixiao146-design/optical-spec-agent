@@ -43,8 +43,9 @@ approval remain separate and not granted.
   a sample session.
 - Tool-call reality: internal tools executed, calculator tools executed, and
   blocked external actions.
-- Optical calculators: thin-film, paraxial, Gaussian beam, and waveguide
-  preview calculators with sanity reference cases and failure modes.
+- Optical calculators: thin-film, paraxial, Gaussian beam, waveguide, fiber
+  coupling, and polarization preview calculators with sanity reference cases
+  and failure modes.
 - Material provenance coverage: starter materials expose provenance fields,
   require user verification, and remain non-production optical constants.
 - Ambiguous requirement matching: deterministic confidence, candidate template,
@@ -57,7 +58,9 @@ approval remain separate and not granted.
   template, expected tool, and preview-only evidence coverage.
 - Application-domain benchmarks: positive, ambiguous, underconstrained,
   unsupported, and unsafe/blocked scenarios evaluated against expected matching,
-  tool-call, missing-input, and safety behavior.
+  tool-call, missing-input, and safety behavior. The previous fiber coupling
+  and polarization warning cases are now covered by deterministic preview
+  calculators.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

@@ -14,8 +14,8 @@ This benchmark scenario is a positive coverage case for a supported local previe
 - Expected candidate domains: `none`
 - Expected confidence: `high`
 - Expected requirement template: `none`
-- Expected calculators: `none`
-- Expected adapters: `none`
+- Expected calculators: `optics.polarization.jones`
+- Expected adapters: `meep`
 - Expected blocked actions: `none`
 
 The local evaluator records actual domain matching, requirement matching, tool-call ledger entries, missing inputs, and recommended questions in `expected_result.json`.

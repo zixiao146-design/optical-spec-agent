@@ -196,7 +196,7 @@
       "status": "available",
       "detection_method": "import optical_spec_agent.optics",
       "notes": [
-        "Thin-film, paraxial, Gaussian beam, and waveguide preview calculators."
+        "Thin-film, paraxial, Gaussian beam, waveguide, fiber-coupling, and polarization preview calculators."
       ]
     }
   ],

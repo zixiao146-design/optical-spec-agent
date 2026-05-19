@@ -466,18 +466,17 @@
     },
     {
       "domain_id": "fiber_coupling_preview",
-      "status": "warning",
+      "status": "pass",
       "template_coverage": true,
       "material_suitability_coverage": true,
       "expected_calculators": [
-        "optics.gaussian_beam.focus",
-        "optics.waveguide.sweep"
+        "optics.fiber_coupling.gaussian_mode_overlap"
       ],
       "expected_adapters": [
         "mpb",
         "optiland"
       ],
-      "expected_tool_status": "partial_deferred",
+      "expected_tool_status": "covered",
       "missing_input_questions_present": true,
       "suggested_materials": [
         "glass_fused_silica_preview",
@@ -519,10 +518,9 @@
         "No deterministic suitability rule for glass_fused_silica_preview in fiber_coupling_preview.",
         "No deterministic suitability rule for sio2 in fiber_coupling_preview.",
         "No deterministic suitability rule for si3n4 in fiber_coupling_preview.",
-        "No deterministic suitability rule for air in fiber_coupling_preview.",
-        "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred."
+        "No deterministic suitability rule for air in fiber_coupling_preview."
       ],
-      "deferred_capability": "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred.",
+      "deferred_capability": null,
       "preview_only": true,
       "external_solver_executed": false,
       "external_llm_required": false,
@@ -532,14 +530,16 @@
     },
     {
       "domain_id": "polarization_optics_preview",
-      "status": "warning",
+      "status": "pass",
       "template_coverage": true,
       "material_suitability_coverage": true,
-      "expected_calculators": [],
+      "expected_calculators": [
+        "optics.polarization.jones"
+      ],
       "expected_adapters": [
         "meep"
       ],
-      "expected_tool_status": "partial_deferred",
+      "expected_tool_status": "covered",
       "missing_input_questions_present": true,
       "suggested_materials": [
         "tio2",
@@ -581,10 +581,9 @@
         "No deterministic suitability rule for tio2 in polarization_optics_preview.",
         "No deterministic suitability rule for si3n4 in polarization_optics_preview.",
         "No deterministic suitability rule for sio2 in polarization_optics_preview.",
-        "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview.",
-        "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred."
+        "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview."
       ],
-      "deferred_capability": "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred.",
+      "deferred_capability": null,
       "preview_only": true,
       "external_solver_executed": false,
       "external_llm_required": false,
@@ -595,8 +594,8 @@
   ],
   "summary": {
     "total": 10,
-    "pass": 8,
-    "warning": 2,
+    "pass": 10,
+    "warning": 0,
     "fail": 0,
     "preview_only": 10
   },

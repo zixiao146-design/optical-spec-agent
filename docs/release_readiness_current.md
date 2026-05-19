@@ -129,6 +129,14 @@ This document describes the current `main` branch. It is not a release tag.
   `examples/application_domain_benchmarks/` evaluate positive, ambiguous,
   underconstrained, unsupported, and unsafe/blocked optical-design requests
   without running solvers or calling external LLMs.
+- Fiber coupling and polarization warning closure:
+  `POST /api/optics/fiber-coupling`,
+  `POST /api/optics/polarization-jones`,
+  `docs/fiber_coupling_preview_calculator.md`, and
+  `docs/polarization_preview_calculator.md` provide deterministic preview
+  calculators for the two former warning-level application domains. They are
+  preview/design-assist only and do not prove real coupling efficiency, vector
+  EM polarization behavior, or production-grade validation.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:

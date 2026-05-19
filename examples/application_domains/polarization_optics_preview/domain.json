@@ -34,7 +34,9 @@
     "ag",
     "au"
   ],
-  "expected_calculators": [],
+  "expected_calculators": [
+    "optics.polarization.jones"
+  ],
   "expected_adapters": [
     "meep"
   ],
@@ -54,14 +56,14 @@
     "retardance"
   ],
   "default_assumptions": [
-    "Polarization handling is preview metadata unless a domain calculator is added.",
+    "Ideal Jones-calculus polarizer/waveplate preview.",
     "No Jones/Mueller production model is claimed."
   ],
   "recommended_questions": [
     "What input and output polarization states should be transformed?",
     "Is the target a polarizer, waveplate, or metasurface polarization element?"
   ],
-  "evidence_boundary": "Deferred/partial coverage; no production polarization model or solver result is claimed.",
+  "evidence_boundary": "Jones-calculus preview only; real vector EM or measured Mueller/Jones validation is deferred.",
   "preview_only": true,
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false

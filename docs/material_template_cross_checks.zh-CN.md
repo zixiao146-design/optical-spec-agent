@@ -18,10 +18,12 @@
 - `warning`：领域是有意的部分覆盖或推迟项，并且限制已明确记录。
 - `fail`：缺少必需的本地覆盖项。
 
-## 推迟领域
+## 已关闭的 warning 领域
 
-`fiber_coupling_preview` 和 `polarization_optics_preview` 目前是部分覆盖。
-它们可用于规划，但真实耦合效率或偏振器件结果需要未来专用计算器或显式求解器验证。
+`fiber_coupling_preview` 和 `polarization_optics_preview` 现在已有本地确定性
+preview 计算器。光纤耦合使用标量 Gaussian mode-overlap 估计，偏振光学使用理想
+Jones 偏振器/波片 helper。真实耦合验证、矢量电磁行为、制造误差、退偏振和实测器件性能
+仍需要显式求解器或实验验证。
 
 ## Benchmark 关联
 

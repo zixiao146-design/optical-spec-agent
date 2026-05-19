@@ -17,6 +17,8 @@ external solvers, call external LLMs, or access network material databases.
 | Gaussian beam preview | `POST /api/optics/gaussian-beam` | Rayleigh range, beam radius, curvature, and Gouy phase estimate. |
 | Gaussian beam series | `POST /api/optics/gaussian-beam-series` | Propagation samples over a z range. |
 | Gaussian beam focus | `POST /api/optics/gaussian-beam-focus` | Thin-lens diffraction-limited focus estimate. |
+| Fiber coupling preview | `POST /api/optics/fiber-coupling` | Scalar Gaussian mode-overlap estimate with offset and tilt factors. |
+| Polarization Jones preview | `POST /api/optics/polarization-jones` | Ideal Jones polarizer/waveplate/state preview. |
 | Waveguide V-number preview | `POST /api/optics/waveguide-estimate` | Scalar slab waveguide V-number and single-mode orientation. |
 | Waveguide sweep | `POST /api/optics/waveguide-sweep` | V-number samples over core thickness. |
 | Waveguide single-mode range | `POST /api/optics/waveguide-single-mode-range` | Scalar slab thickness range for likely `V < pi` behavior. |
@@ -37,6 +39,11 @@ external solvers, call external LLMs, or access network material databases.
   with refractive index 1.0.
 - Gaussian focus assumes a collimated Gaussian at an ideal thin lens; M^2,
   aperture clipping, and aberrations are not included.
+- Fiber coupling assumes scalar circular Gaussian beam and fiber modes. It
+  includes waist mismatch, lateral offset, and angular tilt factors only.
+- Polarization Jones helpers assume coherent two-component states and ideal
+  polarizers/waveplates; depolarization and vector EM propagation are not
+  included.
 - Waveguide estimates use scalar symmetric slab-waveguide orientation only.
 - Waveguide sweeps and single-mode ranges are scalar orientation helpers, not
   vector eigenmode solves.
@@ -59,6 +66,10 @@ actually computed without claiming physical validation.
   `d = lambda / (4 * n_coating)`.
 - Gaussian beam: `z_R = pi * w0^2 / lambda` and
   `w(z_R) = w0 * sqrt(2)`.
+- Fiber coupling waist mismatch:
+  `eta_w = (2 w_in w_f / (w_in^2 + w_f^2))^2`.
+- Jones linear polarizer: `E_out = |a><a| E_in`; ideal waveplate:
+  rotate into the fast/slow axes, apply phase retardance, and rotate back.
 - Thin lens: `1/f = 1/s + 1/s'`.
 - ABCD free space: `[[1, d], [0, 1]]`; thin lens:
   `[[1, 0], [-1/f, 1]]`.

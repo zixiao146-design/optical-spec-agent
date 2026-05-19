@@ -11,7 +11,7 @@ Materials: glass_fused_silica_preview, sio2, si3n4, air
 
 Linked requirement templates: gaussian_beam_focus, slab_waveguide_single_mode
 
-Expected calculators: optics.gaussian_beam.focus, optics.waveguide.sweep
+Expected calculators: optics.fiber_coupling.gaussian_mode_overlap
 
 Expected adapters: mpb, optiland
 
@@ -20,6 +20,6 @@ Missing-input questions:
 - What fiber mode field diameter and wavelength should be assumed?
 - Is the target coupling into a fiber, waveguide, or free-space focus?
 
-Evidence boundary: Partial domain coverage; scalar Gaussian/waveguide previews only, no real coupling efficiency solver.
+Evidence boundary: scalar Gaussian mode-overlap preview only; real fiber coupling validation still requires explicit solver or experimental evidence.
 
 This case is preview/design-assist only. It performs no solver execution, calls no external LLM, performs no network material database lookup, and claims no production-grade physical validation or formal convergence proof.

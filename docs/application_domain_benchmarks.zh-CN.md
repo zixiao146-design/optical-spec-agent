@@ -71,8 +71,15 @@ API endpoints:
 - `warn`: 后端行为安全，但该场景代表部分覆盖或延期能力。
 - `fail`: 后端缺失了预期匹配、追问、阻断动作或工具行为。
 
-`fiber_coupling_preview` 和 `polarization_optics_preview` 的 warning 是有意暴露的证据：
-这些领域已有本地规划语义，但专用物理计算器或求解器验证仍延期。
+截至 `0.9.0rc8.dev0`，光纤耦合和偏振光学的 positive benchmark 已由确定性
+预览计算器闭环：
+
+- `fiber_coupling_preview_positive` 记录
+  `optics.fiber_coupling.gaussian_mode_overlap`。
+- `polarization_optics_preview_positive` 记录 `optics.polarization.jones`。
+
+除非未来新增有意延期的能力，benchmark suite 预期为
+`19 pass / 0 warn / 0 fail`。
 
 ## 安全边界
 

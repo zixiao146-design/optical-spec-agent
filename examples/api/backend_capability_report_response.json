@@ -366,6 +366,44 @@
       "quality_level": "sanity_checked_preview",
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false
+    },
+    {
+      "calculator_name": "fiber_coupling",
+      "implemented": true,
+      "api_endpoints": [
+        "/api/optics/fiber-coupling"
+      ],
+      "reference_cases": [
+        "fiber_gaussian_perfect_overlap"
+      ],
+      "failure_modes": [
+        "negative wavelength",
+        "zero waist",
+        "negative lateral offset"
+      ],
+      "quality_level": "sanity_checked_preview",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "calculator_name": "polarization",
+      "implemented": true,
+      "api_endpoints": [
+        "/api/optics/polarization-jones"
+      ],
+      "reference_cases": [
+        "jones_linear_polarization",
+        "jones_linear_polarizer_projection",
+        "jones_half_waveplate_preview"
+      ],
+      "failure_modes": [
+        "zero Jones-vector intensity",
+        "invalid Jones-vector shape",
+        "non-finite retardance"
+      ],
+      "quality_level": "sanity_checked_preview",
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
     }
   ],
   "requirements_templates": [
@@ -556,25 +594,24 @@
       "dielectric_metasurface",
       "lens_ray_optics",
       "gaussian_beam_focusing",
-      "imaging_system_preview"
-    ],
-    "partial_domains": [
+      "imaging_system_preview",
       "fiber_coupling_preview",
       "polarization_optics_preview"
     ],
+    "partial_domains": [],
     "failed_domains": [],
     "preview_only": true,
     "production_grade_validation_claimed": false,
     "notes": [
       "Application domains are local preview coverage anchors, not production validation.",
-      "Fiber coupling and polarization optics can be partial/deferred until dedicated calculators or solver workflows are added.",
+      "Fiber coupling and polarization optics now have deterministic local preview calculators; solver-backed validation remains deferred.",
       "No external solver, external LLM, or material database lookup is required."
     ]
   },
   "material_template_cross_checks": {
     "total": 10,
-    "pass_count": 8,
-    "warning_count": 2,
+    "pass_count": 10,
+    "warning_count": 0,
     "fail_count": 0,
     "cross_checks": [
       {
@@ -1041,18 +1078,17 @@
       },
       {
         "domain_id": "fiber_coupling_preview",
-        "status": "warning",
+        "status": "pass",
         "template_coverage": true,
         "material_suitability_coverage": true,
         "expected_calculators": [
-          "optics.gaussian_beam.focus",
-          "optics.waveguide.sweep"
+          "optics.fiber_coupling.gaussian_mode_overlap"
         ],
         "expected_adapters": [
           "mpb",
           "optiland"
         ],
-        "expected_tool_status": "partial_deferred",
+        "expected_tool_status": "covered",
         "missing_input_questions_present": true,
         "suggested_materials": [
           "glass_fused_silica_preview",
@@ -1094,10 +1130,9 @@
           "No deterministic suitability rule for glass_fused_silica_preview in fiber_coupling_preview.",
           "No deterministic suitability rule for sio2 in fiber_coupling_preview.",
           "No deterministic suitability rule for si3n4 in fiber_coupling_preview.",
-          "No deterministic suitability rule for air in fiber_coupling_preview.",
-          "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred."
+          "No deterministic suitability rule for air in fiber_coupling_preview."
         ],
-        "deferred_capability": "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred.",
+        "deferred_capability": null,
         "preview_only": true,
         "external_solver_executed": false,
         "external_llm_required": false,
@@ -1107,14 +1142,16 @@
       },
       {
         "domain_id": "polarization_optics_preview",
-        "status": "warning",
+        "status": "pass",
         "template_coverage": true,
         "material_suitability_coverage": true,
-        "expected_calculators": [],
+        "expected_calculators": [
+          "optics.polarization.jones"
+        ],
         "expected_adapters": [
           "meep"
         ],
-        "expected_tool_status": "partial_deferred",
+        "expected_tool_status": "covered",
         "missing_input_questions_present": true,
         "suggested_materials": [
           "tio2",
@@ -1156,10 +1193,9 @@
           "No deterministic suitability rule for tio2 in polarization_optics_preview.",
           "No deterministic suitability rule for si3n4 in polarization_optics_preview.",
           "No deterministic suitability rule for sio2 in polarization_optics_preview.",
-          "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview.",
-          "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred."
+          "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview."
         ],
-        "deferred_capability": "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred.",
+        "deferred_capability": null,
         "preview_only": true,
         "external_solver_executed": false,
         "external_llm_required": false,
@@ -1174,8 +1210,8 @@
   },
   "application_domain_benchmarks": {
     "scenario_count": 19,
-    "pass_count": 17,
-    "warn_count": 2,
+    "pass_count": 19,
+    "warn_count": 0,
     "fail_count": 0,
     "positive_count": 10,
     "ambiguous_count": 3,

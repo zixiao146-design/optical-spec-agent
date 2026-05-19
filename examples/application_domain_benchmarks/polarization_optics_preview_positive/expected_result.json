@@ -1,7 +1,7 @@
 {
   "api_contract_version": "0.1",
   "scenario_id": "polarization_optics_preview_positive",
-  "status": "warn",
+  "status": "pass",
   "actual_domain": "polarization_optics_preview",
   "actual_candidates": [
     "polarization_optics_preview"
@@ -19,6 +19,7 @@
     "optical_language.generate_disambiguation_questions",
     "optical_language.infer_source_monitor",
     "optical_language.map_source_monitor_to_adapter",
+    "optics.polarization.jones",
     "requirements.extract_optical_intent",
     "requirements.match_ambiguity_check",
     "requirements.match_template",
@@ -77,7 +78,7 @@
     "sio2",
     "glass_fused_silica_preview"
   ],
-  "actual_adapter": "adapter auto-selection preview",
+  "actual_adapter": "meep",
   "blocked_actions": [],
   "preview_only": true,
   "external_solver_executed": false,

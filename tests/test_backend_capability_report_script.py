@@ -88,7 +88,16 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert report["material_template_cross_checks"]["fail_count"] == 0
     assert report["application_domain_benchmarks"]["scenario_count"] >= 19
     assert report["application_domain_benchmarks"]["fail_count"] == 0
+    assert report["application_domain_benchmarks"]["warn_count"] == 0
     assert report["application_domain_benchmarks"]["unsupported_count"] >= 3
+    assert {item["calculator_name"] for item in report["optical_calculators"]} == {
+        "thin_film",
+        "paraxial",
+        "gaussian_beam",
+        "waveguide",
+        "fiber_coupling",
+        "polarization",
+    }
     assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")

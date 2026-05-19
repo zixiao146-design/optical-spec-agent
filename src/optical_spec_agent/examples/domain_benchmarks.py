@@ -246,7 +246,7 @@ SCENARIOS: dict[str, ApplicationDomainScenario] = {
         domain_id="fiber_coupling_preview",
         expected_requirement_template="gaussian_beam_focus",
         expected_materials=["glass_fused_silica_preview", "sio2", "si3n4"],
-        expected_calculators=["optics.gaussian_beam.series"],
+        expected_calculators=["optics.fiber_coupling.gaussian_mode_overlap"],
         expected_adapters=["mpb", "optiland"],
     ),
     "polarization_optics_preview_positive": _scenario(
@@ -256,6 +256,8 @@ SCENARIOS: dict[str, ApplicationDomainScenario] = {
         "请创建偏振波片预览，包含输入偏振和延迟量问题。",
         domain_id="polarization_optics_preview",
         expected_materials=["tio2", "si3n4", "sio2"],
+        expected_calculators=["optics.polarization.jones"],
+        expected_adapters=["meep"],
     ),
     "waveguide_or_coating_ambiguous": _scenario(
         "waveguide_or_coating_ambiguous",
@@ -581,14 +583,10 @@ def _status_from_diagnostics(
     diagnostics: list[str],
 ) -> ScenarioStatus:
     if not diagnostics:
-        if scenario.domain_id in {"fiber_coupling_preview", "polarization_optics_preview"}:
-            return "warn"
         return "pass"
     if scenario.scenario_type in {"unsupported", "unsafe_or_blocked"}:
         return "fail"
     if scenario.scenario_type in {"ambiguous", "underconstrained"}:
-        return "warn"
-    if scenario.domain_id in {"fiber_coupling_preview", "polarization_optics_preview"}:
         return "warn"
     return "fail"
 

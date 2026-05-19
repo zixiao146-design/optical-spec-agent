@@ -1,7 +1,7 @@
 {
   "api_contract_version": "0.1",
   "scenario_id": "fiber_coupling_preview_positive",
-  "status": "warn",
+  "status": "pass",
   "actual_domain": "fiber_coupling_preview",
   "actual_candidates": [
     "fiber_coupling_preview",
@@ -20,7 +20,7 @@
     "optical_language.generate_disambiguation_questions",
     "optical_language.infer_source_monitor",
     "optical_language.map_source_monitor_to_adapter",
-    "optics.gaussian_beam.series",
+    "optics.fiber_coupling.gaussian_mode_overlap",
     "requirements.extract_optical_intent",
     "requirements.match_ambiguity_check",
     "requirements.match_template",
@@ -71,7 +71,7 @@
     "si3n4",
     "air"
   ],
-  "actual_adapter": "mpb",
+  "actual_adapter": "optiland",
   "blocked_actions": [],
   "preview_only": true,
   "external_solver_executed": false,

@@ -14,7 +14,7 @@
     "si3n4"
   ],
   "expected_calculators": [
-    "optics.gaussian_beam.series"
+    "optics.fiber_coupling.gaussian_mode_overlap"
   ],
   "expected_adapters": [
     "mpb",

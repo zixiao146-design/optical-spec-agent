@@ -16,8 +16,8 @@ preview/design-assist 机制，不调用外部 LLM，不执行外部求解器，
 | `lens_ray_optics` | `paraxial_lens_imaging` | BK7 preview, fused silica preview, air | 近轴计算器和 Optiland 预览 |
 | `gaussian_beam_focusing` | `gaussian_beam_focus` | air, fused silica preview | 高斯光束传播/聚焦预览 |
 | `imaging_system_preview` | `paraxial_lens_imaging` | BK7 preview, fused silica preview, air | 近轴中继和 Optiland 预览 |
-| `fiber_coupling_preview` | `gaussian_beam_focus`, `slab_waveguide_single_mode` | fused silica preview, SiO2, Si3N4 | 部分高斯/波导预览；耦合求解器推迟 |
-| `polarization_optics_preview` | `dielectric_metasurface_preview` | TiO2, Si3N4, SiO2, fused silica preview | 部分元数据；专用偏振模型推迟 |
+| `fiber_coupling_preview` | `gaussian_beam_focus`, `slab_waveguide_single_mode` | fused silica preview, SiO2, Si3N4 | 高斯 mode-overlap 预览；耦合求解器验证推迟 |
+| `polarization_optics_preview` | `dielectric_metasurface_preview` | TiO2, Si3N4, SiO2, fused silica preview | Jones 偏振器/波片预览；矢量电磁验证推迟 |
 
 ## API
 

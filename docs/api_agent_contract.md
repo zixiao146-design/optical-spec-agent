@@ -171,6 +171,8 @@ endpoint:
 - `POST /api/optics/waveguide-estimate`
 - `POST /api/optics/waveguide-sweep`
 - `POST /api/optics/waveguide-single-mode-range`
+- `POST /api/optics/fiber-coupling`
+- `POST /api/optics/polarization-jones`
 - `GET /api/backend-capability-report`
 - `GET /api/backend-evidence-summary`
 - `GET /api/design-case-cross-checks`
@@ -184,7 +186,9 @@ the local material catalog, local example registry, deterministic sub-agent
 trace, and preview optical calculators when applicable. Calculator-backed cases
 now include thin-film spectrum and quarter-wave AR previews, Gaussian beam
 series/focus previews, paraxial system and two-lens relay previews, and
-waveguide sweep/single-mode range previews. `/api/tool-capabilities` reports
+waveguide sweep/single-mode range previews, plus scalar Gaussian mode-overlap
+fiber coupling previews and ideal Jones-calculus polarization previews.
+`/api/tool-capabilities` reports
 internal tools, external solver availability detection, and disabled
 publication/release controls without executing external tools. The optics
 endpoints provide preview/design-assist calculations only. These endpoints do

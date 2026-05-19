@@ -78,9 +78,15 @@ API endpoints:
 - `fail`: the backend missed an expected match, question, blocked action, or
   tool behavior.
 
-Warnings are intentional evidence for domains such as fiber coupling and
-polarization optics, where local planning exists but dedicated physical
-calculators or solver validation are deferred.
+As of `0.9.0rc8.dev0`, the fiber coupling and polarization optics positive
+benchmarks are closed by deterministic preview calculators:
+
+- `fiber_coupling_preview_positive` records
+  `optics.fiber_coupling.gaussian_mode_overlap`.
+- `polarization_optics_preview_positive` records `optics.polarization.jones`.
+
+The benchmark suite is expected to report `19 pass / 0 warn / 0 fail` unless a
+future scenario intentionally introduces a new deferred capability.
 
 ## Safety Boundary
 

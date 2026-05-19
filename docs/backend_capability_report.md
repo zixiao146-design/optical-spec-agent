@@ -21,12 +21,13 @@ upload, and `v1.0.0` approval remain separate and not granted.
 
 ## What The Report Proves
 
-- Package metadata remains `0.9.0rc7`; PyPI is not published.
+- Package metadata remains `0.9.0rc8.dev0`; PyPI is not published.
 - Sub-agent roles appear in a real sample `AgentTaskSession` trace.
 - Internal tools are importable, callable, and recorded in the sample
   `tool_call_ledger`.
 - Optical calculators are implemented, sanity-checked preview tools with
-  documented reference cases and failure modes.
+  documented reference cases and failure modes, including the new fiber
+  coupling and polarization preview helpers.
 - Material provenance coverage is reported for every starter material, including
   user-verification flags and the fact that no entry is a production-grade
   optical constants record.
@@ -62,9 +63,9 @@ upload, and `v1.0.0` approval remain separate and not granted.
 4. `adapter_native_golden_coverage`: coverage matrix for Meep, MPB, Gmsh,
    Elmer, and Optiland adapter-native source/monitor golden preview cases,
    including strict metadata diff status and preview-only safety flags.
-5. `optical_calculators`: thin-film, paraxial, Gaussian beam, and waveguide
-   preview calculators with endpoints, reference cases, failure modes, and
-   `sanity_checked_preview` quality level.
+5. `optical_calculators`: thin-film, paraxial, Gaussian beam, waveguide,
+   fiber coupling, and polarization preview calculators with endpoints,
+   reference cases, failure modes, and `sanity_checked_preview` quality level.
 6. `design_case_cross_checks`: per-example pass/warning/fail results.
 7. `requirements_templates`: EN/ZH goal presence, heuristic matching status,
    expected tools, cross-check status, and preview-only status for the seven
