@@ -95,6 +95,12 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "agent_session_adapter_mapping_nanoparticle_response.json" in response_files
     assert "agent_session_source_monitor_nanoparticle_response.json" in response_files
     assert "agent_session_ambiguous_goal_response.json" in response_files
+    assert "application_domains_response.json" in response_files
+    assert "application_domain_nanoparticle_response.json" in response_files
+    assert "application_domain_match_waveguide_response.json" in response_files
+    assert "application_domain_cross_check_thin_film_response.json" in response_files
+    assert "application_domain_cross_checks_response.json" in response_files
+    assert "agent_session_domain_nanoparticle_response.json" in response_files
     assert "thin_film_response.json" in response_files
     assert "thin_film_spectrum_response.json" in response_files
     assert "quarter_wave_ar_response.json" in response_files
@@ -117,6 +123,8 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "design_requirement_match_ambiguous_request.json" in request_files
     assert "design_requirement_match_unknown_request.json" in request_files
     assert "agent_session_ambiguous_goal_request.json" in request_files
+    assert "application_domain_match_waveguide_request.json" in request_files
+    assert "agent_session_domain_nanoparticle_request.json" in request_files
     assert "optical_language_infer_nanoparticle_request.json" in request_files
     assert "optical_language_diagnose_nanoparticle_request.json" in request_files
     assert "observable_diagnostics_nanoparticle_request.json" in request_files
@@ -181,6 +189,12 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "agent_session_adapter_mapping_nanoparticle_response.json",
         "agent_session_source_monitor_nanoparticle_response.json",
         "agent_session_ambiguous_goal_response.json",
+        "application_domains_response.json",
+        "application_domain_nanoparticle_response.json",
+        "application_domain_match_waveguide_response.json",
+        "application_domain_cross_check_thin_film_response.json",
+        "application_domain_cross_checks_response.json",
+        "agent_session_domain_nanoparticle_response.json",
     ]:
         payload = _load_json(API_EXAMPLES / calculator_response)
         if "quality" in payload:

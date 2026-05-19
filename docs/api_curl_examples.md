@@ -209,3 +209,12 @@ python scripts/check_adapter_native_golden.py
 The checker now performs strict `expected_metadata.json` diff checks and prints
 `ADAPTER NATIVE METADATA DIFF PASSED` when source/monitor/observable mapping
 metadata remains stable.
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

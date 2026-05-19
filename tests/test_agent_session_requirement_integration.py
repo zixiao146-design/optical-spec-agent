@@ -17,6 +17,8 @@ def test_agent_session_includes_requirement_template_and_optical_language():
     assert ledger["requirements.match_template"].executed is True
     assert ledger["requirements.extract_optical_intent"].executed is True
     assert ledger["requirements.match_ambiguity_check"].executed is True
+    assert ledger["application_domains.match_goal"].executed is True
+    assert ledger["application_domains.cross_check_domain"].executed is True
     assert ledger["optical_language.generate_disambiguation_questions"].executed is True
     assert ledger["optical_language.infer_source_monitor"].executed is True
     assert ledger["optical_language.diagnose_missing_inputs"].executed is True
@@ -26,6 +28,9 @@ def test_agent_session_includes_requirement_template_and_optical_language():
     assert isinstance(session.recommended_questions, list)
     assert isinstance(session.missing_critical_inputs, list)
     assert isinstance(session.missing_optional_inputs, list)
+    assert session.application_domain_id == "thin_film_coating"
+    assert session.domain_cross_check_status == "pass"
+    assert session.domain_material_suitability_summary
     assert "natural language" in session.plan_steps[0].title.lower()
 
 

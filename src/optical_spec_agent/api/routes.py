@@ -18,6 +18,11 @@ from optical_spec_agent.api.models import (
     AgentTraceResponse,
     AgentSessionRequest,
     AgentTaskSessionResponse,
+    ApplicationDomainDetailResponse,
+    ApplicationDomainMatchRequest,
+    ApplicationDomainMatchResult,
+    ApplicationDomainsResponse,
+    ApplicationDomainCrossChecksResponse,
     AdapterPreviewRequest as AgentAdapterPreviewRequest,
     AdapterPreviewResponse,
     AdapterSummary,
@@ -97,6 +102,15 @@ from optical_spec_agent.examples.registry import (
 from optical_spec_agent.examples.cross_check import (
     DesignCaseCrossChecksResponse,
     cross_check_all_design_cases,
+)
+from optical_spec_agent.examples.application_domains import (
+    get_application_domain,
+    list_application_domains,
+    match_goal_to_application_domains,
+)
+from optical_spec_agent.examples.domain_cross_check import (
+    cross_check_all_application_domains,
+    cross_check_application_domain,
 )
 from optical_spec_agent.examples.requirements import (
     get_requirement_template,
@@ -743,6 +757,28 @@ def agent_tool_capabilities():
             ],
         ),
         ToolCapabilityItem(
+            tool_name="application_domain_registry",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.examples.application_domains",
+            notes=[
+                "Maps application domains to templates, materials, calculators, adapters, and questions."
+            ],
+        ),
+        ToolCapabilityItem(
+            tool_name="material_template_cross_checks",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.examples.domain_cross_check",
+            notes=[
+                "Cross-checks application-domain material/template/calculator/adapter coverage."
+            ],
+        ),
+        ToolCapabilityItem(
             tool_name="source_monitor_inference",
             tool_kind="internal_python",
             available=True,
@@ -877,6 +913,119 @@ def agent_design_case_cross_checks():
     """Cross-check local optical design examples against backend task sessions."""
 
     return cross_check_all_design_cases()
+
+
+@router.get("/api/application-domains", response_model=ApplicationDomainsResponse)
+def agent_application_domains():
+    """List local application-domain coverage for backend optical design previews."""
+
+    domains = list_application_domains()
+    return ApplicationDomainsResponse(
+        domains=domains,
+        domain_count=len(domains),
+    )
+
+
+@router.post(
+    "/api/application-domains/match",
+    response_model=ApplicationDomainMatchResult,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_application_domain_match(req: ApplicationDomainMatchRequest):
+    goal = req.goal.strip()
+    if not goal:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Application-domain matching requires a non-empty goal.",
+                diagnostics=ApiDiagnostic(errors=["goal must be a non-empty string."]),
+                recommended_next_actions=[
+                    "Provide a natural-language optical design goal."
+                ],
+            )
+        )
+    if req.language not in (None, "en", "zh-CN"):
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "language must be 'en' or 'zh-CN' when provided.",
+                diagnostics=ApiDiagnostic(errors=["Unsupported language hint."]),
+                recommended_next_actions=["Use language='en', language='zh-CN', or omit language."],
+            )
+        )
+    return match_goal_to_application_domains(goal)
+
+
+@router.get(
+    "/api/application-domain-cross-checks",
+    response_model=ApplicationDomainCrossChecksResponse,
+)
+def agent_application_domain_cross_checks():
+    """Cross-check all application domains against material/template/tool coverage."""
+
+    return cross_check_all_application_domains()
+
+
+@router.get(
+    "/api/application-domains/{domain_id}/cross-check",
+    response_model=ApplicationDomainCrossChecksResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_application_domain_cross_check(domain_id: str):
+    try:
+        check = cross_check_application_domain(domain_id)
+    except ValueError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=[
+                    "Use /api/application-domains to inspect supported domains."
+                ],
+            )
+        )
+    return ApplicationDomainCrossChecksResponse(
+        status="needs_review" if check.status == "fail" else "ok",
+        cross_checks=[check],
+        summary={
+            "total": 1,
+            "pass": 1 if check.status == "pass" else 0,
+            "warning": 1 if check.status == "warning" else 0,
+            "fail": 1 if check.status == "fail" else 0,
+            "preview_only": 1 if check.preview_only else 0,
+        },
+    )
+
+
+@router.get(
+    "/api/application-domains/{domain_id}",
+    response_model=ApplicationDomainDetailResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_application_domain_detail(domain_id: str):
+    try:
+        domain = get_application_domain(domain_id)
+    except ValueError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=[
+                    "Use /api/application-domains to inspect supported domains."
+                ],
+            )
+        )
+    return ApplicationDomainDetailResponse(
+        domain=domain,
+        recommended_next_actions=[
+            *domain.recommended_questions,
+            "Use the domain cross-check endpoint before treating a case as covered.",
+        ],
+    )
 
 
 @router.get(
@@ -1770,6 +1919,10 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
         match_confidence=session.match_confidence,
         candidate_templates=session.candidate_templates,
         recommended_questions=session.recommended_questions,
+        application_domain_id=session.application_domain_id,
+        application_domain_candidates=session.application_domain_candidates,
+        domain_material_suitability_summary=session.domain_material_suitability_summary,
+        domain_cross_check_status=session.domain_cross_check_status,
         selected_example_id=session.selected_example_id,
         design_case_summary=session.design_case_summary,
         missing_required_inputs=session.missing_required_inputs,

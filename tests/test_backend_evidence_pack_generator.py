@@ -40,6 +40,8 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "material_provenance_coverage",
         "ambiguous_requirement_matching",
         "missing_input_diagnostics",
+        "application_domain_coverage",
+        "material_template_cross_checks",
         "design_case_cross_checks",
         "source_monitor_observable_diagnostics",
         "adapter_native_golden_coverage",
@@ -58,6 +60,10 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert payload["material_provenance_coverage"]["production_grade_optical_constants_database"] is False
     assert payload["ambiguous_requirement_matching"]["ambiguous_goals_generate_questions"] is True
     assert payload["missing_input_diagnostics"]["safe_to_run_solver_default"] is False
+    assert payload["application_domain_coverage"]["domain_count"] == 10
+    assert payload["application_domain_coverage"]["failed_domains"] == []
+    assert payload["material_template_cross_checks"]["total"] == 10
+    assert payload["material_template_cross_checks"]["fail_count"] == 0
     markdown = markdown_out.read_text(encoding="utf-8")
     for heading in [
         "Sub-agent reality",
@@ -66,6 +72,8 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Material provenance coverage",
         "Ambiguous requirement matching",
         "Missing-input diagnostics",
+        "Application-domain coverage",
+        "Material-template cross-checks",
         "Design-case cross-checks",
         "Adapter-native golden coverage",
         "Blocked or deferred capabilities",

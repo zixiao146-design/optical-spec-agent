@@ -1,0 +1,68 @@
+{
+  "domain_id": "gaussian_beam_focusing",
+  "title": "Gaussian beam focusing",
+  "title_zh": "高斯光束聚焦",
+  "aliases": [
+    "beam waist",
+    "Rayleigh range",
+    "focused Gaussian beam"
+  ],
+  "natural_language_keywords_en": [
+    "gaussian",
+    "beam waist",
+    "rayleigh",
+    "focused beam",
+    "waist"
+  ],
+  "natural_language_keywords_zh": [
+    "高斯光束",
+    "光腰",
+    "瑞利",
+    "聚焦光束"
+  ],
+  "linked_requirement_templates": [
+    "gaussian_beam_focus"
+  ],
+  "suggested_materials": [
+    "air",
+    "glass_fused_silica_preview"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "expected_calculators": [
+    "optics.gaussian_beam.series",
+    "optics.gaussian_beam.focus"
+  ],
+  "expected_adapters": [
+    "optiland"
+  ],
+  "required_inputs": [
+    "wavelength_nm",
+    "input_waist_um",
+    "propagation_distance_or_focal_length"
+  ],
+  "optional_inputs": [
+    "medium_index",
+    "beam_quality_factor",
+    "aperture"
+  ],
+  "common_missing_inputs": [
+    "wavelength_nm",
+    "waist_um",
+    "propagation_distance_or_focal_length"
+  ],
+  "default_assumptions": [
+    "Paraxial Gaussian beam approximation.",
+    "M2=1 unless specified."
+  ],
+  "recommended_questions": [
+    "What wavelength, input waist, and propagation/focal distance should be used?",
+    "Should the preview include a thin lens focus estimate?"
+  ],
+  "evidence_boundary": "Gaussian beam calculator preview; not a measured or solver-derived focal field.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

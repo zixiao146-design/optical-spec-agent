@@ -22,6 +22,14 @@ from optical_spec_agent.examples.requirements import (
     list_requirement_templates,
     match_goal_to_template,
 )
+from optical_spec_agent.examples.application_domains import (
+    list_application_domains,
+    match_goal_to_application_domains,
+)
+from optical_spec_agent.examples.domain_cross_check import (
+    ApplicationDomainCrossCheck,
+    cross_check_all_application_domains,
+)
 from optical_spec_agent.materials.catalog import (
     diagnose_material_suitability,
     list_materials,
@@ -122,6 +130,27 @@ class MissingInputDiagnosticsCapability(BaseModel):
     notes: list[str] = Field(default_factory=list)
 
 
+class ApplicationDomainCoverage(BaseModel):
+    domain_count: int
+    covered_domains: list[str] = Field(default_factory=list)
+    partial_domains: list[str] = Field(default_factory=list)
+    failed_domains: list[str] = Field(default_factory=list)
+    preview_only: bool = True
+    production_grade_validation_claimed: bool = False
+    notes: list[str] = Field(default_factory=list)
+
+
+class MaterialTemplateCrossCheckCoverage(BaseModel):
+    total: int
+    pass_count: int
+    warning_count: int
+    fail_count: int
+    cross_checks: list[ApplicationDomainCrossCheck] = Field(default_factory=list)
+    preview_only: bool = True
+    production_grade_validation_claimed: bool = False
+    formal_convergence_proof_claimed: bool = False
+
+
 class BackendCapabilityReport(BaseModel):
     api_contract_version: str = "0.1"
     status: str = "ok"
@@ -135,6 +164,8 @@ class BackendCapabilityReport(BaseModel):
             "Material provenance coverage",
             "Ambiguous requirement matching",
             "Missing-input diagnostics",
+            "Application-domain coverage",
+            "Material-template cross-checks",
             "Design-case cross-checks",
             "Source / monitor / observable diagnostics",
             "Adapter-native golden coverage",
@@ -151,6 +182,8 @@ class BackendCapabilityReport(BaseModel):
     material_provenance_coverage: MaterialProvenanceCoverage
     ambiguous_requirement_matching: AmbiguousRequirementMatchingCapability
     missing_input_diagnostics: MissingInputDiagnosticsCapability
+    application_domain_coverage: ApplicationDomainCoverage
+    material_template_cross_checks: MaterialTemplateCrossCheckCoverage
     adapter_native_golden_coverage: AdapterGoldenCoverageReport
     design_case_cross_checks: list[DesignCaseCrossCheck] = Field(default_factory=list)
     blocked_external_actions: list[BlockedExternalAction] = Field(default_factory=list)
@@ -185,6 +218,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         if entry.executed
     }
     cross_checks = cross_check_all_design_cases()
+    domain_cross_checks = cross_check_all_application_domains()
     golden_coverage = build_adapter_golden_coverage_report()
     all_sample_tool_names.add("adapter_native_golden.check")
     failed = any(check.status == "fail" for check in cross_checks.cross_checks)
@@ -198,6 +232,8 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         material_provenance_coverage=_material_provenance_coverage(),
         ambiguous_requirement_matching=_ambiguous_requirement_matching_capability(),
         missing_input_diagnostics=_missing_input_diagnostics_capability(),
+        application_domain_coverage=_application_domain_coverage(domain_cross_checks.cross_checks),
+        material_template_cross_checks=_material_template_cross_checks(domain_cross_checks.cross_checks),
         adapter_native_golden_coverage=golden_coverage,
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
@@ -209,6 +245,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
             "Use scripts/check_adapter_native_golden.py for adapter-native metadata diff checks.",
             "Use /api/materials/diagnose to inspect material provenance and suitability warnings.",
             "Use /api/design-requirements/match to inspect ambiguous-goal questions.",
+            "Use /api/application-domain-cross-checks to inspect domain/material/template coverage.",
             "Treat calculator outputs as sanity-checked preview/design-assist only.",
         ],
     )
@@ -304,6 +341,20 @@ def _internal_tool_capabilities(
             match_goal_to_template,
             "requirements.match_ambiguity_check",
             "Reports candidate templates, confidence, and deterministic follow-up questions.",
+        ),
+        (
+            "application_domain_registry",
+            "optical_spec_agent.examples.application_domains",
+            match_goal_to_application_domains,
+            "application_domains.match_goal",
+            "Maps application domains to templates, materials, calculators, adapters, and questions.",
+        ),
+        (
+            "material_template_cross_checks",
+            "optical_spec_agent.examples.domain_cross_check",
+            cross_check_all_application_domains,
+            "application_domains.cross_check_domain",
+            "Cross-checks application-domain material/template/calculator/adapter coverage.",
         ),
         (
             "missing_input_diagnostics",
@@ -506,6 +557,35 @@ def _missing_input_diagnostics_capability() -> MissingInputDiagnosticsCapability
             f"Optional inputs reported: {', '.join(session.missing_optional_inputs)}.",
             "safe_to_preview remains true while safe_to_run_solver remains false.",
         ],
+    )
+
+
+def _application_domain_coverage(
+    checks: list[ApplicationDomainCrossCheck],
+) -> ApplicationDomainCoverage:
+    domains = list_application_domains()
+    return ApplicationDomainCoverage(
+        domain_count=len(domains),
+        covered_domains=[check.domain_id for check in checks if check.status == "pass"],
+        partial_domains=[check.domain_id for check in checks if check.status == "warning"],
+        failed_domains=[check.domain_id for check in checks if check.status == "fail"],
+        notes=[
+            "Application domains are local preview coverage anchors, not production validation.",
+            "Fiber coupling and polarization optics can be partial/deferred until dedicated calculators or solver workflows are added.",
+            "No external solver, external LLM, or material database lookup is required.",
+        ],
+    )
+
+
+def _material_template_cross_checks(
+    checks: list[ApplicationDomainCrossCheck],
+) -> MaterialTemplateCrossCheckCoverage:
+    return MaterialTemplateCrossCheckCoverage(
+        total=len(checks),
+        pass_count=sum(1 for check in checks if check.status == "pass"),
+        warning_count=sum(1 for check in checks if check.status == "warning"),
+        fail_count=sum(1 for check in checks if check.status == "fail"),
+        cross_checks=checks,
     )
 
 

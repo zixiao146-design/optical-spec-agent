@@ -30,3 +30,12 @@ adapter 预览元数据，但不是生产级光学常数数据库。
 - 用户必须独立验证波长相关 n/k 数据。
 - 材料库不声称生产级物理验证。
 - 材料库不声称形式化收敛证明。
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

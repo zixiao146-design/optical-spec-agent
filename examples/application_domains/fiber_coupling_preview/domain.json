@@ -1,0 +1,72 @@
+{
+  "domain_id": "fiber_coupling_preview",
+  "title": "Fiber coupling preview",
+  "title_zh": "光纤耦合预览",
+  "aliases": [
+    "fiber coupling",
+    "mode overlap",
+    "coupling efficiency"
+  ],
+  "natural_language_keywords_en": [
+    "fiber coupling",
+    "mode overlap",
+    "coupling efficiency",
+    "fiber mode"
+  ],
+  "natural_language_keywords_zh": [
+    "光纤耦合",
+    "模式重叠",
+    "耦合效率",
+    "光纤模式"
+  ],
+  "linked_requirement_templates": [
+    "gaussian_beam_focus",
+    "slab_waveguide_single_mode"
+  ],
+  "suggested_materials": [
+    "glass_fused_silica_preview",
+    "sio2",
+    "si3n4",
+    "air"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "expected_calculators": [
+    "optics.gaussian_beam.focus",
+    "optics.waveguide.sweep"
+  ],
+  "expected_adapters": [
+    "mpb",
+    "optiland"
+  ],
+  "required_inputs": [
+    "mode_field_diameter",
+    "wavelength_nm",
+    "alignment_tolerance",
+    "target_mode"
+  ],
+  "optional_inputs": [
+    "fiber_na",
+    "waveguide_mode_index",
+    "lens_focal_length"
+  ],
+  "common_missing_inputs": [
+    "mode_field_diameter",
+    "target_mode",
+    "alignment_tolerance"
+  ],
+  "default_assumptions": [
+    "Gaussian/fiber mode overlap is a future preview approximation.",
+    "No coupled-mode solver is run by default."
+  ],
+  "recommended_questions": [
+    "What fiber mode field diameter and wavelength should be assumed?",
+    "Is the target coupling into a fiber, waveguide, or free-space focus?"
+  ],
+  "evidence_boundary": "Partial domain coverage; scalar Gaussian/waveguide previews only, no real coupling efficiency solver.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

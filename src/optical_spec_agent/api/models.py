@@ -17,6 +17,16 @@ from optical_spec_agent.examples.models import (
     OpticalDesignExampleDetail,
     OpticalDesignExampleSummary,
 )
+from optical_spec_agent.examples.application_domains import (
+    ApplicationDomain,
+    ApplicationDomainDetailResponse,
+    ApplicationDomainMatchResult,
+    ApplicationDomainsResponse,
+)
+from optical_spec_agent.examples.domain_cross_check import (
+    ApplicationDomainCrossCheck,
+    ApplicationDomainCrossChecksResponse,
+)
 from optical_spec_agent.examples.requirements import (
     DesignRequirementDetailResponse,
     DesignRequirementsResponse,
@@ -273,6 +283,10 @@ class AgentTaskSessionResponse(ApiResponseBase):
     match_confidence: str = "low"
     candidate_templates: list[str] = Field(default_factory=list)
     recommended_questions: list[str] = Field(default_factory=list)
+    application_domain_id: str | None = None
+    application_domain_candidates: list[str] = Field(default_factory=list)
+    domain_material_suitability_summary: list[dict[str, Any]] = Field(default_factory=list)
+    domain_cross_check_status: str = "not_checked"
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
@@ -288,6 +302,11 @@ class AgentTaskSessionResponse(ApiResponseBase):
 
 
 class DesignRequirementMatchRequest(ApiRequestBase):
+    goal: str = Field(..., description="Natural language optical design goal")
+    language: str | None = Field(None, description="Optional language hint: en or zh-CN")
+
+
+class ApplicationDomainMatchRequest(ApiRequestBase):
     goal: str = Field(..., description="Natural language optical design goal")
     language: str | None = Field(None, description="Optional language hint: en or zh-CN")
 
@@ -364,6 +383,13 @@ __all_optical_language_models__ = [
 
 
 __all_requirement_models__ = [
+    "ApplicationDomain",
+    "ApplicationDomainCrossCheck",
+    "ApplicationDomainCrossChecksResponse",
+    "ApplicationDomainDetailResponse",
+    "ApplicationDomainMatchRequest",
+    "ApplicationDomainMatchResult",
+    "ApplicationDomainsResponse",
     "DesignRequirementDetailResponse",
     "DesignRequirementsResponse",
     "RequirementMatchResult",

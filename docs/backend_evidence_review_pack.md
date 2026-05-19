@@ -51,6 +51,10 @@ approval remain separate and not granted.
   and question generation for under-specified goals.
 - Missing-input diagnostics: critical and optional missing inputs, defaults,
   blocking questions, and `safe_to_run_solver=false`.
+- Application-domain coverage: ten local optical domains mapped to materials,
+  templates, calculators/adapters, and missing-input questions.
+- Material-template cross-checks: pass/warning/fail checks for domain material,
+  template, expected tool, and preview-only evidence coverage.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

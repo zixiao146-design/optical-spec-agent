@@ -166,6 +166,8 @@
     "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
     "What source and monitored observable should define the preview?",
     "Which material system and geometry scale should be assumed?",
+    "Is the goal about coatings, beams, waveguides, lenses, metasurfaces, photonic crystals, or nanoparticles?",
+    "Which material system and observable should be previewed?",
     "What source type should drive the design preview?",
     "What observable should be monitored?",
     "Which values should be used for critical inputs: optical_application, source_type, target_observable?",
@@ -173,6 +175,16 @@
     "Can you provide optional context for: geometry_scale, material_system, wavelength_band?",
     "Confirm whether the backend should remain in local preview mode without running external solvers."
   ],
+  "application_domain_id": null,
+  "application_domain_candidates": [
+    "thin_film_coating",
+    "slab_waveguide",
+    "lens_ray_optics",
+    "gaussian_beam_focusing",
+    "nanoparticle_plasmonics"
+  ],
+  "domain_material_suitability_summary": [],
+  "domain_cross_check_status": "not_checked",
   "selected_example_id": null,
   "design_case_summary": "generic general optical design preview",
   "missing_required_inputs": [
@@ -796,6 +808,32 @@
       "output_summary": "confidence=none; candidates=none",
       "reason": "Ambiguous or under-specified goals should produce questions rather than unsafe actions.",
       "safety_note": "No external LLM was used for disambiguation."
+    },
+    {
+      "call_id": "application-domains-match-goal",
+      "tool_name": "application_domains.match_goal",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SpecAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Natural-language goal.",
+      "output_summary": "confidence=low; matched=none; candidates=thin_film_coating, slab_waveguide, lens_ray_optics, gaussian_beam_focusing, nanoparticle_plasmonics",
+      "reason": "Application domains provide higher-level material/template/tool context.",
+      "safety_note": "Domain matching is deterministic and does not call an external LLM."
+    },
+    {
+      "call_id": "application-domains-cross-check-domain",
+      "tool_name": "application_domains.cross_check_domain",
+      "tool_kind": "internal_python",
+      "called_by_agent": "EvidenceAgent",
+      "executed": false,
+      "default_allowed": true,
+      "status": "skipped",
+      "input_summary": "No domain matched.",
+      "output_summary": "No domain cross-check was run.",
+      "reason": "Domain cross-checks connect materials, templates, calculators, adapters, and missing inputs.",
+      "safety_note": "Cross-checks are preview/design-assist metadata; no solver is executed."
     },
     {
       "call_id": "optical-language-generate-disambiguation-questions",

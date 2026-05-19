@@ -31,3 +31,12 @@ asks which path should take priority.
 - No external solver is executed by default.
 - Unknown goals do not silently select a solver path.
 - Results remain preview/design-assist and do not claim production-grade validation.
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

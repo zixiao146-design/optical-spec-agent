@@ -433,3 +433,12 @@ Current v1.0 evidence artifacts:
 7. Create an annotated `v0.9.0rc8` tag only after final maintainer approval.
 8. Keep PyPI unpublished and do not re-upload TestPyPI unless explicitly
    approved for a new version.
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

@@ -1,0 +1,66 @@
+{
+  "domain_id": "photonic_crystal",
+  "title": "Photonic crystal",
+  "title_zh": "光子晶体",
+  "aliases": [
+    "PhC band",
+    "band structure preview"
+  ],
+  "natural_language_keywords_en": [
+    "photonic crystal",
+    "band structure",
+    "band diagram",
+    "lattice",
+    "mpb"
+  ],
+  "natural_language_keywords_zh": [
+    "光子晶体",
+    "能带",
+    "带隙",
+    "晶格"
+  ],
+  "linked_requirement_templates": [
+    "photonic_crystal_band_preview"
+  ],
+  "suggested_materials": [
+    "si",
+    "gaas",
+    "sio2",
+    "air"
+  ],
+  "unsuitable_materials": [
+    "water"
+  ],
+  "expected_calculators": [],
+  "expected_adapters": [
+    "mpb"
+  ],
+  "required_inputs": [
+    "lattice_constant",
+    "unit_cell_geometry",
+    "material_contrast",
+    "k_point_path"
+  ],
+  "optional_inputs": [
+    "num_bands",
+    "resolution",
+    "polarization"
+  ],
+  "common_missing_inputs": [
+    "lattice_constant",
+    "unit_cell_geometry",
+    "k_point_path"
+  ],
+  "default_assumptions": [
+    "MPB-style band structure preview metadata.",
+    "No real band data without MPB execution."
+  ],
+  "recommended_questions": [
+    "What lattice type, lattice constant, and k-point path should be used?",
+    "How many bands should the preview plan request?"
+  ],
+  "evidence_boundary": "Adapter-native MPB preview metadata; real band frequencies require explicit MPB execution.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

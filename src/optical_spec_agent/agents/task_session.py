@@ -12,6 +12,14 @@ from optical_spec_agent.examples.registry import (
     build_example_agent_trace,
     get_optical_design_example,
 )
+from optical_spec_agent.examples.application_domains import (
+    ApplicationDomainMatchResult,
+    match_goal_to_application_domains,
+)
+from optical_spec_agent.examples.domain_cross_check import (
+    ApplicationDomainCrossCheck,
+    cross_check_application_domain,
+)
 from optical_spec_agent.examples.requirements import (
     RequirementMatchResult,
     match_goal_to_template,
@@ -133,6 +141,10 @@ class AgentTaskSession(BaseModel):
     match_confidence: str = "low"
     candidate_templates: list[str] = Field(default_factory=list)
     recommended_questions: list[str] = Field(default_factory=list)
+    application_domain_id: str | None = None
+    application_domain_candidates: list[str] = Field(default_factory=list)
+    domain_material_suitability_summary: list[dict[str, Any]] = Field(default_factory=list)
+    domain_cross_check_status: str = "not_checked"
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
@@ -178,6 +190,20 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         raise ValueError("Agent task session requires a non-empty goal.")
 
     requirement_match = match_goal_to_template(goal)
+    domain_match = match_goal_to_application_domains(goal)
+    application_domain_id = (
+        domain_match.matched_domains[0]
+        if domain_match.matched_domains
+        else _domain_for_template_or_intent(
+            requirement_match.matched_template_id,
+            requirement_match.matched_template.optical_intent if requirement_match.matched_template else goal,
+        )
+    )
+    domain_cross_check = (
+        cross_check_application_domain(application_domain_id)
+        if application_domain_id
+        else None
+    )
     matched_template = requirement_match.matched_template
     source_monitor = infer_source_monitor_from_goal(
         goal,
@@ -238,7 +264,12 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
     recommended_questions = _session_questions(
         requirement_match,
         source_monitor.diagnostics,
+        domain_match,
     )
+    if domain_cross_check is not None:
+        recommended_questions = _unique_strings(
+            [*recommended_questions, *domain_cross_check.diagnostics[:2]]
+        )
 
     return AgentTaskSession(
         session_id=f"session-{session_hash}",
@@ -254,6 +285,12 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         match_confidence=requirement_match.confidence,
         candidate_templates=requirement_match.candidate_templates,
         recommended_questions=recommended_questions,
+        application_domain_id=application_domain_id,
+        application_domain_candidates=domain_match.candidate_domains,
+        domain_material_suitability_summary=(
+            domain_cross_check.material_suitability_summary if domain_cross_check else []
+        ),
+        domain_cross_check_status=domain_cross_check.status if domain_cross_check else "not_checked",
         selected_example_id=selected_example_id,
         design_case_summary=design_case_summary,
         missing_required_inputs=sorted(
@@ -285,6 +322,8 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
             selected_example_id=selected_example_id,
             adapter_recommendation=adapter_recommendation,
             requirement_match=requirement_match,
+            domain_match=domain_match,
+            domain_cross_check=domain_cross_check,
             source_monitor=source_monitor,
             observable_diagnostics=observable_diagnostics,
             adapter_mapping=adapter_mapping,
@@ -377,9 +416,11 @@ def _design_case_summary(
 def _session_questions(
     requirement_match: RequirementMatchResult,
     diagnostics: OpticalLanguageDiagnostics,
+    domain_match: ApplicationDomainMatchResult,
 ) -> list[str]:
     questions = [
         *requirement_match.recommended_questions,
+        *domain_match.recommended_questions,
         *diagnostics.blocking_questions,
         *generate_disambiguation_questions(
             template_id=requirement_match.matched_template_id,
@@ -388,13 +429,41 @@ def _session_questions(
             candidate_templates=requirement_match.candidate_templates,
         ),
     ]
+    return _unique_strings(questions)
+
+
+def _unique_strings(values: list[str]) -> list[str]:
     unique: list[str] = []
     seen: set[str] = set()
-    for question in questions:
-        if question and question not in seen:
-            unique.append(question)
-            seen.add(question)
+    for value in values:
+        if value and value not in seen:
+            unique.append(value)
+            seen.add(value)
     return unique
+
+
+def _domain_for_template_or_intent(template_id: str | None, text: str) -> str | None:
+    template_map = {
+        "nanoparticle_plasmonics": "nanoparticle_plasmonics",
+        "thin_film_ar_coating": "thin_film_coating",
+        "slab_waveguide_single_mode": "slab_waveguide",
+        "photonic_crystal_band_preview": "photonic_crystal",
+        "dielectric_metasurface_preview": "dielectric_metasurface",
+        "paraxial_lens_imaging": "lens_ray_optics",
+        "gaussian_beam_focus": "gaussian_beam_focusing",
+    }
+    if template_id in template_map:
+        return template_map[template_id]
+    lowered = text.lower()
+    if "gaussian" in lowered:
+        return "gaussian_beam_focusing"
+    if "imaging" in lowered or "image" in lowered or "成像" in lowered:
+        return "imaging_system_preview"
+    if "fiber" in lowered or "光纤" in lowered:
+        return "fiber_coupling_preview"
+    if "polarization" in lowered or "偏振" in lowered:
+        return "polarization_optics_preview"
+    return None
 
 
 def _plan_steps(
@@ -747,6 +816,8 @@ def _tool_call_ledger(
     selected_example_id: str | None,
     adapter_recommendation: str,
     requirement_match: RequirementMatchResult,
+    domain_match: ApplicationDomainMatchResult,
+    domain_cross_check: ApplicationDomainCrossCheck | None,
     source_monitor: Any,
     observable_diagnostics: list[ObservableDiagnostic],
     adapter_mapping: AdapterSourceMonitorMapping,
@@ -803,6 +874,41 @@ def _tool_call_ledger(
             ),
             reason="Ambiguous or under-specified goals should produce questions rather than unsafe actions.",
             safety_note="No external LLM was used for disambiguation.",
+        ),
+        ToolCallRecord(
+            call_id="application-domains-match-goal",
+            tool_name="application_domains.match_goal",
+            tool_kind="internal_python",
+            called_by_agent="SpecAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Natural-language goal.",
+            output_summary=(
+                f"confidence={domain_match.confidence}; "
+                f"matched={', '.join(domain_match.matched_domains) or 'none'}; "
+                f"candidates={', '.join(domain_match.candidate_domains) or 'none'}"
+            ),
+            reason="Application domains provide higher-level material/template/tool context.",
+            safety_note="Domain matching is deterministic and does not call an external LLM.",
+        ),
+        ToolCallRecord(
+            call_id="application-domains-cross-check-domain",
+            tool_name="application_domains.cross_check_domain",
+            tool_kind="internal_python",
+            called_by_agent="EvidenceAgent",
+            executed=domain_cross_check is not None,
+            default_allowed=True,
+            status="executed" if domain_cross_check is not None else "skipped",
+            input_summary=domain_cross_check.domain_id if domain_cross_check else "No domain matched.",
+            output_summary=(
+                f"status={domain_cross_check.status}; "
+                f"tool_status={domain_cross_check.expected_tool_status}"
+                if domain_cross_check
+                else "No domain cross-check was run."
+            ),
+            reason="Domain cross-checks connect materials, templates, calculators, adapters, and missing inputs.",
+            safety_note="Cross-checks are preview/design-assist metadata; no solver is executed.",
         ),
         ToolCallRecord(
             call_id="optical-language-generate-disambiguation-questions",

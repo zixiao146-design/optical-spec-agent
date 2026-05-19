@@ -69,6 +69,14 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `design_requirement_match_unknown_response.json`
 - `agent_session_ambiguous_goal_request.json`
 - `agent_session_ambiguous_goal_response.json`
+- `application_domains_response.json`
+- `application_domain_nanoparticle_response.json`
+- `application_domain_match_waveguide_request.json`
+- `application_domain_match_waveguide_response.json`
+- `application_domain_cross_check_thin_film_response.json`
+- `application_domain_cross_checks_response.json`
+- `agent_session_domain_nanoparticle_request.json`
+- `agent_session_domain_nanoparticle_response.json`
 - `thin_film_request.json`
 - `thin_film_response.json`
 - `thin_film_spectrum_request.json`
@@ -112,6 +120,8 @@ matching diagnostics, missing-input diagnostics, and blocked external actions.
 Design requirement fixtures show deterministic natural-language goal matching,
 candidate templates, confidence, and the resulting optical language summary
 without external LLM calls.
+Application domain fixtures show deterministic domain matching and
+material-template cross-check coverage across ten local preview domains.
 They preserve the same no-solver, no-external-LLM, no-upload, no-tag, and
 no-release boundaries.
 

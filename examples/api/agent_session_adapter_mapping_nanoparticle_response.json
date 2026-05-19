@@ -26,8 +26,8 @@
     "Open the Agent Trace Timeline to review sub-agent contributions.",
     "Generate local workflow and adapter-preview artifacts only."
   ],
-  "session_id": "session-acd87c78d4",
-  "user_goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流，优先使用开源工具，不运行外部求解器。",
+  "session_id": "session-b4b48d0d22",
+  "user_goal": "Map a nanoparticle scattering preview to Meep source and flux monitor metadata.",
   "requirement_template_id": "nanoparticle_plasmonics",
   "optical_intent_summary": "nanoparticle plasmonics / scattering preview",
   "optical_language_summary": {
@@ -208,22 +208,59 @@
   },
   "match_confidence": "high",
   "candidate_templates": [
-    "nanoparticle_plasmonics",
-    "thin_film_ar_coating"
+    "nanoparticle_plasmonics"
   ],
   "recommended_questions": [
-    "Which design family should take priority: nanoparticle_plasmonics, thin_film_ar_coating?",
     "What particle size, material, film thickness, wavelength band, and polarization should be assumed?",
     "Please provide or confirm: particle_radius_or_diameter, particle_material, film_thickness, wavelength_band.",
     "Should the backend keep using local preview-only tools without external solver execution?",
+    "What particle material, size, and surrounding medium should be used?",
+    "Should the observable be scattering, extinction, or near-field enhancement?",
     "Which values should be used for critical inputs: particle_radius_or_diameter, particle_material, wavelength_band?",
     "Can you provide optional context for: film_thickness, background_medium, polarization?",
     "For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?",
-    "Which candidate template should be prioritized: nanoparticle_plasmonics, thin_film_ar_coating?",
     "Which values should be used for critical inputs: particle_material, particle_radius_or_diameter, wavelength_band?",
     "Can you provide optional context for: background_medium, film_thickness, polarization?",
-    "Confirm whether the backend should remain in local preview mode without running external solvers."
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "Application domain has local preview coverage."
   ],
+  "application_domain_id": "nanoparticle_plasmonics",
+  "application_domain_candidates": [
+    "nanoparticle_plasmonics"
+  ],
+  "domain_material_suitability_summary": [
+    {
+      "material_id": "ag",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "au",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "sio2",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "air",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "water",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    }
+  ],
+  "domain_cross_check_status": "pass",
   "selected_example_id": "nanoparticle_plasmonics",
   "design_case_summary": "nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview",
   "missing_required_inputs": [
@@ -430,7 +467,7 @@
     ],
     "trace_id": "trace-5011bf2c85",
     "example_id": "nanoparticle_plasmonics",
-    "design_goal": "请为一个银纳米颗粒位于薄膜上的散射问题生成本地预览工作流，优先使用开源工具，不运行外部求解器。",
+    "design_goal": "Map a nanoparticle scattering preview to Meep source and flux monitor metadata.",
     "timeline_summary": "Example Gallery -> Material suggestions -> Adapter recommendation -> Agent trace timeline -> Workflow plan -> Artifact preview -> Evidence -> Next action",
     "agents": [
       {
@@ -845,9 +882,35 @@
       "default_allowed": true,
       "status": "executed",
       "input_summary": "Template scores and candidate template set.",
-      "output_summary": "confidence=high; candidates=nanoparticle_plasmonics, thin_film_ar_coating",
+      "output_summary": "confidence=high; candidates=nanoparticle_plasmonics",
       "reason": "Ambiguous or under-specified goals should produce questions rather than unsafe actions.",
       "safety_note": "No external LLM was used for disambiguation."
+    },
+    {
+      "call_id": "application-domains-match-goal",
+      "tool_name": "application_domains.match_goal",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SpecAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Natural-language goal.",
+      "output_summary": "confidence=high; matched=nanoparticle_plasmonics; candidates=nanoparticle_plasmonics",
+      "reason": "Application domains provide higher-level material/template/tool context.",
+      "safety_note": "Domain matching is deterministic and does not call an external LLM."
+    },
+    {
+      "call_id": "application-domains-cross-check-domain",
+      "tool_name": "application_domains.cross_check_domain",
+      "tool_kind": "internal_python",
+      "called_by_agent": "EvidenceAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "nanoparticle_plasmonics",
+      "output_summary": "status=pass; tool_status=covered",
+      "reason": "Domain cross-checks connect materials, templates, calculators, adapters, and missing inputs.",
+      "safety_note": "Cross-checks are preview/design-assist metadata; no solver is executed."
     },
     {
       "call_id": "optical-language-generate-disambiguation-questions",

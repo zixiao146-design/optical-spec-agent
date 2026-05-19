@@ -16,6 +16,8 @@ def test_agent_session_includes_tool_call_ledger():
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
@@ -75,7 +77,11 @@ def test_backend_report_and_cross_checks_reflect_ledger_reality():
     assert any(tool.tool_name == "observable_diagnostics" for tool in report.internal_tools)
     assert any(tool.tool_name == "adapter_native_mapping" for tool in report.internal_tools)
     assert any(tool.tool_name == "adapter_native_golden_coverage" for tool in report.internal_tools)
+    assert any(tool.tool_name == "application_domain_registry" for tool in report.internal_tools)
+    assert any(tool.tool_name == "material_template_cross_checks" for tool in report.internal_tools)
     assert report.adapter_native_golden_coverage.status == "ok"
+    assert report.application_domain_coverage.domain_count == 10
+    assert report.material_template_cross_checks.fail_count == 0
     assert all(action.executed is False for action in report.blocked_external_actions)
     assert any(
         check.example_id == "thin_film_coating"

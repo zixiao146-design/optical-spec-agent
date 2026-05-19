@@ -1,0 +1,68 @@
+{
+  "domain_id": "polarization_optics_preview",
+  "title": "Polarization optics preview",
+  "title_zh": "偏振光学预览",
+  "aliases": [
+    "polarizer",
+    "waveplate",
+    "Jones preview"
+  ],
+  "natural_language_keywords_en": [
+    "polarization",
+    "polarizer",
+    "waveplate",
+    "retarder",
+    "jones"
+  ],
+  "natural_language_keywords_zh": [
+    "偏振",
+    "偏振片",
+    "波片",
+    "延迟器",
+    "琼斯"
+  ],
+  "linked_requirement_templates": [
+    "dielectric_metasurface_preview"
+  ],
+  "suggested_materials": [
+    "tio2",
+    "si3n4",
+    "sio2",
+    "glass_fused_silica_preview"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "expected_calculators": [],
+  "expected_adapters": [
+    "meep"
+  ],
+  "required_inputs": [
+    "input_polarization",
+    "target_polarization_transform",
+    "wavelength_nm"
+  ],
+  "optional_inputs": [
+    "retardance",
+    "axis_angle",
+    "bandwidth"
+  ],
+  "common_missing_inputs": [
+    "input_polarization",
+    "target_polarization_transform",
+    "retardance"
+  ],
+  "default_assumptions": [
+    "Polarization handling is preview metadata unless a domain calculator is added.",
+    "No Jones/Mueller production model is claimed."
+  ],
+  "recommended_questions": [
+    "What input and output polarization states should be transformed?",
+    "Is the target a polarizer, waveplate, or metasurface polarization element?"
+  ],
+  "evidence_boundary": "Deferred/partial coverage; no production polarization model or solver result is claimed.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

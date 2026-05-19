@@ -1,0 +1,71 @@
+{
+  "domain_id": "slab_waveguide",
+  "title": "Slab waveguide",
+  "title_zh": "平板波导",
+  "aliases": [
+    "single-mode waveguide",
+    "integrated photonics waveguide"
+  ],
+  "natural_language_keywords_en": [
+    "waveguide",
+    "single mode",
+    "mode confinement",
+    "integrated photonics"
+  ],
+  "natural_language_keywords_zh": [
+    "波导",
+    "单模",
+    "模式",
+    "集成光子"
+  ],
+  "linked_requirement_templates": [
+    "slab_waveguide_single_mode"
+  ],
+  "suggested_materials": [
+    "si",
+    "si3n4",
+    "sio2",
+    "air"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "expected_calculators": [
+    "optics.waveguide.sweep",
+    "optics.waveguide.single_mode_range"
+  ],
+  "expected_adapters": [
+    "mpb",
+    "elmer"
+  ],
+  "required_inputs": [
+    "core_material",
+    "cladding_material",
+    "core_thickness_um",
+    "wavelength_nm"
+  ],
+  "optional_inputs": [
+    "polarization",
+    "mode_index",
+    "sidewall_angle"
+  ],
+  "common_missing_inputs": [
+    "core_thickness_um",
+    "cladding_material",
+    "wavelength_nm",
+    "polarization"
+  ],
+  "default_assumptions": [
+    "Scalar slab V-number preview.",
+    "Single-mode threshold is approximate."
+  ],
+  "recommended_questions": [
+    "What core/cladding materials and operating wavelength should be used?",
+    "Is this TE-like, TM-like, or polarization-agnostic?"
+  ],
+  "evidence_boundary": "Waveguide V-number preview; full mode solving requires explicit solver execution.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

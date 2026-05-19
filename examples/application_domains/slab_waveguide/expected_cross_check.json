@@ -1,0 +1,62 @@
+{
+  "domain_id": "slab_waveguide",
+  "status": "pass",
+  "template_coverage": true,
+  "material_suitability_coverage": true,
+  "expected_calculators": [
+    "optics.waveguide.sweep",
+    "optics.waveguide.single_mode_range"
+  ],
+  "expected_adapters": [
+    "mpb",
+    "elmer"
+  ],
+  "expected_tool_status": "covered",
+  "missing_input_questions_present": true,
+  "suggested_materials": [
+    "si",
+    "si3n4",
+    "sio2",
+    "air"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "material_suitability_summary": [
+    {
+      "material_id": "si",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "si3n4",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "sio2",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "air",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    }
+  ],
+  "diagnostics": [
+    "Application domain has local preview coverage."
+  ],
+  "deferred_capability": null,
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

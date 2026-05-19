@@ -1,0 +1,1 @@
+Create a local preview for photonic crystal with no external solver execution.

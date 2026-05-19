@@ -1,0 +1,67 @@
+{
+  "domain_id": "imaging_system_preview",
+  "title": "Imaging system preview",
+  "title_zh": "成像系统预览",
+  "aliases": [
+    "image plane preview",
+    "relay imaging",
+    "optical imaging"
+  ],
+  "natural_language_keywords_en": [
+    "imaging system",
+    "image plane",
+    "magnification",
+    "field of view"
+  ],
+  "natural_language_keywords_zh": [
+    "成像系统",
+    "像面",
+    "放大率",
+    "视场"
+  ],
+  "linked_requirement_templates": [
+    "paraxial_lens_imaging"
+  ],
+  "suggested_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview",
+    "air"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "expected_calculators": [
+    "optics.paraxial.two_lens_relay"
+  ],
+  "expected_adapters": [
+    "optiland"
+  ],
+  "required_inputs": [
+    "object_distance_mm",
+    "image_distance_or_magnification",
+    "aperture"
+  ],
+  "optional_inputs": [
+    "field_of_view",
+    "wavelength_nm",
+    "lens_spacing"
+  ],
+  "common_missing_inputs": [
+    "magnification",
+    "field_of_view",
+    "aperture"
+  ],
+  "default_assumptions": [
+    "Paraxial relay preview.",
+    "Image quality metrics are metadata unless Optiland is explicitly run."
+  ],
+  "recommended_questions": [
+    "What magnification and image plane should the preview target?",
+    "What aperture and field should constrain the imaging system?"
+  ],
+  "evidence_boundary": "Paraxial imaging preview; real spot/MTF requires explicit ray-trace execution.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

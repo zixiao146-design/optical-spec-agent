@@ -36,6 +36,8 @@ for section in [
     "internal_tools",
     "optical_calculators",
     "requirements_templates",
+    "application_domain_coverage",
+    "material_template_cross_checks",
     "adapter_native_golden_coverage",
     "design_case_cross_checks",
     "blocked_external_actions",
@@ -55,6 +57,8 @@ require(internal_tools["missing_input_diagnostics"]["executed_in_sample"] is Tru
 require(internal_tools["observable_diagnostics"]["executed_in_sample"] is True, "observable diagnostics not executed in sample")
 require(internal_tools["adapter_native_mapping"]["executed_in_sample"] is True, "adapter-native mapping not executed in sample")
 require(internal_tools["adapter_native_golden_coverage"]["executed_in_sample"] is True, "adapter golden coverage not executed in sample")
+require(internal_tools["application_domain_registry"]["executed_in_sample"] is True, "application domain registry not executed in sample")
+require(internal_tools["material_template_cross_checks"]["executed_in_sample"] is True, "material-template cross-checks not executed in sample")
 golden = report["adapter_native_golden_coverage"]
 require(golden["status"] == "ok", "adapter golden coverage report not ok")
 require(set(golden["adapters_covered"]) == {"meep", "mpb", "gmsh", "elmer", "optiland"}, "adapter golden coverage mismatch")
@@ -63,6 +67,10 @@ require(all(item["coverage_status"] == "pass" for item in golden["coverage_items
 require(all(action["executed"] is False for action in report["blocked_external_actions"]), "external action executed")
 require(report["production_grade_validation_claimed"] is False, "production claim changed")
 require(report["formal_convergence_proof_claimed"] is False, "convergence claim changed")
+require(report["application_domain_coverage"]["domain_count"] == 10, "application domain count mismatch")
+require(report["application_domain_coverage"]["failed_domains"] == [], "application domain coverage failed")
+require(report["material_template_cross_checks"]["total"] == 10, "material-template cross-check count mismatch")
+require(report["material_template_cross_checks"]["fail_count"] == 0, "material-template cross-check failed")
 require(len(report["requirements_templates"]) == 7, "requirement template count mismatch")
 require(
     all(item["matched_by_heuristic"] for item in report["requirements_templates"]),
@@ -85,6 +93,13 @@ require(cross_payload["summary"]["fail"] == 0, "design case cross-check failed")
 require(cross_payload["summary"]["requirement_templates_fail"] == 0, "requirement template cross-check failed")
 require(cross_payload["external_llm_required"] is False, "cross-check LLM flag changed")
 
+domain_checks = client.get("/api/application-domain-cross-checks")
+require(domain_checks.status_code == 200, "/api/application-domain-cross-checks failed")
+domain_payload = domain_checks.json()
+require(domain_payload["summary"]["total"] == 10, "application domain cross-check count mismatch")
+require(domain_payload["summary"]["fail"] == 0, "application domain cross-check failed")
+require(domain_payload["external_solver_executed"] is False, "domain cross-check solver flag changed")
+
 golden_api = client.get("/api/adapter-native-golden-coverage")
 require(golden_api.status_code == 200, "/api/adapter-native-golden-coverage failed")
 golden_payload = golden_api.json()
@@ -94,6 +109,20 @@ require(golden_payload["external_solver_executed"] is False, "golden coverage so
 requirements = client.get("/api/design-requirements")
 require(requirements.status_code == 200, "/api/design-requirements failed")
 require(requirements.json()["template_count"] == 7, "design requirements count mismatch")
+
+application_domains = client.get("/api/application-domains")
+require(application_domains.status_code == 200, "/api/application-domains failed")
+require(application_domains.json()["domain_count"] == 10, "application domain count mismatch")
+
+domain_match = client.post(
+    "/api/application-domains/match",
+    json={"goal": "Design a thin-film anti-reflection coating.", "language": "en"},
+)
+require(domain_match.status_code == 200, "application domain match failed")
+require(
+    domain_match.json()["matched_domains"] == ["thin_film_coating"],
+    "thin-film application domain match failed",
+)
 
 thin_detail = client.get("/api/design-requirements/thin_film_ar_coating")
 require(thin_detail.status_code == 200, "thin-film requirement detail failed")
@@ -207,6 +236,8 @@ require(preview_payload["adapter_source_monitor_mapping"], "adapter preview miss
 print("BACKEND CAPABILITY REPORT PASSED")
 print("DESIGN CASE CROSS-CHECKS PASSED")
 print("DESIGN REQUIREMENT MATCHING PASSED")
+print("APPLICATION DOMAIN COVERAGE PASSED")
+print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")

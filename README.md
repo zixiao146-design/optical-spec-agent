@@ -122,6 +122,12 @@ records expose provenance, suitability warnings, and user-verification flags;
 ambiguous goals produce candidate templates and questions rather than unsafe
 solver actions. The material catalog remains preview/design-assist only and is
 not a production-grade optical constants database.
+The backend also records an
+[`application domain registry`](docs/application_domain_registry.md) and
+[`material-template cross-checks`](docs/material_template_cross_checks.md),
+connecting ten optical domains to local materials, requirement templates,
+calculators/adapters, missing-input questions, and preview-only evidence
+boundaries.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

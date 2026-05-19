@@ -1,0 +1,36 @@
+# Material-Template Cross-Checks
+
+Material-template cross-checks verify that each application domain has a
+reviewable path through local materials, requirement templates, calculators or
+adapters, and missing-input questions.
+
+## What Is Checked
+
+- A linked requirement template exists.
+- Suggested materials exist in the local preview material catalog.
+- Material suitability diagnostics can be produced for the domain.
+- Expected calculators or adapter preview families are recorded.
+- Missing-input and disambiguation questions are present.
+- Safety flags stay false for solver execution, external LLM usage,
+  production-grade validation, and any claimed convergence proof.
+
+## Status Semantics
+
+- `pass`: the domain has local preview coverage for templates, materials,
+  questions, and expected tool paths.
+- `warning`: the domain is intentionally partial or deferred, but the limitation
+  is explicit.
+- `fail`: a required local coverage item is missing.
+
+## Deferred Domains
+
+`fiber_coupling_preview` and `polarization_optics_preview` are intentionally
+partial. They are useful as planning domains, but real coupling efficiency or
+polarization-device results require future dedicated calculators or explicit
+solver validation.
+
+## Safety Boundary
+
+The cross-checks do not run solvers, do not call external LLMs, and do not query
+external material databases. They are preview/design-assist checks and do not
+prove production-grade physical validation.

@@ -34,6 +34,10 @@ upload, and `v1.0.0` approval remain separate and not granted.
   candidate-template, and recommended-question diagnostics.
 - Missing-input diagnostics separate critical and optional inputs while keeping
   `safe_to_run_solver=false` by default.
+- Application-domain coverage maps ten local preview domains to templates,
+  materials, calculators/adapters, and recommended questions.
+- Material-template cross-checks report pass/warning/fail status for each
+  domain without running solvers or querying external material databases.
 - Optical design examples are cross-checked against agent sessions and expected
   calculator/tool usage.
 - External solver, external LLM, TestPyPI upload, PyPI publish, git tag, and
@@ -49,7 +53,8 @@ upload, and `v1.0.0` approval remain separate and not granted.
 3. `internal_tools`: material catalog, material suitability diagnostics,
    example registry, agent trace builder,
    task session builder, adapter preview generator, workflow planner,
-  ambiguous requirement matching, source/monitor inference, observable diagnostics, adapter-native mapping,
+   ambiguous requirement matching, application-domain registry,
+   material-template cross-checks, source/monitor inference, observable diagnostics, adapter-native mapping,
    adapter-native golden preview checking, and optical calculators.
 4. `adapter_native_golden_coverage`: coverage matrix for Meep, MPB, Gmsh,
    Elmer, and Optiland adapter-native source/monitor golden preview cases,
@@ -64,7 +69,9 @@ upload, and `v1.0.0` approval remain separate and not granted.
 8. `material_provenance_coverage`, `ambiguous_requirement_matching`, and
    `missing_input_diagnostics`: rc8.dev0 backend trust hardening for material
    assumptions and under-specified natural-language goals.
-9. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
+9. `application_domain_coverage` and `material_template_cross_checks`: domain,
+   material, template, calculator/adapter, and missing-input coverage.
+10. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
    release actions that remain unexecuted.
 
 ## How To Generate

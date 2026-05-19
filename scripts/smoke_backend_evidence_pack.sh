@@ -38,6 +38,11 @@ for section in [
     "sub_agent_reality",
     "tool_call_reality",
     "optical_calculators",
+    "material_provenance_coverage",
+    "ambiguous_requirement_matching",
+    "missing_input_diagnostics",
+    "application_domain_coverage",
+    "material_template_cross_checks",
     "design_case_cross_checks",
     "source_monitor_observable_diagnostics",
     "adapter_native_golden_coverage",
@@ -71,12 +76,21 @@ require(payload["external_solver_executed"] is False, "solver flag changed")
 require(payload["external_llm_required"] is False, "LLM flag changed")
 require(payload["production_grade_validation_claimed"] is False, "production claim changed")
 require(payload["formal_convergence_proof_claimed"] is False, "convergence claim changed")
+require(payload["material_provenance_coverage"]["production_grade_optical_constants_database"] is False, "material provenance overclaimed production database")
+require(payload["ambiguous_requirement_matching"]["ambiguous_goals_generate_questions"] is True, "ambiguous matching questions missing")
+require(payload["missing_input_diagnostics"]["safe_to_run_solver_default"] is False, "missing-input diagnostics solver flag changed")
+require(payload["application_domain_coverage"]["domain_count"] == 10, "application domain count mismatch")
+require(payload["application_domain_coverage"]["failed_domains"] == [], "application domain coverage failed")
+require(payload["material_template_cross_checks"]["total"] == 10, "material-template cross-check count mismatch")
+require(payload["material_template_cross_checks"]["fail_count"] == 0, "material-template cross-check failed")
 
 markdown = markdown_path.read_text(encoding="utf-8")
 for heading in [
     "Sub-agent reality",
     "Tool-call reality",
     "Optical calculators",
+    "Application-domain coverage",
+    "Material-template cross-checks",
     "Design-case cross-checks",
     "Adapter-native golden coverage",
     "Blocked or deferred capabilities",
@@ -94,6 +108,8 @@ require(api_payload["external_solver_executed"] is False, "API solver flag chang
 require(api_payload["adapter_native_golden_coverage"]["status"] == "ok", "API golden status changed")
 
 print("BACKEND EVIDENCE PACK PASSED")
+print("APPLICATION DOMAIN COVERAGE PASSED")
+print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

@@ -101,6 +101,28 @@
       ]
     },
     {
+      "tool_name": "application_domain_registry",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.examples.application_domains",
+      "notes": [
+        "Maps application domains to templates, materials, calculators, adapters, and questions."
+      ]
+    },
+    {
+      "tool_name": "material_template_cross_checks",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.examples.domain_cross_check",
+      "notes": [
+        "Cross-checks application-domain material/template/calculator/adapter coverage."
+      ]
+    },
+    {
       "tool_name": "source_monitor_inference",
       "tool_kind": "internal_python",
       "available": true,

@@ -1,0 +1,73 @@
+{
+  "domain_id": "thin_film_coating",
+  "title": "Thin-film coating",
+  "title_zh": "薄膜镀膜",
+  "aliases": [
+    "anti-reflection coating",
+    "AR coating",
+    "thin film stack"
+  ],
+  "natural_language_keywords_en": [
+    "thin film",
+    "coating",
+    "anti-reflection",
+    "antireflection",
+    "ar coating"
+  ],
+  "natural_language_keywords_zh": [
+    "薄膜",
+    "镀膜",
+    "增透",
+    "减反",
+    "薄膜堆栈"
+  ],
+  "linked_requirement_templates": [
+    "thin_film_ar_coating"
+  ],
+  "suggested_materials": [
+    "sio2",
+    "tio2",
+    "al2o3",
+    "glass_bk7_preview"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "expected_calculators": [
+    "optics.thin_film.spectrum",
+    "optics.thin_film.quarter_wave_ar"
+  ],
+  "expected_adapters": [
+    "preview-only TMM calculator path"
+  ],
+  "required_inputs": [
+    "incident_medium",
+    "substrate_material",
+    "target_wavelength_nm",
+    "layer_materials"
+  ],
+  "optional_inputs": [
+    "incidence_angle",
+    "polarization",
+    "wavelength_band"
+  ],
+  "common_missing_inputs": [
+    "substrate_material",
+    "coating_material",
+    "target_wavelength_nm",
+    "incidence_angle"
+  ],
+  "default_assumptions": [
+    "Normal-incidence scalar transfer-matrix preview.",
+    "Lossless layer constants unless k is provided."
+  ],
+  "recommended_questions": [
+    "What substrate and target wavelength should the coating optimize?",
+    "Is normal incidence acceptable for the preview?"
+  ],
+  "evidence_boundary": "Sanity-checked thin-film preview calculator; not production-grade coating validation.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

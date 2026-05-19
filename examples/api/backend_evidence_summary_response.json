@@ -88,6 +88,8 @@
       "workflow_planner",
       "source_monitor_inference",
       "ambiguous_requirement_matching",
+      "application_domain_registry",
+      "material_template_cross_checks",
       "missing_input_diagnostics",
       "observable_diagnostics",
       "adapter_native_mapping",
@@ -104,6 +106,8 @@
       "workflow_planner",
       "source_monitor_inference",
       "ambiguous_requirement_matching",
+      "application_domain_registry",
+      "material_template_cross_checks",
       "missing_input_diagnostics",
       "observable_diagnostics",
       "adapter_native_mapping",
@@ -258,6 +262,636 @@
       "safe_to_preview remains true while safe_to_run_solver remains false."
     ]
   },
+  "application_domain_coverage": {
+    "domain_count": 10,
+    "covered_domains": [
+      "nanoparticle_plasmonics",
+      "thin_film_coating",
+      "slab_waveguide",
+      "photonic_crystal",
+      "dielectric_metasurface",
+      "lens_ray_optics",
+      "gaussian_beam_focusing",
+      "imaging_system_preview"
+    ],
+    "partial_domains": [
+      "fiber_coupling_preview",
+      "polarization_optics_preview"
+    ],
+    "failed_domains": [],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "notes": [
+      "Application domains are local preview coverage anchors, not production validation.",
+      "Fiber coupling and polarization optics can be partial/deferred until dedicated calculators or solver workflows are added.",
+      "No external solver, external LLM, or material database lookup is required."
+    ],
+    "preview_design_assist_only": true,
+    "no_external_solver_execution": true
+  },
+  "material_template_cross_checks": {
+    "total": 10,
+    "pass_count": 8,
+    "warning_count": 2,
+    "fail_count": 0,
+    "cross_checks": [
+      {
+        "domain_id": "nanoparticle_plasmonics",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [],
+        "expected_adapters": [
+          "meep",
+          "gmsh"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "ag",
+          "au",
+          "sio2",
+          "air",
+          "water"
+        ],
+        "unsuitable_materials": [
+          "glass_bk7_preview",
+          "glass_fused_silica_preview"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "ag",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "au",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "sio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "air",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "water",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "thin_film_coating",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [
+          "optics.thin_film.spectrum",
+          "optics.thin_film.quarter_wave_ar"
+        ],
+        "expected_adapters": [
+          "preview-only TMM calculator path"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "sio2",
+          "tio2",
+          "al2o3",
+          "glass_bk7_preview"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "sio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "tio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "al2o3",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "glass_bk7_preview",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "slab_waveguide",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [
+          "optics.waveguide.sweep",
+          "optics.waveguide.single_mode_range"
+        ],
+        "expected_adapters": [
+          "mpb",
+          "elmer"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "si",
+          "si3n4",
+          "sio2",
+          "air"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "si",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "si3n4",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "sio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "air",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "photonic_crystal",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [],
+        "expected_adapters": [
+          "mpb"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "si",
+          "gaas",
+          "sio2",
+          "air"
+        ],
+        "unsuitable_materials": [
+          "water"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "si",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "gaas",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "sio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "air",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "dielectric_metasurface",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [],
+        "expected_adapters": [
+          "meep",
+          "gmsh"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "tio2",
+          "si3n4",
+          "si",
+          "sio2"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au",
+          "water"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "tio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "si3n4",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "si",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "sio2",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "lens_ray_optics",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [
+          "optics.paraxial.two_lens_relay",
+          "optics.paraxial.thin_lens"
+        ],
+        "expected_adapters": [
+          "optiland"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "glass_bk7_preview",
+          "glass_fused_silica_preview",
+          "air"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au",
+          "si"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "glass_bk7_preview",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "air",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "gaussian_beam_focusing",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [
+          "optics.gaussian_beam.series",
+          "optics.gaussian_beam.focus"
+        ],
+        "expected_adapters": [
+          "optiland"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "air",
+          "glass_fused_silica_preview"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "air",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "No deterministic suitability rule for air in gaussian_beam_focusing.",
+          "No deterministic suitability rule for glass_fused_silica_preview in gaussian_beam_focusing."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "imaging_system_preview",
+        "status": "pass",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [
+          "optics.paraxial.two_lens_relay"
+        ],
+        "expected_adapters": [
+          "optiland"
+        ],
+        "expected_tool_status": "covered",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "glass_bk7_preview",
+          "glass_fused_silica_preview",
+          "air"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "glass_bk7_preview",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "air",
+            "suitability": "suitable",
+            "suitable": true,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "deferred_capability": null,
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "fiber_coupling_preview",
+        "status": "warning",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [
+          "optics.gaussian_beam.focus",
+          "optics.waveguide.sweep"
+        ],
+        "expected_adapters": [
+          "mpb",
+          "optiland"
+        ],
+        "expected_tool_status": "partial_deferred",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "glass_fused_silica_preview",
+          "sio2",
+          "si3n4",
+          "air"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "glass_fused_silica_preview",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "sio2",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "si3n4",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "air",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "No deterministic suitability rule for glass_fused_silica_preview in fiber_coupling_preview.",
+          "No deterministic suitability rule for sio2 in fiber_coupling_preview.",
+          "No deterministic suitability rule for si3n4 in fiber_coupling_preview.",
+          "No deterministic suitability rule for air in fiber_coupling_preview.",
+          "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred."
+        ],
+        "deferred_capability": "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred.",
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      },
+      {
+        "domain_id": "polarization_optics_preview",
+        "status": "warning",
+        "template_coverage": true,
+        "material_suitability_coverage": true,
+        "expected_calculators": [],
+        "expected_adapters": [
+          "meep"
+        ],
+        "expected_tool_status": "partial_deferred",
+        "missing_input_questions_present": true,
+        "suggested_materials": [
+          "tio2",
+          "si3n4",
+          "sio2",
+          "glass_fused_silica_preview"
+        ],
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ],
+        "material_suitability_summary": [
+          {
+            "material_id": "tio2",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "si3n4",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "sio2",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "suitability": "unknown",
+            "suitable": null,
+            "requires_user_verification": true
+          }
+        ],
+        "diagnostics": [
+          "No deterministic suitability rule for tio2 in polarization_optics_preview.",
+          "No deterministic suitability rule for si3n4 in polarization_optics_preview.",
+          "No deterministic suitability rule for sio2 in polarization_optics_preview.",
+          "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview.",
+          "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred."
+        ],
+        "deferred_capability": "Domain has preview material/template context, but dedicated calculator or solver-backed physical result remains deferred.",
+        "preview_only": true,
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false
+      }
+    ],
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "preview_design_assist_only": true,
+    "no_production_grade_claim": true
+  },
   "design_case_cross_checks": [
     {
       "example_id": "dielectric_metasurface_preview",
@@ -275,6 +909,8 @@
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
@@ -315,6 +951,8 @@
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
@@ -358,6 +996,8 @@
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
@@ -399,6 +1039,8 @@
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
@@ -439,6 +1081,8 @@
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
@@ -481,6 +1125,8 @@
         "requirements.match_template",
         "requirements.extract_optical_intent",
         "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
         "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",

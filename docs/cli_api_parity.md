@@ -84,3 +84,12 @@ Hardened frontend demo checks are documented in
   `/api/optical-language/adapter-mapping`, `/api/adapter-preview`, and
   `/api/agent-session`; these calls explain preview semantics without running
   Meep, MPB, Gmsh, Elmer, or Optiland.
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

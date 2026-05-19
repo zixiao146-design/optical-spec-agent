@@ -45,6 +45,8 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "material_provenance_coverage",
         "ambiguous_requirement_matching",
         "missing_input_diagnostics",
+        "application_domain_coverage",
+        "material_template_cross_checks",
         "adapter_native_golden_coverage",
         "design_case_cross_checks",
         "blocked_external_actions",
@@ -59,6 +61,8 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     tools = {item["tool_name"]: item for item in report["internal_tools"]}
     assert tools["material_suitability_diagnostics"]["callable"] is True
     assert tools["ambiguous_requirement_matching"]["executed_in_sample"] is True
+    assert tools["application_domain_registry"]["executed_in_sample"] is True
+    assert tools["material_template_cross_checks"]["executed_in_sample"] is True
     assert tools["source_monitor_inference"]["executed_in_sample"] is True
     assert tools["missing_input_diagnostics"]["executed_in_sample"] is True
     assert tools["observable_diagnostics"]["executed_in_sample"] is True
@@ -76,6 +80,10 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert report["material_provenance_coverage"]["production_grade_optical_constants_claimed"] is False
     assert report["ambiguous_requirement_matching"]["no_external_llm_used"] is True
     assert report["missing_input_diagnostics"]["safe_to_run_solver_default"] is False
+    assert report["application_domain_coverage"]["domain_count"] == 10
+    assert report["application_domain_coverage"]["failed_domains"] == []
+    assert report["material_template_cross_checks"]["total"] == 10
+    assert report["material_template_cross_checks"]["fail_count"] == 0
     assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")

@@ -40,6 +40,8 @@ require("observable_diagnostics" in internal_tools, "observable diagnostics miss
 require("adapter_native_mapping" in internal_tools, "adapter-native mapping missing")
 require("adapter_native_golden_coverage" in internal_tools, "adapter-native golden coverage missing")
 require("ambiguous_requirement_matching" in internal_tools, "ambiguous requirement matching missing")
+require("application_domain_registry" in internal_tools, "application domain registry missing")
+require("material_template_cross_checks" in internal_tools, "material-template cross-checks missing")
 
 material_diagnose = client.post(
     "/api/materials/diagnose",
@@ -65,6 +67,31 @@ ambiguous_payload = ambiguous_match.json()
 require(ambiguous_payload["confidence"] == "low", "ambiguous match should be low confidence")
 require(len(ambiguous_payload["candidate_templates"]) >= 2, "ambiguous candidates missing")
 require(ambiguous_payload["no_external_llm_used"] is True, "ambiguous matching used external LLM")
+
+domains = client.get("/api/application-domains")
+require(domains.status_code == 200, "/api/application-domains failed")
+domains_payload = domains.json()
+require(domains_payload["domain_count"] == 10, "application domain count mismatch")
+require(
+    domains_payload["production_grade_validation_claimed"] is False,
+    "domain registry overclaimed validation",
+)
+
+waveguide_domain = client.post(
+    "/api/application-domains/match",
+    json={"goal": "请设计一个 1550 nm 单模硅氮波导预览。", "language": "zh-CN"},
+)
+require(waveguide_domain.status_code == 200, "/api/application-domains/match failed")
+waveguide_payload = waveguide_domain.json()
+require("slab_waveguide" in waveguide_payload["matched_domains"], "waveguide domain match failed")
+require(waveguide_payload["no_external_llm_used"] is True, "domain matching used external LLM")
+
+domain_checks = client.get("/api/application-domain-cross-checks")
+require(domain_checks.status_code == 200, "/api/application-domain-cross-checks failed")
+domain_check_payload = domain_checks.json()
+require(domain_check_payload["summary"]["total"] == 10, "application cross-check count mismatch")
+require(domain_check_payload["summary"]["fail"] == 0, "application domain cross-check failed")
+require(domain_check_payload["external_solver_executed"] is False, "domain cross-check executed solver")
 
 golden_coverage = client.get("/api/adapter-native-golden-coverage")
 require(golden_coverage.status_code == 200, "/api/adapter-native-golden-coverage failed")
@@ -101,6 +128,14 @@ require(
     ledger["optical_language.generate_disambiguation_questions"]["executed"] is True,
     "disambiguation questions not generated",
 )
+require(
+    ledger["application_domains.match_goal"]["executed"] is True,
+    "application domain matching not executed",
+)
+require(
+    ledger["application_domains.cross_check_domain"]["executed"] is True,
+    "application domain cross-check not executed",
+)
 require(ledger["optical_language.infer_source_monitor"]["executed"] is True, "source/monitor inference not executed")
 require(ledger["optical_language.diagnose_missing_inputs"]["executed"] is True, "missing-input diagnostics not executed")
 require(ledger["optical_language.diagnose_observable"]["executed"] is True, "observable diagnostics not executed")
@@ -117,6 +152,8 @@ require(
 )
 require("match_confidence" in session_payload, "agent session missing match confidence")
 require("missing_critical_inputs" in session_payload, "agent session missing critical inputs")
+require("application_domain_id" in session_payload, "agent session missing application domain")
+require("domain_cross_check_status" in session_payload, "agent session missing domain status")
 
 source_monitor = client.post(
     "/api/optical-language/infer",
@@ -309,6 +346,8 @@ require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity c
 print("CALCULATOR SANITY CHECKS PASSED")
 print("MATERIAL PROVENANCE DIAGNOSTICS PASSED")
 print("AMBIGUOUS REQUIREMENT MATCHING PASSED")
+print("APPLICATION DOMAIN COVERAGE PASSED")
+print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
@@ -322,6 +361,8 @@ PY
 echo "CALCULATOR SANITY CHECKS PASSED"
 echo "MATERIAL PROVENANCE DIAGNOSTICS PASSED"
 echo "AMBIGUOUS REQUIREMENT MATCHING PASSED"
+echo "APPLICATION DOMAIN COVERAGE PASSED"
+echo "MATERIAL TEMPLATE CROSS-CHECKS PASSED"
 echo "SOURCE/MONITOR INFERENCE PASSED"
 echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "OBSERVABLE DIAGNOSTICS PASSED"

@@ -1,0 +1,48 @@
+{
+  "domain_id": "gaussian_beam_focusing",
+  "status": "pass",
+  "template_coverage": true,
+  "material_suitability_coverage": true,
+  "expected_calculators": [
+    "optics.gaussian_beam.series",
+    "optics.gaussian_beam.focus"
+  ],
+  "expected_adapters": [
+    "optiland"
+  ],
+  "expected_tool_status": "covered",
+  "missing_input_questions_present": true,
+  "suggested_materials": [
+    "air",
+    "glass_fused_silica_preview"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au"
+  ],
+  "material_suitability_summary": [
+    {
+      "material_id": "air",
+      "suitability": "unknown",
+      "suitable": null,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "glass_fused_silica_preview",
+      "suitability": "unknown",
+      "suitable": null,
+      "requires_user_verification": true
+    }
+  ],
+  "diagnostics": [
+    "No deterministic suitability rule for air in gaussian_beam_focusing.",
+    "No deterministic suitability rule for glass_fused_silica_preview in gaussian_beam_focusing."
+  ],
+  "deferred_capability": null,
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

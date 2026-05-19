@@ -86,6 +86,9 @@ rc8.dev0 后端进一步把材料溯源和歧义需求处理显式化：见
 适用性 warning 和用户验证标记；有歧义的自然语言目标会返回候选模板和追问，
 而不是直接采取不安全的求解器动作。材料库仍然只是 preview/design-assist，
 不是生产级光学常数数据库。
+后端还新增 `docs/application_domain_registry.zh-CN.md` 应用领域注册表和
+`docs/material_template_cross_checks.zh-CN.md` 材料-模板交叉检查，把十个光学领域
+连接到本地材料、需求模板、计算器/适配器、缺失输入问题和 preview-only 证据边界。
 Adapter-native golden preview cases 位于 `examples/adapter_native_golden/`，
 文档见 `docs/adapter_native_golden_cases.zh-CN.md`。它们会检查 Meep、MPB、
 Gmsh、Elmer 和 Optiland 的 source/monitor/observable fragments 以及严格

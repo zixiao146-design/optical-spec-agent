@@ -37,3 +37,12 @@ does not treat those defaults as approval to run a solver.
 - No external LLM is called.
 - Defaults are explicit and reviewable.
 - No production-grade physical validation or formal convergence proof is claimed.
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

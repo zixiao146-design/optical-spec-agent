@@ -1,0 +1,71 @@
+{
+  "domain_id": "lens_ray_optics",
+  "title": "Lens ray optics",
+  "title_zh": "透镜光线光学",
+  "aliases": [
+    "paraxial lens",
+    "ray trace preview",
+    "singlet lens"
+  ],
+  "natural_language_keywords_en": [
+    "lens",
+    "ray trace",
+    "focal length",
+    "singlet",
+    "relay"
+  ],
+  "natural_language_keywords_zh": [
+    "透镜",
+    "光线",
+    "焦距",
+    "单透镜",
+    "中继"
+  ],
+  "linked_requirement_templates": [
+    "paraxial_lens_imaging"
+  ],
+  "suggested_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview",
+    "air"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au",
+    "si"
+  ],
+  "expected_calculators": [
+    "optics.paraxial.two_lens_relay",
+    "optics.paraxial.thin_lens"
+  ],
+  "expected_adapters": [
+    "optiland"
+  ],
+  "required_inputs": [
+    "focal_length_mm",
+    "object_distance_mm",
+    "aperture"
+  ],
+  "optional_inputs": [
+    "field_of_view",
+    "wavelength_nm",
+    "glass_choice"
+  ],
+  "common_missing_inputs": [
+    "focal_length_mm",
+    "aperture",
+    "field_of_view"
+  ],
+  "default_assumptions": [
+    "Paraxial thin-lens preview.",
+    "No aberrations or production ray-trace validation."
+  ],
+  "recommended_questions": [
+    "What focal length, aperture, and field of view should be previewed?",
+    "Is paraxial approximation acceptable for this first pass?"
+  ],
+  "evidence_boundary": "Paraxial calculator and Optiland preview metadata; real ray trace requires explicit execution.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

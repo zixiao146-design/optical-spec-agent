@@ -1,0 +1,79 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "cross_checks": [
+    {
+      "domain_id": "thin_film_coating",
+      "status": "pass",
+      "template_coverage": true,
+      "material_suitability_coverage": true,
+      "expected_calculators": [
+        "optics.thin_film.spectrum",
+        "optics.thin_film.quarter_wave_ar"
+      ],
+      "expected_adapters": [
+        "preview-only TMM calculator path"
+      ],
+      "expected_tool_status": "covered",
+      "missing_input_questions_present": true,
+      "suggested_materials": [
+        "sio2",
+        "tio2",
+        "al2o3",
+        "glass_bk7_preview"
+      ],
+      "unsuitable_materials": [
+        "ag",
+        "au"
+      ],
+      "material_suitability_summary": [
+        {
+          "material_id": "sio2",
+          "suitability": "suitable",
+          "suitable": true,
+          "requires_user_verification": true
+        },
+        {
+          "material_id": "tio2",
+          "suitability": "suitable",
+          "suitable": true,
+          "requires_user_verification": true
+        },
+        {
+          "material_id": "al2o3",
+          "suitability": "suitable",
+          "suitable": true,
+          "requires_user_verification": true
+        },
+        {
+          "material_id": "glass_bk7_preview",
+          "suitability": "suitable",
+          "suitable": true,
+          "requires_user_verification": true
+        }
+      ],
+      "diagnostics": [
+        "Application domain has local preview coverage."
+      ],
+      "deferred_capability": null,
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "pass": 1,
+    "warning": 0,
+    "fail": 0,
+    "preview_only": 1
+  },
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

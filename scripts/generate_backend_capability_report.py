@@ -95,6 +95,8 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
     provenance = payload["material_provenance_coverage"]
     ambiguous = payload["ambiguous_requirement_matching"]
     missing = payload["missing_input_diagnostics"]
+    domain_coverage = payload["application_domain_coverage"]
+    material_template = payload["material_template_cross_checks"]
     lines.extend(
         [
             "",
@@ -118,8 +120,31 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
             f"- critical_optional_split: `{missing['critical_optional_split']}`",
             f"- safe_to_preview_default: `{missing['safe_to_preview_default']}`",
             f"- safe_to_run_solver_default: `{missing['safe_to_run_solver_default']}`",
+            "",
+            "## Application-Domain Coverage",
+            "",
+            f"- domain_count: `{domain_coverage['domain_count']}`",
+            f"- covered_domains: `{', '.join(domain_coverage['covered_domains'])}`",
+            f"- partial_domains: `{', '.join(domain_coverage['partial_domains']) or 'none'}`",
+            f"- failed_domains: `{', '.join(domain_coverage['failed_domains']) or 'none'}`",
+            f"- preview_only: `{domain_coverage['preview_only']}`",
+            "",
+            "## Material-Template Cross-Checks",
+            "",
+            f"- total: `{material_template['total']}`",
+            f"- pass_count: `{material_template['pass_count']}`",
+            f"- warning_count: `{material_template['warning_count']}`",
+            f"- fail_count: `{material_template['fail_count']}`",
+            "",
+            "| Domain | Status | Tool status | Templates | Materials | Questions |",
+            "| --- | --- | --- | --- | --- | --- |",
         ]
     )
+    for item in material_template["cross_checks"]:
+        lines.append(
+            "| {domain_id} | {status} | {expected_tool_status} | {template_coverage} | "
+            "{material_suitability_coverage} | {missing_input_questions_present} |".format(**item)
+        )
 
     lines.extend(
         [
@@ -233,6 +258,16 @@ def _print_summary(report: BackendCapabilityReport) -> None:
     print(
         "ambiguous_requirement_matching="
         f"{payload['ambiguous_requirement_matching']['available']}"
+    )
+    print(
+        "application_domain_coverage="
+        f"{payload['application_domain_coverage']['domain_count']}"
+    )
+    print(
+        "material_template_cross_checks="
+        f"{payload['material_template_cross_checks']['pass_count']} pass/"
+        f"{payload['material_template_cross_checks']['warning_count']} warning/"
+        f"{payload['material_template_cross_checks']['fail_count']} fail"
     )
     print(f"requirements_templates={len(payload['requirements_templates'])}")
     golden = payload["adapter_native_golden_coverage"]

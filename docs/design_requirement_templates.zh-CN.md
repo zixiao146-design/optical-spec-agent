@@ -82,3 +82,12 @@ disambiguation inputs 和 recommended questions，而不是直接采取不安全
 - 输出仅用于 preview/design-assist。
 - 不声明生产级物理验证。
 - 不声明形式化收敛证明。
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

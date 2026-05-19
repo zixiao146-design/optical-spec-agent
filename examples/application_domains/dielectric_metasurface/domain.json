@@ -1,0 +1,70 @@
+{
+  "domain_id": "dielectric_metasurface",
+  "title": "Dielectric metasurface",
+  "title_zh": "介质超表面",
+  "aliases": [
+    "metalens",
+    "phase profile preview",
+    "meta atom"
+  ],
+  "natural_language_keywords_en": [
+    "metasurface",
+    "metalens",
+    "meta atom",
+    "phase profile"
+  ],
+  "natural_language_keywords_zh": [
+    "超表面",
+    "超透镜",
+    "相位",
+    "单元结构"
+  ],
+  "linked_requirement_templates": [
+    "dielectric_metasurface_preview"
+  ],
+  "suggested_materials": [
+    "tio2",
+    "si3n4",
+    "si",
+    "sio2"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au",
+    "water"
+  ],
+  "expected_calculators": [],
+  "expected_adapters": [
+    "meep",
+    "gmsh"
+  ],
+  "required_inputs": [
+    "target_phase_profile",
+    "period",
+    "wavelength_nm",
+    "material_stack"
+  ],
+  "optional_inputs": [
+    "polarization",
+    "numerical_aperture",
+    "unit_cell_height"
+  ],
+  "common_missing_inputs": [
+    "target_phase_profile",
+    "period",
+    "polarization",
+    "unit_cell_geometry"
+  ],
+  "default_assumptions": [
+    "Plane-wave preview source.",
+    "Phase-profile/far-field observable metadata only."
+  ],
+  "recommended_questions": [
+    "What phase profile or focusing target should the metasurface implement?",
+    "What period, height, and polarization should define the unit-cell preview?"
+  ],
+  "evidence_boundary": "Material/geometry/adapter preview; no full-wave metasurface result is computed by default.",
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

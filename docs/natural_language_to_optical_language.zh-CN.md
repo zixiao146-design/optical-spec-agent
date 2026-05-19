@@ -78,3 +78,12 @@ rc8.dev0 后端会区分关键缺失输入和可选缺失输入：
 `safe_to_run_solver` 默认仍为 false。见
 `docs/ambiguous_requirement_matching.zh-CN.md` 和
 `docs/missing_input_diagnostics.zh-CN.md`。
+
+## Application Domain Coverage
+
+The rc8.dev0 backend now includes `GET /api/application-domains`,
+`POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
+These local-only endpoints connect ten preview domains to material suitability,
+requirement templates, expected calculators/adapters, missing-input questions,
+and deferred capability notes. They do not execute solvers, call external LLMs,
+or claim production-grade physical validation.

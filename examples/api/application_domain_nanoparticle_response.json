@@ -1,0 +1,87 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "domain": {
+    "domain_id": "nanoparticle_plasmonics",
+    "title": "Nanoparticle plasmonics",
+    "title_zh": "纳米颗粒等离激元",
+    "aliases": [
+      "nanoparticle scattering",
+      "plasmonic particle",
+      "gap plasmon"
+    ],
+    "natural_language_keywords_en": [
+      "nanoparticle",
+      "plasmon",
+      "scattering",
+      "extinction",
+      "particle"
+    ],
+    "natural_language_keywords_zh": [
+      "纳米颗粒",
+      "纳米粒子",
+      "等离激元",
+      "散射",
+      "消光"
+    ],
+    "linked_requirement_templates": [
+      "nanoparticle_plasmonics"
+    ],
+    "suggested_materials": [
+      "ag",
+      "au",
+      "sio2",
+      "air",
+      "water"
+    ],
+    "unsuitable_materials": [
+      "glass_bk7_preview",
+      "glass_fused_silica_preview"
+    ],
+    "expected_calculators": [],
+    "expected_adapters": [
+      "meep",
+      "gmsh"
+    ],
+    "required_inputs": [
+      "particle_material",
+      "particle_radius",
+      "background_or_gap_medium",
+      "wavelength_band"
+    ],
+    "optional_inputs": [
+      "film_material",
+      "film_thickness",
+      "polarization",
+      "incidence_direction"
+    ],
+    "common_missing_inputs": [
+      "particle_radius",
+      "film_thickness",
+      "gap_medium",
+      "polarization"
+    ],
+    "default_assumptions": [
+      "Plane-wave-like broadband preview source.",
+      "400-900 nm preview wavelength band."
+    ],
+    "recommended_questions": [
+      "What particle material, size, and surrounding medium should be used?",
+      "Should the observable be scattering, extinction, or near-field enhancement?"
+    ],
+    "evidence_boundary": "Material/adapter/source-monitor preview; real scattering spectra require explicit solver execution.",
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "recommended_next_actions": [
+    "What particle material, size, and surrounding medium should be used?",
+    "Should the observable be scattering, extinction, or near-field enhancement?",
+    "Use the domain cross-check endpoint before treating a case as covered."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

@@ -1,0 +1,60 @@
+{
+  "domain_id": "dielectric_metasurface",
+  "status": "pass",
+  "template_coverage": true,
+  "material_suitability_coverage": true,
+  "expected_calculators": [],
+  "expected_adapters": [
+    "meep",
+    "gmsh"
+  ],
+  "expected_tool_status": "covered",
+  "missing_input_questions_present": true,
+  "suggested_materials": [
+    "tio2",
+    "si3n4",
+    "si",
+    "sio2"
+  ],
+  "unsuitable_materials": [
+    "ag",
+    "au",
+    "water"
+  ],
+  "material_suitability_summary": [
+    {
+      "material_id": "tio2",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "si3n4",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "si",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    },
+    {
+      "material_id": "sio2",
+      "suitability": "suitable",
+      "suitable": true,
+      "requires_user_verification": true
+    }
+  ],
+  "diagnostics": [
+    "Application domain has local preview coverage."
+  ],
+  "deferred_capability": null,
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}
