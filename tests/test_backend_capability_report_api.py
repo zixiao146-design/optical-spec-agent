@@ -22,6 +22,7 @@ def test_backend_capability_report_api_returns_expected_sections():
         "missing_input_diagnostics",
         "observable_diagnostics",
         "adapter_native_mapping",
+        "adapter_native_golden_coverage",
         "optical_calculators",
     }
     assert {item["calculator_name"] for item in body["optical_calculators"]} == {
@@ -31,6 +32,15 @@ def test_backend_capability_report_api_returns_expected_sections():
         "waveguide",
     }
     assert len(body["requirements_templates"]) == 7
+    assert body["adapter_native_golden_coverage"]["status"] == "ok"
+    assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
+        "meep",
+        "mpb",
+        "gmsh",
+        "elmer",
+        "optiland",
+    }
+    assert body["adapter_native_golden_coverage"]["missing_adapters"] == []
     assert all(item["matched_by_heuristic"] for item in body["requirements_templates"])
     assert body["design_case_cross_checks"]
     assert all(action["executed"] is False for action in body["blocked_external_actions"])

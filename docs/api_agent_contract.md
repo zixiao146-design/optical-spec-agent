@@ -172,6 +172,7 @@ endpoint:
 - `POST /api/optics/waveguide-single-mode-range`
 - `GET /api/backend-capability-report`
 - `GET /api/design-case-cross-checks`
+- `GET /api/adapter-native-golden-coverage`
 
 This endpoint turns a natural language optical design goal into a
 deterministic local Agent Task Session: optical intent, selected design case, material
@@ -220,3 +221,8 @@ preview-only metadata, not external solver monitor results.
 Adapter-native golden fixtures under `examples/adapter_native_golden/` and
 `examples/api/adapter_native_golden_*_response.json` lock expected preview
 semantics for Meep, MPB, Gmsh, Elmer, and Optiland without running solvers.
+`GET /api/adapter-native-golden-coverage` exposes a machine-readable coverage
+matrix, and the backend capability report includes the same
+`adapter_native_golden_coverage` section. The matrix records strict metadata
+diff status, native mapping terms, preview-only flags, and the fact that real
+solver results still require explicit solver execution.

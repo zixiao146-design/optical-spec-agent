@@ -46,7 +46,9 @@ execution and is not produced by default.
 The adapter-native golden cases in `examples/adapter_native_golden/` check that
 observable diagnostics survive adapter mapping for Meep nanoparticle
 scattering, MPB photonic-crystal bands, Gmsh mesh regions, Elmer FEM
-placeholders, and Optiland image-plane previews.
+placeholders, and Optiland image-plane previews. The coverage matrix in
+`docs/adapter_native_golden_coverage_matrix.md` records the observable kinds and
+native mapping terms locked by each case.
 
 ## Safety Boundary
 

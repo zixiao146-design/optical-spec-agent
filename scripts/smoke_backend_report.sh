@@ -13,6 +13,8 @@ python scripts/generate_backend_capability_report.py \
   --json-out "$JSON_OUT" \
   --markdown-out "$MARKDOWN_OUT"
 
+python scripts/check_adapter_native_golden.py
+
 python - <<'PY'
 import json
 from pathlib import Path
@@ -34,6 +36,7 @@ for section in [
     "internal_tools",
     "optical_calculators",
     "requirements_templates",
+    "adapter_native_golden_coverage",
     "design_case_cross_checks",
     "blocked_external_actions",
 ]:
@@ -51,6 +54,12 @@ require(internal_tools["source_monitor_inference"]["executed_in_sample"] is True
 require(internal_tools["missing_input_diagnostics"]["executed_in_sample"] is True, "missing-input diagnostics not executed in sample")
 require(internal_tools["observable_diagnostics"]["executed_in_sample"] is True, "observable diagnostics not executed in sample")
 require(internal_tools["adapter_native_mapping"]["executed_in_sample"] is True, "adapter-native mapping not executed in sample")
+require(internal_tools["adapter_native_golden_coverage"]["executed_in_sample"] is True, "adapter golden coverage not executed in sample")
+golden = report["adapter_native_golden_coverage"]
+require(golden["status"] == "ok", "adapter golden coverage report not ok")
+require(set(golden["adapters_covered"]) == {"meep", "mpb", "gmsh", "elmer", "optiland"}, "adapter golden coverage mismatch")
+require(golden["missing_adapters"] == [], "adapter golden coverage reports missing adapter")
+require(all(item["coverage_status"] == "pass" for item in golden["coverage_items"]), "adapter golden case coverage failed")
 require(all(action["executed"] is False for action in report["blocked_external_actions"]), "external action executed")
 require(report["production_grade_validation_claimed"] is False, "production claim changed")
 require(report["formal_convergence_proof_claimed"] is False, "convergence claim changed")
@@ -66,6 +75,7 @@ require(capability.status_code == 200, "/api/backend-capability-report failed")
 capability_payload = capability.json()
 require(capability_payload["sub_agents"], "API report missing sub-agents")
 require(capability_payload["external_solver_executed"] is False, "API report solver flag changed")
+require(capability_payload["adapter_native_golden_coverage"]["status"] == "ok", "API report missing golden coverage")
 
 cross_checks = client.get("/api/design-case-cross-checks")
 require(cross_checks.status_code == 200, "/api/design-case-cross-checks failed")
@@ -74,6 +84,12 @@ require(cross_payload["cross_checks"], "API cross-checks missing")
 require(cross_payload["summary"]["fail"] == 0, "design case cross-check failed")
 require(cross_payload["summary"]["requirement_templates_fail"] == 0, "requirement template cross-check failed")
 require(cross_payload["external_llm_required"] is False, "cross-check LLM flag changed")
+
+golden_api = client.get("/api/adapter-native-golden-coverage")
+require(golden_api.status_code == 200, "/api/adapter-native-golden-coverage failed")
+golden_payload = golden_api.json()
+require(golden_payload["status"] == "ok", "golden coverage API not ok")
+require(golden_payload["external_solver_executed"] is False, "golden coverage solver flag changed")
 
 requirements = client.get("/api/design-requirements")
 require(requirements.status_code == 200, "/api/design-requirements failed")
@@ -195,6 +211,8 @@ print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
 print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
+print("ADAPTER NATIVE METADATA DIFF PASSED")
+print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

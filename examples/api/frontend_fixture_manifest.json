@@ -745,6 +745,32 @@
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "proprietary_solver_required": false
+    },
+    {
+      "name": "adapter-native-golden-coverage",
+      "endpoint": "/api/adapter-native-golden-coverage",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "adapter_native_golden_coverage_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "backend-capability-report-with-golden-coverage",
+      "endpoint": "/api/backend-capability-report",
+      "method": "GET",
+      "request_file": null,
+      "response_file": "backend_capability_report_with_golden_coverage_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     }
   ]
 }

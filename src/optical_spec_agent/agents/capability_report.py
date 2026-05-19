@@ -24,6 +24,8 @@ from optical_spec_agent.examples.requirements import (
 )
 from optical_spec_agent.materials.catalog import suggest_materials_for_application
 from optical_spec_agent.optical_language import (
+    AdapterGoldenCoverageReport,
+    build_adapter_golden_coverage_report,
     diagnose_observable,
     diagnose_missing_inputs,
     infer_source_monitor_from_goal,
@@ -100,6 +102,7 @@ class BackendCapabilityReport(BaseModel):
     internal_tools: list[InternalToolCapabilityReport] = Field(default_factory=list)
     optical_calculators: list[OpticalCalculatorCapability] = Field(default_factory=list)
     requirements_templates: list[RequirementTemplateCapability] = Field(default_factory=list)
+    adapter_native_golden_coverage: AdapterGoldenCoverageReport
     design_case_cross_checks: list[DesignCaseCrossCheck] = Field(default_factory=list)
     blocked_external_actions: list[BlockedExternalAction] = Field(default_factory=list)
     external_solver_executed: bool = False
@@ -133,20 +136,24 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         if entry.executed
     }
     cross_checks = cross_check_all_design_cases()
+    golden_coverage = build_adapter_golden_coverage_report()
+    all_sample_tool_names.add("adapter_native_golden.check")
     failed = any(check.status == "fail" for check in cross_checks.cross_checks)
     return BackendCapabilityReport(
-        status="needs_review" if failed else "ok",
+        status="needs_review" if failed or golden_coverage.status == "needs_review" else "ok",
         package=PackageCapability(package_version=__version__),
         sub_agents=_sub_agent_capabilities(sample_session),
         internal_tools=_internal_tool_capabilities(all_sample_tool_names),
         optical_calculators=_optical_calculator_capabilities(),
         requirements_templates=_requirement_template_capabilities(),
+        adapter_native_golden_coverage=golden_coverage,
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
         recommended_next_actions=[
             "Inspect design_case_cross_checks for any warning/fail status.",
             "Use scripts/audit_sub_agents.py for a concise import/call/execution view.",
             "Use scripts/smoke_backend_capabilities.sh for calculator sanity checks.",
+            "Use scripts/check_adapter_native_golden.py for adapter-native metadata diff checks.",
             "Treat calculator outputs as sanity-checked preview/design-assist only.",
         ],
     )
@@ -249,6 +256,13 @@ def _internal_tool_capabilities(
             map_source_monitor_to_adapter,
             "optical_language.map_source_monitor_to_adapter",
             "Maps source/monitor/observable intent to adapter-native preview semantics.",
+        ),
+        (
+            "adapter_native_golden_coverage",
+            "optical_spec_agent.optical_language",
+            build_adapter_golden_coverage_report,
+            "adapter_native_golden.check",
+            "Builds local adapter-native golden preview coverage and metadata diff evidence.",
         ),
         (
             "optical_calculators",

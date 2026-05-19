@@ -380,8 +380,9 @@ Current v1.0 evidence artifacts:
 - Source/monitor inference, missing-input diagnostics, observable diagnostics,
   and adapter-native source/monitor mapping are backend preview metadata only;
   they do not represent executed solver monitor results.
-- Adapter-native golden preview cases are local fixture checks only; they do
-  not represent executed solver monitor results or production-grade validation.
+- Adapter-native golden preview cases and coverage matrices are local fixture
+  and metadata-diff checks only; they do not represent executed solver monitor
+  results or production-grade validation.
 
 ## Manual Release Checklist
 

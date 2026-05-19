@@ -1,0 +1,26 @@
+{
+  "adapter_name": "optiland",
+  "source_type": "ray_bundle",
+  "monitor_type": "image_plane",
+  "observable_kinds": [
+    "image_plane",
+    "ray_fan"
+  ],
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "required_native_terms": [
+    "ray bundle",
+    "image plane",
+    "focal spot",
+    "ray fan"
+  ],
+  "forbidden_claims": [
+    "production-grade",
+    "formal convergence",
+    "solver executed",
+    "real monitor result"
+  ]
+}

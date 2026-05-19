@@ -12,6 +12,8 @@ def test_adapter_native_golden_docs_exist_and_document_five_cases():
     for relative in [
         "docs/adapter_native_golden_cases.md",
         "docs/adapter_native_golden_cases.zh-CN.md",
+        "docs/adapter_native_golden_coverage_matrix.md",
+        "docs/adapter_native_golden_coverage_matrix.zh-CN.md",
     ]:
         path = ROOT / relative
         assert path.exists(), relative

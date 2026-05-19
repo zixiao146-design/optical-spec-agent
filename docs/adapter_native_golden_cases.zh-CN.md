@@ -43,6 +43,7 @@ Optiland，不调用外部 LLM，不上传，不创建 tag，也不创建 GitHub
 - `monitor_model.json`
 - `observable_diagnostics.json`
 - `adapter_mapping.json`
+- `expected_metadata.json`
 - `expected_preview_fragments.txt`
 - `README.md`
 
@@ -55,11 +56,16 @@ Optiland，不调用外部 LLM，不上传，不创建 tag，也不创建 GitHub
 - monitor model fixture 与生成结果一致
 - observable diagnostics fixture 与生成结果一致
 - adapter mapping fixture 与生成结果一致
+- 严格 expected metadata 与 adapter name、source type、monitor type、
+  observable kinds、native terms、preview-only flags 和 safety flags 一致
 - expected fragments 出现在生成的 mapping metadata 中
 - `external_solver_executed=false`
 - `external_llm_required=false`
 - `production_grade_validation_claimed=false`
 - `formal_convergence_proof_claimed=false`
+
+配套覆盖矩阵见 `docs/adapter_native_golden_coverage_matrix.zh-CN.md`，并通过
+`GET /api/adapter-native-golden-coverage` 暴露。
 
 运行：
 

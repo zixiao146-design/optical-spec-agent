@@ -62,7 +62,10 @@ Agent session 会把 `optical_language.diagnose_observable` 和
 tool call。外部 solver 记录仍为 `executed=false`，并保持 blocked 或需要显式批准。
 
 `scripts/check_adapter_native_golden.py` 会通过本地 API/TestClient 调用验证
-Meep、MPB、Gmsh、Elmer 和 Optiland 的 golden preview cases。
+Meep、MPB、Gmsh、Elmer 和 Optiland 的 golden preview cases。检查脚本现在会
+比较 `expected_metadata.json`，锁定 source type、monitor type、observable kind、
+native term、preview-only 和 safety flag 的稳定性。机器可读覆盖矩阵见
+`docs/adapter_native_golden_coverage_matrix.zh-CN.md`。
 
 ## 安全边界
 

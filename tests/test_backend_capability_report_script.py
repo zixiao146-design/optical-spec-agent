@@ -42,6 +42,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "internal_tools",
         "optical_calculators",
         "requirements_templates",
+        "adapter_native_golden_coverage",
         "design_case_cross_checks",
         "blocked_external_actions",
     ]:
@@ -55,10 +56,21 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert tools["missing_input_diagnostics"]["executed_in_sample"] is True
     assert tools["observable_diagnostics"]["executed_in_sample"] is True
     assert tools["adapter_native_mapping"]["executed_in_sample"] is True
+    assert tools["adapter_native_golden_coverage"]["executed_in_sample"] is True
+    assert report["adapter_native_golden_coverage"]["status"] == "ok"
+    assert set(report["adapter_native_golden_coverage"]["adapters_covered"]) == {
+        "meep",
+        "mpb",
+        "gmsh",
+        "elmer",
+        "optiland",
+    }
+    assert report["adapter_native_golden_coverage"]["missing_adapters"] == []
     assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")
     assert "Backend Capability Report" in text
+    assert "Adapter-Native Golden Coverage" in text
     assert "NO UPLOAD PERFORMED" in text
 
 

@@ -1,0 +1,25 @@
+{
+  "adapter_name": "gmsh",
+  "source_type": "plane_wave",
+  "monitor_type": "unknown",
+  "observable_kinds": [
+    "mesh_region"
+  ],
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "required_native_terms": [
+    "Physical Surface/Volume",
+    "mesh region",
+    "monitor-region annotation",
+    "mesh_region"
+  ],
+  "forbidden_claims": [
+    "production-grade",
+    "formal convergence",
+    "solver executed",
+    "real monitor result"
+  ]
+}

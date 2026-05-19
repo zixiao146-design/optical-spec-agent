@@ -25,6 +25,7 @@ def test_adapter_native_golden_checker_runs_and_keeps_safety_boundaries():
     assert result.returncode == 0, result.stdout + result.stderr
     for phrase in [
         "ADAPTER NATIVE GOLDEN CHECKS PASSED",
+        "ADAPTER NATIVE METADATA DIFF PASSED",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",
         "NO UPLOAD PERFORMED",

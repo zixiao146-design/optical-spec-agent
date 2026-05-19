@@ -1215,7 +1215,10 @@ Adapter-native golden preview cases now live in
 documented in
 [`docs/adapter_native_golden_cases.md`](docs/adapter_native_golden_cases.md).
 They check Meep, MPB, Gmsh, Elmer, and Optiland source/monitor/observable
-fragments against local API responses without running solvers.
+fragments and strict expected metadata against local API responses without
+running solvers. The coverage matrix is documented in
+[`docs/adapter_native_golden_coverage_matrix.md`](docs/adapter_native_golden_coverage_matrix.md)
+and exposed by `GET /api/adapter-native-golden-coverage`.
 
 ## License
 

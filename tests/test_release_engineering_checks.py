@@ -229,6 +229,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "adapter_native_source_monitor_mapping.zh-CN.md",
         "adapter_native_golden_cases.md",
         "adapter_native_golden_cases.zh-CN.md",
+        "adapter_native_golden_coverage_matrix.md",
+        "adapter_native_golden_coverage_matrix.zh-CN.md",
         "observable_diagnostics.md",
         "observable_diagnostics.zh-CN.md",
         "optical_calculators.md",

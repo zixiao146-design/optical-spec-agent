@@ -44,6 +44,7 @@ Each case lives under `examples/adapter_native_golden/` and contains:
 - `monitor_model.json`
 - `observable_diagnostics.json`
 - `adapter_mapping.json`
+- `expected_metadata.json`
 - `expected_preview_fragments.txt`
 - `README.md`
 
@@ -57,11 +58,17 @@ and checks:
 - monitor model fixture matches the generated monitor model
 - observable diagnostics fixture matches generated diagnostics
 - adapter mapping fixture matches generated mapping
+- strict expected metadata matches adapter name, source type, monitor type,
+  observable kinds, native terms, preview-only flags, and safety flags
 - expected fragments appear in generated mapping metadata
 - `external_solver_executed=false`
 - `external_llm_required=false`
 - `production_grade_validation_claimed=false`
 - `formal_convergence_proof_claimed=false`
+
+The companion coverage matrix is documented in
+`docs/adapter_native_golden_coverage_matrix.md` and exposed through
+`GET /api/adapter-native-golden-coverage`.
 
 Run:
 

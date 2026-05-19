@@ -72,6 +72,8 @@ def test_backend_report_and_cross_checks_reflect_ledger_reality():
     assert any(tool.tool_name == "missing_input_diagnostics" for tool in report.internal_tools)
     assert any(tool.tool_name == "observable_diagnostics" for tool in report.internal_tools)
     assert any(tool.tool_name == "adapter_native_mapping" for tool in report.internal_tools)
+    assert any(tool.tool_name == "adapter_native_golden_coverage" for tool in report.internal_tools)
+    assert report.adapter_native_golden_coverage.status == "ok"
     assert all(action.executed is False for action in report.blocked_external_actions)
     assert any(
         check.example_id == "thin_film_coating"

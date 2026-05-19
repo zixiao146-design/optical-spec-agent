@@ -38,6 +38,22 @@ require("source_monitor_inference" in internal_tools, "source/monitor inference 
 require("missing_input_diagnostics" in internal_tools, "missing-input diagnostics missing")
 require("observable_diagnostics" in internal_tools, "observable diagnostics missing")
 require("adapter_native_mapping" in internal_tools, "adapter-native mapping missing")
+require("adapter_native_golden_coverage" in internal_tools, "adapter-native golden coverage missing")
+
+golden_coverage = client.get("/api/adapter-native-golden-coverage")
+require(golden_coverage.status_code == 200, "/api/adapter-native-golden-coverage failed")
+golden_payload = golden_coverage.json()
+require(golden_payload["status"] == "ok", "adapter golden coverage status changed")
+require(
+    set(golden_payload["adapters_covered"]) == {"meep", "mpb", "gmsh", "elmer", "optiland"},
+    "adapter golden coverage adapter list mismatch",
+)
+require(golden_payload["missing_adapters"] == [], "adapter golden coverage missing adapters")
+require(golden_payload["external_solver_executed"] is False, "golden coverage executed solver")
+require(
+    all(item["coverage_status"] == "pass" for item in golden_payload["coverage_items"]),
+    "adapter golden coverage case failed",
+)
 
 session = client.post(
     "/api/agent-session",
@@ -260,6 +276,8 @@ print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
 print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
 print("ADAPTER NATIVE GOLDEN CHECKS PASSED")
+print("ADAPTER NATIVE METADATA DIFF PASSED")
+print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
 print("Backend capabilities smoke passed")
 PY
 
@@ -269,6 +287,8 @@ echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "OBSERVABLE DIAGNOSTICS PASSED"
 echo "ADAPTER SOURCE/MONITOR MAPPING PASSED"
 echo "ADAPTER NATIVE GOLDEN CHECKS PASSED"
+echo "ADAPTER NATIVE METADATA DIFF PASSED"
+echo "ADAPTER GOLDEN COVERAGE REPORT PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

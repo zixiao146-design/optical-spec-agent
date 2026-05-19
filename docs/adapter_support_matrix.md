@@ -24,7 +24,9 @@ real solver monitor results require explicit solver execution outside the
 default backend.
 Adapter-native golden preview cases under `examples/adapter_native_golden/`
 check Meep, MPB, Gmsh, Elmer, and Optiland source/monitor/observable fragments
-against local API responses without running external solvers.
+and strict expected metadata against local API responses without running
+external solvers. The coverage summary is exposed through
+`GET /api/adapter-native-golden-coverage`.
 
 Registry `current_status` values are `preview` for Meep and `mvp` for MPB,
 Gmsh, Elmer, and Optiland. No production-grade physical validation is claimed.

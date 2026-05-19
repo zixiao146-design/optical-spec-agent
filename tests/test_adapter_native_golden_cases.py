@@ -20,6 +20,7 @@ REQUIRED_FILES = [
     "monitor_model.json",
     "observable_diagnostics.json",
     "adapter_mapping.json",
+    "expected_metadata.json",
     "expected_preview_fragments.txt",
     "README.md",
 ]

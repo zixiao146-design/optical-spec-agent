@@ -184,6 +184,8 @@ curl -X POST http://127.0.0.1:8000/api/optical-language/adapter-mapping \
 curl -X POST http://127.0.0.1:8000/api/optical-language/adapter-mapping \
   -H "Content-Type: application/json" \
   --data @examples/api/adapter_native_golden_meep_request.json
+
+curl http://127.0.0.1:8000/api/adapter-native-golden-coverage
 ```
 
 Observable diagnostics and adapter-native mapping are preview metadata only.
@@ -196,3 +198,7 @@ Adapter-native golden cases can be checked locally with:
 ```bash
 python scripts/check_adapter_native_golden.py
 ```
+
+The checker now performs strict `expected_metadata.json` diff checks and prints
+`ADAPTER NATIVE METADATA DIFF PASSED` when source/monitor/observable mapping
+metadata remains stable.

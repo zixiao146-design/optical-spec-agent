@@ -125,6 +125,30 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
             )
         )
 
+    golden = payload["adapter_native_golden_coverage"]
+    lines.extend(
+        [
+            "",
+            "## Adapter-Native Golden Coverage",
+            "",
+            f"- status: `{golden['status']}`",
+            f"- adapters_covered: `{', '.join(golden['adapters_covered'])}`",
+            f"- missing_adapters: `{', '.join(golden['missing_adapters']) or 'none'}`",
+            "- preview_only: `True`",
+            "",
+            "| Adapter | Case | Source | Monitor | Observables | Solver required | Solver executed | Coverage |",
+            "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        ]
+    )
+    for item in golden["coverage_items"]:
+        lines.append(
+            "| {adapter_name} | {case_id} | {source_type} | {monitor_type} | {observables} | "
+            "{requires_solver_for_real_result} | {external_solver_executed} | {coverage_status} |".format(
+                observables=", ".join(item["observable_kinds"]),
+                **item,
+            )
+        )
+
     lines.extend(
         [
             "",
@@ -163,6 +187,9 @@ def _print_summary(report: BackendCapabilityReport) -> None:
     print(f"internal_tools={len(payload['internal_tools'])}")
     print(f"optical_calculators={len(payload['optical_calculators'])}")
     print(f"requirements_templates={len(payload['requirements_templates'])}")
+    golden = payload["adapter_native_golden_coverage"]
+    print(f"adapter_native_golden_coverage={golden['status']}")
+    print(f"adapter_native_golden_adapters={','.join(golden['adapters_covered'])}")
     print(f"design_case_cross_checks={len(payload['design_case_cross_checks'])}")
     print(
         "blocked_external_actions="

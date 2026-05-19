@@ -123,6 +123,17 @@
       ]
     },
     {
+      "tool_name": "adapter_native_golden_coverage",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.optical_language",
+      "notes": [
+        "Builds local adapter-native golden coverage and strict metadata diff evidence."
+      ]
+    },
+    {
       "tool_name": "optical_calculators",
       "tool_kind": "internal_python",
       "available": true,

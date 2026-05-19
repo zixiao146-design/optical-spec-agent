@@ -98,6 +98,8 @@ from optical_spec_agent.examples.requirements import (
     match_goal_to_template,
 )
 from optical_spec_agent.optical_language import (
+    AdapterGoldenCoverageReport,
+    build_adapter_golden_coverage_report,
     diagnose_observable,
     diagnose_missing_inputs,
     infer_source_monitor_from_goal,
@@ -756,6 +758,17 @@ def agent_tool_capabilities():
             ],
         ),
         ToolCapabilityItem(
+            tool_name="adapter_native_golden_coverage",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.optical_language",
+            notes=[
+                "Builds local adapter-native golden coverage and strict metadata diff evidence."
+            ],
+        ),
+        ToolCapabilityItem(
             tool_name="optical_calculators",
             tool_kind="internal_python",
             available=True,
@@ -828,6 +841,16 @@ def agent_design_case_cross_checks():
     """Cross-check local optical design examples against backend task sessions."""
 
     return cross_check_all_design_cases()
+
+
+@router.get(
+    "/api/adapter-native-golden-coverage",
+    response_model=AdapterGoldenCoverageReport,
+)
+def agent_adapter_native_golden_coverage():
+    """Report adapter-native golden preview coverage without solver execution."""
+
+    return build_adapter_golden_coverage_report()
 
 
 @router.post(

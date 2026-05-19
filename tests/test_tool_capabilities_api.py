@@ -23,6 +23,7 @@ def test_tool_capabilities_reports_internal_external_and_release_sections():
     assert internal["agent_trace_builder"]["available"] is True
     assert internal["workflow_planner"]["available"] is True
     assert internal["adapter_preview_generator"]["available"] is True
+    assert internal["adapter_native_golden_coverage"]["available"] is True
     assert internal["optical_calculators"]["available"] is True
 
     external = {item["tool_name"]: item for item in payload["external_solvers"]}
@@ -35,4 +36,3 @@ def test_tool_capabilities_reports_internal_external_and_release_sections():
     assert publication["testpypi_upload"]["status"] == "disabled_not_exposed"
     assert publication["pypi_publish"]["status"] == "disabled_not_exposed"
     assert publication["tag_or_release_create"]["status"] == "disabled_not_exposed"
-

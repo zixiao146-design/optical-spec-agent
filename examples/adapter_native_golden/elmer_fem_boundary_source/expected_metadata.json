@@ -1,0 +1,26 @@
+{
+  "adapter_name": "elmer",
+  "source_type": "mode_source",
+  "monitor_type": "mode_overlap",
+  "observable_kinds": [
+    "mode_overlap",
+    "mode_frequency"
+  ],
+  "requires_solver_for_real_result": true,
+  "external_solver_executed": false,
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "required_native_terms": [
+    "Boundary Condition",
+    "Body Force",
+    "ResultOutputSolver",
+    "mode_overlap"
+  ],
+  "forbidden_claims": [
+    "production-grade",
+    "formal convergence",
+    "solver executed",
+    "real monitor result"
+  ]
+}

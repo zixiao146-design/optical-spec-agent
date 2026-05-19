@@ -69,7 +69,9 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "agent_session_error_empty_goal_response.json" in response_files
     assert "tool_capabilities_response.json" in response_files
     assert "backend_capability_report_response.json" in response_files
+    assert "backend_capability_report_with_golden_coverage_response.json" in response_files
     assert "design_case_cross_checks_response.json" in response_files
+    assert "adapter_native_golden_coverage_response.json" in response_files
     assert "design_requirements_response.json" in response_files
     assert "design_requirement_thin_film_response.json" in response_files
     assert "design_requirement_match_thin_film_response.json" in response_files
@@ -160,6 +162,8 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "adapter_native_golden_gmsh_response.json",
         "adapter_native_golden_elmer_response.json",
         "adapter_native_golden_optiland_response.json",
+        "adapter_native_golden_coverage_response.json",
+        "backend_capability_report_with_golden_coverage_response.json",
         "adapter_preview_meep_source_monitor_response.json",
         "agent_session_adapter_mapping_nanoparticle_response.json",
         "agent_session_source_monitor_nanoparticle_response.json",

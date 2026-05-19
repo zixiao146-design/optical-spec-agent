@@ -1,0 +1,186 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "generated_from_cases": [
+    "elmer_fem_boundary_source",
+    "gmsh_mesh_region",
+    "meep_nanoparticle_scattering",
+    "mpb_photonic_crystal_band",
+    "optiland_lens_image_plane"
+  ],
+  "adapters_covered": [
+    "elmer",
+    "gmsh",
+    "meep",
+    "mpb",
+    "optiland"
+  ],
+  "missing_adapters": [],
+  "coverage_items": [
+    {
+      "adapter_name": "elmer",
+      "case_id": "elmer_fem_boundary_source",
+      "source_type": "mode_source",
+      "monitor_type": "mode_overlap",
+      "observable_kinds": [
+        "mode_overlap",
+        "mode_frequency"
+      ],
+      "native_source_terms": [
+        "Boundary Condition placeholders",
+        "Body Force/source section metadata"
+      ],
+      "native_monitor_terms": [
+        "ResultOutputSolver placeholder",
+        "field/output variable plan"
+      ],
+      "expected_supported_observables": [
+        "mode_overlap",
+        "mode_frequency"
+      ],
+      "expected_unsupported_observables": [],
+      "requires_solver_for_real_result": true,
+      "external_solver_executed": false,
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "coverage_status": "pass"
+    },
+    {
+      "adapter_name": "gmsh",
+      "case_id": "gmsh_mesh_region",
+      "source_type": "plane_wave",
+      "monitor_type": "unknown",
+      "observable_kinds": [
+        "mesh_region"
+      ],
+      "native_source_terms": [
+        "geometry comments",
+        "mesh-size hints",
+        "source-region annotation"
+      ],
+      "native_monitor_terms": [
+        "Physical Surface/Volume groups",
+        "monitor-region annotation"
+      ],
+      "expected_supported_observables": [
+        "mesh_region"
+      ],
+      "expected_unsupported_observables": [],
+      "requires_solver_for_real_result": true,
+      "external_solver_executed": false,
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "coverage_status": "pass"
+    },
+    {
+      "adapter_name": "meep",
+      "case_id": "meep_nanoparticle_scattering",
+      "source_type": "plane_wave",
+      "monitor_type": "scattering_spectrum",
+      "observable_kinds": [
+        "scattering_spectrum",
+        "extinction_spectrum"
+      ],
+      "native_source_terms": [
+        "mp.Source",
+        "GaussianSource/broadband pulse metadata",
+        "planewave-like current source placeholder"
+      ],
+      "native_monitor_terms": [
+        "flux monitor metadata",
+        "DFT field monitor metadata",
+        "closed flux box / incident-flux normalization plan"
+      ],
+      "expected_supported_observables": [
+        "scattering_spectrum",
+        "extinction_spectrum"
+      ],
+      "expected_unsupported_observables": [],
+      "requires_solver_for_real_result": true,
+      "external_solver_executed": false,
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "coverage_status": "pass"
+    },
+    {
+      "adapter_name": "mpb",
+      "case_id": "mpb_photonic_crystal_band",
+      "source_type": "mode_source",
+      "monitor_type": "band_structure",
+      "observable_kinds": [
+        "band_structure",
+        "mode_frequency"
+      ],
+      "native_source_terms": [
+        "lattice/eigenmode context",
+        "mode parity / mode index metadata"
+      ],
+      "native_monitor_terms": [
+        "k-points",
+        "num_bands",
+        "band frequencies",
+        "mode field output plan"
+      ],
+      "expected_supported_observables": [
+        "band_structure",
+        "mode_frequency"
+      ],
+      "expected_unsupported_observables": [],
+      "requires_solver_for_real_result": true,
+      "external_solver_executed": false,
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "coverage_status": "pass"
+    },
+    {
+      "adapter_name": "optiland",
+      "case_id": "optiland_lens_image_plane",
+      "source_type": "ray_bundle",
+      "monitor_type": "image_plane",
+      "observable_kinds": [
+        "image_plane",
+        "ray_fan"
+      ],
+      "native_source_terms": [
+        "object point/field metadata",
+        "ray bundle",
+        "Gaussian beam note"
+      ],
+      "native_monitor_terms": [
+        "image plane",
+        "focal spot",
+        "spot diagram plan",
+        "ray fan plan"
+      ],
+      "expected_supported_observables": [
+        "image_plane",
+        "ray_fan"
+      ],
+      "expected_unsupported_observables": [],
+      "requires_solver_for_real_result": true,
+      "external_solver_executed": false,
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "coverage_status": "pass"
+    }
+  ],
+  "warnings": [],
+  "safety_summary": {
+    "no_solver_execution": true,
+    "no_external_llm": true,
+    "preview_only": true,
+    "no_production_grade_validation_claim": true,
+    "no_formal_convergence_proof_claim": true
+  },
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "preview_only": true
+}

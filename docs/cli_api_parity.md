@@ -66,8 +66,10 @@ Hardened frontend demo checks are documented in
   design-case cross-check smoke without solver, LLM, upload, tag, or release
   actions.
 - `scripts/check_adapter_native_golden.py` verifies five adapter-native
-  source/monitor golden preview cases against local API responses without
-  solver, LLM, upload, tag, or release actions.
+  source/monitor golden preview cases and strict metadata diffs against local
+  API responses without solver, LLM, upload, tag, or release actions.
+- `GET /api/adapter-native-golden-coverage` exposes the same adapter coverage
+  matrix for backend-readiness consumers.
 - Source/monitor inference is currently API/backend-only through
   `/api/optical-language/infer`, `/api/optical-language/diagnose`, and
   `/api/agent-session`; it remains local deterministic metadata, not executed

@@ -75,7 +75,11 @@ tool calls. External solver records remain `executed=false` and blocked or
 explicit-approval-only.
 
 `scripts/check_adapter_native_golden.py` verifies the Meep, MPB, Gmsh, Elmer,
-and Optiland golden preview cases through local API/TestClient calls.
+and Optiland golden preview cases through local API/TestClient calls. The
+checker now compares `expected_metadata.json` for strict source type, monitor
+type, observable kind, native term, preview-only, and safety flag stability.
+The machine-readable coverage matrix is documented in
+`docs/adapter_native_golden_coverage_matrix.md`.
 
 ## Safety Boundary
 

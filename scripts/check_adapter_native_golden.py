@@ -30,6 +30,7 @@ REQUIRED_CASE_FILES = (
     "monitor_model.json",
     "observable_diagnostics.json",
     "adapter_mapping.json",
+    "expected_metadata.json",
     "expected_preview_fragments.txt",
     "README.md",
 )
@@ -70,6 +71,84 @@ def _assert_safe(payload: dict[str, Any], *, case_id: str) -> None:
         raise AssertionError(f"{case_id}: adapter mapping overclaimed convergence")
 
 
+def _metadata_diff(
+    *,
+    case_id: str,
+    payload: dict[str, Any],
+    expected_metadata: dict[str, Any],
+) -> dict[str, Any]:
+    source_model = payload["source_model"]
+    monitor_model = payload["monitor_model"]
+    observables = payload["observable_diagnostics"]
+    mapping = payload["adapter_source_monitor_mapping"]
+    actual_observable_kinds = {item["observable_kind"] for item in observables}
+    expected_observable_kinds = set(expected_metadata["observable_kinds"])
+    actual_serialized = json.dumps(
+        {
+            "mapping": mapping,
+            "observables": observables,
+            "source_model": source_model,
+            "monitor_model": monitor_model,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    ).lower()
+    missing_terms = [
+        term
+        for term in expected_metadata["required_native_terms"]
+        if term.lower() not in actual_serialized
+    ]
+    unexpected_claims = [
+        claim
+        for claim in expected_metadata["forbidden_claims"]
+        if claim.lower() in actual_serialized
+    ]
+    field_mismatches = []
+    expected_pairs = {
+        "adapter_name": mapping.get("adapter_name"),
+        "source_type": source_model.get("source_type"),
+        "monitor_type": monitor_model.get("monitor_type"),
+        "requires_solver_for_real_result": mapping.get("requires_solver_for_real_result"),
+        "external_solver_executed": mapping.get("external_solver_executed"),
+        "preview_only": mapping.get("preview_only"),
+        "production_grade_validation_claimed": mapping.get(
+            "production_grade_validation_claimed"
+        ),
+        "formal_convergence_proof_claimed": mapping.get(
+            "formal_convergence_proof_claimed"
+        ),
+    }
+    for field, actual in expected_pairs.items():
+        if actual != expected_metadata[field]:
+            field_mismatches.append(
+                {
+                    "field": field,
+                    "expected": expected_metadata[field],
+                    "actual": actual,
+                }
+            )
+    if not expected_observable_kinds.issubset(actual_observable_kinds):
+        field_mismatches.append(
+            {
+                "field": "observable_kinds",
+                "expected": sorted(expected_observable_kinds),
+                "actual": sorted(actual_observable_kinds),
+            }
+        )
+    metadata_match = not field_mismatches and not missing_terms and not unexpected_claims
+    if not metadata_match:
+        raise AssertionError(
+            f"{case_id}: metadata diff failed; mismatches={field_mismatches}, "
+            f"missing_terms={missing_terms}, unexpected_claims={unexpected_claims}"
+        )
+    return {
+        "metadata_match": metadata_match,
+        "field_mismatches": field_mismatches,
+        "missing_terms": missing_terms,
+        "unexpected_claims": unexpected_claims,
+    }
+
+
 def _check_case(client: TestClient, case_dir: Path) -> dict[str, Any]:
     case_id = case_dir.name
     for filename in REQUIRED_CASE_FILES:
@@ -88,6 +167,7 @@ def _check_case(client: TestClient, case_dir: Path) -> dict[str, Any]:
     expected_monitor = _load_json(case_dir / "monitor_model.json")
     expected_observables = _load_json(case_dir / "observable_diagnostics.json")
     expected_mapping = _load_json(case_dir / "adapter_mapping.json")
+    expected_metadata = _load_json(case_dir / "expected_metadata.json")
 
     if payload["source_model"] != expected_source:
         raise AssertionError(f"{case_id}: source_model drifted")
@@ -106,10 +186,30 @@ def _check_case(client: TestClient, case_dir: Path) -> dict[str, Any]:
     ]
     if missing_fragments:
         raise AssertionError(f"{case_id}: missing expected fragments {missing_fragments}")
+    metadata_result = _metadata_diff(
+        case_id=case_id,
+        payload=payload,
+        expected_metadata=expected_metadata,
+    )
+    safety_match = (
+        payload.get("external_solver_executed") is False
+        and payload.get("external_llm_required") is False
+        and payload.get("proprietary_solver_required") is False
+        and payload.get("production_grade_validation_claimed") is False
+        and payload.get("formal_convergence_proof_claimed") is False
+        and payload["adapter_source_monitor_mapping"].get("external_solver_executed") is False
+        and payload["adapter_source_monitor_mapping"].get("preview_only") is True
+    )
 
     return {
         "case_id": case_id,
         "adapter_name": payload["adapter_source_monitor_mapping"]["adapter_name"],
+        "metadata_match": metadata_result["metadata_match"],
+        "fragment_match": not missing_fragments,
+        "safety_match": safety_match,
+        "missing_terms": metadata_result["missing_terms"],
+        "unexpected_claims": metadata_result["unexpected_claims"],
+        "status": "pass",
         "supported_observables": payload["adapter_source_monitor_mapping"][
             "supported_observables"
         ],
@@ -147,6 +247,7 @@ def main() -> int:
 
     print(json.dumps(report, indent=2, ensure_ascii=False))
     print("ADAPTER NATIVE GOLDEN CHECKS PASSED")
+    print("ADAPTER NATIVE METADATA DIFF PASSED")
     print("NO SOLVER EXECUTION PERFORMED")
     print("NO EXTERNAL LLM CALLED")
     print("NO UPLOAD PERFORMED")
