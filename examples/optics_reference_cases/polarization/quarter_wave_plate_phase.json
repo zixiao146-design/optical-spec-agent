@@ -1,0 +1,25 @@
+{
+  "case_id": "jones_quarter_waveplate_phase_preview",
+  "calculator": "optics.polarization.jones_waveplate",
+  "preview_design_assist_only": true,
+  "input": {
+    "input_angle_deg": 45.0,
+    "element_type": "waveplate",
+    "retardance_rad": 1.5707963267948966,
+    "fast_axis_deg": 0.0
+  },
+  "expected": {
+    "output_intensity": 1.0,
+    "relative_phase_rad": 1.5707963267948966,
+    "equal_normalized_amplitudes": true,
+    "tolerance": 1e-12
+  },
+  "assumptions": [
+    "Retardance is spatially uniform and wavelength-independent in this preview.",
+    "No depolarization or vector-field propagation is modeled."
+  ],
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "external_solver_executed": false,
+  "external_llm_required": false
+}

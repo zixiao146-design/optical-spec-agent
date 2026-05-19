@@ -55,6 +55,15 @@ require({item["calculator_name"] for item in report["optical_calculators"]} == {
     "fiber_coupling",
     "polarization",
 }, "calculator list mismatch")
+calculators = {item["calculator_name"]: item for item in report["optical_calculators"]}
+require(
+    "fiber_gaussian_offset_loss" in calculators["fiber_coupling"]["reference_cases"],
+    "fiber coupling reference cases missing offset-loss sanity check",
+)
+require(
+    "jones_quarter_waveplate_phase_preview" in calculators["polarization"]["reference_cases"],
+    "polarization reference cases missing quarter-wave sanity check",
+)
 internal_tools = {item["tool_name"]: item for item in report["internal_tools"]}
 require(internal_tools["source_monitor_inference"]["executed_in_sample"] is True, "source/monitor inference not executed in sample")
 require(internal_tools["missing_input_diagnostics"]["executed_in_sample"] is True, "missing-input diagnostics not executed in sample")
@@ -260,6 +269,8 @@ print("DESIGN REQUIREMENT MATCHING PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("APPLICATION DOMAIN BENCHMARKS PASSED")
+print("FIBER COUPLING REFERENCE SANITY PASSED")
+print("POLARIZATION REFERENCE SANITY PASSED")
 print("FIBER COUPLING PREVIEW PASSED")
 print("POLARIZATION PREVIEW PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
@@ -272,6 +283,8 @@ PY
 
 echo "FIBER COUPLING PREVIEW PASSED"
 echo "POLARIZATION PREVIEW PASSED"
+echo "FIBER COUPLING REFERENCE SANITY PASSED"
+echo "POLARIZATION REFERENCE SANITY PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

@@ -17,7 +17,11 @@ from optical_spec_agent.api.app import app
 from optical_spec_agent.optics.fiber_coupling import gaussian_mode_overlap
 from optical_spec_agent.optics.gaussian_beam import gaussian_beam_parameters, propagate_gaussian_beam
 from optical_spec_agent.optics.paraxial import thin_lens
-from optical_spec_agent.optics.polarization import jones_linear_polarizer, linear_polarization
+from optical_spec_agent.optics.polarization import (
+    jones_linear_polarizer,
+    jones_waveplate,
+    linear_polarization,
+)
 from optical_spec_agent.optics.thin_film import calculate_thin_film_stack
 from optical_spec_agent.optics.waveguide import slab_waveguide_v_number
 
@@ -385,12 +389,32 @@ require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity c
 
 fiber_reference = gaussian_mode_overlap(5.2, 5.2, wavelength_nm=1550.0)
 require(abs(fiber_reference.result["coupling_efficiency_estimate"] - 1.0) < 1e-12, "fiber coupling sanity check failed")
+fiber_offset = gaussian_mode_overlap(5.2, 5.2, lateral_offset_um=2.0, wavelength_nm=1550.0)
+require(
+    fiber_offset.result["coupling_efficiency_estimate"]
+    < fiber_reference.result["coupling_efficiency_estimate"],
+    "fiber coupling offset-loss reference failed",
+)
+require(
+    fiber_offset.quality.reference_case == "fiber_gaussian_offset_loss",
+    "fiber coupling offset reference case missing",
+)
 
 horizontal = linear_polarization(0.0)
 crossed = jones_linear_polarizer(horizontal.result["output_jones"], 90.0)
 require(crossed.result["intensity"] < 1e-24, "polarization crossed-polarizer sanity check failed")
+diagonal = linear_polarization(45.0)
+malus = jones_linear_polarizer(diagonal.result["output_jones"], 0.0)
+require(abs(malus.result["intensity"] - 0.5) < 1e-12, "polarization Malus sanity check failed")
+quarter_wave = jones_waveplate(diagonal.result["output_jones"], 3.141592653589793 / 2.0, 0.0)
+require(
+    abs(quarter_wave.result["relative_phase_rad"] - 3.141592653589793 / 2.0) < 1e-12,
+    "polarization quarter-wave sanity check failed",
+)
 
 print("CALCULATOR SANITY CHECKS PASSED")
+print("FIBER COUPLING REFERENCE SANITY PASSED")
+print("POLARIZATION REFERENCE SANITY PASSED")
 print("MATERIAL PROVENANCE DIAGNOSTICS PASSED")
 print("AMBIGUOUS REQUIREMENT MATCHING PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
@@ -409,6 +433,8 @@ print("Backend capabilities smoke passed")
 PY
 
 echo "CALCULATOR SANITY CHECKS PASSED"
+echo "FIBER COUPLING REFERENCE SANITY PASSED"
+echo "POLARIZATION REFERENCE SANITY PASSED"
 echo "MATERIAL PROVENANCE DIAGNOSTICS PASSED"
 echo "AMBIGUOUS REQUIREMENT MATCHING PASSED"
 echo "APPLICATION DOMAIN COVERAGE PASSED"

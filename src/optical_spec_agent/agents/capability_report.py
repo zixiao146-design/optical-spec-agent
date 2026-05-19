@@ -518,11 +518,18 @@ def _optical_calculator_capabilities() -> list[OpticalCalculatorCapability]:
             calculator_name="fiber_coupling",
             implemented=callable(gaussian_mode_overlap),
             api_endpoints=["/api/optics/fiber-coupling"],
-            reference_cases=["fiber_gaussian_perfect_overlap"],
+            reference_cases=[
+                "fiber_gaussian_perfect_overlap",
+                "fiber_gaussian_waist_mismatch",
+                "fiber_gaussian_offset_loss",
+                "fiber_gaussian_tilt_loss",
+            ],
             failure_modes=[
                 "negative wavelength",
                 "zero waist",
+                "non-finite waist or wavelength",
                 "negative lateral offset",
+                "non-finite angular tilt",
             ],
         ),
         OpticalCalculatorCapability(
@@ -530,14 +537,17 @@ def _optical_calculator_capabilities() -> list[OpticalCalculatorCapability]:
             implemented=callable(jones_waveplate),
             api_endpoints=["/api/optics/polarization-jones"],
             reference_cases=[
-                "jones_linear_polarization",
-                "jones_linear_polarizer_projection",
+                "jones_linear_0deg",
+                "jones_linear_90deg",
+                "jones_linear_polarizer_malus",
                 "jones_half_waveplate_preview",
+                "jones_quarter_waveplate_phase_preview",
             ],
             failure_modes=[
                 "zero Jones-vector intensity",
                 "invalid Jones-vector shape",
                 "non-finite retardance",
+                "non-finite angle",
             ],
         ),
     ]

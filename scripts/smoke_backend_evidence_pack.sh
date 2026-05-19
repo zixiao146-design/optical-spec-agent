@@ -64,6 +64,15 @@ require(
     == {"thin_film", "paraxial", "gaussian_beam", "waveguide", "fiber_coupling", "polarization"},
     "calculator evidence mismatch",
 )
+calculators = {item["calculator_name"]: item for item in payload["optical_calculators"]}
+require(
+    "fiber_gaussian_offset_loss" in calculators["fiber_coupling"]["sanity_reference_cases"],
+    "fiber coupling reference cases missing offset-loss sanity check",
+)
+require(
+    "jones_quarter_waveplate_phase_preview" in calculators["polarization"]["sanity_reference_cases"],
+    "polarization reference cases missing quarter-wave sanity check",
+)
 golden = payload["adapter_native_golden_coverage"]
 require(golden["status"] == "ok", "adapter golden evidence not ok")
 require(len(golden["cases"]) == 5, "adapter golden case count mismatch")
@@ -119,12 +128,16 @@ print("BACKEND EVIDENCE PACK PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("APPLICATION DOMAIN BENCHMARKS PASSED")
+print("FIBER COUPLING REFERENCE SANITY PASSED")
+print("POLARIZATION REFERENCE SANITY PASSED")
 print("FIBER COUPLING PREVIEW PASSED")
 print("POLARIZATION PREVIEW PASSED")
 PY
 
 echo "FIBER COUPLING PREVIEW PASSED"
 echo "POLARIZATION PREVIEW PASSED"
+echo "FIBER COUPLING REFERENCE SANITY PASSED"
+echo "POLARIZATION REFERENCE SANITY PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

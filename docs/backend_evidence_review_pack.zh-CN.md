@@ -37,7 +37,9 @@ python scripts/generate_backend_evidence_pack.py \
 - Sub-agent reality：每个确定性后端角色是否存在，并且是否在样例 session 中执行。
 - Tool-call reality：已执行的内部工具、已执行的计算器工具，以及被阻止的外部动作。
 - Optical calculators：薄膜、近轴、Gaussian beam、波导、光纤耦合和 Jones 偏振
-  preview 计算器，以及 sanity reference cases 和 failure modes。
+  preview 计算器，以及 sanity reference cases 和 failure modes。光纤耦合覆盖
+  perfect match、waist mismatch、offset loss 和 tilt loss；偏振覆盖线偏振态、
+  Malus-like 偏振片投影、半波片旋转和四分之一波片相位。
 - Design-case cross-checks：光学设计案例如何映射到预期计算器、适配器和 tool-call
   ledger。
 - Source / monitor / observable diagnostics：确定性 source/monitor 推断、缺失输入诊断、

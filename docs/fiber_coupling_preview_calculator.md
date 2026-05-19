@@ -33,6 +33,19 @@ The final `coupling_efficiency_estimate` is clipped to `[0, 1]`.
   mode-solver effects are not included.
 - Perfect waist match with zero offset and zero tilt is the local sanity case.
 
+## Reference Sanity Cases
+
+- Perfect Gaussian match: equal waists, zero lateral offset, zero angular tilt,
+  expected `coupling_efficiency_estimate ~= 1.0`.
+- Waist mismatch: unequal waists lower the estimate.
+- Lateral offset: non-zero offset lowers the estimate.
+- Angular tilt: non-zero tilt lowers the estimate.
+
+The JSON reference cases live under
+`examples/optics_reference_cases/fiber_coupling/`; the combined reference
+policy is documented in
+[`fiber_polarization_reference_cases.md`](fiber_polarization_reference_cases.md).
+
 ## Limitations
 
 This is preview/design-assist evidence only.

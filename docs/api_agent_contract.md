@@ -178,6 +178,12 @@ endpoint:
 - `GET /api/design-case-cross-checks`
 - `GET /api/adapter-native-golden-coverage`
 
+The fiber-coupling and polarization endpoints include reference sanity evidence
+through `quality.reference_case` for perfect Gaussian overlap, offset/tilt
+loss, Malus-like polarizer projection, and waveplate phase/rotation previews.
+These fields are preview/design-assist evidence only and do not authorize
+external solver execution.
+
 This endpoint turns a natural language optical design goal into a
 deterministic local Agent Task Session: optical intent, selected design case, material
 suggestions, adapter recommendation, workflow plan steps, artifacts, evidence,

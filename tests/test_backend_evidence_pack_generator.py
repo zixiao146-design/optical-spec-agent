@@ -76,6 +76,17 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "fiber_coupling",
         "polarization",
     }
+    calculators = {
+        item["calculator_name"]: item for item in payload["optical_calculators"]
+    }
+    assert (
+        "fiber_gaussian_offset_loss"
+        in calculators["fiber_coupling"]["sanity_reference_cases"]
+    )
+    assert (
+        "jones_quarter_waveplate_phase_preview"
+        in calculators["polarization"]["sanity_reference_cases"]
+    )
     markdown = markdown_out.read_text(encoding="utf-8")
     for heading in [
         "Sub-agent reality",

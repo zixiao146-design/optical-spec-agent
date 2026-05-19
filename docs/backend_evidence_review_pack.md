@@ -45,7 +45,9 @@ approval remain separate and not granted.
   blocked external actions.
 - Optical calculators: thin-film, paraxial, Gaussian beam, waveguide, fiber
   coupling, and polarization preview calculators with sanity reference cases
-  and failure modes.
+  and failure modes. Fiber coupling covers perfect match, waist mismatch,
+  offset loss, and tilt loss; polarization covers linear states, Malus-like
+  polarizer projection, half-wave rotation, and quarter-wave phase.
 - Material provenance coverage: starter materials expose provenance fields,
   require user verification, and remain non-production optical constants.
 - Ambiguous requirement matching: deterministic confidence, candidate template,

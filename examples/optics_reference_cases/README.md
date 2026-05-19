@@ -21,6 +21,20 @@ checks, not external validation certificates.
   `object_distance=100 mm`, expected image distance 100 mm and magnification
   -1.
 - `waveguide_v_number_sanity.json`: scalar slab waveguide V-number formula.
+- `fiber_coupling/perfect_gaussian_match.json`: equal Gaussian waists with
+  zero offset and tilt, expected coupling efficiency near 1.
+- `fiber_coupling/gaussian_waist_mismatch.json`: waist mismatch lowers the
+  scalar overlap estimate.
+- `fiber_coupling/gaussian_offset_loss.json`: lateral offset lowers the
+  scalar overlap estimate.
+- `fiber_coupling/gaussian_tilt_loss.json`: angular tilt lowers the scalar
+  overlap estimate.
+- `polarization/linear_polarizer_malus.json`: Malus-like Jones projection,
+  45-degree input through a 0-degree polarizer gives intensity near 0.5.
+- `polarization/half_wave_plate_rotation.json`: half-wave plate reference
+  rotates horizontal input to vertical up to global phase.
+- `polarization/quarter_wave_plate_phase.json`: quarter-wave plate reference
+  introduces relative phase near `pi/2`.
 
 ## Safety
 

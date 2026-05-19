@@ -80,12 +80,36 @@ The single-mode orientation is preview-only and uses `V < pi`. If
 `n_core <= n_clad`, the calculator returns a stable invalid-input diagnostic or
 raises `ValueError` in pure Python helpers.
 
+### Fiber Coupling Gaussian Overlap
+
+The fiber-coupling preview uses scalar circular Gaussian mode overlap:
+
+- `eta_w = (2 w_in w_f / (w_in^2 + w_f^2))^2`
+- lateral offset and angular tilt are independent Gaussian penalty factors
+- total efficiency is bounded to `[0, 1]`
+
+Reference cases cover perfect waist match, waist mismatch, lateral offset loss,
+and angular tilt loss. Perfect match gives coupling efficiency near `1.0`; the
+other three reduce the estimate.
+
+### Jones Polarization
+
+The polarization preview uses ideal Jones vectors and ideal passive elements:
+
+- linear polarization: `[cos(theta), sin(theta)]`
+- ideal polarizer projection: `P = |a><a|`
+- ideal waveplate retardance in rotated local axes
+
+Reference cases cover horizontal/vertical linear states, Malus-like polarizer
+projection, half-wave plate rotation, and quarter-wave plate phase retardance.
+
 ## Failure Modes
 
 The calculators reject invalid local inputs such as negative wavelength, zero
 physical layer thickness, invalid refractive index, invalid sweep point count,
-and unguided waveguide index combinations. API endpoints return stable error
-responses with safety flags preserved.
+unguided waveguide index combinations, non-finite fiber-coupling inputs,
+malformed Jones vectors, and non-finite Jones angles or retardance. API
+endpoints return stable error responses with safety flags preserved.
 
 ## Artifacts
 

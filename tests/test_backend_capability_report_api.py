@@ -41,6 +41,12 @@ def test_backend_capability_report_api_returns_expected_sections():
         "fiber_coupling",
         "polarization",
     }
+    calculators = {item["calculator_name"]: item for item in body["optical_calculators"]}
+    assert "fiber_gaussian_offset_loss" in calculators["fiber_coupling"]["reference_cases"]
+    assert (
+        "jones_quarter_waveplate_phase_preview"
+        in calculators["polarization"]["reference_cases"]
+    )
     assert len(body["requirements_templates"]) == 7
     assert body["material_provenance_coverage"]["material_count"] >= 10
     assert body["material_provenance_coverage"]["production_grade_optical_constants_claimed"] is False

@@ -75,9 +75,31 @@ ABCD 参考矩阵：
 单模判断只是预览取向，使用 `V < pi`。如果 `n_core <= n_clad`，API 返回稳定错误诊断，
 纯 Python helper 会抛出 `ValueError`。
 
+### 光纤耦合 Gaussian overlap
+
+光纤耦合预览使用标量圆对称 Gaussian mode overlap：
+
+- `eta_w = (2 w_in w_f / (w_in^2 + w_f^2))^2`
+- 横向偏移和角度倾斜使用独立 Gaussian penalty factor
+- 总效率限制在 `[0, 1]`
+
+参考算例覆盖完美腰斑匹配、腰斑失配、横向偏移损耗、角度倾斜损耗。完美匹配时耦合效率接近
+`1.0`；其余三个算例都会降低估计值。
+
+### Jones 偏振
+
+偏振预览使用理想 Jones vector 和理想被动元件：
+
+- 线偏振：`[cos(theta), sin(theta)]`
+- 理想偏振片投影：`P = |a><a|`
+- 理想波片在旋转局部坐标中施加 retardance
+
+参考算例覆盖水平/垂直线偏振、Malus-like 偏振片投影、半波片旋转和四分之一波片相位延迟。
+
 ## 失败模式
 
-计算器会拒绝负波长、零物理层厚度、无效折射率、无效 sweep 点数、无法导模的波导折射率组合。
+计算器会拒绝负波长、零物理层厚度、无效折射率、无效 sweep 点数、无法导模的波导折射率组合、
+非有限 fiber-coupling 输入、malformed Jones vector、非有限 Jones 角度或 retardance。
 API endpoint 保持稳定错误响应，并保留安全标记。
 
 ## 示例文件

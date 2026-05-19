@@ -98,6 +98,14 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "fiber_coupling",
         "polarization",
     }
+    calculators = {item["calculator_name"]: item for item in report["optical_calculators"]}
+    assert "fiber_gaussian_offset_loss" in calculators["fiber_coupling"]["reference_cases"]
+    assert "fiber_gaussian_tilt_loss" in calculators["fiber_coupling"]["reference_cases"]
+    assert "jones_linear_polarizer_malus" in calculators["polarization"]["reference_cases"]
+    assert (
+        "jones_quarter_waveplate_phase_preview"
+        in calculators["polarization"]["reference_cases"]
+    )
     assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")

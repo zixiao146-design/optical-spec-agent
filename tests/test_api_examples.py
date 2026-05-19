@@ -119,7 +119,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "waveguide_sweep_response.json" in response_files
     assert "waveguide_single_mode_range_response.json" in response_files
     assert "fiber_coupling_response.json" in response_files
+    assert "fiber_coupling_perfect_match_response.json" in response_files
+    assert "fiber_coupling_offset_response.json" in response_files
     assert "polarization_jones_response.json" in response_files
+    assert "polarization_linear_polarizer_response.json" in response_files
+    assert "polarization_waveplate_response.json" in response_files
     assert "agent_session_fiber_coupling_response.json" in response_files
     assert "agent_session_polarization_response.json" in response_files
     assert "parse_request_heuristic.json" in request_files
@@ -159,7 +163,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "waveguide_sweep_request.json" in request_files
     assert "waveguide_single_mode_range_request.json" in request_files
     assert "fiber_coupling_request.json" in request_files
+    assert "fiber_coupling_perfect_match_request.json" in request_files
+    assert "fiber_coupling_offset_request.json" in request_files
     assert "polarization_jones_request.json" in request_files
+    assert "polarization_linear_polarizer_request.json" in request_files
+    assert "polarization_waveplate_request.json" in request_files
     assert "agent_session_fiber_coupling_request.json" in request_files
     assert "agent_session_polarization_request.json" in request_files
     for calculator_response in [
@@ -176,7 +184,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "waveguide_sweep_response.json",
         "waveguide_single_mode_range_response.json",
         "fiber_coupling_response.json",
+        "fiber_coupling_perfect_match_response.json",
+        "fiber_coupling_offset_response.json",
         "polarization_jones_response.json",
+        "polarization_linear_polarizer_response.json",
+        "polarization_waveplate_response.json",
         "backend_capability_report_response.json",
         "backend_evidence_summary_response.json",
         "design_case_cross_checks_response.json",

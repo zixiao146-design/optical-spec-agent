@@ -85,6 +85,8 @@ Current main development version: `0.9.0rc8.dev0`.
 - [Fiber coupling preview calculator zh-CN](fiber_coupling_preview_calculator.zh-CN.md)
 - [Polarization preview calculator](polarization_preview_calculator.md)
 - [Polarization preview calculator zh-CN](polarization_preview_calculator.zh-CN.md)
+- [Fiber coupling and polarization reference cases](fiber_polarization_reference_cases.md)
+- [Fiber coupling and polarization reference cases zh-CN](fiber_polarization_reference_cases.zh-CN.md)
 - [Optical calculator case integration](optical_calculator_case_integration.md)
 - [Optical calculator case integration zh-CN](optical_calculator_case_integration.zh-CN.md)
 - [Optical calculator reference cases](optical_calculator_reference_cases.md)

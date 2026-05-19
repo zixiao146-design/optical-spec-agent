@@ -1,0 +1,6 @@
+{
+  "input_angle_deg": 45.0,
+  "element_type": "waveplate",
+  "retardance_rad": 1.5707963267948966,
+  "fast_axis_deg": 0.0
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "fiber_gaussian_offset_loss",
+  "calculator": "optics.fiber_coupling.gaussian_mode_overlap",
+  "preview_design_assist_only": true,
+  "input": {
+    "waist_input_um": 5.2,
+    "waist_fiber_um": 5.2,
+    "lateral_offset_um": 2.0,
+    "angular_tilt_mrad": 0.0,
+    "wavelength_nm": 1550.0
+  },
+  "expected": {
+    "offset_factor": 0.8624923548285205,
+    "coupling_efficiency_estimate": 0.8624923548285205,
+    "less_than_perfect_match": true,
+    "tolerance": 1e-12
+  },
+  "assumptions": [
+    "Lateral offset is modeled as an independent Gaussian penalty factor."
+  ],
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "external_solver_executed": false,
+  "external_llm_required": false
+}

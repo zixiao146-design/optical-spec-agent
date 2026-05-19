@@ -45,23 +45,30 @@ def _polarization_quality(
 def linear_polarization(angle_deg: float) -> CalculatorResult:
     """Return a normalized linear-polarization Jones vector."""
 
+    _require_finite(angle_deg, "angle_deg")
     angle_rad = math.radians(angle_deg)
     vector = [complex(math.cos(angle_rad), 0.0), complex(math.sin(angle_rad), 0.0)]
     assumptions = [
         "Linear polarization is represented as [cos(theta), sin(theta)].",
         "Global optical phase is ignored.",
     ]
+    reference_case = "jones_linear_polarization"
+    if math.isclose((angle_deg % 180.0), 0.0, abs_tol=1e-12):
+        reference_case = "jones_linear_0deg"
+    elif math.isclose((angle_deg % 180.0), 90.0, abs_tol=1e-12):
+        reference_case = "jones_linear_90deg"
     return _polarization_result(
         vector,
         assumptions=assumptions,
         diagnostics=["Linear polarization sanity vector generated."],
-        reference_case="jones_linear_polarization",
+        reference_case=reference_case,
     )
 
 
 def jones_linear_polarizer(input_jones: list[Any], angle_deg: float) -> CalculatorResult:
     """Apply an ideal linear polarizer at angle_deg."""
 
+    _require_finite(angle_deg, "angle_deg")
     vector = _parse_jones_vector(input_jones)
     axis = math.radians(angle_deg)
     c = math.cos(axis)
@@ -73,12 +80,22 @@ def jones_linear_polarizer(input_jones: list[Any], angle_deg: float) -> Calculat
         "Input and output intensities are normalized Jones-vector powers.",
         "No extinction-ratio, coating, or angular-bandwidth model is included.",
     ]
+    reference_case = "jones_linear_polarizer_projection"
+    input_intensity = _intensity(vector)
+    output_intensity = _intensity(output)
+    if input_intensity > 0 and math.isclose(
+        output_intensity / input_intensity,
+        0.5,
+        rel_tol=0.0,
+        abs_tol=1e-12,
+    ):
+        reference_case = "jones_linear_polarizer_malus"
     return _polarization_result(
         output,
         input_jones=vector,
         assumptions=assumptions,
         diagnostics=["Ideal polarizer projection applied."],
-        reference_case="jones_linear_polarizer_projection",
+        reference_case=reference_case,
     )
 
 
@@ -89,8 +106,8 @@ def jones_waveplate(
 ) -> CalculatorResult:
     """Apply an ideal linear retarder / waveplate."""
 
-    if not math.isfinite(retardance_rad):
-        raise ValueError("retardance_rad must be finite.")
+    _require_finite(retardance_rad, "retardance_rad")
+    _require_finite(fast_axis_deg, "fast_axis_deg")
     vector = _parse_jones_vector(input_jones)
     axis = math.radians(fast_axis_deg)
     c = math.cos(axis)
@@ -112,7 +129,11 @@ def jones_waveplate(
         "Retardance is spatially uniform and wavelength-independent in this preview.",
         "No depolarization, aperture, coating, or vector-field propagation is modeled.",
     ]
-    reference_case = "jones_half_waveplate_preview" if abs(abs(retardance_rad) - math.pi) < 1e-9 else None
+    reference_case = None
+    if math.isclose(abs(retardance_rad), math.pi, rel_tol=0.0, abs_tol=1e-9):
+        reference_case = "jones_half_waveplate_preview"
+    elif math.isclose(abs(retardance_rad), math.pi / 2.0, rel_tol=0.0, abs_tol=1e-9):
+        reference_case = "jones_quarter_waveplate_phase_preview"
     return _polarization_result(
         output,
         input_jones=vector,
@@ -176,6 +197,11 @@ def _parse_jones_vector(values: list[Any]) -> JonesVector:
     if _intensity(vector) <= 0:
         raise ValueError("input_jones must have non-zero intensity.")
     return vector
+
+
+def _require_finite(value: float, field_name: str) -> None:
+    if not isinstance(value, (int, float)) or not math.isfinite(float(value)):
+        raise ValueError(f"{field_name} must be finite.")
 
 
 def _parse_complex(value: Any) -> complex:

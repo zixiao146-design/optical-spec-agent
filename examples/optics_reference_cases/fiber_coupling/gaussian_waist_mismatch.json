@@ -1,0 +1,24 @@
+{
+  "case_id": "fiber_gaussian_waist_mismatch",
+  "calculator": "optics.fiber_coupling.gaussian_mode_overlap",
+  "preview_design_assist_only": true,
+  "input": {
+    "waist_input_um": 4.0,
+    "waist_fiber_um": 5.2,
+    "lateral_offset_um": 0.0,
+    "angular_tilt_mrad": 0.0,
+    "wavelength_nm": 1550.0
+  },
+  "expected": {
+    "coupling_efficiency_estimate": 0.9342048893741102,
+    "less_than_perfect_match": true,
+    "tolerance": 1e-12
+  },
+  "assumptions": [
+    "Mode mismatch factor eta_w = (2 w_in w_f / (w_in^2 + w_f^2))^2."
+  ],
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "external_solver_executed": false,
+  "external_llm_required": false
+}

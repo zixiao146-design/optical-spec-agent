@@ -92,7 +92,10 @@ estimates, plus
 [`polarization`](docs/polarization_preview_calculator.md) preview helpers; see
 [`optical calculator case integration`](docs/optical_calculator_case_integration.md).
 Reference sanity cases and response quality fields are documented in
-[`optical calculator reference cases`](docs/optical_calculator_reference_cases.md).
+[`optical calculator reference cases`](docs/optical_calculator_reference_cases.md),
+with dedicated
+[`fiber/polarization reference cases`](docs/fiber_polarization_reference_cases.md)
+covering Gaussian mode overlap and Jones-calculus sanity checks.
 These calculators are design-assist previews only; they do not run external
 solvers, call external LLMs, or claim production-grade validation.
 The capability report proves which sub-agents and internal tools execute in

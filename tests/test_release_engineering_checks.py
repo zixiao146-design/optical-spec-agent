@@ -245,6 +245,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "observable_diagnostics.zh-CN.md",
         "optical_calculators.md",
         "optical_calculators.zh-CN.md",
+        "fiber_coupling_preview_calculator.md",
+        "fiber_coupling_preview_calculator.zh-CN.md",
+        "polarization_preview_calculator.md",
+        "polarization_preview_calculator.zh-CN.md",
+        "fiber_polarization_reference_cases.md",
+        "fiber_polarization_reference_cases.zh-CN.md",
         "optical_calculator_case_integration.md",
         "optical_calculator_case_integration.zh-CN.md",
         "optical_calculator_reference_cases.md",
@@ -293,6 +299,20 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     ).exists()
     assert (
         ROOT / "examples" / "optics_reference_cases" / "gaussian_beam_rayleigh_range.json"
+    ).exists()
+    assert (
+        ROOT
+        / "examples"
+        / "optics_reference_cases"
+        / "fiber_coupling"
+        / "perfect_gaussian_match.json"
+    ).exists()
+    assert (
+        ROOT
+        / "examples"
+        / "optics_reference_cases"
+        / "polarization"
+        / "linear_polarizer_malus.json"
     ).exists()
     assert (ROOT / "examples" / "optical_design" / "nanoparticle_plasmonics" / "spec.json").exists()
     assert (ROOT / "examples" / "optical_design" / "thin_film_coating" / "spec.json").exists()

@@ -64,6 +64,8 @@ session 展示“实际计算了什么”，但不会把结果说成生产级物
 
 参考算例详见
 [`optical_calculator_reference_cases.zh-CN.md`](optical_calculator_reference_cases.zh-CN.md)。
+光纤耦合和偏振的补充参考说明见
+[`fiber_polarization_reference_cases.zh-CN.md`](fiber_polarization_reference_cases.zh-CN.md)。
 
 ## 限制
 

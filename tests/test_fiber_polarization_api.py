@@ -42,3 +42,27 @@ def test_fiber_coupling_and_polarization_api_are_safe_preview_endpoints():
         assert body["external_llm_required"] is False
         assert body["production_grade_validation_claimed"] is False
         assert body["formal_convergence_proof_claimed"] is False
+
+
+def test_fiber_coupling_and_polarization_api_return_stable_errors():
+    client = TestClient(app)
+    cases = [
+        (
+            "/api/optics/fiber-coupling",
+            {"waist_input_um": -1.0, "waist_fiber_um": 5.2, "wavelength_nm": 1550.0},
+        ),
+        (
+            "/api/optics/polarization-jones",
+            {"input_jones": [0.0, 0.0], "element_type": "polarizer", "angle_deg": 0.0},
+        ),
+    ]
+    for endpoint, payload in cases:
+        response = client.post(endpoint, json=payload)
+        assert response.status_code == 400
+        body = response.json()
+        assert body["status"] == "error"
+        assert body["external_solver_executed"] is False
+        assert body["external_llm_required"] is False
+        assert body["production_grade_validation_claimed"] is False
+        assert body["formal_convergence_proof_claimed"] is False
+        assert body["diagnostics"]["errors"]

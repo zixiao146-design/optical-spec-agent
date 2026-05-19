@@ -91,7 +91,8 @@ as local preview/design-assist workflows, not production-grade validation.
 
 Calculator responses now expose `quality`, `warnings`, `assumptions`, and
 `limitations`. Formula-level reference cases are documented in
-`docs/optical_calculator_reference_cases.md`; they are sanity checks, not
+`docs/optical_calculator_reference_cases.md` and
+`docs/fiber_polarization_reference_cases.md`; they are sanity checks, not
 production-grade validation.
 
 ## Sub-agent Reality

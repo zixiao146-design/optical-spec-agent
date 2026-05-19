@@ -1,0 +1,70 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only.",
+      "Use a validated mode-overlap calculation or measured alignment data before physical conclusions."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": [
+        "Efficiency is bounded to [0, 1].",
+        "Perfect waist match with zero offset/tilt is the local sanity reference."
+      ]
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "result": {
+    "coupling_efficiency_estimate": 1.0,
+    "mode_mismatch_factor": 1.0,
+    "offset_factor": 1.0,
+    "tilt_factor": 1.0,
+    "summary": "Gaussian fiber-coupling preview estimates 1.0000 coupling efficiency."
+  },
+  "assumptions": [
+    "Scalar circular Gaussian field overlap preview."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ],
+  "warnings": [
+    "Use a validated mode-overlap calculation or measured alignment data before physical conclusions."
+  ],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "fiber_gaussian_perfect_overlap",
+    "assumptions": [
+      "Scalar circular Gaussian field overlap preview."
+    ],
+    "limitations": [
+      "Scalar Gaussian overlap preview only.",
+      "Not production-grade physical validation."
+    ],
+    "warnings": [
+      "Use a validated mode-overlap calculation or measured alignment data before physical conclusions."
+    ],
+    "valid_input_range": {
+      "wavelength_nm": "positive",
+      "waist_input_um": "positive",
+      "waist_fiber_um": "positive"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

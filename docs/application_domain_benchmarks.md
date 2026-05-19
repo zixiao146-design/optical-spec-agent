@@ -85,6 +85,9 @@ benchmarks are closed by deterministic preview calculators:
   `optics.fiber_coupling.gaussian_mode_overlap`.
 - `polarization_optics_preview_positive` records `optics.polarization.jones`.
 
+Their calculator-level reference sanity cases are documented in
+[`fiber_polarization_reference_cases.md`](fiber_polarization_reference_cases.md).
+
 The benchmark suite is expected to report `19 pass / 0 warn / 0 fail` unless a
 future scenario intentionally introduces a new deferred capability.
 

@@ -78,6 +78,8 @@ actually computed without claiming physical validation.
 
 Reference case details live in
 [`optical_calculator_reference_cases.md`](optical_calculator_reference_cases.md).
+Fiber coupling and polarization have additional focused notes in
+[`fiber_polarization_reference_cases.md`](fiber_polarization_reference_cases.md).
 
 ## Limitations
 

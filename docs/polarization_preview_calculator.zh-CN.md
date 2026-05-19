@@ -24,6 +24,17 @@ API 可以接收显式双分量 Jones vector，也可以通过 `input_angle_deg`
 - 波片是理想、空间均匀、预览中不随波长变化的器件。
 - 不包含退偏、孔径效应、镀膜、色散或完整矢量场传播。
 
+## 参考 sanity cases
+
+- 0 度线偏振约为 `[1, 0]`。
+- 90 度线偏振约为 `[0, 1]`。
+- 45 度输入通过 0 度理想偏振片，强度约为 `cos^2(45 deg) ~= 0.5`。
+- 45 度快轴半波片把水平输入旋转到垂直方向，忽略全局相位。
+- 四分之一波片对合适的 45 度输入引入接近 `pi/2` 的相对相位。
+
+JSON 参考算例位于 `examples/optics_reference_cases/polarization/`；综合参考策略见
+[`fiber_polarization_reference_cases.zh-CN.md`](fiber_polarization_reference_cases.zh-CN.md)。
+
 ## 限制
 
 这只是 preview/design-assist 证据。

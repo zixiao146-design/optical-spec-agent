@@ -1,0 +1,7 @@
+{
+  "waist_input_um": 5.2,
+  "waist_fiber_um": 5.2,
+  "lateral_offset_um": 2.0,
+  "angular_tilt_mrad": 0.0,
+  "wavelength_nm": 1550.0
+}

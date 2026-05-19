@@ -54,6 +54,12 @@ def gaussian_mode_overlap(
     closure, not production coupling validation.
     """
 
+    if not math.isfinite(waist_input_um) or not math.isfinite(waist_fiber_um):
+        raise ValueError("waist_input_um and waist_fiber_um must be finite.")
+    if not math.isfinite(wavelength_nm):
+        raise ValueError("wavelength_nm must be finite.")
+    if not math.isfinite(lateral_offset_um) or not math.isfinite(angular_tilt_mrad):
+        raise ValueError("lateral_offset_um and angular_tilt_mrad must be finite.")
     if waist_input_um <= 0 or waist_fiber_um <= 0:
         raise ValueError("waist_input_um and waist_fiber_um must be positive.")
     if wavelength_nm <= 0:
@@ -85,11 +91,17 @@ def gaussian_mode_overlap(
     ]
     reference_case = None
     if (
-        abs(waist_input_um - waist_fiber_um) < 1e-12
+        math.isclose(waist_input_um, waist_fiber_um, rel_tol=0.0, abs_tol=1e-12)
         and lateral_offset_um == 0
         and abs(angular_tilt_mrad) < 1e-12
     ):
         reference_case = "fiber_gaussian_perfect_overlap"
+    elif lateral_offset_um > 0 and abs(angular_tilt_mrad) < 1e-12:
+        reference_case = "fiber_gaussian_offset_loss"
+    elif lateral_offset_um == 0 and abs(angular_tilt_mrad) > 0:
+        reference_case = "fiber_gaussian_tilt_loss"
+    elif not math.isclose(waist_input_um, waist_fiber_um, rel_tol=0.0, abs_tol=1e-12):
+        reference_case = "fiber_gaussian_waist_mismatch"
 
     return CalculatorResult(
         result={

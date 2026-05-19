@@ -154,9 +154,21 @@ curl -X POST http://127.0.0.1:8000/api/optics/waveguide-single-mode-range \
 curl -X POST http://127.0.0.1:8000/api/optics/fiber-coupling \
   -H "Content-Type: application/json" \
   --data @examples/api/fiber_coupling_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/fiber-coupling \
+  -H "Content-Type: application/json" \
+  --data @examples/api/fiber_coupling_perfect_match_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/fiber-coupling \
+  -H "Content-Type: application/json" \
+  --data @examples/api/fiber_coupling_offset_request.json
 curl -X POST http://127.0.0.1:8000/api/optics/polarization-jones \
   -H "Content-Type: application/json" \
   --data @examples/api/polarization_jones_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/polarization-jones \
+  -H "Content-Type: application/json" \
+  --data @examples/api/polarization_linear_polarizer_request.json
+curl -X POST http://127.0.0.1:8000/api/optics/polarization-jones \
+  -H "Content-Type: application/json" \
+  --data @examples/api/polarization_waveplate_request.json
 ```
 
 The Example Gallery and material examples use local repo files and the local

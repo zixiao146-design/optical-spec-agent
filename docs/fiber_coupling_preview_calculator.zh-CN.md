@@ -31,6 +31,17 @@ Endpoint：`POST /api/optics/fiber-coupling`
 - 不包含偏振重叠、Fresnel 损耗、NA 截断、像差和模式求解器效应。
 - 完全光腰匹配、零偏移、零倾角是本地 sanity case。
 
+## 参考 sanity cases
+
+- 完美 Gaussian 匹配：腰斑相同、横向偏移为零、角度倾斜为零，预期
+  `coupling_efficiency_estimate ~= 1.0`。
+- 腰斑失配：不相等的腰斑会降低估计值。
+- 横向偏移：非零 offset 会降低估计值。
+- 角度倾斜：非零 tilt 会降低估计值。
+
+JSON 参考算例位于 `examples/optics_reference_cases/fiber_coupling/`；综合参考策略见
+[`fiber_polarization_reference_cases.zh-CN.md`](fiber_polarization_reference_cases.zh-CN.md)。
+
 ## 限制
 
 这只是 preview/design-assist 证据。

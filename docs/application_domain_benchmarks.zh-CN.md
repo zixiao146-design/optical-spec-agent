@@ -78,6 +78,9 @@ API endpoints:
   `optics.fiber_coupling.gaussian_mode_overlap`。
 - `polarization_optics_preview_positive` 记录 `optics.polarization.jones`。
 
+对应的计算器级 reference sanity cases 见
+[`fiber_polarization_reference_cases.zh-CN.md`](fiber_polarization_reference_cases.zh-CN.md)。
+
 除非未来新增有意延期的能力，benchmark suite 预期为
 `19 pass / 0 warn / 0 fail`。
 

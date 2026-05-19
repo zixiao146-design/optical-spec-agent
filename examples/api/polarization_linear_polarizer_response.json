@@ -1,0 +1,67 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Calculator output is preview/design-assist only.",
+      "Jones calculus is a coherent, two-component preview model only."
+    ],
+    "missing_fields": [],
+    "assumptions": [],
+    "limitations": [
+      "Preview/design-assist calculation only.",
+      "Verify with appropriate validated tools and material data before physical conclusions."
+    ],
+    "details": {
+      "calculator_diagnostics": [
+        "Ideal polarizer projection applied."
+      ]
+    }
+  },
+  "recommended_next_actions": [
+    "Inspect assumptions before using the estimate.",
+    "Verify with validated material data and solver studies before physical conclusions."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "result": {
+    "intensity": 0.5,
+    "input_intensity": 1.0,
+    "summary": "Jones polarization preview with normalized amplitudes (1.000, 0.000) and intensity 0.500."
+  },
+  "assumptions": [
+    "Ideal linear polarizer using P = |a><a|."
+  ],
+  "limitations": [
+    "Preview/design-assist calculation only.",
+    "Verify with appropriate validated tools and material data before physical conclusions."
+  ],
+  "warnings": [
+    "Jones calculus is a coherent, two-component preview model only."
+  ],
+  "quality": {
+    "quality_level": "sanity_checked_preview",
+    "reference_case": "jones_linear_polarizer_malus",
+    "assumptions": [
+      "Ideal linear polarizer using P = |a><a|."
+    ],
+    "limitations": [
+      "Jones-calculus preview only.",
+      "Not production-grade physical validation."
+    ],
+    "warnings": [
+      "Jones calculus is a coherent, two-component preview model only."
+    ],
+    "valid_input_range": {
+      "angle_deg": "finite real angle",
+      "retardance_rad": "finite real retardance",
+      "input_jones": "two finite complex components"
+    },
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  }
+}

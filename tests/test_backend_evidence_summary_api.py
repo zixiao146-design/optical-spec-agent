@@ -28,6 +28,17 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
         "fiber_coupling",
         "polarization",
     }
+    calculators = {
+        item["calculator_name"]: item for item in body["optical_calculators"]
+    }
+    assert (
+        "fiber_gaussian_offset_loss"
+        in calculators["fiber_coupling"]["sanity_reference_cases"]
+    )
+    assert (
+        "jones_quarter_waveplate_phase_preview"
+        in calculators["polarization"]["sanity_reference_cases"]
+    )
     assert body["design_case_cross_checks"]
     assert body["source_monitor_observable_diagnostics"]["observable_taxonomy_available"] is True
     assert body["adapter_native_golden_coverage"]["status"] == "ok"

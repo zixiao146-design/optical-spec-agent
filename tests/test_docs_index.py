@@ -91,6 +91,8 @@ def test_docs_index_exists_and_links_major_docs():
         "fiber_coupling_preview_calculator.zh-CN.md",
         "polarization_preview_calculator.md",
         "polarization_preview_calculator.zh-CN.md",
+        "fiber_polarization_reference_cases.md",
+        "fiber_polarization_reference_cases.zh-CN.md",
         "optical_calculator_case_integration.md",
         "optical_calculator_case_integration.zh-CN.md",
         "optical_calculator_reference_cases.md",

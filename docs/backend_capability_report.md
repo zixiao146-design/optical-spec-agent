@@ -66,6 +66,9 @@ upload, and `v1.0.0` approval remain separate and not granted.
 5. `optical_calculators`: thin-film, paraxial, Gaussian beam, waveguide,
    fiber coupling, and polarization preview calculators with endpoints,
    reference cases, failure modes, and `sanity_checked_preview` quality level.
+   Fiber coupling now includes perfect-match, waist-mismatch, offset-loss, and
+   tilt-loss sanity cases. Polarization now includes linear-state,
+   Malus-like polarizer, half-wave, and quarter-wave Jones sanity cases.
 6. `design_case_cross_checks`: per-example pass/warning/fail results.
 7. `requirements_templates`: EN/ZH goal presence, heuristic matching status,
    expected tools, cross-check status, and preview-only status for the seven
