@@ -1,0 +1,75 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "gaussian_beam_focusing_positive",
+  "status": "pass",
+  "actual_domain": "gaussian_beam_focusing",
+  "actual_candidates": [
+    "gaussian_beam_focusing"
+  ],
+  "actual_confidence": "high",
+  "actual_template": "gaussian_beam_focus",
+  "actual_tool_calls": [
+    "adapter_preview.generate",
+    "agent_trace.build",
+    "application_domains.cross_check_domain",
+    "application_domains.match_goal",
+    "material_catalog.suggest",
+    "optical_language.diagnose_missing_inputs",
+    "optical_language.diagnose_observable",
+    "optical_language.generate_disambiguation_questions",
+    "optical_language.infer_source_monitor",
+    "optical_language.map_source_monitor_to_adapter",
+    "optics.gaussian_beam.series",
+    "requirements.extract_optical_intent",
+    "requirements.match_ambiguity_check",
+    "requirements.match_template",
+    "workflow_plan.preview"
+  ],
+  "actual_missing_inputs": [
+    "wavelength",
+    "propagation_distance",
+    "focal_length_mm",
+    "input_waist_um",
+    "propagation_range_mm",
+    "wavelength_nm",
+    "waist_um",
+    "propagation_distance_or_focal_length"
+  ],
+  "actual_questions": [
+    "What wavelength, input waist, and propagation/focal distance should be used?",
+    "Should the preview include a thin lens focus estimate?",
+    "What wavelength, input waist, and focal length should define the Gaussian beam preview?",
+    "Please provide or confirm: wavelength.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Which values should be used for critical inputs: wavelength?",
+    "Can you provide optional context for: propagation_distance?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "No deterministic suitability rule for air in gaussian_beam_focusing.",
+    "No deterministic suitability rule for glass_fused_silica_preview in gaussian_beam_focusing."
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "air",
+    "glass_fused_silica_preview"
+  ],
+  "actual_adapter": "adapter auto-selection preview",
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

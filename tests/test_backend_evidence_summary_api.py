@@ -29,6 +29,9 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert body["design_case_cross_checks"]
     assert body["source_monitor_observable_diagnostics"]["observable_taxonomy_available"] is True
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
+    assert body["application_domain_benchmarks"]["scenario_count"] >= 19
+    assert body["application_domain_benchmarks"]["fail_count"] == 0
+    assert body["application_domain_benchmarks"]["unsupported_requests_blocked_or_deferred"] is True
     assert all(
         case["metadata_match"] and case["fragment_match"] and case["safety_match"]
         for case in body["adapter_native_golden_coverage"]["cases"]

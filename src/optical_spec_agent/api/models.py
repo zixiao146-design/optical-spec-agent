@@ -27,6 +27,13 @@ from optical_spec_agent.examples.domain_cross_check import (
     ApplicationDomainCrossCheck,
     ApplicationDomainCrossChecksResponse,
 )
+from optical_spec_agent.examples.domain_benchmarks import (
+    ApplicationDomainBenchmarkResponse,
+    ApplicationDomainBenchmarkResultResponse,
+    ApplicationDomainScenario,
+    ApplicationDomainScenarioResponse,
+    ApplicationDomainScenarioResult,
+)
 from optical_spec_agent.examples.requirements import (
     DesignRequirementDetailResponse,
     DesignRequirementsResponse,
@@ -387,8 +394,13 @@ __all_requirement_models__ = [
     "ApplicationDomainCrossCheck",
     "ApplicationDomainCrossChecksResponse",
     "ApplicationDomainDetailResponse",
+    "ApplicationDomainBenchmarkResponse",
+    "ApplicationDomainBenchmarkResultResponse",
     "ApplicationDomainMatchRequest",
     "ApplicationDomainMatchResult",
+    "ApplicationDomainScenario",
+    "ApplicationDomainScenarioResponse",
+    "ApplicationDomainScenarioResult",
     "ApplicationDomainsResponse",
     "DesignRequirementDetailResponse",
     "DesignRequirementsResponse",

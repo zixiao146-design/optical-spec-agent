@@ -1,0 +1,80 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "imaging_system_preview_positive",
+  "status": "pass",
+  "actual_domain": "imaging_system_preview",
+  "actual_candidates": [
+    "imaging_system_preview"
+  ],
+  "actual_confidence": "high",
+  "actual_template": "paraxial_lens_imaging",
+  "actual_tool_calls": [
+    "adapter_preview.generate",
+    "agent_trace.build",
+    "application_domains.cross_check_domain",
+    "application_domains.match_goal",
+    "example_registry.load",
+    "material_catalog.suggest",
+    "optical_language.diagnose_missing_inputs",
+    "optical_language.diagnose_observable",
+    "optical_language.generate_disambiguation_questions",
+    "optical_language.infer_source_monitor",
+    "optical_language.map_source_monitor_to_adapter",
+    "optics.paraxial.two_lens_relay",
+    "requirements.extract_optical_intent",
+    "requirements.match_ambiguity_check",
+    "requirements.match_template",
+    "workflow_plan.preview"
+  ],
+  "actual_missing_inputs": [
+    "field_of_view",
+    "focal_length",
+    "object_distance",
+    "wavelength",
+    "focal_length_mm",
+    "lens_separation_mm optional",
+    "object_distance_mm",
+    "wavelength optional",
+    "magnification",
+    "aperture",
+    "image_distance_or_magnification"
+  ],
+  "actual_questions": [
+    "What magnification and image plane should the preview target?",
+    "What aperture and field should constrain the imaging system?",
+    "What focal length, aperture, field of view, and object distance should be assumed?",
+    "Please provide or confirm: focal_length, field_of_view, object_distance.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Which values should be used for critical inputs: focal_length, object_distance?",
+    "Can you provide optional context for: field_of_view, wavelength?",
+    "For the lens preview, what aperture and field of view should bound the paraxial assumptions?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "Application domain has local preview coverage."
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview",
+    "air"
+  ],
+  "actual_adapter": "optiland",
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

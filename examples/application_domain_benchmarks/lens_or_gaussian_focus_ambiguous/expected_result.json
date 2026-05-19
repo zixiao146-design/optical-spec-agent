@@ -1,0 +1,46 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "lens_or_gaussian_focus_ambiguous",
+  "status": "pass",
+  "actual_domain": null,
+  "actual_candidates": [
+    "lens_ray_optics",
+    "gaussian_beam_focusing"
+  ],
+  "actual_confidence": "low",
+  "actual_template": "gaussian_beam_focus",
+  "actual_tool_calls": [],
+  "actual_missing_inputs": [],
+  "actual_questions": [
+    "What focal length, aperture, and field of view should be previewed?",
+    "Is paraxial approximation acceptable for this first pass?",
+    "What wavelength, input waist, and propagation/focal distance should be used?",
+    "Should the preview include a thin lens focus estimate?",
+    "Which design family should take priority: gaussian_beam_focus, paraxial_lens_imaging?",
+    "What wavelength, input waist, and focal length should define the Gaussian beam preview?",
+    "Please provide or confirm: wavelength, input_waist, focal_length.",
+    "Should the backend keep using local preview-only tools without external solver execution?"
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [],
+  "actual_adapter": null,
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

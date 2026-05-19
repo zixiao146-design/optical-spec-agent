@@ -1,0 +1,25 @@
+{
+  "scenario_id": "waveguide_missing_core_thickness",
+  "domain_id": "slab_waveguide",
+  "scenario_type": "underconstrained",
+  "goal_en": "Plan a single mode slab waveguide preview.",
+  "goal_zh": "请规划一个单模平板波导预览。",
+  "expected_primary_domain": "slab_waveguide",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "slab_waveguide_single_mode",
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [
+    "core_thickness_um",
+    "cladding_material",
+    "wavelength_nm"
+  ],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

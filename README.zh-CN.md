@@ -89,6 +89,10 @@ rc8.dev0 后端进一步把材料溯源和歧义需求处理显式化：见
 后端还新增 `docs/application_domain_registry.zh-CN.md` 应用领域注册表和
 `docs/material_template_cross_checks.zh-CN.md` 材料-模板交叉检查，把十个光学领域
 连接到本地材料、需求模板、计算器/适配器、缺失输入问题和 preview-only 证据边界。
+这些领域现在还通过 `docs/application_domain_benchmarks.zh-CN.md` 应用领域
+benchmark 场景集进行检查，覆盖明确、歧义、输入不足、不支持和需要阻断的光学设计请求。
+evaluator 会检查预期 domain/template 匹配、材料/计算器/adapter 行为、缺失输入问题和
+阻断动作，同时不运行求解器、不调用外部 LLM。
 Adapter-native golden preview cases 位于 `examples/adapter_native_golden/`，
 文档见 `docs/adapter_native_golden_cases.zh-CN.md`。它们会检查 Meep、MPB、
 Gmsh、Elmer 和 Optiland 的 source/monitor/observable fragments 以及严格

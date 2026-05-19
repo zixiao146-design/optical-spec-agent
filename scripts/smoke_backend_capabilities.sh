@@ -8,6 +8,7 @@ set -euo pipefail
 
 python scripts/audit_sub_agents.py
 python scripts/check_adapter_native_golden.py
+python scripts/evaluate_application_domain_benchmarks.py
 
 python - <<'PY'
 from fastapi.testclient import TestClient
@@ -42,6 +43,7 @@ require("adapter_native_golden_coverage" in internal_tools, "adapter-native gold
 require("ambiguous_requirement_matching" in internal_tools, "ambiguous requirement matching missing")
 require("application_domain_registry" in internal_tools, "application domain registry missing")
 require("material_template_cross_checks" in internal_tools, "material-template cross-checks missing")
+require("application_domain_benchmarks" in internal_tools, "application domain benchmarks missing")
 
 material_diagnose = client.post(
     "/api/materials/diagnose",
@@ -92,6 +94,22 @@ domain_check_payload = domain_checks.json()
 require(domain_check_payload["summary"]["total"] == 10, "application cross-check count mismatch")
 require(domain_check_payload["summary"]["fail"] == 0, "application domain cross-check failed")
 require(domain_check_payload["external_solver_executed"] is False, "domain cross-check executed solver")
+
+benchmarks = client.get("/api/application-domain-benchmarks")
+require(benchmarks.status_code == 200, "/api/application-domain-benchmarks failed")
+benchmark_payload = benchmarks.json()
+require(benchmark_payload["scenario_count"] >= 19, "application benchmark count mismatch")
+require(benchmark_payload["scenario_type_counts"]["positive"] >= 10, "positive benchmark count mismatch")
+
+benchmark_eval = client.post("/api/application-domain-benchmarks/nanoparticle_plasmonics_positive/evaluate")
+require(benchmark_eval.status_code == 200, "application benchmark evaluation failed")
+require(benchmark_eval.json()["status"] in {"pass", "warn"}, "nanoparticle benchmark did not pass")
+
+benchmark_results = client.get("/api/application-domain-benchmark-results")
+require(benchmark_results.status_code == 200, "/api/application-domain-benchmark-results failed")
+benchmark_results_payload = benchmark_results.json()
+require(benchmark_results_payload["summary"]["fail"] == 0, "application benchmark failed")
+require(benchmark_results_payload["external_solver_executed"] is False, "benchmark executed solver")
 
 golden_coverage = client.get("/api/adapter-native-golden-coverage")
 require(golden_coverage.status_code == 200, "/api/adapter-native-golden-coverage failed")
@@ -348,6 +366,7 @@ print("MATERIAL PROVENANCE DIAGNOSTICS PASSED")
 print("AMBIGUOUS REQUIREMENT MATCHING PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
+print("APPLICATION DOMAIN BENCHMARKS PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
@@ -363,6 +382,7 @@ echo "MATERIAL PROVENANCE DIAGNOSTICS PASSED"
 echo "AMBIGUOUS REQUIREMENT MATCHING PASSED"
 echo "APPLICATION DOMAIN COVERAGE PASSED"
 echo "MATERIAL TEMPLATE CROSS-CHECKS PASSED"
+echo "APPLICATION DOMAIN BENCHMARKS PASSED"
 echo "SOURCE/MONITOR INFERENCE PASSED"
 echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "OBSERVABLE DIAGNOSTICS PASSED"

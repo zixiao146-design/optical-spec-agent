@@ -123,6 +123,17 @@
       ]
     },
     {
+      "tool_name": "application_domain_benchmarks",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.examples.domain_benchmarks",
+      "notes": [
+        "Evaluates positive, ambiguous, underconstrained, and unsupported optical-design scenarios."
+      ]
+    },
+    {
       "tool_name": "source_monitor_inference",
       "tool_kind": "internal_python",
       "available": true,

@@ -1,0 +1,58 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "full_lumerical_fdtd_request",
+  "status": "pass",
+  "actual_domain": "dielectric_metasurface",
+  "actual_candidates": [
+    "dielectric_metasurface"
+  ],
+  "actual_confidence": "medium",
+  "actual_template": "dielectric_metasurface_preview",
+  "actual_tool_calls": [],
+  "actual_missing_inputs": [
+    "target_phase_profile",
+    "period",
+    "polarization",
+    "unit_cell_geometry",
+    "wavelength_nm",
+    "material_stack"
+  ],
+  "actual_questions": [
+    "What phase profile or focusing target should the metasurface implement?",
+    "What period, height, and polarization should define the unit-cell preview?",
+    "What wavelength, polarization, period, and target phase profile should define the metasurface?",
+    "Please provide or confirm: period, target_phase_profile, polarization, wavelength.",
+    "Should the backend keep using local preview-only tools without external solver execution?"
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "tio2",
+    "si3n4",
+    "si",
+    "sio2"
+  ],
+  "actual_adapter": null,
+  "blocked_actions": [
+    "proprietary_solver",
+    "external_solver",
+    "real_solver_monitor_result"
+  ],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

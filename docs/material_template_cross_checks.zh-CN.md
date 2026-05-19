@@ -23,8 +23,13 @@
 `fiber_coupling_preview` 和 `polarization_optics_preview` 目前是部分覆盖。
 它们可用于规划，但真实耦合效率或偏振器件结果需要未来专用计算器或显式求解器验证。
 
+## Benchmark 关联
+
+`examples/application_domain_benchmarks/` 会把这些交叉检查扩展为自然语言场景。benchmark
+evaluator 会验证正向领域是否匹配预期本地路径，歧义目标是否保留候选和追问，输入不足目标
+是否报告缺失输入，不支持的商业工具或生产级请求是否被阻断/延期。
+
 ## 安全边界
 
 交叉检查不运行求解器，不调用外部 LLM，也不查询外部材料数据库。
 它们只是 preview/design-assist 检查，不证明生产级物理验证。
-

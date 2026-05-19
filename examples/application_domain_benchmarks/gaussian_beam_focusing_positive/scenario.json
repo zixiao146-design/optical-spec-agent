@@ -1,0 +1,25 @@
+{
+  "scenario_id": "gaussian_beam_focusing_positive",
+  "domain_id": "gaussian_beam_focusing",
+  "scenario_type": "positive",
+  "goal_en": "Preview Gaussian beam focusing with waist, Rayleigh range, and focal spot estimates.",
+  "goal_zh": "请预览高斯光束聚焦，包含光腰、瑞利长度和焦斑估计。",
+  "expected_primary_domain": "gaussian_beam_focusing",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "gaussian_beam_focus",
+  "expected_materials": [
+    "air"
+  ],
+  "expected_calculators": [
+    "optics.gaussian_beam.series"
+  ],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

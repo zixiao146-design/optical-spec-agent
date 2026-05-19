@@ -55,6 +55,9 @@ approval remain separate and not granted.
   templates, calculators/adapters, and missing-input questions.
 - Material-template cross-checks: pass/warning/fail checks for domain material,
   template, expected tool, and preview-only evidence coverage.
+- Application-domain benchmarks: positive, ambiguous, underconstrained,
+  unsupported, and unsafe/blocked scenarios evaluated against expected matching,
+  tool-call, missing-input, and safety behavior.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

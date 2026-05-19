@@ -1,0 +1,25 @@
+{
+  "scenario_id": "nanoparticle_missing_radius_material",
+  "domain_id": "nanoparticle_plasmonics",
+  "scenario_type": "underconstrained",
+  "goal_en": "Plan a nanoparticle scattering preview.",
+  "goal_zh": "请规划一个纳米颗粒散射预览。",
+  "expected_primary_domain": "nanoparticle_plasmonics",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "nanoparticle_plasmonics",
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [
+    "particle_radius",
+    "particle_material",
+    "gap_medium"
+  ],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

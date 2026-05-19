@@ -1,0 +1,25 @@
+{
+  "scenario_id": "production_grade_validation_request",
+  "domain_id": null,
+  "scenario_type": "unsafe_or_blocked",
+  "goal_en": "Provide production-grade physical validation and a convergence proof for this optical design.",
+  "goal_zh": "请为这个光学设计提供生产级物理验证和收敛证明。",
+  "expected_primary_domain": null,
+  "expected_candidate_domains": [],
+  "expected_confidence": "none",
+  "expected_requirement_template": null,
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [
+    "production_grade_validation",
+    "formal_convergence_claim",
+    "external_solver"
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

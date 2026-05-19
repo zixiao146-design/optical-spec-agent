@@ -27,9 +27,15 @@ preview/design-assist 机制，不调用外部 LLM，不执行外部求解器，
 - `GET /api/application-domains/{domain_id}/cross-check`
 - `GET /api/application-domain-cross-checks`
 
+## Benchmark
+
+注册表由 [`application_domain_benchmarks.zh-CN.md`](application_domain_benchmarks.zh-CN.md)
+中的场景集检查。benchmark 覆盖明确、歧义、输入不足、不支持和需要阻断的请求，用来展示
+domain matching、材料覆盖、需求模板、计算器/adapter、缺失输入问题和 blocked actions
+如何协同工作。
+
 ## 安全边界
 
 该注册表只记录预览级覆盖。材料常数仍是本地 starter 值，需要用户验证。
 计算器和适配器路径是 design-assist 脚手架，不是生产级物理验证。
 默认不需要、也不执行外部求解器或外部 LLM。
-

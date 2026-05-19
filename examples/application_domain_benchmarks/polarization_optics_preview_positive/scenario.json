@@ -1,0 +1,25 @@
+{
+  "scenario_id": "polarization_optics_preview_positive",
+  "domain_id": "polarization_optics_preview",
+  "scenario_type": "positive",
+  "goal_en": "Create a polarization waveplate preview with input polarization and retardance questions.",
+  "goal_zh": "请创建偏振波片预览，包含输入偏振和延迟量问题。",
+  "expected_primary_domain": "polarization_optics_preview",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": null,
+  "expected_materials": [
+    "tio2",
+    "si3n4",
+    "sio2"
+  ],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

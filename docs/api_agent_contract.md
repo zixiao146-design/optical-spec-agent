@@ -241,3 +241,11 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+Application-domain scenario evidence is exposed through
+`GET /api/application-domain-benchmarks`,
+`GET /api/application-domain-benchmarks/{scenario_id}`,
+`POST /api/application-domain-benchmarks/{scenario_id}/evaluate`, and
+`GET /api/application-domain-benchmark-results`. These endpoints evaluate
+positive, ambiguous, underconstrained, unsupported, and unsafe/blocked goals
+without executing solvers or calling external LLMs.

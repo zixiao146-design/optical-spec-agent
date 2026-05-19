@@ -90,6 +90,7 @@
       "ambiguous_requirement_matching",
       "application_domain_registry",
       "material_template_cross_checks",
+      "application_domain_benchmarks",
       "missing_input_diagnostics",
       "observable_diagnostics",
       "adapter_native_mapping",
@@ -108,6 +109,7 @@
       "ambiguous_requirement_matching",
       "application_domain_registry",
       "material_template_cross_checks",
+      "application_domain_benchmarks",
       "missing_input_diagnostics",
       "observable_diagnostics",
       "adapter_native_mapping",
@@ -892,6 +894,29 @@
     "preview_design_assist_only": true,
     "no_production_grade_claim": true
   },
+  "application_domain_benchmarks": {
+    "scenario_count": 19,
+    "pass_count": 17,
+    "warn_count": 2,
+    "fail_count": 0,
+    "positive_count": 10,
+    "ambiguous_count": 3,
+    "underconstrained_count": 3,
+    "unsupported_count": 3,
+    "safety_summary": {
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "preview_design_assist_only": true,
+    "unsupported_requests_blocked_or_deferred": true,
+    "no_external_solver_execution": true
+  },
   "design_case_cross_checks": [
     {
       "example_id": "dielectric_metasurface_preview",
@@ -904,7 +929,7 @@
         "si",
         "sio2"
       ],
-      "adapter_recommendation": "optiland",
+      "adapter_recommendation": "meep with gmsh geometry preview",
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",

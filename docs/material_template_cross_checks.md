@@ -29,6 +29,14 @@ partial. They are useful as planning domains, but real coupling efficiency or
 polarization-device results require future dedicated calculators or explicit
 solver validation.
 
+## Benchmark Link
+
+`examples/application_domain_benchmarks/` extends these cross-checks into
+natural-language scenarios. The benchmark evaluator verifies that positive
+domains match expected local paths, ambiguous goals preserve candidates and
+questions, underconstrained goals report missing inputs, and unsupported
+commercial or production-grade requests are blocked/deferred.
+
 ## Safety Boundary
 
 The cross-checks do not run solvers, do not call external LLMs, and do not query

@@ -42,6 +42,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "missing_input_diagnostics",
         "application_domain_coverage",
         "material_template_cross_checks",
+        "application_domain_benchmarks",
         "design_case_cross_checks",
         "source_monitor_observable_diagnostics",
         "adapter_native_golden_coverage",
@@ -64,6 +65,8 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert payload["application_domain_coverage"]["failed_domains"] == []
     assert payload["material_template_cross_checks"]["total"] == 10
     assert payload["material_template_cross_checks"]["fail_count"] == 0
+    assert payload["application_domain_benchmarks"]["scenario_count"] >= 19
+    assert payload["application_domain_benchmarks"]["fail_count"] == 0
     markdown = markdown_out.read_text(encoding="utf-8")
     for heading in [
         "Sub-agent reality",
@@ -74,6 +77,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Missing-input diagnostics",
         "Application-domain coverage",
         "Material-template cross-checks",
+        "Application-domain benchmarks",
         "Design-case cross-checks",
         "Adapter-native golden coverage",
         "Blocked or deferred capabilities",

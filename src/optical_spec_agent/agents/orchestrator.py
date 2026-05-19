@@ -30,10 +30,10 @@ def _detect_application(text: str) -> str:
         return "waveguide mode"
     if any(word in lowered for word in ("photonic crystal", "band", "光子晶体")):
         return "photonic crystal band"
-    if any(word in lowered for word in ("lens", "ray", "透镜")):
-        return "lens/ray optics"
     if any(word in lowered for word in ("metasurface", "metalens", "超表面")):
         return "dielectric metasurface"
+    if any(word in lowered for word in ("lens", "ray trace", "ray-optics", "ray optics", "透镜")):
+        return "lens/ray optics"
     return "general optical preview"
 
 

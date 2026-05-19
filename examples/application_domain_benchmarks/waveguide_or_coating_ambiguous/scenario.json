@@ -1,0 +1,26 @@
+{
+  "scenario_id": "waveguide_or_coating_ambiguous",
+  "domain_id": null,
+  "scenario_type": "ambiguous",
+  "goal_en": "Design a waveguide and thin-film coating preview for an integrated photonics stack.",
+  "goal_zh": "请为集成光子堆栈设计一个波导和薄膜镀膜预览。",
+  "expected_primary_domain": null,
+  "expected_candidate_domains": [
+    "slab_waveguide",
+    "thin_film_coating"
+  ],
+  "expected_confidence": "low",
+  "expected_requirement_template": null,
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [
+    "Is the primary artifact a waveguide mode estimate or a coating spectrum?"
+  ],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

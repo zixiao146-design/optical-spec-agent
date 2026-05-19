@@ -24,6 +24,7 @@ def test_tool_capabilities_reports_internal_external_and_release_sections():
     assert internal["ambiguous_requirement_matching"]["available"] is True
     assert internal["application_domain_registry"]["available"] is True
     assert internal["material_template_cross_checks"]["available"] is True
+    assert internal["application_domain_benchmarks"]["available"] is True
     assert internal["agent_trace_builder"]["available"] is True
     assert internal["workflow_planner"]["available"] is True
     assert internal["adapter_preview_generator"]["available"] is True

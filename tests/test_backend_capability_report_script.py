@@ -47,6 +47,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "missing_input_diagnostics",
         "application_domain_coverage",
         "material_template_cross_checks",
+        "application_domain_benchmarks",
         "adapter_native_golden_coverage",
         "design_case_cross_checks",
         "blocked_external_actions",
@@ -63,6 +64,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert tools["ambiguous_requirement_matching"]["executed_in_sample"] is True
     assert tools["application_domain_registry"]["executed_in_sample"] is True
     assert tools["material_template_cross_checks"]["executed_in_sample"] is True
+    assert tools["application_domain_benchmarks"]["executed_in_sample"] is True
     assert tools["source_monitor_inference"]["executed_in_sample"] is True
     assert tools["missing_input_diagnostics"]["executed_in_sample"] is True
     assert tools["observable_diagnostics"]["executed_in_sample"] is True
@@ -84,6 +86,9 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert report["application_domain_coverage"]["failed_domains"] == []
     assert report["material_template_cross_checks"]["total"] == 10
     assert report["material_template_cross_checks"]["fail_count"] == 0
+    assert report["application_domain_benchmarks"]["scenario_count"] >= 19
+    assert report["application_domain_benchmarks"]["fail_count"] == 0
+    assert report["application_domain_benchmarks"]["unsupported_count"] >= 3
     assert all(item["matched_by_heuristic"] for item in report["requirements_templates"])
     assert all(action["executed"] is False for action in report["blocked_external_actions"])
     text = markdown_out.read_text(encoding="utf-8")

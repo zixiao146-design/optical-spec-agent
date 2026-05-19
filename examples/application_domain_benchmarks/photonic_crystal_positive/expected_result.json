@@ -1,0 +1,78 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "photonic_crystal_positive",
+  "status": "pass",
+  "actual_domain": "photonic_crystal",
+  "actual_candidates": [
+    "photonic_crystal"
+  ],
+  "actual_confidence": "high",
+  "actual_template": "photonic_crystal_band_preview",
+  "actual_tool_calls": [
+    "adapter_preview.generate",
+    "agent_trace.build",
+    "application_domains.cross_check_domain",
+    "application_domains.match_goal",
+    "example_registry.load",
+    "material_catalog.suggest",
+    "optical_language.diagnose_missing_inputs",
+    "optical_language.diagnose_observable",
+    "optical_language.generate_disambiguation_questions",
+    "optical_language.infer_source_monitor",
+    "optical_language.map_source_monitor_to_adapter",
+    "requirements.extract_optical_intent",
+    "requirements.match_ambiguity_check",
+    "requirements.match_template",
+    "workflow_plan.preview"
+  ],
+  "actual_missing_inputs": [
+    "k_point_path",
+    "lattice_constant",
+    "unit_cell_geometry",
+    "k_path",
+    "lattice_type",
+    "material_indices",
+    "mode_index",
+    "num_bands",
+    "period",
+    "material_contrast"
+  ],
+  "actual_questions": [
+    "What lattice type, lattice constant, and k-point path should be used?",
+    "How many bands should the preview plan request?",
+    "What lattice constant, unit cell geometry, and k-point path should define the band preview?",
+    "Please provide or confirm: lattice_constant, unit_cell_geometry, k_point_path.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Which values should be used for critical inputs: lattice_constant, unit_cell_geometry, k_point_path?",
+    "Which values should be used for critical inputs: k_point_path, lattice_constant, unit_cell_geometry?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "Application domain has local preview coverage."
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "si",
+    "gaas",
+    "sio2",
+    "air"
+  ],
+  "actual_adapter": "mpb",
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

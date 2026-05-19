@@ -19,8 +19,12 @@ from optical_spec_agent.api.models import (
     AgentSessionRequest,
     AgentTaskSessionResponse,
     ApplicationDomainDetailResponse,
+    ApplicationDomainBenchmarkResponse,
+    ApplicationDomainBenchmarkResultResponse,
     ApplicationDomainMatchRequest,
     ApplicationDomainMatchResult,
+    ApplicationDomainScenarioResponse,
+    ApplicationDomainScenarioResult,
     ApplicationDomainsResponse,
     ApplicationDomainCrossChecksResponse,
     AdapterPreviewRequest as AgentAdapterPreviewRequest,
@@ -111,6 +115,12 @@ from optical_spec_agent.examples.application_domains import (
 from optical_spec_agent.examples.domain_cross_check import (
     cross_check_all_application_domains,
     cross_check_application_domain,
+)
+from optical_spec_agent.examples.domain_benchmarks import (
+    application_domain_benchmark_response,
+    evaluate_all_domain_scenarios,
+    evaluate_domain_scenario,
+    get_domain_scenario,
 )
 from optical_spec_agent.examples.requirements import (
     get_requirement_template,
@@ -779,6 +789,17 @@ def agent_tool_capabilities():
             ],
         ),
         ToolCapabilityItem(
+            tool_name="application_domain_benchmarks",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.examples.domain_benchmarks",
+            notes=[
+                "Evaluates positive, ambiguous, underconstrained, and unsupported optical-design scenarios."
+            ],
+        ),
+        ToolCapabilityItem(
             tool_name="source_monitor_inference",
             tool_kind="internal_python",
             available=True,
@@ -913,6 +934,74 @@ def agent_design_case_cross_checks():
     """Cross-check local optical design examples against backend task sessions."""
 
     return cross_check_all_design_cases()
+
+
+@router.get(
+    "/api/application-domain-benchmarks",
+    response_model=ApplicationDomainBenchmarkResponse,
+)
+def agent_application_domain_benchmarks():
+    """List local application-domain benchmark scenarios."""
+
+    return application_domain_benchmark_response()
+
+
+@router.get(
+    "/api/application-domain-benchmark-results",
+    response_model=ApplicationDomainBenchmarkResultResponse,
+)
+def agent_application_domain_benchmark_results():
+    """Evaluate all application-domain benchmark scenarios."""
+
+    return evaluate_all_domain_scenarios()
+
+
+@router.post(
+    "/api/application-domain-benchmarks/{scenario_id}/evaluate",
+    response_model=ApplicationDomainScenarioResult,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_application_domain_benchmark_evaluate(scenario_id: str):
+    """Evaluate one application-domain benchmark scenario."""
+
+    try:
+        return evaluate_domain_scenario(scenario_id)
+    except ValueError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=[
+                    "Use /api/application-domain-benchmarks to inspect supported scenarios."
+                ],
+            )
+        )
+
+
+@router.get(
+    "/api/application-domain-benchmarks/{scenario_id}",
+    response_model=ApplicationDomainScenarioResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_application_domain_benchmark_detail(scenario_id: str):
+    """Return one application-domain benchmark scenario."""
+
+    try:
+        return ApplicationDomainScenarioResponse(scenario=get_domain_scenario(scenario_id))
+    except ValueError as exc:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                str(exc),
+                status_code=404,
+                diagnostics=ApiDiagnostic(errors=[str(exc)]),
+                recommended_next_actions=[
+                    "Use /api/application-domain-benchmarks to inspect supported scenarios."
+                ],
+            )
+        )
 
 
 @router.get("/api/application-domains", response_model=ApplicationDomainsResponse)

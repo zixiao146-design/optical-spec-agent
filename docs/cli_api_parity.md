@@ -45,6 +45,7 @@ Hardened frontend demo checks are documented in
 | backend evidence summary | `GET /api/backend-evidence-summary` | API-first | Maintainer review summary for sub-agent reality, tool-call reality, calculators, design cases, diagnostics, adapter golden coverage, and blocked actions. |
 | design case cross-checks | `GET /api/design-case-cross-checks` | API-first | Cross-checks bundled examples against expected calculator or adapter-trace behavior. |
 | design requirement templates | `GET /api/design-requirements`, `POST /api/design-requirements/match` | API-first | Maps natural-language goals to optical language and expected backend tool calls. |
+| application domain benchmarks | `GET /api/application-domain-benchmarks`, `POST /api/application-domain-benchmarks/{scenario_id}/evaluate`, `GET /api/application-domain-benchmark-results` | API-first | Evaluates positive, ambiguous, underconstrained, unsupported, and unsafe/blocked domain scenarios. |
 | optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/thin-film-spectrum`, `POST /api/optics/quarter-wave-ar`, `POST /api/optics/paraxial-lens`, `POST /api/optics/paraxial-system`, `POST /api/optics/two-lens-relay`, `POST /api/optics/gaussian-beam`, `POST /api/optics/gaussian-beam-series`, `POST /api/optics/gaussian-beam-focus`, `POST /api/optics/waveguide-estimate`, `POST /api/optics/waveguide-sweep`, `POST /api/optics/waveguide-single-mode-range` | API-first | Local preview/design-assist calculators with sweeps and case helpers; no production-grade validation claim. |
 
 ## Shared boundaries
@@ -93,3 +94,8 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+`python scripts/evaluate_application_domain_benchmarks.py` and the
+application-domain benchmark endpoints provide scenario-level evidence for
+positive, ambiguous, underconstrained, unsupported, and unsafe/blocked requests
+without changing the no-solver/no-LLM boundary.

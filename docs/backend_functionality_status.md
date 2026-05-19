@@ -50,6 +50,7 @@ decision.
 | Agent trace builder | yes | yes | yes |
 | Agent task session builder | yes | yes | yes |
 | Tool-call ledger | yes | yes | yes |
+| Application-domain benchmark scenarios | yes | yes | yes |
 | Source/monitor inference | yes | yes | yes |
 | Source/monitor missing-input diagnostics | yes | yes | yes |
 | Observable diagnostics | yes | yes | yes |
@@ -132,6 +133,7 @@ python scripts/audit_sub_agents.py
 ./scripts/smoke_backend_capabilities.sh
 ./scripts/smoke_backend_report.sh
 ./scripts/smoke_backend_evidence_pack.sh
+python scripts/evaluate_application_domain_benchmarks.py
 ```
 
 Backend source/monitor functionality is implemented as local Python helpers:
@@ -170,3 +172,12 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+The same domain registry is benchmarked through
+`examples/application_domain_benchmarks/`,
+`python scripts/evaluate_application_domain_benchmarks.py`,
+`GET /api/application-domain-benchmarks`,
+`POST /api/application-domain-benchmarks/{scenario_id}/evaluate`, and
+`GET /api/application-domain-benchmark-results`. The benchmark suite checks
+positive, ambiguous, underconstrained, unsupported, and unsafe/blocked scenario
+behavior without solver execution or external LLM calls.

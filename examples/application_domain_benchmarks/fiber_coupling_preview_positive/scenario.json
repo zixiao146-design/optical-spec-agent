@@ -1,0 +1,30 @@
+{
+  "scenario_id": "fiber_coupling_preview_positive",
+  "domain_id": "fiber_coupling_preview",
+  "scenario_type": "positive",
+  "goal_en": "Preview fiber coupling with mode overlap and Gaussian beam assumptions.",
+  "goal_zh": "请预览光纤耦合，包含模式重叠和高斯光束假设。",
+  "expected_primary_domain": "fiber_coupling_preview",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "gaussian_beam_focus",
+  "expected_materials": [
+    "glass_fused_silica_preview",
+    "sio2",
+    "si3n4"
+  ],
+  "expected_calculators": [
+    "optics.gaussian_beam.series"
+  ],
+  "expected_adapters": [
+    "mpb",
+    "optiland"
+  ],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

@@ -29,10 +29,18 @@ solver, or query an online material database.
 - `GET /api/application-domains/{domain_id}/cross-check`
 - `GET /api/application-domain-cross-checks`
 
+## Benchmarks
+
+The registry is exercised by
+[`application_domain_benchmarks.md`](application_domain_benchmarks.md). The
+benchmark suite adds positive, ambiguous, underconstrained, unsupported, and
+unsafe/blocked scenarios so maintainers can see how domain matching, material
+coverage, requirement templates, calculators/adapters, missing-input questions,
+and blocked actions behave together.
+
 ## Safety Boundary
 
 The registry records preview-only coverage. Material constants remain local
 starter values that require user verification. Calculator and adapter paths are
 design-assist scaffolds, not production-grade physical validation. External
 solvers and external LLMs are not required or executed by default.
-

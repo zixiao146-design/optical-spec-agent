@@ -1,0 +1,27 @@
+{
+  "scenario_id": "thin_film_coating_positive",
+  "domain_id": "thin_film_coating",
+  "scenario_type": "positive",
+  "goal_en": "Design a thin film anti-reflection coating on glass at 550 nm using local preview calculators.",
+  "goal_zh": "请为玻璃基底在 550 nm 设计薄膜增透镀膜，并只使用本地预览计算器。",
+  "expected_primary_domain": "thin_film_coating",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "thin_film_ar_coating",
+  "expected_materials": [
+    "sio2",
+    "tio2",
+    "al2o3"
+  ],
+  "expected_calculators": [
+    "optics.thin_film.spectrum"
+  ],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

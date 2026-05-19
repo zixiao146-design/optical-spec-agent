@@ -218,3 +218,16 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+```bash
+curl http://127.0.0.1:8000/api/application-domain-benchmarks
+curl http://127.0.0.1:8000/api/application-domain-benchmarks/nanoparticle_plasmonics_positive
+curl -X POST http://127.0.0.1:8000/api/application-domain-benchmarks/nanoparticle_plasmonics_positive/evaluate \
+  -H "Content-Type: application/json" \
+  --data '{}'
+curl http://127.0.0.1:8000/api/application-domain-benchmark-results
+```
+
+Application-domain benchmark calls add positive, ambiguous, underconstrained,
+unsupported, and unsafe/blocked scenario evidence without changing the
+no-solver/no-LLM boundary.

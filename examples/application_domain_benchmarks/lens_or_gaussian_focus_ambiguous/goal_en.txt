@@ -1,0 +1,1 @@
+Focus a Gaussian beam with a lens, but decide whether this is a beam or ray-optics task.

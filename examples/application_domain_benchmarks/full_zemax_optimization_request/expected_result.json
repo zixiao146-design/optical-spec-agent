@@ -1,0 +1,55 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "full_zemax_optimization_request",
+  "status": "pass",
+  "actual_domain": "lens_ray_optics",
+  "actual_candidates": [
+    "lens_ray_optics"
+  ],
+  "actual_confidence": "medium",
+  "actual_template": "paraxial_lens_imaging",
+  "actual_tool_calls": [],
+  "actual_missing_inputs": [
+    "focal_length_mm",
+    "aperture",
+    "field_of_view",
+    "object_distance_mm"
+  ],
+  "actual_questions": [
+    "What focal length, aperture, and field of view should be previewed?",
+    "Is paraxial approximation acceptable for this first pass?",
+    "What focal length, aperture, field of view, and object distance should be assumed?",
+    "Please provide or confirm: focal_length, aperture, field_of_view, object_distance.",
+    "Should the backend keep using local preview-only tools without external solver execution?"
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview",
+    "air"
+  ],
+  "actual_adapter": null,
+  "blocked_actions": [
+    "proprietary_solver",
+    "external_solver",
+    "production_ready_export"
+  ],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

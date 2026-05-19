@@ -1,0 +1,44 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "waveguide_or_coating_ambiguous",
+  "status": "pass",
+  "actual_domain": null,
+  "actual_candidates": [
+    "slab_waveguide",
+    "thin_film_coating"
+  ],
+  "actual_confidence": "low",
+  "actual_template": "thin_film_ar_coating",
+  "actual_tool_calls": [],
+  "actual_missing_inputs": [],
+  "actual_questions": [
+    "What core/cladding materials and operating wavelength should be used?",
+    "Is this TE-like, TM-like, or polarization-agnostic?",
+    "Which design family should take priority: thin_film_ar_coating, slab_waveguide_single_mode?",
+    "What target wavelength, substrate material, incidence angle, and polarization define the coating?",
+    "Please provide or confirm: target_wavelength, substrate_material, incidence_angle.",
+    "Should the backend keep using local preview-only tools without external solver execution?"
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [],
+  "actual_adapter": null,
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

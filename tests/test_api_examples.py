@@ -100,6 +100,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "application_domain_match_waveguide_response.json" in response_files
     assert "application_domain_cross_check_thin_film_response.json" in response_files
     assert "application_domain_cross_checks_response.json" in response_files
+    assert "application_domain_benchmarks_response.json" in response_files
+    assert "application_domain_benchmark_nanoparticle_response.json" in response_files
+    assert "application_domain_benchmark_eval_nanoparticle_response.json" in response_files
+    assert "application_domain_benchmark_eval_ambiguous_response.json" in response_files
+    assert "application_domain_benchmark_results_response.json" in response_files
     assert "agent_session_domain_nanoparticle_response.json" in response_files
     assert "thin_film_response.json" in response_files
     assert "thin_film_spectrum_response.json" in response_files
@@ -194,6 +199,11 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
         "application_domain_match_waveguide_response.json",
         "application_domain_cross_check_thin_film_response.json",
         "application_domain_cross_checks_response.json",
+        "application_domain_benchmarks_response.json",
+        "application_domain_benchmark_nanoparticle_response.json",
+        "application_domain_benchmark_eval_nanoparticle_response.json",
+        "application_domain_benchmark_eval_ambiguous_response.json",
+        "application_domain_benchmark_results_response.json",
         "agent_session_domain_nanoparticle_response.json",
     ]:
         payload = _load_json(API_EXAMPLES / calculator_response)

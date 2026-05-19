@@ -1,0 +1,80 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "slab_waveguide_positive",
+  "status": "pass",
+  "actual_domain": "slab_waveguide",
+  "actual_candidates": [
+    "slab_waveguide"
+  ],
+  "actual_confidence": "high",
+  "actual_template": "slab_waveguide_single_mode",
+  "actual_tool_calls": [
+    "adapter_preview.generate",
+    "agent_trace.build",
+    "application_domains.cross_check_domain",
+    "application_domains.match_goal",
+    "example_registry.load",
+    "material_catalog.suggest",
+    "optical_language.diagnose_missing_inputs",
+    "optical_language.diagnose_observable",
+    "optical_language.generate_disambiguation_questions",
+    "optical_language.infer_source_monitor",
+    "optical_language.map_source_monitor_to_adapter",
+    "optics.waveguide.sweep",
+    "requirements.extract_optical_intent",
+    "requirements.match_ambiguity_check",
+    "requirements.match_template",
+    "workflow_plan.preview"
+  ],
+  "actual_missing_inputs": [
+    "core_thickness",
+    "wavelength",
+    "polarization_or_mode_family",
+    "cladding_n",
+    "core_n",
+    "core_thickness_um",
+    "mode_index",
+    "wavelength_nm",
+    "cladding_material",
+    "polarization",
+    "core_material"
+  ],
+  "actual_questions": [
+    "What core/cladding materials and operating wavelength should be used?",
+    "Is this TE-like, TM-like, or polarization-agnostic?",
+    "What core/cladding materials, core thickness, and wavelength should define the waveguide?",
+    "Please provide or confirm: core_thickness, wavelength.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Which values should be used for critical inputs: core_thickness, wavelength?",
+    "Can you provide optional context for: polarization_or_mode_family?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "Application domain has local preview coverage."
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "si",
+    "si3n4",
+    "sio2",
+    "air"
+  ],
+  "actual_adapter": "mpb",
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

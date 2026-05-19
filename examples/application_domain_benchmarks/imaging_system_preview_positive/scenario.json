@@ -1,0 +1,28 @@
+{
+  "scenario_id": "imaging_system_preview_positive",
+  "domain_id": "imaging_system_preview",
+  "scenario_type": "positive",
+  "goal_en": "Plan an imaging system preview with magnification, image plane, and aperture questions.",
+  "goal_zh": "请规划成像系统预览，包含放大率、像面和孔径问题。",
+  "expected_primary_domain": "imaging_system_preview",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "paraxial_lens_imaging",
+  "expected_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview"
+  ],
+  "expected_calculators": [
+    "optics.paraxial.two_lens_relay"
+  ],
+  "expected_adapters": [
+    "optiland"
+  ],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

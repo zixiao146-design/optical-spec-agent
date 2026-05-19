@@ -1,0 +1,25 @@
+{
+  "scenario_id": "lens_missing_focal_length",
+  "domain_id": "lens_ray_optics",
+  "scenario_type": "underconstrained",
+  "goal_en": "Optimize a lens preview for imaging.",
+  "goal_zh": "请优化一个成像透镜预览。",
+  "expected_primary_domain": "lens_ray_optics",
+  "expected_candidate_domains": [],
+  "expected_confidence": "medium",
+  "expected_requirement_template": "paraxial_lens_imaging",
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [
+    "focal_length_mm",
+    "aperture",
+    "field_of_view"
+  ],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

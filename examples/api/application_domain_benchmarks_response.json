@@ -1,0 +1,523 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "scenarios": [
+    {
+      "scenario_id": "nanoparticle_plasmonics_positive",
+      "domain_id": "nanoparticle_plasmonics",
+      "scenario_type": "positive",
+      "goal_en": "Create a local preview for a silver nanoparticle plasmonic scattering spectrum from 400 to 900 nm.",
+      "goal_zh": "请为银纳米颗粒等离激元散射谱生成 400 到 900 nm 的本地预览。",
+      "expected_primary_domain": "nanoparticle_plasmonics",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "nanoparticle_plasmonics",
+      "expected_materials": [
+        "ag",
+        "au",
+        "sio2"
+      ],
+      "expected_calculators": [],
+      "expected_adapters": [
+        "meep",
+        "gmsh"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "thin_film_coating_positive",
+      "domain_id": "thin_film_coating",
+      "scenario_type": "positive",
+      "goal_en": "Design a thin film anti-reflection coating on glass at 550 nm using local preview calculators.",
+      "goal_zh": "请为玻璃基底在 550 nm 设计薄膜增透镀膜，并只使用本地预览计算器。",
+      "expected_primary_domain": "thin_film_coating",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "thin_film_ar_coating",
+      "expected_materials": [
+        "sio2",
+        "tio2",
+        "al2o3"
+      ],
+      "expected_calculators": [
+        "optics.thin_film.spectrum"
+      ],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "slab_waveguide_positive",
+      "domain_id": "slab_waveguide",
+      "scenario_type": "positive",
+      "goal_en": "Design a single mode slab waveguide preview at 1550 nm with SiN core and SiO2 cladding.",
+      "goal_zh": "请设计 1550 nm 的单模平板波导预览，芯层为氮化硅，包层为二氧化硅。",
+      "expected_primary_domain": "slab_waveguide",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "slab_waveguide_single_mode",
+      "expected_materials": [
+        "si3n4",
+        "sio2"
+      ],
+      "expected_calculators": [
+        "optics.waveguide.sweep"
+      ],
+      "expected_adapters": [
+        "mpb",
+        "elmer"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "photonic_crystal_positive",
+      "domain_id": "photonic_crystal",
+      "scenario_type": "positive",
+      "goal_en": "Create a photonic crystal band structure preview with an MPB adapter path.",
+      "goal_zh": "请生成光子晶体能带结构的 MPB adapter 本地预览。",
+      "expected_primary_domain": "photonic_crystal",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "photonic_crystal_band_preview",
+      "expected_materials": [
+        "si",
+        "sio2",
+        "air"
+      ],
+      "expected_calculators": [],
+      "expected_adapters": [
+        "mpb"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "dielectric_metasurface_positive",
+      "domain_id": "dielectric_metasurface",
+      "scenario_type": "positive",
+      "goal_en": "Plan a dielectric metasurface phase profile preview for a TiO2 periodic meta atom.",
+      "goal_zh": "请为 TiO2 周期性超表面单元结构规划介质超表面相位预览。",
+      "expected_primary_domain": "dielectric_metasurface",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "dielectric_metasurface_preview",
+      "expected_materials": [
+        "tio2",
+        "sio2"
+      ],
+      "expected_calculators": [],
+      "expected_adapters": [
+        "meep",
+        "gmsh"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "lens_ray_optics_positive",
+      "domain_id": "lens_ray_optics",
+      "scenario_type": "positive",
+      "goal_en": "Create a paraxial lens ray trace preview with focal length and aperture estimates.",
+      "goal_zh": "请创建包含焦距和孔径估计的近轴透镜光线预览。",
+      "expected_primary_domain": "lens_ray_optics",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "paraxial_lens_imaging",
+      "expected_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview"
+      ],
+      "expected_calculators": [
+        "optics.paraxial.two_lens_relay"
+      ],
+      "expected_adapters": [
+        "optiland"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "gaussian_beam_focusing_positive",
+      "domain_id": "gaussian_beam_focusing",
+      "scenario_type": "positive",
+      "goal_en": "Preview Gaussian beam focusing with waist, Rayleigh range, and focal spot estimates.",
+      "goal_zh": "请预览高斯光束聚焦，包含光腰、瑞利长度和焦斑估计。",
+      "expected_primary_domain": "gaussian_beam_focusing",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "gaussian_beam_focus",
+      "expected_materials": [
+        "air"
+      ],
+      "expected_calculators": [
+        "optics.gaussian_beam.series"
+      ],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "imaging_system_preview_positive",
+      "domain_id": "imaging_system_preview",
+      "scenario_type": "positive",
+      "goal_en": "Plan an imaging system preview with magnification, image plane, and aperture questions.",
+      "goal_zh": "请规划成像系统预览，包含放大率、像面和孔径问题。",
+      "expected_primary_domain": "imaging_system_preview",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "paraxial_lens_imaging",
+      "expected_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview"
+      ],
+      "expected_calculators": [
+        "optics.paraxial.two_lens_relay"
+      ],
+      "expected_adapters": [
+        "optiland"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "fiber_coupling_preview_positive",
+      "domain_id": "fiber_coupling_preview",
+      "scenario_type": "positive",
+      "goal_en": "Preview fiber coupling with mode overlap and Gaussian beam assumptions.",
+      "goal_zh": "请预览光纤耦合，包含模式重叠和高斯光束假设。",
+      "expected_primary_domain": "fiber_coupling_preview",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "gaussian_beam_focus",
+      "expected_materials": [
+        "glass_fused_silica_preview",
+        "sio2",
+        "si3n4"
+      ],
+      "expected_calculators": [
+        "optics.gaussian_beam.series"
+      ],
+      "expected_adapters": [
+        "mpb",
+        "optiland"
+      ],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "polarization_optics_preview_positive",
+      "domain_id": "polarization_optics_preview",
+      "scenario_type": "positive",
+      "goal_en": "Create a polarization waveplate preview with input polarization and retardance questions.",
+      "goal_zh": "请创建偏振波片预览，包含输入偏振和延迟量问题。",
+      "expected_primary_domain": "polarization_optics_preview",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": null,
+      "expected_materials": [
+        "tio2",
+        "si3n4",
+        "sio2"
+      ],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "waveguide_or_coating_ambiguous",
+      "domain_id": null,
+      "scenario_type": "ambiguous",
+      "goal_en": "Design a waveguide and thin-film coating preview for an integrated photonics stack.",
+      "goal_zh": "请为集成光子堆栈设计一个波导和薄膜镀膜预览。",
+      "expected_primary_domain": null,
+      "expected_candidate_domains": [
+        "slab_waveguide",
+        "thin_film_coating"
+      ],
+      "expected_confidence": "low",
+      "expected_requirement_template": null,
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [
+        "Is the primary artifact a waveguide mode estimate or a coating spectrum?"
+      ],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "lens_or_gaussian_focus_ambiguous",
+      "domain_id": null,
+      "scenario_type": "ambiguous",
+      "goal_en": "Focus a Gaussian beam with a lens, but decide whether this is a beam or ray-optics task.",
+      "goal_zh": "请用透镜聚焦高斯光束，但需要判断这是光束任务还是光线光学任务。",
+      "expected_primary_domain": null,
+      "expected_candidate_domains": [
+        "gaussian_beam_focusing",
+        "lens_ray_optics"
+      ],
+      "expected_confidence": "low",
+      "expected_requirement_template": null,
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [
+        "Should the first result be a Gaussian waist estimate or a paraxial lens image?"
+      ],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "generic_optical_system_ambiguous",
+      "domain_id": null,
+      "scenario_type": "ambiguous",
+      "goal_en": "Design an optical system.",
+      "goal_zh": "设计一个光学系统。",
+      "expected_primary_domain": null,
+      "expected_candidate_domains": [
+        "thin_film_coating",
+        "slab_waveguide",
+        "lens_ray_optics",
+        "gaussian_beam_focusing",
+        "nanoparticle_plasmonics"
+      ],
+      "expected_confidence": "low",
+      "expected_requirement_template": null,
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "lens_missing_focal_length",
+      "domain_id": "lens_ray_optics",
+      "scenario_type": "underconstrained",
+      "goal_en": "Optimize a lens preview for imaging.",
+      "goal_zh": "请优化一个成像透镜预览。",
+      "expected_primary_domain": "lens_ray_optics",
+      "expected_candidate_domains": [],
+      "expected_confidence": "medium",
+      "expected_requirement_template": "paraxial_lens_imaging",
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [
+        "focal_length_mm",
+        "aperture",
+        "field_of_view"
+      ],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "nanoparticle_missing_radius_material",
+      "domain_id": "nanoparticle_plasmonics",
+      "scenario_type": "underconstrained",
+      "goal_en": "Plan a nanoparticle scattering preview.",
+      "goal_zh": "请规划一个纳米颗粒散射预览。",
+      "expected_primary_domain": "nanoparticle_plasmonics",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "nanoparticle_plasmonics",
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [
+        "particle_radius",
+        "particle_material",
+        "gap_medium"
+      ],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "waveguide_missing_core_thickness",
+      "domain_id": "slab_waveguide",
+      "scenario_type": "underconstrained",
+      "goal_en": "Plan a single mode slab waveguide preview.",
+      "goal_zh": "请规划一个单模平板波导预览。",
+      "expected_primary_domain": "slab_waveguide",
+      "expected_candidate_domains": [],
+      "expected_confidence": "high",
+      "expected_requirement_template": "slab_waveguide_single_mode",
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [
+        "core_thickness_um",
+        "cladding_material",
+        "wavelength_nm"
+      ],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "full_zemax_optimization_request",
+      "domain_id": null,
+      "scenario_type": "unsupported",
+      "goal_en": "Run a full Zemax lens optimization and return production-ready prescription files.",
+      "goal_zh": "请运行完整 Zemax 透镜优化并返回生产可用的处方文件。",
+      "expected_primary_domain": null,
+      "expected_candidate_domains": [],
+      "expected_confidence": "none",
+      "expected_requirement_template": null,
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [
+        "proprietary_solver",
+        "external_solver",
+        "production_ready_export"
+      ],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "full_lumerical_fdtd_request",
+      "domain_id": null,
+      "scenario_type": "unsupported",
+      "goal_en": "Run a full Lumerical FDTD metasurface optimization with real monitor results.",
+      "goal_zh": "请运行完整 Lumerical FDTD 超表面优化并返回真实 monitor 结果。",
+      "expected_primary_domain": null,
+      "expected_candidate_domains": [],
+      "expected_confidence": "none",
+      "expected_requirement_template": null,
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [
+        "proprietary_solver",
+        "external_solver",
+        "real_solver_monitor_result"
+      ],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "scenario_id": "production_grade_validation_request",
+      "domain_id": null,
+      "scenario_type": "unsafe_or_blocked",
+      "goal_en": "Provide production-grade physical validation and a convergence proof for this optical design.",
+      "goal_zh": "请为这个光学设计提供生产级物理验证和收敛证明。",
+      "expected_primary_domain": null,
+      "expected_candidate_domains": [],
+      "expected_confidence": "none",
+      "expected_requirement_template": null,
+      "expected_materials": [],
+      "expected_calculators": [],
+      "expected_adapters": [],
+      "expected_missing_critical_inputs": [],
+      "expected_missing_optional_inputs": [],
+      "expected_recommended_questions": [],
+      "expected_blocked_actions": [
+        "production_grade_validation",
+        "formal_convergence_claim",
+        "external_solver"
+      ],
+      "preview_only": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "scenario_count": 19,
+  "scenario_type_counts": {
+    "positive": 10,
+    "ambiguous": 3,
+    "underconstrained": 3,
+    "unsupported": 3,
+    "unsafe_or_blocked": 1
+  },
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

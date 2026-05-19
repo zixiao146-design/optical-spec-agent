@@ -1,0 +1,28 @@
+{
+  "scenario_id": "lens_ray_optics_positive",
+  "domain_id": "lens_ray_optics",
+  "scenario_type": "positive",
+  "goal_en": "Create a paraxial lens ray trace preview with focal length and aperture estimates.",
+  "goal_zh": "请创建包含焦距和孔径估计的近轴透镜光线预览。",
+  "expected_primary_domain": "lens_ray_optics",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "paraxial_lens_imaging",
+  "expected_materials": [
+    "glass_bk7_preview",
+    "glass_fused_silica_preview"
+  ],
+  "expected_calculators": [
+    "optics.paraxial.two_lens_relay"
+  ],
+  "expected_adapters": [
+    "optiland"
+  ],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

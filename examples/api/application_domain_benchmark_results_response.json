@@ -1,0 +1,1372 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "results": [
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "nanoparticle_plasmonics_positive",
+      "status": "pass",
+      "actual_domain": "nanoparticle_plasmonics",
+      "actual_candidates": [
+        "nanoparticle_plasmonics"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "nanoparticle_plasmonics",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "film_thickness",
+        "particle_radius_or_diameter",
+        "wavelength_band",
+        "background_medium",
+        "polarization",
+        "film_material",
+        "gap_nm",
+        "particle_material",
+        "particle_size_nm",
+        "wavelength_range_nm",
+        "particle_radius",
+        "gap_medium",
+        "background_or_gap_medium"
+      ],
+      "actual_questions": [
+        "What particle material, size, and surrounding medium should be used?",
+        "Should the observable be scattering, extinction, or near-field enhancement?",
+        "What particle size, material, film thickness, wavelength band, and polarization should be assumed?",
+        "Please provide or confirm: particle_radius_or_diameter, film_thickness, wavelength_band.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: particle_radius_or_diameter?",
+        "Can you provide optional context for: film_thickness, background_medium, polarization?",
+        "For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?",
+        "Can you provide optional context for: background_medium, film_thickness, polarization?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "ag",
+        "au",
+        "sio2",
+        "air",
+        "water"
+      ],
+      "actual_adapter": "meep",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "thin_film_coating_positive",
+      "status": "pass",
+      "actual_domain": "thin_film_coating",
+      "actual_candidates": [
+        "thin_film_coating"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "thin_film_ar_coating",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.thin_film.spectrum",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "incidence_angle",
+        "polarization",
+        "coating_n or material choice",
+        "incident_n",
+        "substrate_n",
+        "target_wavelength_nm",
+        "wavelength_range_nm",
+        "substrate_material",
+        "coating_material",
+        "incident_medium",
+        "layer_materials"
+      ],
+      "actual_questions": [
+        "What substrate and target wavelength should the coating optimize?",
+        "Is normal incidence acceptable for the preview?",
+        "What target wavelength, substrate material, incidence angle, and polarization define the coating?",
+        "Please provide or confirm: incidence_angle.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Can you provide optional context for: incidence_angle, polarization?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "sio2",
+        "tio2",
+        "al2o3",
+        "glass_bk7_preview"
+      ],
+      "actual_adapter": "preview-only; future TMM adapter candidate",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "slab_waveguide_positive",
+      "status": "pass",
+      "actual_domain": "slab_waveguide",
+      "actual_candidates": [
+        "slab_waveguide"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "slab_waveguide_single_mode",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.waveguide.sweep",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "core_thickness",
+        "wavelength",
+        "polarization_or_mode_family",
+        "cladding_n",
+        "core_n",
+        "core_thickness_um",
+        "mode_index",
+        "wavelength_nm",
+        "cladding_material",
+        "polarization",
+        "core_material"
+      ],
+      "actual_questions": [
+        "What core/cladding materials and operating wavelength should be used?",
+        "Is this TE-like, TM-like, or polarization-agnostic?",
+        "What core/cladding materials, core thickness, and wavelength should define the waveguide?",
+        "Please provide or confirm: core_thickness, wavelength.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: core_thickness, wavelength?",
+        "Can you provide optional context for: polarization_or_mode_family?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "si",
+        "si3n4",
+        "sio2",
+        "air"
+      ],
+      "actual_adapter": "mpb",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "photonic_crystal_positive",
+      "status": "pass",
+      "actual_domain": "photonic_crystal",
+      "actual_candidates": [
+        "photonic_crystal"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "photonic_crystal_band_preview",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "k_point_path",
+        "lattice_constant",
+        "unit_cell_geometry",
+        "k_path",
+        "lattice_type",
+        "material_indices",
+        "mode_index",
+        "num_bands",
+        "period",
+        "material_contrast"
+      ],
+      "actual_questions": [
+        "What lattice type, lattice constant, and k-point path should be used?",
+        "How many bands should the preview plan request?",
+        "What lattice constant, unit cell geometry, and k-point path should define the band preview?",
+        "Please provide or confirm: lattice_constant, unit_cell_geometry, k_point_path.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: lattice_constant, unit_cell_geometry, k_point_path?",
+        "Which values should be used for critical inputs: k_point_path, lattice_constant, unit_cell_geometry?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "si",
+        "gaas",
+        "sio2",
+        "air"
+      ],
+      "actual_adapter": "mpb",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "dielectric_metasurface_positive",
+      "status": "pass",
+      "actual_domain": "dielectric_metasurface",
+      "actual_candidates": [
+        "dielectric_metasurface"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "dielectric_metasurface_preview",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "polarization",
+        "wavelength",
+        "material_stack",
+        "meta_atom_geometry",
+        "period",
+        "phase_profile",
+        "substrate_material",
+        "target_wavelength_nm",
+        "target_phase_profile",
+        "unit_cell_geometry",
+        "wavelength_nm"
+      ],
+      "actual_questions": [
+        "What phase profile or focusing target should the metasurface implement?",
+        "What period, height, and polarization should define the unit-cell preview?",
+        "What wavelength, polarization, period, and target phase profile should define the metasurface?",
+        "Please provide or confirm: polarization, wavelength.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: wavelength?",
+        "Can you provide optional context for: polarization, material_stack?",
+        "Can you provide optional context for: material_stack, polarization?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "tio2",
+        "si3n4",
+        "si",
+        "sio2"
+      ],
+      "actual_adapter": "meep",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "lens_ray_optics_positive",
+      "status": "pass",
+      "actual_domain": "lens_ray_optics",
+      "actual_candidates": [
+        "lens_ray_optics"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "paraxial_lens_imaging",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.paraxial.two_lens_relay",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "field_of_view",
+        "object_distance",
+        "wavelength",
+        "focal_length_mm",
+        "lens_separation_mm optional",
+        "object_distance_mm",
+        "wavelength optional",
+        "aperture"
+      ],
+      "actual_questions": [
+        "What focal length, aperture, and field of view should be previewed?",
+        "Is paraxial approximation acceptable for this first pass?",
+        "What focal length, aperture, field of view, and object distance should be assumed?",
+        "Please provide or confirm: field_of_view, object_distance.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: object_distance?",
+        "Can you provide optional context for: field_of_view, wavelength?",
+        "For the lens preview, what aperture and field of view should bound the paraxial assumptions?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "actual_adapter": "optiland",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "gaussian_beam_focusing_positive",
+      "status": "pass",
+      "actual_domain": "gaussian_beam_focusing",
+      "actual_candidates": [
+        "gaussian_beam_focusing"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "gaussian_beam_focus",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.gaussian_beam.series",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "wavelength",
+        "propagation_distance",
+        "focal_length_mm",
+        "input_waist_um",
+        "propagation_range_mm",
+        "wavelength_nm",
+        "waist_um",
+        "propagation_distance_or_focal_length"
+      ],
+      "actual_questions": [
+        "What wavelength, input waist, and propagation/focal distance should be used?",
+        "Should the preview include a thin lens focus estimate?",
+        "What wavelength, input waist, and focal length should define the Gaussian beam preview?",
+        "Please provide or confirm: wavelength.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: wavelength?",
+        "Can you provide optional context for: propagation_distance?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "No deterministic suitability rule for air in gaussian_beam_focusing.",
+        "No deterministic suitability rule for glass_fused_silica_preview in gaussian_beam_focusing."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "air",
+        "glass_fused_silica_preview"
+      ],
+      "actual_adapter": "adapter auto-selection preview",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "imaging_system_preview_positive",
+      "status": "pass",
+      "actual_domain": "imaging_system_preview",
+      "actual_candidates": [
+        "imaging_system_preview"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "paraxial_lens_imaging",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.paraxial.two_lens_relay",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "field_of_view",
+        "focal_length",
+        "object_distance",
+        "wavelength",
+        "focal_length_mm",
+        "lens_separation_mm optional",
+        "object_distance_mm",
+        "wavelength optional",
+        "magnification",
+        "aperture",
+        "image_distance_or_magnification"
+      ],
+      "actual_questions": [
+        "What magnification and image plane should the preview target?",
+        "What aperture and field should constrain the imaging system?",
+        "What focal length, aperture, field of view, and object distance should be assumed?",
+        "Please provide or confirm: focal_length, field_of_view, object_distance.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: focal_length, object_distance?",
+        "Can you provide optional context for: field_of_view, wavelength?",
+        "For the lens preview, what aperture and field of view should bound the paraxial assumptions?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "actual_adapter": "optiland",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "fiber_coupling_preview_positive",
+      "status": "warn",
+      "actual_domain": "fiber_coupling_preview",
+      "actual_candidates": [
+        "fiber_coupling_preview",
+        "gaussian_beam_focusing"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "gaussian_beam_focus",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.gaussian_beam.series",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "focal_length",
+        "input_waist",
+        "wavelength",
+        "propagation_distance",
+        "focal_length_mm",
+        "input_waist_um",
+        "propagation_range_mm",
+        "wavelength_nm",
+        "mode_field_diameter",
+        "target_mode",
+        "alignment_tolerance"
+      ],
+      "actual_questions": [
+        "What fiber mode field diameter and wavelength should be assumed?",
+        "Is the target coupling into a fiber, waveguide, or free-space focus?",
+        "What wavelength, input waist, and focal length should define the Gaussian beam preview?",
+        "Please provide or confirm: wavelength, input_waist, focal_length.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: wavelength, input_waist, focal_length?",
+        "Can you provide optional context for: propagation_distance?",
+        "Which values should be used for critical inputs: focal_length, input_waist, wavelength?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "No deterministic suitability rule for glass_fused_silica_preview in fiber_coupling_preview.",
+        "No deterministic suitability rule for sio2 in fiber_coupling_preview."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "glass_fused_silica_preview",
+        "sio2",
+        "si3n4",
+        "air"
+      ],
+      "actual_adapter": "mpb",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "polarization_optics_preview_positive",
+      "status": "warn",
+      "actual_domain": "polarization_optics_preview",
+      "actual_candidates": [
+        "polarization_optics_preview"
+      ],
+      "actual_confidence": "high",
+      "actual_template": null,
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "geometry",
+        "materials",
+        "optical_application",
+        "physical_system",
+        "source_type",
+        "target_observable",
+        "target_output",
+        "geometry_scale",
+        "material_system",
+        "wavelength_band",
+        "monitor_region",
+        "observable",
+        "wavelength_or_frequency",
+        "input_polarization",
+        "target_polarization_transform",
+        "retardance",
+        "wavelength_nm"
+      ],
+      "actual_questions": [
+        "What input and output polarization states should be transformed?",
+        "Is the target a polarizer, waveplate, or metasurface polarization element?",
+        "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
+        "What source and monitored observable should define the preview?",
+        "Which material system and geometry scale should be assumed?",
+        "What source type should drive the design preview?",
+        "What observable should be monitored?",
+        "Which values should be used for critical inputs: optical_application, source_type, target_observable?",
+        "Can you provide optional context for: wavelength_band, material_system, geometry_scale?",
+        "Can you provide optional context for: geometry_scale, material_system, wavelength_band?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "No deterministic suitability rule for tio2 in polarization_optics_preview.",
+        "No deterministic suitability rule for si3n4 in polarization_optics_preview."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "tio2",
+        "si3n4",
+        "sio2",
+        "glass_fused_silica_preview"
+      ],
+      "actual_adapter": "adapter auto-selection preview",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "waveguide_or_coating_ambiguous",
+      "status": "pass",
+      "actual_domain": null,
+      "actual_candidates": [
+        "slab_waveguide",
+        "thin_film_coating"
+      ],
+      "actual_confidence": "low",
+      "actual_template": "thin_film_ar_coating",
+      "actual_tool_calls": [],
+      "actual_missing_inputs": [],
+      "actual_questions": [
+        "What core/cladding materials and operating wavelength should be used?",
+        "Is this TE-like, TM-like, or polarization-agnostic?",
+        "Which design family should take priority: thin_film_ar_coating, slab_waveguide_single_mode?",
+        "What target wavelength, substrate material, incidence angle, and polarization define the coating?",
+        "Please provide or confirm: target_wavelength, substrate_material, incidence_angle.",
+        "Should the backend keep using local preview-only tools without external solver execution?"
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [],
+      "actual_adapter": null,
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "lens_or_gaussian_focus_ambiguous",
+      "status": "pass",
+      "actual_domain": null,
+      "actual_candidates": [
+        "lens_ray_optics",
+        "gaussian_beam_focusing"
+      ],
+      "actual_confidence": "low",
+      "actual_template": "gaussian_beam_focus",
+      "actual_tool_calls": [],
+      "actual_missing_inputs": [],
+      "actual_questions": [
+        "What focal length, aperture, and field of view should be previewed?",
+        "Is paraxial approximation acceptable for this first pass?",
+        "What wavelength, input waist, and propagation/focal distance should be used?",
+        "Should the preview include a thin lens focus estimate?",
+        "Which design family should take priority: gaussian_beam_focus, paraxial_lens_imaging?",
+        "What wavelength, input waist, and focal length should define the Gaussian beam preview?",
+        "Please provide or confirm: wavelength, input_waist, focal_length.",
+        "Should the backend keep using local preview-only tools without external solver execution?"
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [],
+      "actual_adapter": null,
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "generic_optical_system_ambiguous",
+      "status": "pass",
+      "actual_domain": null,
+      "actual_candidates": [
+        "thin_film_coating",
+        "slab_waveguide",
+        "lens_ray_optics",
+        "gaussian_beam_focusing",
+        "nanoparticle_plasmonics"
+      ],
+      "actual_confidence": "low",
+      "actual_template": null,
+      "actual_tool_calls": [],
+      "actual_missing_inputs": [],
+      "actual_questions": [
+        "Is the goal about coatings, beams, waveguides, lenses, metasurfaces, photonic crystals, or nanoparticles?",
+        "Which material system and observable should be previewed?",
+        "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
+        "What source and monitored observable should define the preview?",
+        "Which material system and geometry scale should be assumed?"
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [],
+      "actual_adapter": null,
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "lens_missing_focal_length",
+      "status": "pass",
+      "actual_domain": "lens_ray_optics",
+      "actual_candidates": [
+        "lens_ray_optics"
+      ],
+      "actual_confidence": "medium",
+      "actual_template": "paraxial_lens_imaging",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.paraxial.two_lens_relay",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "aperture",
+        "field_of_view",
+        "focal_length",
+        "object_distance",
+        "wavelength",
+        "focal_length_mm",
+        "lens_separation_mm optional",
+        "object_distance_mm",
+        "wavelength optional"
+      ],
+      "actual_questions": [
+        "What focal length, aperture, and field of view should be previewed?",
+        "Is paraxial approximation acceptable for this first pass?",
+        "What focal length, aperture, field of view, and object distance should be assumed?",
+        "Please provide or confirm: focal_length, aperture, field_of_view, object_distance.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: focal_length, object_distance?",
+        "Can you provide optional context for: aperture, field_of_view, wavelength?",
+        "For the lens preview, what aperture and field of view should bound the paraxial assumptions?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "actual_adapter": "optiland",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "nanoparticle_missing_radius_material",
+      "status": "pass",
+      "actual_domain": "nanoparticle_plasmonics",
+      "actual_candidates": [
+        "nanoparticle_plasmonics"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "nanoparticle_plasmonics",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "film_thickness",
+        "particle_material",
+        "particle_radius_or_diameter",
+        "wavelength_band",
+        "background_medium",
+        "polarization",
+        "film_material",
+        "gap_nm",
+        "particle_size_nm",
+        "wavelength_range_nm",
+        "particle_radius",
+        "gap_medium",
+        "background_or_gap_medium"
+      ],
+      "actual_questions": [
+        "What particle material, size, and surrounding medium should be used?",
+        "Should the observable be scattering, extinction, or near-field enhancement?",
+        "What particle size, material, film thickness, wavelength band, and polarization should be assumed?",
+        "Please provide or confirm: particle_radius_or_diameter, particle_material, film_thickness, wavelength_band.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: particle_radius_or_diameter, particle_material, wavelength_band?",
+        "Can you provide optional context for: film_thickness, background_medium, polarization?",
+        "For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?",
+        "Which values should be used for critical inputs: particle_material, particle_radius_or_diameter, wavelength_band?",
+        "Can you provide optional context for: background_medium, film_thickness, polarization?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "ag",
+        "au",
+        "sio2",
+        "air",
+        "water"
+      ],
+      "actual_adapter": "meep",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "waveguide_missing_core_thickness",
+      "status": "pass",
+      "actual_domain": "slab_waveguide",
+      "actual_candidates": [
+        "slab_waveguide"
+      ],
+      "actual_confidence": "high",
+      "actual_template": "slab_waveguide_single_mode",
+      "actual_tool_calls": [
+        "adapter_preview.generate",
+        "agent_trace.build",
+        "application_domains.cross_check_domain",
+        "application_domains.match_goal",
+        "example_registry.load",
+        "material_catalog.suggest",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.map_source_monitor_to_adapter",
+        "optics.waveguide.sweep",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "requirements.match_template",
+        "workflow_plan.preview"
+      ],
+      "actual_missing_inputs": [
+        "cladding_index_or_material",
+        "core_index_or_material",
+        "core_thickness",
+        "wavelength",
+        "polarization_or_mode_family",
+        "cladding_n",
+        "core_n",
+        "core_thickness_um",
+        "mode_index",
+        "wavelength_nm",
+        "cladding_material",
+        "polarization",
+        "core_material"
+      ],
+      "actual_questions": [
+        "What core/cladding materials and operating wavelength should be used?",
+        "Is this TE-like, TM-like, or polarization-agnostic?",
+        "What core/cladding materials, core thickness, and wavelength should define the waveguide?",
+        "Please provide or confirm: core_index_or_material, cladding_index_or_material, core_thickness, wavelength.",
+        "Should the backend keep using local preview-only tools without external solver execution?",
+        "Which values should be used for critical inputs: core_index_or_material, cladding_index_or_material, core_thickness, wavelength?",
+        "Can you provide optional context for: polarization_or_mode_family?",
+        "Which values should be used for critical inputs: cladding_index_or_material, core_index_or_material, core_thickness, wavelength?",
+        "Confirm whether the backend should remain in local preview mode without running external solvers.",
+        "Application domain has local preview coverage."
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "si",
+        "si3n4",
+        "sio2",
+        "air"
+      ],
+      "actual_adapter": "mpb",
+      "blocked_actions": [],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "full_zemax_optimization_request",
+      "status": "pass",
+      "actual_domain": "lens_ray_optics",
+      "actual_candidates": [
+        "lens_ray_optics"
+      ],
+      "actual_confidence": "medium",
+      "actual_template": "paraxial_lens_imaging",
+      "actual_tool_calls": [],
+      "actual_missing_inputs": [
+        "focal_length_mm",
+        "aperture",
+        "field_of_view",
+        "object_distance_mm"
+      ],
+      "actual_questions": [
+        "What focal length, aperture, and field of view should be previewed?",
+        "Is paraxial approximation acceptable for this first pass?",
+        "What focal length, aperture, field of view, and object distance should be assumed?",
+        "Please provide or confirm: focal_length, aperture, field_of_view, object_distance.",
+        "Should the backend keep using local preview-only tools without external solver execution?"
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "actual_adapter": null,
+      "blocked_actions": [
+        "proprietary_solver",
+        "external_solver",
+        "production_ready_export"
+      ],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "full_lumerical_fdtd_request",
+      "status": "pass",
+      "actual_domain": "dielectric_metasurface",
+      "actual_candidates": [
+        "dielectric_metasurface"
+      ],
+      "actual_confidence": "medium",
+      "actual_template": "dielectric_metasurface_preview",
+      "actual_tool_calls": [],
+      "actual_missing_inputs": [
+        "target_phase_profile",
+        "period",
+        "polarization",
+        "unit_cell_geometry",
+        "wavelength_nm",
+        "material_stack"
+      ],
+      "actual_questions": [
+        "What phase profile or focusing target should the metasurface implement?",
+        "What period, height, and polarization should define the unit-cell preview?",
+        "What wavelength, polarization, period, and target phase profile should define the metasurface?",
+        "Please provide or confirm: period, target_phase_profile, polarization, wavelength.",
+        "Should the backend keep using local preview-only tools without external solver execution?"
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [
+        "tio2",
+        "si3n4",
+        "si",
+        "sio2"
+      ],
+      "actual_adapter": null,
+      "blocked_actions": [
+        "proprietary_solver",
+        "external_solver",
+        "real_solver_monitor_result"
+      ],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "api_contract_version": "0.1",
+      "scenario_id": "production_grade_validation_request",
+      "status": "pass",
+      "actual_domain": null,
+      "actual_candidates": [
+        "thin_film_coating",
+        "slab_waveguide",
+        "lens_ray_optics",
+        "gaussian_beam_focusing",
+        "nanoparticle_plasmonics"
+      ],
+      "actual_confidence": "low",
+      "actual_template": null,
+      "actual_tool_calls": [],
+      "actual_missing_inputs": [],
+      "actual_questions": [
+        "Is the goal about coatings, beams, waveguides, lenses, metasurfaces, photonic crystals, or nanoparticles?",
+        "Which material system and observable should be previewed?",
+        "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
+        "What source and monitored observable should define the preview?",
+        "Which material system and geometry scale should be assumed?"
+      ],
+      "diagnostics": [
+        "Scenario matched expected local preview behavior."
+      ],
+      "safety_flags": {
+        "external_solver_executed": false,
+        "external_llm_required": false,
+        "proprietary_solver_required": false,
+        "production_grade_validation_claimed": false,
+        "formal_convergence_proof_claimed": false,
+        "upload_performed": false,
+        "tag_created": false,
+        "release_created": false
+      },
+      "actual_materials": [],
+      "actual_adapter": null,
+      "blocked_actions": [
+        "production_grade_validation",
+        "formal_convergence_claim",
+        "external_solver"
+      ],
+      "preview_only": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "pass": 17,
+    "warn": 2,
+    "fail": 0,
+    "positive": 10,
+    "ambiguous": 3,
+    "underconstrained": 3,
+    "unsupported": 3,
+    "unsafe_or_blocked": 1,
+    "preview_only": 19
+  },
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

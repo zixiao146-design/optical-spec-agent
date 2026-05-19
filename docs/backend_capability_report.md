@@ -38,6 +38,9 @@ upload, and `v1.0.0` approval remain separate and not granted.
   materials, calculators/adapters, and recommended questions.
 - Material-template cross-checks report pass/warning/fail status for each
   domain without running solvers or querying external material databases.
+- Application-domain benchmarks evaluate positive, ambiguous,
+  underconstrained, unsupported, and unsafe/blocked natural-language scenarios
+  against expected matching, tool-call, missing-input, and safety behavior.
 - Optical design examples are cross-checked against agent sessions and expected
   calculator/tool usage.
 - External solver, external LLM, TestPyPI upload, PyPI publish, git tag, and
@@ -71,7 +74,10 @@ upload, and `v1.0.0` approval remain separate and not granted.
    assumptions and under-specified natural-language goals.
 9. `application_domain_coverage` and `material_template_cross_checks`: domain,
    material, template, calculator/adapter, and missing-input coverage.
-10. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
+10. `application_domain_benchmarks`: scenario-count, pass/warn/fail, positive,
+   ambiguous, underconstrained, unsupported, and preview-only benchmark
+   coverage.
+11. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
    release actions that remain unexecuted.
 
 ## How To Generate
@@ -101,6 +107,12 @@ Adapter-native golden preview cases can also be checked directly:
 
 ```bash
 python scripts/check_adapter_native_golden.py
+```
+
+Application-domain benchmark scenarios can also be checked directly:
+
+```bash
+python scripts/evaluate_application_domain_benchmarks.py
 ```
 
 Coverage can also be read directly:

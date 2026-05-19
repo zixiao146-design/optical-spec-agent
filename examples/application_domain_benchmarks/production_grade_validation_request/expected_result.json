@@ -1,0 +1,50 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "production_grade_validation_request",
+  "status": "pass",
+  "actual_domain": null,
+  "actual_candidates": [
+    "thin_film_coating",
+    "slab_waveguide",
+    "lens_ray_optics",
+    "gaussian_beam_focusing",
+    "nanoparticle_plasmonics"
+  ],
+  "actual_confidence": "low",
+  "actual_template": null,
+  "actual_tool_calls": [],
+  "actual_missing_inputs": [],
+  "actual_questions": [
+    "Is the goal about coatings, beams, waveguides, lenses, metasurfaces, photonic crystals, or nanoparticles?",
+    "Which material system and observable should be previewed?",
+    "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
+    "What source and monitored observable should define the preview?",
+    "Which material system and geometry scale should be assumed?"
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [],
+  "actual_adapter": null,
+  "blocked_actions": [
+    "production_grade_validation",
+    "formal_convergence_claim",
+    "external_solver"
+  ],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

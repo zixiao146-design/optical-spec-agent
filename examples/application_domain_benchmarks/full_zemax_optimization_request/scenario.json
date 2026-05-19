@@ -1,0 +1,25 @@
+{
+  "scenario_id": "full_zemax_optimization_request",
+  "domain_id": null,
+  "scenario_type": "unsupported",
+  "goal_en": "Run a full Zemax lens optimization and return production-ready prescription files.",
+  "goal_zh": "请运行完整 Zemax 透镜优化并返回生产可用的处方文件。",
+  "expected_primary_domain": null,
+  "expected_candidate_domains": [],
+  "expected_confidence": "none",
+  "expected_requirement_template": null,
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [
+    "proprietary_solver",
+    "external_solver",
+    "production_ready_export"
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

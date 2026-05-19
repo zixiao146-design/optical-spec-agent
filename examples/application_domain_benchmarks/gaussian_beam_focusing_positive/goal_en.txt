@@ -1,0 +1,1 @@
+Preview Gaussian beam focusing with waist, Rayleigh range, and focal spot estimates.

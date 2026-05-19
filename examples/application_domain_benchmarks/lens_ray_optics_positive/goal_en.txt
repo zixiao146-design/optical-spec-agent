@@ -1,0 +1,1 @@
+Create a paraxial lens ray trace preview with focal length and aperture estimates.

@@ -1,0 +1,80 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "dielectric_metasurface_positive",
+  "status": "pass",
+  "actual_domain": "dielectric_metasurface",
+  "actual_candidates": [
+    "dielectric_metasurface"
+  ],
+  "actual_confidence": "high",
+  "actual_template": "dielectric_metasurface_preview",
+  "actual_tool_calls": [
+    "adapter_preview.generate",
+    "agent_trace.build",
+    "application_domains.cross_check_domain",
+    "application_domains.match_goal",
+    "example_registry.load",
+    "material_catalog.suggest",
+    "optical_language.diagnose_missing_inputs",
+    "optical_language.diagnose_observable",
+    "optical_language.generate_disambiguation_questions",
+    "optical_language.infer_source_monitor",
+    "optical_language.map_source_monitor_to_adapter",
+    "requirements.extract_optical_intent",
+    "requirements.match_ambiguity_check",
+    "requirements.match_template",
+    "workflow_plan.preview"
+  ],
+  "actual_missing_inputs": [
+    "polarization",
+    "wavelength",
+    "material_stack",
+    "meta_atom_geometry",
+    "period",
+    "phase_profile",
+    "substrate_material",
+    "target_wavelength_nm",
+    "target_phase_profile",
+    "unit_cell_geometry",
+    "wavelength_nm"
+  ],
+  "actual_questions": [
+    "What phase profile or focusing target should the metasurface implement?",
+    "What period, height, and polarization should define the unit-cell preview?",
+    "What wavelength, polarization, period, and target phase profile should define the metasurface?",
+    "Please provide or confirm: polarization, wavelength.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Which values should be used for critical inputs: wavelength?",
+    "Can you provide optional context for: polarization, material_stack?",
+    "Can you provide optional context for: material_stack, polarization?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "Application domain has local preview coverage."
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "tio2",
+    "si3n4",
+    "si",
+    "sio2"
+  ],
+  "actual_adapter": "meep",
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

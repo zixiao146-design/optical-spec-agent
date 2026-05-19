@@ -30,6 +30,10 @@ from optical_spec_agent.examples.domain_cross_check import (
     ApplicationDomainCrossCheck,
     cross_check_all_application_domains,
 )
+from optical_spec_agent.examples.domain_benchmarks import (
+    ApplicationDomainBenchmarkResultResponse,
+    evaluate_all_domain_scenarios,
+)
 from optical_spec_agent.materials.catalog import (
     diagnose_material_suitability,
     list_materials,
@@ -151,6 +155,21 @@ class MaterialTemplateCrossCheckCoverage(BaseModel):
     formal_convergence_proof_claimed: bool = False
 
 
+class ApplicationDomainBenchmarkCoverage(BaseModel):
+    scenario_count: int
+    pass_count: int
+    warn_count: int
+    fail_count: int
+    positive_count: int
+    ambiguous_count: int
+    underconstrained_count: int
+    unsupported_count: int
+    safety_summary: dict[str, bool] = Field(default_factory=dict)
+    preview_only: bool = True
+    production_grade_validation_claimed: bool = False
+    formal_convergence_proof_claimed: bool = False
+
+
 class BackendCapabilityReport(BaseModel):
     api_contract_version: str = "0.1"
     status: str = "ok"
@@ -166,6 +185,7 @@ class BackendCapabilityReport(BaseModel):
             "Missing-input diagnostics",
             "Application-domain coverage",
             "Material-template cross-checks",
+            "Application-domain benchmarks",
             "Design-case cross-checks",
             "Source / monitor / observable diagnostics",
             "Adapter-native golden coverage",
@@ -184,6 +204,7 @@ class BackendCapabilityReport(BaseModel):
     missing_input_diagnostics: MissingInputDiagnosticsCapability
     application_domain_coverage: ApplicationDomainCoverage
     material_template_cross_checks: MaterialTemplateCrossCheckCoverage
+    application_domain_benchmarks: ApplicationDomainBenchmarkCoverage
     adapter_native_golden_coverage: AdapterGoldenCoverageReport
     design_case_cross_checks: list[DesignCaseCrossCheck] = Field(default_factory=list)
     blocked_external_actions: list[BlockedExternalAction] = Field(default_factory=list)
@@ -219,8 +240,10 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
     }
     cross_checks = cross_check_all_design_cases()
     domain_cross_checks = cross_check_all_application_domains()
+    domain_benchmarks = evaluate_all_domain_scenarios()
     golden_coverage = build_adapter_golden_coverage_report()
     all_sample_tool_names.add("adapter_native_golden.check")
+    all_sample_tool_names.add("application_domain_benchmarks.evaluate")
     failed = any(check.status == "fail" for check in cross_checks.cross_checks)
     return BackendCapabilityReport(
         status="needs_review" if failed or golden_coverage.status == "needs_review" else "ok",
@@ -234,6 +257,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         missing_input_diagnostics=_missing_input_diagnostics_capability(),
         application_domain_coverage=_application_domain_coverage(domain_cross_checks.cross_checks),
         material_template_cross_checks=_material_template_cross_checks(domain_cross_checks.cross_checks),
+        application_domain_benchmarks=_application_domain_benchmarks(domain_benchmarks),
         adapter_native_golden_coverage=golden_coverage,
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
@@ -246,6 +270,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
             "Use /api/materials/diagnose to inspect material provenance and suitability warnings.",
             "Use /api/design-requirements/match to inspect ambiguous-goal questions.",
             "Use /api/application-domain-cross-checks to inspect domain/material/template coverage.",
+            "Use /api/application-domain-benchmark-results to inspect scenario benchmark behavior.",
             "Treat calculator outputs as sanity-checked preview/design-assist only.",
         ],
     )
@@ -355,6 +380,13 @@ def _internal_tool_capabilities(
             cross_check_all_application_domains,
             "application_domains.cross_check_domain",
             "Cross-checks application-domain material/template/calculator/adapter coverage.",
+        ),
+        (
+            "application_domain_benchmarks",
+            "optical_spec_agent.examples.domain_benchmarks",
+            evaluate_all_domain_scenarios,
+            "application_domain_benchmarks.evaluate",
+            "Evaluates positive, ambiguous, underconstrained, and unsupported optical-design scenarios.",
         ),
         (
             "missing_input_diagnostics",
@@ -586,6 +618,29 @@ def _material_template_cross_checks(
         warning_count=sum(1 for check in checks if check.status == "warning"),
         fail_count=sum(1 for check in checks if check.status == "fail"),
         cross_checks=checks,
+    )
+
+
+def _application_domain_benchmarks(
+    results: ApplicationDomainBenchmarkResultResponse,
+) -> ApplicationDomainBenchmarkCoverage:
+    summary = results.summary
+    return ApplicationDomainBenchmarkCoverage(
+        scenario_count=summary["total"],
+        pass_count=summary["pass"],
+        warn_count=summary["warn"],
+        fail_count=summary["fail"],
+        positive_count=summary["positive"],
+        ambiguous_count=summary["ambiguous"],
+        underconstrained_count=summary["underconstrained"],
+        unsupported_count=summary["unsupported"],
+        safety_summary={
+            "external_solver_executed": results.external_solver_executed,
+            "external_llm_required": results.external_llm_required,
+            "proprietary_solver_required": results.proprietary_solver_required,
+            "production_grade_validation_claimed": results.production_grade_validation_claimed,
+            "formal_convergence_proof_claimed": results.formal_convergence_proof_claimed,
+        },
     )
 
 

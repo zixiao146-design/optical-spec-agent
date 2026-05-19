@@ -13,6 +13,8 @@ python scripts/generate_backend_evidence_pack.py \
   --json-out "$JSON_OUT" \
   --markdown-out "$MARKDOWN_OUT"
 
+python scripts/evaluate_application_domain_benchmarks.py
+
 python - <<'PY'
 import json
 from pathlib import Path
@@ -43,6 +45,7 @@ for section in [
     "missing_input_diagnostics",
     "application_domain_coverage",
     "material_template_cross_checks",
+    "application_domain_benchmarks",
     "design_case_cross_checks",
     "source_monitor_observable_diagnostics",
     "adapter_native_golden_coverage",
@@ -83,6 +86,9 @@ require(payload["application_domain_coverage"]["domain_count"] == 10, "applicati
 require(payload["application_domain_coverage"]["failed_domains"] == [], "application domain coverage failed")
 require(payload["material_template_cross_checks"]["total"] == 10, "material-template cross-check count mismatch")
 require(payload["material_template_cross_checks"]["fail_count"] == 0, "material-template cross-check failed")
+require(payload["application_domain_benchmarks"]["scenario_count"] >= 19, "benchmark scenario count mismatch")
+require(payload["application_domain_benchmarks"]["fail_count"] == 0, "application domain benchmark failed")
+require(payload["application_domain_benchmarks"]["unsupported_requests_blocked_or_deferred"] is True, "unsupported benchmark policy missing")
 
 markdown = markdown_path.read_text(encoding="utf-8")
 for heading in [
@@ -91,6 +97,7 @@ for heading in [
     "Optical calculators",
     "Application-domain coverage",
     "Material-template cross-checks",
+    "Application-domain benchmarks",
     "Design-case cross-checks",
     "Adapter-native golden coverage",
     "Blocked or deferred capabilities",
@@ -110,6 +117,7 @@ require(api_payload["adapter_native_golden_coverage"]["status"] == "ok", "API go
 print("BACKEND EVIDENCE PACK PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
+print("APPLICATION DOMAIN BENCHMARKS PASSED")
 PY
 
 echo "NO SOLVER EXECUTION PERFORMED"

@@ -1,0 +1,27 @@
+{
+  "scenario_id": "photonic_crystal_positive",
+  "domain_id": "photonic_crystal",
+  "scenario_type": "positive",
+  "goal_en": "Create a photonic crystal band structure preview with an MPB adapter path.",
+  "goal_zh": "请生成光子晶体能带结构的 MPB adapter 本地预览。",
+  "expected_primary_domain": "photonic_crystal",
+  "expected_candidate_domains": [],
+  "expected_confidence": "high",
+  "expected_requirement_template": "photonic_crystal_band_preview",
+  "expected_materials": [
+    "si",
+    "sio2",
+    "air"
+  ],
+  "expected_calculators": [],
+  "expected_adapters": [
+    "mpb"
+  ],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

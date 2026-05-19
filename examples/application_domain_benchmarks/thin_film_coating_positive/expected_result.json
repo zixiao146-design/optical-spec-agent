@@ -1,0 +1,79 @@
+{
+  "api_contract_version": "0.1",
+  "scenario_id": "thin_film_coating_positive",
+  "status": "pass",
+  "actual_domain": "thin_film_coating",
+  "actual_candidates": [
+    "thin_film_coating"
+  ],
+  "actual_confidence": "high",
+  "actual_template": "thin_film_ar_coating",
+  "actual_tool_calls": [
+    "adapter_preview.generate",
+    "agent_trace.build",
+    "application_domains.cross_check_domain",
+    "application_domains.match_goal",
+    "example_registry.load",
+    "material_catalog.suggest",
+    "optical_language.diagnose_missing_inputs",
+    "optical_language.diagnose_observable",
+    "optical_language.generate_disambiguation_questions",
+    "optical_language.infer_source_monitor",
+    "optical_language.map_source_monitor_to_adapter",
+    "optics.thin_film.spectrum",
+    "requirements.extract_optical_intent",
+    "requirements.match_ambiguity_check",
+    "requirements.match_template",
+    "workflow_plan.preview"
+  ],
+  "actual_missing_inputs": [
+    "incidence_angle",
+    "polarization",
+    "coating_n or material choice",
+    "incident_n",
+    "substrate_n",
+    "target_wavelength_nm",
+    "wavelength_range_nm",
+    "substrate_material",
+    "coating_material",
+    "incident_medium",
+    "layer_materials"
+  ],
+  "actual_questions": [
+    "What substrate and target wavelength should the coating optimize?",
+    "Is normal incidence acceptable for the preview?",
+    "What target wavelength, substrate material, incidence angle, and polarization define the coating?",
+    "Please provide or confirm: incidence_angle.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Can you provide optional context for: incidence_angle, polarization?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers.",
+    "Application domain has local preview coverage."
+  ],
+  "diagnostics": [
+    "Scenario matched expected local preview behavior."
+  ],
+  "safety_flags": {
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "proprietary_solver_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false,
+    "upload_performed": false,
+    "tag_created": false,
+    "release_created": false
+  },
+  "actual_materials": [
+    "sio2",
+    "tio2",
+    "al2o3",
+    "glass_bk7_preview"
+  ],
+  "actual_adapter": "preview-only; future TMM adapter candidate",
+  "blocked_actions": [],
+  "preview_only": true,
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

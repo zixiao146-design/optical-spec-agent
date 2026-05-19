@@ -12,6 +12,7 @@
     "Missing-input diagnostics",
     "Application-domain coverage",
     "Material-template cross-checks",
+    "Application-domain benchmarks",
     "Design-case cross-checks",
     "Source / monitor / observable diagnostics",
     "Adapter-native golden coverage",
@@ -222,6 +223,15 @@
       "executed_in_sample": true,
       "notes": [
         "Cross-checks application-domain material/template/calculator/adapter coverage."
+      ]
+    },
+    {
+      "tool_name": "application_domain_benchmarks",
+      "importable": true,
+      "callable": true,
+      "executed_in_sample": true,
+      "notes": [
+        "Evaluates positive, ambiguous, underconstrained, and unsupported optical-design scenarios."
       ]
     },
     {
@@ -1162,6 +1172,26 @@
     "production_grade_validation_claimed": false,
     "formal_convergence_proof_claimed": false
   },
+  "application_domain_benchmarks": {
+    "scenario_count": 19,
+    "pass_count": 17,
+    "warn_count": 2,
+    "fail_count": 0,
+    "positive_count": 10,
+    "ambiguous_count": 3,
+    "underconstrained_count": 3,
+    "unsupported_count": 3,
+    "safety_summary": {
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "proprietary_solver_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
   "adapter_native_golden_coverage": {
     "api_contract_version": "0.1",
     "status": "ok",
@@ -1362,7 +1392,7 @@
         "si",
         "sio2"
       ],
-      "adapter_recommendation": "optiland",
+      "adapter_recommendation": "meep with gmsh geometry preview",
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
@@ -1722,6 +1752,7 @@
     "Use /api/materials/diagnose to inspect material provenance and suitability warnings.",
     "Use /api/design-requirements/match to inspect ambiguous-goal questions.",
     "Use /api/application-domain-cross-checks to inspect domain/material/template coverage.",
+    "Use /api/application-domain-benchmark-results to inspect scenario benchmark behavior.",
     "Treat calculator outputs as sanity-checked preview/design-assist only."
   ]
 }

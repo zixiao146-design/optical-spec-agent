@@ -128,6 +128,13 @@ The backend also records an
 connecting ten optical domains to local materials, requirement templates,
 calculators/adapters, missing-input questions, and preview-only evidence
 boundaries.
+Those domains are now benchmarked by
+[`application domain benchmarks`](docs/application_domain_benchmarks.md), a
+local scenario suite covering positive, ambiguous, underconstrained,
+unsupported, and unsafe/blocked optical-design requests. The evaluator checks
+expected domain/template matching, material/calculator/adapter behavior,
+missing-input questions, and blocked actions without running solvers or calling
+external LLMs.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

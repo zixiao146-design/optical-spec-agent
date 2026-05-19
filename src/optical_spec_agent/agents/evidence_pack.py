@@ -22,6 +22,7 @@ EVIDENCE_PACK_SECTIONS = [
     "Missing-input diagnostics",
     "Application-domain coverage",
     "Material-template cross-checks",
+    "Application-domain benchmarks",
     "Design-case cross-checks",
     "Source / monitor / observable diagnostics",
     "Adapter-native golden coverage",
@@ -46,6 +47,7 @@ class BackendEvidencePack(BaseModel):
     missing_input_diagnostics: dict[str, Any] = Field(default_factory=dict)
     application_domain_coverage: dict[str, Any] = Field(default_factory=dict)
     material_template_cross_checks: dict[str, Any] = Field(default_factory=dict)
+    application_domain_benchmarks: dict[str, Any] = Field(default_factory=dict)
     design_case_cross_checks: list[dict[str, Any]] = Field(default_factory=list)
     source_monitor_observable_diagnostics: dict[str, Any]
     adapter_native_golden_coverage: dict[str, Any]
@@ -169,6 +171,12 @@ def generate_backend_evidence_pack(
             **payload["material_template_cross_checks"],
             "preview_design_assist_only": True,
             "no_production_grade_claim": True,
+        },
+        application_domain_benchmarks={
+            **payload["application_domain_benchmarks"],
+            "preview_design_assist_only": True,
+            "unsupported_requests_blocked_or_deferred": True,
+            "no_external_solver_execution": True,
         },
         design_case_cross_checks=[
             {

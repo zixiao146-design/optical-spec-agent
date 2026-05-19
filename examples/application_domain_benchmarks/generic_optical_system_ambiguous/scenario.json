@@ -1,0 +1,27 @@
+{
+  "scenario_id": "generic_optical_system_ambiguous",
+  "domain_id": null,
+  "scenario_type": "ambiguous",
+  "goal_en": "Design an optical system.",
+  "goal_zh": "设计一个光学系统。",
+  "expected_primary_domain": null,
+  "expected_candidate_domains": [
+    "thin_film_coating",
+    "slab_waveguide",
+    "lens_ray_optics",
+    "gaussian_beam_focusing",
+    "nanoparticle_plasmonics"
+  ],
+  "expected_confidence": "low",
+  "expected_requirement_template": null,
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

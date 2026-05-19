@@ -1,0 +1,25 @@
+{
+  "scenario_id": "full_lumerical_fdtd_request",
+  "domain_id": null,
+  "scenario_type": "unsupported",
+  "goal_en": "Run a full Lumerical FDTD metasurface optimization with real monitor results.",
+  "goal_zh": "请运行完整 Lumerical FDTD 超表面优化并返回真实 monitor 结果。",
+  "expected_primary_domain": null,
+  "expected_candidate_domains": [],
+  "expected_confidence": "none",
+  "expected_requirement_template": null,
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [],
+  "expected_blocked_actions": [
+    "proprietary_solver",
+    "external_solver",
+    "real_solver_monitor_result"
+  ],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

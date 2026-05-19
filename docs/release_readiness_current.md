@@ -123,6 +123,12 @@ This document describes the current `main` branch. It is not a release tag.
 - rc8 to v1.0 decision path:
   `docs/rc8_to_v1_0_decision_path.md` keeps rc8.dev0 engineering separate from
   future rc8 release draft, PyPI publication, and v1.0.0 decisions.
+- Application-domain benchmarks:
+  `docs/application_domain_benchmarks.md`,
+  `docs/domain_benchmark_results_policy.md`, and
+  `examples/application_domain_benchmarks/` evaluate positive, ambiguous,
+  underconstrained, unsupported, and unsafe/blocked optical-design requests
+  without running solvers or calling external LLMs.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:
@@ -442,3 +448,8 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+Application-domain benchmark endpoints and fixtures now cover positive,
+ambiguous, underconstrained, unsupported, and unsafe/blocked scenarios. The
+benchmark evaluator keeps warnings for intentionally partial domains and blocks
+commercial solver or production-grade validation requests by default.

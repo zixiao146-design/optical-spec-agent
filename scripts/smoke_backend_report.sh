@@ -14,6 +14,7 @@ python scripts/generate_backend_capability_report.py \
   --markdown-out "$MARKDOWN_OUT"
 
 python scripts/check_adapter_native_golden.py
+python scripts/evaluate_application_domain_benchmarks.py
 
 python - <<'PY'
 import json
@@ -38,6 +39,7 @@ for section in [
     "requirements_templates",
     "application_domain_coverage",
     "material_template_cross_checks",
+    "application_domain_benchmarks",
     "adapter_native_golden_coverage",
     "design_case_cross_checks",
     "blocked_external_actions",
@@ -59,6 +61,7 @@ require(internal_tools["adapter_native_mapping"]["executed_in_sample"] is True, 
 require(internal_tools["adapter_native_golden_coverage"]["executed_in_sample"] is True, "adapter golden coverage not executed in sample")
 require(internal_tools["application_domain_registry"]["executed_in_sample"] is True, "application domain registry not executed in sample")
 require(internal_tools["material_template_cross_checks"]["executed_in_sample"] is True, "material-template cross-checks not executed in sample")
+require(internal_tools["application_domain_benchmarks"]["executed_in_sample"] is True, "application domain benchmarks not executed in sample")
 golden = report["adapter_native_golden_coverage"]
 require(golden["status"] == "ok", "adapter golden coverage report not ok")
 require(set(golden["adapters_covered"]) == {"meep", "mpb", "gmsh", "elmer", "optiland"}, "adapter golden coverage mismatch")
@@ -71,6 +74,8 @@ require(report["application_domain_coverage"]["domain_count"] == 10, "applicatio
 require(report["application_domain_coverage"]["failed_domains"] == [], "application domain coverage failed")
 require(report["material_template_cross_checks"]["total"] == 10, "material-template cross-check count mismatch")
 require(report["material_template_cross_checks"]["fail_count"] == 0, "material-template cross-check failed")
+require(report["application_domain_benchmarks"]["scenario_count"] >= 19, "benchmark scenario count mismatch")
+require(report["application_domain_benchmarks"]["fail_count"] == 0, "application domain benchmark failed")
 require(len(report["requirements_templates"]) == 7, "requirement template count mismatch")
 require(
     all(item["matched_by_heuristic"] for item in report["requirements_templates"]),
@@ -99,6 +104,18 @@ domain_payload = domain_checks.json()
 require(domain_payload["summary"]["total"] == 10, "application domain cross-check count mismatch")
 require(domain_payload["summary"]["fail"] == 0, "application domain cross-check failed")
 require(domain_payload["external_solver_executed"] is False, "domain cross-check solver flag changed")
+
+benchmarks = client.get("/api/application-domain-benchmarks")
+require(benchmarks.status_code == 200, "/api/application-domain-benchmarks failed")
+require(benchmarks.json()["scenario_count"] >= 19, "benchmark scenario count mismatch")
+
+benchmark_eval = client.post("/api/application-domain-benchmarks/waveguide_or_coating_ambiguous/evaluate")
+require(benchmark_eval.status_code == 200, "application benchmark evaluation failed")
+require(benchmark_eval.json()["status"] in {"pass", "warn"}, "ambiguous benchmark status changed")
+
+benchmark_results = client.get("/api/application-domain-benchmark-results")
+require(benchmark_results.status_code == 200, "/api/application-domain-benchmark-results failed")
+require(benchmark_results.json()["summary"]["fail"] == 0, "application benchmark failed")
 
 golden_api = client.get("/api/adapter-native-golden-coverage")
 require(golden_api.status_code == 200, "/api/adapter-native-golden-coverage failed")
@@ -238,6 +255,7 @@ print("DESIGN CASE CROSS-CHECKS PASSED")
 print("DESIGN REQUIREMENT MATCHING PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
 print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
+print("APPLICATION DOMAIN BENCHMARKS PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")

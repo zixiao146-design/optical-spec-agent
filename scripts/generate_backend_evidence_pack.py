@@ -93,6 +93,7 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
     missing = payload["missing_input_diagnostics"]
     domain_coverage = payload["application_domain_coverage"]
     material_template = payload["material_template_cross_checks"]
+    domain_benchmarks = payload["application_domain_benchmarks"]
     lines.extend(
         [
             "",
@@ -143,6 +144,23 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
             "| {domain_id} | {status} | {expected_tool_status} | {template_coverage} | "
             "{material_suitability_coverage} | {missing_input_questions_present} |".format(**item)
         )
+
+    lines.extend(
+        [
+            "",
+            "## Application-domain benchmarks",
+            "",
+            f"- scenario_count: `{domain_benchmarks['scenario_count']}`",
+            f"- pass_count: `{domain_benchmarks['pass_count']}`",
+            f"- warn_count: `{domain_benchmarks['warn_count']}`",
+            f"- fail_count: `{domain_benchmarks['fail_count']}`",
+            f"- positive_count: `{domain_benchmarks['positive_count']}`",
+            f"- ambiguous_count: `{domain_benchmarks['ambiguous_count']}`",
+            f"- underconstrained_count: `{domain_benchmarks['underconstrained_count']}`",
+            f"- unsupported_count: `{domain_benchmarks['unsupported_count']}`",
+            f"- preview_design_assist_only: `{domain_benchmarks['preview_design_assist_only']}`",
+        ]
+    )
 
     lines.extend(
         [
@@ -260,6 +278,12 @@ def _print_summary(pack: BackendEvidencePack) -> None:
         f"{payload['material_template_cross_checks']['pass_count']} pass/"
         f"{payload['material_template_cross_checks']['warning_count']} warning/"
         f"{payload['material_template_cross_checks']['fail_count']} fail"
+    )
+    print(
+        "application_domain_benchmarks="
+        f"{payload['application_domain_benchmarks']['pass_count']} pass/"
+        f"{payload['application_domain_benchmarks']['warn_count']} warn/"
+        f"{payload['application_domain_benchmarks']['fail_count']} fail"
     )
     print(f"design_case_cross_checks={len(payload['design_case_cross_checks'])}")
     print(

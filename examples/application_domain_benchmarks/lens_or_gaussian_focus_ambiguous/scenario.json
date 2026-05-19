@@ -1,0 +1,26 @@
+{
+  "scenario_id": "lens_or_gaussian_focus_ambiguous",
+  "domain_id": null,
+  "scenario_type": "ambiguous",
+  "goal_en": "Focus a Gaussian beam with a lens, but decide whether this is a beam or ray-optics task.",
+  "goal_zh": "请用透镜聚焦高斯光束，但需要判断这是光束任务还是光线光学任务。",
+  "expected_primary_domain": null,
+  "expected_candidate_domains": [
+    "gaussian_beam_focusing",
+    "lens_ray_optics"
+  ],
+  "expected_confidence": "low",
+  "expected_requirement_template": null,
+  "expected_materials": [],
+  "expected_calculators": [],
+  "expected_adapters": [],
+  "expected_missing_critical_inputs": [],
+  "expected_missing_optional_inputs": [],
+  "expected_recommended_questions": [
+    "Should the first result be a Gaussian waist estimate or a paraxial lens image?"
+  ],
+  "expected_blocked_actions": [],
+  "preview_only": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}
