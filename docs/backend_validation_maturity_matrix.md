@@ -33,6 +33,8 @@ convergence proof is claimed.
 | Optical language | observable diagnostics | `fixture_guarded_preview` | observable taxonomy fixtures and tests | Observable fit is not a computed physical result. |
 | Adapters | adapter-native source/monitor mapping | `fixture_guarded_preview` | adapter mapping fixtures and tests | Real adapter results require explicit solver execution. |
 | Adapters | adapter golden coverage | `fixture_guarded_preview` | golden cases and strict metadata diff | Metadata checks are not solver monitor outputs. |
+| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. |
+| Optional solver validation | Elmer micro-benchmark plan | `documented_preview` / deferred | `validation/elmer/elmer_install_deferred_2026-05-15.md` and Elmer optional pilot docs | Elmer remains Level 2 + Level-3-ready; Level 3 is not claimed. |
 | Application domains | domain benchmarks | `benchmark_checked_preview` | 19 pass / 0 warn / 0 fail scenario suite | Benchmarks test deterministic behavior, not physical correctness. |
 | Agents | sub-agent task sessions | `fixture_guarded_preview` | audit script and tool-call ledger tests | Roles are deterministic local backend roles. |
 | Agents | tool-call ledger | `fixture_guarded_preview` | ledger tests and evidence pack | Ledger shows local tool calls and blocked external actions. |
@@ -44,6 +46,9 @@ convergence proof is claimed.
 - No formal convergence proof is claimed.
 - No real solver monitor result is claimed by default.
 - No external solver execution is performed by default.
+- Optional solver-backed micro-benchmarks require explicit opt-in environment
+  variables and are not part of default pytest, smoke, quality gates, or release
+  gates.
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 
@@ -54,4 +59,3 @@ python scripts/audit_validation_claims.py
 ```
 
 The audit blocks unsafe claim language while allowing explicit negated forms.
-

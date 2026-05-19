@@ -56,6 +56,10 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
 
 - Add more reference cases for calculators, especially layered lossy thin-film
   examples, Gaussian focusing edge cases, and waveguide boundary cases.
+- Plan optional solver-backed micro-benchmarks through
+  [`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md)
+  without adding solvers to default pytest, smoke, quality gates, or release
+  gates.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.
@@ -70,6 +74,8 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
 - Frontend display of backend evidence review data.
 - Elmer Level 3 validation.
 - Optional external solver execution.
+- Optional solver-backed micro-benchmark execution unless explicitly approved
+  through `OSA_RUN_OPTIONAL_*_VALIDATION=1`.
 - Optional external LLM integration.
 
 ## Future / Phase 2
@@ -99,3 +105,9 @@ and [`preview_boundary_policy.md`](preview_boundary_policy.md) as the shared
 boundary for future hardening. Any future rc8/PyPI/v1.0 decision should keep the
 calculator, material, adapter, application-domain, and frontend evidence levels
 separate from physical validation claims.
+
+Optional solver-backed validation planning is tracked separately in
+[`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md)
+and `validation/solver_validation_micro_benchmarks.json`. It is manual,
+explicit opt-in only, keeps Elmer deferred, and does not change the default
+no-solver release path.

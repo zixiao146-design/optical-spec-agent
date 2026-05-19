@@ -132,6 +132,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "validation_evidence_manifest.md",
         "open_source_solver_validation_plan.md",
         "open_solver_validation_harness.md",
+        "solver_validation_micro_benchmarks.md",
+        "solver_validation_micro_benchmarks.zh-CN.md",
         "adapter_maturity_model.md",
         "gmsh_optional_validation_pilot.md",
         "gmsh_level3_readiness.md",
@@ -144,6 +146,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "elmer_optional_validation_pilot.md",
         "elmer_level3_readiness.md",
         "manual_solver_validation_report_template.md",
+        "manual_solver_validation_reports/solver_micro_benchmark_report_schema.json",
         "manual_solver_validation_reports/gmsh_validation_pilot_template.md",
         "manual_solver_validation_reports/meep_validation_report_schema.json",
         "manual_solver_validation_reports/mpb_validation_report_schema.json",
@@ -221,6 +224,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "backend_validation_maturity_matrix.zh-CN.md",
         "preview_boundary_policy.md",
         "preview_boundary_policy.zh-CN.md",
+        "solver_validation_micro_benchmarks.md",
+        "solver_validation_micro_benchmarks.zh-CN.md",
         "backend_evidence_review_decision.md",
         "rc8_backend_roadmap.md",
         "rc8_capability_gap_audit.md",
@@ -337,6 +342,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
     assert (ROOT / "scripts" / "open_solver_validation_preflight.sh").exists()
+    assert (ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh").exists()
     assert (ROOT / "scripts" / "run_optional_gmsh_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_meep_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_mpb_validation.sh").exists()
@@ -362,6 +368,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Validation Evidence Manifest" in combined
     assert "Open-source Solver Validation Plan" in combined
     assert "Open-source Solver Validation Harness" in combined
+    assert "Optional Solver-backed Validation Micro-benchmarks" in combined
+    assert "explicit opt-in" in combined
     assert "Adapter Maturity Model" in combined
     assert "Gmsh Optional Validation Pilot" in combined
     assert "Gmsh Level 3 Readiness" in combined
@@ -472,6 +480,14 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "NO SOLVER EXECUTION PERFORMED" in (
         ROOT / "scripts" / "open_solver_validation_preflight.sh"
     ).read_text(encoding="utf-8")
+    optional_micro_script = (
+        ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh"
+    ).read_text(encoding="utf-8")
+    assert "NO SOLVER EXECUTION PERFORMED BY DEFAULT" in optional_micro_script
+    assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION" in optional_micro_script
+    assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION" in optional_micro_script
+    assert "OSA_RUN_OPTIONAL_MPB_VALIDATION" in optional_micro_script
+    assert "OSA_RUN_OPTIONAL_OPTILAND_VALIDATION" in optional_micro_script
     gmsh_script = (ROOT / "scripts" / "run_optional_gmsh_validation.sh").read_text(
         encoding="utf-8"
     )
@@ -520,6 +536,7 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "run_optional_mpb_validation.sh",
         ROOT / "scripts" / "run_optional_optiland_validation.sh",
         ROOT / "scripts" / "run_optional_elmer_validation.sh",
+        ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh",
         ROOT / "scripts" / "smoke_agent_api.sh",
         ROOT / "scripts" / "smoke_backend_report.sh",
         ROOT / "scripts" / "generate_backend_capability_report.py",

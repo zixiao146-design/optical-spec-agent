@@ -50,6 +50,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "application_domain_benchmarks",
         "validation_maturity_summary",
         "preview_boundary_summary",
+        "optional_solver_micro_benchmarks",
         "adapter_native_golden_coverage",
         "design_case_cross_checks",
         "blocked_external_actions",
@@ -100,6 +101,14 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     )
     assert report["validation_claim_audit_available"] is True
     assert "adapters" in report["preview_boundary_summary"]
+    solver_micro = report["optional_solver_micro_benchmarks"]
+    assert solver_micro["manifest_exists"] is True
+    assert solver_micro["default_runs_solver"] is False
+    assert solver_micro["opt_in_required"] is True
+    assert len(solver_micro["solvers"]) == 5
+    assert solver_micro["elmer_deferred"] is True
+    assert solver_micro["production_grade_claim"] is False
+    assert solver_micro["formal_convergence_proof_claimed"] is False
     assert {item["calculator_name"] for item in report["optical_calculators"]} == {
         "thin_film",
         "paraxial",
@@ -123,6 +132,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert "Adapter-Native Golden Coverage" in text
     assert "Validation Maturity Summary" in text
     assert "Preview Boundary Summary" in text
+    assert "Optional Solver Micro-benchmarks" in text
     assert "Maintainer Evidence Pack" in text
     assert "NO UPLOAD PERFORMED" in text
 

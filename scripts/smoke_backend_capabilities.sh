@@ -10,6 +10,12 @@ python scripts/audit_sub_agents.py
 python scripts/check_adapter_native_golden.py
 python scripts/evaluate_application_domain_benchmarks.py
 python scripts/audit_validation_claims.py
+env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
+    -u OSA_RUN_OPTIONAL_MEEP_VALIDATION \
+    -u OSA_RUN_OPTIONAL_MPB_VALIDATION \
+    -u OSA_RUN_OPTIONAL_OPTILAND_VALIDATION \
+    -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
+    ./scripts/run_optional_solver_micro_benchmarks.sh
 
 python - <<'PY'
 from fastapi.testclient import TestClient
@@ -65,6 +71,15 @@ require(
     maturity_payload["summary"]["application_domain_maturity_level"]
     == "benchmark_checked_preview",
     "application domain maturity level changed",
+)
+require(
+    maturity_payload["summary"]["optional_solver_micro_benchmark_default"]
+    == "no_solver_execution",
+    "optional solver micro-benchmark default changed",
+)
+require(
+    maturity_payload["summary"]["optional_solver_micro_benchmarks_opt_in_required"] is True,
+    "optional solver micro-benchmarks no longer require opt-in",
 )
 require(maturity_payload["external_solver_executed"] is False, "validation maturity executed solver")
 require(
@@ -456,6 +471,7 @@ print("ADAPTER NATIVE METADATA DIFF PASSED")
 print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
 print("VALIDATION MATURITY CHECKS PASSED")
 print("VALIDATION CLAIM AUDIT PASSED")
+print("OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED")
 print("Backend capabilities smoke passed")
 PY
 
@@ -478,6 +494,7 @@ echo "ADAPTER NATIVE METADATA DIFF PASSED"
 echo "ADAPTER GOLDEN COVERAGE REPORT PASSED"
 echo "VALIDATION MATURITY CHECKS PASSED"
 echo "VALIDATION CLAIM AUDIT PASSED"
+echo "OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

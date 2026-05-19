@@ -1,379 +1,514 @@
 {
   "api_contract_version": "0.1",
-  "status": "ok",
+  "external_llm_required": false,
+  "external_solver_executed": false,
+  "formal_convergence_proof_claimed": false,
+  "preview_boundary_summary": {
+    "adapters": "Adapter-native source/monitor mappings are preview metadata; real results require explicit solver execution.",
+    "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
+    "calculators": "Sanity-checked preview/design-assist calculators; physical validation remains user responsibility.",
+    "materials": "Local curated preview catalog; not a production-grade optical constants database.",
+    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; default gates do not run solvers.",
+    "pypi": "PyPI publication would not imply production-grade validation.",
+    "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services."
+  },
+  "production_grade_validation_claimed": false,
+  "proprietary_solver_required": false,
   "records": [
     {
       "area": "materials",
       "component_id": "material_library",
-      "maturity_level": "documented_preview",
       "evidence_refs": [
         "docs/material_provenance_policy.md",
         "docs/material_library.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_material_provenance.py",
-        "tests/test_material_suitability_diagnostics.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Local curated preview catalog only.",
         "User must verify optical constants before physical conclusions.",
         "Not a production-grade optical constants database."
       ],
+      "maturity_level": "documented_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_material_provenance.py",
+        "tests/test_material_suitability_diagnostics.py"
+      ]
     },
     {
       "area": "requirements",
       "component_id": "design_requirement_templates",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/design_requirement_templates.md",
         "examples/design_requirements/"
       ],
-      "tests_or_scripts": [
-        "tests/test_design_requirement_templates.py",
-        "tests/test_requirement_matching.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Deterministic heuristic matching only.",
         "Ambiguous goals produce questions rather than solver actions."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_design_requirement_templates.py",
+        "tests/test_requirement_matching.py"
+      ]
     },
     {
       "area": "requirements",
       "component_id": "natural_language_to_optical_language",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/natural_language_to_optical_language.md",
         "docs/ambiguous_requirement_matching.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_ambiguous_requirement_matching.py",
-        "tests/test_missing_input_diagnostics_deepening.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "No external LLM is used by default.",
         "Confidence is routing evidence, not a correctness guarantee."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_ambiguous_requirement_matching.py",
+        "tests/test_missing_input_diagnostics_deepening.py"
+      ]
     },
     {
       "area": "application_domains",
       "component_id": "application_domain_benchmarks",
-      "maturity_level": "benchmark_checked_preview",
       "evidence_refs": [
         "docs/application_domain_benchmarks.md",
         "examples/application_domain_benchmarks/"
       ],
-      "tests_or_scripts": [
-        "scripts/evaluate_application_domain_benchmarks.py",
-        "tests/test_application_domain_benchmark_evaluator.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Benchmarks test deterministic routing, diagnostics, and blocked actions.",
         "Benchmarks do not establish physical accuracy."
       ],
+      "maturity_level": "benchmark_checked_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "scripts/evaluate_application_domain_benchmarks.py",
+        "tests/test_application_domain_benchmark_evaluator.py"
+      ]
     },
     {
       "area": "optical_language",
       "component_id": "source_monitor_diagnostics",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/optical_language_source_monitor.md",
         "docs/source_monitor_missing_input_diagnostics.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_optical_language_inference.py",
-        "tests/test_optical_language_diagnostics.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Source and monitor records are preview metadata.",
         "No real solver monitor result is claimed."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_optical_language_inference.py",
+        "tests/test_optical_language_diagnostics.py"
+      ]
     },
     {
       "area": "optical_language",
       "component_id": "observable_diagnostics",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/observable_diagnostics.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_observable_diagnostics.py",
-        "tests/test_optical_language_observable_api.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Observable taxonomy describes requested outputs and adapter fit.",
         "Real physical outputs require separately approved solver execution."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_observable_diagnostics.py",
+        "tests/test_optical_language_observable_api.py"
+      ]
     },
     {
       "area": "adapters",
       "component_id": "adapter_native_mapping",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/adapter_native_source_monitor_mapping.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_adapter_source_monitor_mapping.py",
-        "tests/test_adapter_preview_source_monitor_metadata.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Adapter-native mapping is metadata preview only.",
         "External solvers are not run by default."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": true,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_adapter_source_monitor_mapping.py",
+        "tests/test_adapter_preview_source_monitor_metadata.py"
+      ]
     },
     {
       "area": "adapters",
       "component_id": "adapter_golden_coverage",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/adapter_native_golden_coverage_matrix.md",
         "examples/adapter_native_golden/"
       ],
-      "tests_or_scripts": [
-        "scripts/check_adapter_native_golden.py",
-        "tests/test_adapter_native_golden_metadata_diff.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Golden cases check preview metadata and expected fragments.",
         "Golden cases are not real solver monitor results."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": true,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "scripts/check_adapter_native_golden.py",
+        "tests/test_adapter_native_golden_metadata_diff.py"
+      ]
     },
     {
       "area": "agents",
       "component_id": "sub_agent_task_sessions",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/sub_agent_architecture.md",
         "docs/backend_evidence_review_pack.md"
       ],
-      "tests_or_scripts": [
-        "scripts/audit_sub_agents.py",
-        "tests/test_agent_task_session.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Sub-agents are deterministic backend roles in one local process.",
         "They are not independent autonomous services."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "scripts/audit_sub_agents.py",
+        "tests/test_agent_task_session.py"
+      ]
     },
     {
       "area": "agents",
       "component_id": "tool_call_ledger",
-      "maturity_level": "fixture_guarded_preview",
       "evidence_refs": [
         "docs/tool_call_reality_matrix.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_tool_call_ledger.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Ledger records backend tool-call reality for local sessions.",
         "Blocked external actions remain disabled unless separately approved."
       ],
+      "maturity_level": "fixture_guarded_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_tool_call_ledger.py"
+      ]
     },
     {
       "area": "frontend",
       "component_id": "agent_studio",
-      "maturity_level": "documented_preview",
       "evidence_refs": [
         "docs/frontend_mvp_product_spec.md",
         "docs/agent_command_center.md"
       ],
-      "tests_or_scripts": [
-        "tests/test_frontend_mvp_files.py",
-        "tests/test_frontend_visual_smoke_plan.py"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Frontend is a UI/demo surface, not validation evidence.",
         "Backend evidence remains the source of validation maturity status."
       ],
+      "maturity_level": "documented_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_frontend_mvp_files.py",
+        "tests/test_frontend_visual_smoke_plan.py"
+      ]
     },
     {
       "area": "calculators",
       "component_id": "thin_film_calculator",
-      "maturity_level": "sanity_checked_preview",
       "evidence_refs": [
         "docs/optical_calculator_reference_cases.md",
         "thin_film_single_interface_air_glass",
         "thin_film_quarter_wave_ar_550nm"
       ],
-      "tests_or_scripts": [
-        "tests/test_optics_thin_film_reference_cases.py",
-        "scripts/smoke_backend_capabilities.sh"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Analytic/local preview calculation only.",
         "Reference cases are sanity checks, not production-grade validation.",
         "No formal convergence proof is claimed."
       ],
+      "maturity_level": "sanity_checked_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_optics_thin_film_reference_cases.py",
+        "scripts/smoke_backend_capabilities.sh"
+      ]
     },
     {
       "area": "calculators",
       "component_id": "paraxial_calculator",
-      "maturity_level": "sanity_checked_preview",
       "evidence_refs": [
         "docs/optical_calculator_reference_cases.md",
         "paraxial_thin_lens_1to1",
         "abcd_free_space_matrix",
         "two_lens_4f_relay_1_to_1"
       ],
-      "tests_or_scripts": [
-        "tests/test_optics_paraxial_reference_cases.py",
-        "scripts/smoke_backend_capabilities.sh"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Analytic/local preview calculation only.",
         "Reference cases are sanity checks, not production-grade validation.",
         "No formal convergence proof is claimed."
       ],
+      "maturity_level": "sanity_checked_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_optics_paraxial_reference_cases.py",
+        "scripts/smoke_backend_capabilities.sh"
+      ]
     },
     {
       "area": "calculators",
       "component_id": "gaussian_beam_calculator",
-      "maturity_level": "sanity_checked_preview",
       "evidence_refs": [
         "docs/optical_calculator_reference_cases.md",
         "gaussian_beam_rayleigh_range",
         "gaussian_beam_radius_at_rayleigh_range"
       ],
-      "tests_or_scripts": [
-        "tests/test_optics_gaussian_beam_reference_cases.py",
-        "scripts/smoke_backend_capabilities.sh"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Analytic/local preview calculation only.",
         "Reference cases are sanity checks, not production-grade validation.",
         "No formal convergence proof is claimed."
       ],
+      "maturity_level": "sanity_checked_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_optics_gaussian_beam_reference_cases.py",
+        "scripts/smoke_backend_capabilities.sh"
+      ]
     },
     {
       "area": "calculators",
       "component_id": "waveguide_calculator",
-      "maturity_level": "sanity_checked_preview",
       "evidence_refs": [
         "docs/optical_calculator_reference_cases.md",
         "waveguide_v_number_sanity",
         "slab_waveguide_v_number_sweep"
       ],
-      "tests_or_scripts": [
-        "tests/test_optics_waveguide_reference_cases.py",
-        "scripts/smoke_backend_capabilities.sh"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Analytic/local preview calculation only.",
         "Reference cases are sanity checks, not production-grade validation.",
         "No formal convergence proof is claimed."
       ],
+      "maturity_level": "sanity_checked_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_optics_waveguide_reference_cases.py",
+        "scripts/smoke_backend_capabilities.sh"
+      ]
     },
     {
       "area": "calculators",
       "component_id": "fiber_coupling_calculator",
-      "maturity_level": "sanity_checked_preview",
       "evidence_refs": [
         "docs/optical_calculator_reference_cases.md",
         "fiber_gaussian_perfect_overlap",
         "fiber_gaussian_offset_loss",
         "fiber_gaussian_tilt_loss"
       ],
-      "tests_or_scripts": [
-        "tests/test_optics_fiber_coupling_reference_cases.py",
-        "scripts/smoke_backend_capabilities.sh"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Analytic/local preview calculation only.",
         "Reference cases are sanity checks, not production-grade validation.",
         "No formal convergence proof is claimed."
       ],
+      "maturity_level": "sanity_checked_preview",
       "production_grade_physical_validation_claimed": false,
-      "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "tests_or_scripts": [
+        "tests/test_optics_fiber_coupling_reference_cases.py",
+        "scripts/smoke_backend_capabilities.sh"
+      ]
     },
     {
       "area": "calculators",
       "component_id": "polarization_calculator",
-      "maturity_level": "sanity_checked_preview",
       "evidence_refs": [
         "docs/optical_calculator_reference_cases.md",
         "jones_linear_polarizer_malus",
         "jones_half_waveplate_preview",
         "jones_quarter_waveplate_phase_preview"
       ],
-      "tests_or_scripts": [
-        "tests/test_optics_polarization_reference_cases.py",
-        "scripts/smoke_backend_capabilities.sh"
-      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": false,
+      "formal_convergence_proof_claimed": false,
       "limitations": [
         "Analytic/local preview calculation only.",
         "Reference cases are sanity checks, not production-grade validation.",
         "No formal convergence proof is claimed."
       ],
+      "maturity_level": "sanity_checked_preview",
       "production_grade_physical_validation_claimed": false,
+      "tests_or_scripts": [
+        "tests/test_optics_polarization_reference_cases.py",
+        "scripts/smoke_backend_capabilities.sh"
+      ]
+    },
+    {
+      "area": "optional_solver_micro_benchmarks",
+      "component_id": "gmsh_optional_solver_micro_benchmark",
+      "evidence_refs": [
+        "docs/solver_validation_micro_benchmarks.md",
+        "validation/solver_validation_micro_benchmarks.json",
+        "validation/gmsh/gmsh_validation_pilot_2026-05-14.md"
+      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
       "formal_convergence_proof_claimed": false,
-      "external_solver_required": false,
-      "external_solver_executed_by_default": false
+      "limitations": [
+        "Gmsh has a recorded narrow optional manual validation report.",
+        "Optional solver-backed micro-benchmarks require explicit opt-in.",
+        "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+        "No production-grade physical validation or formal convergence proof is claimed."
+      ],
+      "maturity_level": "optional_manual_solver_validated",
+      "production_grade_physical_validation_claimed": false,
+      "tests_or_scripts": [
+        "scripts/run_optional_solver_micro_benchmarks.sh",
+        "tests/test_optional_solver_micro_benchmarks_script.py"
+      ]
+    },
+    {
+      "area": "optional_solver_micro_benchmarks",
+      "component_id": "meep_optional_solver_micro_benchmark",
+      "evidence_refs": [
+        "docs/solver_validation_micro_benchmarks.md",
+        "validation/solver_validation_micro_benchmarks.json",
+        "validation/meep/meep_validation_pilot_2026-05-14.md"
+      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Meep has a recorded narrow optional manual validation report.",
+        "Optional solver-backed micro-benchmarks require explicit opt-in.",
+        "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+        "No production-grade physical validation or formal convergence proof is claimed."
+      ],
+      "maturity_level": "optional_manual_solver_validated",
+      "production_grade_physical_validation_claimed": false,
+      "tests_or_scripts": [
+        "scripts/run_optional_solver_micro_benchmarks.sh",
+        "tests/test_optional_solver_micro_benchmarks_script.py"
+      ]
+    },
+    {
+      "area": "optional_solver_micro_benchmarks",
+      "component_id": "mpb_optional_solver_micro_benchmark",
+      "evidence_refs": [
+        "docs/solver_validation_micro_benchmarks.md",
+        "validation/solver_validation_micro_benchmarks.json",
+        "validation/mpb/mpb_validation_pilot_2026-05-14.md"
+      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "MPB has a recorded narrow optional manual validation report.",
+        "Optional solver-backed micro-benchmarks require explicit opt-in.",
+        "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+        "No production-grade physical validation or formal convergence proof is claimed."
+      ],
+      "maturity_level": "optional_manual_solver_validated",
+      "production_grade_physical_validation_claimed": false,
+      "tests_or_scripts": [
+        "scripts/run_optional_solver_micro_benchmarks.sh",
+        "tests/test_optional_solver_micro_benchmarks_script.py"
+      ]
+    },
+    {
+      "area": "optional_solver_micro_benchmarks",
+      "component_id": "optiland_optional_solver_micro_benchmark",
+      "evidence_refs": [
+        "docs/solver_validation_micro_benchmarks.md",
+        "validation/solver_validation_micro_benchmarks.json",
+        "validation/optiland/optiland_validation_pilot_2026-05-14.md"
+      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Optiland has a recorded narrow optional manual validation report.",
+        "Optional solver-backed micro-benchmarks require explicit opt-in.",
+        "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+        "No production-grade physical validation or formal convergence proof is claimed."
+      ],
+      "maturity_level": "optional_manual_solver_validated",
+      "production_grade_physical_validation_claimed": false,
+      "tests_or_scripts": [
+        "scripts/run_optional_solver_micro_benchmarks.sh",
+        "tests/test_optional_solver_micro_benchmarks_script.py"
+      ]
+    },
+    {
+      "area": "optional_solver_micro_benchmarks",
+      "component_id": "elmer_optional_solver_micro_benchmark",
+      "evidence_refs": [
+        "docs/solver_validation_micro_benchmarks.md",
+        "validation/solver_validation_micro_benchmarks.json",
+        "validation/elmer/elmer_install_deferred_2026-05-15.md"
+      ],
+      "external_solver_executed_by_default": false,
+      "external_solver_required": true,
+      "formal_convergence_proof_claimed": false,
+      "limitations": [
+        "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
+        "Optional solver-backed micro-benchmarks require explicit opt-in.",
+        "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+        "No production-grade physical validation or formal convergence proof is claimed."
+      ],
+      "maturity_level": "documented_preview",
+      "production_grade_physical_validation_claimed": false,
+      "tests_or_scripts": [
+        "scripts/run_optional_solver_micro_benchmarks.sh",
+        "tests/test_optional_solver_micro_benchmarks_script.py"
+      ]
     }
   ],
+  "status": "ok",
   "summary": {
-    "record_count": 17,
+    "adapter_source_monitor_maturity_level": "fixture_guarded_preview",
+    "application_domain_maturity_level": "benchmark_checked_preview",
     "areas": [
       "adapters",
       "agents",
@@ -382,13 +517,8 @@
       "frontend",
       "materials",
       "optical_language",
+      "optional_solver_micro_benchmarks",
       "requirements"
-    ],
-    "levels": [
-      "benchmark_checked_preview",
-      "documented_preview",
-      "fixture_guarded_preview",
-      "sanity_checked_preview"
     ],
     "by_area": {
       "adapters": 2,
@@ -398,30 +528,28 @@
       "frontend": 1,
       "materials": 1,
       "optical_language": 2,
+      "optional_solver_micro_benchmarks": 5,
       "requirements": 2
     },
     "by_level": {
       "benchmark_checked_preview": 1,
-      "documented_preview": 2,
+      "documented_preview": 3,
       "fixture_guarded_preview": 8,
+      "optional_manual_solver_validated": 4,
       "sanity_checked_preview": 6
     },
     "calculator_maturity_level": "sanity_checked_preview",
-    "application_domain_maturity_level": "benchmark_checked_preview",
-    "adapter_source_monitor_maturity_level": "fixture_guarded_preview",
-    "material_maturity_level": "documented_preview_user_must_verify"
-  },
-  "preview_boundary_summary": {
-    "calculators": "Sanity-checked preview/design-assist calculators; physical validation remains user responsibility.",
-    "materials": "Local curated preview catalog; not a production-grade optical constants database.",
-    "adapters": "Adapter-native source/monitor mappings are preview metadata; real results require explicit solver execution.",
-    "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
-    "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services.",
-    "pypi": "PyPI publication would not imply production-grade validation."
-  },
-  "external_solver_executed": false,
-  "external_llm_required": false,
-  "proprietary_solver_required": false,
-  "production_grade_validation_claimed": false,
-  "formal_convergence_proof_claimed": false
+    "elmer_micro_benchmark_status": "deferred",
+    "levels": [
+      "benchmark_checked_preview",
+      "documented_preview",
+      "fixture_guarded_preview",
+      "optional_manual_solver_validated",
+      "sanity_checked_preview"
+    ],
+    "material_maturity_level": "documented_preview_user_must_verify",
+    "optional_solver_micro_benchmark_default": "no_solver_execution",
+    "optional_solver_micro_benchmarks_opt_in_required": true,
+    "record_count": 22
+  }
 }

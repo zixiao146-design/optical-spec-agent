@@ -475,3 +475,9 @@ Current readiness now includes a conservative validation maturity layer:
   local API.
 - `scripts/audit_validation_claims.py` scans repo text for unsafe validation
   overclaims before future release-draft work.
+- Optional solver-backed micro-benchmark planning is documented in
+  [`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md)
+  and `validation/solver_validation_micro_benchmarks.json`. The wrapper
+  `scripts/run_optional_solver_micro_benchmarks.sh` is default no-execute and
+  requires explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1` before any solver-backed
+  run.

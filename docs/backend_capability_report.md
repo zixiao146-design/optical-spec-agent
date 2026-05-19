@@ -81,7 +81,9 @@ upload, and `v1.0.0` approval remain separate and not granted.
 10. `application_domain_benchmarks`: scenario-count, pass/warn/fail, positive,
    ambiguous, underconstrained, unsupported, and preview-only benchmark
    coverage.
-11. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
+11. `optional_solver_micro_benchmarks`: manifest-backed, explicit opt-in-only
+    solver micro-benchmark plan; default solver execution remains false.
+12. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
    release actions that remain unexecuted.
 
 ## How To Generate
@@ -119,6 +121,17 @@ Application-domain benchmark scenarios can also be checked directly:
 python scripts/evaluate_application_domain_benchmarks.py
 ```
 
+Optional solver-backed micro-benchmark planning can be checked without running
+solvers:
+
+```bash
+./scripts/run_optional_solver_micro_benchmarks.sh
+```
+
+This wrapper requires explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1` variables for
+any solver-backed run. Default report generation and smoke checks do not set
+those variables.
+
 Coverage can also be read directly:
 
 ```bash
@@ -147,13 +160,19 @@ curl http://127.0.0.1:8000/api/adapter-native-golden-coverage
 ## Validation Maturity
 
 The report now includes `validation_maturity_summary`,
-`preview_boundary_summary`, and `validation_claim_audit_available`. These fields
-link the capability report to
+`preview_boundary_summary`, `optional_solver_micro_benchmarks`, and
+`validation_claim_audit_available`. These fields link the capability report to
 [`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
 and [`preview_boundary_policy.md`](preview_boundary_policy.md). Calculator
 evidence remains `sanity_checked_preview`, application-domain evidence remains
 `benchmark_checked_preview`, and adapter/source-monitor evidence remains
 fixture-guarded preview metadata.
+
+Optional solver-backed micro-benchmarks are documented in
+[`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md).
+They are manual and explicit opt-in only, are not default pytest/smoke/release
+gates, and do not claim production-grade physical validation or formal
+convergence proof.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

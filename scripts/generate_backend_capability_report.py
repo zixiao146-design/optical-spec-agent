@@ -98,6 +98,7 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
     domain_coverage = payload["application_domain_coverage"]
     material_template = payload["material_template_cross_checks"]
     domain_benchmarks = payload["application_domain_benchmarks"]
+    solver_micro = payload["optional_solver_micro_benchmarks"]
     maturity = payload["validation_maturity_summary"]
     preview_boundaries = payload["preview_boundary_summary"]
     lines.extend(
@@ -163,6 +164,28 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
             f"- underconstrained_count: `{domain_benchmarks['underconstrained_count']}`",
             f"- unsupported_count: `{domain_benchmarks['unsupported_count']}`",
             f"- preview_only: `{domain_benchmarks['preview_only']}`",
+            "",
+            "## Optional Solver Micro-benchmarks",
+            "",
+            f"- manifest_exists: `{solver_micro['manifest_exists']}`",
+            f"- default_runs_solver: `{solver_micro['default_runs_solver']}`",
+            f"- opt_in_required: `{solver_micro['opt_in_required']}`",
+            f"- elmer_deferred: `{solver_micro['elmer_deferred']}`",
+            f"- production_grade_claim: `{solver_micro['production_grade_claim']}`",
+            "",
+            "| Solver | Status | Opt-in env | Default runs solver |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+    for item in solver_micro["solvers"]:
+        lines.append(
+            "| {solver_name} | {status} | {opt_in_env_var} | {default_runs_solver} |".format(
+                **item
+            )
+        )
+
+    lines.extend(
+        [
             "",
             "## Validation Maturity Summary",
             "",
@@ -310,6 +333,11 @@ def _print_summary(report: BackendCapabilityReport) -> None:
         f"{payload['application_domain_benchmarks']['pass_count']} pass/"
         f"{payload['application_domain_benchmarks']['warn_count']} warn/"
         f"{payload['application_domain_benchmarks']['fail_count']} fail"
+    )
+    print(
+        "optional_solver_micro_benchmarks="
+        f"{len(payload['optional_solver_micro_benchmarks']['solvers'])} solvers/"
+        f"default_runs_solver={payload['optional_solver_micro_benchmarks']['default_runs_solver']}"
     )
     print(f"requirements_templates={len(payload['requirements_templates'])}")
     print(

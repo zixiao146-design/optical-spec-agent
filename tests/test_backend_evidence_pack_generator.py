@@ -48,6 +48,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "adapter_native_golden_coverage",
         "validation_maturity_summary",
         "preview_boundary_summary",
+        "optional_solver_micro_benchmarks",
         "blocked_or_deferred_capabilities",
         "maintainer_review_questions",
     ]:
@@ -77,6 +78,13 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     )
     assert payload["validation_claim_audit_available"] is True
     assert "materials" in payload["preview_boundary_summary"]
+    solver_micro = payload["optional_solver_micro_benchmarks"]
+    assert solver_micro["manifest_exists"] is True
+    assert solver_micro["default_runs_solver"] is False
+    assert solver_micro["manual_opt_in_only"] is True
+    assert solver_micro["no_production_grade_claim"] is True
+    assert len(solver_micro["solvers"]) == 5
+    assert solver_micro["elmer_deferred"] is True
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",
         "paraxial",
@@ -109,6 +117,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Application-domain benchmarks",
         "Validation maturity summary",
         "Preview boundary summary",
+        "Optional solver micro-benchmarks",
         "Design-case cross-checks",
         "Adapter-native golden coverage",
         "Blocked or deferred capabilities",

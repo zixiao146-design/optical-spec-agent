@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Optional Solver Micro-benchmark Report",
+  "type": "object",
+  "required": [
+    "solver_name",
+    "benchmark_id",
+    "opt_in_env_var",
+    "executed",
+    "passed",
+    "skipped_reason",
+    "solver_version",
+    "input_fixture",
+    "output_artifacts",
+    "production_grade_validation_claimed",
+    "formal_convergence_proof_claimed",
+    "external_solver_executed"
+  ],
+  "properties": {
+    "solver_name": {
+      "type": "string"
+    },
+    "benchmark_id": {
+      "type": "string"
+    },
+    "opt_in_env_var": {
+      "type": "string"
+    },
+    "executed": {
+      "type": "boolean"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "skipped_reason": {
+      "type": ["string", "null"]
+    },
+    "solver_version": {
+      "type": ["string", "null"]
+    },
+    "input_fixture": {
+      "type": ["string", "null"]
+    },
+    "output_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "production_grade_validation_claimed": {
+      "const": false
+    },
+    "formal_convergence_proof_claimed": {
+      "const": false
+    },
+    "external_solver_executed": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": true
+}

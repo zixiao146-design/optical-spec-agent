@@ -63,6 +63,9 @@ approval remain separate and not granted.
   tool-call, missing-input, and safety behavior. The previous fiber coupling
   and polarization warning cases are now covered by deterministic preview
   calculators.
+- Optional solver micro-benchmarks: a manifest-backed plan for tiny open-source
+  solver-backed checks that remain manual and explicit opt-in only. Default
+  evidence pack generation does not run solvers.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,
@@ -84,6 +87,8 @@ means a local evidence check did not match the expected contract.
 ## Limitations
 
 - No external solver is executed by default.
+- Optional solver-backed micro-benchmarks require explicit
+  `OSA_RUN_OPTIONAL_*_VALIDATION=1` approval and are not default gates.
 - No external LLM is called by default.
 - No TestPyPI/PyPI upload is performed.
 - No Git tag or GitHub release is created.

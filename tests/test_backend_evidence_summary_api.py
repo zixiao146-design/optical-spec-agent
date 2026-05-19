@@ -52,6 +52,9 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
         == "benchmark_checked_preview"
     )
     assert body["validation_claim_audit_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
+    assert body["optional_solver_micro_benchmarks"]["manual_opt_in_only"] is True
+    assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(
         case["metadata_match"] and case["fragment_match"] and case["safety_match"]

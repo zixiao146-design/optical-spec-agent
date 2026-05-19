@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import importlib
 import importlib.util
+import json
+from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -176,6 +178,18 @@ class ApplicationDomainBenchmarkCoverage(BaseModel):
     formal_convergence_proof_claimed: bool = False
 
 
+class OptionalSolverMicroBenchmarkCoverage(BaseModel):
+    manifest_exists: bool
+    manifest_path: str = "validation/solver_validation_micro_benchmarks.json"
+    default_runs_solver: bool = False
+    opt_in_required: bool = True
+    solvers: list[dict[str, Any]] = Field(default_factory=list)
+    elmer_deferred: bool = True
+    production_grade_claim: bool = False
+    formal_convergence_proof_claimed: bool = False
+    notes: list[str] = Field(default_factory=list)
+
+
 class BackendCapabilityReport(BaseModel):
     api_contract_version: str = "0.1"
     status: str = "ok"
@@ -192,6 +206,7 @@ class BackendCapabilityReport(BaseModel):
             "Application-domain coverage",
             "Material-template cross-checks",
             "Application-domain benchmarks",
+            "Optional solver micro-benchmarks",
             "Design-case cross-checks",
             "Source / monitor / observable diagnostics",
             "Adapter-native golden coverage",
@@ -213,6 +228,7 @@ class BackendCapabilityReport(BaseModel):
     application_domain_coverage: ApplicationDomainCoverage
     material_template_cross_checks: MaterialTemplateCrossCheckCoverage
     application_domain_benchmarks: ApplicationDomainBenchmarkCoverage
+    optional_solver_micro_benchmarks: OptionalSolverMicroBenchmarkCoverage
     adapter_native_golden_coverage: AdapterGoldenCoverageReport
     validation_maturity_summary: BackendValidationMaturityResponse
     preview_boundary_summary: dict[str, object] = Field(default_factory=dict)
@@ -271,6 +287,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         application_domain_coverage=_application_domain_coverage(domain_cross_checks.cross_checks),
         material_template_cross_checks=_material_template_cross_checks(domain_cross_checks.cross_checks),
         application_domain_benchmarks=_application_domain_benchmarks(domain_benchmarks),
+        optional_solver_micro_benchmarks=_optional_solver_micro_benchmarks(),
         adapter_native_golden_coverage=golden_coverage,
         validation_maturity_summary=maturity_summary,
         preview_boundary_summary=maturity_summary.preview_boundary_summary,
@@ -288,6 +305,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
             "Use /api/application-domain-cross-checks to inspect domain/material/template coverage.",
             "Use /api/application-domain-benchmark-results to inspect scenario benchmark behavior.",
             "Use /api/backend-validation-maturity to inspect conservative evidence levels.",
+            "Use scripts/run_optional_solver_micro_benchmarks.sh only after explicit opt-in validation approval.",
             "Run scripts/audit_validation_claims.py before release-draft work.",
             "Treat calculator outputs as sanity-checked preview/design-assist only.",
         ],
@@ -702,6 +720,38 @@ def _application_domain_benchmarks(
             "production_grade_validation_claimed": results.production_grade_validation_claimed,
             "formal_convergence_proof_claimed": results.formal_convergence_proof_claimed,
         },
+    )
+
+
+def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
+    manifest_path = Path("validation/solver_validation_micro_benchmarks.json")
+    if not manifest_path.exists():
+        return OptionalSolverMicroBenchmarkCoverage(
+            manifest_exists=False,
+            notes=["Optional solver micro-benchmark manifest is missing."],
+        )
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    solvers = payload.get("solvers", [])
+    return OptionalSolverMicroBenchmarkCoverage(
+        manifest_exists=True,
+        default_runs_solver=bool(payload.get("default_runs_solver", False)),
+        opt_in_required=bool(payload.get("opt_in_required", True)),
+        solvers=solvers,
+        elmer_deferred=any(
+            item.get("solver_name") == "elmer" and item.get("status") == "deferred"
+            for item in solvers
+        ),
+        production_grade_claim=bool(
+            payload.get("production_grade_validation_claimed", False)
+        ),
+        formal_convergence_proof_claimed=bool(
+            payload.get("formal_convergence_proof_claimed", False)
+        ),
+        notes=[
+            "Unified solver micro-benchmark wrapper is default no-execute.",
+            "Opt-in environment variables are required for solver-backed runs.",
+            "Elmer remains deferred and is not Level 3.",
+        ],
     )
 
 

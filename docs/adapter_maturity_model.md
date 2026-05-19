@@ -58,6 +58,13 @@ from any future production validation claim.
 | MPB | Level 3 - Optional manual solver validation | Registered and CLI-visible; generates MPB Python scaffold evidence for band-structure style workflows. A narrow opt-in pilot generated the adapter scaffold and executed a tiny project-owned MPB/PyMeep validation path through `meep.mpb`. MPB CLI is not required. | `examples/specs/mpb_preview.json`, `tests/fixtures/adapter_golden/mpb/`, `tests/test_adapter_family_evidence.py`, `docs/mpb_optional_validation_pilot.md`, `docs/mpb_level3_readiness.md`, `validation/mpb/mpb_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible solver-backed benchmark before considering Level 4. |
 | Optiland | Level 3 - Optional manual backend validation | Registered and CLI-visible; generates Optiland scaffold evidence while lens prescription schema remains incomplete. A narrow opt-in pilot generated the adapter scaffold and executed a tiny project-owned Optiland validation path. | `examples/specs/optiland_preview.json`, `tests/fixtures/adapter_golden/optiland/`, `tests/test_adapter_family_evidence.py`, `docs/optiland_optional_validation_pilot.md`, `docs/optiland_level3_readiness.md`, `validation/optiland/optiland_validation_pilot_2026-05-14.md` | no | yes, only for the 2026-05-14 opt-in pilot | no | Define a reproducible backend-backed benchmark before considering Level 4. |
 
+The optional solver-backed micro-benchmark planning layer is recorded in
+`docs/solver_validation_micro_benchmarks.md` and
+`validation/solver_validation_micro_benchmarks.json`. It consolidates the
+Gmsh, Meep, MPB, and Optiland Level 3 pilot paths into a default no-execute
+manifest and wrapper. It does not make any solver a default dependency and does
+not upgrade any adapter to production-grade validation.
+
 ## Non-goals
 
 - No default external solver execution.

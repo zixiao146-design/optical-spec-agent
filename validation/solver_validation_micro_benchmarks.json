@@ -1,0 +1,113 @@
+{
+  "schema_version": "solver_validation_micro_benchmarks.v0.1",
+  "default_runs_solver": false,
+  "opt_in_required": true,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "solvers": [
+    {
+      "solver_name": "gmsh",
+      "adapter": "gmsh",
+      "current_maturity": "Level 3 - Optional manual solver validation",
+      "optional_script": "scripts/run_optional_gmsh_validation.sh",
+      "opt_in_env_var": "OSA_RUN_OPTIONAL_GMSH_VALIDATION",
+      "default_runs_solver": false,
+      "missing_solver_non_blocking": true,
+      "expected_artifacts": [
+        "gmsh_preview.geo",
+        "gmsh_preview.msh",
+        "gmsh_validation_report.json"
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "status": "manual_report_recorded",
+      "evidence_refs": [
+        "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
+        "docs/gmsh_optional_validation_pilot.md"
+      ]
+    },
+    {
+      "solver_name": "meep",
+      "adapter": "meep",
+      "current_maturity": "Level 3 - Optional manual solver validation",
+      "optional_script": "scripts/run_optional_meep_validation.sh",
+      "opt_in_env_var": "OSA_RUN_OPTIONAL_MEEP_VALIDATION",
+      "default_runs_solver": false,
+      "missing_solver_non_blocking": true,
+      "expected_artifacts": [
+        "meep_preview.py",
+        "meep_validation_result.json",
+        "meep_validation_report.json"
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "status": "manual_report_recorded",
+      "evidence_refs": [
+        "validation/meep/meep_validation_pilot_2026-05-14.md",
+        "docs/meep_optional_validation_pilot.md"
+      ]
+    },
+    {
+      "solver_name": "mpb",
+      "adapter": "mpb",
+      "current_maturity": "Level 3 - Optional manual solver validation",
+      "optional_script": "scripts/run_optional_mpb_validation.sh",
+      "opt_in_env_var": "OSA_RUN_OPTIONAL_MPB_VALIDATION",
+      "default_runs_solver": false,
+      "missing_solver_non_blocking": true,
+      "expected_artifacts": [
+        "mpb_preview.py",
+        "mpb_validation_result.json",
+        "mpb_validation_report.json"
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "status": "manual_report_recorded",
+      "evidence_refs": [
+        "validation/mpb/mpb_validation_pilot_2026-05-14.md",
+        "docs/mpb_optional_validation_pilot.md"
+      ]
+    },
+    {
+      "solver_name": "optiland",
+      "adapter": "optiland",
+      "current_maturity": "Level 3 - Optional manual backend validation",
+      "optional_script": "scripts/run_optional_optiland_validation.sh",
+      "opt_in_env_var": "OSA_RUN_OPTIONAL_OPTILAND_VALIDATION",
+      "default_runs_solver": false,
+      "missing_solver_non_blocking": true,
+      "expected_artifacts": [
+        "optiland_preview.py",
+        "optiland_validation_result.json",
+        "optiland_validation_report.json"
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "status": "manual_report_recorded",
+      "evidence_refs": [
+        "validation/optiland/optiland_validation_pilot_2026-05-14.md",
+        "docs/optiland_optional_validation_pilot.md"
+      ]
+    },
+    {
+      "solver_name": "elmer",
+      "adapter": "elmer",
+      "current_maturity": "Level 2 - Golden/evidence fixtures, Level-3-ready",
+      "optional_script": "scripts/run_optional_elmer_validation.sh",
+      "opt_in_env_var": "OSA_RUN_OPTIONAL_ELMER_VALIDATION",
+      "default_runs_solver": false,
+      "missing_solver_non_blocking": true,
+      "expected_artifacts": [
+        "case.sif",
+        "elmer_validation_report.json"
+      ],
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "status": "deferred",
+      "evidence_refs": [
+        "validation/elmer/elmer_install_deferred_2026-05-15.md",
+        "docs/elmer_optional_validation_pilot.md"
+      ]
+    }
+  ]
+}

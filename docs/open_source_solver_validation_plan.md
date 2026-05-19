@@ -14,6 +14,13 @@ commands and Python-backed module availability, and can write an availability
 JSON report, but it does not execute Meep, MPB, Gmsh, Elmer, Optiland, or any
 other solver.
 
+The rc8.dev0 micro-benchmark planning layer is documented in
+`docs/solver_validation_micro_benchmarks.md` and summarized by
+`validation/solver_validation_micro_benchmarks.json`. The unified wrapper
+`scripts/run_optional_solver_micro_benchmarks.sh` is default no-execute: unless
+an explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1` variable is set, it only prints
+the manifest summary and optional JSON report metadata.
+
 ## Candidate open-source solver families
 
 - Meep: current research-preview adapter and optional explicit local execution
@@ -105,3 +112,5 @@ optional/manual and may be unavailable without failing default preflight.
 - Tests should not be part of default `scripts/smoke_release.sh`.
 - Tests should not require proprietary tools or proprietary licenses.
 - Marker policy is documented in `docs/pytest_marker_policy.md`.
+- Optional solver micro-benchmarks remain outside default quality gates and do
+  not claim production-grade physical validation or formal convergence proof.

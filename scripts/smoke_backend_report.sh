@@ -16,6 +16,12 @@ python scripts/generate_backend_capability_report.py \
 python scripts/check_adapter_native_golden.py
 python scripts/evaluate_application_domain_benchmarks.py
 python scripts/audit_validation_claims.py
+env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
+    -u OSA_RUN_OPTIONAL_MEEP_VALIDATION \
+    -u OSA_RUN_OPTIONAL_MPB_VALIDATION \
+    -u OSA_RUN_OPTIONAL_OPTILAND_VALIDATION \
+    -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
+    ./scripts/run_optional_solver_micro_benchmarks.sh
 
 python - <<'PY'
 import json
@@ -43,6 +49,7 @@ for section in [
     "application_domain_benchmarks",
     "validation_maturity_summary",
     "preview_boundary_summary",
+    "optional_solver_micro_benchmarks",
     "adapter_native_golden_coverage",
     "design_case_cross_checks",
     "blocked_external_actions",
@@ -101,6 +108,15 @@ require(
     report["validation_maturity_summary"]["summary"]["application_domain_maturity_level"]
     == "benchmark_checked_preview",
     "application domain maturity level changed",
+)
+require(report["optional_solver_micro_benchmarks"]["manifest_exists"] is True, "optional solver manifest missing")
+require(
+    report["optional_solver_micro_benchmarks"]["default_runs_solver"] is False,
+    "optional solver micro-benchmarks run by default",
+)
+require(
+    report["optional_solver_micro_benchmarks"]["opt_in_required"] is True,
+    "optional solver micro-benchmarks no longer require opt-in",
 )
 require(report["validation_claim_audit_available"] is True, "validation claim audit missing")
 require(len(report["requirements_templates"]) == 7, "requirement template count mismatch")
@@ -304,6 +320,7 @@ print("ADAPTER NATIVE METADATA DIFF PASSED")
 print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
 print("VALIDATION MATURITY CHECKS PASSED")
 print("VALIDATION CLAIM AUDIT PASSED")
+print("OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED")
 PY
 
 echo "FIBER COUPLING PREVIEW PASSED"
@@ -312,6 +329,7 @@ echo "FIBER COUPLING REFERENCE SANITY PASSED"
 echo "POLARIZATION REFERENCE SANITY PASSED"
 echo "VALIDATION MATURITY CHECKS PASSED"
 echo "VALIDATION CLAIM AUDIT PASSED"
+echo "OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

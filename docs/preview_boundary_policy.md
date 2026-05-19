@@ -31,6 +31,7 @@ Users must verify:
 | Application domains | Benchmarks check deterministic routing and diagnostics, not physical correctness. |
 | Source/monitor models | Preview metadata only; no real solver monitor result is claimed. |
 | Adapter mappings | Adapter-native semantic previews; real results require explicit solver execution. |
+| Optional solver micro-benchmarks | Manual, explicit opt-in only; default tests, smoke, quality gates, and release gates do not run solvers. |
 | Sub-agents | Deterministic backend roles; not independent autonomous services. |
 | Frontend | UI/demo surface; not validation evidence. |
 
@@ -46,6 +47,6 @@ solver convergence, and material-data verification.
 - No formal convergence proof is claimed.
 - No guaranteed accuracy is claimed.
 - No external solver execution is performed by default.
+- Optional solver-backed validation is manual and explicit opt-in only.
 - No external LLM is called by default.
 - Elmer Level 3 remains deferred.
-

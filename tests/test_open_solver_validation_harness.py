@@ -13,8 +13,11 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     template = ROOT / "docs" / "manual_solver_validation_report_template.md"
     marker_policy = ROOT / "docs" / "pytest_marker_policy.md"
     plan = ROOT / "docs" / "open_source_solver_validation_plan.md"
+    micro_doc = ROOT / "docs" / "solver_validation_micro_benchmarks.md"
+    micro_manifest = ROOT / "validation" / "solver_validation_micro_benchmarks.json"
+    micro_script = ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh"
 
-    for path in [harness, template, marker_policy, plan]:
+    for path in [harness, template, marker_policy, plan, micro_doc, micro_manifest, micro_script]:
         assert path.exists()
 
     harness_text = harness.read_text(encoding="utf-8")
@@ -35,6 +38,8 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "Meep opt-in pilot" in harness_text
     assert "MPB opt-in pilot" in harness_text
     assert "Optiland opt-in pilot" in harness_text
+    assert "run_optional_solver_micro_benchmarks.sh" in harness_text
+    assert "default no-execute" in harness_text
     assert "production-grade physical validation" in harness_text
     assert "not a default dependency" in harness_text
 
@@ -72,3 +77,12 @@ def test_open_solver_validation_harness_docs_exist_and_stay_optional():
     assert "validation/elmer/elmer_install_deferred_2026-05-15.md" in plan_text
     assert "Tests should not be part of default `pytest`" in plan_text
     assert "Marker policy is documented in `docs/pytest_marker_policy.md`" in plan_text
+    assert "solver_validation_micro_benchmarks.md" in plan_text
+    assert "run_optional_solver_micro_benchmarks.sh" in plan_text
+
+    micro_text = micro_doc.read_text(encoding="utf-8")
+    assert "explicit opt-in" in micro_text
+    assert "pytest does not run solvers by default" in micro_text
+    assert "Elmer remains deferred" in micro_text
+    script_text = micro_script.read_text(encoding="utf-8")
+    assert "NO SOLVER EXECUTION PERFORMED BY DEFAULT" in script_text

@@ -15,6 +15,12 @@ python scripts/generate_backend_evidence_pack.py \
 
 python scripts/evaluate_application_domain_benchmarks.py
 python scripts/audit_validation_claims.py
+env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
+    -u OSA_RUN_OPTIONAL_MEEP_VALIDATION \
+    -u OSA_RUN_OPTIONAL_MPB_VALIDATION \
+    -u OSA_RUN_OPTIONAL_OPTILAND_VALIDATION \
+    -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
+    ./scripts/run_optional_solver_micro_benchmarks.sh
 
 python - <<'PY'
 import json
@@ -52,6 +58,7 @@ for section in [
     "adapter_native_golden_coverage",
     "validation_maturity_summary",
     "preview_boundary_summary",
+    "optional_solver_micro_benchmarks",
     "blocked_or_deferred_capabilities",
     "maintainer_review_questions",
 ]:
@@ -112,6 +119,15 @@ require(
     == "benchmark_checked_preview",
     "application maturity level changed",
 )
+require(payload["optional_solver_micro_benchmarks"]["manifest_exists"] is True, "optional solver manifest missing")
+require(
+    payload["optional_solver_micro_benchmarks"]["default_runs_solver"] is False,
+    "optional solver micro-benchmarks run by default",
+)
+require(
+    payload["optional_solver_micro_benchmarks"]["manual_opt_in_only"] is True,
+    "optional solver micro-benchmarks no longer manual opt-in",
+)
 require(payload["validation_claim_audit_available"] is True, "validation claim audit missing")
 
 markdown = markdown_path.read_text(encoding="utf-8")
@@ -152,6 +168,7 @@ print("FIBER COUPLING REFERENCE SANITY PASSED")
 print("POLARIZATION REFERENCE SANITY PASSED")
 print("VALIDATION MATURITY CHECKS PASSED")
 print("VALIDATION CLAIM AUDIT PASSED")
+print("OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED")
 print("FIBER COUPLING PREVIEW PASSED")
 print("POLARIZATION PREVIEW PASSED")
 PY
@@ -162,6 +179,7 @@ echo "FIBER COUPLING REFERENCE SANITY PASSED"
 echo "POLARIZATION REFERENCE SANITY PASSED"
 echo "VALIDATION MATURITY CHECKS PASSED"
 echo "VALIDATION CLAIM AUDIT PASSED"
+echo "OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

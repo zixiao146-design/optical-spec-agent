@@ -30,6 +30,7 @@
 | Application domains | benchmark 检查确定性路由和诊断，不证明物理正确性。 |
 | Source/monitor models | 仅 preview metadata；不声称真实 solver monitor result。 |
 | Adapter mappings | adapter-native 语义预览；真实结果需要显式批准 solver execution。 |
+| Optional solver micro-benchmarks | 仅手动、显式 opt-in；默认 tests、smoke、quality gates 和 release gates 不运行 solver。 |
 | Sub-agents | 确定性后端角色；不是独立自主服务。 |
 | Frontend | UI/demo surface；不是验证证据。 |
 
@@ -44,6 +45,6 @@
 - 不声称形式化收敛证明。
 - 不声称 guaranteed accuracy。
 - 默认不执行 external solver。
+- Optional solver-backed validation 只能手动显式 opt-in。
 - 默认不调用 external LLM。
 - Elmer Level 3 仍然 deferred。
-

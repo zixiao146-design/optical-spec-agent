@@ -23,6 +23,7 @@ EVIDENCE_PACK_SECTIONS = [
     "Application-domain coverage",
     "Material-template cross-checks",
     "Application-domain benchmarks",
+    "Optional solver micro-benchmarks",
     "Design-case cross-checks",
     "Source / monitor / observable diagnostics",
     "Adapter-native golden coverage",
@@ -50,6 +51,7 @@ class BackendEvidencePack(BaseModel):
     application_domain_coverage: dict[str, Any] = Field(default_factory=dict)
     material_template_cross_checks: dict[str, Any] = Field(default_factory=dict)
     application_domain_benchmarks: dict[str, Any] = Field(default_factory=dict)
+    optional_solver_micro_benchmarks: dict[str, Any] = Field(default_factory=dict)
     design_case_cross_checks: list[dict[str, Any]] = Field(default_factory=list)
     source_monitor_observable_diagnostics: dict[str, Any]
     adapter_native_golden_coverage: dict[str, Any]
@@ -182,6 +184,13 @@ def generate_backend_evidence_pack(
             "preview_design_assist_only": True,
             "unsupported_requests_blocked_or_deferred": True,
             "no_external_solver_execution": True,
+        },
+        optional_solver_micro_benchmarks={
+            **payload["optional_solver_micro_benchmarks"],
+            "preview_design_assist_only": True,
+            "default_solver_execution": False,
+            "manual_opt_in_only": True,
+            "no_production_grade_claim": True,
         },
         validation_maturity_summary=payload["validation_maturity_summary"],
         preview_boundary_summary=payload["preview_boundary_summary"],

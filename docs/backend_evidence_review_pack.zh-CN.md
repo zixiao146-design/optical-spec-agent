@@ -48,6 +48,8 @@ python scripts/generate_backend_evidence_pack.py \
   case，以及 metadata、fragment、safety 检查。
 - Application-domain benchmarks：此前 fiber coupling 和 polarization 的 warning
   场景现在由确定性 preview 计算器覆盖，但真实耦合/矢量偏振验证仍需显式求解器或实验依据。
+- Optional solver micro-benchmarks：manifest-backed 的微型开源 solver-backed
+  检查规划，只能手动显式 opt-in。默认 evidence pack generation 不运行 solver。
 - Blocked or deferred capabilities：外部求解器、外部 LLM、发布、tag/release、Elmer
   Level 3、生产级验证、形式化收敛证明等被阻止或延后能力。
 - Maintainer review questions：供维护者决定下一步审查或深化方向的问题。
@@ -60,6 +62,8 @@ python scripts/generate_backend_evidence_pack.py \
 ## 限制
 
 - 默认不执行外部求解器。
+- Optional solver-backed micro-benchmarks 必须显式设置
+  `OSA_RUN_OPTIONAL_*_VALIDATION=1`，且不属于默认 gate。
 - 默认不调用外部 LLM。
 - 不上传 TestPyPI/PyPI。
 - 不创建 Git tag 或 GitHub release。
@@ -73,6 +77,8 @@ python scripts/generate_backend_evidence_pack.py \
 - `validation_maturity_summary`：对计算器、材料、应用域、adapter metadata、
   sub-agent session 和前端 UI/demo surface 的保守成熟度分级。
 - `preview_boundary_summary`：说明每类证据证明什么，以及用户仍需自行验证什么。
+- `optional_solver_micro_benchmarks`：记录可选手动 solver-backed micro-benchmark
+  manifest，默认不执行 solver，且不声称生产级验证。
 - `validation_claim_audit_available`：记录
   `scripts/audit_validation_claims.py` 是后端证据 workflow 的一部分。
 

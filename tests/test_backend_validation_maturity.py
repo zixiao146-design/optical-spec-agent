@@ -25,6 +25,11 @@ def test_backend_validation_maturity_records_cover_expected_areas():
         "observable_diagnostics",
         "adapter_native_mapping",
         "adapter_golden_coverage",
+        "gmsh_optional_solver_micro_benchmark",
+        "meep_optional_solver_micro_benchmark",
+        "mpb_optional_solver_micro_benchmark",
+        "optiland_optional_solver_micro_benchmark",
+        "elmer_optional_solver_micro_benchmark",
         "sub_agent_task_sessions",
         "tool_call_ledger",
         "agent_studio",
@@ -55,6 +60,23 @@ def test_backend_validation_maturity_levels_are_conservative():
     )
     assert all(record.formal_convergence_proof_claimed is False for record in records)
     assert all(record.external_solver_executed_by_default is False for record in records)
+    optional_solver_records = [
+        record for record in records if record.area == "optional_solver_micro_benchmarks"
+    ]
+    assert len(optional_solver_records) == 5
+    assert all(record.external_solver_required is True for record in optional_solver_records)
+    assert all(
+        record.external_solver_executed_by_default is False
+        for record in optional_solver_records
+    )
+    assert (
+        next(
+            record
+            for record in optional_solver_records
+            if record.component_id == "elmer_optional_solver_micro_benchmark"
+        ).maturity_level
+        == "documented_preview"
+    )
 
 
 def test_backend_validation_maturity_summary_has_preview_boundaries():
@@ -63,8 +85,11 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert summary.summary["application_domain_maturity_level"] == "benchmark_checked_preview"
     assert summary.summary["adapter_source_monitor_maturity_level"] == "fixture_guarded_preview"
     assert summary.summary["material_maturity_level"] == "documented_preview_user_must_verify"
+    assert summary.summary["optional_solver_micro_benchmark_default"] == "no_solver_execution"
+    assert summary.summary["optional_solver_micro_benchmarks_opt_in_required"] is True
+    assert summary.summary["elmer_micro_benchmark_status"] == "deferred"
     assert "not a production-grade optical constants database" in summary.preview_boundary_summary["materials"]
     assert "not physical correctness" in summary.preview_boundary_summary["application_domains"]
+    assert "explicit opt-in" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert summary.production_grade_validation_claimed is False
     assert summary.formal_convergence_proof_claimed is False
-

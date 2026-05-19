@@ -68,6 +68,10 @@ def test_backend_capability_report_api_returns_expected_sections():
     )
     assert body["validation_claim_audit_available"] is True
     assert "materials" in body["preview_boundary_summary"]
+    assert body["optional_solver_micro_benchmarks"]["manifest_exists"] is True
+    assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
+    assert body["optional_solver_micro_benchmarks"]["opt_in_required"] is True
+    assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",
@@ -101,6 +105,8 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["application_domain_benchmarks"]["warn_count"] == 0
     assert body["validation_maturity_summary"]["summary"]["record_count"] >= 17
     assert body["validation_claim_audit_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
+    assert body["optional_solver_micro_benchmarks"]["opt_in_required"] is True
     assert body["external_solver_executed"] is False
 
 

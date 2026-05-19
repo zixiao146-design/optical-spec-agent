@@ -33,6 +33,7 @@ not production-grade physical validation.
 | Observable diagnostics | Taxonomy and adapter compatibility exist | Combined observables need richer required-input handling | Preview artifacts may hide observable prerequisites | Add multi-observable cases and expected warnings. |
 | Adapter-native mappings | Five adapters mapped with golden metadata | Mapping is preview metadata, not executed solver semantics | Real solver users may expect monitor results | Keep `solver_execution_required_for_real_result` prominent. |
 | Adapter golden coverage | Strict metadata diffs cover five golden cases | Coverage is narrow per adapter | Adapter changes can pass without broader semantic coverage | Add one additional case per adapter when adapter previews change. |
+| Optional solver-backed micro-benchmarks | Existing Gmsh/Meep/MPB/Optiland pilots are now represented in a unified manifest; Elmer remains deferred | Optional solver-backed checks are not default gates and are not yet reproducible Level 4 benchmarks | Maintainers may overread manual pilots as production validation | Keep `scripts/run_optional_solver_micro_benchmarks.sh` default no-execute and require explicit opt-in variables. |
 | Design requirement templates | Seven templates and deterministic matching exist | Requirements lack tolerance/optimization constraints | Goals may not capture design acceptance criteria | Add tolerance, sweep, and pass/fail fields for candidate templates. |
 | Natural-language to optical-language matching | Deterministic heuristic EN/ZH matching, candidate templates, confidence, and questions exist | Novel phrasing may still need more negative examples | Unexpected matches can produce misleading plans | Keep adding ambiguous/negative cases and confidence-threshold tests. |
 | Application domain coverage | Ten domains map to templates, materials, calculators/adapters, and missing-input questions | Fiber coupling and polarization now have deterministic preview calculators, but real coupling/vector validation remains deferred | Domain coverage could be mistaken for full physical validation | Keep pass/warning/fail semantics explicit and require explicit solver or experimental evidence for physical validation. |
@@ -67,6 +68,12 @@ not production-grade physical validation.
    Elmer is not Level 3 and should remain non-blocking until installation and
    opt-in validation become maintainable.
 
+6. Optional solver-backed validation now has a planning path, not a default
+   gate.
+   `validation/solver_validation_micro_benchmarks.json` and
+   `scripts/run_optional_solver_micro_benchmarks.sh` consolidate tiny optional
+   Gmsh/Meep/MPB/Optiland checks while preserving default no-solver behavior.
+
 ## Non-gaps / Stable Enough
 
 - Current public prerelease remains `v0.9.0rc7`.
@@ -93,3 +100,5 @@ Validation maturity is now tracked explicitly in
 The remaining gap is not missing labels; it is deeper optional validation beyond
 preview evidence. That future work must stay separate from PyPI and release
 decisions unless maintainers explicitly decide otherwise.
+The optional solver-backed micro-benchmark plan is the next disciplined step,
+but it is manual and explicit opt-in only.

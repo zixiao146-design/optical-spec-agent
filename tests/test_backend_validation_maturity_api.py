@@ -19,14 +19,18 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert body["summary"]["application_domain_maturity_level"] == "benchmark_checked_preview"
     assert body["summary"]["adapter_source_monitor_maturity_level"] == "fixture_guarded_preview"
     assert body["summary"]["material_maturity_level"] == "documented_preview_user_must_verify"
+    assert body["summary"]["optional_solver_micro_benchmark_default"] == "no_solver_execution"
+    assert body["summary"]["optional_solver_micro_benchmarks_opt_in_required"] is True
+    assert body["summary"]["elmer_micro_benchmark_status"] == "deferred"
     component_ids = {record["component_id"] for record in body["records"]}
     assert "fiber_coupling_calculator" in component_ids
     assert "polarization_calculator" in component_ids
     assert "adapter_golden_coverage" in component_ids
+    assert "gmsh_optional_solver_micro_benchmark" in component_ids
+    assert "elmer_optional_solver_micro_benchmark" in component_ids
     assert "tool_call_ledger" in component_ids
     assert "not a production-grade optical constants database" in body["preview_boundary_summary"]["materials"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False
     assert body["formal_convergence_proof_claimed"] is False
-

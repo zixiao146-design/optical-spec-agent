@@ -322,6 +322,81 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
             )
         )
 
+    optional_solver_micro_benchmarks: list[
+        tuple[str, ValidationMaturityLevel, list[str], str]
+    ] = [
+        (
+            "gmsh_optional_solver_micro_benchmark",
+            "optional_manual_solver_validated",
+            [
+                "docs/solver_validation_micro_benchmarks.md",
+                "validation/solver_validation_micro_benchmarks.json",
+                "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
+            ],
+            "Gmsh has a recorded narrow optional manual validation report.",
+        ),
+        (
+            "meep_optional_solver_micro_benchmark",
+            "optional_manual_solver_validated",
+            [
+                "docs/solver_validation_micro_benchmarks.md",
+                "validation/solver_validation_micro_benchmarks.json",
+                "validation/meep/meep_validation_pilot_2026-05-14.md",
+            ],
+            "Meep has a recorded narrow optional manual validation report.",
+        ),
+        (
+            "mpb_optional_solver_micro_benchmark",
+            "optional_manual_solver_validated",
+            [
+                "docs/solver_validation_micro_benchmarks.md",
+                "validation/solver_validation_micro_benchmarks.json",
+                "validation/mpb/mpb_validation_pilot_2026-05-14.md",
+            ],
+            "MPB has a recorded narrow optional manual validation report.",
+        ),
+        (
+            "optiland_optional_solver_micro_benchmark",
+            "optional_manual_solver_validated",
+            [
+                "docs/solver_validation_micro_benchmarks.md",
+                "validation/solver_validation_micro_benchmarks.json",
+                "validation/optiland/optiland_validation_pilot_2026-05-14.md",
+            ],
+            "Optiland has a recorded narrow optional manual validation report.",
+        ),
+        (
+            "elmer_optional_solver_micro_benchmark",
+            "documented_preview",
+            [
+                "docs/solver_validation_micro_benchmarks.md",
+                "validation/solver_validation_micro_benchmarks.json",
+                "validation/elmer/elmer_install_deferred_2026-05-15.md",
+            ],
+            "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
+        ),
+    ]
+    for component_id, maturity_level, evidence_refs, status_note in optional_solver_micro_benchmarks:
+        records.append(
+            _record(
+                area="optional_solver_micro_benchmarks",
+                component_id=component_id,
+                maturity_level=maturity_level,
+                evidence_refs=evidence_refs,
+                tests_or_scripts=[
+                    "scripts/run_optional_solver_micro_benchmarks.sh",
+                    "tests/test_optional_solver_micro_benchmarks_script.py",
+                ],
+                limitations=[
+                    status_note,
+                    "Optional solver-backed micro-benchmarks require explicit opt-in.",
+                    "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+                    "No production-grade physical validation or formal convergence proof is claimed.",
+                ],
+                external_solver_required=True,
+            )
+        )
+
     return records
 
 
@@ -343,6 +418,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "application_domain_maturity_level": "benchmark_checked_preview",
             "adapter_source_monitor_maturity_level": "fixture_guarded_preview",
             "material_maturity_level": "documented_preview_user_must_verify",
+            "optional_solver_micro_benchmark_default": "no_solver_execution",
+            "optional_solver_micro_benchmarks_opt_in_required": True,
+            "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
             "calculators": (
@@ -366,6 +444,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "independent autonomous services."
             ),
             "pypi": "PyPI publication would not imply production-grade validation.",
+            "optional_solver_micro_benchmarks": (
+                "Open-source solver-backed micro-benchmarks are optional/manual/"
+                "explicit opt-in only; default gates do not run solvers."
+            ),
         },
     )
-

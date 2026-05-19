@@ -24,6 +24,13 @@ external solvers default requirements.
 - does not upload packages
 - does not require proprietary tools
 
+`scripts/run_optional_solver_micro_benchmarks.sh` adds a unified optional
+micro-benchmark wrapper over the existing solver-specific pilot scripts. In
+default no-execute mode it does not run solvers; it reads
+`validation/solver_validation_micro_benchmarks.json`, prints the manifest
+summary, and can write a JSON summary when `OSA_SOLVER_MICRO_BENCHMARK_REPORT`
+is set.
+
 ## Candidate Open-source Solver Families
 
 - Meep: current preview adapter and optional explicit local execution harness.
@@ -103,3 +110,5 @@ Future manual solver validation should follow this pattern:
 - no proprietary solver validation
 - no TestPyPI/PyPI upload
 - no release creation
+- no optional solver micro-benchmark execution without explicit
+  `OSA_RUN_OPTIONAL_*_VALIDATION=1`
