@@ -38,7 +38,7 @@ health = get("/api/health")
 require(health["status"] == "ok", "health status must be ok")
 
 version = get("/api/version")
-require(version["package_version"] == "0.9.0rc7.dev0", "unexpected package version")
+require(version["package_version"] == "0.9.0rc7", "unexpected package version")
 require(version["api_contract_version"] == "0.1", "unexpected API contract version")
 
 adapters = get("/api/adapters")
@@ -140,7 +140,7 @@ internal_tools = {item["tool_name"] for item in tool_capabilities["internal_tool
 require("optical_calculators" in internal_tools, "tool capabilities missing optical calculators")
 
 backend_report = get("/api/backend-capability-report")
-require(backend_report["package"]["package_version"] == "0.9.0rc7.dev0", "backend report package mismatch")
+require(backend_report["package"]["package_version"] == "0.9.0rc7", "backend report package mismatch")
 require(backend_report["design_case_cross_checks"], "backend report missing design case checks")
 require(all(item["executed"] is False for item in backend_report["blocked_external_actions"]), "blocked action executed")
 

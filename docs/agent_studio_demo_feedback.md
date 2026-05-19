@@ -3,7 +3,7 @@
 ## Current Status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: 0.9.0rc7
 - Latest localized frontend commit reviewed: 212b880
 - Agent Studio frontend localization: English / 中文
 - Demo was run locally: yes

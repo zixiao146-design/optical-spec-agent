@@ -8,7 +8,7 @@ maintainer-approved v1.0 public contract freeze.
 ## Current scope
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: `0.9.0rc7.dev0`
+- Current main release draft: `0.9.0rc7`
 - v1.0.0 not released
 - v0.9.0rc7 tag not created
 - v0.9.0rc7 GitHub release not created

@@ -8,12 +8,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc6.dev0.md"
 RC6_APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc6.md"
-RC7_APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc7.dev0.md"
+RC7_DEV_APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc7.dev0.md"
+RC7_APPROVAL_RECORD = ROOT / "docs" / "testpypi_upload_approval_v0.9.0rc7.md"
 
 
 def test_testpypi_upload_approval_record_exists_and_grants_testpypi_only():
     assert APPROVAL_RECORD.exists()
     assert RC6_APPROVAL_RECORD.exists()
+    assert RC7_DEV_APPROVAL_RECORD.exists()
     assert RC7_APPROVAL_RECORD.exists()
     text = APPROVAL_RECORD.read_text(encoding="utf-8")
     assert "TestPyPI upload approval: granted for 0.9.0rc6.dev0 only" in text
@@ -25,10 +27,11 @@ def test_testpypi_upload_approval_record_exists_and_grants_testpypi_only():
     assert "Upload command authorized for rc6: no" in rc6_text
     assert "PyPI publication approval: not granted" in rc6_text
     rc7_text = RC7_APPROVAL_RECORD.read_text(encoding="utf-8")
-    assert "TestPyPI upload approval: pending" in rc7_text
-    assert "Upload command authorized: no" in rc7_text
-    assert "Current main development version: 0.9.0rc7.dev0" in rc7_text
-    assert "TestPyPI upload for 0.9.0rc7.dev0: not performed" in rc7_text
+    assert "TestPyPI upload approval for 0.9.0rc7: pending" in rc7_text
+    assert "Upload command authorized for rc7: no" in rc7_text
+    assert "Current main release draft: v0.9.0rc7" in rc7_text
+    assert "TestPyPI upload for rc7: not performed" in rc7_text
+    assert "DO NOT RUN WITHOUT APPROVAL" in rc7_text
 
 
 def test_testpypi_upload_approval_record_documents_artifacts_and_token_safety():
@@ -50,6 +53,6 @@ def test_testpypi_upload_approval_record_is_linked_from_gate_docs():
     ]
     for path in required_docs:
         text = path.read_text(encoding="utf-8")
-        assert "docs/testpypi_upload_approval_v0.9.0rc7.dev0.md" in text
+        assert "docs/testpypi_upload_approval_v0.9.0rc7.md" in text
         assert "pending" in text
         assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text

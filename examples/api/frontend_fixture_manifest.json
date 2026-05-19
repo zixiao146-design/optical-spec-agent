@@ -1,6 +1,6 @@
 {
   "current_public_prerelease": "v0.9.0rc6",
-  "current_main_development_version": "0.9.0rc7.dev0",
+  "current_main_development_version": "0.9.0rc7",
   "api_contract_version": "0.1",
   "frontend_implementation": "mvp implemented under frontend/",
   "demo_mode": "available; demo fixtures are not live validation",
@@ -785,5 +785,8 @@
       "formal_convergence_proof_claimed": false,
       "proprietary_solver_required": false
     }
-  ]
+  ],
+  "current_main_release_draft": "v0.9.0rc7",
+  "testpypi_upload_for_0_9_0rc7_performed": false,
+  "pypi_published": false
 }

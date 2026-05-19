@@ -15,7 +15,7 @@ def test_pypi_publication_readiness_checklist_tracks_current_gate():
 
     assert "TestPyPI uploaded: yes" in text
     assert "TestPyPI version: 0.9.0rc6.dev0" in text
-    assert "TestPyPI upload for 0.9.0rc7.dev0: not performed" in text
+    assert "TestPyPI upload for 0.9.0rc7: not performed" in text
     assert "Clean install from TestPyPI: passed" in text
     assert "PyPI published: no" in text
     assert "PyPI publication approval: not granted" in text

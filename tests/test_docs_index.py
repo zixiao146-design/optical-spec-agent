@@ -14,7 +14,7 @@ def test_docs_index_exists_and_links_major_docs():
     text = index.read_text(encoding="utf-8")
     required = [
         "Current public prerelease: v0.9.0rc6",
-        "Current main development version: `0.9.0rc7.dev0`",
+        "Current main release draft: `0.9.0rc7`",
         "release_readiness_current.md",
         "release_readiness_v0.9.0rc7.md",
         "release_readiness_v0.9.0rc6.md",
@@ -130,7 +130,7 @@ def test_docs_index_exists_and_links_major_docs():
         "pypi_publication_readiness_checklist.md",
         "pypi_post_publication_verification_plan.md",
         "publication_decision_record.md",
-        "testpypi_upload_approval_v0.9.0rc7.dev0.md",
+        "testpypi_upload_approval_v0.9.0rc7.md",
         "testpypi_upload_approval_v0.9.0rc6.dev0.md",
         "testpypi_upload_approval_v0.9.0rc6.md",
         "testpypi_upload_attempt_v0.9.0rc6.dev0.md",

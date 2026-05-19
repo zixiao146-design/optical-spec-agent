@@ -2,9 +2,9 @@
 
 This document describes the local requirement-template layer that maps natural-language optical design goals into deterministic optical language. It is backend functionality for Agent Studio and the Agent Command Center.
 
-Current public prerelease: `v0.9.0rc6`  
-Current main development version: `0.9.0rc7.dev0`  
-API contract version: `0.1`  
+Current public prerelease: `v0.9.0rc6`
+Current main release draft: `0.9.0rc7`
+API contract version: `0.1`
 PyPI: not published
 
 ## Purpose

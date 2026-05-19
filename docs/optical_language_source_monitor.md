@@ -3,8 +3,8 @@
 This document records the local, deterministic source/monitor inference used by
 Agent Studio backend previews.
 
-Current public prerelease: v0.9.0rc6. Current main development version:
-`0.9.0rc7.dev0`.
+Current public prerelease: v0.9.0rc6. Current main release draft:
+`0.9.0rc7`.
 
 ## Purpose
 

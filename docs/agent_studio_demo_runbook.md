@@ -9,7 +9,7 @@ releases.
 ## 2. Current Status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: 0.9.0rc7
 - Frontend MVP: implemented and hardened
 - API contract version: 0.1
 - PyPI: not published
@@ -87,7 +87,7 @@ npm run dev -- --host 127.0.0.1 --port 5173
 - Quickstart action: use Start guided demo to follow the eight-step local
   agent walkthrough.
 - Expected result: readiness cards show `v0.9.0rc6`,
-  `0.9.0rc7.dev0`, API contract version 0.1, PyPI not published, and
+  `0.9.0rc7`, API contract version 0.1, PyPI not published, and
   recommended next actions.
 - Safety boundary to point out: no solver execution by default and no
   PyPI/TestPyPI or GitHub release controls.

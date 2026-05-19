@@ -1,7 +1,7 @@
 # Backend Functionality Status
 
-Current public prerelease: v0.9.0rc6. Current main development version:
-`0.9.0rc7.dev0`.
+Current public prerelease: v0.9.0rc6. Current main release draft:
+`0.9.0rc7`.
 
 This document records what the backend can actually import, call, execute, or
 block.

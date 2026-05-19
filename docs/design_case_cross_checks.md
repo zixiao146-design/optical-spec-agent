@@ -1,7 +1,7 @@
 # Design Case Cross-Checks
 
-Current public prerelease: v0.9.0rc6. Current main development version:
-`0.9.0rc7.dev0`.
+Current public prerelease: v0.9.0rc6. Current main release draft:
+`0.9.0rc7`.
 
 Design case cross-checks verify that each bundled optical design example can be
 loaded, converted into a deterministic `AgentTaskSession`, and inspected through

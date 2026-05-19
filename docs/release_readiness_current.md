@@ -4,9 +4,9 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc7.dev0`
+- `pyproject.toml` package version on `main`: `0.9.0rc7`
 - Current public prerelease: `v0.9.0rc6`
-- Current main development version: `0.9.0rc7.dev0`
+- Current main release draft: `0.9.0rc7`
 - Main branch state: post-v0.9.0rc6 development toward `v0.9.0rc7`
 - Product positioning: open-source-solver-first
 - `v0.9.0rc6` GitHub prerelease has been created and verified
@@ -19,11 +19,11 @@ This document describes the current `main` branch. It is not a release tag.
 - Latest release-status commit: `cf2fe72`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
-- TestPyPI upload for `0.9.0rc7.dev0`: not performed
+- TestPyPI upload for `0.9.0rc7`: not performed
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
-- TestPyPI upload approval record for rc7.dev0:
-  `docs/testpypi_upload_approval_v0.9.0rc7.dev0.md`
+- TestPyPI upload approval record for rc7:
+  `docs/testpypi_upload_approval_v0.9.0rc7.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
 - TestPyPI status:
@@ -33,9 +33,9 @@ This document describes the current `main` branch. It is not a release tag.
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml` (manual, passed for
   `0.9.0rc6.dev0`)
-- TestPyPI upload approval status for 0.9.0rc7.dev0: pending
-- TestPyPI upload authorized for rc7.dev0: no
-- Upload command authorized for 0.9.0rc7.dev0: no
+- TestPyPI upload approval status for 0.9.0rc7: pending
+- TestPyPI upload authorized for rc7: no
+- Upload command authorized for 0.9.0rc7: no
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - TestPyPI Trusted Publishing result: completed
 - TestPyPI clean install verification: passed
@@ -207,7 +207,7 @@ prerelease while `main` moves to post-v0.9.0rc6 development toward
 `v0.9.0rc7`. The `v0.9.0rc7` tag has not been created, no GitHub release
 exists for rc7, and publication remains separately gated. TestPyPI contains
 the `0.9.0rc6.dev0` development package via manual Trusted Publishing, but
-TestPyPI upload for `0.9.0rc7.dev0` has not been performed; PyPI remains
+TestPyPI upload for `0.9.0rc7` has not been performed; PyPI remains
 unpublished.
 
 Current main contract artifacts:
@@ -366,7 +366,7 @@ Current v1.0 evidence artifacts:
 ## Release Blockers
 
 - No hard release blocker is currently recorded for the post-`v0.9.0rc6`
-  `0.9.0rc7.dev0` development state.
+  `0.9.0rc7` release-draft state.
 - v1.0 hard blockers remain: explicit PyPI publication decision and final
   `v1.0.0` release criteria.
 - The public contract freeze is approved for the documented surface.
@@ -374,7 +374,7 @@ Current v1.0 evidence artifacts:
   `v0.9.0rc5`, or `v0.9.0rc6`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
-- Do not upload `0.9.0rc7.dev0` to TestPyPI unless separately approved.
+- Do not upload `0.9.0rc7` to TestPyPI unless separately approved.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
 - Next blocker class: any future `v0.9.0rc7` candidate must pass the release smoke

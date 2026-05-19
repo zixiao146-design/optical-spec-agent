@@ -1,64 +1,105 @@
-# v0.9.0rc7 Development Readiness
+# v0.9.0rc7 Release Draft Readiness
 
-## 1. Baseline
+## Baseline
 
 - Current public prerelease: v0.9.0rc6
 - v0.9.0rc6 release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc6
-- v0.9.0rc6 target commit: cf40be6407ae6d8055894a056afa1a2c2b5874b2
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: v0.9.0rc7
+- `pyproject.toml` version: 0.9.0rc7
+- `optical_spec_agent.__version__`: 0.9.0rc7
 - v0.9.0rc7 tag: not created
-- v1.0.0 tag: not created
+- GitHub release: not created
+- v1.0.0: not released
 - PyPI: not published
-- TestPyPI uploaded and verified for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc7.dev0: not performed
 - PyPI publication approval: not granted
+- TestPyPI uploaded and verified only for 0.9.0rc6.dev0
+- TestPyPI upload for 0.9.0rc7: not performed
+- v1.0 public contract freeze: approved
+- Backend evidence review decision: sufficient for rc7 release draft
 
-## 2. Why main moved to 0.9.0rc7.dev0
+## Included Post-rc6 Hardening
 
-- v0.9.0rc6 is already a published GitHub prerelease.
-- Post-release commits on main should not keep building as 0.9.0rc6.
-- 0.9.0rc7.dev0 marks post-rc6 development toward the next candidate.
-- v0.9.0rc7.dev0 is not itself a public release.
+- Material Library
+- Optical design examples
+- Sub-agent collaboration
+- Agent Command Center
+- Tool-call ledger
+- Local optical calculators
+- Calculator reference sanity cases
+- Design requirement templates
+- Natural-language to optical-language matching
+- Source/monitor diagnostics
+- Observable diagnostics
+- Adapter-native mappings
+- Adapter golden coverage metadata checks
+- Backend evidence review pack
+- Frontend quickstart/demo/localization work
 
-## 3. v0.9.0rc7 development goals
+## Required Checks Before Tag Creation
 
-- Continue v1.0 readiness engineering.
-- Decide whether/when to approve PyPI publication.
-- Keep v1.0 public contract freeze stable.
-- Keep quality gates passing.
-- Keep TestPyPI/PyPI publication boundaries explicit.
-- Keep open-source-solver-first strategy.
-- Keep proprietary solvers non-default/export-only.
-- Keep external solver and external LLM optional.
-- Continue validation maturity work without overclaiming physical correctness.
-- Optionally revisit Elmer validation only when maintainable install route exists.
-- Evaluate API/frontend agent studio only after backend/public contract remains stable.
-
-## 4. Required checks before future v0.9.0rc7 release draft
-
-- `project.version` must change from `0.9.0rc7.dev0` to `0.9.0rc7`.
-- `optical_spec_agent.__version__` must match.
+- `git status --short` clean.
+- `project.version == 0.9.0rc7`.
+- `optical_spec_agent.__version__ == 0.9.0rc7`.
+- `v0.9.0rc7` tag absent.
+- Backend evidence smoke passed.
+- Backend capability smoke passed.
+- Adapter-native golden checker passed.
+- Sub-agent audit passed.
+- API fixture check passed.
+- API smoke passed.
 - TestPyPI no-upload preflight passed.
-- Quality gates passed.
-- `smoke_release.sh` passed.
+- Normal smoke passed.
 - Wheel smoke passed.
 - `pytest` passed.
 - `python -m build` passed.
 - `make check` passed.
+- Quality gates passed.
 - CLI examples passed.
-- E2E examples passed.
-- Dist filenames must contain `0.9.0rc7`.
-- Release draft notes must exist.
-- `v0.9.0rc7` tag must be absent before creation.
-- PyPI/TestPyPI decision must be explicit.
+- Dist filenames contain `0.9.0rc7`.
+- No PyPI upload.
+- No TestPyPI upload for rc7.
+- No tag/release until approval.
 
-## 5. Non-goals
+## Verification Snapshot
 
-- Do not publish PyPI now.
-- Do not upload TestPyPI now.
-- Do not create `v0.9.0rc7` tag now.
-- Do not create `v1.0.0` tag now.
-- Do not claim production-grade physical validation.
-- Do not claim formal convergence proof.
-- Do not require external solver or external LLM by default.
-- Do not require proprietary solver by default.
+- backend evidence pack smoke: passed
+- backend capability smoke: passed
+- adapter-native golden checker: passed
+- sub-agent audit: passed
+- API fixture check: passed
+- API smoke: passed
+- quality gates: passed
+- TestPyPI no-upload preflight: passed
+- normal smoke: passed
+- wheel smoke: passed
+- pytest: 761 passed, 4 warnings
+- python -m build: passed
+- make check: passed, with the expected rc7 release-note consistency warning resolved by this release notes file
+- CLI examples: passed
+- dist files:
+  - `optical_spec_agent-0.9.0rc7-py3-none-any.whl`
+  - `optical_spec_agent-0.9.0rc7.tar.gz`
+
+## Safety Boundaries
+
+- No PyPI publication is approved.
+- No TestPyPI upload for 0.9.0rc7 is approved or performed.
+- No production-grade physical validation is claimed.
+- No formal convergence proof is claimed.
+- External solvers are not run by default.
+- External LLMs are not required by default.
+- Proprietary solvers are not required by default.
+- Elmer remains Level 2 + Level-3-ready; Level 3 validation is deferred.
+- Calculator results are sanity-checked preview/design-assist outputs, not
+  production-grade validation.
+- Adapter-native golden cases are preview metadata checks, not real solver
+  monitor results.
+- This RC is not final 1.0 stability.
+
+## Next Step
+
+- After maintainer approval, create an annotated `v0.9.0rc7` tag.
+- Create the GitHub prerelease.
+- Verify `draft=false` and `prerelease=true`.
+- Add `docs/post_release_status_v0.9.0rc7.md`.
+- Do not publish PyPI unless separately approved.

@@ -7,7 +7,7 @@
 ## 2. 当前状态
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: 0.9.0rc7
 - PyPI 未发布
 - TestPyPI 仅验证过 0.9.0rc6.dev0
 - 本教程不运行外部求解器
@@ -34,7 +34,7 @@
 ### 3. 查看 readiness / 系统状态
 
 - 用户操作：停留在 Dashboard / Readiness，或打开 System Status。
-- 预期看到的结果：看到 API 已连接、`api_contract_version`、当前公开候选版本、main development version、PyPI 未发布。
+- 预期看到的结果：看到 API 已连接、`api_contract_version`、当前公开候选版本、main release draft、PyPI 未发布。
 - 使用的 API endpoint：`GET /api/readiness`, `GET /api/version`, `GET /api/health`
 - 安全边界说明：readiness 只是状态展示，不执行外部求解器。
 

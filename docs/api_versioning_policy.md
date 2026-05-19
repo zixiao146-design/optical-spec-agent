@@ -3,7 +3,7 @@
 ## Current status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: 0.9.0rc7
 - Local Agent API status: frontend-readiness / candidate API
 - Frontend implementation: local MVP implemented under `frontend/`
 - PyPI: not published
@@ -11,7 +11,7 @@
 ## API contract version
 
 - `api_contract_version`: "0.1"
-- `package_version`: "0.9.0rc7.dev0"
+- `package_version`: "0.9.0rc7"
 
 The package version tracks Python package releases. The
 `api_contract_version` tracks the frontend/API request and response shape.

@@ -9,7 +9,7 @@ publication, tag, release, solver-run, or external LLM controls.
 ## 2. Current Status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: `0.9.0rc7.dev0`
+- Current main release draft: `0.9.0rc7`
 - Frontend MVP implemented and hardened
 - API contract version: 0.1
 - Visual smoke: manual / optional

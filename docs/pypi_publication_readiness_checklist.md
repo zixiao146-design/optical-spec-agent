@@ -4,7 +4,7 @@
 
 - TestPyPI uploaded: yes
 - TestPyPI version: 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc7.dev0: not performed
+- TestPyPI upload for 0.9.0rc7: not performed
 - Clean install from TestPyPI: passed
 - PyPI published: no
 - PyPI publication approval: not granted

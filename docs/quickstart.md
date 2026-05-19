@@ -30,7 +30,7 @@ names, package metadata, and `api_contract_version` remain untranslated.
 - Node/npm.
 - Local checkout of this repository.
 - Current public prerelease: v0.9.0rc6.
-- Current main development version: 0.9.0rc7.dev0.
+- Current main release draft: 0.9.0rc7.
 
 ## 4. One-command Setup
 
@@ -106,7 +106,7 @@ Agent Command Center docs:
 You should see:
 
 - API connected.
-- Package version `0.9.0rc7.dev0`.
+- Package version `0.9.0rc7`.
 - `api_contract_version` `0.1`.
 - No solver executed.
 - No external LLM called.

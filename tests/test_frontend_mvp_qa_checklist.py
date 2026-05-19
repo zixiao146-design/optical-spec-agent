@@ -10,7 +10,7 @@ def test_frontend_mvp_qa_checklist_documents_demo_safety_and_verification():
     text = path.read_text(encoding="utf-8")
     required = [
         "Agent Studio Frontend MVP QA Checklist",
-        "0.9.0rc7.dev0",
+        "0.9.0rc7",
         "demo fixture mode",
         "not live validation",
         "Loading state",

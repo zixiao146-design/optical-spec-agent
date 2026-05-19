@@ -10,11 +10,11 @@ software.
 ## Current Status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: `0.9.0rc7.dev0`
+- Current main release draft: `0.9.0rc7`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - v0.9.0rc7 tag: not created
-- TestPyPI upload approval for 0.9.0rc7.dev0: pending
-- Upload command authorized for 0.9.0rc7.dev0: no
+- TestPyPI upload approval for 0.9.0rc7: pending
+- Upload command authorized for 0.9.0rc7: no
 - PyPI publication approval: not granted
 
 ## Local Quality Gate

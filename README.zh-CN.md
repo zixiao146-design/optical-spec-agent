@@ -104,8 +104,8 @@ PyPI/TestPyPI 上传或 GitHub tag/release 控制。
 
 ## 发布状态
 
-当前公开 release candidate 是 `v0.9.0rc6`。当前 `main` 的 development version 是
-`0.9.0rc7.dev0`。`v0.9.0rc7` tag 和 GitHub release 尚未创建；这仍然不是
+当前公开 release candidate 是 `v0.9.0rc6`。当前 `main` 的 release draft version 是
+`0.9.0rc7`。`v0.9.0rc7` tag 和 GitHub release 尚未创建；这仍然不是
 final stable `1.0`。
 
 `v0.6` 到 `v0.9` 的能力属于 preview/scaffold/evaluation capabilities：
@@ -118,7 +118,7 @@ final stable `1.0`。
 `v0.9.0rc6` tag 和 GitHub prerelease 已由维护者确认后创建，并作为当前
 release candidate supersede `v0.9.0rc5`。不要移动 `v0.9.0rc1`、`v0.9.0rc2`、
 `v0.9.0rc3`、`v0.9.0rc4`、`v0.9.0rc5` 或 `v0.9.0rc6` tag。未来 post-release fix 应使用新的 RC tag。PyPI 仍未发布；
-TestPyPI 已通过手动 Trusted Publishing 上传 `0.9.0rc6.dev0`，但 `0.9.0rc7.dev0`
+TestPyPI 已通过手动 Trusted Publishing 上传 `0.9.0rc6.dev0`，但 `0.9.0rc7`
 尚未上传到 TestPyPI；这不授权正式 PyPI 发布。
 
 面向 `v1.0` 的公共契约边界见：
@@ -160,8 +160,8 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/v1_0_public_contract_freeze_checklist.md`、
 `docs/public_contract_manifest.json`、`docs/public_contract_change_checklist.md`、
 `examples/e2e/README.md` 和 `examples/examples_manifest.json`。
-当前 rc7 development readiness 和发布 gate 见 `docs/release_readiness_v0.9.0rc7.md`、
-`docs/testpypi_upload_approval_v0.9.0rc7.dev0.md`，以及历史 rc6 release 记录：
+当前 rc7 release draft readiness 和发布 gate 见 `docs/release_readiness_v0.9.0rc7.md`、
+`docs/testpypi_upload_approval_v0.9.0rc7.md`，以及历史 rc6 release 记录：
 `docs/release_readiness_v0.9.0rc6.md`、
 `docs/github_release_draft_v0.9.0rc6.md`、`docs/release_notes_v0.9.0rc6.md`、
 `docs/testpypi_upload_approval_v0.9.0rc6.md`、
@@ -330,7 +330,7 @@ pip install -e ".[dev]"
 完整的无网络、无外部 solver、无外部 LLM、无 proprietary solver 默认依赖的
 端到端路径见 `docs/offline_user_journey.md` 和 `examples/e2e/README.md`。
 
-`examples/` 目录中的 fixture 是当前 `0.9.0rc7.dev0` main 和公开
+`examples/` 目录中的 fixture 是当前 `0.9.0rc7` main 和公开
 `v0.9.0rc6` RC 线的本地示例证据：
 
 ```bash

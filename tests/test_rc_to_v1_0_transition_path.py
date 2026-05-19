@@ -14,8 +14,7 @@ def test_rc_to_v1_0_transition_path_exists_and_tracks_options():
     text = path.read_text(encoding="utf-8")
     assert "`v0.9.0rc6` is the current public prerelease" in text
     assert "`main` is" in text
-    assert "`0.9.0rc7.dev0`" in text
+    assert "`0.9.0rc7`" in text
     assert "v1.0.0 requires separate maintainer approval" in text
-    assert "`0.9.0rc7.dev0` -> `0.9.0rc7`" in text
-    assert "`0.9.0rc7.dev0` -> `1.0.0` release draft" in text
-
+    assert "`0.9.0rc7` release draft -> `v0.9.0rc7` tag" in text
+    assert "`0.9.0rc7` -> `1.0.0` release draft" in text

@@ -43,7 +43,7 @@ from optical_spec_agent.workflows import plan_workflow
 class PackageCapability(BaseModel):
     package_version: str
     current_public_prerelease: str = "v0.9.0rc6"
-    main_development_version: str = "0.9.0rc7.dev0"
+    main_development_version: str = "0.9.0rc7"
     pypi_published: bool = False
     testpypi_verified_for: str = "0.9.0rc6.dev0"
 

@@ -3,13 +3,13 @@
 ## Current status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: 0.9.0rc7
 - TestPyPI uploaded: yes, for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc7.dev0: not performed
+- TestPyPI upload for 0.9.0rc7: not performed
 - PyPI published: no
-- TestPyPI upload approval for 0.9.0rc7.dev0: pending
+- TestPyPI upload approval for 0.9.0rc7: pending
 - PyPI publication approval: not granted
-- Upload command authorized for 0.9.0rc7.dev0: no
+- Upload command authorized for 0.9.0rc7: no
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden

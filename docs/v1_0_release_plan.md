@@ -9,7 +9,7 @@ access, or proprietary solver support.
 
 ## Proposed release sequence
 
-- Continue `0.9.0rc7.dev0` engineering.
+- Continue `0.9.0rc7` engineering.
 - Continue local Agent API readiness and keep the Agent Studio frontend MVP
   local-first.
 - Keep API response models and `examples/api/` frontend fixtures aligned with

@@ -3,7 +3,7 @@
 ## Current baseline
 
 - Current public prerelease: `v0.9.0rc6`
-- Current main development version: `0.9.0rc7.dev0`
+- Current main release draft: `0.9.0rc7`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - Open-source-solver-first strategy: yes
 

@@ -3,7 +3,7 @@
 ## Current status
 
 - Current public prerelease: v0.9.0rc6
-- Current main development version: 0.9.0rc7.dev0
+- Current main release draft: 0.9.0rc7
 - TestPyPI uploaded and verified: yes
 - PyPI published: no
 - PyPI publication approval: not granted

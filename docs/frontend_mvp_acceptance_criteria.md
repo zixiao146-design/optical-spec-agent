@@ -35,7 +35,7 @@
 - Chinese guided demo shows 示例库、加载示例规格、本地解析、验证规格、查看适配器矩阵、
   材料库、多智能体协作轨迹、生成工作流计划、预览适配器产物、查看验证证据、查看 readiness / 下一步建议。
 - Can show a quickstart completion checklist with API connected,
-  `0.9.0rc7.dev0`, `api_contract_version` 0.1, no solver executed, and no
+  `0.9.0rc7`, `api_contract_version` 0.1, no solver executed, and no
   external LLM called.
 
 ## 2. Safety criteria
