@@ -39,7 +39,18 @@
     "optical_role": "low-index dielectric",
     "production_grade": false,
     "validation_level": "preview",
+    "provenance_type": "approximate_constant",
     "source_note": "Curated local preview value for examples only; verify against a trusted material database or measurement before drawing physical conclusions.",
+    "citation_note": null,
+    "wavelength_validity_note": "Approximate local preview only; verify wavelength-dependent data before physical conclusions.",
+    "known_limitations": [
+      "Starter catalog entry for preview/design-assist workflows.",
+      "Not a production-grade optical constants database entry."
+    ],
+    "suitable_for": [],
+    "not_suitable_for": [],
+    "requires_user_verification": true,
+    "production_grade_optical_constants": false,
     "wavelength_range_nm": [
       400.0,
       1600.0

@@ -22,7 +22,11 @@ from optical_spec_agent.examples.requirements import (
     list_requirement_templates,
     match_goal_to_template,
 )
-from optical_spec_agent.materials.catalog import suggest_materials_for_application
+from optical_spec_agent.materials.catalog import (
+    diagnose_material_suitability,
+    list_materials,
+    suggest_materials_for_application,
+)
 from optical_spec_agent.optical_language import (
     AdapterGoldenCoverageReport,
     build_adapter_golden_coverage_report,
@@ -94,6 +98,30 @@ class RequirementTemplateCapability(BaseModel):
     preview_only: bool = True
 
 
+class MaterialProvenanceCoverage(BaseModel):
+    material_count: int
+    materials_with_provenance: int
+    materials_requiring_user_verification: int
+    production_grade_optical_constants_claimed: bool = False
+    notes: list[str] = Field(default_factory=list)
+
+
+class AmbiguousRequirementMatchingCapability(BaseModel):
+    available: bool = True
+    deterministic: bool = True
+    no_external_llm_used: bool = True
+    covered_cases: list[str] = Field(default_factory=list)
+    notes: list[str] = Field(default_factory=list)
+
+
+class MissingInputDiagnosticsCapability(BaseModel):
+    available: bool = True
+    critical_optional_split: bool = True
+    safe_to_preview_default: bool = True
+    safe_to_run_solver_default: bool = False
+    notes: list[str] = Field(default_factory=list)
+
+
 class BackendCapabilityReport(BaseModel):
     api_contract_version: str = "0.1"
     status: str = "ok"
@@ -104,6 +132,9 @@ class BackendCapabilityReport(BaseModel):
             "Sub-agent reality",
             "Tool-call reality",
             "Optical calculators",
+            "Material provenance coverage",
+            "Ambiguous requirement matching",
+            "Missing-input diagnostics",
             "Design-case cross-checks",
             "Source / monitor / observable diagnostics",
             "Adapter-native golden coverage",
@@ -117,6 +148,9 @@ class BackendCapabilityReport(BaseModel):
     internal_tools: list[InternalToolCapabilityReport] = Field(default_factory=list)
     optical_calculators: list[OpticalCalculatorCapability] = Field(default_factory=list)
     requirements_templates: list[RequirementTemplateCapability] = Field(default_factory=list)
+    material_provenance_coverage: MaterialProvenanceCoverage
+    ambiguous_requirement_matching: AmbiguousRequirementMatchingCapability
+    missing_input_diagnostics: MissingInputDiagnosticsCapability
     adapter_native_golden_coverage: AdapterGoldenCoverageReport
     design_case_cross_checks: list[DesignCaseCrossCheck] = Field(default_factory=list)
     blocked_external_actions: list[BlockedExternalAction] = Field(default_factory=list)
@@ -161,6 +195,9 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         internal_tools=_internal_tool_capabilities(all_sample_tool_names),
         optical_calculators=_optical_calculator_capabilities(),
         requirements_templates=_requirement_template_capabilities(),
+        material_provenance_coverage=_material_provenance_coverage(),
+        ambiguous_requirement_matching=_ambiguous_requirement_matching_capability(),
+        missing_input_diagnostics=_missing_input_diagnostics_capability(),
         adapter_native_golden_coverage=golden_coverage,
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
@@ -170,6 +207,8 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
             "Use scripts/audit_sub_agents.py for a concise import/call/execution view.",
             "Use scripts/smoke_backend_capabilities.sh for calculator sanity checks.",
             "Use scripts/check_adapter_native_golden.py for adapter-native metadata diff checks.",
+            "Use /api/materials/diagnose to inspect material provenance and suitability warnings.",
+            "Use /api/design-requirements/match to inspect ambiguous-goal questions.",
             "Treat calculator outputs as sanity-checked preview/design-assist only.",
         ],
     )
@@ -209,6 +248,13 @@ def _internal_tool_capabilities(
             suggest_materials_for_application,
             "material_catalog.suggest",
             "Suggests materials from the bundled local preview catalog.",
+        ),
+        (
+            "material_suitability_diagnostics",
+            "optical_spec_agent.materials.catalog",
+            diagnose_material_suitability,
+            "material_catalog.diagnose_suitability",
+            "Reports material provenance, suitability, and verification warnings.",
         ),
         (
             "example_registry",
@@ -251,6 +297,13 @@ def _internal_tool_capabilities(
             infer_source_monitor_from_goal,
             "optical_language.infer_source_monitor",
             "Infers preview source, monitor, observable, and defaults from local heuristics.",
+        ),
+        (
+            "ambiguous_requirement_matching",
+            "optical_spec_agent.examples.requirements",
+            match_goal_to_template,
+            "requirements.match_ambiguity_check",
+            "Reports candidate templates, confidence, and deterministic follow-up questions.",
         ),
         (
             "missing_input_diagnostics",
@@ -404,6 +457,56 @@ def _requirement_template_capabilities() -> list[RequirementTemplateCapability]:
             )
         )
     return capabilities
+
+
+def _material_provenance_coverage() -> MaterialProvenanceCoverage:
+    materials = list_materials()
+    return MaterialProvenanceCoverage(
+        material_count=len(materials),
+        materials_with_provenance=sum(1 for item in materials if item.provenance_type),
+        materials_requiring_user_verification=sum(
+            1 for item in materials if item.requires_user_verification
+        ),
+        production_grade_optical_constants_claimed=any(
+            item.production_grade_optical_constants for item in materials
+        ),
+        notes=[
+            "All starter material records are local preview/design-assist entries.",
+            "Numeric n/k values remain approximate and require user verification.",
+            "No external material database lookup is performed.",
+        ],
+    )
+
+
+def _ambiguous_requirement_matching_capability() -> AmbiguousRequirementMatchingCapability:
+    generic = match_goal_to_template("Design an optical system.")
+    mixed = match_goal_to_template("Plan a waveguide and thin film coating design.")
+    lens = match_goal_to_template("Help me optimize a lens.")
+    return AmbiguousRequirementMatchingCapability(
+        covered_cases=[
+            "generic_optical_system",
+            "waveguide_or_coating",
+            "lens_optimization_underconstrained",
+            "unknown_application",
+        ],
+        notes=[
+            f"Generic optical goal confidence: {generic.confidence}.",
+            f"Mixed waveguide/coating candidates: {', '.join(mixed.candidate_templates)}.",
+            f"Underconstrained lens missing inputs: {', '.join(lens.missing_disambiguation_inputs)}.",
+            "Ambiguous goals generate questions instead of unsafe solver actions.",
+        ],
+    )
+
+
+def _missing_input_diagnostics_capability() -> MissingInputDiagnosticsCapability:
+    session = build_agent_task_session("Help me optimize a lens.")
+    return MissingInputDiagnosticsCapability(
+        notes=[
+            f"Critical inputs reported: {', '.join(session.missing_critical_inputs)}.",
+            f"Optional inputs reported: {', '.join(session.missing_optional_inputs)}.",
+            "safe_to_preview remains true while safe_to_run_solver remains false.",
+        ],
+    )
 
 
 def _blocked_external_actions(sample_session: Any) -> list[BlockedExternalAction]:

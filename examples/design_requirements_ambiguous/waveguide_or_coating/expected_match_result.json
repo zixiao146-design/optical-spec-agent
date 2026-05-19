@@ -1,0 +1,8 @@
+{
+  "confidence": "low",
+  "candidate_templates": [
+    "thin_film_ar_coating",
+    "slab_waveguide_single_mode"
+  ],
+  "safe_behavior": "surface_candidates_and_ask_priority_no_solver_no_llm"
+}

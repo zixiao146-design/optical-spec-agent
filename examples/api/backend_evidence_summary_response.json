@@ -87,6 +87,7 @@
       "adapter_preview_generator",
       "workflow_planner",
       "source_monitor_inference",
+      "ambiguous_requirement_matching",
       "missing_input_diagnostics",
       "observable_diagnostics",
       "adapter_native_mapping",
@@ -95,12 +96,14 @@
     ],
     "internal_tools_available": [
       "material_catalog",
+      "material_suitability_diagnostics",
       "example_registry",
       "agent_trace_builder",
       "task_session_builder",
       "adapter_preview_generator",
       "workflow_planner",
       "source_monitor_inference",
+      "ambiguous_requirement_matching",
       "missing_input_diagnostics",
       "observable_diagnostics",
       "adapter_native_mapping",
@@ -211,6 +214,50 @@
       "formal_convergence_proof_claimed": false
     }
   ],
+  "material_provenance_coverage": {
+    "material_count": 13,
+    "materials_with_provenance": 13,
+    "materials_requiring_user_verification": 13,
+    "production_grade_optical_constants_claimed": false,
+    "notes": [
+      "All starter material records are local preview/design-assist entries.",
+      "Numeric n/k values remain approximate and require user verification.",
+      "No external material database lookup is performed."
+    ],
+    "preview_design_assist_only": true,
+    "no_external_material_database_lookup": true,
+    "production_grade_optical_constants_database": false
+  },
+  "ambiguous_requirement_matching": {
+    "available": true,
+    "deterministic": true,
+    "no_external_llm_used": true,
+    "covered_cases": [
+      "generic_optical_system",
+      "waveguide_or_coating",
+      "lens_optimization_underconstrained",
+      "unknown_application"
+    ],
+    "notes": [
+      "Generic optical goal confidence: none.",
+      "Mixed waveguide/coating candidates: thin_film_ar_coating, slab_waveguide_single_mode.",
+      "Underconstrained lens missing inputs: focal_length, aperture, field_of_view, object_distance.",
+      "Ambiguous goals generate questions instead of unsafe solver actions."
+    ],
+    "ambiguous_goals_generate_questions": true,
+    "unsafe_default_solver_action": false
+  },
+  "missing_input_diagnostics": {
+    "available": true,
+    "critical_optional_split": true,
+    "safe_to_preview_default": true,
+    "safe_to_run_solver_default": false,
+    "notes": [
+      "Critical inputs reported: aperture, field_of_view, focal_length, object_distance.",
+      "Optional inputs reported: aperture, field_of_view, wavelength.",
+      "safe_to_preview remains true while safe_to_run_solver remains false."
+    ]
+  },
   "design_case_cross_checks": [
     {
       "example_id": "dielectric_metasurface_preview",
@@ -227,6 +274,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -265,6 +314,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -306,6 +357,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -345,6 +398,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -383,6 +438,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -423,6 +480,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",

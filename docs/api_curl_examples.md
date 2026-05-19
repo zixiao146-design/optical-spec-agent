@@ -94,6 +94,9 @@ curl http://127.0.0.1:8000/api/materials/sio2
 curl -X POST http://127.0.0.1:8000/api/materials/suggest \
   -H "Content-Type: application/json" \
   --data @examples/api/material_suggestion_request.json
+curl -X POST http://127.0.0.1:8000/api/materials/diagnose \
+  -H "Content-Type: application/json" \
+  --data @examples/api/material_diagnose_ag_plasmonics_request.json
 curl -X POST http://127.0.0.1:8000/api/agent-trace \
   -H "Content-Type: application/json" \
   --data @examples/api/agent_trace_request_nanoparticle.json
@@ -109,6 +112,9 @@ curl http://127.0.0.1:8000/api/design-requirements/thin_film_ar_coating
 curl -X POST http://127.0.0.1:8000/api/design-requirements/match \
   -H "Content-Type: application/json" \
   --data @examples/api/design_requirement_match_thin_film_request.json
+curl -X POST http://127.0.0.1:8000/api/design-requirements/match \
+  -H "Content-Type: application/json" \
+  --data @examples/api/design_requirement_match_ambiguous_request.json
 curl -X POST http://127.0.0.1:8000/api/optics/thin-film \
   -H "Content-Type: application/json" \
   --data @examples/api/thin_film_request.json

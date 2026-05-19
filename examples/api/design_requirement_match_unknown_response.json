@@ -1,0 +1,57 @@
+{
+  "api_contract_version": "0.1",
+  "status": "needs_review",
+  "matched_template": null,
+  "matched_template_id": null,
+  "optical_language_summary": {
+    "physical_system": "unknown_or_mixed_optical_system",
+    "material_system": "not_enough_information",
+    "geometry_model": "not_enough_information",
+    "solver_or_adapter_family": "needs_human_selection",
+    "calculator_or_tool_path": "no calculator selected",
+    "evidence_boundary": "Preview/design-assist only; clarify the case before using outputs.",
+    "source_goal": "Create a quantum sparkle optimizer for an undefined optical artifact."
+  },
+  "confidence": "none",
+  "candidate_templates": [],
+  "ambiguity_notes": [
+    "No deterministic requirement template matched this goal.",
+    "The backend will not guess a solver path from an unknown application."
+  ],
+  "missing_disambiguation_inputs": [
+    "optical_application",
+    "physical_system",
+    "materials",
+    "geometry",
+    "target_output"
+  ],
+  "recommended_questions": [
+    "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
+    "What source and monitored observable should define the preview?",
+    "Which material system and geometry scale should be assumed?"
+  ],
+  "safe_default_template": null,
+  "no_external_llm_used": true,
+  "missing_required_inputs": [
+    "physical_system",
+    "materials",
+    "geometry",
+    "target_output"
+  ],
+  "default_assumptions": [
+    "Use local preview workflow only.",
+    "Do not execute external solvers or call external LLMs."
+  ],
+  "recommended_next_actions": [
+    "Clarify whether this is a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case.",
+    "Use /api/design-requirements to inspect supported templates."
+  ],
+  "diagnostics": [
+    "No deterministic requirement template matched this goal."
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

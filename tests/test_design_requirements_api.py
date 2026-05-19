@@ -32,6 +32,9 @@ def test_design_requirements_api_list_detail_and_match():
     assert match.status_code == 200
     match_payload = match.json()
     assert match_payload["matched_template_id"] == "thin_film_ar_coating"
+    assert "candidate_templates" in match_payload
+    assert "recommended_questions" in match_payload
+    assert match_payload["no_external_llm_used"] is True
     assert match_payload["external_solver_executed"] is False
     assert match_payload["external_llm_required"] is False
 
@@ -45,4 +48,3 @@ def test_design_requirements_api_rejects_empty_goal_and_unknown_template():
     unknown = client.get("/api/design-requirements/missing_template")
     assert unknown.status_code == 404
     assert unknown.json()["external_solver_executed"] is False
-

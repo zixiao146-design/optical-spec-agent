@@ -75,6 +75,7 @@ maintainer explicitly approves freezing it.
 - `GET /api/materials`
 - `GET /api/materials/{material_id}`
 - `POST /api/materials/suggest`
+- `POST /api/materials/diagnose`
 - `POST /api/agent-trace`
 - `POST /api/agent-session`
 

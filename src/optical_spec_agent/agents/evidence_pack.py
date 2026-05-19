@@ -17,6 +17,9 @@ EVIDENCE_PACK_SECTIONS = [
     "Sub-agent reality",
     "Tool-call reality",
     "Optical calculators",
+    "Material provenance coverage",
+    "Ambiguous requirement matching",
+    "Missing-input diagnostics",
     "Design-case cross-checks",
     "Source / monitor / observable diagnostics",
     "Adapter-native golden coverage",
@@ -36,6 +39,9 @@ class BackendEvidencePack(BaseModel):
     sub_agent_reality: list[dict[str, Any]] = Field(default_factory=list)
     tool_call_reality: dict[str, Any]
     optical_calculators: list[dict[str, Any]] = Field(default_factory=list)
+    material_provenance_coverage: dict[str, Any] = Field(default_factory=dict)
+    ambiguous_requirement_matching: dict[str, Any] = Field(default_factory=dict)
+    missing_input_diagnostics: dict[str, Any] = Field(default_factory=dict)
     design_case_cross_checks: list[dict[str, Any]] = Field(default_factory=list)
     source_monitor_observable_diagnostics: dict[str, Any]
     adapter_native_golden_coverage: dict[str, Any]
@@ -135,6 +141,21 @@ def generate_backend_evidence_pack(
             }
             for item in calculators
         ],
+        material_provenance_coverage={
+            **payload["material_provenance_coverage"],
+            "preview_design_assist_only": True,
+            "no_external_material_database_lookup": True,
+            "production_grade_optical_constants_database": False,
+        },
+        ambiguous_requirement_matching={
+            **payload["ambiguous_requirement_matching"],
+            "ambiguous_goals_generate_questions": True,
+            "unsafe_default_solver_action": False,
+        },
+        missing_input_diagnostics={
+            **payload["missing_input_diagnostics"],
+            "safe_to_run_solver_default": False,
+        },
         design_case_cross_checks=[
             {
                 "example_id": item["example_id"],

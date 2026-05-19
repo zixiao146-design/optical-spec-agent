@@ -57,6 +57,8 @@ class OpticalMonitorModel(BaseModel):
 
 class OpticalLanguageDiagnostics(BaseModel):
     missing_required_inputs: list[str] = Field(default_factory=list)
+    missing_critical_inputs: list[str] = Field(default_factory=list)
+    missing_optional_inputs: list[str] = Field(default_factory=list)
     default_assumptions_applied: list[str] = Field(default_factory=list)
     ambiguity_notes: list[str] = Field(default_factory=list)
     blocking_questions: list[str] = Field(default_factory=list)
@@ -182,6 +184,7 @@ def diagnose_missing_inputs(
         value = _model_field_value(field, source_model, monitor_model)
         if value is None and not _field_present(field, spec_values):
             missing.append(field)
+    missing_critical, missing_optional = _template_missing_inputs(template, goal, spec_values)
     defaulted = [
         *(default_source_assumptions or []),
         *(default_monitor_assumptions or []),
@@ -198,14 +201,44 @@ def diagnose_missing_inputs(
         ambiguity.append("Polarization was defaulted; confirm before solver execution.")
     if "wavelength_range_nm" in source_model.defaulted_fields:
         ambiguity.append("Wavelength range was defaulted; confirm the design band.")
+    if missing_critical:
+        ambiguity.append("Critical design inputs are absent; safe preview may proceed with defaults, but solver execution remains blocked.")
+    if missing_optional:
+        ambiguity.append("Optional design inputs are absent; preview quality may improve if they are provided.")
+    blocking.extend(_questions_for_missing(template, missing_critical, missing_optional))
     return OpticalLanguageDiagnostics(
-        missing_required_inputs=sorted(set(missing)),
+        missing_required_inputs=sorted(set([*missing, *missing_critical])),
+        missing_critical_inputs=sorted(set(missing_critical)),
+        missing_optional_inputs=sorted(set(missing_optional)),
         default_assumptions_applied=defaulted,
         ambiguity_notes=ambiguity,
         blocking_questions=blocking,
         safe_to_preview=True,
         safe_to_run_solver=False,
     )
+
+
+def generate_disambiguation_questions(
+    *,
+    template_id: str | None,
+    missing_critical_inputs: list[str],
+    missing_optional_inputs: list[str],
+    candidate_templates: list[str] | None = None,
+) -> list[str]:
+    """Generate deterministic questions for ambiguous or under-specified goals."""
+
+    questions: list[str] = []
+    if candidate_templates and len(candidate_templates) > 1:
+        questions.append(
+            "Which candidate template should be prioritized: "
+            + ", ".join(candidate_templates[:4])
+            + "?"
+        )
+    questions.extend(_questions_for_missing(template_id, missing_critical_inputs, missing_optional_inputs))
+    if not questions:
+        questions.append("Confirm that the inferred source, monitor, material, and geometry assumptions are acceptable.")
+    questions.append("Confirm whether the backend should remain in local preview mode without running external solvers.")
+    return questions
 
 
 def _template_id_from_keywords(goal: str) -> str | None:
@@ -256,6 +289,106 @@ def _model_field_value(
     if field == "observable":
         return monitor_model.observable if monitor_model.observable != "unknown" else None
     return getattr(source_model, field, None) or getattr(monitor_model, field, None)
+
+
+def _template_missing_inputs(
+    template_id: str | None,
+    goal: str,
+    spec_values: str,
+) -> tuple[list[str], list[str]]:
+    text = f"{goal} {spec_values}".lower()
+    rules: dict[str, tuple[list[tuple[str, tuple[str, ...]]], list[tuple[str, tuple[str, ...]]]]] = {
+        "nanoparticle_plasmonics": (
+            [
+                ("particle_radius_or_diameter", ("radius", "diameter", "半径", "直径")),
+                ("particle_material", ("silver", "gold", "ag", "au", "材料")),
+                ("wavelength_band", ("wavelength", "波长", "400", "900")),
+            ],
+            [
+                ("film_thickness", ("film thickness", "薄膜厚度", "thickness")),
+                ("background_medium", ("water", "air", "medium", "背景")),
+                ("polarization", ("polarization", "偏振")),
+            ],
+        ),
+        "thin_film_ar_coating": (
+            [
+                ("target_wavelength", ("wavelength", "波长", "550")),
+                ("substrate_material", ("substrate", "基底", "glass")),
+            ],
+            [
+                ("incidence_angle", ("angle", "入射角")),
+                ("polarization", ("polarization", "偏振")),
+            ],
+        ),
+        "gaussian_beam_focus": (
+            [
+                ("wavelength", ("wavelength", "波长")),
+                ("input_waist", ("waist", "光腰")),
+                ("focal_length", ("focal", "焦距")),
+            ],
+            [("propagation_distance", ("distance", "距离", "z"))],
+        ),
+        "slab_waveguide_single_mode": (
+            [
+                ("core_index_or_material", ("core", "芯层", "材料")),
+                ("cladding_index_or_material", ("cladding", "包层")),
+                ("core_thickness", ("thickness", "厚度")),
+                ("wavelength", ("wavelength", "波长")),
+            ],
+            [("polarization_or_mode_family", ("te", "tm", "polarization", "偏振"))],
+        ),
+        "paraxial_lens_imaging": (
+            [
+                ("focal_length", ("focal", "焦距")),
+                ("object_distance", ("object distance", "物距")),
+            ],
+            [
+                ("aperture", ("aperture", "孔径")),
+                ("field_of_view", ("field", "视场")),
+                ("wavelength", ("wavelength", "波长")),
+            ],
+        ),
+        "photonic_crystal_band_preview": (
+            [
+                ("lattice_constant", ("lattice", "period", "晶格", "周期")),
+                ("unit_cell_geometry", ("unit cell", "单胞", "孔", "柱")),
+                ("k_point_path", ("k-point", "k point", "能带路径")),
+            ],
+            [("polarization_or_mode_family", ("te", "tm", "偏振"))],
+        ),
+        "dielectric_metasurface_preview": (
+            [
+                ("wavelength", ("wavelength", "波长")),
+                ("period", ("period", "周期")),
+                ("target_phase_profile", ("phase", "相位")),
+            ],
+            [("polarization", ("polarization", "偏振")), ("material_stack", ("material", "材料"))],
+        ),
+    }
+    critical_rules, optional_rules = rules.get(template_id or "", ([], []))
+    critical = [field for field, tokens in critical_rules if not any(token.lower() in text for token in tokens)]
+    optional = [field for field, tokens in optional_rules if not any(token.lower() in text for token in tokens)]
+    if template_id is None:
+        critical = ["optical_application", "source_type", "target_observable"]
+        optional = ["wavelength_band", "material_system", "geometry_scale"]
+    return critical, optional
+
+
+def _questions_for_missing(
+    template_id: str | None,
+    missing_critical: list[str],
+    missing_optional: list[str],
+) -> list[str]:
+    questions: list[str] = []
+    if missing_critical:
+        questions.append("Which values should be used for critical inputs: " + ", ".join(missing_critical) + "?")
+    if missing_optional:
+        questions.append("Can you provide optional context for: " + ", ".join(missing_optional) + "?")
+    if template_id == "paraxial_lens_imaging" and ("aperture" in missing_optional or "field_of_view" in missing_optional):
+        questions.append("For the lens preview, what aperture and field of view should bound the paraxial assumptions?")
+    if template_id == "nanoparticle_plasmonics" and missing_critical:
+        questions.append("For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?")
+    return questions
 
 
 def _field_present(field: str, flattened_spec: str) -> bool:

@@ -41,7 +41,11 @@ decision.
 | --- | --- | --- | --- |
 | Design requirement templates | yes | yes | yes |
 | Natural-language goal matching | yes | yes | yes |
+| Ambiguous requirement matching | yes | yes | yes |
+| Missing-input critical/optional diagnostics | yes | yes | yes |
 | Material library | yes | yes | yes |
+| Material provenance coverage | yes | yes | yes |
+| Material suitability diagnostics | yes | yes | yes |
 | Optical design example registry | yes | yes | yes |
 | Agent trace builder | yes | yes | yes |
 | Agent task session builder | yes | yes | yes |
@@ -110,10 +114,14 @@ The `v0.9.0rc8` tag has not been created, `v1.0.0` has not been released, and
 
 ## Current Gap Audit
 
-`docs/rc8_capability_gap_audit.md` currently identifies calculator depth,
-material provenance, ambiguous natural-language matching, metadata-only
-adapter-native mapping evidence, and Elmer Level 3 deferral as the main backend
-gaps to review before future rc8 or v1.0 decisions.
+`docs/rc8_capability_gap_audit.md` identified calculator depth, material
+provenance, ambiguous natural-language matching, metadata-only adapter-native
+mapping evidence, and Elmer Level 3 deferral as the main backend gaps to review
+before future rc8 or v1.0 decisions. rc8.dev0 now has structured material
+provenance fields, `POST /api/materials/diagnose`, ambiguous/negative
+requirement examples, candidate-template matching, recommended questions, and
+critical/optional missing-input diagnostics. These additions reduce the audit
+gap but remain preview/design-assist evidence, not production validation.
 
 ## Verification
 

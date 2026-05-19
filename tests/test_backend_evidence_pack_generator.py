@@ -37,6 +37,9 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "sub_agent_reality",
         "tool_call_reality",
         "optical_calculators",
+        "material_provenance_coverage",
+        "ambiguous_requirement_matching",
+        "missing_input_diagnostics",
         "design_case_cross_checks",
         "source_monitor_observable_diagnostics",
         "adapter_native_golden_coverage",
@@ -52,11 +55,17 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         item["executed"] is False
         for item in payload["blocked_or_deferred_capabilities"]
     )
+    assert payload["material_provenance_coverage"]["production_grade_optical_constants_database"] is False
+    assert payload["ambiguous_requirement_matching"]["ambiguous_goals_generate_questions"] is True
+    assert payload["missing_input_diagnostics"]["safe_to_run_solver_default"] is False
     markdown = markdown_out.read_text(encoding="utf-8")
     for heading in [
         "Sub-agent reality",
         "Tool-call reality",
         "Optical calculators",
+        "Material provenance coverage",
+        "Ambiguous requirement matching",
+        "Missing-input diagnostics",
         "Design-case cross-checks",
         "Adapter-native golden coverage",
         "Blocked or deferred capabilities",

@@ -18,7 +18,7 @@ from optical_spec_agent.optical_language import (
 )
 
 
-MatchConfidence = Literal["high", "medium", "low"]
+MatchConfidence = Literal["high", "medium", "low", "none"]
 
 
 class RequirementSafetyFlags(BaseModel):
@@ -66,6 +66,12 @@ class RequirementMatchResult(BaseModel):
     matched_template_id: str | None = None
     optical_language_summary: dict[str, str] = Field(default_factory=dict)
     confidence: MatchConfidence = "low"
+    candidate_templates: list[str] = Field(default_factory=list)
+    ambiguity_notes: list[str] = Field(default_factory=list)
+    missing_disambiguation_inputs: list[str] = Field(default_factory=list)
+    recommended_questions: list[str] = Field(default_factory=list)
+    safe_default_template: str | None = None
+    no_external_llm_used: bool = True
     missing_required_inputs: list[str] = Field(default_factory=list)
     default_assumptions: list[str] = Field(default_factory=list)
     recommended_next_actions: list[str] = Field(default_factory=list)
@@ -123,6 +129,7 @@ TEMPLATE_KEYWORDS: dict[str, tuple[str, ...]] = {
         "增透",
         "减反",
         "镀膜",
+        "薄膜",
         "薄膜镀膜",
     ),
     "gaussian_beam_focus": (
@@ -199,6 +206,13 @@ def match_goal_to_template(goal: str) -> RequirementMatchResult:
     if not text:
         return RequirementMatchResult(
             status="needs_review",
+            confidence="none",
+            ambiguity_notes=["No goal text was supplied."],
+            missing_disambiguation_inputs=["optical_application", "target_observable"],
+            recommended_questions=[
+                "What optical system are you trying to design?",
+                "Which observable should be inspected first?",
+            ],
             diagnostics=["Goal is empty; no requirement template can be matched."],
             recommended_next_actions=["Provide a natural-language optical design goal."],
         )
@@ -212,8 +226,25 @@ def match_goal_to_template(goal: str) -> RequirementMatchResult:
     if not scores:
         return RequirementMatchResult(
             status="needs_review",
-            confidence="low",
+            confidence="none",
             optical_language_summary=_generic_optical_language_summary(text),
+            candidate_templates=[],
+            ambiguity_notes=[
+                "No deterministic requirement template matched this goal.",
+                "The backend will not guess a solver path from an unknown application.",
+            ],
+            missing_disambiguation_inputs=[
+                "optical_application",
+                "physical_system",
+                "materials",
+                "geometry",
+                "target_output",
+            ],
+            recommended_questions=[
+                "Is this a coating, beam, waveguide, lens, photonic crystal, metasurface, or nanoparticle case?",
+                "What source and monitored observable should define the preview?",
+                "Which material system and geometry scale should be assumed?",
+            ],
             diagnostics=["No deterministic requirement template matched this goal."],
             missing_required_inputs=["physical_system", "materials", "geometry", "target_output"],
             default_assumptions=[
@@ -226,14 +257,43 @@ def match_goal_to_template(goal: str) -> RequirementMatchResult:
             ],
         )
 
-    _, _, template_id = max(scores)
+    scores_sorted = sorted(scores, reverse=True)
+    top_score = scores_sorted[0][0]
+    top_template_ids = [template_id for score, _, template_id in scores_sorted if score == top_score]
+    candidate_templates = [template_id for _, _, template_id in scores_sorted]
+    _, _, template_id = scores_sorted[0]
     template = TEMPLATES[template_id]
-    confidence: MatchConfidence = "high" if max(scores)[0] >= 2 else "medium"
+    mixed_application = len(candidate_templates) > 1
+    confidence: MatchConfidence
+    if top_score >= 2 and len(top_template_ids) == 1 and not _looks_underconstrained(text):
+        confidence = "high"
+    elif len(top_template_ids) > 1 or mixed_application:
+        confidence = "low"
+    else:
+        confidence = "medium"
+    ambiguity_notes = _ambiguity_notes(
+        text=text,
+        confidence=confidence,
+        candidate_templates=candidate_templates,
+        top_template_ids=top_template_ids,
+    )
+    missing_disambiguation_inputs = _missing_disambiguation_inputs(template.template_id, text)
+    recommended_questions = _recommended_questions(
+        template.template_id,
+        candidate_templates=candidate_templates,
+        missing_inputs=missing_disambiguation_inputs,
+    )
     return RequirementMatchResult(
+        status="needs_review" if confidence in {"low", "none"} else "ok",
         matched_template=template,
         matched_template_id=template.template_id,
         optical_language_summary=template.optical_language_summary,
         confidence=confidence,
+        candidate_templates=candidate_templates,
+        ambiguity_notes=ambiguity_notes,
+        missing_disambiguation_inputs=missing_disambiguation_inputs,
+        recommended_questions=recommended_questions,
+        safe_default_template=template.template_id if confidence == "medium" else None,
         missing_required_inputs=template.required_inputs,
         default_assumptions=template.default_assumptions,
         recommended_next_actions=template.next_actions,
@@ -242,6 +302,130 @@ def match_goal_to_template(goal: str) -> RequirementMatchResult:
             "Template outputs are preview/design-assist and require human review.",
         ],
     )
+
+
+def _looks_underconstrained(text: str) -> bool:
+    lowered = text.lower()
+    underconstrained_tokens = (
+        "design an optical system",
+        "optical system",
+        "optimize",
+        "优化",
+        "光学系统",
+        "设计一个光学系统",
+        "帮我优化",
+    )
+    return any(token in lowered for token in underconstrained_tokens)
+
+
+def _ambiguity_notes(
+    *,
+    text: str,
+    confidence: MatchConfidence,
+    candidate_templates: list[str],
+    top_template_ids: list[str],
+) -> list[str]:
+    notes = [
+        "Requirement matching is deterministic keyword logic; no external LLM was used.",
+    ]
+    if confidence == "high":
+        notes.append("The goal contains a clear template-specific keyword pattern.")
+    if confidence == "medium":
+        notes.append("A safe default template is available, but design inputs remain under-specified.")
+    if confidence == "low":
+        if len(top_template_ids) > 1:
+            notes.append("Multiple templates tied for the strongest deterministic match.")
+        elif len(candidate_templates) > 1:
+            notes.append("The goal mixes multiple optical application families.")
+        if _looks_underconstrained(text):
+            notes.append("The goal is underconstrained and needs more design intent before solver use.")
+    if confidence == "none":
+        notes.append("No supported local design template matched the goal.")
+    return notes
+
+
+def _missing_disambiguation_inputs(template_id: str, text: str) -> list[str]:
+    lowered = text.lower()
+    missing_by_template = {
+        "nanoparticle_plasmonics": [
+            ("particle_radius_or_diameter", ("radius", "diameter", "半径", "直径")),
+            ("particle_material", ("silver", "gold", "ag", "au", "材料")),
+            ("film_thickness", ("film thickness", "薄膜厚度", "thickness")),
+            ("wavelength_band", ("wavelength", "band", "波长")),
+        ],
+        "thin_film_ar_coating": [
+            ("target_wavelength", ("wavelength", "550", "波长")),
+            ("substrate_material", ("substrate", "glass", "基底")),
+            ("incidence_angle", ("angle", "入射角")),
+        ],
+        "gaussian_beam_focus": [
+            ("wavelength", ("wavelength", "波长")),
+            ("input_waist", ("waist", "光腰")),
+            ("focal_length", ("focal", "焦距")),
+        ],
+        "slab_waveguide_single_mode": [
+            ("core_index_or_material", ("core", "芯层", "材料")),
+            ("cladding_index_or_material", ("cladding", "包层")),
+            ("core_thickness", ("thickness", "厚度")),
+            ("wavelength", ("wavelength", "波长")),
+        ],
+        "paraxial_lens_imaging": [
+            ("focal_length", ("focal", "焦距")),
+            ("aperture", ("aperture", "孔径")),
+            ("field_of_view", ("field", "视场")),
+            ("object_distance", ("object distance", "物距")),
+        ],
+        "photonic_crystal_band_preview": [
+            ("lattice_constant", ("lattice", "period", "晶格", "周期")),
+            ("unit_cell_geometry", ("unit cell", "孔", "柱", "单胞")),
+            ("k_point_path", ("k-point", "k point", "能带路径")),
+        ],
+        "dielectric_metasurface_preview": [
+            ("period", ("period", "周期")),
+            ("target_phase_profile", ("phase", "相位")),
+            ("polarization", ("polarization", "偏振")),
+            ("wavelength", ("wavelength", "波长")),
+        ],
+    }
+    missing = [
+        field
+        for field, tokens in missing_by_template.get(template_id, [])
+        if not any(token.lower() in lowered for token in tokens)
+    ]
+    return missing
+
+
+def _recommended_questions(
+    template_id: str,
+    *,
+    candidate_templates: list[str],
+    missing_inputs: list[str],
+) -> list[str]:
+    questions: list[str] = []
+    if len(candidate_templates) > 1:
+        questions.append(
+            "Which design family should take priority: "
+            + ", ".join(candidate_templates[:4])
+            + "?"
+        )
+    if template_id == "paraxial_lens_imaging":
+        questions.append("What focal length, aperture, field of view, and object distance should be assumed?")
+    elif template_id == "nanoparticle_plasmonics":
+        questions.append("What particle size, material, film thickness, wavelength band, and polarization should be assumed?")
+    elif template_id == "thin_film_ar_coating":
+        questions.append("What target wavelength, substrate material, incidence angle, and polarization define the coating?")
+    elif template_id == "slab_waveguide_single_mode":
+        questions.append("What core/cladding materials, core thickness, and wavelength should define the waveguide?")
+    elif template_id == "gaussian_beam_focus":
+        questions.append("What wavelength, input waist, and focal length should define the Gaussian beam preview?")
+    elif template_id == "photonic_crystal_band_preview":
+        questions.append("What lattice constant, unit cell geometry, and k-point path should define the band preview?")
+    elif template_id == "dielectric_metasurface_preview":
+        questions.append("What wavelength, polarization, period, and target phase profile should define the metasurface?")
+    if missing_inputs:
+        questions.append("Please provide or confirm: " + ", ".join(missing_inputs) + ".")
+    questions.append("Should the backend keep using local preview-only tools without external solver execution?")
+    return questions
 
 
 def _template(

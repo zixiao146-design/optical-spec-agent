@@ -31,6 +31,8 @@ from optical_spec_agent.api.models import (
     ExamplesResponse,
     HealthResponse,
     MaterialDetailResponse,
+    MaterialDiagnoseRequest,
+    MaterialDiagnoseResponse,
     MaterialSuggestionRequest,
     MaterialSuggestionResponse,
     MaterialsResponse,
@@ -110,6 +112,7 @@ from optical_spec_agent.optical_language import (
     map_source_monitor_to_adapter,
 )
 from optical_spec_agent.materials.catalog import (
+    diagnose_material_suitability,
     get_material,
     list_materials,
     suggest_materials_for_application,
@@ -682,6 +685,17 @@ def agent_tool_capabilities():
             notes=["Callable local preview material catalog."],
         ),
         ToolCapabilityItem(
+            tool_name="material_suitability_diagnostics",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.materials.catalog",
+            notes=[
+                "Reports local preview provenance, suitability warnings, and verification prompts."
+            ],
+        ),
+        ToolCapabilityItem(
             tool_name="example_registry",
             tool_kind="internal_python",
             available=True,
@@ -716,6 +730,17 @@ def agent_tool_capabilities():
             status="available",
             detection_method="adapter registry dispatch",
             notes=["Generates preview scaffold content only."],
+        ),
+        ToolCapabilityItem(
+            tool_name="ambiguous_requirement_matching",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.examples.requirements",
+            notes=[
+                "Reports match confidence, candidate templates, and deterministic follow-up questions."
+            ],
         ),
         ToolCapabilityItem(
             tool_name="source_monitor_inference",
@@ -1192,6 +1217,45 @@ def agent_material_suggest(req: MaterialSuggestionRequest):
     )
 
 
+@router.post(
+    "/api/materials/diagnose",
+    response_model=MaterialDiagnoseResponse,
+    responses=API_ERROR_RESPONSES,
+)
+def agent_material_diagnose(req: MaterialDiagnoseRequest):
+    material_id = req.material_id.strip()
+    application = req.application.strip()
+    if not material_id or not application:
+        return _agent_error_response(
+            AgentApiError(
+                "invalid_workflow_request",
+                "Material diagnostics require material_id and application.",
+                diagnostics=ApiDiagnostic(errors=["material_id and application must be non-empty strings."]),
+                recommended_next_actions=[
+                    "Provide a local preview material ID and an optical application phrase."
+                ],
+            )
+        )
+    diagnostic = diagnose_material_suitability(material_id, application)
+    return MaterialDiagnoseResponse(
+        diagnostic=diagnostic,
+        diagnostics=ApiDiagnostic(
+            warnings=[
+                "Material suitability diagnostics are local preview guidance only.",
+                "No external material database lookup was performed.",
+            ],
+            limitations=[
+                "This response is not a production-grade optical constants record."
+            ],
+            missing_fields=diagnostic.missing_context,
+        ),
+        recommended_next_actions=[
+            *diagnostic.recommended_verification,
+            "Use material diagnostics as review prompts before any solver setup.",
+        ],
+    )
+
+
 @router.get(
     "/api/materials/{material_id}",
     response_model=MaterialDetailResponse,
@@ -1398,6 +1462,8 @@ def agent_optical_language_diagnose(req: OpticalLanguageDiagnoseRequest):
         status="ok" if diagnostics.safe_to_preview else "needs_review",
         matched_template_id=inference.matched_template_id,
         missing_required_inputs=diagnostics.missing_required_inputs,
+        missing_critical_inputs=diagnostics.missing_critical_inputs,
+        missing_optional_inputs=diagnostics.missing_optional_inputs,
         default_assumptions_applied=diagnostics.default_assumptions_applied,
         ambiguity_notes=diagnostics.ambiguity_notes,
         blocking_questions=diagnostics.blocking_questions,
@@ -1701,9 +1767,14 @@ def _agent_session_response(session: Any) -> AgentTaskSessionResponse:
         optical_language_diagnostics=session.optical_language_diagnostics,
         observable_diagnostics=session.observable_diagnostics,
         adapter_source_monitor_mapping=session.adapter_source_monitor_mapping,
+        match_confidence=session.match_confidence,
+        candidate_templates=session.candidate_templates,
+        recommended_questions=session.recommended_questions,
         selected_example_id=session.selected_example_id,
         design_case_summary=session.design_case_summary,
         missing_required_inputs=session.missing_required_inputs,
+        missing_critical_inputs=session.missing_critical_inputs,
+        missing_optional_inputs=session.missing_optional_inputs,
         default_assumptions_applied=session.default_assumptions_applied,
         plan_steps=session.plan_steps,
         agent_trace=trace,

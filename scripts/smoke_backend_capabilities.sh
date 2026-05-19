@@ -39,6 +39,32 @@ require("missing_input_diagnostics" in internal_tools, "missing-input diagnostic
 require("observable_diagnostics" in internal_tools, "observable diagnostics missing")
 require("adapter_native_mapping" in internal_tools, "adapter-native mapping missing")
 require("adapter_native_golden_coverage" in internal_tools, "adapter-native golden coverage missing")
+require("ambiguous_requirement_matching" in internal_tools, "ambiguous requirement matching missing")
+
+material_diagnose = client.post(
+    "/api/materials/diagnose",
+    json={"material_id": "ag", "application": "nanoparticle plasmonics"},
+)
+require(material_diagnose.status_code == 200, "/api/materials/diagnose failed")
+material_diag_payload = material_diagnose.json()
+require(
+    material_diag_payload["diagnostic"]["production_grade_optical_constants"] is False,
+    "material diagnostics overclaimed production-grade constants",
+)
+require(
+    material_diag_payload["diagnostic"]["requires_user_verification"] is True,
+    "material diagnostics missing user verification",
+)
+
+ambiguous_match = client.post(
+    "/api/design-requirements/match",
+    json={"goal": "Design a waveguide and thin-film coating preview."},
+)
+require(ambiguous_match.status_code == 200, "/api/design-requirements/match ambiguous failed")
+ambiguous_payload = ambiguous_match.json()
+require(ambiguous_payload["confidence"] == "low", "ambiguous match should be low confidence")
+require(len(ambiguous_payload["candidate_templates"]) >= 2, "ambiguous candidates missing")
+require(ambiguous_payload["no_external_llm_used"] is True, "ambiguous matching used external LLM")
 
 golden_coverage = client.get("/api/adapter-native-golden-coverage")
 require(golden_coverage.status_code == 200, "/api/adapter-native-golden-coverage failed")
@@ -67,6 +93,14 @@ session_payload = session.json()
 require(session_payload["tool_call_ledger"], "tool_call_ledger missing")
 ledger = {entry["tool_name"]: entry for entry in session_payload["tool_call_ledger"]}
 require(ledger["material_catalog.suggest"]["executed"] is True, "material catalog not executed")
+require(
+    ledger["requirements.match_ambiguity_check"]["executed"] is True,
+    "ambiguity check not executed",
+)
+require(
+    ledger["optical_language.generate_disambiguation_questions"]["executed"] is True,
+    "disambiguation questions not generated",
+)
 require(ledger["optical_language.infer_source_monitor"]["executed"] is True, "source/monitor inference not executed")
 require(ledger["optical_language.diagnose_missing_inputs"]["executed"] is True, "missing-input diagnostics not executed")
 require(ledger["optical_language.diagnose_observable"]["executed"] is True, "observable diagnostics not executed")
@@ -81,6 +115,8 @@ require(
     session_payload["adapter_source_monitor_mapping"],
     "agent session missing adapter source/monitor mapping",
 )
+require("match_confidence" in session_payload, "agent session missing match confidence")
+require("missing_critical_inputs" in session_payload, "agent session missing critical inputs")
 
 source_monitor = client.post(
     "/api/optical-language/infer",
@@ -271,6 +307,8 @@ waveguide_reference = slab_waveguide_v_number(2.0, 1.5, 0.3, 1550.0)
 require(waveguide_reference.result["v_number"] > 0, "waveguide V-number sanity check failed")
 
 print("CALCULATOR SANITY CHECKS PASSED")
+print("MATERIAL PROVENANCE DIAGNOSTICS PASSED")
+print("AMBIGUOUS REQUIREMENT MATCHING PASSED")
 print("SOURCE/MONITOR INFERENCE PASSED")
 print("MISSING INPUT DIAGNOSTICS PASSED")
 print("OBSERVABLE DIAGNOSTICS PASSED")
@@ -282,6 +320,8 @@ print("Backend capabilities smoke passed")
 PY
 
 echo "CALCULATOR SANITY CHECKS PASSED"
+echo "MATERIAL PROVENANCE DIAGNOSTICS PASSED"
+echo "AMBIGUOUS REQUIREMENT MATCHING PASSED"
 echo "SOURCE/MONITOR INFERENCE PASSED"
 echo "MISSING INPUT DIAGNOSTICS PASSED"
 echo "OBSERVABLE DIAGNOSTICS PASSED"

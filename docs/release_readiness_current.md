@@ -361,7 +361,10 @@ Current v1.0 evidence artifacts:
   these document installed/callable/executed status, task-session tool-call
   ledgers, blocked solver/LLM/upload/tag/release actions, and local optical
   preview calculators. The generated report also cross-checks bundled design
-  cases against expected calculator or adapter-trace behavior.
+  cases against expected calculator or adapter-trace behavior. rc8.dev0 adds
+  material provenance coverage, material suitability diagnostics, ambiguous
+  requirement matching, and critical/optional missing-input diagnostics without
+  changing publication or release boundaries.
 - Maintainer backend evidence review pack:
   `docs/backend_evidence_review_pack.md`,
   `docs/backend_evidence_review_pack.zh-CN.md`,

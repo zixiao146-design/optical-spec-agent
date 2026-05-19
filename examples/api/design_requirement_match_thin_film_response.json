@@ -129,6 +129,23 @@
     "evidence_boundary": "Sanity-checked preview formulas only; verify material constants and stack physics before conclusions."
   },
   "confidence": "high",
+  "candidate_templates": [
+    "thin_film_ar_coating"
+  ],
+  "ambiguity_notes": [
+    "Requirement matching is deterministic keyword logic; no external LLM was used.",
+    "The goal contains a clear template-specific keyword pattern."
+  ],
+  "missing_disambiguation_inputs": [
+    "incidence_angle"
+  ],
+  "recommended_questions": [
+    "What target wavelength, substrate material, incidence angle, and polarization define the coating?",
+    "Please provide or confirm: incidence_angle.",
+    "Should the backend keep using local preview-only tools without external solver execution?"
+  ],
+  "safe_default_template": null,
+  "no_external_llm_used": true,
   "missing_required_inputs": [
     "incident_n",
     "substrate_n",

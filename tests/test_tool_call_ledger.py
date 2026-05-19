@@ -15,6 +15,8 @@ def test_agent_session_includes_tool_call_ledger():
     for internal in [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",

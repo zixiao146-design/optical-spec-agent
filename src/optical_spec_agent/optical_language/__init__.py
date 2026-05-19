@@ -17,6 +17,7 @@ from .source_monitor import (
     OpticalSourceModel,
     SourceMonitorInference,
     diagnose_missing_inputs,
+    generate_disambiguation_questions,
     infer_source_monitor_from_goal,
     template_source_monitor_defaults,
 )
@@ -32,6 +33,7 @@ __all__ = [
     "SourceMonitorInference",
     "diagnose_missing_inputs",
     "diagnose_observable",
+    "generate_disambiguation_questions",
     "infer_source_monitor_from_goal",
     "build_adapter_golden_coverage_report",
     "map_source_monitor_to_adapter",

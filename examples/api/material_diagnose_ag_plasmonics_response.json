@@ -1,0 +1,67 @@
+{
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false,
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "diagnostics": {
+    "errors": [],
+    "warnings": [
+      "Material suitability diagnostics are local preview guidance only.",
+      "No external material database lookup was performed."
+    ],
+    "missing_fields": [
+      "wavelength_band",
+      "geometry_dimensions",
+      "particle_radius",
+      "background_medium",
+      "substrate_or_film_stack"
+    ],
+    "assumptions": [],
+    "limitations": [
+      "This response is not a production-grade optical constants record."
+    ],
+    "details": {}
+  },
+  "recommended_next_actions": [
+    "Confirm the operating wavelength band.",
+    "Verify material optical constants against trusted data before physical conclusions.",
+    "Review fabrication/process compatibility for the intended geometry.",
+    "Use material diagnostics as review prompts before any solver setup."
+  ],
+  "diagnostic": {
+    "material_id": "ag",
+    "application": "nanoparticle plasmonics",
+    "suitable": true,
+    "suitability": "suitable",
+    "rationale": "Silver (Ag) appears in the local preview allow-list for nanoparticle plasmonics workflows.",
+    "warnings": [
+      "Material suitability is preview/design-assist only.",
+      "Verify wavelength-dependent n/k, dispersion, loss, and fabrication constraints independently.",
+      "This material record is not a production-grade optical constants entry."
+    ],
+    "missing_context": [
+      "wavelength_band",
+      "geometry_dimensions",
+      "particle_radius",
+      "background_medium",
+      "substrate_or_film_stack"
+    ],
+    "recommended_verification": [
+      "Confirm the operating wavelength band.",
+      "Verify material optical constants against trusted data before physical conclusions.",
+      "Review fabrication/process compatibility for the intended geometry."
+    ],
+    "provenance_type": "approximate_constant",
+    "requires_user_verification": true,
+    "production_grade_optical_constants": false,
+    "external_solver_executed": false,
+    "external_llm_required": false,
+    "production_grade_validation_claimed": false,
+    "formal_convergence_proof_claimed": false
+  },
+  "catalog_status": "local_preview_catalog",
+  "catalog_note": "Suitability diagnostics are design-assist only; verify material data independently."
+}

@@ -39,7 +39,10 @@ PyPI：未发布
 - `metasurface`、`metalens`、`超表面`、`超透镜` -> `dielectric_metasurface_preview`
 - `nanoparticle`、`plasmonic`、`scattering`、`纳米颗粒`、`散射` -> `nanoparticle_plasmonics`
 
-未知目标会返回低置信度的安全结果，列出缺失输入和建议澄清步骤。
+未知目标会返回 `none`/低置信度的安全结果，列出缺失输入和建议澄清步骤。
+有歧义的目标会返回 candidate templates、ambiguity notes、missing
+disambiguation inputs 和 recommended questions，而不是直接采取不安全的求解器动作。
+见 `docs/ambiguous_requirement_matching.zh-CN.md`。
 
 ## 预期工具调用
 
@@ -50,6 +53,8 @@ PyPI：未发布
 - `optical_language.infer_source_monitor`
 - `optical_language.diagnose_missing_inputs`
 - `material_catalog.suggest`
+- `requirements.match_ambiguity_check`
+- `optical_language.generate_disambiguation_questions`
 - 有本地设计案例时执行 `example_registry.load`
 - `agent_trace.build`
 - `workflow_plan.preview`

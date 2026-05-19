@@ -113,6 +113,15 @@ mapping layer. These deterministic templates connect first-run goals to optical
 intent, required inputs, default assumptions, material/geometry choices,
 expected calculators or adapters, tool-call ledger entries, and preview
 artifacts without using an external LLM.
+The rc8.dev0 backend now makes material provenance and ambiguous requirement
+handling explicit through
+[`material provenance policy`](docs/material_provenance_policy.md),
+[`ambiguous requirement matching`](docs/ambiguous_requirement_matching.md), and
+[`missing-input diagnostics`](docs/missing_input_diagnostics.md). Material
+records expose provenance, suitability warnings, and user-verification flags;
+ambiguous goals produce candidate templates and questions rather than unsafe
+solver actions. The material catalog remains preview/design-assist only and is
+not a production-grade optical constants database.
 The gallery connects examples to material suggestions, adapter recommendations,
 workflow planning, artifact preview, evidence, and next actions.
 These additions remain preview-first: no solver is executed by default, no

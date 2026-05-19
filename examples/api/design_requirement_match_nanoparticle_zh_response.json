@@ -131,6 +131,28 @@
     "evidence_boundary": "Adapter/material preview only; no scattering spectrum solver result."
   },
   "confidence": "high",
+  "candidate_templates": [
+    "nanoparticle_plasmonics",
+    "thin_film_ar_coating"
+  ],
+  "ambiguity_notes": [
+    "Requirement matching is deterministic keyword logic; no external LLM was used.",
+    "The goal contains a clear template-specific keyword pattern."
+  ],
+  "missing_disambiguation_inputs": [
+    "particle_radius_or_diameter",
+    "particle_material",
+    "film_thickness",
+    "wavelength_band"
+  ],
+  "recommended_questions": [
+    "Which design family should take priority: nanoparticle_plasmonics, thin_film_ar_coating?",
+    "What particle size, material, film thickness, wavelength band, and polarization should be assumed?",
+    "Please provide or confirm: particle_radius_or_diameter, particle_material, film_thickness, wavelength_band.",
+    "Should the backend keep using local preview-only tools without external solver execution?"
+  ],
+  "safe_default_template": null,
+  "no_external_llm_used": true,
   "missing_required_inputs": [
     "particle_material",
     "particle_size_nm",

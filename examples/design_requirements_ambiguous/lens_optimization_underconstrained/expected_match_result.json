@@ -1,0 +1,11 @@
+{
+  "confidence": "medium",
+  "matched_template_id": "paraxial_lens_imaging",
+  "missing_disambiguation_inputs": [
+    "focal_length",
+    "aperture",
+    "field_of_view",
+    "object_distance"
+  ],
+  "safe_behavior": "safe_default_template_with_questions_no_solver_no_llm"
+}

@@ -88,6 +88,37 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
             )
         )
 
+    provenance = payload["material_provenance_coverage"]
+    ambiguous = payload["ambiguous_requirement_matching"]
+    missing = payload["missing_input_diagnostics"]
+    lines.extend(
+        [
+            "",
+            "## Material provenance coverage",
+            "",
+            f"- material_count: `{provenance['material_count']}`",
+            f"- materials_with_provenance: `{provenance['materials_with_provenance']}`",
+            f"- materials_requiring_user_verification: `{provenance['materials_requiring_user_verification']}`",
+            f"- production_grade_optical_constants_database: `{provenance['production_grade_optical_constants_database']}`",
+            f"- no_external_material_database_lookup: `{provenance['no_external_material_database_lookup']}`",
+            "",
+            "## Ambiguous requirement matching",
+            "",
+            f"- available: `{ambiguous['available']}`",
+            f"- deterministic: `{ambiguous['deterministic']}`",
+            f"- no_external_llm_used: `{ambiguous['no_external_llm_used']}`",
+            f"- covered_cases: `{', '.join(ambiguous['covered_cases'])}`",
+            f"- ambiguous_goals_generate_questions: `{ambiguous['ambiguous_goals_generate_questions']}`",
+            "",
+            "## Missing-input diagnostics",
+            "",
+            f"- available: `{missing['available']}`",
+            f"- critical_optional_split: `{missing['critical_optional_split']}`",
+            f"- safe_to_preview_default: `{missing['safe_to_preview_default']}`",
+            f"- safe_to_run_solver_default: `{missing['safe_to_run_solver_default']}`",
+        ]
+    )
+
     lines.extend(
         [
             "",
@@ -186,6 +217,15 @@ def _print_summary(pack: BackendEvidencePack) -> None:
     )
     print(f"sub_agent_reality={len(payload['sub_agent_reality'])}")
     print(f"optical_calculators={len(payload['optical_calculators'])}")
+    print(
+        "material_provenance_coverage="
+        f"{payload['material_provenance_coverage']['materials_with_provenance']}/"
+        f"{payload['material_provenance_coverage']['material_count']}"
+    )
+    print(
+        "ambiguous_requirement_matching="
+        f"{payload['ambiguous_requirement_matching']['available']}"
+    )
     print(f"design_case_cross_checks={len(payload['design_case_cross_checks'])}")
     print(
         "adapter_native_golden_coverage="

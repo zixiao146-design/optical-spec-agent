@@ -784,6 +784,58 @@
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "proprietary_solver_required": false
+    },
+    {
+      "name": "material-diagnose-ag-plasmonics",
+      "endpoint": "/api/materials/diagnose",
+      "method": "POST",
+      "request_file": "material_diagnose_ag_plasmonics_request.json",
+      "response_file": "material_diagnose_ag_plasmonics_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "design-requirement-match-ambiguous",
+      "endpoint": "/api/design-requirements/match",
+      "method": "POST",
+      "request_file": "design_requirement_match_ambiguous_request.json",
+      "response_file": "design_requirement_match_ambiguous_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "design-requirement-match-unknown",
+      "endpoint": "/api/design-requirements/match",
+      "method": "POST",
+      "request_file": "design_requirement_match_unknown_request.json",
+      "response_file": "design_requirement_match_unknown_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
+    },
+    {
+      "name": "agent-session-ambiguous-goal",
+      "endpoint": "/api/agent-session",
+      "method": "POST",
+      "request_file": "agent_session_ambiguous_goal_request.json",
+      "response_file": "agent_session_ambiguous_goal_response.json",
+      "no_network": true,
+      "external_solver_executed": false,
+      "external_llm_required": false,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false,
+      "proprietary_solver_required": false
     }
   ],
   "current_public_release_candidate": "v0.9.0rc7",

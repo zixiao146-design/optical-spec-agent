@@ -20,6 +20,7 @@
   },
   "recommended_next_actions": [
     "Review the optical intent and selected design case.",
+    "Answer recommended questions for any low-confidence or under-specified goal.",
     "Inspect permission gates before any optional external action.",
     "Inspect observable diagnostics and adapter-native source/monitor mapping.",
     "Open the Agent Trace Timeline to review sub-agent contributions.",
@@ -68,7 +69,21 @@
     "preview_only": true
   },
   "optical_language_diagnostics": {
-    "missing_required_inputs": [],
+    "missing_required_inputs": [
+      "particle_material",
+      "particle_radius_or_diameter",
+      "wavelength_band"
+    ],
+    "missing_critical_inputs": [
+      "particle_material",
+      "particle_radius_or_diameter",
+      "wavelength_band"
+    ],
+    "missing_optional_inputs": [
+      "background_medium",
+      "film_thickness",
+      "polarization"
+    ],
     "default_assumptions_applied": [
       "Default to normal-incidence plane-wave-like source.",
       "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
@@ -78,9 +93,15 @@
     ],
     "ambiguity_notes": [
       "Polarization was defaulted; confirm before solver execution.",
-      "Wavelength range was defaulted; confirm the design band."
+      "Wavelength range was defaulted; confirm the design band.",
+      "Critical design inputs are absent; safe preview may proceed with defaults, but solver execution remains blocked.",
+      "Optional design inputs are absent; preview quality may improve if they are provided."
     ],
-    "blocking_questions": [],
+    "blocking_questions": [
+      "Which values should be used for critical inputs: particle_radius_or_diameter, particle_material, wavelength_band?",
+      "Can you provide optional context for: film_thickness, background_medium, polarization?",
+      "For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?"
+    ],
     "safe_to_preview": true,
     "safe_to_run_solver": false
   },
@@ -185,14 +206,46 @@
     "production_grade_validation_claimed": false,
     "formal_convergence_proof_claimed": false
   },
+  "match_confidence": "high",
+  "candidate_templates": [
+    "nanoparticle_plasmonics",
+    "thin_film_ar_coating"
+  ],
+  "recommended_questions": [
+    "Which design family should take priority: nanoparticle_plasmonics, thin_film_ar_coating?",
+    "What particle size, material, film thickness, wavelength band, and polarization should be assumed?",
+    "Please provide or confirm: particle_radius_or_diameter, particle_material, film_thickness, wavelength_band.",
+    "Should the backend keep using local preview-only tools without external solver execution?",
+    "Which values should be used for critical inputs: particle_radius_or_diameter, particle_material, wavelength_band?",
+    "Can you provide optional context for: film_thickness, background_medium, polarization?",
+    "For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?",
+    "Which candidate template should be prioritized: nanoparticle_plasmonics, thin_film_ar_coating?",
+    "Which values should be used for critical inputs: particle_material, particle_radius_or_diameter, wavelength_band?",
+    "Can you provide optional context for: background_medium, film_thickness, polarization?",
+    "Confirm whether the backend should remain in local preview mode without running external solvers."
+  ],
   "selected_example_id": "nanoparticle_plasmonics",
   "design_case_summary": "nanoparticle_plasmonics requirement template -> nanoparticle_plasmonics -> nanoparticle plasmonics / scattering preview",
   "missing_required_inputs": [
     "film_material",
+    "film_thickness",
     "gap_nm",
     "particle_material",
+    "particle_radius_or_diameter",
     "particle_size_nm",
+    "wavelength_band",
     "wavelength_range_nm"
+  ],
+  "missing_critical_inputs": [
+    "film_thickness",
+    "particle_material",
+    "particle_radius_or_diameter",
+    "wavelength_band"
+  ],
+  "missing_optional_inputs": [
+    "background_medium",
+    "film_thickness",
+    "polarization"
   ],
   "default_assumptions_applied": [
     "Open-source-first Meep/Gmsh preview path.",
@@ -784,6 +837,32 @@
       "safety_note": "Optical language extraction is local heuristic logic, not an external model."
     },
     {
+      "call_id": "requirements-match-ambiguity-check",
+      "tool_name": "requirements.match_ambiguity_check",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SpecAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Template scores and candidate template set.",
+      "output_summary": "confidence=high; candidates=nanoparticle_plasmonics, thin_film_ar_coating",
+      "reason": "Ambiguous or under-specified goals should produce questions rather than unsafe actions.",
+      "safety_note": "No external LLM was used for disambiguation."
+    },
+    {
+      "call_id": "optical-language-generate-disambiguation-questions",
+      "tool_name": "optical_language.generate_disambiguation_questions",
+      "tool_kind": "internal_python",
+      "called_by_agent": "SafetyAgent",
+      "executed": true,
+      "default_allowed": true,
+      "status": "executed",
+      "input_summary": "Matched template, candidate templates, and missing inputs.",
+      "output_summary": "critical=3; optional=3",
+      "reason": "The session should expose follow-up questions for ambiguous or incomplete requirements.",
+      "safety_note": "Questions are deterministic local diagnostics; no solver or LLM was invoked."
+    },
+    {
       "call_id": "optical-language-infer-source-monitor",
       "tool_name": "optical_language.infer_source_monitor",
       "tool_kind": "internal_python",
@@ -805,7 +884,7 @@
       "default_allowed": true,
       "status": "executed",
       "input_summary": "Goal, requirement template, source model, and monitor model.",
-      "output_summary": "missing=0; safe_to_preview=True; safe_to_run_solver=False",
+      "output_summary": "missing=3; safe_to_preview=True; safe_to_run_solver=False",
       "reason": "Missing source/monitor inputs and defaults must be explicit.",
       "safety_note": "safe_to_run_solver is false by default."
     },

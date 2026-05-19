@@ -35,6 +35,17 @@
       ]
     },
     {
+      "tool_name": "material_suitability_diagnostics",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.materials.catalog",
+      "notes": [
+        "Reports local preview provenance, suitability warnings, and verification prompts."
+      ]
+    },
+    {
       "tool_name": "example_registry",
       "tool_kind": "internal_python",
       "available": true,
@@ -76,6 +87,17 @@
       "detection_method": "adapter registry dispatch",
       "notes": [
         "Generates preview scaffold content only."
+      ]
+    },
+    {
+      "tool_name": "ambiguous_requirement_matching",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.examples.requirements",
+      "notes": [
+        "Reports match confidence, candidate templates, and deterministic follow-up questions."
       ]
     },
     {

@@ -7,6 +7,9 @@
     "Sub-agent reality",
     "Tool-call reality",
     "Optical calculators",
+    "Material provenance coverage",
+    "Ambiguous requirement matching",
+    "Missing-input diagnostics",
     "Design-case cross-checks",
     "Source / monitor / observable diagnostics",
     "Adapter-native golden coverage",
@@ -130,6 +133,15 @@
       ]
     },
     {
+      "tool_name": "material_suitability_diagnostics",
+      "importable": true,
+      "callable": true,
+      "executed_in_sample": false,
+      "notes": [
+        "Reports material provenance, suitability, and verification warnings."
+      ]
+    },
+    {
       "tool_name": "example_registry",
       "importable": true,
       "callable": true,
@@ -181,6 +193,15 @@
       "executed_in_sample": true,
       "notes": [
         "Infers preview source, monitor, observable, and defaults from local heuristics."
+      ]
+    },
+    {
+      "tool_name": "ambiguous_requirement_matching",
+      "importable": true,
+      "callable": true,
+      "executed_in_sample": true,
+      "notes": [
+        "Reports candidate templates, confidence, and deterministic follow-up questions."
       ]
     },
     {
@@ -456,6 +477,45 @@
       "preview_only": true
     }
   ],
+  "material_provenance_coverage": {
+    "material_count": 13,
+    "materials_with_provenance": 13,
+    "materials_requiring_user_verification": 13,
+    "production_grade_optical_constants_claimed": false,
+    "notes": [
+      "All starter material records are local preview/design-assist entries.",
+      "Numeric n/k values remain approximate and require user verification.",
+      "No external material database lookup is performed."
+    ]
+  },
+  "ambiguous_requirement_matching": {
+    "available": true,
+    "deterministic": true,
+    "no_external_llm_used": true,
+    "covered_cases": [
+      "generic_optical_system",
+      "waveguide_or_coating",
+      "lens_optimization_underconstrained",
+      "unknown_application"
+    ],
+    "notes": [
+      "Generic optical goal confidence: none.",
+      "Mixed waveguide/coating candidates: thin_film_ar_coating, slab_waveguide_single_mode.",
+      "Underconstrained lens missing inputs: focal_length, aperture, field_of_view, object_distance.",
+      "Ambiguous goals generate questions instead of unsafe solver actions."
+    ]
+  },
+  "missing_input_diagnostics": {
+    "available": true,
+    "critical_optional_split": true,
+    "safe_to_preview_default": true,
+    "safe_to_run_solver_default": false,
+    "notes": [
+      "Critical inputs reported: aperture, field_of_view, focal_length, object_distance.",
+      "Optional inputs reported: aperture, field_of_view, wavelength.",
+      "safe_to_preview remains true while safe_to_run_solver remains false."
+    ]
+  },
   "adapter_native_golden_coverage": {
     "api_contract_version": "0.1",
     "status": "ok",
@@ -660,6 +720,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -708,6 +770,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -759,6 +823,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -808,6 +874,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -856,6 +924,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -906,6 +976,8 @@
       "tool_call_ledger_entries": [
         "requirements.match_template",
         "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "optical_language.generate_disambiguation_questions",
         "optical_language.infer_source_monitor",
         "optical_language.diagnose_missing_inputs",
         "optical_language.diagnose_observable",
@@ -989,6 +1061,8 @@
     "Use scripts/audit_sub_agents.py for a concise import/call/execution view.",
     "Use scripts/smoke_backend_capabilities.sh for calculator sanity checks.",
     "Use scripts/check_adapter_native_golden.py for adapter-native metadata diff checks.",
+    "Use /api/materials/diagnose to inspect material provenance and suitability warnings.",
+    "Use /api/design-requirements/match to inspect ambiguous-goal questions.",
     "Treat calculator outputs as sanity-checked preview/design-assist only."
   ]
 }

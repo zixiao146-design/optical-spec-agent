@@ -19,7 +19,9 @@ def test_tool_capabilities_reports_internal_external_and_release_sections():
 
     internal = {item["tool_name"]: item for item in payload["internal_tools"]}
     assert internal["material_catalog"]["available"] is True
+    assert internal["material_suitability_diagnostics"]["available"] is True
     assert internal["example_registry"]["available"] is True
+    assert internal["ambiguous_requirement_matching"]["available"] is True
     assert internal["agent_trace_builder"]["available"] is True
     assert internal["workflow_planner"]["available"] is True
     assert internal["adapter_preview_generator"]["available"] is True

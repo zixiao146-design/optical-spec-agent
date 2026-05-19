@@ -1,0 +1,13 @@
+{
+  "confidence": "none",
+  "matched_template_id": null,
+  "candidate_templates": [],
+  "missing_disambiguation_inputs": [
+    "optical_application",
+    "physical_system",
+    "materials",
+    "geometry",
+    "target_output"
+  ],
+  "safe_behavior": "ask_questions_no_solver_no_llm"
+}

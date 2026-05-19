@@ -22,7 +22,11 @@ from optical_spec_agent.examples.requirements import (
     DesignRequirementsResponse,
     RequirementMatchResult,
 )
-from optical_spec_agent.materials.models import MaterialDetail, MaterialSummary
+from optical_spec_agent.materials.models import (
+    MaterialDetail,
+    MaterialSuitabilityDiagnostic,
+    MaterialSummary,
+)
 from optical_spec_agent.optical_language import (
     AdapterSourceMonitorMapping,
     ObservableDiagnostic,
@@ -217,6 +221,19 @@ class MaterialSuggestionResponse(ApiResponseBase):
     )
 
 
+class MaterialDiagnoseRequest(ApiRequestBase):
+    material_id: str = Field(..., description="Local preview material ID or alias")
+    application: str = Field(..., description="Optical application phrase")
+
+
+class MaterialDiagnoseResponse(ApiResponseBase):
+    diagnostic: MaterialSuitabilityDiagnostic
+    catalog_status: str = "local_preview_catalog"
+    catalog_note: str = (
+        "Suitability diagnostics are design-assist only; verify material data independently."
+    )
+
+
 class AgentTraceRequest(ApiRequestBase):
     spec: dict[str, Any] | None = Field(None, description="Inline OpticalSpec-like payload")
     text: str | None = Field(None, description="Natural language optical design request")
@@ -253,9 +270,14 @@ class AgentTaskSessionResponse(ApiResponseBase):
     )
     observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
     adapter_source_monitor_mapping: AdapterSourceMonitorMapping | None = None
+    match_confidence: str = "low"
+    candidate_templates: list[str] = Field(default_factory=list)
+    recommended_questions: list[str] = Field(default_factory=list)
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
+    missing_critical_inputs: list[str] = Field(default_factory=list)
+    missing_optional_inputs: list[str] = Field(default_factory=list)
     default_assumptions_applied: list[str] = Field(default_factory=list)
     plan_steps: list[AgentPlanStep] = Field(default_factory=list)
     agent_trace: AgentTraceResponse
@@ -286,6 +308,8 @@ class OpticalLanguageDiagnoseRequest(ApiRequestBase):
 class OpticalLanguageDiagnoseResponse(ApiResponseBase):
     matched_template_id: str | None = None
     missing_required_inputs: list[str] = Field(default_factory=list)
+    missing_critical_inputs: list[str] = Field(default_factory=list)
+    missing_optional_inputs: list[str] = Field(default_factory=list)
     default_assumptions_applied: list[str] = Field(default_factory=list)
     ambiguity_notes: list[str] = Field(default_factory=list)
     blocking_questions: list[str] = Field(default_factory=list)

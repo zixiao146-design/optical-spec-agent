@@ -34,6 +34,17 @@ Suggestion rules:
 - lens/ray optics -> BK7 preview, fused silica preview, air
 - photonic crystal band -> Si, GaAs, SiO2, air
 
+Material provenance:
+- Every starter material exposes `provenance_type`, `source_note`,
+  `wavelength_validity_note`, `known_limitations`, `requires_user_verification`,
+  and `production_grade_optical_constants=false`.
+- Numeric n/k values are approximate preview constants unless a future entry
+  documents stronger reviewed provenance.
+- `POST /api/materials/diagnose` returns suitability rationale, warnings,
+  missing context, and recommended verification for one material/application
+  pair.
+- See `docs/material_provenance_policy.md` for the catalog policy.
+
 Safety boundaries:
 - Material values are approximate preview/design-assist hints.
 - Users must verify material constants before physical conclusions.

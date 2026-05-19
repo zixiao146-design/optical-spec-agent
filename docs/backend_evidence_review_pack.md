@@ -45,6 +45,12 @@ approval remain separate and not granted.
   blocked external actions.
 - Optical calculators: thin-film, paraxial, Gaussian beam, and waveguide
   preview calculators with sanity reference cases and failure modes.
+- Material provenance coverage: starter materials expose provenance fields,
+  require user verification, and remain non-production optical constants.
+- Ambiguous requirement matching: deterministic confidence, candidate template,
+  and question generation for under-specified goals.
+- Missing-input diagnostics: critical and optional missing inputs, defaults,
+  blocking questions, and `safe_to_run_solver=false`.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

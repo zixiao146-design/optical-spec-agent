@@ -9,6 +9,9 @@ The current local backend maps:
 natural language goal -> requirement template -> optical language summary -> design case -> material/geometry/adapter/calculator path -> tool-call ledger.
 
 The mapper is deterministic and local. It does not call an external LLM.
+For ambiguous or under-specified goals, it returns confidence, candidate
+templates, missing disambiguation inputs, and recommended questions. It does
+not silently choose a solver path for unknown goals.
 
 ## Optical Language Fields
 
@@ -66,3 +69,16 @@ solver monitor result is produced.
 
 See `docs/optical_language_source_monitor.md` and
 `docs/source_monitor_missing_input_diagnostics.md`.
+
+## Ambiguous and Missing Inputs
+
+The rc8.dev0 backend distinguishes critical and optional missing inputs:
+
+- `missing_critical_inputs`: values needed before a meaningful solver setup.
+- `missing_optional_inputs`: values that improve preview fidelity.
+- `recommended_questions`: deterministic follow-up questions.
+
+`safe_to_preview` can remain true for local design-assist artifacts, while
+`safe_to_run_solver` remains false by default. See
+`docs/ambiguous_requirement_matching.md` and
+`docs/missing_input_diagnostics.md`.

@@ -20,7 +20,9 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert {item["role_name"] for item in body["sub_agents"]} >= {"SpecAgent", "SafetyAgent"}
     assert {item["tool_name"] for item in body["internal_tools"]} >= {
         "material_catalog",
+        "material_suitability_diagnostics",
         "example_registry",
+        "ambiguous_requirement_matching",
         "source_monitor_inference",
         "missing_input_diagnostics",
         "observable_diagnostics",
@@ -35,6 +37,11 @@ def test_backend_capability_report_api_returns_expected_sections():
         "waveguide",
     }
     assert len(body["requirements_templates"]) == 7
+    assert body["material_provenance_coverage"]["material_count"] >= 10
+    assert body["material_provenance_coverage"]["production_grade_optical_constants_claimed"] is False
+    assert body["ambiguous_requirement_matching"]["available"] is True
+    assert body["ambiguous_requirement_matching"]["no_external_llm_used"] is True
+    assert body["missing_input_diagnostics"]["safe_to_run_solver_default"] is False
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",
@@ -60,6 +67,8 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert report["evidence_pack_available"] is True
     assert body["evidence_pack_available"] is True
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
+    assert body["material_provenance_coverage"]["production_grade_optical_constants_database"] is False
+    assert body["ambiguous_requirement_matching"]["ambiguous_goals_generate_questions"] is True
     assert body["external_solver_executed"] is False
 
 

@@ -27,14 +27,14 @@ not production-grade physical validation.
 | --- | --- | --- | --- | --- |
 | Sub-agent reality | Deterministic roles execute in traces and audit | Roles are not standalone autonomous packages/classes | Maintainers may overread "agent" as independent installed agents | Keep audit wording explicit and add examples showing deterministic orchestration. |
 | Tool-call ledger | Records internal calls and blocked external actions | Ledger is session-scoped, not persisted across runs | Harder to compare historical evidence | Add optional JSON export examples before rc8 draft. |
-| Material library | Local preview catalog and suggestions | Preview optical constants are not provenance-complete | Material suggestions may be mistaken for authoritative constants | Add source/provenance notes and stronger warning tests. |
+| Material library | Local preview catalog, provenance fields, suitability diagnostics, and suggestions | Preview optical constants still require external human verification | Material suggestions may be mistaken for authoritative constants | Keep provenance warnings prominent and add application-specific review cases. |
 | Optical calculators | Reference sanity cases exist | Limited domains and simplified assumptions | Users may apply preview outputs outside supported assumptions | Add more failure-mode tests and assumption summaries. |
-| Source/monitor diagnostics | Template and goal inference exists | Ambiguous multi-source/multi-monitor cases are shallow | Missing inputs may be underreported | Expand ambiguity diagnostics and blocking questions. |
+| Source/monitor diagnostics | Template and goal inference plus critical/optional missing-input diagnostics exists | Ambiguous multi-source/multi-monitor cases can still be deeper | Missing inputs may be underreported for novel systems | Continue expanding negative and multi-observable examples. |
 | Observable diagnostics | Taxonomy and adapter compatibility exist | Combined observables need richer required-input handling | Preview artifacts may hide observable prerequisites | Add multi-observable cases and expected warnings. |
 | Adapter-native mappings | Five adapters mapped with golden metadata | Mapping is preview metadata, not executed solver semantics | Real solver users may expect monitor results | Keep `solver_execution_required_for_real_result` prominent. |
 | Adapter golden coverage | Strict metadata diffs cover five golden cases | Coverage is narrow per adapter | Adapter changes can pass without broader semantic coverage | Add one additional case per adapter when adapter previews change. |
 | Design requirement templates | Seven templates and deterministic matching exist | Requirements lack tolerance/optimization constraints | Goals may not capture design acceptance criteria | Add tolerance, sweep, and pass/fail fields for candidate templates. |
-| Natural-language to optical-language matching | Deterministic heuristic EN/ZH matching exists | Low-confidence unknown goals need more examples | Unexpected matches can produce misleading plans | Add negative examples and confidence thresholds. |
+| Natural-language to optical-language matching | Deterministic heuristic EN/ZH matching, candidate templates, confidence, and questions exist | Novel phrasing may still need more negative examples | Unexpected matches can produce misleading plans | Keep adding ambiguous/negative cases and confidence-threshold tests. |
 | Frontend Agent Studio | Local MVP exists | Backend evidence is not yet summarized in UI | Maintainer review remains docs/scripts-first | Defer until backend evidence shape stabilizes. |
 | PyPI publication | Deferred and not approved | No final PyPI approval path executed | Publishing before decision could create irreversible public surface | Keep PyPI gate closed until explicit approval. |
 | v1.0.0 criteria | Public contract freeze approved | PyPI decision, final release readiness, and validation boundaries remain open | Premature v1.0.0 could overstate maturity | Use rc8 gap closure and separate v1.0 planning package. |
@@ -46,13 +46,15 @@ not production-grade physical validation.
    The local calculators are useful for sanity checks and design-assist
    summaries, but they are not production-grade physical validation.
 
-2. Material provenance should be strengthened.
-   The material library is safe as a local preview catalog, but rc8 backend
-   hardening should make source notes and validation levels easier to audit.
+2. Material provenance should be strengthened; rc8.dev0 has already made the
+   first strengthening pass.
+   Starter materials now expose provenance fields and suitability diagnostics,
+   but all optical constants still require independent user verification.
 
-3. Natural-language matching should add negative and ambiguous examples.
-   The deterministic matcher should continue to prefer safe low-confidence
-   diagnostics over overconfident case selection.
+3. Natural-language matching should add negative and ambiguous examples; rc8.dev0
+   now has an initial negative/ambiguous example set.
+   The deterministic matcher should continue to prefer safe low/none confidence
+   diagnostics and questions over overconfident case selection.
 
 4. Adapter-native mapping evidence is metadata-only.
    Golden cases prove preview semantics and safety boundaries, not real solver

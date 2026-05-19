@@ -10,9 +10,15 @@
     "errors": [],
     "warnings": [
       "Polarization was defaulted; confirm before solver execution.",
-      "Wavelength range was defaulted; confirm the design band."
+      "Wavelength range was defaulted; confirm the design band.",
+      "Critical design inputs are absent; safe preview may proceed with defaults, but solver execution remains blocked.",
+      "Optional design inputs are absent; preview quality may improve if they are provided."
     ],
-    "missing_fields": [],
+    "missing_fields": [
+      "particle_material",
+      "particle_radius_or_diameter",
+      "wavelength_band"
+    ],
     "assumptions": [
       "Default to normal-incidence plane-wave-like source.",
       "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
@@ -32,7 +38,21 @@
     "Use /api/agent-session to inspect the full tool-call ledger."
   ],
   "matched_template_id": "nanoparticle_plasmonics",
-  "missing_required_inputs": [],
+  "missing_required_inputs": [
+    "particle_material",
+    "particle_radius_or_diameter",
+    "wavelength_band"
+  ],
+  "missing_critical_inputs": [
+    "particle_material",
+    "particle_radius_or_diameter",
+    "wavelength_band"
+  ],
+  "missing_optional_inputs": [
+    "background_medium",
+    "film_thickness",
+    "polarization"
+  ],
   "default_assumptions_applied": [
     "Default to normal-incidence plane-wave-like source.",
     "Default wavelength band is 400-900 nm for nanoparticle scattering previews.",
@@ -42,9 +62,15 @@
   ],
   "ambiguity_notes": [
     "Polarization was defaulted; confirm before solver execution.",
-    "Wavelength range was defaulted; confirm the design band."
+    "Wavelength range was defaulted; confirm the design band.",
+    "Critical design inputs are absent; safe preview may proceed with defaults, but solver execution remains blocked.",
+    "Optional design inputs are absent; preview quality may improve if they are provided."
   ],
-  "blocking_questions": [],
+  "blocking_questions": [
+    "Which values should be used for critical inputs: particle_radius_or_diameter, particle_material, wavelength_band?",
+    "Can you provide optional context for: film_thickness, background_medium, polarization?",
+    "For nanoparticle scattering, what radius/material/wavelength band should be used before solver setup?"
+  ],
   "safe_to_preview": true,
   "safe_to_run_solver": false
 }

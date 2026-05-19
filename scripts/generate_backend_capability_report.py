@@ -92,6 +92,35 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
             "{formal_convergence_proof_claimed} |".format(**item)
         )
 
+    provenance = payload["material_provenance_coverage"]
+    ambiguous = payload["ambiguous_requirement_matching"]
+    missing = payload["missing_input_diagnostics"]
+    lines.extend(
+        [
+            "",
+            "## Material Provenance Coverage",
+            "",
+            f"- material_count: `{provenance['material_count']}`",
+            f"- materials_with_provenance: `{provenance['materials_with_provenance']}`",
+            f"- materials_requiring_user_verification: `{provenance['materials_requiring_user_verification']}`",
+            f"- production_grade_optical_constants_claimed: `{provenance['production_grade_optical_constants_claimed']}`",
+            "",
+            "## Ambiguous Requirement Matching",
+            "",
+            f"- available: `{ambiguous['available']}`",
+            f"- deterministic: `{ambiguous['deterministic']}`",
+            f"- no_external_llm_used: `{ambiguous['no_external_llm_used']}`",
+            f"- covered_cases: `{', '.join(ambiguous['covered_cases'])}`",
+            "",
+            "## Missing-input Diagnostics",
+            "",
+            f"- available: `{missing['available']}`",
+            f"- critical_optional_split: `{missing['critical_optional_split']}`",
+            f"- safe_to_preview_default: `{missing['safe_to_preview_default']}`",
+            f"- safe_to_run_solver_default: `{missing['safe_to_run_solver_default']}`",
+        ]
+    )
+
     lines.extend(
         [
             "",
@@ -196,6 +225,15 @@ def _print_summary(report: BackendCapabilityReport) -> None:
     print(f"sub_agents={len(payload['sub_agents'])}")
     print(f"internal_tools={len(payload['internal_tools'])}")
     print(f"optical_calculators={len(payload['optical_calculators'])}")
+    print(
+        "material_provenance_coverage="
+        f"{payload['material_provenance_coverage']['materials_with_provenance']}/"
+        f"{payload['material_provenance_coverage']['material_count']}"
+    )
+    print(
+        "ambiguous_requirement_matching="
+        f"{payload['ambiguous_requirement_matching']['available']}"
+    )
     print(f"requirements_templates={len(payload['requirements_templates'])}")
     golden = payload["adapter_native_golden_coverage"]
     print(f"adapter_native_golden_coverage={golden['status']}")

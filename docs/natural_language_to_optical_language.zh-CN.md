@@ -8,7 +8,9 @@
 
 自然语言目标 -> 需求模板 -> 光学语言摘要 -> 设计案例 -> 材料/几何/适配器/计算器路径 -> 工具调用账本。
 
-映射器是确定性的本地逻辑，不调用外部 LLM。
+映射器是确定性的本地逻辑，不调用外部 LLM。对于有歧义或约束不足的目标，
+它会返回 confidence、candidate templates、missing disambiguation inputs 和
+recommended questions；未知目标不会静默选择求解器路径。
 
 ## 光学语言字段
 
@@ -63,3 +65,16 @@
 
 参见 `docs/optical_language_source_monitor.zh-CN.md` 和
 `docs/source_monitor_missing_input_diagnostics.zh-CN.md`。
+
+## 歧义与缺失输入
+
+rc8.dev0 后端会区分关键缺失输入和可选缺失输入：
+
+- `missing_critical_inputs`：有意义的求解器设置前需要明确的值。
+- `missing_optional_inputs`：可提升预览质量的上下文。
+- `recommended_questions`：确定性追问。
+
+`safe_to_preview` 可以在本地 design-assist 预览中保持 true，但
+`safe_to_run_solver` 默认仍为 false。见
+`docs/ambiguous_requirement_matching.zh-CN.md` 和
+`docs/missing_input_diagnostics.zh-CN.md`。

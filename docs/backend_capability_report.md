@@ -27,6 +27,13 @@ upload, and `v1.0.0` approval remain separate and not granted.
   `tool_call_ledger`.
 - Optical calculators are implemented, sanity-checked preview tools with
   documented reference cases and failure modes.
+- Material provenance coverage is reported for every starter material, including
+  user-verification flags and the fact that no entry is a production-grade
+  optical constants record.
+- Ambiguous requirement matching is covered with deterministic confidence,
+  candidate-template, and recommended-question diagnostics.
+- Missing-input diagnostics separate critical and optional inputs while keeping
+  `safe_to_run_solver=false` by default.
 - Optical design examples are cross-checked against agent sessions and expected
   calculator/tool usage.
 - External solver, external LLM, TestPyPI upload, PyPI publish, git tag, and
@@ -39,9 +46,10 @@ upload, and `v1.0.0` approval remain separate and not granted.
 2. `sub_agents`: `SpecAgent`, `MaterialAgent`, `GeometryAgent`,
    `AdapterAgent`, `WorkflowAgent`, `EvidenceAgent`, `SafetyAgent`, and
    `RecommendationAgent` reality checks.
-3. `internal_tools`: material catalog, example registry, agent trace builder,
+3. `internal_tools`: material catalog, material suitability diagnostics,
+   example registry, agent trace builder,
    task session builder, adapter preview generator, workflow planner,
-  source/monitor inference, observable diagnostics, adapter-native mapping,
+  ambiguous requirement matching, source/monitor inference, observable diagnostics, adapter-native mapping,
    adapter-native golden preview checking, and optical calculators.
 4. `adapter_native_golden_coverage`: coverage matrix for Meep, MPB, Gmsh,
    Elmer, and Optiland adapter-native source/monitor golden preview cases,
@@ -53,7 +61,10 @@ upload, and `v1.0.0` approval remain separate and not granted.
 7. `requirements_templates`: EN/ZH goal presence, heuristic matching status,
    expected tools, cross-check status, and preview-only status for the seven
    design requirement templates.
-8. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
+8. `material_provenance_coverage`, `ambiguous_requirement_matching`, and
+   `missing_input_diagnostics`: rc8.dev0 backend trust hardening for material
+   assumptions and under-specified natural-language goals.
+9. `blocked_external_actions`: solver, LLM, upload, publication, tag, and
    release actions that remain unexecuted.
 
 ## How To Generate

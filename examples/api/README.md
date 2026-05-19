@@ -43,6 +43,8 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `material_detail_sio2_response.json`
 - `material_suggestion_request.json`
 - `material_suggestion_response.json`
+- `material_diagnose_ag_plasmonics_request.json`
+- `material_diagnose_ag_plasmonics_response.json`
 - `agent_trace_request_nanoparticle.json`
 - `agent_trace_response_nanoparticle.json`
 - `examples_response.json`
@@ -61,6 +63,12 @@ The manifest also includes Material Library and Agent Collaboration fixtures:
 - `design_requirement_match_thin_film_response.json`
 - `design_requirement_match_nanoparticle_zh_request.json`
 - `design_requirement_match_nanoparticle_zh_response.json`
+- `design_requirement_match_ambiguous_request.json`
+- `design_requirement_match_ambiguous_response.json`
+- `design_requirement_match_unknown_request.json`
+- `design_requirement_match_unknown_response.json`
+- `agent_session_ambiguous_goal_request.json`
+- `agent_session_ambiguous_goal_response.json`
 - `thin_film_request.json`
 - `thin_film_response.json`
 - `thin_film_spectrum_request.json`
@@ -99,9 +107,11 @@ Calculator fixtures include `quality`, `warnings`, `assumptions`, and
 `limitations` fields; `quality.quality_level` is `sanity_checked_preview`.
 Backend capability report fixtures show package status, sub-agent execution,
 internal tool calls, calculator reference-case status, design-case cross-checks,
-design requirement template status, and blocked external actions. Design
-requirement fixtures show deterministic natural-language goal matching and the
-resulting optical language summary without external LLM calls.
+design requirement template status, material provenance coverage, ambiguous
+matching diagnostics, missing-input diagnostics, and blocked external actions.
+Design requirement fixtures show deterministic natural-language goal matching,
+candidate templates, confidence, and the resulting optical language summary
+without external LLM calls.
 They preserve the same no-solver, no-external-LLM, no-upload, no-tag, and
 no-release boundaries.
 

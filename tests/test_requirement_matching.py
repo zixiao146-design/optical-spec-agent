@@ -36,9 +36,9 @@ def test_gaussian_beam_goal_maps_to_gaussian_template():
 def test_unknown_goal_returns_low_confidence_safe_result():
     match = match_goal_to_template("Help with an unusual optical idea that has no specific system.")
     assert match.matched_template_id is None
-    assert match.confidence == "low"
+    assert match.confidence == "none"
     assert match.status == "needs_review"
+    assert match.recommended_questions
     assert match.external_solver_executed is False
     assert match.external_llm_required is False
     assert match.production_grade_validation_claimed is False
-

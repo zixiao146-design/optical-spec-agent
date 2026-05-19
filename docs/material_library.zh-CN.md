@@ -33,6 +33,15 @@
 - lens/ray optics -> BK7 preview、fused silica preview、air
 - photonic crystal band -> Si、GaAs、SiO2、air
 
+材料溯源：
+- 每个 starter material 都暴露 `provenance_type`、`source_note`、
+  `wavelength_validity_note`、`known_limitations`、`requires_user_verification`
+  和 `production_grade_optical_constants=false`。
+- 数值 n/k 只是近似预览常数，除非未来条目明确记录更强的审核溯源。
+- `POST /api/materials/diagnose` 会针对一个材料/应用组合返回适用性 rationale、
+  warnings、missing context 和 recommended verification。
+- 目录策略见 `docs/material_provenance_policy.zh-CN.md`。
+
 安全边界：
 - 材料值只是近似预览/设计辅助提示。
 - 做物理结论前，用户必须独立核验材料常数。

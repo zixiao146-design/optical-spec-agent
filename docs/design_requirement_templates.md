@@ -39,7 +39,10 @@ The matcher uses local keyword heuristics only. Examples:
 - `metasurface`, `metalens`, `超表面`, `超透镜` -> `dielectric_metasurface_preview`
 - `nanoparticle`, `plasmonic`, `scattering`, `纳米颗粒`, `散射` -> `nanoparticle_plasmonics`
 
-Unknown goals return a low-confidence safe result with missing inputs and recommended clarification steps.
+Unknown goals return a `none`/low-confidence safe result with missing inputs
+and recommended clarification steps. Ambiguous goals return candidate templates,
+ambiguity notes, missing disambiguation inputs, and recommended questions rather
+than an unsafe solver action. See `docs/ambiguous_requirement_matching.md`.
 
 ## Expected Tool Calls
 
@@ -50,6 +53,8 @@ Every matched template expects:
 - `optical_language.infer_source_monitor`
 - `optical_language.diagnose_missing_inputs`
 - `material_catalog.suggest`
+- `requirements.match_ambiguity_check`
+- `optical_language.generate_disambiguation_questions`
 - `example_registry.load` when a local design case is available
 - `agent_trace.build`
 - `workflow_plan.preview`

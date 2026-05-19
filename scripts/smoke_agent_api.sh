@@ -84,6 +84,13 @@ material_suggestion = post("/api/materials/suggest", {"application": "nanopartic
 suggestion_ids = {item["material_id"] for item in material_suggestion["suggested_materials"]}
 require({"au", "ag", "sio2"}.issubset(suggestion_ids), "material suggestion missing plasmonics candidates")
 
+material_diagnose = post("/api/materials/diagnose", {"material_id": "ag", "application": "nanoparticle plasmonics"})
+require(material_diagnose["diagnostic"]["suitability"] == "suitable", "material diagnostics mismatch")
+require(
+    material_diagnose["diagnostic"]["production_grade_optical_constants"] is False,
+    "material diagnostics overclaimed production-grade constants",
+)
+
 examples = get("/api/examples")
 example_ids = {item["example_id"] for item in examples["examples"]}
 require(
@@ -174,6 +181,13 @@ require(
     design_requirement_match["matched_template_id"] == "thin_film_ar_coating",
     "design requirement match failed",
 )
+ambiguous_requirement_match = post(
+    "/api/design-requirements/match",
+    {"goal": "Design a waveguide and thin-film coating preview.", "language": "en"},
+)
+require(ambiguous_requirement_match["confidence"] == "low", "ambiguous match confidence changed")
+require(len(ambiguous_requirement_match["candidate_templates"]) >= 2, "ambiguous candidates missing")
+require(ambiguous_requirement_match["no_external_llm_used"] is True, "ambiguous matching used external LLM")
 
 optical_language_infer = post(
     "/api/optical-language/infer",

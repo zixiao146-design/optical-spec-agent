@@ -24,6 +24,7 @@ from optical_spec_agent.optical_language import (
     OpticalMonitorModel,
     OpticalSourceModel,
     diagnose_observable,
+    generate_disambiguation_questions,
     infer_source_monitor_from_goal,
     map_source_monitor_to_adapter,
 )
@@ -129,9 +130,14 @@ class AgentTaskSession(BaseModel):
     )
     observable_diagnostics: list[ObservableDiagnostic] = Field(default_factory=list)
     adapter_source_monitor_mapping: AdapterSourceMonitorMapping | None = None
+    match_confidence: str = "low"
+    candidate_templates: list[str] = Field(default_factory=list)
+    recommended_questions: list[str] = Field(default_factory=list)
     selected_example_id: str | None = None
     design_case_summary: str
     missing_required_inputs: list[str] = Field(default_factory=list)
+    missing_critical_inputs: list[str] = Field(default_factory=list)
+    missing_optional_inputs: list[str] = Field(default_factory=list)
     default_assumptions_applied: list[str] = Field(default_factory=list)
     plan_steps: list[AgentPlanStep] = Field(default_factory=list)
     agent_trace: AgentTrace
@@ -224,6 +230,15 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         selected_example_id,
         requirement_match,
     )
+    missing_critical_inputs = sorted(
+        set(requirement_match.missing_disambiguation_inputs)
+        | set(source_monitor.diagnostics.missing_critical_inputs)
+    )
+    missing_optional_inputs = sorted(set(source_monitor.diagnostics.missing_optional_inputs))
+    recommended_questions = _session_questions(
+        requirement_match,
+        source_monitor.diagnostics,
+    )
 
     return AgentTaskSession(
         session_id=f"session-{session_hash}",
@@ -236,12 +251,18 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         optical_language_diagnostics=source_monitor.diagnostics,
         observable_diagnostics=observable_diagnostics,
         adapter_source_monitor_mapping=adapter_mapping,
+        match_confidence=requirement_match.confidence,
+        candidate_templates=requirement_match.candidate_templates,
+        recommended_questions=recommended_questions,
         selected_example_id=selected_example_id,
         design_case_summary=design_case_summary,
         missing_required_inputs=sorted(
             set(requirement_match.missing_required_inputs)
             | set(source_monitor.diagnostics.missing_required_inputs)
+            | set(missing_critical_inputs)
         ),
+        missing_critical_inputs=missing_critical_inputs,
+        missing_optional_inputs=missing_optional_inputs,
         default_assumptions_applied=[
             *requirement_match.default_assumptions,
             *source_monitor.diagnostics.default_assumptions_applied,
@@ -278,6 +299,7 @@ def build_agent_task_session(user_goal: str, example_id: str | None = None) -> A
         ),
         recommended_next_actions=[
             "Review the optical intent and selected design case.",
+            "Answer recommended questions for any low-confidence or under-specified goal.",
             "Inspect permission gates before any optional external action.",
             "Inspect observable diagnostics and adapter-native source/monitor mapping.",
             "Open the Agent Trace Timeline to review sub-agent contributions.",
@@ -350,6 +372,29 @@ def _design_case_summary(
     if selected_example_id:
         return f"{selected_example_id} example-backed {intent}"
     return f"generic {intent}"
+
+
+def _session_questions(
+    requirement_match: RequirementMatchResult,
+    diagnostics: OpticalLanguageDiagnostics,
+) -> list[str]:
+    questions = [
+        *requirement_match.recommended_questions,
+        *diagnostics.blocking_questions,
+        *generate_disambiguation_questions(
+            template_id=requirement_match.matched_template_id,
+            missing_critical_inputs=diagnostics.missing_critical_inputs,
+            missing_optional_inputs=diagnostics.missing_optional_inputs,
+            candidate_templates=requirement_match.candidate_templates,
+        ),
+    ]
+    unique: list[str] = []
+    seen: set[str] = set()
+    for question in questions:
+        if question and question not in seen:
+            unique.append(question)
+            seen.add(question)
+    return unique
 
 
 def _plan_steps(
@@ -742,6 +787,38 @@ def _tool_call_ledger(
             ),
             reason="The backend exposes the natural language -> optical language step explicitly.",
             safety_note="Optical language extraction is local heuristic logic, not an external model.",
+        ),
+        ToolCallRecord(
+            call_id="requirements-match-ambiguity-check",
+            tool_name="requirements.match_ambiguity_check",
+            tool_kind="internal_python",
+            called_by_agent="SpecAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Template scores and candidate template set.",
+            output_summary=(
+                f"confidence={requirement_match.confidence}; "
+                f"candidates={', '.join(requirement_match.candidate_templates) or 'none'}"
+            ),
+            reason="Ambiguous or under-specified goals should produce questions rather than unsafe actions.",
+            safety_note="No external LLM was used for disambiguation.",
+        ),
+        ToolCallRecord(
+            call_id="optical-language-generate-disambiguation-questions",
+            tool_name="optical_language.generate_disambiguation_questions",
+            tool_kind="internal_python",
+            called_by_agent="SafetyAgent",
+            executed=True,
+            default_allowed=True,
+            status="executed",
+            input_summary="Matched template, candidate templates, and missing inputs.",
+            output_summary=(
+                f"critical={len(source_monitor.diagnostics.missing_critical_inputs)}; "
+                f"optional={len(source_monitor.diagnostics.missing_optional_inputs)}"
+            ),
+            reason="The session should expose follow-up questions for ambiguous or incomplete requirements.",
+            safety_note="Questions are deterministic local diagnostics; no solver or LLM was invoked.",
         ),
         ToolCallRecord(
             call_id="optical-language-infer-source-monitor",
