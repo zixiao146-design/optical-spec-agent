@@ -144,6 +144,11 @@ require(backend_report["package"]["package_version"] == "0.9.0rc7.dev0", "backen
 require(backend_report["design_case_cross_checks"], "backend report missing design case checks")
 require(all(item["executed"] is False for item in backend_report["blocked_external_actions"]), "blocked action executed")
 
+backend_evidence = get("/api/backend-evidence-summary")
+require(backend_evidence["evidence_pack_available"] is True, "backend evidence pack missing")
+require(backend_evidence["adapter_native_golden_coverage"]["status"] == "ok", "backend evidence golden coverage mismatch")
+require(backend_evidence["external_solver_executed"] is False, "backend evidence solver flag changed")
+
 design_case_cross_checks = get("/api/design-case-cross-checks")
 require(design_case_cross_checks["summary"]["total"] == 6, "design case cross-check count mismatch")
 require(design_case_cross_checks["summary"]["fail"] == 0, "design case cross-check failed")

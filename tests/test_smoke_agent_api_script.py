@@ -31,6 +31,7 @@ def test_smoke_agent_api_script_exists_and_does_not_publish_or_release():
         "/api/readiness",
         "/api/tool-capabilities",
         "/api/backend-capability-report",
+        "/api/backend-evidence-summary",
         "/api/design-case-cross-checks",
         "/api/design-requirements",
         "/api/design-requirements/thin_film_ar_coating",

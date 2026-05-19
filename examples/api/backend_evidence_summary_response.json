@@ -1,0 +1,593 @@
+{
+  "api_contract_version": "0.1",
+  "status": "ok",
+  "evidence_pack_available": true,
+  "preview_design_assist_only": true,
+  "package_and_release_status": {
+    "package_version": "0.9.0rc7.dev0",
+    "current_public_prerelease": "v0.9.0rc6",
+    "main_development_version": "0.9.0rc7.dev0",
+    "pypi_published": false,
+    "testpypi_verified_only_for": "0.9.0rc6.dev0",
+    "tag_release_actions": "none",
+    "upload_actions": "none"
+  },
+  "sub_agent_reality": [
+    {
+      "role_name": "SpecAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": false
+    },
+    {
+      "role_name": "MaterialAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": true
+    },
+    {
+      "role_name": "GeometryAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": false
+    },
+    {
+      "role_name": "AdapterAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": true
+    },
+    {
+      "role_name": "WorkflowAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": false
+    },
+    {
+      "role_name": "EvidenceAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": true
+    },
+    {
+      "role_name": "SafetyAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": true
+    },
+    {
+      "role_name": "RecommendationAgent",
+      "role_exists": true,
+      "importable_or_trace_role": true,
+      "executed_in_sample_session": true,
+      "output_summary_available": true,
+      "evidence_refs_available": false
+    }
+  ],
+  "tool_call_reality": {
+    "internal_tools_executed": [
+      "material_catalog",
+      "example_registry",
+      "agent_trace_builder",
+      "task_session_builder",
+      "adapter_preview_generator",
+      "workflow_planner",
+      "source_monitor_inference",
+      "missing_input_diagnostics",
+      "observable_diagnostics",
+      "adapter_native_mapping",
+      "adapter_native_golden_coverage",
+      "optical_calculators"
+    ],
+    "internal_tools_available": [
+      "material_catalog",
+      "example_registry",
+      "agent_trace_builder",
+      "task_session_builder",
+      "adapter_preview_generator",
+      "workflow_planner",
+      "source_monitor_inference",
+      "missing_input_diagnostics",
+      "observable_diagnostics",
+      "adapter_native_mapping",
+      "adapter_native_golden_coverage",
+      "optical_calculators"
+    ],
+    "calculator_tools_executed": [
+      "optical_calculators"
+    ],
+    "blocked_external_actions": [
+      "external_solver",
+      "external_llm",
+      "testpypi_upload",
+      "pypi_publish",
+      "git_tag",
+      "github_release"
+    ]
+  },
+  "optical_calculators": [
+    {
+      "calculator_name": "thin_film",
+      "implemented": true,
+      "sanity_reference_cases": [
+        "thin_film_single_interface_air_glass",
+        "thin_film_quarter_wave_ar_550nm"
+      ],
+      "failure_modes": [
+        "negative wavelength",
+        "zero/negative thickness",
+        "invalid refractive index"
+      ],
+      "api_endpoints": [
+        "/api/optics/thin-film",
+        "/api/optics/thin-film-spectrum",
+        "/api/optics/quarter-wave-ar"
+      ],
+      "quality_level": "sanity_checked_preview",
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "calculator_name": "paraxial",
+      "implemented": true,
+      "sanity_reference_cases": [
+        "paraxial_thin_lens_1to1",
+        "abcd_free_space_matrix",
+        "two_lens_4f_relay_1_to_1"
+      ],
+      "failure_modes": [
+        "zero focal length",
+        "object at focal plane",
+        "invalid ABCD element"
+      ],
+      "api_endpoints": [
+        "/api/optics/paraxial-lens",
+        "/api/optics/paraxial-system",
+        "/api/optics/two-lens-relay"
+      ],
+      "quality_level": "sanity_checked_preview",
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "calculator_name": "gaussian_beam",
+      "implemented": true,
+      "sanity_reference_cases": [
+        "gaussian_beam_rayleigh_range",
+        "gaussian_beam_radius_at_waist",
+        "gaussian_beam_radius_at_rayleigh_range"
+      ],
+      "failure_modes": [
+        "negative wavelength",
+        "zero waist",
+        "invalid sweep points"
+      ],
+      "api_endpoints": [
+        "/api/optics/gaussian-beam",
+        "/api/optics/gaussian-beam-series",
+        "/api/optics/gaussian-beam-focus"
+      ],
+      "quality_level": "sanity_checked_preview",
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    },
+    {
+      "calculator_name": "waveguide",
+      "implemented": true,
+      "sanity_reference_cases": [
+        "waveguide_v_number_sanity",
+        "slab_waveguide_v_number_sweep"
+      ],
+      "failure_modes": [
+        "core_n <= cladding_n",
+        "negative wavelength",
+        "invalid sweep points"
+      ],
+      "api_endpoints": [
+        "/api/optics/waveguide-estimate",
+        "/api/optics/waveguide-sweep",
+        "/api/optics/waveguide-single-mode-range"
+      ],
+      "quality_level": "sanity_checked_preview",
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "formal_convergence_proof_claimed": false
+    }
+  ],
+  "design_case_cross_checks": [
+    {
+      "example_id": "dielectric_metasurface_preview",
+      "status": "pass",
+      "expected_calculator": null,
+      "calculator_called": false,
+      "material_suggestions": [
+        "tio2",
+        "si3n4",
+        "si",
+        "sio2"
+      ],
+      "adapter_recommendation": "optiland",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ],
+      "diagnostics": [
+        "No scalar calculator is required for this example category."
+      ]
+    },
+    {
+      "example_id": "lens_raytrace_preview",
+      "status": "pass",
+      "expected_calculator": "optics.paraxial",
+      "calculator_called": true,
+      "material_suggestions": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "adapter_recommendation": "optiland",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.paraxial.two_lens_relay",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ],
+      "diagnostics": [
+        "Expected calculator executed: optics.paraxial."
+      ]
+    },
+    {
+      "example_id": "nanoparticle_plasmonics",
+      "status": "pass",
+      "expected_calculator": null,
+      "calculator_called": false,
+      "material_suggestions": [
+        "au",
+        "ag",
+        "sio2",
+        "water",
+        "air"
+      ],
+      "adapter_recommendation": "meep with gmsh geometry preview",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ],
+      "diagnostics": [
+        "No scalar calculator is required for this example category."
+      ]
+    },
+    {
+      "example_id": "photonic_crystal_band",
+      "status": "pass",
+      "expected_calculator": null,
+      "calculator_called": false,
+      "material_suggestions": [
+        "si",
+        "gaas",
+        "sio2",
+        "air"
+      ],
+      "adapter_recommendation": "mpb",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ],
+      "diagnostics": [
+        "No scalar calculator is required for this example category."
+      ]
+    },
+    {
+      "example_id": "thin_film_coating",
+      "status": "pass",
+      "expected_calculator": "optics.thin_film",
+      "calculator_called": true,
+      "material_suggestions": [
+        "sio2",
+        "tio2",
+        "al2o3"
+      ],
+      "adapter_recommendation": "preview-only; future TMM adapter candidate",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.thin_film.spectrum",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ],
+      "diagnostics": [
+        "Expected calculator executed: optics.thin_film."
+      ]
+    },
+    {
+      "example_id": "waveguide_mode",
+      "status": "pass",
+      "expected_calculator": "optics.waveguide",
+      "calculator_called": true,
+      "material_suggestions": [
+        "si",
+        "sio2",
+        "si3n4",
+        "gaas"
+      ],
+      "adapter_recommendation": "mpb or elmer preview",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.waveguide.sweep",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ],
+      "diagnostics": [
+        "Expected calculator executed: optics.waveguide."
+      ]
+    }
+  ],
+  "source_monitor_observable_diagnostics": {
+    "source_monitor_inference_available": true,
+    "source_monitor_inference_executed": true,
+    "missing_input_diagnostics_available": true,
+    "missing_input_diagnostics_executed": true,
+    "observable_taxonomy_available": true,
+    "observable_diagnostics_executed": true,
+    "adapter_native_mapping_available": true,
+    "adapter_native_mapping_executed": true,
+    "monitor_metadata": "preview-only; no real solver monitor result is claimed."
+  },
+  "adapter_native_golden_coverage": {
+    "status": "ok",
+    "adapters_covered": [
+      "elmer",
+      "gmsh",
+      "meep",
+      "mpb",
+      "optiland"
+    ],
+    "missing_adapters": [],
+    "cases": [
+      {
+        "adapter_name": "elmer",
+        "case_id": "elmer_fem_boundary_source",
+        "metadata_match": true,
+        "fragment_match": true,
+        "safety_match": true,
+        "solver_required_for_real_result": true,
+        "solver_executed": false,
+        "preview_only": true
+      },
+      {
+        "adapter_name": "gmsh",
+        "case_id": "gmsh_mesh_region",
+        "metadata_match": true,
+        "fragment_match": true,
+        "safety_match": true,
+        "solver_required_for_real_result": true,
+        "solver_executed": false,
+        "preview_only": true
+      },
+      {
+        "adapter_name": "meep",
+        "case_id": "meep_nanoparticle_scattering",
+        "metadata_match": true,
+        "fragment_match": true,
+        "safety_match": true,
+        "solver_required_for_real_result": true,
+        "solver_executed": false,
+        "preview_only": true
+      },
+      {
+        "adapter_name": "mpb",
+        "case_id": "mpb_photonic_crystal_band",
+        "metadata_match": true,
+        "fragment_match": true,
+        "safety_match": true,
+        "solver_required_for_real_result": true,
+        "solver_executed": false,
+        "preview_only": true
+      },
+      {
+        "adapter_name": "optiland",
+        "case_id": "optiland_lens_image_plane",
+        "metadata_match": true,
+        "fragment_match": true,
+        "safety_match": true,
+        "solver_required_for_real_result": true,
+        "solver_executed": false,
+        "preview_only": true
+      }
+    ]
+  },
+  "blocked_or_deferred_capabilities": [
+    {
+      "capability": "external_solver",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "External solvers require explicit maintainer/user approval."
+    },
+    {
+      "capability": "external_llm",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "The backend is deterministic/local by default."
+    },
+    {
+      "capability": "testpypi_upload",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "Uploads require explicit maintainer approval outside Agent Studio."
+    },
+    {
+      "capability": "pypi_publish",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "PyPI is not published and approval is not granted."
+    },
+    {
+      "capability": "git_tag",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "Release actions are out of scope for backend tool-call previews."
+    },
+    {
+      "capability": "github_release",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "Release actions require separate explicit approval."
+    },
+    {
+      "capability": "elmer_level_3",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "Elmer remains Level 2 + Level-3-ready; Level 3 is not claimed."
+    },
+    {
+      "capability": "production_grade_validation",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "Calculator and adapter evidence is preview/design-assist only."
+    },
+    {
+      "capability": "formal_convergence_proof",
+      "default_allowed": false,
+      "executed": false,
+      "reason": "No formal convergence proof is claimed."
+    }
+  ],
+  "maintainer_review_questions": [
+    "Is backend evidence sufficient for a v0.9.0rc7 draft?",
+    "Is PyPI still deferred?",
+    "Should the frontend display backend evidence next?",
+    "Which calculator or optical design domain should deepen next?"
+  ],
+  "external_solver_executed": false,
+  "external_llm_required": false,
+  "proprietary_solver_required": false,
+  "production_grade_validation_claimed": false,
+  "formal_convergence_proof_claimed": false
+}

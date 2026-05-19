@@ -64,6 +64,14 @@ Or run the smoke script:
 ./scripts/smoke_backend_report.sh
 ```
 
+Design-case cross-checks are also included in the maintainer evidence pack:
+
+```bash
+python scripts/generate_backend_evidence_pack.py \
+  --json-out /tmp/osa-backend-evidence-pack.json \
+  --markdown-out /tmp/osa-backend-evidence-pack.md
+```
+
 ## Safety Boundaries
 
 Cross-checks are preview/design-assist checks only. They do not run external

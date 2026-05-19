@@ -1,6 +1,19 @@
 {
   "api_contract_version": "0.1",
   "status": "ok",
+  "evidence_pack_available": true,
+  "evidence_pack_sections": [
+    "Package and release status",
+    "Sub-agent reality",
+    "Tool-call reality",
+    "Optical calculators",
+    "Design-case cross-checks",
+    "Source / monitor / observable diagnostics",
+    "Adapter-native golden coverage",
+    "Blocked or deferred capabilities",
+    "Maintainer review questions"
+  ],
+  "maintainer_review_recommended": true,
   "package": {
     "package_version": "0.9.0rc7.dev0",
     "current_public_prerelease": "v0.9.0rc6",
@@ -971,6 +984,7 @@
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false,
   "recommended_next_actions": [
+    "Generate the maintainer evidence pack with scripts/generate_backend_evidence_pack.py.",
     "Inspect design_case_cross_checks for any warning/fail status.",
     "Use scripts/audit_sub_agents.py for a concise import/call/execution view.",
     "Use scripts/smoke_backend_capabilities.sh for calculator sanity checks.",

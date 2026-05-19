@@ -13,6 +13,9 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert response.status_code == 200
     body = response.json()
     assert body["api_contract_version"] == "0.1"
+    assert body["evidence_pack_available"] is True
+    assert body["maintainer_review_recommended"] is True
+    assert "Adapter-native golden coverage" in body["evidence_pack_sections"]
     assert body["package"]["package_version"] == "0.9.0rc7.dev0"
     assert {item["role_name"] for item in body["sub_agents"]} >= {"SpecAgent", "SafetyAgent"}
     assert {item["tool_name"] for item in body["internal_tools"]} >= {
@@ -46,6 +49,18 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert all(action["executed"] is False for action in body["blocked_external_actions"])
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
+
+
+def test_backend_evidence_summary_api_is_linked_to_capability_report():
+    client = TestClient(app)
+    report = client.get("/api/backend-capability-report").json()
+    response = client.get("/api/backend-evidence-summary")
+    assert response.status_code == 200
+    body = response.json()
+    assert report["evidence_pack_available"] is True
+    assert body["evidence_pack_available"] is True
+    assert body["adapter_native_golden_coverage"]["status"] == "ok"
+    assert body["external_solver_executed"] is False
 
 
 def test_design_case_cross_checks_api_returns_safe_results():

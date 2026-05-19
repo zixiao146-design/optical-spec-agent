@@ -166,15 +166,25 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
     lines.extend(
         [
             "",
-            "## Safety Markers",
-            "",
-            "- NO SOLVER EXECUTION PERFORMED",
-            "- NO EXTERNAL LLM CALLED",
-            "- NO UPLOAD PERFORMED",
-            "- NO TAG CREATED",
-            "- NO RELEASE CREATED",
-            "",
-        ]
+        "## Safety Markers",
+        "",
+        "- NO SOLVER EXECUTION PERFORMED",
+        "- NO EXTERNAL LLM CALLED",
+        "- NO UPLOAD PERFORMED",
+        "- NO TAG CREATED",
+        "- NO RELEASE CREATED",
+        "",
+        "## Maintainer Evidence Pack",
+        "",
+        "For a review-oriented bundle that combines sub-agent reality, tool-call",
+        "reality, calculator evidence, design-case cross-checks, source/monitor",
+        "diagnostics, and adapter-native golden coverage, run:",
+        "",
+        "```bash",
+        "python scripts/generate_backend_evidence_pack.py --json-out /tmp/osa-backend-evidence-pack.json --markdown-out /tmp/osa-backend-evidence-pack.md",
+        "```",
+        "",
+    ]
     )
     path.write_text("\n".join(lines), encoding="utf-8")
 

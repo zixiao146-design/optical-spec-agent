@@ -20,6 +20,10 @@ The live API surfaces are `GET /api/backend-capability-report` and
 `GET /api/design-case-cross-checks`. Requirement templates are exposed through
 `GET /api/design-requirements`, `GET /api/design-requirements/{template_id}`,
 and `POST /api/design-requirements/match`.
+For maintainer review, `scripts/generate_backend_evidence_pack.py`,
+`./scripts/smoke_backend_evidence_pack.sh`, and
+`GET /api/backend-evidence-summary` collect the same backend evidence into one
+preview/design-assist review package.
 
 ## Installed / Callable / Executed
 
@@ -47,6 +51,7 @@ and `POST /api/design-requirements/match`.
 | Waveguide V-number preview calculator | yes | yes | yes |
 | Waveguide sweep / single-mode range helper | yes | yes | yes |
 | Backend capability report generator | yes | yes | yes |
+| Backend evidence review pack generator | yes | yes | yes |
 | Design case cross-check module | yes | yes | yes |
 
 ## Case Integration
@@ -99,6 +104,7 @@ Use:
 python scripts/audit_sub_agents.py
 ./scripts/smoke_backend_capabilities.sh
 ./scripts/smoke_backend_report.sh
+./scripts/smoke_backend_evidence_pack.sh
 ```
 
 Backend source/monitor functionality is implemented as local Python helpers:

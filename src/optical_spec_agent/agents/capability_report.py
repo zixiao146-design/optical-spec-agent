@@ -97,6 +97,21 @@ class RequirementTemplateCapability(BaseModel):
 class BackendCapabilityReport(BaseModel):
     api_contract_version: str = "0.1"
     status: str = "ok"
+    evidence_pack_available: bool = True
+    evidence_pack_sections: list[str] = Field(
+        default_factory=lambda: [
+            "Package and release status",
+            "Sub-agent reality",
+            "Tool-call reality",
+            "Optical calculators",
+            "Design-case cross-checks",
+            "Source / monitor / observable diagnostics",
+            "Adapter-native golden coverage",
+            "Blocked or deferred capabilities",
+            "Maintainer review questions",
+        ]
+    )
+    maintainer_review_recommended: bool = True
     package: PackageCapability
     sub_agents: list[SubAgentCapability] = Field(default_factory=list)
     internal_tools: list[InternalToolCapabilityReport] = Field(default_factory=list)
@@ -150,6 +165,7 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
         recommended_next_actions=[
+            "Generate the maintainer evidence pack with scripts/generate_backend_evidence_pack.py.",
             "Inspect design_case_cross_checks for any warning/fail status.",
             "Use scripts/audit_sub_agents.py for a concise import/call/execution view.",
             "Use scripts/smoke_backend_capabilities.sh for calculator sanity checks.",

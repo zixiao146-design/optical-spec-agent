@@ -1,0 +1,55 @@
+# 后端证据审查包
+
+后端证据审查包是面向维护者的汇总文档，用来说明本地后端今天实际能证明什么。它是
+preview/design-assist 审查产物，不是 production-grade / 生产级物理验证，不声明形式化收敛证明，也不会执行
+外部求解器。
+
+## 生成审查包
+
+```bash
+python scripts/generate_backend_evidence_pack.py \
+  --json-out /tmp/osa-backend-evidence-pack.json \
+  --markdown-out /tmp/osa-backend-evidence-pack.md
+```
+
+生成在 `/tmp` 下的 JSON/Markdown 只是审查产物，默认不提交。
+
+## 冒烟检查
+
+```bash
+./scripts/smoke_backend_evidence_pack.sh
+```
+
+该脚本会确认生成的 JSON 和 Markdown 包含必要章节和安全标记。
+
+## 包含章节
+
+- Package and release status：当前公开预发布版本、main 开发版本、PyPI/TestPyPI
+  状态，以及没有 tag/release 动作。
+- Sub-agent reality：每个确定性后端角色是否存在，并且是否在样例 session 中执行。
+- Tool-call reality：已执行的内部工具、已执行的计算器工具，以及被阻止的外部动作。
+- Optical calculators：薄膜、近轴、Gaussian beam、波导 preview 计算器，以及 sanity
+  reference cases 和 failure modes。
+- Design-case cross-checks：光学设计案例如何映射到预期计算器、适配器和 tool-call
+  ledger。
+- Source / monitor / observable diagnostics：确定性 source/monitor 推断、缺失输入诊断、
+  observable taxonomy 和 adapter-native mapping。
+- Adapter-native golden coverage：Meep、MPB、Gmsh、Elmer、Optiland 的 golden preview
+  case，以及 metadata、fragment、safety 检查。
+- Blocked or deferred capabilities：外部求解器、外部 LLM、发布、tag/release、Elmer
+  Level 3、生产级验证、形式化收敛证明等被阻止或延后能力。
+- Maintainer review questions：供维护者决定下一步审查或深化方向的问题。
+
+## 如何解读状态
+
+`pass` 表示本地确定性证据符合预期 preview contract。`warn` 表示能力有意保持部分实现或
+延后。`fail` 表示本地证据检查与预期 contract 不一致。
+
+## 限制
+
+- 默认不执行外部求解器。
+- 默认不调用外部 LLM。
+- 不上传 TestPyPI/PyPI。
+- 不创建 Git tag 或 GitHub release。
+- adapter-native monitor metadata 只是 preview 元数据，不是真实 solver monitor result。
+- 计算器输出是 sanity-checked preview/design-assist 结果，不是 production-grade / 生产级物理验证。

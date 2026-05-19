@@ -92,6 +92,9 @@ responses with safety flags preserved.
 Reference JSON cases live under `examples/optics_reference_cases/`.
 Backend capability reporting in `docs/backend_capability_report.md` lists these
 reference cases alongside calculator endpoints and failure modes.
+The maintainer backend evidence review pack also includes calculator reference
+case coverage; generate it with `scripts/generate_backend_evidence_pack.py` or
+smoke it with `./scripts/smoke_backend_evidence_pack.sh`.
 
 ## Safety
 

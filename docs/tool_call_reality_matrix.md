@@ -32,6 +32,10 @@ For the fuller backend capability report, run
 `GET /api/backend-capability-report`. That report records sub-agent execution,
 internal tool calls, calculator reference-case status, design-case
 cross-checks, and blocked external actions in one structured payload.
+For a maintainer review pack that bundles the same evidence with adapter-native
+golden coverage and review questions, run
+`python scripts/generate_backend_evidence_pack.py` or call
+`GET /api/backend-evidence-summary`.
 
 ## Internal Python Tools
 
@@ -44,6 +48,7 @@ cross-checks, and blocked external actions in one structured payload.
 | `agent_trace.build` | yes | yes | Builds deterministic eight-role trace. |
 | `workflow_plan.preview` | yes | yes | Builds local no-execute workflow preview. |
 | `adapter_preview.generate` | yes | yes | Generates preview scaffold metadata/content only. |
+| `backend_evidence_pack.generate` | yes through smoke script and API | yes | Bundles sub-agent, tool-call, calculator, design-case, source/monitor, and adapter golden evidence for maintainer review. |
 | `optics.thin_film.calculate` | yes through API | yes | Single-wavelength transfer-matrix preview. |
 | `optics.thin_film.spectrum` | yes for coating goals | yes | Wavelength sweep and quarter-wave AR preview. |
 | `optics.paraxial.thin_lens` | yes through API | yes | Single thin-lens preview. |

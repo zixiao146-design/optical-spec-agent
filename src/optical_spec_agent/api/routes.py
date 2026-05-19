@@ -75,6 +75,10 @@ from optical_spec_agent.agents.capability_report import (
     BackendCapabilityReport,
     generate_backend_capability_report,
 )
+from optical_spec_agent.agents.evidence_pack import (
+    BackendEvidencePack,
+    generate_backend_evidence_pack,
+)
 from optical_spec_agent.agents.task_session import build_agent_task_session
 from optical_spec_agent.adapters.registry import (
     AdapterRegistryError,
@@ -834,6 +838,13 @@ def agent_backend_capability_report():
     """Report what backend capabilities are importable, callable, and executed."""
 
     return generate_backend_capability_report()
+
+
+@router.get("/api/backend-evidence-summary", response_model=BackendEvidencePack)
+def agent_backend_evidence_summary():
+    """Return a maintainer-facing backend evidence summary."""
+
+    return generate_backend_evidence_pack()
 
 
 @router.get("/api/design-case-cross-checks", response_model=DesignCaseCrossChecksResponse)

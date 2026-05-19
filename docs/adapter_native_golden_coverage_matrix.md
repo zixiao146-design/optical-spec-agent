@@ -51,11 +51,15 @@ The same coverage data is exposed through:
 
 - `GET /api/adapter-native-golden-coverage`
 - `GET /api/backend-capability-report`
+- `GET /api/backend-evidence-summary`
 - `scripts/generate_backend_capability_report.py`
+- `scripts/generate_backend_evidence_pack.py`
 
 The report records which adapters are covered, whether any registered adapter
 is missing coverage, and whether every golden case remains preview-only and
 solver-free.
+The maintainer evidence pack also records per-case `metadata_match`,
+`fragment_match`, and `safety_match` summaries for review.
 
 ## Limitations
 

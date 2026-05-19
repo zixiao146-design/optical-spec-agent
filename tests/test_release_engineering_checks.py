@@ -215,6 +215,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "backend_functionality_status.md",
         "backend_capability_report.md",
         "backend_capability_report.zh-CN.md",
+        "backend_evidence_review_pack.md",
+        "backend_evidence_review_pack.zh-CN.md",
         "design_case_cross_checks.md",
         "design_case_cross_checks.zh-CN.md",
         "design_requirement_templates.md",

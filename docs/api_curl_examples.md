@@ -102,6 +102,7 @@ curl -X POST http://127.0.0.1:8000/api/agent-session \
   --data @examples/api/agent_session_request_nanoparticle.json
 curl http://127.0.0.1:8000/api/tool-capabilities
 curl http://127.0.0.1:8000/api/backend-capability-report
+curl http://127.0.0.1:8000/api/backend-evidence-summary
 curl http://127.0.0.1:8000/api/design-case-cross-checks
 curl http://127.0.0.1:8000/api/design-requirements
 curl http://127.0.0.1:8000/api/design-requirements/thin_film_ar_coating

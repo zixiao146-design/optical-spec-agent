@@ -171,6 +171,7 @@ endpoint:
 - `POST /api/optics/waveguide-sweep`
 - `POST /api/optics/waveguide-single-mode-range`
 - `GET /api/backend-capability-report`
+- `GET /api/backend-evidence-summary`
 - `GET /api/design-case-cross-checks`
 - `GET /api/adapter-native-golden-coverage`
 
@@ -199,7 +200,11 @@ The backend-readiness report endpoints add maintainer-facing proof of backend
 reality. `GET /api/backend-capability-report` returns package status,
 sub-agent execution status, internal tool import/call/execution status,
 calculator quality/reference-case status, design-case cross-check summaries,
-and blocked external actions. `GET /api/design-case-cross-checks` verifies
+and blocked external actions. `GET /api/backend-evidence-summary` returns a
+maintainer review summary that bundles sub-agent reality, tool-call reality,
+calculator evidence, design-case cross-checks, source/monitor diagnostics,
+adapter-native golden coverage, and blocked/deferred capabilities.
+`GET /api/design-case-cross-checks` verifies
 bundled optical design examples against expected calculator or adapter-trace
 behavior. These endpoints do not run external solvers, call external LLMs,
 upload packages, create tags/releases, or claim production-grade physical

@@ -42,6 +42,7 @@ Hardened frontend demo checks are documented in
 | command-center task session | `POST /api/agent-session` | API-first | Natural language goal to optical intent, design case, plan, artifacts, permission gates, tool-call ledger, evidence, and next actions. |
 | backend tool capabilities | `GET /api/tool-capabilities` | API-first | Reports internal tools, external solver detection, and disabled publication/release controls without executing solvers. |
 | backend capability report | `GET /api/backend-capability-report` | API-first | Reports package, sub-agent, internal tool, calculator, design-case, and blocked action reality. |
+| backend evidence summary | `GET /api/backend-evidence-summary` | API-first | Maintainer review summary for sub-agent reality, tool-call reality, calculators, design cases, diagnostics, adapter golden coverage, and blocked actions. |
 | design case cross-checks | `GET /api/design-case-cross-checks` | API-first | Cross-checks bundled examples against expected calculator or adapter-trace behavior. |
 | design requirement templates | `GET /api/design-requirements`, `POST /api/design-requirements/match` | API-first | Maps natural-language goals to optical language and expected backend tool calls. |
 | optical calculators | `POST /api/optics/thin-film`, `POST /api/optics/thin-film-spectrum`, `POST /api/optics/quarter-wave-ar`, `POST /api/optics/paraxial-lens`, `POST /api/optics/paraxial-system`, `POST /api/optics/two-lens-relay`, `POST /api/optics/gaussian-beam`, `POST /api/optics/gaussian-beam-series`, `POST /api/optics/gaussian-beam-focus`, `POST /api/optics/waveguide-estimate`, `POST /api/optics/waveguide-sweep`, `POST /api/optics/waveguide-single-mode-range` | API-first | Local preview/design-assist calculators with sweeps and case helpers; no production-grade validation claim. |
@@ -70,6 +71,10 @@ Hardened frontend demo checks are documented in
   API responses without solver, LLM, upload, tag, or release actions.
 - `GET /api/adapter-native-golden-coverage` exposes the same adapter coverage
   matrix for backend-readiness consumers.
+- `scripts/generate_backend_evidence_pack.py`,
+  `scripts/smoke_backend_evidence_pack.sh`, and
+  `GET /api/backend-evidence-summary` bundle backend evidence for maintainer
+  review without solver, LLM, upload, tag, or release actions.
 - Source/monitor inference is currently API/backend-only through
   `/api/optical-language/infer`, `/api/optical-language/diagnose`, and
   `/api/agent-session`; it remains local deterministic metadata, not executed

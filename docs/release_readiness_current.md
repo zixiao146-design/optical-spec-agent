@@ -337,6 +337,15 @@ Current v1.0 evidence artifacts:
   ledgers, blocked solver/LLM/upload/tag/release actions, and local optical
   preview calculators. The generated report also cross-checks bundled design
   cases against expected calculator or adapter-trace behavior.
+- Maintainer backend evidence review pack:
+  `docs/backend_evidence_review_pack.md`,
+  `docs/backend_evidence_review_pack.zh-CN.md`,
+  `scripts/generate_backend_evidence_pack.py`, and
+  `scripts/smoke_backend_evidence_pack.sh`; this bundles sub-agent reality,
+  tool-call reality, calculator evidence, design-case cross-checks,
+  source/monitor diagnostics, adapter-native golden coverage, blocked external
+  actions, and maintainer review questions. It is preview/design-assist
+  evidence only and does not authorize PyPI/TestPyPI upload, tags, or releases.
 - Optical calculator evidence:
   `docs/optical_calculators.md`, `docs/optical_calculators.zh-CN.md`,
   `docs/optical_calculator_case_integration.md`,

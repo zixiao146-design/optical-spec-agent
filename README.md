@@ -79,6 +79,7 @@ The backend now also records a
 [`tool-call reality matrix`](docs/tool_call_reality_matrix.md), live
 [`backend functionality status`](docs/backend_functionality_status.md),
 generated [`backend capability report`](docs/backend_capability_report.md),
+maintainer [`backend evidence review pack`](docs/backend_evidence_review_pack.md),
 [`design case cross-checks`](docs/design_case_cross_checks.md), and
 local preview [`optical calculators`](docs/optical_calculators.md) for
 thin-film stacks, paraxial lenses, Gaussian beams, and waveguide V-number
@@ -94,6 +95,11 @@ solvers, call external LLMs, or claim production-grade validation.
 The capability report proves which sub-agents and internal tools execute in
 sample sessions, which calculators are sanity-checked previews, and which
 external solver/LLM/upload/tag/release actions remain blocked.
+The evidence pack can be generated with
+`python scripts/generate_backend_evidence_pack.py --json-out /tmp/osa-backend-evidence-pack.json --markdown-out /tmp/osa-backend-evidence-pack.md`
+or smoke-checked with `./scripts/smoke_backend_evidence_pack.sh`; it is a
+maintainer review artifact only, not a release, upload, tag, or publication
+action.
 The backend also includes
 [`design requirement templates`](docs/design_requirement_templates.md) and a
 [`natural language to optical language`](docs/natural_language_to_optical_language.md)
