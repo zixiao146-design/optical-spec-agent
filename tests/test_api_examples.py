@@ -72,6 +72,7 @@ def test_api_frontend_fixture_manifest_points_to_existing_files_and_safe_default
     assert "backend_capability_report_response.json" in response_files
     assert "backend_capability_report_with_golden_coverage_response.json" in response_files
     assert "backend_evidence_summary_response.json" in response_files
+    assert "backend_validation_maturity_response.json" in response_files
     assert "design_case_cross_checks_response.json" in response_files
     assert "adapter_native_golden_coverage_response.json" in response_files
     assert "design_requirements_response.json" in response_files

@@ -461,3 +461,17 @@ Application-domain benchmark endpoints and fixtures now cover positive,
 ambiguous, underconstrained, unsupported, and unsafe/blocked scenarios. The
 benchmark evaluator keeps warnings for intentionally partial domains and blocks
 commercial solver or production-grade validation requests by default.
+
+## Validation Maturity and Preview Boundary
+
+Current readiness now includes a conservative validation maturity layer:
+
+- [`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+  classifies materials, calculators, application domains, adapter metadata,
+  sub-agent sessions, tool-call ledger evidence, and frontend UI/demo surface.
+- [`preview_boundary_policy.md`](preview_boundary_policy.md) states what users
+  can rely on and what they must independently verify.
+- `GET /api/backend-validation-maturity` exposes the same summary through the
+  local API.
+- `scripts/audit_validation_claims.py` scans repo text for unsafe validation
+  overclaims before future release-draft work.

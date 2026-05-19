@@ -85,3 +85,11 @@ not production-grade physical validation.
 This audit supports continued v1.0 readiness/backend engineering. It does not
 approve a `v0.9.0rc8` release draft, TestPyPI upload, PyPI publication, tag
 creation, GitHub release creation, or `v1.0.0` release.
+
+## Validation Maturity Gap Status
+
+Validation maturity is now tracked explicitly in
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md).
+The remaining gap is not missing labels; it is deeper optional validation beyond
+preview evidence. That future work must stay separate from PyPI and release
+decisions unless maintainers explicitly decide otherwise.

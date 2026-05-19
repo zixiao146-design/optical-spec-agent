@@ -165,6 +165,10 @@ from optical_spec_agent.optics import (
     suggest_single_mode_thickness_range,
 )
 from optical_spec_agent.services.spec_service import SpecService
+from optical_spec_agent.validation_maturity import (
+    BackendValidationMaturityResponse,
+    build_backend_validation_maturity_summary,
+)
 from optical_spec_agent.utils.format import spec_to_summary
 from optical_spec_agent.validators.spec_validator import SpecValidator
 
@@ -862,6 +866,17 @@ def agent_tool_capabilities():
             ],
         ),
         ToolCapabilityItem(
+            tool_name="validation_maturity_summary",
+            tool_kind="internal_python",
+            available=True,
+            default_allowed=True,
+            status="available",
+            detection_method="import optical_spec_agent.validation_maturity",
+            notes=[
+                "Classifies conservative backend evidence levels and preview boundaries."
+            ],
+        ),
+        ToolCapabilityItem(
             tool_name="optical_calculators",
             tool_kind="internal_python",
             available=True,
@@ -936,6 +951,16 @@ def agent_backend_evidence_summary():
     """Return a maintainer-facing backend evidence summary."""
 
     return generate_backend_evidence_pack()
+
+
+@router.get(
+    "/api/backend-validation-maturity",
+    response_model=BackendValidationMaturityResponse,
+)
+def agent_backend_validation_maturity():
+    """Return conservative backend validation maturity and preview boundaries."""
+
+    return build_backend_validation_maturity_summary()
 
 
 @router.get("/api/design-case-cross-checks", response_model=DesignCaseCrossChecksResponse)

@@ -94,6 +94,8 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
     domain_coverage = payload["application_domain_coverage"]
     material_template = payload["material_template_cross_checks"]
     domain_benchmarks = payload["application_domain_benchmarks"]
+    maturity = payload["validation_maturity_summary"]
+    preview_boundaries = payload["preview_boundary_summary"]
     lines.extend(
         [
             "",
@@ -159,6 +161,22 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
             f"- underconstrained_count: `{domain_benchmarks['underconstrained_count']}`",
             f"- unsupported_count: `{domain_benchmarks['unsupported_count']}`",
             f"- preview_design_assist_only: `{domain_benchmarks['preview_design_assist_only']}`",
+            "",
+            "## Validation maturity summary",
+            "",
+            f"- record_count: `{maturity['summary']['record_count']}`",
+            f"- calculator_maturity_level: `{maturity['summary']['calculator_maturity_level']}`",
+            f"- application_domain_maturity_level: `{maturity['summary']['application_domain_maturity_level']}`",
+            f"- adapter_source_monitor_maturity_level: `{maturity['summary']['adapter_source_monitor_maturity_level']}`",
+            f"- material_maturity_level: `{maturity['summary']['material_maturity_level']}`",
+            f"- validation_claim_audit_available: `{payload['validation_claim_audit_available']}`",
+            "",
+            "## Preview boundary summary",
+            "",
+            f"- calculators: `{preview_boundaries['calculators']}`",
+            f"- materials: `{preview_boundaries['materials']}`",
+            f"- adapters: `{preview_boundaries['adapters']}`",
+            f"- application_domains: `{preview_boundaries['application_domains']}`",
         ]
     )
 

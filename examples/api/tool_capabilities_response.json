@@ -189,6 +189,17 @@
       ]
     },
     {
+      "tool_name": "validation_maturity_summary",
+      "tool_kind": "internal_python",
+      "available": true,
+      "default_allowed": true,
+      "status": "available",
+      "detection_method": "import optical_spec_agent.validation_maturity",
+      "notes": [
+        "Classifies conservative backend evidence levels and preview boundaries."
+      ]
+    },
+    {
       "tool_name": "optical_calculators",
       "tool_kind": "internal_python",
       "available": true,

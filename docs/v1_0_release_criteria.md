@@ -116,3 +116,9 @@
 Material constants remain preview/design-assist data unless independently
 verified. Sub-agent trace is local/deterministic and does not call external
 LLMs or run solvers.
+
+Validation maturity is consolidated in
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md). These documents
+help prevent future v1.0 decisions from overreading backend evidence as physical
+validation, solver convergence, or material-data verification.

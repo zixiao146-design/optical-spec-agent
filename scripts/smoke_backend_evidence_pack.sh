@@ -14,6 +14,7 @@ python scripts/generate_backend_evidence_pack.py \
   --markdown-out "$MARKDOWN_OUT"
 
 python scripts/evaluate_application_domain_benchmarks.py
+python scripts/audit_validation_claims.py
 
 python - <<'PY'
 import json
@@ -49,6 +50,8 @@ for section in [
     "design_case_cross_checks",
     "source_monitor_observable_diagnostics",
     "adapter_native_golden_coverage",
+    "validation_maturity_summary",
+    "preview_boundary_summary",
     "blocked_or_deferred_capabilities",
     "maintainer_review_questions",
 ]:
@@ -99,6 +102,17 @@ require(payload["application_domain_benchmarks"]["scenario_count"] >= 19, "bench
 require(payload["application_domain_benchmarks"]["fail_count"] == 0, "application domain benchmark failed")
 require(payload["application_domain_benchmarks"]["warn_count"] == 0, "application domain benchmark warning remained")
 require(payload["application_domain_benchmarks"]["unsupported_requests_blocked_or_deferred"] is True, "unsupported benchmark policy missing")
+require(
+    payload["validation_maturity_summary"]["summary"]["calculator_maturity_level"]
+    == "sanity_checked_preview",
+    "calculator maturity level changed",
+)
+require(
+    payload["validation_maturity_summary"]["summary"]["application_domain_maturity_level"]
+    == "benchmark_checked_preview",
+    "application maturity level changed",
+)
+require(payload["validation_claim_audit_available"] is True, "validation claim audit missing")
 
 markdown = markdown_path.read_text(encoding="utf-8")
 for heading in [
@@ -108,6 +122,8 @@ for heading in [
     "Application-domain coverage",
     "Material-template cross-checks",
     "Application-domain benchmarks",
+    "Validation maturity summary",
+    "Preview boundary summary",
     "Design-case cross-checks",
     "Adapter-native golden coverage",
     "Blocked or deferred capabilities",
@@ -123,6 +139,10 @@ api_payload = response.json()
 require(api_payload["evidence_pack_available"] is True, "API evidence flag missing")
 require(api_payload["external_solver_executed"] is False, "API solver flag changed")
 require(api_payload["adapter_native_golden_coverage"]["status"] == "ok", "API golden status changed")
+require(
+    api_payload["validation_maturity_summary"]["summary"]["record_count"] >= 17,
+    "API evidence missing validation maturity summary",
+)
 
 print("BACKEND EVIDENCE PACK PASSED")
 print("APPLICATION DOMAIN COVERAGE PASSED")
@@ -130,6 +150,8 @@ print("MATERIAL TEMPLATE CROSS-CHECKS PASSED")
 print("APPLICATION DOMAIN BENCHMARKS PASSED")
 print("FIBER COUPLING REFERENCE SANITY PASSED")
 print("POLARIZATION REFERENCE SANITY PASSED")
+print("VALIDATION MATURITY CHECKS PASSED")
+print("VALIDATION CLAIM AUDIT PASSED")
 print("FIBER COUPLING PREVIEW PASSED")
 print("POLARIZATION PREVIEW PASSED")
 PY
@@ -138,6 +160,8 @@ echo "FIBER COUPLING PREVIEW PASSED"
 echo "POLARIZATION PREVIEW PASSED"
 echo "FIBER COUPLING REFERENCE SANITY PASSED"
 echo "POLARIZATION REFERENCE SANITY PASSED"
+echo "VALIDATION MATURITY CHECKS PASSED"
+echo "VALIDATION CLAIM AUDIT PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

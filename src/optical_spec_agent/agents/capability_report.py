@@ -55,6 +55,10 @@ from optical_spec_agent.optics import (
     jones_waveplate,
     slab_waveguide_sweep,
 )
+from optical_spec_agent.validation_maturity import (
+    BackendValidationMaturityResponse,
+    build_backend_validation_maturity_summary,
+)
 from optical_spec_agent.workflows import plan_workflow
 
 
@@ -191,6 +195,8 @@ class BackendCapabilityReport(BaseModel):
             "Design-case cross-checks",
             "Source / monitor / observable diagnostics",
             "Adapter-native golden coverage",
+            "Validation maturity summary",
+            "Preview boundary summary",
             "Blocked or deferred capabilities",
             "Maintainer review questions",
         ]
@@ -208,6 +214,9 @@ class BackendCapabilityReport(BaseModel):
     material_template_cross_checks: MaterialTemplateCrossCheckCoverage
     application_domain_benchmarks: ApplicationDomainBenchmarkCoverage
     adapter_native_golden_coverage: AdapterGoldenCoverageReport
+    validation_maturity_summary: BackendValidationMaturityResponse
+    preview_boundary_summary: dict[str, object] = Field(default_factory=dict)
+    validation_claim_audit_available: bool = True
     design_case_cross_checks: list[DesignCaseCrossCheck] = Field(default_factory=list)
     blocked_external_actions: list[BlockedExternalAction] = Field(default_factory=list)
     external_solver_executed: bool = False
@@ -244,8 +253,10 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
     domain_cross_checks = cross_check_all_application_domains()
     domain_benchmarks = evaluate_all_domain_scenarios()
     golden_coverage = build_adapter_golden_coverage_report()
+    maturity_summary = build_backend_validation_maturity_summary()
     all_sample_tool_names.add("adapter_native_golden.check")
     all_sample_tool_names.add("application_domain_benchmarks.evaluate")
+    all_sample_tool_names.add("validation_maturity.build_summary")
     failed = any(check.status == "fail" for check in cross_checks.cross_checks)
     return BackendCapabilityReport(
         status="needs_review" if failed or golden_coverage.status == "needs_review" else "ok",
@@ -261,6 +272,9 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
         material_template_cross_checks=_material_template_cross_checks(domain_cross_checks.cross_checks),
         application_domain_benchmarks=_application_domain_benchmarks(domain_benchmarks),
         adapter_native_golden_coverage=golden_coverage,
+        validation_maturity_summary=maturity_summary,
+        preview_boundary_summary=maturity_summary.preview_boundary_summary,
+        validation_claim_audit_available=True,
         design_case_cross_checks=cross_checks.cross_checks,
         blocked_external_actions=_blocked_external_actions(sample_session),
         recommended_next_actions=[
@@ -273,6 +287,8 @@ def generate_backend_capability_report() -> BackendCapabilityReport:
             "Use /api/design-requirements/match to inspect ambiguous-goal questions.",
             "Use /api/application-domain-cross-checks to inspect domain/material/template coverage.",
             "Use /api/application-domain-benchmark-results to inspect scenario benchmark behavior.",
+            "Use /api/backend-validation-maturity to inspect conservative evidence levels.",
+            "Run scripts/audit_validation_claims.py before release-draft work.",
             "Treat calculator outputs as sanity-checked preview/design-assist only.",
         ],
     )
@@ -417,6 +433,13 @@ def _internal_tool_capabilities(
             build_adapter_golden_coverage_report,
             "adapter_native_golden.check",
             "Builds local adapter-native golden preview coverage and metadata diff evidence.",
+        ),
+        (
+            "validation_maturity_summary",
+            "optical_spec_agent.validation_maturity",
+            build_backend_validation_maturity_summary,
+            "validation_maturity.build_summary",
+            "Classifies conservative backend evidence levels and preview boundaries.",
         ),
         (
             "optical_calculators",

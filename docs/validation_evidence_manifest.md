@@ -164,3 +164,21 @@
 - `validation/elmer/elmer_install_deferred_2026-05-15.md`
 - `docs/manual_solver_validation_report_template.md`
 - `docs/pytest_marker_policy.md`
+
+## Validation Maturity / Preview Boundary Evidence
+
+- `docs/backend_validation_maturity_matrix.md`
+- `docs/backend_validation_maturity_matrix.zh-CN.md`
+- `docs/preview_boundary_policy.md`
+- `docs/preview_boundary_policy.zh-CN.md`
+- `src/optical_spec_agent/validation_maturity.py`
+- `scripts/audit_validation_claims.py`
+- `tests/test_backend_validation_maturity.py`
+- `tests/test_backend_validation_maturity_api.py`
+- `tests/test_backend_validation_maturity_docs.py`
+- `tests/test_preview_boundary_policy.py`
+- `tests/test_validation_claim_audit.py`
+
+These entries consolidate preview/design-assist evidence boundaries. They do
+not claim production-grade physical validation and do not claim formal
+convergence proof.

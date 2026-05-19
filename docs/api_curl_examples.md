@@ -249,3 +249,14 @@ curl http://127.0.0.1:8000/api/application-domain-benchmark-results
 Application-domain benchmark calls add positive, ambiguous, underconstrained,
 unsupported, and unsafe/blocked scenario evidence without changing the
 no-solver/no-LLM boundary.
+
+## Backend Validation Maturity
+
+```bash
+curl http://127.0.0.1:8000/api/backend-validation-maturity
+python scripts/audit_validation_claims.py
+```
+
+The endpoint and audit script summarize conservative maturity levels and guard
+preview/design-assist boundaries. They do not upload, tag, release, execute
+solvers, or call external LLMs.

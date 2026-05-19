@@ -218,3 +218,7 @@
   keeping tag/release/PyPI approval separate.
 - Continue `0.9.0rc8.dev0` development; create any future `v0.9.0rc8` tag and
   GitHub prerelease only after explicit maintainer approval and fresh verification.
+- Use `docs/backend_validation_maturity_matrix.md`,
+  `docs/preview_boundary_policy.md`, and
+  `scripts/audit_validation_claims.py` before future rc8/PyPI/v1.0 decision
+  work so backend evidence remains conservative.

@@ -65,3 +65,16 @@ python scripts/generate_backend_evidence_pack.py \
 - 不创建 Git tag 或 GitHub release。
 - adapter-native monitor metadata 只是 preview 元数据，不是真实 solver monitor result。
 - 计算器输出是 sanity-checked preview/design-assist 结果，不是 production-grade / 生产级物理验证。
+
+## 验证成熟度和 preview 边界
+
+生成的 evidence pack 现在包含：
+
+- `validation_maturity_summary`：对计算器、材料、应用域、adapter metadata、
+  sub-agent session 和前端 UI/demo surface 的保守成熟度分级。
+- `preview_boundary_summary`：说明每类证据证明什么，以及用户仍需自行验证什么。
+- `validation_claim_audit_available`：记录
+  `scripts/audit_validation_claims.py` 是后端证据 workflow 的一部分。
+
+详见 [`backend_validation_maturity_matrix.zh-CN.md`](backend_validation_maturity_matrix.zh-CN.md)
+和 [`preview_boundary_policy.zh-CN.md`](preview_boundary_policy.zh-CN.md)。

@@ -97,3 +97,7 @@ The benchmark suite does not prove real solver monitor results. It does not
 prove production-grade physical validation. It does not prove formal
 convergence. External solvers, external LLMs, proprietary tools, uploads, tags,
 and releases remain outside the default benchmark path.
+
+The consolidated maturity label for this suite is
+`benchmark_checked_preview`; see
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md).

@@ -15,7 +15,9 @@ def test_smoke_backend_report_script_exists_and_has_safety_markers():
     text = script.read_text(encoding="utf-8")
     assert "generate_backend_capability_report.py" in text
     assert "check_adapter_native_golden.py" in text
+    assert "audit_validation_claims.py" in text
     assert "/api/backend-capability-report" in text
+    assert "/api/backend-validation-maturity" in text
     assert "/api/design-case-cross-checks" in text
     assert "/api/adapter-native-golden-coverage" in text
     assert "/api/design-requirements" in text
@@ -33,6 +35,8 @@ def test_smoke_backend_report_script_exists_and_has_safety_markers():
     assert "ADAPTER SOURCE/MONITOR MAPPING PASSED" in text
     assert "ADAPTER NATIVE METADATA DIFF PASSED" in text
     assert "ADAPTER GOLDEN COVERAGE REPORT PASSED" in text
+    assert "VALIDATION MATURITY CHECKS PASSED" in text
+    assert "VALIDATION CLAIM AUDIT PASSED" in text
     assert "NO SOLVER EXECUTION PERFORMED" in text
     assert "NO EXTERNAL LLM CALLED" in text
     assert "NO UPLOAD PERFORMED" in text
@@ -60,3 +64,5 @@ def test_smoke_backend_report_script_runs_successfully():
     assert "ADAPTER SOURCE/MONITOR MAPPING PASSED" in result.stdout
     assert "ADAPTER NATIVE METADATA DIFF PASSED" in result.stdout
     assert "ADAPTER GOLDEN COVERAGE REPORT PASSED" in result.stdout
+    assert "VALIDATION MATURITY CHECKS PASSED" in result.stdout
+    assert "VALIDATION CLAIM AUDIT PASSED" in result.stdout

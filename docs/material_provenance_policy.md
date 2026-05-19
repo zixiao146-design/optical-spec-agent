@@ -43,3 +43,8 @@ These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,
 and deferred capability notes. They do not execute solvers, call external LLMs,
 or claim production-grade physical validation.
+
+The material catalog appears in the validation maturity matrix as
+`documented_preview` with a user-must-verify boundary. See
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md).

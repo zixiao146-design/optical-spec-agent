@@ -90,3 +90,12 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
 - Default external LLM calls.
 - PyPI/TestPyPI upload without explicit maintainer approval.
 - Tag or GitHub release creation without explicit maintainer approval.
+
+## Validation Maturity Track
+
+The rc8 backend roadmap now uses
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md) as the shared
+boundary for future hardening. Any future rc8/PyPI/v1.0 decision should keep the
+calculator, material, adapter, application-domain, and frontend evidence levels
+separate from physical validation claims.

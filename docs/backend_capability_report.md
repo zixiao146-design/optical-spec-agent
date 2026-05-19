@@ -143,3 +143,17 @@ curl http://127.0.0.1:8000/api/adapter-native-golden-coverage
 - Reports are preview/design-assist evidence only.
 - No production-grade physical validation is claimed.
 - No formal convergence proof is claimed.
+
+## Validation Maturity
+
+The report now includes `validation_maturity_summary`,
+`preview_boundary_summary`, and `validation_claim_audit_available`. These fields
+link the capability report to
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md). Calculator
+evidence remains `sanity_checked_preview`, application-domain evidence remains
+`benchmark_checked_preview`, and adapter/source-monitor evidence remains
+fixture-guarded preview metadata.
+
+Use `GET /api/backend-validation-maturity` or
+`python scripts/audit_validation_claims.py` to inspect these boundaries.

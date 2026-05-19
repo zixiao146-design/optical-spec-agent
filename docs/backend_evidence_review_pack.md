@@ -91,3 +91,19 @@ means a local evidence check did not match the expected contract.
   monitor result.
 - Calculator outputs are sanity-checked preview/design-assist results, not
   production-grade physical validation.
+
+## Validation Maturity and Preview Boundaries
+
+The generated evidence pack now includes:
+
+- `validation_maturity_summary`: conservative levels for calculators,
+  materials, application domains, adapter metadata, sub-agent sessions, and the
+  frontend UI/demo surface.
+- `preview_boundary_summary`: plain-language reminders of what each evidence
+  area proves and what users must verify independently.
+- `validation_claim_audit_available`: records that
+  `scripts/audit_validation_claims.py` is part of the backend evidence
+  workflow.
+
+See [`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md).

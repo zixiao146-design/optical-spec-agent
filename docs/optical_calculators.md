@@ -94,6 +94,11 @@ production simulation workflows.
 - Users must verify material data, boundary conditions, and numerical methods
   before making physical conclusions.
 
+The consolidated maturity label for all six calculator families is
+`sanity_checked_preview`; see
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md).
+
 ## Examples
 
 Example requests live under `examples/optics_calculators/`.

@@ -193,3 +193,19 @@ The same domain registry is benchmarked through
 `GET /api/application-domain-benchmark-results`. The benchmark suite checks
 positive, ambiguous, underconstrained, unsupported, and unsafe/blocked scenario
 behavior without solver execution or external LLM calls.
+
+## Validation Maturity Boundary
+
+Backend status is now consolidated in
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and [`preview_boundary_policy.md`](preview_boundary_policy.md). In short:
+
+- calculators are `sanity_checked_preview`;
+- application-domain scenarios are `benchmark_checked_preview`;
+- adapter/source-monitor mappings and golden coverage are fixture-guarded
+  preview metadata;
+- the material library remains local preview data that users must verify;
+- frontend Agent Studio is a UI/demo surface, not validation evidence.
+
+`scripts/audit_validation_claims.py` checks docs, source, tests, examples, and
+README files for unsafe validation overclaims before future release-draft work.

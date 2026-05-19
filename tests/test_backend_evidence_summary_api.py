@@ -46,6 +46,13 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert body["application_domain_benchmarks"]["fail_count"] == 0
     assert body["application_domain_benchmarks"]["warn_count"] == 0
     assert body["application_domain_benchmarks"]["unsupported_requests_blocked_or_deferred"] is True
+    assert body["validation_maturity_summary"]["summary"]["record_count"] >= 17
+    assert (
+        body["validation_maturity_summary"]["summary"]["application_domain_maturity_level"]
+        == "benchmark_checked_preview"
+    )
+    assert body["validation_claim_audit_available"] is True
+    assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(
         case["metadata_match"] and case["fragment_match"] and case["safety_match"]
         for case in body["adapter_native_golden_coverage"]["cases"]

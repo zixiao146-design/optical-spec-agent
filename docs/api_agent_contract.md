@@ -259,3 +259,13 @@ Application-domain scenario evidence is exposed through
 `GET /api/application-domain-benchmark-results`. These endpoints evaluate
 positive, ambiguous, underconstrained, unsupported, and unsafe/blocked goals
 without executing solvers or calling external LLMs.
+
+## Validation Maturity Endpoint
+
+`GET /api/backend-validation-maturity` returns conservative maturity records,
+a summary, preview-boundary copy, and safety flags. It classifies calculators as
+`sanity_checked_preview`, application-domain benchmarks as
+`benchmark_checked_preview`, adapter/source-monitor mapping as
+`fixture_guarded_preview`, and the material library as user-must-verify preview
+data. It does not execute solvers, call external LLMs, or change the no
+production-grade validation boundary.

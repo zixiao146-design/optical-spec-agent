@@ -46,6 +46,8 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "design_case_cross_checks",
         "source_monitor_observable_diagnostics",
         "adapter_native_golden_coverage",
+        "validation_maturity_summary",
+        "preview_boundary_summary",
         "blocked_or_deferred_capabilities",
         "maintainer_review_questions",
     ]:
@@ -68,6 +70,13 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert payload["application_domain_benchmarks"]["scenario_count"] >= 19
     assert payload["application_domain_benchmarks"]["fail_count"] == 0
     assert payload["application_domain_benchmarks"]["warn_count"] == 0
+    assert payload["validation_maturity_summary"]["summary"]["record_count"] >= 17
+    assert (
+        payload["validation_maturity_summary"]["summary"]["calculator_maturity_level"]
+        == "sanity_checked_preview"
+    )
+    assert payload["validation_claim_audit_available"] is True
+    assert "materials" in payload["preview_boundary_summary"]
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",
         "paraxial",
@@ -98,6 +107,8 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Application-domain coverage",
         "Material-template cross-checks",
         "Application-domain benchmarks",
+        "Validation maturity summary",
+        "Preview boundary summary",
         "Design-case cross-checks",
         "Adapter-native golden coverage",
         "Blocked or deferred capabilities",

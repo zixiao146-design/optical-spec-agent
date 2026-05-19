@@ -31,6 +31,7 @@ def test_backend_capability_report_api_returns_expected_sections():
         "observable_diagnostics",
         "adapter_native_mapping",
         "adapter_native_golden_coverage",
+        "validation_maturity_summary",
         "optical_calculators",
     }
     assert {item["calculator_name"] for item in body["optical_calculators"]} == {
@@ -60,6 +61,13 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["application_domain_benchmarks"]["scenario_count"] >= 19
     assert body["application_domain_benchmarks"]["fail_count"] == 0
     assert body["application_domain_benchmarks"]["warn_count"] == 0
+    assert body["validation_maturity_summary"]["summary"]["record_count"] >= 17
+    assert (
+        body["validation_maturity_summary"]["summary"]["calculator_maturity_level"]
+        == "sanity_checked_preview"
+    )
+    assert body["validation_claim_audit_available"] is True
+    assert "materials" in body["preview_boundary_summary"]
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",
@@ -91,6 +99,8 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["material_template_cross_checks"]["fail_count"] == 0
     assert body["application_domain_benchmarks"]["fail_count"] == 0
     assert body["application_domain_benchmarks"]["warn_count"] == 0
+    assert body["validation_maturity_summary"]["summary"]["record_count"] >= 17
+    assert body["validation_claim_audit_available"] is True
     assert body["external_solver_executed"] is False
 
 

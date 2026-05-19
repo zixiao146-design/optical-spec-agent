@@ -127,3 +127,8 @@ smoke it with `./scripts/smoke_backend_evidence_pack.sh`.
 - No network material database is queried.
 - No production-grade physical validation is claimed.
 - No formal convergence proof is claimed.
+
+All calculator reference cases feed the backend validation maturity summary as
+`sanity_checked_preview` evidence. The summary is exposed by
+`GET /api/backend-validation-maturity` and documented in
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md).

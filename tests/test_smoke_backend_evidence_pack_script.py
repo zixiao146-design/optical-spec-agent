@@ -14,7 +14,10 @@ def test_smoke_backend_evidence_pack_script_exists_and_has_safety_markers():
     assert SCRIPT.exists()
     text = SCRIPT.read_text(encoding="utf-8")
     assert "generate_backend_evidence_pack.py" in text
+    assert "audit_validation_claims.py" in text
     assert "BACKEND EVIDENCE PACK PASSED" in text
+    assert "VALIDATION MATURITY CHECKS PASSED" in text
+    assert "VALIDATION CLAIM AUDIT PASSED" in text
     assert "NO SOLVER EXECUTION PERFORMED" in text
     assert "NO EXTERNAL LLM CALLED" in text
     assert "NO UPLOAD PERFORMED" in text
@@ -37,6 +40,8 @@ def test_smoke_backend_evidence_pack_script_runs_successfully():
     )
     assert result.returncode == 0, result.stdout + result.stderr
     assert "BACKEND EVIDENCE PACK PASSED" in result.stdout
+    assert "VALIDATION MATURITY CHECKS PASSED" in result.stdout
+    assert "VALIDATION CLAIM AUDIT PASSED" in result.stdout
     assert "NO SOLVER EXECUTION PERFORMED" in result.stdout
     assert "NO EXTERNAL LLM CALLED" in result.stdout
     assert "NO UPLOAD PERFORMED" in result.stdout

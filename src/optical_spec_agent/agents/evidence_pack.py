@@ -26,6 +26,8 @@ EVIDENCE_PACK_SECTIONS = [
     "Design-case cross-checks",
     "Source / monitor / observable diagnostics",
     "Adapter-native golden coverage",
+    "Validation maturity summary",
+    "Preview boundary summary",
     "Blocked or deferred capabilities",
     "Maintainer review questions",
 ]
@@ -51,6 +53,9 @@ class BackendEvidencePack(BaseModel):
     design_case_cross_checks: list[dict[str, Any]] = Field(default_factory=list)
     source_monitor_observable_diagnostics: dict[str, Any]
     adapter_native_golden_coverage: dict[str, Any]
+    validation_maturity_summary: dict[str, Any] = Field(default_factory=dict)
+    preview_boundary_summary: dict[str, Any] = Field(default_factory=dict)
+    validation_claim_audit_available: bool = True
     blocked_or_deferred_capabilities: list[dict[str, Any]] = Field(default_factory=list)
     maintainer_review_questions: list[str] = Field(default_factory=list)
     external_solver_executed: bool = False
@@ -178,6 +183,9 @@ def generate_backend_evidence_pack(
             "unsupported_requests_blocked_or_deferred": True,
             "no_external_solver_execution": True,
         },
+        validation_maturity_summary=payload["validation_maturity_summary"],
+        preview_boundary_summary=payload["preview_boundary_summary"],
+        validation_claim_audit_available=payload["validation_claim_audit_available"],
         design_case_cross_checks=[
             {
                 "example_id": item["example_id"],

@@ -15,7 +15,9 @@ def test_smoke_backend_capabilities_script_is_safe_and_covers_endpoints():
     for phrase in [
         "scripts/audit_sub_agents.py",
         "scripts/check_adapter_native_golden.py",
+        "scripts/audit_validation_claims.py",
         "/api/tool-capabilities",
+        "/api/backend-validation-maturity",
         "/api/agent-session",
         "/api/optical-language/infer",
         "/api/optical-language/diagnose",
@@ -42,6 +44,8 @@ def test_smoke_backend_capabilities_script_is_safe_and_covers_endpoints():
         "ADAPTER NATIVE GOLDEN CHECKS PASSED",
         "ADAPTER NATIVE METADATA DIFF PASSED",
         "ADAPTER GOLDEN COVERAGE REPORT PASSED",
+        "VALIDATION MATURITY CHECKS PASSED",
+        "VALIDATION CLAIM AUDIT PASSED",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",
         "NO UPLOAD PERFORMED",

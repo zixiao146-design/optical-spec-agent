@@ -48,6 +48,8 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         "application_domain_coverage",
         "material_template_cross_checks",
         "application_domain_benchmarks",
+        "validation_maturity_summary",
+        "preview_boundary_summary",
         "adapter_native_golden_coverage",
         "design_case_cross_checks",
         "blocked_external_actions",
@@ -70,6 +72,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert tools["observable_diagnostics"]["executed_in_sample"] is True
     assert tools["adapter_native_mapping"]["executed_in_sample"] is True
     assert tools["adapter_native_golden_coverage"]["executed_in_sample"] is True
+    assert tools["validation_maturity_summary"]["executed_in_sample"] is True
     assert report["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(report["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",
@@ -90,6 +93,13 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert report["application_domain_benchmarks"]["fail_count"] == 0
     assert report["application_domain_benchmarks"]["warn_count"] == 0
     assert report["application_domain_benchmarks"]["unsupported_count"] >= 3
+    assert report["validation_maturity_summary"]["summary"]["record_count"] >= 17
+    assert (
+        report["validation_maturity_summary"]["summary"]["calculator_maturity_level"]
+        == "sanity_checked_preview"
+    )
+    assert report["validation_claim_audit_available"] is True
+    assert "adapters" in report["preview_boundary_summary"]
     assert {item["calculator_name"] for item in report["optical_calculators"]} == {
         "thin_film",
         "paraxial",
@@ -111,6 +121,8 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     text = markdown_out.read_text(encoding="utf-8")
     assert "Backend Capability Report" in text
     assert "Adapter-Native Golden Coverage" in text
+    assert "Validation Maturity Summary" in text
+    assert "Preview Boundary Summary" in text
     assert "Maintainer Evidence Pack" in text
     assert "NO UPLOAD PERFORMED" in text
 

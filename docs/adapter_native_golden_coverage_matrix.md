@@ -68,3 +68,8 @@ flux, field, band, FEM, mesh-coupled, or ray-trace results require explicit
 solver execution and independent validation. This project does not claim
 production-grade physical validation or formal convergence proof from these
 golden cases.
+
+The consolidated maturity label for adapter-native golden coverage is
+`fixture_guarded_preview`. It is listed in
+[`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
+and remains preview metadata evidence only.

@@ -9,6 +9,7 @@ set -euo pipefail
 python scripts/audit_sub_agents.py
 python scripts/check_adapter_native_golden.py
 python scripts/evaluate_application_domain_benchmarks.py
+python scripts/audit_validation_claims.py
 
 python - <<'PY'
 from fastapi.testclient import TestClient
@@ -50,6 +51,30 @@ require("ambiguous_requirement_matching" in internal_tools, "ambiguous requireme
 require("application_domain_registry" in internal_tools, "application domain registry missing")
 require("material_template_cross_checks" in internal_tools, "material-template cross-checks missing")
 require("application_domain_benchmarks" in internal_tools, "application domain benchmarks missing")
+require("validation_maturity_summary" in internal_tools, "validation maturity summary missing")
+
+maturity = client.get("/api/backend-validation-maturity")
+require(maturity.status_code == 200, "/api/backend-validation-maturity failed")
+maturity_payload = maturity.json()
+require(maturity_payload["summary"]["record_count"] >= 17, "validation maturity records missing")
+require(
+    maturity_payload["summary"]["calculator_maturity_level"] == "sanity_checked_preview",
+    "calculator maturity level changed",
+)
+require(
+    maturity_payload["summary"]["application_domain_maturity_level"]
+    == "benchmark_checked_preview",
+    "application domain maturity level changed",
+)
+require(maturity_payload["external_solver_executed"] is False, "validation maturity executed solver")
+require(
+    maturity_payload["production_grade_validation_claimed"] is False,
+    "validation maturity overclaimed production-grade validation",
+)
+require(
+    maturity_payload["formal_convergence_proof_claimed"] is False,
+    "validation maturity overclaimed convergence proof",
+)
 
 material_diagnose = client.post(
     "/api/materials/diagnose",
@@ -429,6 +454,8 @@ print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
 print("ADAPTER NATIVE GOLDEN CHECKS PASSED")
 print("ADAPTER NATIVE METADATA DIFF PASSED")
 print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
+print("VALIDATION MATURITY CHECKS PASSED")
+print("VALIDATION CLAIM AUDIT PASSED")
 print("Backend capabilities smoke passed")
 PY
 
@@ -449,6 +476,8 @@ echo "ADAPTER SOURCE/MONITOR MAPPING PASSED"
 echo "ADAPTER NATIVE GOLDEN CHECKS PASSED"
 echo "ADAPTER NATIVE METADATA DIFF PASSED"
 echo "ADAPTER GOLDEN COVERAGE REPORT PASSED"
+echo "VALIDATION MATURITY CHECKS PASSED"
+echo "VALIDATION CLAIM AUDIT PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

@@ -112,3 +112,10 @@ The following are not exposed as backend Agent Studio actions:
   results.
 - Production-grade physical validation is not claimed.
 - Formal convergence proof is not claimed.
+
+## Validation Maturity Tooling
+
+`validation_maturity.build_summary` is now part of the backend capability
+report path. It does not run a solver; it classifies existing evidence levels
+and preview boundaries. `scripts/audit_validation_claims.py` is the paired
+claim-audit tool and is included in backend smoke scripts.

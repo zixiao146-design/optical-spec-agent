@@ -15,6 +15,7 @@ python scripts/generate_backend_capability_report.py \
 
 python scripts/check_adapter_native_golden.py
 python scripts/evaluate_application_domain_benchmarks.py
+python scripts/audit_validation_claims.py
 
 python - <<'PY'
 import json
@@ -40,6 +41,8 @@ for section in [
     "application_domain_coverage",
     "material_template_cross_checks",
     "application_domain_benchmarks",
+    "validation_maturity_summary",
+    "preview_boundary_summary",
     "adapter_native_golden_coverage",
     "design_case_cross_checks",
     "blocked_external_actions",
@@ -73,6 +76,7 @@ require(internal_tools["adapter_native_golden_coverage"]["executed_in_sample"] i
 require(internal_tools["application_domain_registry"]["executed_in_sample"] is True, "application domain registry not executed in sample")
 require(internal_tools["material_template_cross_checks"]["executed_in_sample"] is True, "material-template cross-checks not executed in sample")
 require(internal_tools["application_domain_benchmarks"]["executed_in_sample"] is True, "application domain benchmarks not executed in sample")
+require(internal_tools["validation_maturity_summary"]["executed_in_sample"] is True, "validation maturity summary not executed in sample")
 golden = report["adapter_native_golden_coverage"]
 require(golden["status"] == "ok", "adapter golden coverage report not ok")
 require(set(golden["adapters_covered"]) == {"meep", "mpb", "gmsh", "elmer", "optiland"}, "adapter golden coverage mismatch")
@@ -88,6 +92,17 @@ require(report["material_template_cross_checks"]["fail_count"] == 0, "material-t
 require(report["application_domain_benchmarks"]["scenario_count"] >= 19, "benchmark scenario count mismatch")
 require(report["application_domain_benchmarks"]["fail_count"] == 0, "application domain benchmark failed")
 require(report["application_domain_benchmarks"]["warn_count"] == 0, "application domain benchmark warning remained")
+require(
+    report["validation_maturity_summary"]["summary"]["calculator_maturity_level"]
+    == "sanity_checked_preview",
+    "calculator maturity level changed",
+)
+require(
+    report["validation_maturity_summary"]["summary"]["application_domain_maturity_level"]
+    == "benchmark_checked_preview",
+    "application domain maturity level changed",
+)
+require(report["validation_claim_audit_available"] is True, "validation claim audit missing")
 require(len(report["requirements_templates"]) == 7, "requirement template count mismatch")
 require(
     all(item["matched_by_heuristic"] for item in report["requirements_templates"]),
@@ -101,6 +116,14 @@ capability_payload = capability.json()
 require(capability_payload["sub_agents"], "API report missing sub-agents")
 require(capability_payload["external_solver_executed"] is False, "API report solver flag changed")
 require(capability_payload["adapter_native_golden_coverage"]["status"] == "ok", "API report missing golden coverage")
+require(
+    capability_payload["validation_maturity_summary"]["summary"]["record_count"] >= 17,
+    "API report missing validation maturity summary",
+)
+
+maturity = client.get("/api/backend-validation-maturity")
+require(maturity.status_code == 200, "/api/backend-validation-maturity failed")
+require(maturity.json()["production_grade_validation_claimed"] is False, "maturity API production claim changed")
 
 cross_checks = client.get("/api/design-case-cross-checks")
 require(cross_checks.status_code == 200, "/api/design-case-cross-checks failed")
@@ -279,12 +302,16 @@ print("OBSERVABLE DIAGNOSTICS PASSED")
 print("ADAPTER SOURCE/MONITOR MAPPING PASSED")
 print("ADAPTER NATIVE METADATA DIFF PASSED")
 print("ADAPTER GOLDEN COVERAGE REPORT PASSED")
+print("VALIDATION MATURITY CHECKS PASSED")
+print("VALIDATION CLAIM AUDIT PASSED")
 PY
 
 echo "FIBER COUPLING PREVIEW PASSED"
 echo "POLARIZATION PREVIEW PASSED"
 echo "FIBER COUPLING REFERENCE SANITY PASSED"
 echo "POLARIZATION REFERENCE SANITY PASSED"
+echo "VALIDATION MATURITY CHECKS PASSED"
+echo "VALIDATION CLAIM AUDIT PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

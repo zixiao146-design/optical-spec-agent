@@ -97,3 +97,16 @@ curl http://127.0.0.1:8000/api/adapter-native-golden-coverage
 - 报告只作为 preview/design-assist 证据。
 - 不声明生产级物理验证。
 - 不声明形式化收敛证明。
+
+## 验证成熟度
+
+报告现在包含 `validation_maturity_summary`、`preview_boundary_summary` 和
+`validation_claim_audit_available`。这些字段链接到
+[`backend_validation_maturity_matrix.zh-CN.md`](backend_validation_maturity_matrix.zh-CN.md)
+和 [`preview_boundary_policy.zh-CN.md`](preview_boundary_policy.zh-CN.md)。
+计算器证据仍是 `sanity_checked_preview`，应用域证据仍是
+`benchmark_checked_preview`，adapter/source-monitor 证据仍是 fixture-guarded
+preview metadata。
+
+可通过 `GET /api/backend-validation-maturity` 或
+`python scripts/audit_validation_claims.py` 检查这些边界。
