@@ -142,6 +142,9 @@ for the repeatable RC procedure and
 the current RC line toward `v1.0`.
 Current rc8 development readiness and publication gates are tracked in
 [`docs/release_readiness_v0.9.0rc8.md`](docs/release_readiness_v0.9.0rc8.md),
+[`docs/rc8_backend_roadmap.md`](docs/rc8_backend_roadmap.md),
+[`docs/rc8_capability_gap_audit.md`](docs/rc8_capability_gap_audit.md),
+[`docs/rc8_to_v1_0_decision_path.md`](docs/rc8_to_v1_0_decision_path.md),
 [`docs/testpypi_upload_approval_v0.9.0rc8.dev0.md`](docs/testpypi_upload_approval_v0.9.0rc8.dev0.md),
 while rc7 release records remain in
 [`docs/release_readiness_v0.9.0rc7.md`](docs/release_readiness_v0.9.0rc7.md),
@@ -400,6 +403,18 @@ checklists, and workflow benchmarks.
 These are reviewable engineering aids, not production-grade physical validation.
 External solvers and external LLM providers are optional and not required by
 default.
+
+Post-rc7 backend planning now lives in the rc8 roadmap and gap audit:
+
+- [`docs/rc8_backend_roadmap.md`](docs/rc8_backend_roadmap.md) classifies areas
+  as done / stable enough, needs backend hardening, deferred / non-blocker,
+  future / Phase 2, or not a goal.
+- [`docs/rc8_capability_gap_audit.md`](docs/rc8_capability_gap_audit.md)
+  identifies remaining backend hardening gaps before any future rc8, PyPI, or
+  v1.0.0 decision.
+- [`docs/rc8_to_v1_0_decision_path.md`](docs/rc8_to_v1_0_decision_path.md)
+  keeps rc8.dev0 engineering separate from release-draft, PyPI, and v1.0.0
+  approvals.
 
 The current loop:
 

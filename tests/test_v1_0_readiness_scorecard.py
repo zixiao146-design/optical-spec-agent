@@ -18,6 +18,9 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0" in text
     assert "v1.0 readiness gap audit" in text
     assert "v0.9.0rc8 development readiness" in text
+    assert "rc8 backend roadmap" in text
+    assert "rc8 capability gap audit" in text
+    assert "rc8 to v1.0 decision path" in text
     assert "v1.0 decision matrix" in text
     assert "v1.0 public contract freeze checklist" in text
     assert "v1.0 public contract freeze confirmation package" in text
@@ -73,3 +76,5 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "docs/backend_evidence_review_decision.md" in text
     assert "backend evidence is sufficient to" in text
     assert "not approved" in text
+    assert "remaining backend" in text
+    assert "hardening areas before any future rc8, PyPI, or v1.0.0 decision" in text

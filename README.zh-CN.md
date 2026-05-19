@@ -130,6 +130,12 @@ TestPyPI 已通过手动 Trusted Publishing 上传 `0.9.0rc6.dev0`，但 `0.9.0r
 `docs/external_solver_policy.md`、`docs/external_llm_policy.md` 和
 `docs/pypi_publication_decision.md`。PyPI 发布仍是 not granted，见
 `docs/publication_decision_record.md`；TestPyPI 成功状态不授权正式 PyPI 发布。
+rc8.dev0 后端路线和能力差距审计见：
+`docs/rc8_backend_roadmap.md`、`docs/rc8_capability_gap_audit.md` 和
+`docs/rc8_to_v1_0_decision_path.md`。这些文档用于继续 v1.0 readiness/backend
+engineering，不准备 `v0.9.0rc8` release draft，不授权 PyPI/TestPyPI 上传，
+不创建 tag/release，也不提供 production-grade physical validation 或 formal
+convergence proof。
 v1.0 public contract freeze 已获 maintainer approval，并记录在：
 `docs/v1_0_public_contract_freeze_status.md`。freeze package 包括：
 `docs/v1_0_public_contract_freeze_confirmation.md`、

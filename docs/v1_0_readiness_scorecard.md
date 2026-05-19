@@ -52,6 +52,9 @@
 - Public contract freeze approved for the documented surface.
 - v1.0 readiness gap audit.
 - v0.9.0rc8 development readiness.
+- rc8 backend roadmap.
+- rc8 capability gap audit.
+- rc8 to v1.0 decision path.
 - v1.0 decision matrix.
 - v1.0 public contract freeze checklist.
 - v1.0 public contract freeze confirmation package.
@@ -152,10 +155,17 @@
   continue `0.9.0rc8.dev0` development readiness, but `v0.9.0rc8` tag creation, future GitHub
   release creation, PyPI publication, TestPyPI upload, and `v1.0.0` release are
   not approved.
+- rc8 backend roadmap and capability gap audit identify remaining backend
+  hardening areas before any future rc8, PyPI, or v1.0.0 decision. They do not
+  prepare a release draft and do not claim production-grade physical validation
+  or a formal convergence proof.
 
 ## Recommended Next Decisions
 
 - Continue v1.0 readiness engineering.
+- Use `docs/rc8_backend_roadmap.md`, `docs/rc8_capability_gap_audit.md`, and
+  `docs/rc8_to_v1_0_decision_path.md` before deciding whether to prepare a
+  future `v0.9.0rc8` release draft.
 - Use `docs/v1_0_gap_audit.md` to classify blockers and deferred work.
 - Use `docs/rc6_development_plan.md` to keep rc6 development scoped.
 - Use `docs/v1_0_decision_matrix.md` before TestPyPI, PyPI, Elmer, production

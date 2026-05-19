@@ -1,0 +1,79 @@
+# rc8.dev0 Capability Gap Audit
+
+Current public prerelease: `v0.9.0rc7`.
+Current main development version: `0.9.0rc8.dev0`.
+
+This audit identifies backend gaps that should be reviewed before any future
+`v0.9.0rc8`, PyPI, or `v1.0.0` decision. It is preview/design-assist planning,
+not production-grade physical validation.
+
+## Release and Safety Status
+
+- `v0.9.0rc8` tag: not created.
+- `v1.0.0` tag: not created.
+- PyPI: not published.
+- PyPI publication approval: not granted.
+- TestPyPI uploaded and verified only for `0.9.0rc6.dev0`.
+- TestPyPI upload for `0.9.0rc8.dev0`: not performed.
+- External solver execution: blocked by default.
+- External LLM calls: blocked by default.
+- Production-grade physical validation: not claimed.
+- Formal convergence proof: not claimed.
+- Elmer Level 3: deferred; Elmer remains Level 2 + Level-3-ready.
+
+## Gap Matrix
+
+| Capability | Current state | Gap | Risk | Recommended rc8 action |
+| --- | --- | --- | --- | --- |
+| Sub-agent reality | Deterministic roles execute in traces and audit | Roles are not standalone autonomous packages/classes | Maintainers may overread "agent" as independent installed agents | Keep audit wording explicit and add examples showing deterministic orchestration. |
+| Tool-call ledger | Records internal calls and blocked external actions | Ledger is session-scoped, not persisted across runs | Harder to compare historical evidence | Add optional JSON export examples before rc8 draft. |
+| Material library | Local preview catalog and suggestions | Preview optical constants are not provenance-complete | Material suggestions may be mistaken for authoritative constants | Add source/provenance notes and stronger warning tests. |
+| Optical calculators | Reference sanity cases exist | Limited domains and simplified assumptions | Users may apply preview outputs outside supported assumptions | Add more failure-mode tests and assumption summaries. |
+| Source/monitor diagnostics | Template and goal inference exists | Ambiguous multi-source/multi-monitor cases are shallow | Missing inputs may be underreported | Expand ambiguity diagnostics and blocking questions. |
+| Observable diagnostics | Taxonomy and adapter compatibility exist | Combined observables need richer required-input handling | Preview artifacts may hide observable prerequisites | Add multi-observable cases and expected warnings. |
+| Adapter-native mappings | Five adapters mapped with golden metadata | Mapping is preview metadata, not executed solver semantics | Real solver users may expect monitor results | Keep `solver_execution_required_for_real_result` prominent. |
+| Adapter golden coverage | Strict metadata diffs cover five golden cases | Coverage is narrow per adapter | Adapter changes can pass without broader semantic coverage | Add one additional case per adapter when adapter previews change. |
+| Design requirement templates | Seven templates and deterministic matching exist | Requirements lack tolerance/optimization constraints | Goals may not capture design acceptance criteria | Add tolerance, sweep, and pass/fail fields for candidate templates. |
+| Natural-language to optical-language matching | Deterministic heuristic EN/ZH matching exists | Low-confidence unknown goals need more examples | Unexpected matches can produce misleading plans | Add negative examples and confidence thresholds. |
+| Frontend Agent Studio | Local MVP exists | Backend evidence is not yet summarized in UI | Maintainer review remains docs/scripts-first | Defer until backend evidence shape stabilizes. |
+| PyPI publication | Deferred and not approved | No final PyPI approval path executed | Publishing before decision could create irreversible public surface | Keep PyPI gate closed until explicit approval. |
+| v1.0.0 criteria | Public contract freeze approved | PyPI decision, final release readiness, and validation boundaries remain open | Premature v1.0.0 could overstate maturity | Use rc8 gap closure and separate v1.0 planning package. |
+| Elmer Level 3 | Level 2 + Level-3-ready, install deferred | No completed ElmerSolver execution evidence | Level 3 would overclaim current validation | Keep deferred until maintainable install route and opt-in validation pass. |
+
+## Capability Gaps Found
+
+1. Calculator depth remains preview-oriented.
+   The local calculators are useful for sanity checks and design-assist
+   summaries, but they are not production-grade physical validation.
+
+2. Material provenance should be strengthened.
+   The material library is safe as a local preview catalog, but rc8 backend
+   hardening should make source notes and validation levels easier to audit.
+
+3. Natural-language matching should add negative and ambiguous examples.
+   The deterministic matcher should continue to prefer safe low-confidence
+   diagnostics over overconfident case selection.
+
+4. Adapter-native mapping evidence is metadata-only.
+   Golden cases prove preview semantics and safety boundaries, not real solver
+   monitor results.
+
+5. Elmer remains explicitly deferred.
+   Elmer is not Level 3 and should remain non-blocking until installation and
+   opt-in validation become maintainable.
+
+## Non-gaps / Stable Enough
+
+- Current public prerelease remains `v0.9.0rc7`.
+- Main development version is `0.9.0rc8.dev0`.
+- Backend evidence pack, backend capability report, sub-agent audit, and
+  adapter golden coverage are available.
+- Tool-call ledger records blocked solver/LLM/publication/release actions.
+- PyPI is not published and publication approval remains not granted.
+- No `v0.9.0rc8` or `v1.0.0` tag is created.
+
+## Decision Impact
+
+This audit supports continued v1.0 readiness/backend engineering. It does not
+approve a `v0.9.0rc8` release draft, TestPyPI upload, PyPI publication, tag
+creation, GitHub release creation, or `v1.0.0` release.

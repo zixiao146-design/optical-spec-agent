@@ -25,6 +25,16 @@ For maintainer review, `scripts/generate_backend_evidence_pack.py`,
 `GET /api/backend-evidence-summary` collect the same backend evidence into one
 preview/design-assist review package.
 
+Post-`v0.9.0rc7` backend planning is tracked in:
+
+- `docs/rc8_backend_roadmap.md`
+- `docs/rc8_capability_gap_audit.md`
+- `docs/rc8_to_v1_0_decision_path.md`
+
+Those documents identify what is stable enough, what needs backend hardening,
+what is deferred, and what is not a goal before any future rc8, PyPI, or v1.0.0
+decision.
+
 ## Installed / Callable / Executed
 
 | Capability | Installed/importable | Callable | Executed in backend smoke |
@@ -95,6 +105,15 @@ install deferred.
 The backend does not expose TestPyPI upload, PyPI publication, git tag creation,
 or GitHub release creation endpoints. PyPI remains unpublished, and publication
 approval remains not granted.
+The `v0.9.0rc8` tag has not been created, `v1.0.0` has not been released, and
+`0.9.0rc8.dev0` is not a public release.
+
+## Current Gap Audit
+
+`docs/rc8_capability_gap_audit.md` currently identifies calculator depth,
+material provenance, ambiguous natural-language matching, metadata-only
+adapter-native mapping evidence, and Elmer Level 3 deferral as the main backend
+gaps to review before future rc8 or v1.0 decisions.
 
 ## Verification
 

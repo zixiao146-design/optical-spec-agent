@@ -113,6 +113,16 @@ This document describes the current `main` branch. It is not a release tag.
   GitHub prerelease. It does not approve PyPI publication, TestPyPI upload for
   0.9.0rc8.dev0, creating a v0.9.0rc8 tag, creating a v1.0.0 tag/release, or
   claiming production-grade physical validation.
+- rc8 backend roadmap:
+  `docs/rc8_backend_roadmap.md` classifies post-rc7 backend work as done /
+  stable enough, needs backend hardening, deferred / non-blocker, future /
+  Phase 2, and not a goal.
+- rc8 capability gap audit:
+  `docs/rc8_capability_gap_audit.md` records remaining backend hardening gaps
+  before any future rc8, PyPI, or v1.0.0 decision.
+- rc8 to v1.0 decision path:
+  `docs/rc8_to_v1_0_decision_path.md` keeps rc8.dev0 engineering separate from
+  future rc8 release draft, PyPI publication, and v1.0.0 decisions.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:
@@ -213,6 +223,12 @@ exists for rc8, and publication remains separately gated. TestPyPI contains
 the `0.9.0rc6.dev0` development package via manual Trusted Publishing, but
 TestPyPI upload for `0.9.0rc8.dev0` has not been performed; PyPI remains
 unpublished.
+
+Use `docs/rc8_backend_roadmap.md`, `docs/rc8_capability_gap_audit.md`, and
+`docs/rc8_to_v1_0_decision_path.md` for post-rc7 backend engineering. These
+documents do not prepare a `v0.9.0rc8` release draft, do not create tags or
+GitHub releases, do not approve PyPI/TestPyPI publication, and do not claim
+production-grade physical validation or a formal convergence proof.
 
 Current main contract artifacts:
 
