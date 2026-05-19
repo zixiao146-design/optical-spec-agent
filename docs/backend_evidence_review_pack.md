@@ -25,6 +25,15 @@ default.
 The smoke script verifies that the generated JSON and Markdown include the
 expected sections and safety markers.
 
+## Review Decision
+
+The maintained review decision is recorded in
+[`backend_evidence_review_decision.md`](backend_evidence_review_decision.md).
+That decision records backend evidence as sufficient to prepare a
+`v0.9.0rc7` release draft, while keeping `v0.9.0rc7` tag creation, GitHub
+release creation, PyPI publication, TestPyPI upload, and `v1.0.0` release
+approval separate and not granted.
+
 ## Sections
 
 - Package and release status: current public prerelease, main development

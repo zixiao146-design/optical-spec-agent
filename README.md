@@ -100,6 +100,11 @@ The evidence pack can be generated with
 or smoke-checked with `./scripts/smoke_backend_evidence_pack.sh`; it is a
 maintainer review artifact only, not a release, upload, tag, or publication
 action.
+The maintainer
+[`backend evidence review decision`](docs/backend_evidence_review_decision.md)
+records backend evidence as sufficient to prepare a `v0.9.0rc7` release draft,
+while keeping `v0.9.0rc7` tag/release approval, PyPI publication, TestPyPI
+upload, and `v1.0.0` approval separate and not granted.
 The backend also includes
 [`design requirement templates`](docs/design_requirement_templates.md) and a
 [`natural language to optical language`](docs/natural_language_to_optical_language.md)

@@ -29,3 +29,6 @@ def test_v1_0_release_criteria_exists_and_bounds_release_claims():
     assert "docs/frontend_mvp_runbook.md" in text
     assert "local MVP under `frontend/`" in text
     assert "not a PyPI publication trigger" in text
+    assert "docs/backend_evidence_review_decision.md" in text
+    assert "sufficient to prepare a `v0.9.0rc7` release draft" in text
+    assert "tag/release/PyPI/TestPyPI/v1.0 approval remains separate and not granted" in text

@@ -46,6 +46,7 @@ def test_docs_index_exists_and_links_major_docs():
         "backend_capability_report.zh-CN.md",
         "backend_evidence_review_pack.md",
         "backend_evidence_review_pack.zh-CN.md",
+        "backend_evidence_review_decision.md",
         "design_case_cross_checks.md",
         "design_case_cross_checks.zh-CN.md",
         "design_requirement_templates.md",

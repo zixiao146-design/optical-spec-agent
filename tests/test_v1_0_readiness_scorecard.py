@@ -70,3 +70,6 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "PyPI publication remains a hard strategic decision" in text
     assert "not production-grade physical validation" in text
     assert "not production-grade optical validation" in text
+    assert "docs/backend_evidence_review_decision.md" in text
+    assert "backend evidence is sufficient to" in text
+    assert "not approved" in text

@@ -24,3 +24,17 @@ def test_backend_evidence_pack_docs_exist_and_document_limits():
         assert "LLM" in text
         assert "tag" in text
         assert "release" in text
+
+
+def test_backend_evidence_pack_docs_link_review_decision():
+    text = (ROOT / "docs" / "backend_evidence_review_pack.md").read_text(
+        encoding="utf-8"
+    )
+    zh_text = (ROOT / "docs" / "backend_evidence_review_pack.zh-CN.md").read_text(
+        encoding="utf-8"
+    )
+    assert "backend_evidence_review_decision.md" in text
+    assert "sufficient to prepare a" in text
+    assert "not granted" in text
+    assert "backend_evidence_review_decision.md" in zh_text
+    assert "尚未授权" in zh_text

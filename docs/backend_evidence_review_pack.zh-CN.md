@@ -22,6 +22,14 @@ python scripts/generate_backend_evidence_pack.py \
 
 该脚本会确认生成的 JSON 和 Markdown 包含必要章节和安全标记。
 
+## 审查决策
+
+维护者审查决策记录在
+[`backend_evidence_review_decision.md`](backend_evidence_review_decision.md)。
+该决策说明后端证据已足以准备 `v0.9.0rc7` release draft，但 `v0.9.0rc7`
+tag、GitHub release、PyPI 发布、TestPyPI 上传和 `v1.0.0` 发布批准仍保持分离，
+且尚未授权。
+
 ## 包含章节
 
 - Package and release status：当前公开预发布版本、main 开发版本、PyPI/TestPyPI

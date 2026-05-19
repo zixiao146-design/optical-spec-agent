@@ -39,6 +39,11 @@
   `docs/frontend_i18n_zh_CN.md` and `frontend/src/i18n/`; it improves local
   usability without changing API JSON fields, adapter tool names,
   `api_contract_version`, package version, or release status.
+- Backend evidence review decision:
+  `docs/backend_evidence_review_decision.md` records backend evidence as
+  sufficient to prepare a `v0.9.0rc7` release draft. It does not approve a
+  `v0.9.0rc7` tag, GitHub release, PyPI publication, TestPyPI upload, or
+  `v1.0.0` release.
 
 ## Required before v1.0.0
 
@@ -105,6 +110,7 @@
 | Optical calculators | Engineering track | Preview/design-assist endpoints available, including sweeps, case helpers, quality fields, and formula sanity reference cases | Useful backend functionality; not production-grade physical validation and not a v1.0 blocker by itself. |
 | Backend capability report | Engineering track | JSON/Markdown script and API endpoints available | Proves installed/callable/executed backend reality and design-case cross-checks; not a release/upload/tag trigger. |
 | Backend evidence review pack | Engineering track | JSON/Markdown generator, smoke script, docs, and API summary available | Bundles maintainer review evidence; not production-grade validation and not a release/upload/tag trigger. |
+| Backend evidence review decision | Engineering track | Backend evidence sufficient to prepare `v0.9.0rc7` release draft | Draft preparation only; tag/release/PyPI/TestPyPI/v1.0 approval remains separate and not granted. |
 
 Material constants remain preview/design-assist data unless independently
 verified. Sub-agent trace is local/deterministic and does not call external

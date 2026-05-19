@@ -13,6 +13,11 @@ sub-agent reality, tool-call reality, calculator evidence, design-case
 cross-checks, source/monitor diagnostics, adapter-native golden coverage, and
 blocked external actions, use
 [`backend_evidence_review_pack.md`](backend_evidence_review_pack.md).
+The review decision in
+[`backend_evidence_review_decision.md`](backend_evidence_review_decision.md)
+records that backend evidence is sufficient to prepare a `v0.9.0rc7` release
+draft, while tag creation, GitHub release creation, PyPI publication, TestPyPI
+upload, and `v1.0.0` approval remain separate and not granted.
 
 ## What The Report Proves
 

@@ -37,6 +37,7 @@ Current main development version: `0.9.0rc7.dev0`.
 - [Backend capability report zh-CN](backend_capability_report.zh-CN.md)
 - [Backend evidence review pack](backend_evidence_review_pack.md)
 - [Backend evidence review pack zh-CN](backend_evidence_review_pack.zh-CN.md)
+- [Backend evidence review decision](backend_evidence_review_decision.md)
 - [Design case cross-checks](design_case_cross_checks.md)
 - [Design case cross-checks zh-CN](design_case_cross_checks.zh-CN.md)
 - [Design requirement templates](design_requirement_templates.md)

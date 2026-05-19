@@ -104,6 +104,11 @@ This document describes the current `main` branch. It is not a release tag.
   session surface from natural language goal to optical intent, design case,
   plan steps, sub-agent trace, artifacts, permission gates, evidence, and next
   actions. This is not a release, PyPI, TestPyPI, tag, or GitHub release action.
+- Backend evidence review decision:
+  `docs/backend_evidence_review_decision.md` records that backend evidence is
+  sufficient to prepare a `v0.9.0rc7` release draft. This does not approve
+  creating the `v0.9.0rc7` tag, creating a GitHub release, publishing PyPI,
+  uploading TestPyPI, or preparing `v1.0.0`.
 - Frontend MVP smoke:
   `scripts/smoke_frontend_mvp.sh`
 - Frontend visual smoke plan:
