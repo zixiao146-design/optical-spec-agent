@@ -166,6 +166,11 @@ This document describes the current `main` branch. It is not a release tag.
   `validation/mpb/mpb_micro_benchmark_2026-05-20.md`. This is optional manual
   MPB/band-structure smoke evidence only; Meep FDTD, Gmsh, Optiland, and Elmer
   were not run in that task. Future MPB reruns require separate approval.
+- MPB micro-benchmark review decision:
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`.
+  The evidence is accepted only as optional manual MPB/band-structure smoke
+  evidence; it does not approve Elmer, PyPI/TestPyPI upload, tag/release
+  creation, or any future MPB rerun.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.

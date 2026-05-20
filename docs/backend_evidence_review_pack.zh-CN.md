@@ -79,7 +79,7 @@ python scripts/generate_backend_evidence_pack.py \
   ray/path smoke 证据。2026-05-20 单独批准的 Meep-only run 使用
   `OSA_SOLVER_PYTHON`，review 后只接受为可选手动 PyMeep/FDTD smoke 证据。
   2026-05-20 单独批准的 MPB-only run 使用 `OSA_SOLVER_PYTHON` 和 `meep.mpb`，
-  只记录为可选手动 MPB/band-structure smoke 证据，等待单独 review；Elmer 仍 deferred。
+  只记录为可选手动 MPB/band-structure smoke 证据，已 review 并接受；Elmer 仍 deferred。
 - MPB decision packet
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
   已准备，记录必需的 `OSA_SOLVER_PYTHON` profile、`meep.mpb` import-only

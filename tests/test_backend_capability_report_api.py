@@ -166,6 +166,13 @@ def test_backend_capability_report_api_returns_expected_sections():
         "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
     )
     assert mpb["decision_packet_path"].endswith("mpb_micro_benchmark_decision_packet.md")
+    assert mpb["review_record_path"].endswith(
+        "mpb_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        mpb["review_status"]
+        == "accepted_as_optional_manual_mpb_band_structure_smoke_evidence"
+    )
     assert mpb["cli_required"] is False
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {

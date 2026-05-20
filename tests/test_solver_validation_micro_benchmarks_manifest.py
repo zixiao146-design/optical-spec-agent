@@ -120,7 +120,14 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert solvers["mpb"]["last_execution_evidence"] == (
         "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
     )
-    assert solvers["mpb"]["review_status"] == "pending_review"
+    assert solvers["mpb"]["review_record_path"] == (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        solvers["mpb"]["review_status"]
+        == "accepted_as_optional_manual_mpb_band_structure_smoke_evidence"
+    )
+    assert solvers["mpb"]["review_decision_date"] == "2026-05-20"
     assert solvers["mpb"]["next_candidate_solver"] == "elmer_deferred"
     assert solvers["mpb"]["next_candidate_approved"] is False
     assert solvers["mpb"]["no_further_solver_authorized"] is True
@@ -136,11 +143,15 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         "I approve running the optional MPB micro-benchmark for optical-spec-agent "
         "using OSA_SOLVER_PYTHON=<path>."
     )
-    assert "MPB evidence is recorded" in solvers["mpb"]["recommended_next_action"]
+    assert "MPB evidence is reviewed and accepted" in solvers["mpb"]["recommended_next_action"]
     assert "No future MPB rerun" in solvers["mpb"]["recommended_next_action"]
     assert "validation/mpb/mpb_micro_benchmark_2026-05-20.md" in solvers["mpb"]["evidence_refs"]
     assert (
         "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md"
+        in solvers["mpb"]["evidence_refs"]
+    )
+    assert (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md"
         in solvers["mpb"]["evidence_refs"]
     )
     assert (

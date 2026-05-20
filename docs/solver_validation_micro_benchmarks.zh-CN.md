@@ -33,7 +33,7 @@ Optiland-only run 已通过，并已 review 接受为 optional manual ray/path s
 evidence。单独批准的 2026-05-20 Meep-only run 使用 `OSA_SOLVER_PYTHON`
 并已通过，review 接受为 optional manual PyMeep/FDTD smoke evidence。单独批准的
 2026-05-20 MPB-only run 使用 `OSA_SOLVER_PYTHON` 通过 `meep.mpb` 执行并已通过，
-记录为 optional manual MPB/band-structure smoke evidence，等待单独 review。
+已 review 并接受为 optional manual MPB/band-structure smoke evidence。
 Elmer 仍 deferred。当前记录不批准未来 Gmsh、Optiland、Meep 或 MPB rerun。
 Meep 专用 decision packet 记录在
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)，
@@ -96,8 +96,8 @@ Optiland-only、Meep-only 和 MPB-only approved execution records，位于
 [`optional_solver_approval_records/`](optional_solver_approval_records/)。
 其中 Meep decision packet、approval record 和 review record 不授权 Elmer、
 upload、tag、release 动作或任何未来 Meep rerun。
-同一目录中的 MPB approval record 和 evidence 只覆盖已批准的 MPB-only run；
-不授权未来 MPB rerun、Elmer、upload、tag 或 release 动作。
+同一目录中的 MPB approval record、evidence 和 review record 只覆盖已批准的
+MPB-only run；不授权未来 MPB rerun、Elmer、upload、tag 或 release 动作。
 
 ## 声明边界
 

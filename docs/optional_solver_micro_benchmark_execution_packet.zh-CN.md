@@ -20,7 +20,7 @@
 - solver micro-benchmark review decision：Gmsh 只被接受为 optional manual
   mesh-generation smoke evidence；Optiland 只被接受为 optional manual ray/path
   smoke evidence；Meep 只被接受为 optional manual PyMeep/FDTD smoke evidence；
-  MPB 已记录为 optional manual MPB/band-structure smoke evidence，等待单独 review
+  MPB 已 review 并接受为 optional manual MPB/band-structure smoke evidence
 - Meep decision packet：
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`；
   已用于 Meep-only 2026-05-20 run，并 review 接受为 optional manual PyMeep/FDTD smoke evidence
@@ -55,7 +55,7 @@
    批准执行并通过，并已 review 为 optional manual PyMeep/FDTD smoke evidence。
 4. MPB fourth：需要 solver Python profile 和 `meep.mpb`。
    状态：2026-05-20 已按 MPB-only 批准执行并通过，记录为 optional manual
-   MPB/band-structure smoke evidence，等待单独 review。
+   MPB/band-structure smoke evidence，已 review 并接受。
 5. Elmer deferred：直到存在可维护的 `ElmerSolver` 安装路径。
 
 ## Per-solver 审批包

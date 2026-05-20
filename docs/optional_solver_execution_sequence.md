@@ -40,9 +40,8 @@ not execution approval.
    - Decision packet:
      `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`.
    - MPB CLI is not required if the `meep.mpb` Python import path is available.
-   - Status: completed for the approved 2026-05-20 MPB-only run and recorded
-     as optional manual MPB/band-structure smoke evidence pending separate
-     review.
+   - Status: completed for the approved 2026-05-20 MPB-only run and reviewed
+     as optional manual MPB/band-structure smoke evidence.
    - Evidence: `validation/mpb/mpb_micro_benchmark_2026-05-20.md`.
    - Stop after MPB and review the band-path smoke report.
 5. Elmer deferred.

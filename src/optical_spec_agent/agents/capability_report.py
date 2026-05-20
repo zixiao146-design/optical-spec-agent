@@ -816,7 +816,7 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
                 "FDTD benchmark was not rerun by the MPB task."
             ),
             "Meep evidence was reviewed and accepted as optional manual PyMeep/FDTD smoke evidence; it does not authorize future Meep reruns or other solver execution.",
-            "MPB has an approved 2026-05-20 MPB-only optional micro-benchmark pass recorded as MPB/band-structure smoke evidence; it does not authorize future MPB reruns or other solver execution.",
+            "MPB evidence was reviewed and accepted as optional manual MPB/band-structure smoke evidence; it does not authorize future MPB reruns or other solver execution.",
             "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
             "Future execution should run one solver at a time after explicit approval.",
             "Opt-in environment variables are required for solver-backed runs.",

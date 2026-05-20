@@ -66,9 +66,9 @@ solver convergence, and material-data verification.
   PyMeep/FDTD smoke evidence; it does not approve MPB, Elmer, or any future
   Meep rerun.
 - The separately approved MPB-only 2026-05-20 micro-benchmark used
-  `OSA_SOLVER_PYTHON` and `meep.mpb` and is recorded only as optional manual
-  MPB/band-structure smoke evidence pending separate review; it does not
-  approve Elmer or any future MPB rerun.
+  `OSA_SOLVER_PYTHON` and `meep.mpb` and is reviewed/accepted only as optional
+  manual MPB/band-structure smoke evidence; it does not approve Elmer or any
+  future MPB rerun.
 - `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
   Python environment; CLI tools such as Gmsh are still detected through the
   current `PATH`.

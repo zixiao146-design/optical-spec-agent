@@ -161,6 +161,13 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert mpb["decision_packet_path"].endswith(
         "mpb_micro_benchmark_decision_packet.md"
     )
+    assert mpb["review_record_path"].endswith(
+        "mpb_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        mpb["review_status"]
+        == "accepted_as_optional_manual_mpb_band_structure_smoke_evidence"
+    )
     assert mpb["cli_required"] is False
     assert any(
         "Optiland evidence was reviewed and accepted" in note
@@ -170,7 +177,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Meep evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
-    assert any("MPB has an approved 2026-05-20 MPB-only" in note for note in solver_micro["notes"])
+    assert any("MPB evidence was reviewed and accepted" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",

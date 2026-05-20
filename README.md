@@ -139,6 +139,8 @@ and reviewed in
 as optional manual PyMeep/FDTD smoke evidence only. The separately approved
 MPB-only 2026-05-20 run is recorded in
 [`validation/mpb/mpb_micro_benchmark_2026-05-20.md`](validation/mpb/mpb_micro_benchmark_2026-05-20.md)
+and reviewed in
+[`docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`](docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md)
 as optional manual MPB/band-structure smoke evidence only. Elmer remains
 deferred; Gmsh, Optiland, Meep, and MPB reruns all require separate approval.
 The Meep decision packet
@@ -150,6 +152,8 @@ The MPB decision packet
 records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
 readiness path, approved command, artifacts, cleanup, and non-claims for the
 approved MPB-only run. It does not authorize future MPB reruns.
+The optional solver evidence loop is now closed for Gmsh, Optiland, Meep, and
+MPB; Elmer remains deferred and is not Level 3.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

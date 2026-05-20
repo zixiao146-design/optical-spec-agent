@@ -61,7 +61,7 @@
   它不批准 MPB、Elmer 或未来 Meep rerun。
 - 2026-05-20 单独批准并执行的 MPB-only micro-benchmark 使用
   `OSA_SOLVER_PYTHON` 和 `meep.mpb`，只记录为 optional manual MPB/band-structure
-  smoke evidence，等待单独 review；它不批准 Elmer 或未来 MPB rerun。
+  smoke evidence，已 review 并接受；它不批准 Elmer 或未来 MPB rerun。
 - `OSA_SOLVER_PYTHON` 可用于把 import-only probe 指向专用 solver Python；
   Gmsh 等 CLI 工具仍从当前 `PATH` 探测。
 - 默认不调用 external LLM。

@@ -33,7 +33,7 @@ convergence proof is claimed.
 | Optical language | observable diagnostics | `fixture_guarded_preview` | observable taxonomy fixtures and tests | Observable fit is not a computed physical result. |
 | Adapters | adapter-native source/monitor mapping | `fixture_guarded_preview` | adapter mapping fixtures and tests | Real adapter results require explicit solver execution. |
 | Adapters | adapter golden coverage | `fixture_guarded_preview` | golden cases and strict metadata diff | Metadata checks are not solver monitor outputs. |
-| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, the approved Gmsh-only, Optiland-only, Meep-only, and MPB-only 2026-05-20 evidence records, the Gmsh, Optiland, and Meep review decisions, the Meep and MPB decision packets, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. Gmsh evidence is accepted only as mesh-generation smoke, Optiland evidence only as ray/path smoke, Meep evidence only as PyMeep/FDTD smoke, and MPB evidence only as band-structure path smoke pending separate review; none proves optical correctness. |
+| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, the approved Gmsh-only, Optiland-only, Meep-only, and MPB-only 2026-05-20 evidence records, the Gmsh, Optiland, Meep, and MPB review decisions, the Meep and MPB decision packets, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. Gmsh evidence is accepted only as mesh-generation smoke, Optiland evidence only as ray/path smoke, Meep evidence only as PyMeep/FDTD smoke, and MPB evidence only as MPB/band-structure smoke; none proves optical correctness. |
 | Optional solver validation | Elmer micro-benchmark plan | `documented_preview` / deferred | `validation/elmer/elmer_install_deferred_2026-05-15.md` and Elmer optional pilot docs | Elmer remains Level 2 + Level-3-ready; Level 3 is not claimed. |
 | Application domains | domain benchmarks | `benchmark_checked_preview` | 19 pass / 0 warn / 0 fail scenario suite | Benchmarks test deterministic behavior, not physical correctness. |
 | Agents | sub-agent task sessions | `fixture_guarded_preview` | audit script and tool-call ledger tests | Roles are deterministic local backend roles. |
@@ -80,7 +80,10 @@ convergence proof is claimed.
   [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
   records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
   readiness path, approved command, artifacts, and non-claims for the approved
-  MPB-only run. It does not authorize future MPB reruns.
+  MPB-only run. The MPB review record
+  [`optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md)
+  accepts it only as optional manual MPB/band-structure smoke evidence. It
+  does not authorize future MPB reruns.
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 

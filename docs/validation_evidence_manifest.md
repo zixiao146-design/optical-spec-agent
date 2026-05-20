@@ -107,6 +107,9 @@
   `validation/mpb/mpb_micro_benchmark_2026-05-20.md`.
   It records optional manual MPB/band-structure smoke evidence only and does
   not approve future MPB reruns, uploads, tags, or releases.
+- Maintainer review accepted the MPB evidence as optional manual
+  MPB/band-structure smoke evidence only:
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`.
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.

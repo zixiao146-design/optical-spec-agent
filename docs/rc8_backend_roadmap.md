@@ -78,8 +78,8 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   mesh-generation smoke evidence; record that the Optiland review accepted the
   evidence only as optional manual ray/path smoke evidence; record that the
   Meep review accepted the evidence only as optional manual PyMeep/FDTD smoke
-  evidence; record that MPB evidence remains optional manual MPB/band-structure
-  smoke evidence pending separate review.
+  evidence; record that the MPB review accepted the evidence only as optional
+  manual MPB/band-structure smoke evidence.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.
@@ -151,6 +151,6 @@ Meep, MPB, Elmer, or future Gmsh reruns.
 The Meep-only micro-benchmark is reviewed and accepted as optional manual
 PyMeep/FDTD smoke evidence only; it does not authorize MPB, Elmer,
 PyPI/TestPyPI upload, tag/release creation, or future Meep reruns.
-The MPB-only micro-benchmark is recorded as optional manual MPB/band-structure
-smoke evidence pending separate review; it does not authorize Elmer,
+The MPB-only micro-benchmark is reviewed and accepted as optional manual
+MPB/band-structure smoke evidence; it does not authorize Elmer,
 PyPI/TestPyPI upload, tag/release creation, or future MPB reruns.

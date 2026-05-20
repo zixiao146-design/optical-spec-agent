@@ -376,13 +376,14 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_execution_sequence.md",
                 "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md",
                 "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md",
+                "docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md",
                 "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
                 "validation/mpb/mpb_micro_benchmark_2026-05-20.md",
                 "validation/mpb/mpb_validation_pilot_2026-05-14.md",
             ],
-            "MPB has an approved 2026-05-20 optional manual MPB/band-structure smoke pass through meep.mpb and OSA_SOLVER_PYTHON.",
+            "MPB has a reviewed and accepted optional manual MPB/band-structure smoke pass from 2026-05-20 through meep.mpb and OSA_SOLVER_PYTHON.",
         ),
         (
             "optiland_optional_solver_micro_benchmark",
@@ -489,7 +490,7 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "meep_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only",
             "mpb_optional_micro_benchmark_decision_packet_available": True,
             "mpb_optional_micro_benchmark_status": "passed_2026-05-20",
-            "mpb_optional_micro_benchmark_review_status": "pending_review",
+            "mpb_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mpb_band_structure_smoke_evidence",
             "mpb_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only_meep_mpb",
             "next_optional_solver_candidate": "none_elmer_deferred",
             "elmer_micro_benchmark_status": "deferred",
@@ -528,8 +529,8 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "record the separately approved Meep-only pass from 2026-05-20 "
                 "as reviewed optional manual PyMeep/FDTD smoke evidence through "
                 "OSA_SOLVER_PYTHON, record the separately approved MPB-only pass "
-                "from 2026-05-20 as optional manual MPB/band-structure smoke "
-                "evidence through meep.mpb and OSA_SOLVER_PYTHON, "
+                "from 2026-05-20 as reviewed optional manual MPB/band-structure "
+                "smoke evidence through meep.mpb and OSA_SOLVER_PYTHON, "
                 "and default gates do not run solvers."
             ),
         },

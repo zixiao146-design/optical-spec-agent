@@ -20,8 +20,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - Solver micro-benchmark evidence: Gmsh accepted only as optional manual
   mesh-generation smoke evidence; Optiland accepted only as optional manual
   ray/path smoke evidence; Meep accepted only as optional manual PyMeep/FDTD
-  smoke evidence; MPB recorded as optional manual MPB/band-structure smoke
-  evidence pending separate review
+  smoke evidence; MPB accepted only as optional manual MPB/band-structure
+  smoke evidence
 - Meep decision packet: prepared at
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`;
   approved/executed/reviewed for the Meep-only 2026-05-20 run as optional
@@ -61,8 +61,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
    Status: completed for the approved Meep-only run on 2026-05-20 and reviewed
    as optional manual PyMeep/FDTD smoke evidence.
 4. MPB fourth: requires the solver Python profile and `meep.mpb`.
-   Status: completed for the approved MPB-only run on 2026-05-20 and recorded
-   as optional manual MPB/band-structure smoke evidence pending separate review.
+   Status: completed for the approved MPB-only run on 2026-05-20 and reviewed
+   as optional manual MPB/band-structure smoke evidence.
 5. Elmer deferred: keep deferred until a maintainable `ElmerSolver` install
    route exists.
 

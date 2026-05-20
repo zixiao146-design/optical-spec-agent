@@ -153,6 +153,26 @@ def test_mpb_approved_execution_record_is_separate_from_pending_template():
     assert "no production band-structure validation" in text
 
 
+def test_mpb_review_record_accepts_evidence_without_new_authorization():
+    path = RECORD_DIR / "mpb_micro_benchmark_review_2026-05-20.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    assert "Review status: accepted as optional manual MPB / band-structure smoke evidence" in text
+    assert "MPB / PyMeep version: 1.33.0" in text
+    assert "MPB CLI required: no" in text
+    assert "Execution path: `meep.mpb` through solver Python profile" in text
+    assert "Meep FDTD benchmark executed: no" in text
+    assert "Gmsh rerun in this task: no" in text
+    assert "Optiland rerun in this task: no" in text
+    assert "Elmer executed: no" in text
+    assert "PyPI/TestPyPI upload: no" in text
+    assert "Tag/release action: no" in text
+    assert "Production-grade MPB validation claimed: no" in text
+    assert "Production band-structure validation claimed: no" in text
+    assert "This evidence does not authorize any further solver execution." in text
+    assert "This evidence does not authorize Elmer execution." in text
+
+
 def test_meep_approved_execution_record_is_separate_from_pending_template():
     path = RECORD_DIR / "meep_micro_benchmark_approval_2026-05-20.md"
     assert path.exists()

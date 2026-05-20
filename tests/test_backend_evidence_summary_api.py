@@ -138,6 +138,13 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert mpb["approval_record_path"].endswith(
         "mpb_micro_benchmark_approval_2026-05-20.md"
     )
+    assert mpb["review_record_path"].endswith(
+        "mpb_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        mpb["review_status"]
+        == "accepted_as_optional_manual_mpb_band_structure_smoke_evidence"
+    )
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(

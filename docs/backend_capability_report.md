@@ -148,8 +148,11 @@ accepts that run only as optional manual PyMeep/FDTD smoke evidence, not
 production FDTD validation.
 The MPB-specific decision packet is
 [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md);
-it requires `OSA_SOLVER_PYTHON`, treats `meep.mpb` import as readiness only,
-and does not authorize MPB execution.
+it requires `OSA_SOLVER_PYTHON`, documents the `meep.mpb` execution path, and
+records the separately approved MPB-only run. The MPB review record
+[`optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md)
+accepts that run only as optional manual MPB/band-structure smoke evidence,
+not production band-structure validation or optical correctness.
 
 Coverage can also be read directly:
 
@@ -221,7 +224,9 @@ and reviewed in
 as optional manual PyMeep/FDTD smoke evidence only. The separately approved
 MPB-only 2026-05-20 run is recorded in
 [`../validation/mpb/mpb_micro_benchmark_2026-05-20.md`](../validation/mpb/mpb_micro_benchmark_2026-05-20.md)
-as optional manual MPB/band-structure smoke evidence pending separate review.
+and reviewed in
+[`optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md)
+as accepted optional manual MPB/band-structure smoke evidence only.
 Elmer remains not executed by these tasks, and Gmsh/Optiland/Meep/MPB reruns
 require separate approval. None of these records authorizes PyPI/TestPyPI
 upload, tag creation, or release creation.

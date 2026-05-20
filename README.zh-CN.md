@@ -102,9 +102,10 @@ solver 执行。单独批准的 2026-05-20 Optiland-only run 记录在
 `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`
 中完成 review，只作为 optional manual PyMeep/FDTD smoke evidence。单独批准的
 MPB-only 2026-05-20 run 已记录在
-`validation/mpb/mpb_micro_benchmark_2026-05-20.md`，只作为 optional manual
-MPB/band-structure smoke evidence。Elmer 仍 deferred；Gmsh、Optiland、Meep 和
-MPB rerun 都需要单独批准。
+`validation/mpb/mpb_micro_benchmark_2026-05-20.md`，并在
+`docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`
+完成 review，只作为 optional manual MPB/band-structure smoke evidence。Elmer
+仍 deferred；Gmsh、Optiland、Meep 和 MPB rerun 都需要单独批准。
 Meep decision packet
 `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`
 记录必需的 `OSA_SOLVER_PYTHON` profile、approval phrase、命令、artifact
@@ -114,6 +115,8 @@ MPB decision packet
 记录必需的 `OSA_SOLVER_PYTHON` profile、`meep.mpb` import-only readiness
 路径、已批准命令、artifact、cleanup 和 non-claims，用于这次已批准的 MPB-only
 run；它不授权未来 MPB rerun。
+Gmsh、Optiland、Meep 和 MPB 的 optional solver evidence loop 已收口；Elmer
+仍 deferred 且不是 Level 3。
 readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
 `OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
 `meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。

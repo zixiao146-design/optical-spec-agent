@@ -72,8 +72,8 @@ approval remain separate and not granted.
 - Optional solver readiness/approval: availability detection, expected
   artifacts, risk notes, and explicit approval phrase are documented before any
   solver-backed micro-benchmark can be run. The execution approval packet,
-  one-solver-at-a-time sequence, the reviewed Gmsh-only, Optiland-only, and
-  Meep-only records, and pending/deferred records for
+  one-solver-at-a-time sequence, the reviewed Gmsh-only, Optiland-only,
+  Meep-only, and MPB-only records, and pending/deferred records for
   other solvers are review aids only.
   This does not authorize PyPI, TestPyPI, tag, release, or other solver
   execution actions. The Meep and MPB runs used `OSA_SOLVER_PYTHON`; Elmer
@@ -89,9 +89,10 @@ approval remain separate and not granted.
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
   records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
   readiness path, approved command, artifacts, cleanup, and non-claims for the
-  approved MPB-only run. The MPB evidence is recorded as optional manual
-  MPB/band-structure smoke evidence only and does not authorize future MPB
-  reruns.
+  approved MPB-only run. The MPB review record
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`
+  accepts the result only as optional manual MPB/band-structure smoke evidence
+  and does not authorize future MPB reruns.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

@@ -64,5 +64,5 @@
 record 后执行。已接受的 Optiland review 本身不授权 Meep；Meep 只是在单独
 approval record 后执行。已接受的 Meep 证据不授权 MPB；MPB 只是在单独
 approval record 后执行。MPB 证据目前只记录为 optional manual MPB/band-structure
-smoke evidence，等待单独 review；它不授权 Elmer、未来 Gmsh/Optiland/Meep/MPB
+smoke evidence，已 review 并接受；它不授权 Elmer、未来 Gmsh/Optiland/Meep/MPB
 rerun、PyPI/TestPyPI upload、tag 创建或 release 创建。

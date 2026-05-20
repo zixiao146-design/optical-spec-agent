@@ -39,8 +39,8 @@ reviewed as optional manual ray/path smoke evidence. A separate 2026-05-20
 Meep-only run used `OSA_SOLVER_PYTHON`, passed, and is reviewed and accepted
 as optional manual PyMeep/FDTD smoke evidence. A separate 2026-05-20 MPB-only
 run used `OSA_SOLVER_PYTHON`, executed through `meep.mpb`, passed, and is
-recorded as optional manual MPB/band-structure smoke evidence pending separate
-review. Elmer remains deferred. No future Gmsh, Optiland, Meep, or MPB rerun is
+reviewed and accepted as optional manual MPB/band-structure smoke evidence.
+Elmer remains deferred. No future Gmsh, Optiland, Meep, or MPB rerun is
 approved by these records.
 The Meep-specific decision packet is recorded at
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md).
@@ -112,9 +112,9 @@ The Meep decision packet, approval record, and review record in that directory
 do not authorize Elmer, upload, tag, release actions, or any future Meep rerun.
 The Meep review record is
 [`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md).
-The MPB approval record and evidence file in the same directory tree record the
-separately approved MPB-only run. They do not authorize future MPB reruns,
-Elmer, upload, tag, or release actions.
+The MPB approval record, evidence file, and review record in the same directory
+tree record the separately approved MPB-only run. They do not authorize future
+MPB reruns, Elmer, upload, tag, or release actions.
 
 ## Claims
 

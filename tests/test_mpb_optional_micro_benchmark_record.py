@@ -16,8 +16,15 @@ def test_mpb_optional_micro_benchmark_record_documents_scope_and_non_claims():
         / "mpb_micro_benchmark_approval_2026-05-20.md"
     )
     evidence = ROOT / "validation" / "mpb" / "mpb_micro_benchmark_2026-05-20.md"
+    review = (
+        ROOT
+        / "docs"
+        / "optional_solver_approval_records"
+        / "mpb_micro_benchmark_review_2026-05-20.md"
+    )
     assert approval.exists()
     assert evidence.exists()
+    assert review.exists()
 
     approval_text = approval.read_text(encoding="utf-8")
     evidence_text = evidence.read_text(encoding="utf-8")
@@ -52,3 +59,7 @@ def test_mpb_optional_micro_benchmark_record_documents_scope_and_non_claims():
     assert "no production band-structure validation" in evidence_text
     assert "no formal convergence proof" in evidence_text
     assert "no optical correctness claim" in evidence_text
+
+    review_text = review.read_text(encoding="utf-8")
+    assert "accepted as optional manual MPB / band-structure smoke evidence" in review_text
+    assert "This evidence does not authorize any further solver execution." in review_text

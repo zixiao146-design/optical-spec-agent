@@ -47,7 +47,10 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     )
     assert body["summary"]["mpb_optional_micro_benchmark_decision_packet_available"] is True
     assert body["summary"]["mpb_optional_micro_benchmark_status"] == "passed_2026-05-20"
-    assert body["summary"]["mpb_optional_micro_benchmark_review_status"] == "pending_review"
+    assert (
+        body["summary"]["mpb_optional_micro_benchmark_review_status"]
+        == "accepted_as_optional_manual_mpb_band_structure_smoke_evidence"
+    )
     assert (
         body["summary"]["next_optional_solver_candidate"]
         == "none_elmer_deferred"
@@ -67,6 +70,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert "Meep-only pass" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "reviewed optional manual PyMeep/FDTD smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "MPB/band-structure smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
+    assert "reviewed optional manual MPB/band-structure" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False
