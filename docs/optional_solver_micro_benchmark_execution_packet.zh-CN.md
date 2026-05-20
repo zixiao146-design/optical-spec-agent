@@ -12,10 +12,16 @@
 - TestPyPI 仅上传并验证过：0.9.0rc6.dev0
 - v0.9.0rc8 tag：未创建
 - v1.0.0 tag：未创建
-- solver micro-benchmark approval：仅授予 2026-05-20 Gmsh run
-- 已执行 solver micro-benchmark：是，仅 Gmsh，日期 2026-05-20
+- solver micro-benchmark approval：仅授予 2026-05-20 Gmsh run 和单独批准的
+  2026-05-20 Optiland run
+- 已执行 solver micro-benchmark：是，Gmsh only 用于其批准 run，Optiland only
+  用于其单独批准 run
 - solver micro-benchmark review decision：Gmsh 只被接受为 optional manual
-  mesh-generation smoke evidence
+  mesh-generation smoke evidence；Optiland 只被接受为 optional manual ray/path
+  smoke evidence
+- Meep decision packet：
+  `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`；
+  approval pending，execution authorized: no，executed: no
 - 其他 solver micro-benchmark 执行：否
 
 ## 执行原则
@@ -37,9 +43,11 @@
    路径。状态：2026-05-20 已按 Gmsh-only 批准执行并通过，并已 review 为
    optional manual mesh-generation smoke evidence。
 2. Optiland second：本地 Python/package ray-preview 路径，不涉及外部电磁
-   solver。状态：只是下一个候选；Gmsh review 不批准 Optiland。
+   solver。状态：2026-05-20 已按单独批准的 Optiland-only run 执行并通过，
+   并已 review 为 optional manual ray/path smoke evidence。
 3. Meep third：需要 solver Python profile，通常是
-   `OSA_SOLVER_PYTHON=<osa-solvers python>`。
+   `OSA_SOLVER_PYTHON=<osa-solvers python>`。状态：decision packet 已准备，
+   approval pending，execution authorized: no。
 4. MPB fourth：需要 solver Python profile 和 `meep.mpb`。
 5. Elmer deferred：直到存在可维护的 `ElmerSolver` 安装路径。
 
@@ -91,6 +99,8 @@
 ### Meep
 
 - Solver：Meep / PyMeep
+- 状态：decision packet 已准备；approval pending；execution authorized: no；
+  executed: no
 - Readiness profile：`osa-solvers`
 - 批准后需要的 env vars：
   - `OSA_SOLVER_PYTHON=<path to solver Python>`
@@ -101,11 +111,12 @@
 - 命令模板：
   - `OSA_SOLVER_PYTHON=<path> OSA_SOLVER_READINESS_PROFILE=osa-solvers OSA_RUN_OPTIONAL_MEEP_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts：
-  - `/tmp/osa-meep-validation/meep_preview.py`
-  - `/tmp/osa-meep-validation/meep_validation_result.json`
-  - `/tmp/osa-meep-validation/meep_validation_report.json`
-- Expected report path：`/tmp/osa-meep-validation/meep_validation_report.json`
-- Cleanup：review 后移除 `/tmp/osa-meep-validation/`，除非要求保留。
+  - `/tmp/osa-meep-micro-benchmark-output/meep_preview.py`
+  - `/tmp/osa-meep-micro-benchmark-output/meep_validation_result.json`
+  - `/tmp/osa-meep-micro-benchmark-report.json`
+- Expected report path：`/tmp/osa-meep-micro-benchmark-report.json`
+- Cleanup：review 后移除 `/tmp/osa-meep-micro-benchmark-output/` 和 report，
+  除非要求保留。
 - Risk：tiny PyMeep path smoke only，不是 FDTD accuracy 或 convergence evidence。
 - Non-claims：no production-grade physical validation；no formal convergence proof。
 

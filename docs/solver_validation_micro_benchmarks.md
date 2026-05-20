@@ -38,6 +38,10 @@ behavior. A separate 2026-05-20 Optiland-only run was approved, passed, and
 reviewed as optional manual ray/path smoke evidence. Meep and MPB require
 `OSA_SOLVER_PYTHON` plus separate approval; Elmer remains deferred. No future
 Gmsh or Optiland rerun is approved by these records.
+The Meep-specific decision packet is prepared at
+[`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md).
+It records the required `OSA_SOLVER_PYTHON` profile and future opt-in command
+without authorizing or executing Meep.
 
 ## Required Approval
 
@@ -95,6 +99,8 @@ with one-solver-at-a-time sequencing in
 and per-solver pending/deferred approval records, plus the approved Gmsh-only
 and Optiland-only 2026-05-20 execution records, under
 [`optional_solver_approval_records/`](optional_solver_approval_records/).
+The Meep decision packet in that directory keeps Meep pending/not run and does
+not authorize MPB, Elmer, upload, tag, or release actions.
 
 ## Claims
 

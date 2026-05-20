@@ -68,7 +68,7 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         solvers["gmsh"]["review_status"]
         == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
     )
-    assert solvers["gmsh"]["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
+    assert solvers["gmsh"]["next_candidate_solver"] == "meep_after_osa_solver_python"
     assert solvers["gmsh"]["next_candidate_approved"] is False
     assert solvers["gmsh"]["no_further_solver_authorized"] is True
     assert "gmsh_micro_benchmark_approval_2026-05-20.md" in solvers["gmsh"]["approval_record_path"]
@@ -78,6 +78,20 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert "meep" in solvers["meep"]["module_names"]
     assert solvers["meep"]["execution_sequence_rank"] == 3
     assert solvers["meep"]["solver_python_required"] is True
+    assert solvers["meep"]["approval_status"] == "pending"
+    assert solvers["meep"]["execution_authorized"] is False
+    assert solvers["meep"]["last_execution_status"] == "not_run"
+    assert solvers["meep"]["decision_packet_path"] == (
+        "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+    )
+    assert solvers["meep"]["readiness_profile"] == "osa-solvers"
+    assert solvers["meep"]["approval_phrase"] == (
+        "I approve running the optional Meep micro-benchmark for optical-spec-agent "
+        "using OSA_SOLVER_PYTHON=<path>."
+    )
+    assert "explicit maintainer approval required" in solvers["meep"][
+        "recommended_next_action"
+    ]
     assert "meep.mpb" in solvers["mpb"]["module_names"]
     assert solvers["mpb"]["execution_sequence_rank"] == 4
     assert solvers["mpb"]["solver_python_required"] is True
@@ -98,7 +112,7 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         == "accepted_as_optional_manual_ray_path_smoke_evidence"
     )
     assert "optiland_micro_benchmark_approval_2026-05-20.md" in solvers["optiland"]["approval_record_path"]
-    assert solvers["optiland"]["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
+    assert solvers["optiland"]["next_candidate_solver"] == "meep_after_osa_solver_python"
     assert solvers["optiland"]["next_candidate_approved"] is False
     assert solvers["optiland"]["no_further_solver_authorized"] is True
     assert solvers["elmer"]["command_names"] == ["ElmerSolver"]

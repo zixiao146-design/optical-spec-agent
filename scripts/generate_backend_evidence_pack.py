@@ -169,6 +169,8 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
             f"- readiness_available: `{solver_micro['readiness_available']}`",
             f"- approval_matrix_available: `{solver_micro['approval_matrix_available']}`",
             f"- execution_approval_packet_available: `{solver_micro['execution_approval_packet_available']}`",
+            f"- meep_decision_packet_available: `{solver_micro['meep_decision_packet_available']}`",
+            f"- meep_decision_packet_path: `{solver_micro['meep_decision_packet_path']}`",
             f"- approval_records_present: `{solver_micro['approval_records_present']}`",
             f"- environment_profiles_available: `{solver_micro['environment_profiles_available']}`",
             f"- execution_approval_packet_path: `{solver_micro['execution_approval_packet_path']}`",

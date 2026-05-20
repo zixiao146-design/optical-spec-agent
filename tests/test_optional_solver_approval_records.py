@@ -92,3 +92,18 @@ def test_optiland_review_record_accepts_evidence_without_new_authorization():
     assert "Tag/release action: no" in text
     assert "does not authorize any further solver execution" in text
     assert "requires explicit OSA_SOLVER_PYTHON profile and separate approval" in text
+
+
+def test_meep_pending_record_references_decision_packet_without_authorization():
+    pending = RECORD_DIR / "meep_micro_benchmark_approval_pending.md"
+    packet = RECORD_DIR / "meep_micro_benchmark_decision_packet.md"
+    assert pending.exists()
+    assert packet.exists()
+    text = pending.read_text(encoding="utf-8")
+    assert "Approval status: pending" in text
+    assert "Execution authorized: no" in text
+    assert "Solver execution performed: no" in text
+    assert "meep_micro_benchmark_decision_packet.md" in text
+    assert "OSA_SOLVER_PYTHON" in text
+    assert "OSA_SOLVER_READINESS_PROFILE=osa-solvers" in text
+    assert "does not authorize MPB execution, Meep execution, uploads, tags, or releases" in text

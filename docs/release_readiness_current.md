@@ -144,6 +144,11 @@ This document describes the current `main` branch. It is not a release tag.
   `PATH`. Default behavior remains no solver
   execution, Elmer remains deferred, and these records do not authorize
   PyPI/TestPyPI upload, tag creation, or GitHub release creation.
+- Meep optional micro-benchmark decision packet:
+  `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`.
+  It records the required `OSA_SOLVER_PYTHON` profile and approval phrase for
+  a future Meep decision; Meep approval remains pending, execution authorized
+  remains no, and Meep has not been executed.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.

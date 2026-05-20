@@ -145,6 +145,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "optional_solver_micro_benchmark_readiness_status.md",
         "optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
         "optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
+        "optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
         "optional_solver_environment_profiles.md",
         "optional_solver_environment_profiles.zh-CN.md",
         "adapter_maturity_model.md",
@@ -250,6 +251,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "optional_solver_micro_benchmark_readiness_status.md",
         "optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
         "optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
+        "optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
         "optional_solver_environment_profiles.md",
         "optional_solver_environment_profiles.zh-CN.md",
         "backend_evidence_review_decision.md",
@@ -397,6 +399,8 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Open-source Solver Validation Harness" in combined
     assert "Optional Solver-backed Validation Micro-benchmarks" in combined
     assert "explicit opt-in" in combined
+    assert "meep_micro_benchmark_decision_packet.md" in combined
+    assert "OSA_SOLVER_PYTHON" in combined
     assert "Adapter Maturity Model" in combined
     assert "Gmsh Optional Validation Pilot" in combined
     assert "Gmsh Level 3 Readiness" in combined

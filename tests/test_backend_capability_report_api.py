@@ -81,6 +81,11 @@ def test_backend_capability_report_api_returns_expected_sections():
         body["optional_solver_micro_benchmarks"]["environment_profiles_path"]
         == "validation/solver_environment_profiles.json"
     )
+    assert body["optional_solver_micro_benchmarks"]["meep_decision_packet_available"] is True
+    assert (
+        body["optional_solver_micro_benchmarks"]["meep_decision_packet_path"]
+        == "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+    )
     assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert body["optional_solver_micro_benchmarks"]["profile_env_var"] == "OSA_SOLVER_READINESS_PROFILE"
     assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
@@ -104,7 +109,7 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "meep_after_osa_solver_python"
     assert gmsh["next_candidate_approved"] is False
     optiland = next(
         item
@@ -122,6 +127,17 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert (
         optiland["review_status"]
         == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
+    meep = next(
+        item
+        for item in body["optional_solver_micro_benchmarks"]["solvers"]
+        if item["solver_name"] == "meep"
+    )
+    assert meep["approval_status"] == "pending"
+    assert meep["execution_authorized"] is False
+    assert meep["last_execution_status"] == "not_run"
+    assert meep["decision_packet_path"].endswith(
+        "meep_micro_benchmark_decision_packet.md"
     )
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
@@ -161,6 +177,7 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["optional_solver_micro_benchmarks"]["optional_solver_readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_approval_matrix_available"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_environment_profiles_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["meep_decision_packet_available"] is True
     assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
     gmsh = next(

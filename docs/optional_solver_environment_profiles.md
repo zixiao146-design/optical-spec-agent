@@ -28,6 +28,12 @@ The script runs import-only probes such as `import meep` and
 `import meep.mpb` in that interpreter. It does not run a Meep, MPB, Gmsh,
 Optiland, or Elmer simulation.
 
+The Meep decision packet uses this profile explicitly:
+[`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md).
+It keeps Meep approval pending and execution unauthorized until the maintainer
+provides the exact solver-specific approval phrase with an `OSA_SOLVER_PYTHON`
+path.
+
 ## Solver-specific notes
 
 - Gmsh readiness can be CLI/PATH based through `gmsh`.

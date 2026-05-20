@@ -40,7 +40,7 @@
       "last_execution_solver_version": "4.15.2-git",
       "last_execution_scope": "Gmsh only for the earlier approved run; Optiland was executed later under separate approval; Meep/MPB/Elmer not executed.",
       "recommended_next_action": "Gmsh evidence is reviewed and accepted as optional manual mesh-generation smoke evidence. Optiland evidence is reviewed and accepted as optional manual ray/path smoke evidence. Meep/MPB require OSA_SOLVER_PYTHON and separate approval; no future Gmsh or Optiland rerun is authorized.",
-      "next_candidate_solver": "meep_or_mpb_after_osa_solver_python",
+      "next_candidate_solver": "meep_after_osa_solver_python",
       "next_candidate_approved": false,
       "no_further_solver_authorized": true,
       "environment_profile_required": "homebrew-cli",
@@ -94,14 +94,16 @@
       "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "execution_sequence_rank": 3,
       "approval_record_path": "docs/optional_solver_approval_records/meep_micro_benchmark_approval_pending.md",
+      "decision_packet_path": "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
       "approval_status": "pending",
       "execution_authorized": false,
       "last_execution_status": "not_run",
-      "recommended_next_action": "Review the Meep approval record, confirm OSA_SOLVER_PYTHON points to the osa-solvers profile, and provide the exact solver-specific approval phrase before any opt-in run.",
+      "recommended_next_action": "Review the Meep decision packet, confirm OSA_SOLVER_PYTHON points to the osa-solvers profile; explicit maintainer approval required before execution.",
       "environment_profile_required": "osa-solvers",
+      "readiness_profile": "osa-solvers",
       "solver_python_required": true,
       "approval_required": true,
-      "approval_phrase": "I approve running the optional meep micro-benchmark for optical-spec-agent.",
+      "approval_phrase": "I approve running the optional Meep micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.",
       "expected_runtime_environment": "Local Python environment with PyMeep importable after explicit maintainer approval.",
       "expected_artifacts": [
         "meep_preview.py",
@@ -109,9 +111,9 @@
         "meep_validation_report.json"
       ],
       "expected_artifact_paths": [
-        "/tmp/osa-meep-validation/meep_preview.py",
-        "/tmp/osa-meep-validation/meep_validation_result.json",
-        "/tmp/osa-meep-validation/meep_validation_report.json"
+        "/tmp/osa-meep-micro-benchmark-output/meep_preview.py",
+        "/tmp/osa-meep-micro-benchmark-output/meep_validation_result.json",
+        "/tmp/osa-meep-micro-benchmark-report.json"
       ],
       "cleanup_required": true,
       "default_in_quality_gates": false,
@@ -244,7 +246,7 @@
       "last_execution_scope": "Optiland only; Gmsh/Meep/MPB/Elmer not executed in this task.",
       "review_record_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
       "review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
-      "next_candidate_solver": "meep_or_mpb_after_osa_solver_python",
+      "next_candidate_solver": "meep_after_osa_solver_python",
       "next_candidate_approved": false,
       "no_further_solver_authorized": true
     },

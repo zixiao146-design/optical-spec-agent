@@ -25,6 +25,11 @@ python scripts/check_optional_solver_readiness.py
 脚本只会在该解释器中执行 `import meep`、`import meep.mpb` 等导入探测。
 它不会运行 Meep、MPB、Gmsh、Optiland 或 Elmer 仿真。
 
+Meep decision packet 明确使用该 profile：
+[`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)。
+在维护者提供包含 `OSA_SOLVER_PYTHON` 路径的 solver-specific approval phrase
+之前，Meep approval 仍是 pending，execution authorized 仍是 no。
+
 ## Solver 说明
 
 - Gmsh readiness 通常基于当前 `PATH` 中的 `gmsh` CLI。

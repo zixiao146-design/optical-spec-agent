@@ -95,6 +95,11 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert solver_micro["optional_solver_approval_matrix_available"] is True
     assert solver_micro["optional_solver_execution_approval_packet_available"] is True
     assert solver_micro["optional_solver_approval_records_present"] is True
+    assert solver_micro["meep_decision_packet_available"] is True
+    assert (
+        solver_micro["meep_decision_packet_path"]
+        == "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+    )
     assert solver_micro["optional_solver_execution_default"] is False
     assert solver_micro["manual_opt_in_only"] is True
     assert solver_micro["all_optional_solver_execution_authorized"] is False
@@ -109,7 +114,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "meep_after_osa_solver_python"
     assert gmsh["next_candidate_approved"] is False
     optiland = next(item for item in solver_micro["solvers"] if item["solver_name"] == "optiland")
     assert optiland["approval_status"] == "approved_executed"
@@ -123,6 +128,13 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert (
         optiland["review_status"]
         == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
+    meep = next(item for item in solver_micro["solvers"] if item["solver_name"] == "meep")
+    assert meep["approval_status"] == "pending"
+    assert meep["execution_authorized"] is False
+    assert meep["last_execution_status"] == "not_run"
+    assert meep["decision_packet_path"].endswith(
+        "meep_micro_benchmark_decision_packet.md"
     )
     assert any(
         "Optiland evidence was reviewed and accepted" in note

@@ -189,6 +189,10 @@ class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     execution_approval_packet_available: bool = True
     execution_approval_packet_path: str = "docs/optional_solver_micro_benchmark_execution_packet.md"
     execution_sequence_path: str = "docs/optional_solver_execution_sequence.md"
+    meep_decision_packet_available: bool = True
+    meep_decision_packet_path: str = (
+        "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+    )
     approval_records_present: bool = True
     approval_records_path: str = "docs/optional_solver_approval_records"
     readiness_status_path: str = "docs/optional_solver_micro_benchmark_readiness_status.md"
@@ -764,6 +768,9 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         execution_approval_packet_available=Path(
             "docs/optional_solver_micro_benchmark_execution_packet.md"
         ).exists(),
+        meep_decision_packet_available=Path(
+            "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+        ).exists(),
         approval_records_present=Path("docs/optional_solver_approval_records").exists(),
         environment_profiles_available=Path(
             "validation/solver_environment_profiles.json"
@@ -797,7 +804,8 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
             "The Gmsh evidence was reviewed and accepted as optional manual mesh-generation smoke evidence; it does not authorize further solver execution.",
             "Optiland evidence was reviewed and accepted as optional manual ray/path smoke evidence; it does not authorize further solver execution.",
             "Gmsh was not rerun by the Optiland task; Meep, MPB, and Elmer were not executed.",
-            "Meep/MPB require OSA_SOLVER_PYTHON and separate approval; Elmer remains deferred.",
+            "Meep has a decision packet prepared with OSA_SOLVER_PYTHON profile requirements; Meep execution remains unauthorized and not run.",
+            "MPB requires OSA_SOLVER_PYTHON and separate approval; Elmer remains deferred.",
             "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
             "Future execution should run one solver at a time after explicit approval.",
             "Opt-in environment variables are required for solver-backed runs.",

@@ -12,10 +12,16 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
 - v0.9.0rc8 tag: not created
 - v1.0.0 tag: not created
-- Solver micro-benchmark approval: granted only for the Gmsh 2026-05-20 run
-- Solver micro-benchmark execution performed: yes, Gmsh only on 2026-05-20
-- Solver micro-benchmark review decision: Gmsh accepted only as optional manual
-  mesh-generation smoke evidence
+- Solver micro-benchmark approval: granted only for the Gmsh and Optiland
+  2026-05-20 runs
+- Solver micro-benchmark execution performed: yes, Gmsh only for its approved
+  run and Optiland only for its separately approved run
+- Solver micro-benchmark review decisions: Gmsh accepted only as optional
+  manual mesh-generation smoke evidence; Optiland accepted only as optional
+  manual ray/path smoke evidence
+- Meep decision packet: prepared at
+  `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`;
+  approval pending, execution authorized: no, executed: no
 - Other solver micro-benchmark execution performed: no
 
 ## Execution Principles
@@ -39,10 +45,12 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
    Gmsh-only run on 2026-05-20 and reviewed as optional manual
    mesh-generation smoke evidence.
 2. Optiland second: local Python/package ray-preview path with no external
-   electromagnetic solver. Status: next candidate only; not approved by the
-   Gmsh review.
+   electromagnetic solver. Status: completed for the separately approved
+   Optiland-only run on 2026-05-20 and reviewed as optional manual ray/path
+   smoke evidence.
 3. Meep third: requires the solver Python profile, typically
    `OSA_SOLVER_PYTHON=<osa-solvers python>`.
+   Status: decision packet prepared, approval pending, execution authorized: no.
 4. MPB fourth: requires the solver Python profile and `meep.mpb`.
 5. Elmer deferred: keep deferred until a maintainable `ElmerSolver` install
    route exists.
@@ -100,6 +108,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 ### Meep
 
 - Solver: Meep / PyMeep
+- Status: decision packet prepared; approval pending; execution authorized: no;
+  executed: no
 - Readiness profile: `osa-solvers`
 - Required env vars after approval:
   - `OSA_SOLVER_PYTHON=<path to solver Python>`
@@ -110,12 +120,12 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - Command template:
   - `OSA_SOLVER_PYTHON=<path> OSA_SOLVER_READINESS_PROFILE=osa-solvers OSA_RUN_OPTIONAL_MEEP_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts:
-  - `/tmp/osa-meep-validation/meep_preview.py`
-  - `/tmp/osa-meep-validation/meep_validation_result.json`
-  - `/tmp/osa-meep-validation/meep_validation_report.json`
-- Expected report path: `/tmp/osa-meep-validation/meep_validation_report.json`
-- Cleanup notes: remove `/tmp/osa-meep-validation/` after review unless
-  preservation is requested.
+  - `/tmp/osa-meep-micro-benchmark-output/meep_preview.py`
+  - `/tmp/osa-meep-micro-benchmark-output/meep_validation_result.json`
+  - `/tmp/osa-meep-micro-benchmark-report.json`
+- Expected report path: `/tmp/osa-meep-micro-benchmark-report.json`
+- Cleanup notes: remove `/tmp/osa-meep-micro-benchmark-output/` and the report
+  after review unless preservation is requested.
 - Risk notes: tiny PyMeep path smoke only; not FDTD accuracy or convergence
   evidence.
 - Non-claims: no production-grade physical validation; no formal convergence

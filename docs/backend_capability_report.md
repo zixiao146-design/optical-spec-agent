@@ -139,6 +139,10 @@ matrix and approval record template are
 [`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md)
 and
 [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md).
+The Meep-specific future decision packet is
+[`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md);
+it requires `OSA_SOLVER_PYTHON`, keeps Meep approval pending, and records no
+Meep execution.
 
 Coverage can also be read directly:
 
@@ -205,6 +209,9 @@ and reviewed in
 as accepted optional manual ray/path smoke evidence only. Meep, MPB, and Elmer
 remain not executed by these tasks, and Gmsh/Optiland reruns require separate
 approval.
+The Meep decision packet is prepared for a future explicit approval decision
+only; it does not authorize Meep, MPB, PyPI/TestPyPI upload, tag creation, or
+release creation.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

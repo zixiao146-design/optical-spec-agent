@@ -32,6 +32,10 @@ test、quality gate 或 release gate 行为。另一个单独批准的 2026-05-2
 Optiland-only run 已通过，并已 review 接受为 optional manual ray/path smoke
 evidence。Meep/MPB 需要 `OSA_SOLVER_PYTHON` 和单独批准；Elmer 仍
 deferred。当前记录不批准未来 Gmsh 或 Optiland rerun。
+Meep 专用 decision packet 已准备在
+[`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)，
+记录必需的 `OSA_SOLVER_PYTHON` profile 和未来 opt-in 命令，但不授权也不执行
+Meep。
 
 ## 必需批准
 
@@ -83,6 +87,8 @@ python scripts/check_optional_solver_readiness.py
 per-solver pending/deferred approval records，以及 2026-05-20 Gmsh-only 和
 Optiland-only approved execution records，位于
 [`optional_solver_approval_records/`](optional_solver_approval_records/)。
+其中 Meep decision packet 仍保持 pending/not run，不授权 MPB、Elmer、upload、
+tag 或 release 动作。
 
 ## 声明边界
 

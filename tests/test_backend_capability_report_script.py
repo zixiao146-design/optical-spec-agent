@@ -113,6 +113,11 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         solver_micro["execution_approval_packet_path"]
         == "docs/optional_solver_micro_benchmark_execution_packet.md"
     )
+    assert solver_micro["meep_decision_packet_available"] is True
+    assert (
+        solver_micro["meep_decision_packet_path"]
+        == "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+    )
     assert solver_micro["approval_records_path"] == "docs/optional_solver_approval_records"
     assert solver_micro["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert solver_micro["profile_env_var"] == "OSA_SOLVER_READINESS_PROFILE"
@@ -135,7 +140,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         gmsh["review_status"]
         == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
     )
-    assert gmsh["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "meep_after_osa_solver_python"
     assert gmsh["next_candidate_approved"] is False
     assert gmsh["no_further_solver_authorized"] is True
     optiland = next(item for item in solver_micro["solvers"] if item["solver_name"] == "optiland")
@@ -151,10 +156,19 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         optiland["review_status"]
         == "accepted_as_optional_manual_ray_path_smoke_evidence"
     )
+    meep = next(item for item in solver_micro["solvers"] if item["solver_name"] == "meep")
+    assert meep["decision_packet_path"] == (
+        "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
+    )
+    assert meep["approval_status"] == "pending"
+    assert meep["execution_authorized"] is False
+    assert meep["last_execution_status"] == "not_run"
+    assert meep["solver_python_required"] is True
     assert any(
         "Optiland evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
+    assert any("Meep has a decision packet prepared" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
     assert solver_micro["formal_convergence_proof_claimed"] is False

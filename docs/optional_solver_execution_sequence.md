@@ -26,6 +26,9 @@ not execution approval.
 3. Meep third.
    - Requires `OSA_SOLVER_PYTHON` pointing at a solver Python profile such as
      `osa-solvers`.
+   - Decision packet:
+     `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`.
+   - Current status: approval pending, execution authorized: no, executed: no.
    - Stop after Meep and review the PyMeep report before considering MPB.
 4. MPB fourth.
    - Requires `OSA_SOLVER_PYTHON` and `meep.mpb`.

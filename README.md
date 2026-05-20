@@ -134,6 +134,10 @@ and reviewed in
 as optional manual ray/path smoke evidence only. Meep, MPB, and Elmer remain
 not executed by these tasks and require separate approval; Gmsh and Optiland
 reruns also require separate approval.
+The Meep decision packet
+[`meep_micro_benchmark_decision_packet.md`](docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
+records the required `OSA_SOLVER_PYTHON` profile, approval phrase, expected
+future command, artifacts, and non-claims while keeping Meep pending/not run.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

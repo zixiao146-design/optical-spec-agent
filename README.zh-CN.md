@@ -98,6 +98,10 @@ solver 执行。单独批准的 2026-05-20 Optiland-only run 记录在
 `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`
 中完成 review，只作为 optional manual ray/path smoke evidence。Meep、MPB 和
 Elmer 仍未在这些任务中执行，且需要单独批准；Gmsh 和 Optiland rerun 也需要单独批准。
+Meep decision packet
+`docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`
+记录必需的 `OSA_SOLVER_PYTHON` profile、approval phrase、未来命令、artifact
+和 non-claims，同时保持 Meep pending/not run。
 readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
 `OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
 `meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。

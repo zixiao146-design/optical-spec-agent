@@ -63,6 +63,10 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
 - Review the approved Gmsh-only and Optiland-only 2026-05-20 optional
   micro-benchmark evidence before considering any separately approved Meep,
   MPB, Elmer, future Gmsh rerun, or future Optiland rerun.
+- Use the Meep decision packet
+  [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
+  to review the `OSA_SOLVER_PYTHON` profile, approval phrase, artifacts, and
+  non-claims before any future Meep opt-in execution.
 - Record that the Gmsh review accepted the evidence only as optional manual
   mesh-generation smoke evidence; record that the Optiland review accepted the
   evidence only as optional manual ray/path smoke evidence.
@@ -134,3 +138,5 @@ The Gmsh review decision is recorded in
 [`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
 and does not authorize PyPI/TestPyPI upload, tag/release creation, Optiland,
 Meep, MPB, Elmer, or future Gmsh reruns.
+The Meep decision packet is now prepared, but it keeps Meep approval pending
+and execution authorized: no.

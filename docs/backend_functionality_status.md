@@ -117,6 +117,9 @@ The separately approved Optiland-only optional micro-benchmark also passed on
 2026-05-20 and is reviewed as accepted optional manual ray/path smoke evidence,
 not production lens design validation. Meep, MPB, and Elmer remain unexecuted by
 these tasks.
+The Meep decision packet is now prepared as a future approval aid only. It
+requires `OSA_SOLVER_PYTHON`, keeps execution authorized: no, and does not
+authorize MPB, uploads, tags, or releases.
 
 ## Publication / Release Actions
 
@@ -234,7 +237,8 @@ recorded.
 The Gmsh review decision closes only the already approved Gmsh run. The
 Optiland review decision closes only the separately approved Optiland run.
 Meep/MPB require `OSA_SOLVER_PYTHON` and separate approval; Elmer remains
-deferred.
+deferred. The Meep-specific decision packet records the future approval phrase
+and expected artifacts but keeps Meep pending/not run.
 Readiness is calibrated by environment profile: current Python/current `PATH`
 is the default, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see
