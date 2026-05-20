@@ -85,6 +85,10 @@
 - Maintainer review accepted the Gmsh evidence as optional manual
   mesh-generation smoke evidence only; it does not approve Optiland, Meep, MPB,
   Elmer, PyPI/TestPyPI upload, tag creation, or release creation.
+- Approved Optiland-only 2026-05-20 optional micro-benchmark evidence for local
+  adapter scaffold plus tiny Optiland object construction smoke only.
+- The Optiland evidence does not approve Meep, MPB, Elmer, any future Gmsh or
+  Optiland rerun, PyPI/TestPyPI upload, tag creation, or release creation.
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.

@@ -72,5 +72,8 @@ mesh-generation smoke evidence. It does not authorize Optiland, Meep, MPB,
 Elmer, any future Gmsh rerun, PyPI/TestPyPI upload, tag creation, or release
 creation.
 
+Later on 2026-05-20, Optiland was run only under its own separate approval
+record. That later Optiland evidence does not change this Gmsh record's scope.
+
 The generated `/tmp` artifacts are intentionally not committed. This repository
 record preserves the reviewed report summary and safety boundaries.

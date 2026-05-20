@@ -92,9 +92,10 @@ PyPI/TestPyPI upload、tag 创建或 GitHub release 创建。
 per-solver approval records 位于 `docs/optional_solver_approval_records/`；
 2026-05-20 已批准并执行的 Gmsh-only run 也记录在该目录，并在
 `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md` 中汇总。维护者 review
-只接受它作为 optional manual mesh-generation smoke evidence；它不授权任何后续
-solver 执行。Optiland 只是下一个候选且未批准；该 run 未执行 Meep、MPB、
-Optiland 或 Elmer。
+只接受它作为 optional manual mesh-generation smoke evidence；它本身不授权任何后续
+solver 执行。单独批准的 2026-05-20 Optiland-only run 记录在
+`validation/optiland/optiland_micro_benchmark_2026-05-20.md`，只作为 optional
+manual ray/path smoke evidence。Meep、MPB 和 Elmer 仍未在这些任务中执行，且需要单独批准。
 readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
 `OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
 `meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。

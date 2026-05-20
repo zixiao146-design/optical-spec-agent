@@ -60,11 +60,12 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   [`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md)
   without adding solvers to default pytest, smoke, quality gates, or release
   gates.
-- Review the approved Gmsh-only 2026-05-20 optional micro-benchmark evidence
-  before considering any separately approved Meep, MPB, Optiland, or Elmer run.
+- Review the approved Gmsh-only and Optiland-only 2026-05-20 optional
+  micro-benchmark evidence before considering any separately approved Meep,
+  MPB, Elmer, future Gmsh rerun, or future Optiland rerun.
 - Record that the Gmsh review accepted the evidence only as optional manual
-  mesh-generation smoke evidence; Optiland is a next candidate only, not an
-  approved run.
+  mesh-generation smoke evidence; record that Optiland evidence is only
+  optional manual ray/path smoke evidence.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.

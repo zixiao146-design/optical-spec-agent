@@ -75,6 +75,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 ### Optiland
 
 - Solver: Optiland
+- Status: completed for the separately approved Optiland-only 2026-05-20 run;
+  future Optiland runs require fresh approval.
 - Readiness profile: `current` or a Python profile with `optiland` importable
 - Required env vars after approval:
   - `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1`
@@ -83,13 +85,13 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - Command template:
   - `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts:
-  - `/tmp/osa-optiland-validation/optiland_preview.py`
-  - `/tmp/osa-optiland-validation/optiland_validation_result.json`
-  - `/tmp/osa-optiland-validation/optiland_validation_report.json`
+  - `/tmp/osa-optiland-micro-benchmark-output/optiland_preview.py`
+  - `/tmp/osa-optiland-micro-benchmark-output/optiland_validation_result.json`
+  - `/tmp/osa-optiland-micro-benchmark-report.json`
 - Expected report path:
-  `/tmp/osa-optiland-validation/optiland_validation_report.json`
-- Cleanup notes: remove `/tmp/osa-optiland-validation/` after review unless
-  preservation is requested.
+  `/tmp/osa-optiland-micro-benchmark-report.json`
+- Cleanup notes: remove `/tmp/osa-optiland-micro-benchmark-output/` and the
+  report after review unless preservation is requested.
 - Risk notes: ray/backend path smoke only; not lens design validation.
 - Non-claims: no production-grade physical validation; no formal convergence
   proof.

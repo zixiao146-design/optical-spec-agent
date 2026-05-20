@@ -197,7 +197,11 @@ and reviewed in
 [`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
 as accepted optional manual mesh-generation smoke evidence. Meep, MPB,
 Optiland, and Elmer were not executed by that run, and no further solver
-execution is approved by the review. Optiland is only the next candidate.
+execution is approved by the review. The separately approved Optiland-only
+2026-05-20 run is recorded in
+[`../validation/optiland/optiland_micro_benchmark_2026-05-20.md`](../validation/optiland/optiland_micro_benchmark_2026-05-20.md)
+as optional manual ray/path smoke evidence only. Meep, MPB, and Elmer remain
+not executed by these tasks.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

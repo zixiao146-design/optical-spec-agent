@@ -53,6 +53,9 @@
 - 2026-05-20 已批准并执行的 Gmsh-only micro-benchmark 只记录为可选手动
   mesh generation smoke 证据，不是光学正确性证据；review decision 不批准
   Optiland、Meep、MPB、Elmer 或未来 Gmsh rerun。
+- 2026-05-20 单独批准并执行的 Optiland-only micro-benchmark 只记录为可选手动
+  ray/path smoke 证据，不是透镜设计验证；它不批准 Meep、MPB、Elmer 或未来
+  Optiland rerun。
 - `OSA_SOLVER_PYTHON` 可用于把 import-only probe 指向专用 solver Python；
   Gmsh 等 CLI 工具仍从当前 `PATH` 探测。
 - 默认不调用 external LLM。

@@ -126,9 +126,11 @@ Per-solver approval records live under
 the approved Gmsh-only 2026-05-20 run is recorded there and summarized in
 [`validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`](validation/gmsh/gmsh_micro_benchmark_2026-05-20.md).
 The maintainer review accepted it only as optional manual mesh-generation smoke
-evidence; it does not authorize any further solver execution. Optiland is only
-the next candidate and remains unapproved. Meep, MPB, Optiland, and Elmer were
-not executed by that run.
+evidence; it did not authorize any further solver execution. The separately
+approved Optiland-only 2026-05-20 run is recorded in
+[`validation/optiland/optiland_micro_benchmark_2026-05-20.md`](validation/optiland/optiland_micro_benchmark_2026-05-20.md)
+as optional manual ray/path smoke evidence only. Meep, MPB, and Elmer remain
+not executed by these tasks and require separate approval.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

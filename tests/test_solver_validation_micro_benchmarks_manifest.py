@@ -68,7 +68,7 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         solvers["gmsh"]["review_status"]
         == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
     )
-    assert solvers["gmsh"]["next_candidate_solver"] == "optiland"
+    assert solvers["gmsh"]["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
     assert solvers["gmsh"]["next_candidate_approved"] is False
     assert solvers["gmsh"]["no_further_solver_authorized"] is True
     assert "gmsh_micro_benchmark_approval_2026-05-20.md" in solvers["gmsh"]["approval_record_path"]
@@ -83,8 +83,17 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert solvers["mpb"]["solver_python_required"] is True
     assert "optiland" in solvers["optiland"]["module_names"]
     assert solvers["optiland"]["execution_sequence_rank"] == 2
-    assert solvers["optiland"]["approval_status"] == "pending"
+    assert solvers["optiland"]["approval_status"] == "approved_executed"
     assert solvers["optiland"]["execution_authorized"] is False
+    assert solvers["optiland"]["last_execution_status"] == "passed"
+    assert solvers["optiland"]["last_execution_date"] == "2026-05-20"
+    assert solvers["optiland"]["last_execution_evidence"] == (
+        "validation/optiland/optiland_micro_benchmark_2026-05-20.md"
+    )
+    assert "optiland_micro_benchmark_approval_2026-05-20.md" in solvers["optiland"]["approval_record_path"]
+    assert solvers["optiland"]["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
+    assert solvers["optiland"]["next_candidate_approved"] is False
+    assert solvers["optiland"]["no_further_solver_authorized"] is True
     assert solvers["elmer"]["command_names"] == ["ElmerSolver"]
     assert solvers["elmer"]["execution_sequence_rank"] == 99
     assert solvers["elmer"]["approval_status"] == "deferred"

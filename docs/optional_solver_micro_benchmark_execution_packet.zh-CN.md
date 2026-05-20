@@ -69,6 +69,8 @@
 ### Optiland
 
 - Solver：Optiland
+- 状态：2026-05-20 已按单独批准的 Optiland-only run 执行并通过；未来再次运行
+  Optiland 需要重新批准。
 - Readiness profile：`current` 或可 import `optiland` 的 Python profile
 - 批准后需要的 env var：
   - `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1`
@@ -77,11 +79,11 @@
 - 命令模板：
   - `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts：
-  - `/tmp/osa-optiland-validation/optiland_preview.py`
-  - `/tmp/osa-optiland-validation/optiland_validation_result.json`
-  - `/tmp/osa-optiland-validation/optiland_validation_report.json`
-- Expected report path：`/tmp/osa-optiland-validation/optiland_validation_report.json`
-- Cleanup：review 后移除 `/tmp/osa-optiland-validation/`，除非要求保留。
+  - `/tmp/osa-optiland-micro-benchmark-output/optiland_preview.py`
+  - `/tmp/osa-optiland-micro-benchmark-output/optiland_validation_result.json`
+  - `/tmp/osa-optiland-micro-benchmark-report.json`
+- Expected report path：`/tmp/osa-optiland-micro-benchmark-report.json`
+- Cleanup：review 后移除 `/tmp/osa-optiland-micro-benchmark-output/` 和 report，除非要求保留。
 - Risk：只验证 ray/backend path smoke，不验证 lens design。
 - Non-claims：no production-grade physical validation；no formal convergence proof。
 

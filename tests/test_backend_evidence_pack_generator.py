@@ -109,10 +109,16 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "optiland"
+    assert gmsh["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
     assert gmsh["next_candidate_approved"] is False
+    optiland = next(item for item in solver_micro["solvers"] if item["solver_name"] == "optiland")
+    assert optiland["approval_status"] == "approved_executed"
+    assert optiland["last_execution_status"] == "passed"
+    assert optiland["last_execution_evidence"] == (
+        "validation/optiland/optiland_micro_benchmark_2026-05-20.md"
+    )
     assert any(
-        "Optiland is the next candidate only" in note
+        "Optiland has an approved 2026-05-20 Optiland-only" in note
         for note in solver_micro["notes"]
     )
     assert solver_micro["elmer_deferred"] is True

@@ -62,3 +62,18 @@ def test_gmsh_review_record_accepts_evidence_without_new_authorization():
     assert "Tag/release action: no" in text
     assert "does not authorize any further solver execution" in text
     assert "Optiland may be considered next, but requires separate explicit approval" in text
+
+
+def test_optiland_approved_execution_record_is_separate_from_pending_template():
+    path = RECORD_DIR / "optiland_micro_benchmark_approval_2026-05-20.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    assert "Approval status: approved for this Optiland run" in text
+    assert "Execution authorized: yes, Optiland only" in text
+    assert "Other solvers authorized: no" in text
+    assert "PyPI/TestPyPI/tag/release authorized: no" in text
+    assert "DO NOT RUN WITHOUT APPROVAL" not in text
+    assert "validation/optiland/optiland_micro_benchmark_2026-05-20.md" not in text
+    assert "no production-grade physical validation" in text
+    assert "no formal convergence proof" in text
+    assert "no optical correctness claim" in text

@@ -388,9 +388,11 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
+                "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
+                "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
                 "validation/optiland/optiland_validation_pilot_2026-05-14.md",
             ],
-            "Optiland has a recorded narrow optional manual validation report.",
+            "Optiland has an approved optional manual ray/path smoke pass from 2026-05-20.",
         ),
         (
             "elmer_optional_solver_micro_benchmark",
@@ -426,7 +428,7 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                     status_note,
                     "Readiness checks detect availability only and do not execute solvers.",
                     "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-                    "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
+                    "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -468,7 +470,8 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "all_optional_solver_execution_authorized": False,
             "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
             "gmsh_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
-            "next_optional_solver_candidate": "optiland_not_approved",
+            "optiland_optional_micro_benchmark_status": "passed_2026-05-20",
+            "next_optional_solver_candidate": "meep_or_mpb_requires_osa_solver_python_not_approved",
             "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
@@ -500,8 +503,10 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "Python profiles, include pending/deferred per-solver approval "
                 "records and one-solver-at-a-time sequencing, record the Gmsh-only "
                 "optional manual micro-benchmark pass from 2026-05-20 as reviewed "
-                "mesh-generation smoke evidence, keep Optiland as a candidate only "
-                "without approval, and default gates do not run solvers."
+                "mesh-generation smoke evidence, record the separately approved "
+                "Optiland-only pass from 2026-05-20 as ray/path smoke evidence, "
+                "keep Meep/MPB unapproved pending OSA_SOLVER_PYTHON-specific "
+                "approval, and default gates do not run solvers."
             ),
         },
     )

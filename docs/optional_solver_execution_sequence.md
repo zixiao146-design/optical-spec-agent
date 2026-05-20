@@ -17,7 +17,10 @@ not execution approval.
 2. Optiland second.
    - Checks a local Python/package ray-preview path.
    - Stop after Optiland and review whether the artifact path is useful.
-   - Status: next candidate only; not approved by the Gmsh review.
+   - Status: completed for the approved Optiland-only run on 2026-05-20; see
+     `validation/optiland/optiland_micro_benchmark_2026-05-20.md`.
+   - Scope: optional manual ray/path smoke evidence only, not lens design
+     validation.
 3. Meep third.
    - Requires `OSA_SOLVER_PYTHON` pointing at a solver Python profile such as
      `osa-solvers`.
@@ -51,5 +54,6 @@ not execution approval.
   next solver.
 
 Do not batch all solvers without separate approval.
-The accepted Gmsh review does not authorize Optiland, Meep, MPB, Elmer, or any
-future Gmsh rerun.
+The accepted Gmsh review did not authorize Optiland; Optiland was run only
+after its separate approval record. The completed Optiland run does not
+authorize Meep, MPB, Elmer, any future Gmsh rerun, or any future Optiland rerun.

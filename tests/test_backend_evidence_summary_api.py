@@ -73,8 +73,18 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "optiland"
+    assert gmsh["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
     assert gmsh["next_candidate_approved"] is False
+    optiland = next(
+        item
+        for item in body["optional_solver_micro_benchmarks"]["solvers"]
+        if item["solver_name"] == "optiland"
+    )
+    assert optiland["approval_status"] == "approved_executed"
+    assert optiland["last_execution_status"] == "passed"
+    assert optiland["last_execution_evidence"] == (
+        "validation/optiland/optiland_micro_benchmark_2026-05-20.md"
+    )
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(

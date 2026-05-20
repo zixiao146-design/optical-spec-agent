@@ -27,6 +27,13 @@
 - Meep / MPB require explicit `OSA_SOLVER_PYTHON` profile and separate approval.
 - Elmer remains deferred.
 
+## Follow-up
+
+- Optiland was later run only under its own separate approval record on
+  2026-05-20.
+- That separate Optiland evidence does not change this Gmsh review scope and
+  does not authorize future Gmsh reruns.
+
 ## Boundary
 
 The accepted evidence proves only that the approved local Gmsh path generated a
