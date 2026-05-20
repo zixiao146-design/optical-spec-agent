@@ -54,7 +54,9 @@ solver convergence, and material-data verification.
 - Optional solver execution approval packets and pending records prepare future
   review only; they do not authorize solver execution by themselves.
 - The approved Gmsh-only 2026-05-20 micro-benchmark is recorded as optional
-  manual mesh generation smoke evidence, not optical correctness evidence.
+  manual mesh generation smoke evidence, not optical correctness evidence; the
+  review decision does not approve Optiland, Meep, MPB, Elmer, or any future
+  Gmsh rerun.
 - `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
   Python environment; CLI tools such as Gmsh are still detected through the
   current `PATH`.

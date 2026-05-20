@@ -31,6 +31,12 @@ convergence proof, or real optical-design correctness.
 | Optiland | Tiny ray-trace or import/run smoke | result JSON | Validates local Optiland path only. |
 | Elmer | Deferred until maintainable `ElmerSolver` install exists | deferred report | No Level 3 validation is claimed. |
 
+The 2026-05-20 Gmsh result has been reviewed and accepted only as optional
+manual mesh-generation smoke evidence. It does not authorize any further solver
+execution and does not change default test, quality gate, or release gate
+behavior. Optiland is the next candidate only and remains unapproved; Meep and
+MPB require `OSA_SOLVER_PYTHON` plus separate approval; Elmer remains deferred.
+
 ## Required Approval
 
 Solver-backed runs require explicit opt-in environment variables. Do not set

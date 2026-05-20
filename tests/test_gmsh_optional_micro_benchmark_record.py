@@ -16,8 +16,15 @@ def test_gmsh_optional_micro_benchmark_evidence_is_recorded():
         / "gmsh_micro_benchmark_approval_2026-05-20.md"
     )
     evidence = ROOT / "validation" / "gmsh" / "gmsh_micro_benchmark_2026-05-20.md"
+    review = (
+        ROOT
+        / "docs"
+        / "optional_solver_approval_records"
+        / "gmsh_micro_benchmark_review_2026-05-20.md"
+    )
     assert approval.exists()
     assert evidence.exists()
+    assert review.exists()
     approval_text = approval.read_text(encoding="utf-8")
     evidence_text = evidence.read_text(encoding="utf-8")
     combined = f"{approval_text}\n{evidence_text}"

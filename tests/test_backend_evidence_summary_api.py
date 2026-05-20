@@ -70,6 +70,11 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     )
     assert gmsh["approval_status"] == "approved_executed"
     assert gmsh["last_execution_status"] == "passed"
+    assert gmsh["review_record_path"].endswith(
+        "gmsh_micro_benchmark_review_2026-05-20.md"
+    )
+    assert gmsh["next_candidate_solver"] == "optiland"
+    assert gmsh["next_candidate_approved"] is False
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(

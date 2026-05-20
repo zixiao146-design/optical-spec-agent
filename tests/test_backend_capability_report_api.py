@@ -101,6 +101,11 @@ def test_backend_capability_report_api_returns_expected_sections():
     )
     assert gmsh["approval_status"] == "approved_executed"
     assert gmsh["last_execution_status"] == "passed"
+    assert gmsh["review_record_path"].endswith(
+        "gmsh_micro_benchmark_review_2026-05-20.md"
+    )
+    assert gmsh["next_candidate_solver"] == "optiland"
+    assert gmsh["next_candidate_approved"] is False
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",
@@ -141,6 +146,14 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["optional_solver_micro_benchmarks"]["optional_solver_environment_profiles_available"] is True
     assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
+    gmsh = next(
+        item
+        for item in body["optional_solver_micro_benchmarks"]["solvers"]
+        if item["solver_name"] == "gmsh"
+    )
+    assert gmsh["review_record_path"].endswith(
+        "gmsh_micro_benchmark_review_2026-05-20.md"
+    )
     assert body["external_solver_executed"] is False
 
 

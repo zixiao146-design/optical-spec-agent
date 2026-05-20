@@ -110,7 +110,9 @@ whether Meep, Gmsh, MPB, ElmerSolver, or Optiland appear importable or on PATH,
 but detection is not execution. Elmer remains Level 2 + Level-3-ready with
 install deferred.
 The approved Gmsh-only optional micro-benchmark passed on 2026-05-20 and is
-recorded as mesh generation smoke evidence, not optical correctness evidence.
+reviewed as accepted optional manual mesh-generation smoke evidence, not
+optical correctness evidence. That review does not approve Optiland, Meep, MPB,
+Elmer, or any future Gmsh rerun.
 
 ## Publication / Release Actions
 
@@ -225,6 +227,8 @@ The execution approval packet, per-solver approval records, and
 one-solver-at-a-time sequence are prepared as future review aids only; all
 execution remains unauthorized until explicit solver-specific approval is
 recorded.
+The Gmsh review decision closes only the already approved Gmsh run. Optiland is
+the next candidate only and remains unapproved.
 Readiness is calibrated by environment profile: current Python/current `PATH`
 is the default, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

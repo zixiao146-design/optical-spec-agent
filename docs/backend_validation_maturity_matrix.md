@@ -33,7 +33,7 @@ convergence proof is claimed.
 | Optical language | observable diagnostics | `fixture_guarded_preview` | observable taxonomy fixtures and tests | Observable fit is not a computed physical result. |
 | Adapters | adapter-native source/monitor mapping | `fixture_guarded_preview` | adapter mapping fixtures and tests | Real adapter results require explicit solver execution. |
 | Adapters | adapter golden coverage | `fixture_guarded_preview` | golden cases and strict metadata diff | Metadata checks are not solver monitor outputs. |
-| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, the approved Gmsh-only 2026-05-20 evidence record, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. Gmsh evidence is mesh path smoke, not optical correctness. |
+| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, the approved Gmsh-only 2026-05-20 evidence record, the Gmsh review decision, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. Gmsh evidence is accepted only as mesh-generation smoke, not optical correctness. |
 | Optional solver validation | Elmer micro-benchmark plan | `documented_preview` / deferred | `validation/elmer/elmer_install_deferred_2026-05-15.md` and Elmer optional pilot docs | Elmer remains Level 2 + Level-3-ready; Level 3 is not claimed. |
 | Application domains | domain benchmarks | `benchmark_checked_preview` | 19 pass / 0 warn / 0 fail scenario suite | Benchmarks test deterministic behavior, not physical correctness. |
 | Agents | sub-agent task sessions | `fixture_guarded_preview` | audit script and tool-call ledger tests | Roles are deterministic local backend roles. |
@@ -60,6 +60,11 @@ convergence proof is claimed.
   point import probes at a dedicated solver Python such as `osa-solvers`, while
   CLI tools such as Gmsh are detected from the current `PATH`; see
   [`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md).
+- The Gmsh review record
+  [`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
+  accepts only optional manual mesh-generation smoke evidence. Optiland is a
+  candidate only and remains unapproved; Meep/MPB require `OSA_SOLVER_PYTHON`
+  and separate approval.
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 

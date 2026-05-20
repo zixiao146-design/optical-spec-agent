@@ -26,6 +26,11 @@
 | Optiland | 微型 ray-trace 或 import/run smoke | result JSON | 只验证本地 Optiland 路径。 |
 | Elmer | 等待可维护的 `ElmerSolver` 安装路径 | deferred report | 不声称 Level 3 验证。 |
 
+2026-05-20 的 Gmsh 结果已被 review 并接受为 optional manual
+mesh-generation smoke evidence。它不授权任何进一步 solver 执行，也不改变默认
+test、quality gate 或 release gate 行为。Optiland 只是下一个候选，尚未批准；
+Meep/MPB 需要 `OSA_SOLVER_PYTHON` 和单独批准；Elmer 仍 deferred。
+
 ## 必需批准
 
 Solver-backed run 必须显式设置 opt-in 环境变量。默认 CI、默认 smoke、release gates 或 quality gates 不应设置这些变量：

@@ -21,6 +21,10 @@ without making Gmsh a default dependency.
   for local `.geo` to `.msh` mesh generation smoke.
 - Micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`.
+- Micro-benchmark review:
+  `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`
+  accepts the evidence only as optional manual mesh-generation smoke evidence
+  and does not approve any further solver execution.
 - Level 3 readiness: `docs/gmsh_level3_readiness.md`.
 
 ## Input Fixture

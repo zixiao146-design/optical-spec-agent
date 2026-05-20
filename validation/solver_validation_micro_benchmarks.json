@@ -28,6 +28,9 @@
       "execution_sequence_rank": 1,
       "approval_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
       "pending_approval_template_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_pending.md",
+      "review_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
+      "review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
+      "review_decision_date": "2026-05-20",
       "approval_status": "approved_executed",
       "execution_authorized": false,
       "last_execution_status": "passed",
@@ -36,7 +39,10 @@
       "last_execution_evidence": "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
       "last_execution_solver_version": "4.15.2-git",
       "last_execution_scope": "Gmsh only; Meep/MPB/Optiland/Elmer not executed.",
-      "recommended_next_action": "Review the recorded Gmsh evidence before considering any separately approved next solver micro-benchmark.",
+      "recommended_next_action": "Gmsh evidence is reviewed and accepted as optional manual mesh-generation smoke evidence. Optiland may be considered next only after separate explicit approval; Meep/MPB require OSA_SOLVER_PYTHON and separate approval.",
+      "next_candidate_solver": "optiland",
+      "next_candidate_approved": false,
+      "no_further_solver_authorized": true,
       "environment_profile_required": "homebrew-cli",
       "solver_python_required": false,
       "approval_required": true,
@@ -63,6 +69,7 @@
       "evidence_refs": [
         "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
         "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+        "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
         "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
         "docs/gmsh_optional_validation_pilot.md"
       ]
@@ -198,7 +205,7 @@
       "approval_status": "pending",
       "execution_authorized": false,
       "last_execution_status": "not_run",
-      "recommended_next_action": "Review the Optiland approval record and provide the exact solver-specific approval phrase before any opt-in run.",
+      "recommended_next_action": "Optiland is the next candidate after accepted Gmsh evidence, but it is not approved; review the Optiland approval record and provide the exact solver-specific approval phrase before any opt-in run.",
       "environment_profile_required": "current",
       "solver_python_required": false,
       "approval_required": true,

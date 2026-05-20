@@ -3,6 +3,7 @@
 - Solver: Gmsh
 - Benchmark type: optional manual solver-backed micro-benchmark
 - Approval record path: `docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md`
+- Review decision path: `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`
 - Project version: `0.9.0rc8.dev0`
 - Current public prerelease: `v0.9.0rc7`
 - Solver path: `/opt/homebrew/bin/gmsh`
@@ -65,6 +66,11 @@ This evidence supports only a narrow optional manual claim: the local Gmsh
 adapter-preview path can produce a `.geo` artifact from the project fixture and
 Gmsh can mesh that artifact in the maintainer's local environment. It is smoke /
 mesh generation evidence, not optical correctness evidence.
+
+The maintainer review decision accepts this record only as optional manual
+mesh-generation smoke evidence. It does not authorize Optiland, Meep, MPB,
+Elmer, any future Gmsh rerun, PyPI/TestPyPI upload, tag creation, or release
+creation.
 
 The generated `/tmp` artifacts are intentionally not committed. This repository
 record preserves the reviewed report summary and safety boundaries.

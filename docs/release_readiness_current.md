@@ -147,6 +147,11 @@ This document describes the current `main` branch. It is not a release tag.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.
+- Gmsh micro-benchmark review decision:
+  `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`.
+  The evidence is accepted only as optional manual mesh-generation smoke
+  evidence. Optiland is the next candidate only and is not approved; Meep/MPB
+  require `OSA_SOLVER_PYTHON` and separate approval; Elmer remains deferred.
 - Fiber coupling and polarization warning closure:
   `POST /api/optics/fiber-coupling`,
   `POST /api/optics/polarization-jones`,

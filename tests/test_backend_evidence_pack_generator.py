@@ -106,6 +106,15 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert gmsh["last_execution_evidence"] == (
         "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md"
     )
+    assert gmsh["review_record_path"].endswith(
+        "gmsh_micro_benchmark_review_2026-05-20.md"
+    )
+    assert gmsh["next_candidate_solver"] == "optiland"
+    assert gmsh["next_candidate_approved"] is False
+    assert any(
+        "Optiland is the next candidate only" in note
+        for note in solver_micro["notes"]
+    )
     assert solver_micro["elmer_deferred"] is True
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",

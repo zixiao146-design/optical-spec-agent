@@ -28,6 +28,8 @@
   `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
 - Gmsh optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`.
+- Gmsh optional micro-benchmark review decision:
+  `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`.
 - Meep optional validation pilot default report:
   `scripts/run_optional_meep_validation.sh`.
 - Meep optional manual validation evidence:
@@ -80,6 +82,9 @@
   project/adapter `.geo` artifact path.
 - Approved Gmsh-only 2026-05-20 optional micro-benchmark evidence for local
   `.geo` to `.msh` mesh generation smoke only.
+- Maintainer review accepted the Gmsh evidence as optional manual
+  mesh-generation smoke evidence only; it does not approve Optiland, Meep, MPB,
+  Elmer, PyPI/TestPyPI upload, tag creation, or release creation.
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.

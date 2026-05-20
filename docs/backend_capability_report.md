@@ -193,8 +193,11 @@ and `scripts/check_optional_solver_readiness.py`. It does not authorize PyPI,
 TestPyPI, tag, release, or solver execution actions.
 The approved Gmsh-only 2026-05-20 run is recorded in
 [`../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`](../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md)
-as optional manual mesh generation smoke evidence. Meep, MPB, Optiland, and
-Elmer were not executed by that run.
+and reviewed in
+[`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
+as accepted optional manual mesh-generation smoke evidence. Meep, MPB,
+Optiland, and Elmer were not executed by that run, and no further solver
+execution is approved by the review. Optiland is only the next candidate.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

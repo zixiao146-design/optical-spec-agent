@@ -62,6 +62,9 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   gates.
 - Review the approved Gmsh-only 2026-05-20 optional micro-benchmark evidence
   before considering any separately approved Meep, MPB, Optiland, or Elmer run.
+- Record that the Gmsh review accepted the evidence only as optional manual
+  mesh-generation smoke evidence; Optiland is a next candidate only, not an
+  approved run.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.
@@ -126,3 +129,7 @@ Readiness is now environment-aware through
 the default profile uses current Python/current `PATH`, while
 `OSA_SOLVER_PYTHON` can probe a dedicated solver Python such as `osa-solvers`
 for PyMeep and `meep.mpb` without running any solver benchmark.
+The Gmsh review decision is recorded in
+[`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
+and does not authorize PyPI/TestPyPI upload, tag/release creation, Optiland,
+Meep, MPB, Elmer, or future Gmsh reruns.

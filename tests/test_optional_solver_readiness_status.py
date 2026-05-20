@@ -19,7 +19,10 @@ def test_optional_solver_readiness_status_records_current_boundaries():
     assert "optional_solver_micro_benchmark_execution_packet.md" in text
     assert "optional_solver_approval_records/" in text
     assert "Gmsh-only optional micro-benchmark on 2026-05-20" in text
+    assert "accepted it as optional manual mesh-generation smoke evidence" in text
+    assert "Optiland is the next candidate only" in text
     assert "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md" in text
+    assert "gmsh_micro_benchmark_review_2026-05-20.md" in text
     assert "Elmer | deferred" in text
     assert "Meep and `meep.mpb` are detectable" in text
     assert "explicit" in text.lower()

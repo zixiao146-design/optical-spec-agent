@@ -50,3 +50,15 @@ def test_gmsh_approved_execution_record_is_separate_from_pending_template():
     assert "TestPyPI upload authorized: no" in text
     assert "Tag or GitHub release creation authorized: no" in text
     assert "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md" in text
+
+
+def test_gmsh_review_record_accepts_evidence_without_new_authorization():
+    path = RECORD_DIR / "gmsh_micro_benchmark_review_2026-05-20.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    assert "Review status: accepted as optional manual mesh-generation smoke evidence" in text
+    assert "Other solvers executed: no" in text
+    assert "PyPI/TestPyPI upload: no" in text
+    assert "Tag/release action: no" in text
+    assert "does not authorize any further solver execution" in text
+    assert "Optiland may be considered next, but requires separate explicit approval" in text

@@ -96,6 +96,11 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert summary.summary["explicit_solver_approval_required"] is True
     assert summary.summary["all_optional_solver_execution_authorized"] is False
     assert summary.summary["gmsh_optional_micro_benchmark_status"] == "passed_2026-05-20"
+    assert (
+        summary.summary["gmsh_optional_micro_benchmark_review_status"]
+        == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
+    )
+    assert summary.summary["next_optional_solver_candidate"] == "optiland_not_approved"
     assert summary.summary["elmer_micro_benchmark_status"] == "deferred"
     assert "not a production-grade optical constants database" in summary.preview_boundary_summary["materials"]
     assert "not physical correctness" in summary.preview_boundary_summary["application_domains"]
@@ -103,5 +108,6 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert "availability" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "OSA_SOLVER_PYTHON" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "one-solver-at-a-time" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
+    assert "Optiland as a candidate only" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert summary.production_grade_validation_claimed is False
     assert summary.formal_convergence_proof_claimed is False

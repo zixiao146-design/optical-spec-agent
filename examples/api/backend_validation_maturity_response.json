@@ -386,6 +386,7 @@
         "validation/solver_environment_profiles.json",
         "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
         "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+        "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
         "validation/gmsh/gmsh_validation_pilot_2026-05-14.md"
       ],
       "tests_or_scripts": [
@@ -395,7 +396,7 @@
         "tests/test_optional_solver_micro_benchmarks_script.py"
       ],
       "limitations": [
-        "Gmsh has a recorded optional manual micro-benchmark pass from 2026-05-20.",
+        "Gmsh has a reviewed and accepted optional manual mesh-generation smoke pass from 2026-05-20.",
         "Readiness checks detect availability only and do not execute solvers.",
         "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
         "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
@@ -602,6 +603,8 @@
     "explicit_solver_approval_required": true,
     "all_optional_solver_execution_authorized": false,
     "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
+    "gmsh_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
+    "next_optional_solver_candidate": "optiland_not_approved",
     "elmer_micro_benchmark_status": "deferred"
   },
   "preview_boundary_summary": {
@@ -611,7 +614,7 @@
     "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
     "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services.",
     "pypi": "PyPI publication would not imply production-grade validation.",
-    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20, and default gates do not run solvers."
+    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20 as reviewed mesh-generation smoke evidence, keep Optiland as a candidate only without approval, and default gates do not run solvers."
   },
   "external_solver_executed": false,
   "external_llm_required": false,

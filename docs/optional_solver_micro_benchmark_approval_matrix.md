@@ -19,7 +19,7 @@ detection only, not solver execution.
 
 | Solver | Current status | Availability detection | Opt-in env var | Script path | Expected input fixture | Expected output artifact | Risk / limitation | Requires explicit approval | Default execution | Production-grade claim | Formal convergence claim |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Gmsh | Executed/passed for the approved 2026-05-20 Gmsh-only run; previous narrow manual report also exists | `command -v gmsh` on current `PATH`; optional `gmsh` Python import probe | `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1` | `scripts/run_optional_gmsh_validation.sh` | `examples/specs/gmsh_preview.json` | `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh` and `/tmp/osa-gmsh-micro-benchmark-report.json` | Mesh path smoke only; not optical correctness | approved/executed for Gmsh only on 2026-05-20; future runs need fresh approval | no | no | no |
+| Gmsh | Executed/passed for the approved 2026-05-20 Gmsh-only run; reviewed and accepted as optional manual mesh-generation smoke evidence | `command -v gmsh` on current `PATH`; optional `gmsh` Python import probe | `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1` | `scripts/run_optional_gmsh_validation.sh` | `examples/specs/gmsh_preview.json` | `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh` and `/tmp/osa-gmsh-micro-benchmark-report.json` | Mesh path smoke only; not optical correctness | approved/executed/reviewed for Gmsh only on 2026-05-20; future runs need fresh approval | no | no | no |
 | Meep | Candidate-ready with previous narrow manual report | `meep` import probe through current Python or `OSA_SOLVER_PYTHON` | `OSA_RUN_OPTIONAL_MEEP_VALIDATION=1` | `scripts/run_optional_meep_validation.sh` | `examples/specs/missing_wavelength_meep_preview.json` | `/tmp/osa-meep-validation/meep_validation_result.json` and report JSON | Tiny PyMeep path smoke only; not FDTD validation | yes | no | no | no |
 | MPB | Candidate-ready with previous narrow manual report | `meep.mpb` import probe through current Python or `OSA_SOLVER_PYTHON`; optional `mpb` CLI path | `OSA_RUN_OPTIONAL_MPB_VALIDATION=1` | `scripts/run_optional_mpb_validation.sh` | `examples/specs/mpb_preview.json` | `/tmp/osa-mpb-validation/mpb_validation_result.json` and report JSON | Tiny band path smoke only; not band convergence evidence | yes | no | no | no |
 | Optiland | Candidate-ready with previous narrow manual report | `optiland` import probe through current Python or `OSA_SOLVER_PYTHON`, optional CLI path check | `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1` | `scripts/run_optional_optiland_validation.sh` | `examples/specs/optiland_preview.json` | `/tmp/osa-optiland-validation/optiland_validation_result.json` and report JSON | Tiny ray/backend path smoke only; not lens design validation | yes | no | no | no |
@@ -38,3 +38,8 @@ with pending per-solver records under
 [`optional_solver_approval_records/`](optional_solver_approval_records/) and a
 one-solver-at-a-time sequence in
 [`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md).
+The Gmsh review record is
+[`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md).
+It accepts only Gmsh mesh-generation smoke evidence and does not approve
+Optiland, Meep, MPB, Elmer, PyPI/TestPyPI upload, tag creation, or release
+creation.

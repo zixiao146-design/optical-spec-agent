@@ -22,6 +22,8 @@ Latest local readiness findings are environment-specific:
 
 - Gmsh is available through the CLI/PATH profile, and the approved Gmsh-only
   optional micro-benchmark passed on 2026-05-20.
+- Maintainer review accepted the Gmsh result as optional manual
+  mesh-generation smoke evidence, not optical correctness evidence.
 - Optiland is available in the local Python/package profile.
 - Meep and `meep.mpb` are detectable through the maintainer-reported
   `osa-solvers` Python profile when `OSA_SOLVER_PYTHON` points there.
@@ -29,12 +31,13 @@ Latest local readiness findings are environment-specific:
 - Gmsh was executed only for the approved 2026-05-20 run. No Meep, MPB,
   Optiland, or Elmer micro-benchmark has been executed or approved by this
   status.
+- Optiland is the next candidate only; it is not approved by the Gmsh review.
 
 ## Readiness By Solver
 
 | Solver | Readiness status | Default execution | Approval required | Notes |
 | --- | --- | --- | --- | --- |
-| Gmsh | Executed/passed for the approved Gmsh-only optional micro-benchmark on 2026-05-20 | no by default; yes only for the completed approved Gmsh run | future Gmsh runs require fresh approval | Evidence: `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`; availability detection checks `gmsh` on PATH and can optionally probe the `gmsh` Python module. |
+| Gmsh | Executed/passed for the approved Gmsh-only optional micro-benchmark on 2026-05-20; review accepted it as optional manual mesh-generation smoke evidence | no by default; yes only for the completed approved Gmsh run | future Gmsh runs require fresh approval | Evidence: `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`; review: `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`; availability detection checks `gmsh` on PATH and can optionally probe the `gmsh` Python module. |
 | Meep | Candidate-ready with previous narrow manual report | no | yes | Availability detection checks `meep` through current Python or `OSA_SOLVER_PYTHON`. |
 | MPB | Candidate-ready with previous narrow manual report | no | yes | Availability detection checks `meep.mpb` through current Python or `OSA_SOLVER_PYTHON`; MPB CLI is optional. |
 | Optiland | Candidate-ready with previous narrow manual report | no | yes | Availability detection checks `optiland` through current Python or `OSA_SOLVER_PYTHON`, plus optional CLI path. |
@@ -52,6 +55,9 @@ The one-solver-at-a-time execution sequence is documented in
 The current pending/deferred records and the approved Gmsh-only execution
 record are stored under
 [`optional_solver_approval_records/`](optional_solver_approval_records/).
+The Gmsh review decision closes the Gmsh loop but does not approve Optiland,
+Meep, MPB, Elmer, any future Gmsh rerun, PyPI/TestPyPI upload, tag creation, or
+release creation.
 
 No PyPI upload, TestPyPI upload, tag creation, GitHub release creation, or
 `v1.0.0` release is approved by this readiness status.

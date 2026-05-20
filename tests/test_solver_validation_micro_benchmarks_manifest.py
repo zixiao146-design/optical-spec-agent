@@ -61,6 +61,16 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert solvers["gmsh"]["last_execution_evidence"] == (
         "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md"
     )
+    assert solvers["gmsh"]["review_record_path"] == (
+        "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        solvers["gmsh"]["review_status"]
+        == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
+    )
+    assert solvers["gmsh"]["next_candidate_solver"] == "optiland"
+    assert solvers["gmsh"]["next_candidate_approved"] is False
+    assert solvers["gmsh"]["no_further_solver_authorized"] is True
     assert "gmsh_micro_benchmark_approval_2026-05-20.md" in solvers["gmsh"]["approval_record_path"]
     assert solvers["gmsh"]["pending_approval_template_path"].endswith(
         "gmsh_micro_benchmark_approval_pending.md"
@@ -73,6 +83,8 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert solvers["mpb"]["solver_python_required"] is True
     assert "optiland" in solvers["optiland"]["module_names"]
     assert solvers["optiland"]["execution_sequence_rank"] == 2
+    assert solvers["optiland"]["approval_status"] == "pending"
+    assert solvers["optiland"]["execution_authorized"] is False
     assert solvers["elmer"]["command_names"] == ["ElmerSolver"]
     assert solvers["elmer"]["execution_sequence_rank"] == 99
     assert solvers["elmer"]["approval_status"] == "deferred"

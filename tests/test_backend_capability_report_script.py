@@ -128,6 +128,20 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert gmsh["last_execution_evidence"] == (
         "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md"
     )
+    assert gmsh["review_record_path"].endswith(
+        "gmsh_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        gmsh["review_status"]
+        == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
+    )
+    assert gmsh["next_candidate_solver"] == "optiland"
+    assert gmsh["next_candidate_approved"] is False
+    assert gmsh["no_further_solver_authorized"] is True
+    assert any(
+        "Optiland is the next candidate only" in note
+        for note in solver_micro["notes"]
+    )
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
     assert solver_micro["formal_convergence_proof_claimed"] is False

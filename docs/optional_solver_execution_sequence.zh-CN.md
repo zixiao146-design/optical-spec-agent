@@ -11,9 +11,12 @@
    - Gmsh 后暂停并 review report，再考虑下一个 solver。
    - 状态：2026-05-20 已按 Gmsh-only 批准执行并通过；见
      `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`。
+   - Review 状态：已接受为 optional manual mesh-generation smoke evidence；
+     见 `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`。
 2. Optiland second。
    - 检查本地 Python/package ray-preview 路径。
    - Optiland 后暂停并 review artifact path。
+   - 状态：仅为下一个候选；Gmsh review 不批准 Optiland 执行。
 3. Meep third。
    - 需要 `OSA_SOLVER_PYTHON` 指向 `osa-solvers` 等 solver Python profile。
    - Meep 后暂停并 review PyMeep report，再考虑 MPB。
@@ -44,3 +47,4 @@
 - 在考虑下一个 solver 前，记录 manual validation follow-up。
 
 不要在没有 separate approval 的情况下批量运行所有 solvers。
+已接受的 Gmsh review 不授权 Optiland、Meep、MPB、Elmer 或未来 Gmsh rerun。

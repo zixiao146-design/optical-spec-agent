@@ -14,6 +14,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - v1.0.0 tag: not created
 - Solver micro-benchmark approval: granted only for the Gmsh 2026-05-20 run
 - Solver micro-benchmark execution performed: yes, Gmsh only on 2026-05-20
+- Solver micro-benchmark review decision: Gmsh accepted only as optional manual
+  mesh-generation smoke evidence
 - Other solver micro-benchmark execution performed: no
 
 ## Execution Principles
@@ -34,9 +36,11 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 
 1. Gmsh first: CLI mesh generation is the lowest-risk path and validates a
    local `.geo` to `.msh` path only. Status: completed for the approved
-   Gmsh-only run on 2026-05-20.
+   Gmsh-only run on 2026-05-20 and reviewed as optional manual
+   mesh-generation smoke evidence.
 2. Optiland second: local Python/package ray-preview path with no external
-   electromagnetic solver.
+   electromagnetic solver. Status: next candidate only; not approved by the
+   Gmsh review.
 3. Meep third: requires the solver Python profile, typically
    `OSA_SOLVER_PYTHON=<osa-solvers python>`.
 4. MPB fourth: requires the solver Python profile and `meep.mpb`.
@@ -61,6 +65,7 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
   - `/tmp/osa-gmsh-micro-benchmark-report.json`
 - Expected report path: `/tmp/osa-gmsh-micro-benchmark-report.json`
 - Recorded evidence: `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`
+- Review decision: `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`
 - Cleanup notes: remove `/tmp/osa-gmsh-micro-benchmark-output/` after review unless the
   maintainer explicitly asks to preserve local evidence.
 - Risk notes: syntax/path smoke only; not optical correctness.

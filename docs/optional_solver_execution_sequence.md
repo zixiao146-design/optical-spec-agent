@@ -12,9 +12,12 @@ not execution approval.
    - Stop after Gmsh and review the report before considering another solver.
    - Status: completed for the approved Gmsh-only run on 2026-05-20; see
      `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`.
+   - Review status: accepted as optional manual mesh-generation smoke evidence;
+     see `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`.
 2. Optiland second.
    - Checks a local Python/package ray-preview path.
    - Stop after Optiland and review whether the artifact path is useful.
+   - Status: next candidate only; not approved by the Gmsh review.
 3. Meep third.
    - Requires `OSA_SOLVER_PYTHON` pointing at a solver Python profile such as
      `osa-solvers`.
@@ -48,3 +51,5 @@ not execution approval.
   next solver.
 
 Do not batch all solvers without separate approval.
+The accepted Gmsh review does not authorize Optiland, Meep, MPB, Elmer, or any
+future Gmsh rerun.

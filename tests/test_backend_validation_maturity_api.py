@@ -30,6 +30,11 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert body["summary"]["explicit_solver_approval_required"] is True
     assert body["summary"]["all_optional_solver_execution_authorized"] is False
     assert body["summary"]["gmsh_optional_micro_benchmark_status"] == "passed_2026-05-20"
+    assert (
+        body["summary"]["gmsh_optional_micro_benchmark_review_status"]
+        == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
+    )
+    assert body["summary"]["next_optional_solver_candidate"] == "optiland_not_approved"
     assert body["summary"]["elmer_micro_benchmark_status"] == "deferred"
     component_ids = {record["component_id"] for record in body["records"]}
     assert "fiber_coupling_calculator" in component_ids
@@ -41,6 +46,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert "not a production-grade optical constants database" in body["preview_boundary_summary"]["materials"]
     assert "OSA_SOLVER_PYTHON" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "one-solver-at-a-time" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
+    assert "Optiland as a candidate only" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False

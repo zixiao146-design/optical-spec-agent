@@ -339,9 +339,10 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "validation/solver_environment_profiles.json",
                 "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
                 "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+                "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
                 "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
             ],
-            "Gmsh has a recorded optional manual micro-benchmark pass from 2026-05-20.",
+            "Gmsh has a reviewed and accepted optional manual mesh-generation smoke pass from 2026-05-20.",
         ),
         (
             "meep_optional_solver_micro_benchmark",
@@ -466,6 +467,8 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "explicit_solver_approval_required": True,
             "all_optional_solver_execution_authorized": False,
             "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
+            "gmsh_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
+            "next_optional_solver_candidate": "optiland_not_approved",
             "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
@@ -496,8 +499,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "can be calibrated with OSA_SOLVER_PYTHON for solver-specific "
                 "Python profiles, include pending/deferred per-solver approval "
                 "records and one-solver-at-a-time sequencing, record the Gmsh-only "
-                "optional manual micro-benchmark pass from 2026-05-20, and default "
-                "gates do not run solvers."
+                "optional manual micro-benchmark pass from 2026-05-20 as reviewed "
+                "mesh-generation smoke evidence, keep Optiland as a candidate only "
+                "without approval, and default gates do not run solvers."
             ),
         },
     )
