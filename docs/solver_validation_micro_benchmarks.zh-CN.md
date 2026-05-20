@@ -99,6 +99,17 @@ upload、tag、release 动作或任何未来 Meep rerun。
 同一目录中的 MPB approval record、evidence 和 review record 只覆盖已批准的
 MPB-only run；不授权未来 MPB rerun、Elmer、upload、tag 或 release 动作。
 
+汇总性的维护者文档见
+[`optional_solver_evidence_summary.zh-CN.md`](optional_solver_evidence_summary.zh-CN.md)。
+rc8 backend readiness review 见
+[`rc8_backend_readiness_review.zh-CN.md`](rc8_backend_readiness_review.zh-CN.md)，
+validation maturity 映射见
+[`solver_evidence_validation_maturity_mapping.zh-CN.md`](solver_evidence_validation_maturity_mapping.zh-CN.md)。
+这些文档记录 Gmsh、Optiland、Meep、MPB 的 optional manual smoke-evidence
+review loop 已关闭，而 Elmer 仍 deferred 且不是 Level 3。它们不授权 solver
+rerun、PyPI/TestPyPI upload、tag/release creation 或 production-grade validation
+claims。
+
 ## 声明边界
 
 这些 micro-benchmarks 在显式运行并记录后，可以作为小型项目路径的可选手动验证证据。它们不意味着：

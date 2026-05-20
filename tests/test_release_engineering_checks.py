@@ -134,6 +134,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "open_solver_validation_harness.md",
         "solver_validation_micro_benchmarks.md",
         "solver_validation_micro_benchmarks.zh-CN.md",
+        "optional_solver_evidence_summary.md",
+        "optional_solver_evidence_summary.zh-CN.md",
+        "rc8_backend_readiness_review.md",
+        "rc8_backend_readiness_review.zh-CN.md",
+        "solver_evidence_validation_maturity_mapping.md",
+        "solver_evidence_validation_maturity_mapping.zh-CN.md",
         "optional_solver_micro_benchmark_approval_matrix.md",
         "optional_solver_micro_benchmark_approval_matrix.zh-CN.md",
         "optional_solver_micro_benchmark_approval_record_template.md",
@@ -245,6 +251,12 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "preview_boundary_policy.zh-CN.md",
         "solver_validation_micro_benchmarks.md",
         "solver_validation_micro_benchmarks.zh-CN.md",
+        "optional_solver_evidence_summary.md",
+        "optional_solver_evidence_summary.zh-CN.md",
+        "rc8_backend_readiness_review.md",
+        "rc8_backend_readiness_review.zh-CN.md",
+        "solver_evidence_validation_maturity_mapping.md",
+        "solver_evidence_validation_maturity_mapping.zh-CN.md",
         "optional_solver_micro_benchmark_approval_matrix.md",
         "optional_solver_micro_benchmark_approval_matrix.zh-CN.md",
         "optional_solver_micro_benchmark_approval_record_template.md",
@@ -408,6 +420,9 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert "Open-source Solver Validation Plan" in combined
     assert "Open-source Solver Validation Harness" in combined
     assert "Optional Solver-backed Validation Micro-benchmarks" in combined
+    assert "Optional Solver Evidence Summary" in combined
+    assert "rc8 Backend Readiness Review" in combined
+    assert "Solver Evidence Validation Maturity Mapping" in combined
     assert "explicit opt-in" in combined
     assert "meep_micro_benchmark_decision_packet.md" in combined
     assert "meep_micro_benchmark_review_2026-05-20.md" in combined

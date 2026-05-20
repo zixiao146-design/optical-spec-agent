@@ -93,6 +93,16 @@ approval remain separate and not granted.
   `docs/optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`
   accepts the result only as optional manual MPB/band-structure smoke evidence
   and does not authorize future MPB reruns.
+- Optional solver evidence summary:
+  `docs/optional_solver_evidence_summary.md` records Gmsh, Optiland, Meep, and
+  MPB as executed / passed / reviewed / accepted optional manual smoke evidence,
+  with Elmer deferred and not Level 3.
+- rc8 backend readiness review:
+  `docs/rc8_backend_readiness_review.md` uses the solver evidence summary,
+  application-domain benchmark result, calculator sanity evidence, material
+  provenance, adapter-native golden coverage, validation maturity, and preview
+  boundary policy as a maintainer-facing backend readiness review. It does not
+  authorize release/tag/upload actions.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

@@ -154,3 +154,10 @@ PyPI/TestPyPI upload, tag/release creation, or future Meep reruns.
 The MPB-only micro-benchmark is reviewed and accepted as optional manual
 MPB/band-structure smoke evidence; it does not authorize Elmer,
 PyPI/TestPyPI upload, tag/release creation, or future MPB reruns.
+The consolidated rc8 review package is now split across
+[`optional_solver_evidence_summary.md`](optional_solver_evidence_summary.md),
+[`rc8_backend_readiness_review.md`](rc8_backend_readiness_review.md), and
+[`solver_evidence_validation_maturity_mapping.md`](solver_evidence_validation_maturity_mapping.md).
+It records that the optional solver evidence loop is closed for Gmsh,
+Optiland, Meep, and MPB, while Elmer remains deferred and no release,
+publication, or production-validation claim is authorized.

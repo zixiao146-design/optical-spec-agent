@@ -189,6 +189,33 @@ def generate_backend_evidence_pack(
             **payload["optional_solver_micro_benchmarks"],
             "preview_design_assist_only": True,
             "default_solver_execution": False,
+            "optional_solver_evidence_summary_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["optional_solver_evidence_summary_available"],
+            "optional_solver_evidence_summary_path": payload[
+                "optional_solver_micro_benchmarks"
+            ]["optional_solver_evidence_summary_path"],
+            "rc8_backend_readiness_review_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["rc8_backend_readiness_review_available"],
+            "rc8_backend_readiness_review_path": payload[
+                "optional_solver_micro_benchmarks"
+            ]["rc8_backend_readiness_review_path"],
+            "solver_evidence_validation_maturity_mapping_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["solver_evidence_validation_maturity_mapping_available"],
+            "solver_evidence_validation_maturity_mapping_path": payload[
+                "optional_solver_micro_benchmarks"
+            ]["solver_evidence_validation_maturity_mapping_path"],
+            "solver_evidence_closed_for": payload["optional_solver_micro_benchmarks"][
+                "solver_evidence_closed_for"
+            ],
+            "solver_evidence_deferred_for": payload["optional_solver_micro_benchmarks"][
+                "solver_evidence_deferred_for"
+            ],
+            "optional_solver_evidence_review_complete": payload[
+                "optional_solver_micro_benchmarks"
+            ]["optional_solver_evidence_review_complete"],
             "optional_solver_readiness_available": payload[
                 "optional_solver_micro_benchmarks"
             ]["readiness_available"],
@@ -318,6 +345,7 @@ def generate_backend_evidence_pack(
         ],
         maintainer_review_questions=[
             "Is backend evidence sufficient for continued v0.9.0rc8.dev0 readiness work?",
+            "Is the rc8 backend readiness review sufficient as a maintainer-facing summary of optional solver evidence?",
             "Is PyPI still deferred?",
             "Should the frontend display backend evidence next?",
             "Which calculator or optical design domain should deepen next?",

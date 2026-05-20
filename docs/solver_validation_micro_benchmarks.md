@@ -116,6 +116,17 @@ The MPB approval record, evidence file, and review record in the same directory
 tree record the separately approved MPB-only run. They do not authorize future
 MPB reruns, Elmer, upload, tag, or release actions.
 
+The consolidated maintainer summary is
+[`optional_solver_evidence_summary.md`](optional_solver_evidence_summary.md).
+The rc8 backend readiness view is
+[`rc8_backend_readiness_review.md`](rc8_backend_readiness_review.md), and the
+validation maturity mapping is
+[`solver_evidence_validation_maturity_mapping.md`](solver_evidence_validation_maturity_mapping.md).
+Together they record that Gmsh, Optiland, Meep, and MPB have closed optional
+manual smoke-evidence review loops, while Elmer remains deferred and not Level
+3. They do not authorize solver reruns, PyPI/TestPyPI upload, tag/release
+creation, or production-grade validation claims.
+
 ## Claims
 
 These micro-benchmarks may support optional manual validation evidence for a

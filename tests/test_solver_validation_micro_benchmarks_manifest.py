@@ -17,6 +17,18 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert payload["opt_in_required"] is True
     assert payload["production_grade_validation_claimed"] is False
     assert payload["formal_convergence_proof_claimed"] is False
+    assert payload["optional_solver_evidence_summary_path"] == (
+        "docs/optional_solver_evidence_summary.md"
+    )
+    assert payload["rc8_backend_readiness_review_path"] == (
+        "docs/rc8_backend_readiness_review.md"
+    )
+    assert payload["solver_evidence_validation_maturity_mapping_path"] == (
+        "docs/solver_evidence_validation_maturity_mapping.md"
+    )
+    assert payload["optional_solver_evidence_review_complete"] is True
+    assert payload["solver_evidence_closed_for"] == ["gmsh", "optiland", "meep", "mpb"]
+    assert payload["solver_evidence_deferred_for"] == ["elmer"]
     solvers = {item["solver_name"]: item for item in payload["solvers"]}
     assert set(solvers) == {"gmsh", "meep", "mpb", "optiland", "elmer"}
     for name, item in solvers.items():

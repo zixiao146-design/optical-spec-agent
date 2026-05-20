@@ -181,6 +181,19 @@ class ApplicationDomainBenchmarkCoverage(BaseModel):
 class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     manifest_exists: bool
     manifest_path: str = "validation/solver_validation_micro_benchmarks.json"
+    optional_solver_evidence_summary_available: bool = True
+    optional_solver_evidence_summary_path: str = "docs/optional_solver_evidence_summary.md"
+    rc8_backend_readiness_review_available: bool = True
+    rc8_backend_readiness_review_path: str = "docs/rc8_backend_readiness_review.md"
+    solver_evidence_validation_maturity_mapping_available: bool = True
+    solver_evidence_validation_maturity_mapping_path: str = (
+        "docs/solver_evidence_validation_maturity_mapping.md"
+    )
+    solver_evidence_closed_for: list[str] = Field(
+        default_factory=lambda: ["gmsh", "optiland", "meep", "mpb"]
+    )
+    solver_evidence_deferred_for: list[str] = Field(default_factory=lambda: ["elmer"])
+    optional_solver_evidence_review_complete: bool = True
     readiness_available: bool = True
     readiness_script: str = "scripts/check_optional_solver_readiness.py"
     approval_matrix_available: bool = True
@@ -765,6 +778,24 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
     solvers = payload.get("solvers", [])
     return OptionalSolverMicroBenchmarkCoverage(
         manifest_exists=True,
+        optional_solver_evidence_summary_available=Path(
+            "docs/optional_solver_evidence_summary.md"
+        ).exists(),
+        rc8_backend_readiness_review_available=Path(
+            "docs/rc8_backend_readiness_review.md"
+        ).exists(),
+        solver_evidence_validation_maturity_mapping_available=Path(
+            "docs/solver_evidence_validation_maturity_mapping.md"
+        ).exists(),
+        solver_evidence_closed_for=payload.get(
+            "solver_evidence_closed_for", ["gmsh", "optiland", "meep", "mpb"]
+        ),
+        solver_evidence_deferred_for=payload.get(
+            "solver_evidence_deferred_for", ["elmer"]
+        ),
+        optional_solver_evidence_review_complete=bool(
+            payload.get("optional_solver_evidence_review_complete", True)
+        ),
         readiness_available=Path("scripts/check_optional_solver_readiness.py").exists(),
         approval_matrix_available=Path(
             "docs/optional_solver_micro_benchmark_approval_matrix.md"
@@ -817,6 +848,8 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
             ),
             "Meep evidence was reviewed and accepted as optional manual PyMeep/FDTD smoke evidence; it does not authorize future Meep reruns or other solver execution.",
             "MPB evidence was reviewed and accepted as optional manual MPB/band-structure smoke evidence; it does not authorize future MPB reruns or other solver execution.",
+            "Optional solver evidence review loops are closed for Gmsh, Optiland, Meep, and MPB; Elmer remains deferred and not Level 3.",
+            "The rc8 backend readiness review summarizes this evidence without authorizing PyPI, TestPyPI, tag, release, or v1.0.0 actions.",
             "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
             "Future execution should run one solver at a time after explicit approval.",
             "Opt-in environment variables are required for solver-backed runs.",

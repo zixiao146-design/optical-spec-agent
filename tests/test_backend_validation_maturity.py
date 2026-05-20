@@ -91,7 +91,13 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert summary.summary["optional_solver_approval_matrix_available"] is True
     assert summary.summary["optional_solver_environment_profiles_available"] is True
     assert summary.summary["optional_solver_execution_approval_packet_available"] is True
+    assert summary.summary["optional_solver_evidence_summary_available"] is True
+    assert summary.summary["rc8_backend_readiness_review_available"] is True
+    assert summary.summary["solver_evidence_validation_maturity_mapping_available"] is True
     assert summary.summary["optional_solver_approval_records_present"] is True
+    assert summary.summary["solver_evidence_closed_for"] == ["gmsh", "optiland", "meep", "mpb"]
+    assert summary.summary["solver_evidence_deferred_for"] == ["elmer"]
+    assert summary.summary["optional_solver_evidence_review_complete"] is True
     assert summary.summary["optional_solver_execution_default"] is False
     assert summary.summary["explicit_solver_approval_required"] is True
     assert summary.summary["all_optional_solver_execution_authorized"] is False
@@ -144,6 +150,12 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
         "optional_solver_micro_benchmarks"
     ]
     assert "reviewed optional manual MPB/band-structure" in summary.preview_boundary_summary[
+        "optional_solver_micro_benchmarks"
+    ]
+    assert "close the optional solver evidence review loops" in summary.preview_boundary_summary[
+        "optional_solver_micro_benchmarks"
+    ]
+    assert "Elmer deferred and not Level 3" in summary.preview_boundary_summary[
         "optional_solver_micro_benchmarks"
     ]
     assert summary.production_grade_validation_claimed is False

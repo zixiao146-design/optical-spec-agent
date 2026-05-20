@@ -69,6 +69,12 @@ solver convergence, and material-data verification.
   `OSA_SOLVER_PYTHON` and `meep.mpb` and is reviewed/accepted only as optional
   manual MPB/band-structure smoke evidence; it does not approve Elmer or any
   future MPB rerun.
+- `optional_solver_evidence_summary.md`, `rc8_backend_readiness_review.md`, and
+  `solver_evidence_validation_maturity_mapping.md` consolidate those reviewed
+  optional solver records for rc8 backend readiness review only; they do not
+  authorize PyPI/TestPyPI upload, tag/release creation, `v1.0.0`, additional
+  solver execution, production-grade solver validation, formal convergence
+  proof, or optical correctness claims.
 - `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
   Python environment; CLI tools such as Gmsh are still detected through the
   current `PATH`.

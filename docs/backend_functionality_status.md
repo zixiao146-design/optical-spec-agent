@@ -127,6 +127,14 @@ reruns.
 The MPB decision packet now documents the required `OSA_SOLVER_PYTHON` profile,
 `meep.mpb` import-only readiness path, expected artifacts, and approval phrase,
 but it does not authorize future MPB reruns.
+The consolidated optional solver evidence summary is now recorded in
+`docs/optional_solver_evidence_summary.md`, the rc8 backend readiness review in
+`docs/rc8_backend_readiness_review.md`, and the solver evidence maturity mapping
+in `docs/solver_evidence_validation_maturity_mapping.md`. These documents close
+the reviewed optional evidence loop for Gmsh, Optiland, Meep, and MPB while
+keeping Elmer deferred, default gates no-execute, and all PyPI/TestPyPI,
+tag/release, production validation, convergence, and optical-correctness
+decisions separately gated.
 
 ## Publication / Release Actions
 

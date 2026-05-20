@@ -78,3 +78,8 @@ any future Optiland rerun, or any future Meep rerun.
 The approved MPB evidence closes only the MPB-only run and does not authorize
 Elmer, any future Gmsh/Optiland/Meep/MPB rerun, PyPI/TestPyPI upload, tag
 creation, or release creation.
+
+The optional solver evidence loop is now closed for Gmsh, Optiland, Meep, and
+MPB. Use `docs/optional_solver_evidence_summary.md` and
+`docs/rc8_backend_readiness_review.md` for maintainer review before any future
+rc8/PyPI/v1.0 decision. Elmer remains deferred and not Level 3.

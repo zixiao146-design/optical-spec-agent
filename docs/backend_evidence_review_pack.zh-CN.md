@@ -80,6 +80,15 @@ python scripts/generate_backend_evidence_pack.py \
   `OSA_SOLVER_PYTHON`，review 后只接受为可选手动 PyMeep/FDTD smoke 证据。
   2026-05-20 单独批准的 MPB-only run 使用 `OSA_SOLVER_PYTHON` 和 `meep.mpb`，
   只记录为可选手动 MPB/band-structure smoke 证据，已 review 并接受；Elmer 仍 deferred。
+- Optional solver evidence summary:
+  `docs/optional_solver_evidence_summary.zh-CN.md` 记录 Gmsh、Optiland、
+  Meep、MPB 均已 executed / passed / reviewed / accepted 为 optional manual
+  smoke evidence，Elmer deferred 且不是 Level 3。
+- rc8 backend readiness review:
+  `docs/rc8_backend_readiness_review.zh-CN.md` 把 solver evidence summary、
+  application-domain benchmark 结果、calculator sanity evidence、material
+  provenance、adapter-native golden coverage、validation maturity 和 preview
+  boundary policy 汇总为维护者 review 文档，但不授权 release/tag/upload。
 - MPB decision packet
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
   已准备，记录必需的 `OSA_SOLVER_PYTHON` profile、`meep.mpb` import-only

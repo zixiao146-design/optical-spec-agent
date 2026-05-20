@@ -333,6 +333,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_evidence_summary.md",
+                "docs/rc8_backend_readiness_review.md",
+                "docs/solver_evidence_validation_maturity_mapping.md",
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
@@ -352,6 +355,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_evidence_summary.md",
+                "docs/rc8_backend_readiness_review.md",
+                "docs/solver_evidence_validation_maturity_mapping.md",
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
@@ -372,6 +378,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_evidence_summary.md",
+                "docs/rc8_backend_readiness_review.md",
+                "docs/solver_evidence_validation_maturity_mapping.md",
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md",
@@ -393,6 +402,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_evidence_summary.md",
+                "docs/rc8_backend_readiness_review.md",
+                "docs/solver_evidence_validation_maturity_mapping.md",
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
@@ -412,6 +424,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_evidence_summary.md",
+                "docs/rc8_backend_readiness_review.md",
+                "docs/solver_evidence_validation_maturity_mapping.md",
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
@@ -441,6 +456,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                     "Only the recorded Gmsh, Optiland, Meep, and MPB runs were explicitly approved and executed; Elmer remains deferred.",
                     "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
                     "The MPB optional micro-benchmark used OSA_SOLVER_PYTHON and records MPB/band-structure smoke evidence only.",
+                    "Optional solver evidence review loops are closed for Gmsh, Optiland, Meep, and MPB.",
+                    "Elmer remains deferred and not Level 3.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -476,7 +493,13 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "optional_solver_approval_matrix_available": True,
             "optional_solver_environment_profiles_available": True,
             "optional_solver_execution_approval_packet_available": True,
+            "optional_solver_evidence_summary_available": True,
+            "rc8_backend_readiness_review_available": True,
+            "solver_evidence_validation_maturity_mapping_available": True,
             "optional_solver_approval_records_present": True,
+            "solver_evidence_closed_for": ["gmsh", "optiland", "meep", "mpb"],
+            "solver_evidence_deferred_for": ["elmer"],
+            "optional_solver_evidence_review_complete": True,
             "optional_solver_execution_default": False,
             "explicit_solver_approval_required": True,
             "all_optional_solver_execution_authorized": False,
@@ -530,8 +553,10 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "as reviewed optional manual PyMeep/FDTD smoke evidence through "
                 "OSA_SOLVER_PYTHON, record the separately approved MPB-only pass "
                 "from 2026-05-20 as reviewed optional manual MPB/band-structure "
-                "smoke evidence through meep.mpb and OSA_SOLVER_PYTHON, "
-                "and default gates do not run solvers."
+                "smoke evidence through meep.mpb and OSA_SOLVER_PYTHON, close "
+                "the optional solver evidence review loops for Gmsh, Optiland, "
+                "Meep, and MPB, keep Elmer deferred and not Level 3, and default "
+                "gates do not run solvers."
             ),
         },
     )

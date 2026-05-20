@@ -34,6 +34,9 @@
   evidence for one tiny project-owned MPB/PyMeep validation path.
 - MPB Level 3 optional manual validation evidence is recorded but remains
   narrow and non-default. MPB CLI is not required.
+- Optional solver evidence summary, rc8 backend readiness review, and solver
+  evidence maturity mapping now consolidate the reviewed Gmsh, Optiland, Meep,
+  and MPB smoke evidence loops for maintainer review.
 - Optiland optional validation pilot, now with Level 3 optional manual
   validation evidence for one tiny project-owned Optiland backend path.
 - Optiland Level 3 optional manual validation evidence is recorded but remains
@@ -108,6 +111,10 @@
   physical validation, not a formal convergence proof, and not a default gate.
 - The MPB report is not production-grade physical validation and does not
   require MPB CLI.
+- The consolidated optional solver evidence summary and rc8 backend readiness
+  review do not authorize PyPI/TestPyPI upload, tag/release creation, `v1.0.0`,
+  additional solver execution, optical correctness claims, or production-grade
+  solver validation.
 - Optiland Level 3 evidence is narrow and optional; it is not production-grade
   optical validation, not a formal convergence proof, and not a default gate.
 - The Optiland report is not production-grade optical validation.
@@ -166,6 +173,11 @@
 - Use `docs/rc8_backend_roadmap.md`, `docs/rc8_capability_gap_audit.md`, and
   `docs/rc8_to_v1_0_decision_path.md` before deciding whether to prepare a
   future `v0.9.0rc8` release draft.
+- Use `docs/optional_solver_evidence_summary.md`,
+  `docs/rc8_backend_readiness_review.md`, and
+  `docs/solver_evidence_validation_maturity_mapping.md` to review closed
+  optional solver evidence without treating it as PyPI, tag/release, v1.0.0, or
+  production-validation approval.
 - Use `docs/v1_0_gap_audit.md` to classify blockers and deferred work.
 - Use `docs/rc6_development_plan.md` to keep rc6 development scoped.
 - Use `docs/v1_0_decision_matrix.md` before TestPyPI, PyPI, Elmer, production

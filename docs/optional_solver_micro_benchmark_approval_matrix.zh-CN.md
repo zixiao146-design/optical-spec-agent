@@ -64,3 +64,9 @@ MPB evidence record：
 [`../validation/mpb/mpb_micro_benchmark_2026-05-20.md`](../validation/mpb/mpb_micro_benchmark_2026-05-20.md)。
 它只记录 optional manual MPB/band-structure smoke evidence，不批准 Elmer、
 未来 Gmsh/Optiland/Meep/MPB rerun、PyPI/TestPyPI upload、tag 创建或 release 创建。
+
+汇总 solver evidence state 见
+[`optional_solver_evidence_summary.zh-CN.md`](optional_solver_evidence_summary.zh-CN.md)。
+Gmsh、Optiland、Meep、MPB 的 reviewed optional manual smoke-evidence loop 已关闭；
+Elmer 仍 deferred 且不是 Level 3。本矩阵任何一行都不授权 PyPI/TestPyPI upload、
+tag/release creation、`v1.0.0` 或未来 solver rerun。

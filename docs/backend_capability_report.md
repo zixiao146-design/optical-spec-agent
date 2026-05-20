@@ -231,5 +231,16 @@ Elmer remains not executed by these tasks, and Gmsh/Optiland/Meep/MPB reruns
 require separate approval. None of these records authorizes PyPI/TestPyPI
 upload, tag creation, or release creation.
 
+The consolidated optional solver evidence summary is
+[`optional_solver_evidence_summary.md`](optional_solver_evidence_summary.md).
+The rc8 backend readiness review is
+[`rc8_backend_readiness_review.md`](rc8_backend_readiness_review.md), and the
+solver evidence maturity mapping is
+[`solver_evidence_validation_maturity_mapping.md`](solver_evidence_validation_maturity_mapping.md).
+Together they record `solver_evidence_closed_for = [Gmsh, Optiland, Meep, MPB]`
+and `solver_evidence_deferred_for = [Elmer]`. They do not authorize
+PyPI/TestPyPI upload, tag/release creation, `v1.0.0`, or production-grade
+solver validation claims.
+
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

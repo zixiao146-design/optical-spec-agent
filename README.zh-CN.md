@@ -117,6 +117,12 @@ MPB decision packet
 run；它不授权未来 MPB rerun。
 Gmsh、Optiland、Meep 和 MPB 的 optional solver evidence loop 已收口；Elmer
 仍 deferred 且不是 Level 3。
+维护者视角的 `docs/optional_solver_evidence_summary.zh-CN.md`、
+`docs/rc8_backend_readiness_review.zh-CN.md` 和
+`docs/solver_evidence_validation_maturity_mapping.zh-CN.md` 汇总这些证据证明什么、
+不证明什么，并保持 PyPI/TestPyPI upload、tag/release 和 `v1.0.0` 决策独立
+gate；不声明 production-grade validation、formal convergence proof 或 optical
+correctness。
 readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
 `OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
 `meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。

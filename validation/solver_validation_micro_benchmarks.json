@@ -2,6 +2,19 @@
   "schema_version": "solver_validation_micro_benchmarks.v0.1",
   "default_runs_solver": false,
   "opt_in_required": true,
+  "optional_solver_evidence_summary_path": "docs/optional_solver_evidence_summary.md",
+  "rc8_backend_readiness_review_path": "docs/rc8_backend_readiness_review.md",
+  "solver_evidence_validation_maturity_mapping_path": "docs/solver_evidence_validation_maturity_mapping.md",
+  "optional_solver_evidence_review_complete": true,
+  "solver_evidence_closed_for": [
+    "gmsh",
+    "optiland",
+    "meep",
+    "mpb"
+  ],
+  "solver_evidence_deferred_for": [
+    "elmer"
+  ],
   "production_grade_validation_claimed": false,
   "formal_convergence_proof_claimed": false,
   "solvers": [

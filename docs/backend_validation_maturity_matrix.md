@@ -84,6 +84,15 @@ convergence proof is claimed.
   [`optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md)
   accepts it only as optional manual MPB/band-structure smoke evidence. It
   does not authorize future MPB reruns.
+- The consolidated optional solver evidence summary
+  [`optional_solver_evidence_summary.md`](optional_solver_evidence_summary.md),
+  rc8 backend readiness review
+  [`rc8_backend_readiness_review.md`](rc8_backend_readiness_review.md), and
+  solver evidence maturity mapping
+  [`solver_evidence_validation_maturity_mapping.md`](solver_evidence_validation_maturity_mapping.md)
+  close the reviewed optional evidence loops for Gmsh, Optiland, Meep, and MPB
+  while keeping Elmer deferred, default gates no-execute, and release/publication
+  decisions separately gated.
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 

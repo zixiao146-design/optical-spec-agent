@@ -69,6 +69,36 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["validation_claim_audit_available"] is True
     assert "materials" in body["preview_boundary_summary"]
     assert body["optional_solver_micro_benchmarks"]["manifest_exists"] is True
+    assert body["optional_solver_micro_benchmarks"][
+        "optional_solver_evidence_summary_available"
+    ] is True
+    assert body["optional_solver_micro_benchmarks"][
+        "optional_solver_evidence_summary_path"
+    ] == "docs/optional_solver_evidence_summary.md"
+    assert body["optional_solver_micro_benchmarks"][
+        "rc8_backend_readiness_review_available"
+    ] is True
+    assert body["optional_solver_micro_benchmarks"][
+        "rc8_backend_readiness_review_path"
+    ] == "docs/rc8_backend_readiness_review.md"
+    assert body["optional_solver_micro_benchmarks"][
+        "solver_evidence_validation_maturity_mapping_available"
+    ] is True
+    assert body["optional_solver_micro_benchmarks"][
+        "solver_evidence_validation_maturity_mapping_path"
+    ] == "docs/solver_evidence_validation_maturity_mapping.md"
+    assert body["optional_solver_micro_benchmarks"]["solver_evidence_closed_for"] == [
+        "gmsh",
+        "optiland",
+        "meep",
+        "mpb",
+    ]
+    assert body["optional_solver_micro_benchmarks"]["solver_evidence_deferred_for"] == [
+        "elmer"
+    ]
+    assert body["optional_solver_micro_benchmarks"][
+        "optional_solver_evidence_review_complete"
+    ] is True
     assert body["optional_solver_micro_benchmarks"]["readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["approval_matrix_available"] is True
     assert (
@@ -208,6 +238,24 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["validation_maturity_summary"]["summary"]["record_count"] >= 17
     assert body["validation_claim_audit_available"] is True
     assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
+    assert body["optional_solver_micro_benchmarks"][
+        "optional_solver_evidence_summary_available"
+    ] is True
+    assert body["optional_solver_micro_benchmarks"][
+        "rc8_backend_readiness_review_available"
+    ] is True
+    assert body["optional_solver_micro_benchmarks"][
+        "solver_evidence_validation_maturity_mapping_available"
+    ] is True
+    assert body["optional_solver_micro_benchmarks"]["solver_evidence_closed_for"] == [
+        "gmsh",
+        "optiland",
+        "meep",
+        "mpb",
+    ]
+    assert body["optional_solver_micro_benchmarks"]["solver_evidence_deferred_for"] == [
+        "elmer"
+    ]
     assert body["optional_solver_micro_benchmarks"]["opt_in_required"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_approval_matrix_available"] is True

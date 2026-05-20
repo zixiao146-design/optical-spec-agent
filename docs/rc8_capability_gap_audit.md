@@ -119,3 +119,10 @@ closes only the separately approved Meep run using `OSA_SOLVER_PYTHON`. The MPB
 evidence records only the separately approved MPB run through `meep.mpb` and
 `OSA_SOLVER_PYTHON`; it remains optional manual MPB/band-structure smoke
 evidence reviewed and accepted. Elmer remains deferred.
+The consolidated optional solver evidence summary, rc8 backend readiness
+review, and solver evidence maturity mapping now make the closed evidence loops
+for Gmsh, Optiland, Meep, and MPB explicit. The remaining validation gap is
+deeper, separately approved physical validation beyond these optional smoke
+checks; it is not a default gate and does not authorize PyPI/TestPyPI upload,
+tag/release creation, `v1.0.0`, production-grade solver validation, formal
+convergence proof, or optical correctness claims.

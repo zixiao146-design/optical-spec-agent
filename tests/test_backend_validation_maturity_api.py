@@ -25,7 +25,13 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert body["summary"]["optional_solver_approval_matrix_available"] is True
     assert body["summary"]["optional_solver_environment_profiles_available"] is True
     assert body["summary"]["optional_solver_execution_approval_packet_available"] is True
+    assert body["summary"]["optional_solver_evidence_summary_available"] is True
+    assert body["summary"]["rc8_backend_readiness_review_available"] is True
+    assert body["summary"]["solver_evidence_validation_maturity_mapping_available"] is True
     assert body["summary"]["optional_solver_approval_records_present"] is True
+    assert body["summary"]["solver_evidence_closed_for"] == ["gmsh", "optiland", "meep", "mpb"]
+    assert body["summary"]["solver_evidence_deferred_for"] == ["elmer"]
+    assert body["summary"]["optional_solver_evidence_review_complete"] is True
     assert body["summary"]["optional_solver_execution_default"] is False
     assert body["summary"]["explicit_solver_approval_required"] is True
     assert body["summary"]["all_optional_solver_execution_authorized"] is False
@@ -71,6 +77,9 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert "reviewed optional manual PyMeep/FDTD smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "MPB/band-structure smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "reviewed optional manual MPB/band-structure" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
+    assert "close the optional solver evidence review loops" in body[
+        "preview_boundary_summary"
+    ]["optional_solver_micro_benchmarks"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False

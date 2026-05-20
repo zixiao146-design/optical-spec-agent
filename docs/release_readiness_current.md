@@ -187,6 +187,13 @@ This document describes the current `main` branch. It is not a release tag.
 - Optiland micro-benchmark review decision:
   `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`.
   The evidence is accepted only as optional manual ray/path smoke evidence.
+- Optional solver evidence summary and rc8 backend readiness review:
+  `docs/optional_solver_evidence_summary.md`,
+  `docs/rc8_backend_readiness_review.md`, and
+  `docs/solver_evidence_validation_maturity_mapping.md`. These documents close
+  the reviewed optional evidence loop for Gmsh, Optiland, Meep, and MPB while
+  keeping Elmer deferred and keeping PyPI/TestPyPI upload, tag/release creation,
+  `v1.0.0`, and production validation decisions separately gated.
 - Fiber coupling and polarization warning closure:
   `POST /api/optics/fiber-coupling`,
   `POST /api/optics/polarization-jones`,

@@ -62,6 +62,11 @@
 - 2026-05-20 单独批准并执行的 MPB-only micro-benchmark 使用
   `OSA_SOLVER_PYTHON` 和 `meep.mpb`，只记录为 optional manual MPB/band-structure
   smoke evidence，已 review 并接受；它不批准 Elmer 或未来 MPB rerun。
+- `optional_solver_evidence_summary.md`、`rc8_backend_readiness_review.md` 和
+  `solver_evidence_validation_maturity_mapping.md` 仅用于把这些已 review 的
+  optional solver 记录汇总到 rc8 backend readiness review；它们不授权
+  PyPI/TestPyPI upload、tag/release 创建、`v1.0.0`、额外 solver execution、
+  生产级 solver validation、形式化收敛证明或光学正确性声称。
 - `OSA_SOLVER_PYTHON` 可用于把 import-only probe 指向专用 solver Python；
   Gmsh 等 CLI 工具仍从当前 `PATH` 探测。
 - 默认不调用 external LLM。

@@ -154,6 +154,14 @@ readiness path, approved command, artifacts, cleanup, and non-claims for the
 approved MPB-only run. It does not authorize future MPB reruns.
 The optional solver evidence loop is now closed for Gmsh, Optiland, Meep, and
 MPB; Elmer remains deferred and is not Level 3.
+The maintainer-facing
+[`optional solver evidence summary`](docs/optional_solver_evidence_summary.md),
+[`rc8 backend readiness review`](docs/rc8_backend_readiness_review.md), and
+[`solver evidence validation maturity mapping`](docs/solver_evidence_validation_maturity_mapping.md)
+consolidate what this evidence proves and what it does not prove. They keep
+PyPI/TestPyPI upload, tag/release creation, and `v1.0.0` decisions separately
+gated and do not claim production-grade validation, formal convergence proof, or
+optical correctness.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

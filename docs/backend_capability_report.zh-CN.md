@@ -164,5 +164,15 @@ MPB-specific decision packet
 [`optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/mpb_micro_benchmark_review_2026-05-20.md)
 review 接受为可选手动 MPB/band-structure smoke 证据，且不授权未来 MPB rerun。
 
+汇总性的 optional solver evidence summary 见
+[`optional_solver_evidence_summary.zh-CN.md`](optional_solver_evidence_summary.zh-CN.md)。
+rc8 backend readiness review 见
+[`rc8_backend_readiness_review.zh-CN.md`](rc8_backend_readiness_review.zh-CN.md)，
+solver evidence maturity mapping 见
+[`solver_evidence_validation_maturity_mapping.zh-CN.md`](solver_evidence_validation_maturity_mapping.zh-CN.md)。
+这些文档记录 `solver_evidence_closed_for = [Gmsh, Optiland, Meep, MPB]`，
+`solver_evidence_deferred_for = [Elmer]`。它们不授权 PyPI/TestPyPI upload、
+tag/release creation、`v1.0.0` 或 production-grade solver validation claims。
+
 可通过 `GET /api/backend-validation-maturity` 或
 `python scripts/audit_validation_claims.py` 检查这些边界。

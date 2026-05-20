@@ -72,3 +72,9 @@ and
 It documents the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` path,
 artifacts, and non-claims for the approved MPB-only run. It does not approve
 future MPB reruns.
+
+The consolidated solver evidence state is summarized in
+[`optional_solver_evidence_summary.md`](optional_solver_evidence_summary.md).
+Gmsh, Optiland, Meep, and MPB have closed reviewed optional manual smoke-evidence
+loops; Elmer remains deferred and not Level 3. No row in this matrix authorizes
+PyPI/TestPyPI upload, tag/release creation, `v1.0.0`, or future solver reruns.

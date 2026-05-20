@@ -80,6 +80,24 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert "materials" in payload["preview_boundary_summary"]
     solver_micro = payload["optional_solver_micro_benchmarks"]
     assert solver_micro["manifest_exists"] is True
+    assert solver_micro["optional_solver_evidence_summary_available"] is True
+    assert (
+        solver_micro["optional_solver_evidence_summary_path"]
+        == "docs/optional_solver_evidence_summary.md"
+    )
+    assert solver_micro["rc8_backend_readiness_review_available"] is True
+    assert (
+        solver_micro["rc8_backend_readiness_review_path"]
+        == "docs/rc8_backend_readiness_review.md"
+    )
+    assert solver_micro["solver_evidence_validation_maturity_mapping_available"] is True
+    assert (
+        solver_micro["solver_evidence_validation_maturity_mapping_path"]
+        == "docs/solver_evidence_validation_maturity_mapping.md"
+    )
+    assert solver_micro["solver_evidence_closed_for"] == ["gmsh", "optiland", "meep", "mpb"]
+    assert solver_micro["solver_evidence_deferred_for"] == ["elmer"]
+    assert solver_micro["optional_solver_evidence_review_complete"] is True
     assert solver_micro["readiness_available"] is True
     assert solver_micro["approval_matrix_available"] is True
     assert solver_micro["execution_approval_packet_available"] is True
