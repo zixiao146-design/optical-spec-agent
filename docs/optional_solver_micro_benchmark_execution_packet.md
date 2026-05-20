@@ -19,11 +19,12 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
   separately approved run
 - Solver micro-benchmark review decisions: Gmsh accepted only as optional
   manual mesh-generation smoke evidence; Optiland accepted only as optional
-  manual ray/path smoke evidence
+  manual ray/path smoke evidence; Meep accepted only as optional manual
+  PyMeep/FDTD smoke evidence
 - Meep decision packet: prepared at
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`;
-  approved/executed for the Meep-only 2026-05-20 run as optional manual
-  PyMeep/FDTD smoke evidence
+  approved/executed/reviewed for the Meep-only 2026-05-20 run as optional
+  manual PyMeep/FDTD smoke evidence
 - Other solver micro-benchmark execution performed: MPB and Elmer were not run
 
 ## Execution Principles

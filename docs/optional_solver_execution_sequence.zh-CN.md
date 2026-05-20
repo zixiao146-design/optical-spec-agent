@@ -23,6 +23,10 @@
    - 范围：仅作为 optional manual ray/path smoke evidence，不是透镜设计验证。
 3. Meep third。
    - 需要 `OSA_SOLVER_PYTHON` 指向 `osa-solvers` 等 solver Python profile。
+   - 状态：2026-05-20 已按 Meep-only 批准执行并通过；见
+     `validation/meep/meep_micro_benchmark_2026-05-20.md`。
+   - Review 状态：接受为 optional manual PyMeep/FDTD smoke evidence；见
+     `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`。
    - Meep 后暂停并 review PyMeep report，再考虑 MPB。
 4. MPB fourth。
    - 需要 `OSA_SOLVER_PYTHON` 和 `meep.mpb`。

@@ -5,6 +5,7 @@
 - Meep micro-benchmark approval: approved for the 2026-05-20 Meep-only run
 - Meep execution authorized: yes, for the 2026-05-20 Meep-only run only
 - Meep executed: yes, passed on 2026-05-20
+- Meep review status: accepted as optional manual PyMeep/FDTD smoke evidence
 - MPB executed: no
 - Gmsh executed in this task: no
 - Optiland executed in this task: no
@@ -29,7 +30,8 @@ The 2026-05-20 import-only profile check detected the `meep` module through the
 `osa-solvers` Python profile. It may also detect `meep.mpb`, but MPB remains a
 separate solver decision and is not authorized by this Meep packet. Readiness
 checks perform import/path detection only. The later approved Meep-only run is
-recorded in `validation/meep/meep_micro_benchmark_2026-05-20.md`.
+recorded in `validation/meep/meep_micro_benchmark_2026-05-20.md` and reviewed
+in `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`.
 
 ## Approval phrase
 

@@ -30,6 +30,8 @@ not execution approval.
      `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`.
    - Status: completed for the approved Meep-only run on 2026-05-20; see
      `validation/meep/meep_micro_benchmark_2026-05-20.md`.
+   - Review status: accepted as optional manual PyMeep/FDTD smoke evidence;
+     see `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`.
    - Scope: optional manual PyMeep/FDTD smoke evidence only, not production
      FDTD validation or optical correctness evidence.
    - Stop after Meep and review the PyMeep report before considering MPB.

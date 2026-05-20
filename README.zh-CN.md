@@ -98,8 +98,10 @@ solver 执行。单独批准的 2026-05-20 Optiland-only run 记录在
 `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`
 中完成 review，只作为 optional manual ray/path smoke evidence。单独批准的
 2026-05-20 Meep-only run 记录在
-`validation/meep/meep_micro_benchmark_2026-05-20.md`，只作为 optional manual
-PyMeep/FDTD smoke evidence。MPB 和 Elmer 仍未在这些任务中执行，且需要单独批准；
+`validation/meep/meep_micro_benchmark_2026-05-20.md`，并在
+`docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`
+中完成 review，只作为 optional manual PyMeep/FDTD smoke evidence。MPB 和
+Elmer 仍未在这些任务中执行，且需要单独批准；
 Gmsh、Optiland 和 Meep rerun 也需要单独批准。
 Meep decision packet
 `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`

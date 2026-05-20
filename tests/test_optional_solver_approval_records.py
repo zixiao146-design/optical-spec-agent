@@ -127,3 +127,22 @@ def test_meep_approved_execution_record_is_separate_from_pending_template():
     assert "no production-grade FDTD validation" in text
     assert "no formal convergence proof" in text
     assert "no optical correctness claim" in text
+
+
+def test_meep_review_record_accepts_evidence_without_new_authorization():
+    path = RECORD_DIR / "meep_micro_benchmark_review_2026-05-20.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    assert "Review status: accepted as optional manual PyMeep/FDTD smoke evidence" in text
+    assert "Meep / PyMeep version: 1.33.0" in text
+    assert "External solver/package executed: yes, Meep only" in text
+    assert "MPB executed: no" in text
+    assert "Gmsh rerun in this task: no" in text
+    assert "Optiland rerun in this task: no" in text
+    assert "Elmer executed: no" in text
+    assert "PyPI/TestPyPI upload: no" in text
+    assert "Tag/release action: no" in text
+    assert "Production-grade FDTD validation claimed: no" in text
+    assert "does not authorize any further solver execution" in text
+    assert "does not authorize MPB execution" in text
+    assert "MPB approval must remain separate from Meep" in text

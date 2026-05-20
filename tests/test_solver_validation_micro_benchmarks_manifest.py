@@ -85,6 +85,14 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert solvers["meep"]["last_execution_evidence"] == (
         "validation/meep/meep_micro_benchmark_2026-05-20.md"
     )
+    assert solvers["meep"]["review_record_path"] == (
+        "docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        solvers["meep"]["review_status"]
+        == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
+    )
+    assert solvers["meep"]["no_further_solver_authorized"] is True
     assert solvers["meep"]["next_candidate_solver"] == "mpb_after_osa_solver_python"
     assert solvers["meep"]["decision_packet_path"] == (
         "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
@@ -98,6 +106,10 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         "recommended_next_action"
     ]
     assert "validation/meep/meep_micro_benchmark_2026-05-20.md" in solvers["meep"]["evidence_refs"]
+    assert (
+        "docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md"
+        in solvers["meep"]["evidence_refs"]
+    )
     assert "meep.mpb" in solvers["mpb"]["module_names"]
     assert solvers["mpb"]["execution_sequence_rank"] == 4
     assert solvers["mpb"]["solver_python_required"] is True

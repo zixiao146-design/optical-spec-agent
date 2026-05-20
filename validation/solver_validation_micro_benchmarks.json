@@ -98,7 +98,7 @@
       "approval_status": "approved_executed",
       "execution_authorized": false,
       "last_execution_status": "passed",
-      "recommended_next_action": "Meep evidence is recorded as optional manual PyMeep/FDTD smoke evidence. MPB requires separate OSA_SOLVER_PYTHON approval before any execution; no future Meep rerun is authorized.",
+      "recommended_next_action": "Meep evidence is reviewed and accepted as optional manual PyMeep/FDTD smoke evidence. MPB requires separate OSA_SOLVER_PYTHON approval before any execution; no future Meep rerun is authorized.",
       "environment_profile_required": "osa-solvers",
       "readiness_profile": "osa-solvers",
       "solver_python_required": true,
@@ -129,15 +129,18 @@
         "validation/meep/meep_micro_benchmark_2026-05-20.md",
         "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
         "docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md",
+        "docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md",
         "validation/meep/meep_validation_pilot_2026-05-14.md",
         "docs/meep_optional_validation_pilot.md"
       ],
       "last_execution_scope": "Meep only for the approved Meep run using OSA_SOLVER_PYTHON; Gmsh and Optiland were not rerun; MPB/Elmer not executed.",
       "last_execution_date": "2026-05-20",
       "last_execution_evidence": "validation/meep/meep_micro_benchmark_2026-05-20.md",
-      "review_status": "not_reviewed_yet",
+      "review_record_path": "docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md",
+      "review_status": "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence",
       "next_candidate_solver": "mpb_after_osa_solver_python",
-      "next_candidate_approved": false
+      "next_candidate_approved": false,
+      "no_further_solver_authorized": true
     },
     {
       "solver_name": "mpb",

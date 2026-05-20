@@ -134,6 +134,8 @@ and reviewed in
 as optional manual ray/path smoke evidence only. The separately approved
 Meep-only 2026-05-20 run is recorded in
 [`validation/meep/meep_micro_benchmark_2026-05-20.md`](validation/meep/meep_micro_benchmark_2026-05-20.md)
+and reviewed in
+[`docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
 as optional manual PyMeep/FDTD smoke evidence only. MPB and Elmer remain
 not executed by these tasks and require separate approval; Gmsh, Optiland, and
 Meep reruns also require separate approval.

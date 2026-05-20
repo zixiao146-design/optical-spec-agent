@@ -152,6 +152,11 @@ This document describes the current `main` branch. It is not a release tag.
   `validation/meep/meep_micro_benchmark_2026-05-20.md`. This is PyMeep/FDTD
   smoke evidence only; MPB was not executed, and Gmsh/Optiland were not rerun
   in that task.
+- Meep micro-benchmark review decision:
+  `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`.
+  The evidence is accepted only as optional manual PyMeep/FDTD smoke evidence;
+  it does not approve MPB, PyPI/TestPyPI upload, tag/release creation, or any
+  future Meep rerun.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.

@@ -142,8 +142,10 @@ and
 The Meep-specific decision packet is
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md);
 it requires `OSA_SOLVER_PYTHON` and records the one approved Meep-only
-2026-05-20 run as optional manual PyMeep/FDTD smoke evidence, not production
-FDTD validation.
+2026-05-20 run. The Meep review record
+[`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
+accepts that run only as optional manual PyMeep/FDTD smoke evidence, not
+production FDTD validation.
 
 Coverage can also be read directly:
 
@@ -210,9 +212,11 @@ and reviewed in
 as accepted optional manual ray/path smoke evidence only. The separately
 approved Meep-only 2026-05-20 run is recorded in
 [`../validation/meep/meep_micro_benchmark_2026-05-20.md`](../validation/meep/meep_micro_benchmark_2026-05-20.md)
+and reviewed in
+[`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
 as optional manual PyMeep/FDTD smoke evidence only. MPB and Elmer remain not
 executed by these tasks, and Gmsh/Optiland/Meep reruns require separate
-approval. The Meep run does not authorize MPB, PyPI/TestPyPI upload, tag
+approval. The Meep review does not authorize MPB, PyPI/TestPyPI upload, tag
 creation, or release creation.
 
 Use `GET /api/backend-validation-maturity` or

@@ -165,11 +165,18 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert meep["last_execution_status"] == "passed"
     assert meep["solver_python_required"] is True
     assert "validation/meep/meep_micro_benchmark_2026-05-20.md" in meep["evidence_refs"]
+    assert meep["review_record_path"].endswith(
+        "meep_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        meep["review_status"]
+        == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
+    )
     assert any(
         "Optiland evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
-    assert any("Meep has a separate approved" in note for note in solver_micro["notes"])
+    assert any("Meep evidence was reviewed and accepted" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
     assert solver_micro["formal_convergence_proof_claimed"] is False

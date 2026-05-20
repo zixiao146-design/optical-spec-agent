@@ -94,6 +94,9 @@
 - Approved Meep-only 2026-05-20 optional micro-benchmark evidence for local
   adapter scaffold plus tiny PyMeep/FDTD smoke only:
   `validation/meep/meep_micro_benchmark_2026-05-20.md`.
+- Maintainer review accepted the Meep evidence as optional manual PyMeep/FDTD
+  smoke evidence only:
+  `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`.
 - The Meep evidence does not approve MPB, Elmer, any future Gmsh/Optiland/Meep
   rerun, PyPI/TestPyPI upload, tag creation, or release creation.
 - Limited Meep Level 3 optional manual validation evidence for one

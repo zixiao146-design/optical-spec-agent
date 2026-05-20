@@ -60,16 +60,19 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   [`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md)
   without adding solvers to default pytest, smoke, quality gates, or release
   gates.
-- Review the approved Gmsh-only, Optiland-only, and Meep-only 2026-05-20
-  optional micro-benchmark evidence before considering any separately approved
-  MPB, Elmer, future Gmsh rerun, future Optiland rerun, or future Meep rerun.
+- Treat the approved Gmsh-only, Optiland-only, and Meep-only 2026-05-20
+  optional micro-benchmark evidence as reviewed and closed before considering
+  any separately approved MPB, Elmer, future Gmsh rerun, future Optiland rerun,
+  or future Meep rerun.
 - Use the Meep decision packet
   [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
   to review the `OSA_SOLVER_PYTHON` profile, approval phrase, artifacts, and
   non-claims for the approved Meep-only smoke run.
 - Record that the Gmsh review accepted the evidence only as optional manual
   mesh-generation smoke evidence; record that the Optiland review accepted the
-  evidence only as optional manual ray/path smoke evidence.
+  evidence only as optional manual ray/path smoke evidence; record that the
+  Meep review accepted the evidence only as optional manual PyMeep/FDTD smoke
+  evidence.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.
@@ -138,6 +141,6 @@ The Gmsh review decision is recorded in
 [`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
 and does not authorize PyPI/TestPyPI upload, tag/release creation, Optiland,
 Meep, MPB, Elmer, or future Gmsh reruns.
-The Meep-only micro-benchmark is recorded as optional manual PyMeep/FDTD smoke
-evidence only; it does not authorize MPB, Elmer, PyPI/TestPyPI upload,
-tag/release creation, or future Meep reruns.
+The Meep-only micro-benchmark is reviewed and accepted as optional manual
+PyMeep/FDTD smoke evidence only; it does not authorize MPB, Elmer,
+PyPI/TestPyPI upload, tag/release creation, or future Meep reruns.

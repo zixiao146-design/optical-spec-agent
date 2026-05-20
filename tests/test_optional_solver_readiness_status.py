@@ -27,8 +27,10 @@ def test_optional_solver_readiness_status_records_current_boundaries():
     assert "gmsh_micro_benchmark_review_2026-05-20.md" in text
     assert "optiland_micro_benchmark_review_2026-05-20.md" in text
     assert "meep_micro_benchmark_decision_packet.md" in text
+    assert "meep_micro_benchmark_review_2026-05-20.md" in text
     assert "validation/meep/meep_micro_benchmark_2026-05-20.md" in text
     assert "approved Meep-only optional micro-benchmark" in text
+    assert "accepted the Meep result as optional manual PyMeep/FDTD" in text
     assert "future Meep runs require fresh approval" in text
     assert "Elmer | deferred" in text
     assert "Meep and `meep.mpb` are detectable" in text

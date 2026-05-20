@@ -16,12 +16,20 @@ def test_meep_optional_micro_benchmark_record_exists_and_preserves_boundaries():
         / "meep_micro_benchmark_approval_2026-05-20.md"
     )
     evidence = ROOT / "validation" / "meep" / "meep_micro_benchmark_2026-05-20.md"
+    review = (
+        ROOT
+        / "docs"
+        / "optional_solver_approval_records"
+        / "meep_micro_benchmark_review_2026-05-20.md"
+    )
     assert approval.exists()
     assert evidence.exists()
+    assert review.exists()
 
     approval_text = approval.read_text(encoding="utf-8")
     evidence_text = evidence.read_text(encoding="utf-8")
-    combined = approval_text + "\n" + evidence_text
+    review_text = review.read_text(encoding="utf-8")
+    combined = approval_text + "\n" + evidence_text + "\n" + review_text
 
     assert "approved for this Meep run" in approval_text
     assert "Execution authorized: yes, Meep only" in approval_text
@@ -42,3 +50,5 @@ def test_meep_optional_micro_benchmark_record_exists_and_preserves_boundaries():
     assert "Production-grade FDTD validation claimed: no" in evidence_text
     assert "Formal convergence proof claimed: no" in combined
     assert "Optical correctness claimed: no" in evidence_text
+    assert "accepted as optional manual PyMeep/FDTD smoke evidence" in review_text
+    assert "Production-grade FDTD validation claimed: no" in review_text

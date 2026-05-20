@@ -117,8 +117,8 @@ The separately approved Optiland-only optional micro-benchmark also passed on
 2026-05-20 and is reviewed as accepted optional manual ray/path smoke evidence,
 not production lens design validation. The separately approved Meep-only
 optional micro-benchmark passed on 2026-05-20 using `OSA_SOLVER_PYTHON` and is
-recorded as optional manual PyMeep/FDTD smoke evidence, not production FDTD
-validation. MPB and Elmer remain unexecuted by these tasks.
+reviewed as accepted optional manual PyMeep/FDTD smoke evidence, not production
+FDTD validation. MPB and Elmer remain unexecuted by these tasks.
 The Meep record does not authorize MPB, uploads, tags, releases, or future Meep
 reruns.
 
@@ -237,7 +237,7 @@ execution remains unauthorized until explicit solver-specific approval is
 recorded.
 The Gmsh review decision closes only the already approved Gmsh run. The
 Optiland review decision closes only the separately approved Optiland run.
-The Meep approval record closes only the separately approved Meep run. MPB
+The Meep review decision closes only the separately approved Meep run. MPB
 requires `OSA_SOLVER_PYTHON` and separate approval; Elmer remains deferred.
 The Meep-specific decision packet records the approval phrase and expected
 artifacts for the approved smoke run, but it does not authorize future Meep

@@ -20,6 +20,8 @@ def test_meep_optional_micro_benchmark_decision_packet_records_approved_run_and_
     assert "Meep micro-benchmark approval: approved for the 2026-05-20 Meep-only run" in text
     assert "Meep execution authorized: yes, for the 2026-05-20 Meep-only run only" in text
     assert "Meep executed: yes, passed on 2026-05-20" in text
+    assert "Meep review status: accepted as optional manual PyMeep/FDTD smoke evidence" in text
+    assert "meep_micro_benchmark_review_2026-05-20.md" in text
     assert "MPB executed: no" in text
     assert "Gmsh executed in this task: no" in text
     assert "Optiland executed in this task: no" in text

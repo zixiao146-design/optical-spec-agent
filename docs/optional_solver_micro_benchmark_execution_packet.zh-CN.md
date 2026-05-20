@@ -18,10 +18,10 @@
   用于其单独批准 run，Meep only 用于其单独批准 run
 - solver micro-benchmark review decision：Gmsh 只被接受为 optional manual
   mesh-generation smoke evidence；Optiland 只被接受为 optional manual ray/path
-  smoke evidence
+  smoke evidence；Meep 只被接受为 optional manual PyMeep/FDTD smoke evidence
 - Meep decision packet：
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`；
-  已用于 Meep-only 2026-05-20 run，记录为 optional manual PyMeep/FDTD smoke evidence
+  已用于 Meep-only 2026-05-20 run，并 review 接受为 optional manual PyMeep/FDTD smoke evidence
 - 其他 solver micro-benchmark 执行：MPB 和 Elmer 未执行
 
 ## 执行原则

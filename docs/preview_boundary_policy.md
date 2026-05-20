@@ -62,8 +62,9 @@ solver convergence, and material-data verification.
   validation; it does not approve Meep, MPB, Elmer, or any future Optiland
   rerun.
 - The separately approved Meep-only 2026-05-20 micro-benchmark used
-  `OSA_SOLVER_PYTHON` and is recorded only as optional manual PyMeep/FDTD smoke
-  evidence; it does not approve MPB, Elmer, or any future Meep rerun.
+  `OSA_SOLVER_PYTHON` and is reviewed and accepted only as optional manual
+  PyMeep/FDTD smoke evidence; it does not approve MPB, Elmer, or any future
+  Meep rerun.
 - `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
   Python environment; CLI tools such as Gmsh are still detected through the
   current `PATH`.

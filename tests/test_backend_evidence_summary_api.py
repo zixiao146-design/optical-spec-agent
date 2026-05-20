@@ -111,6 +111,13 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert meep["decision_packet_path"].endswith(
         "meep_micro_benchmark_decision_packet.md"
     )
+    assert meep["review_record_path"].endswith(
+        "meep_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        meep["review_status"]
+        == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
+    )
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(
