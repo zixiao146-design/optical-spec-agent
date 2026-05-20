@@ -1,7 +1,7 @@
 # rc8 Capability Gap Audit
 
-Current public prerelease: `v0.9.0rc7`.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: `v0.9.0rc8`.
+Current main development version: `0.9.0rc9.dev0`.
 
 This audit identifies backend gaps that should be reviewed before any future
 `v0.9.0rc8`, PyPI, or `v1.0.0` decision. It is preview/design-assist planning,
@@ -9,12 +9,12 @@ not production-grade physical validation.
 
 ## Release and Safety Status
 
-- `v0.9.0rc8` tag: not created.
+- `v0.9.0rc9` tag: not created.
 - `v1.0.0` tag: not created.
 - PyPI: not published.
 - PyPI publication approval: not granted.
 - TestPyPI uploaded and verified only for `0.9.0rc6.dev0`.
-- TestPyPI upload for `0.9.0rc8`: not performed.
+- TestPyPI upload for `0.9.0rc9.dev0`: not performed.
 - External solver execution: blocked by default.
 - External LLM calls: blocked by default.
 - Production-grade physical validation: not claimed.

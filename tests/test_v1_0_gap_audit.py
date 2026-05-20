@@ -13,13 +13,13 @@ def test_v1_0_gap_audit_tracks_current_baseline_and_blockers():
     assert path.exists()
     text = path.read_text(encoding="utf-8")
 
-    assert "Current public prerelease: v0.9.0rc7" in text
-    assert "Current main release draft: 0.9.0rc8" in text
-    assert "v0.9.0rc8 tag: not created" in text
+    assert "Current public prerelease: v0.9.0rc8" in text
+    assert "Current main development version: 0.9.0rc9.dev0" in text
+    assert "v0.9.0rc9 tag: not created" in text
     assert "PyPI: not published" in text
     assert "TestPyPI: uploaded for 0.9.0rc6.dev0" in text
-    assert "TestPyPI upload for 0.9.0rc8: not performed" in text
-    assert "TestPyPI upload approval for 0.9.0rc8: pending" in text
+    assert "TestPyPI upload for 0.9.0rc9.dev0: not performed" in text
+    assert "TestPyPI upload approval for 0.9.0rc9.dev0: pending" in text
     assert "Elmer Level 3 validation deferred" in text
     assert "Production-grade physical validation not claimed" in text
     assert "Formal convergence proof not claimed" in text

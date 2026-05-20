@@ -2,14 +2,14 @@
 
 ## Current baseline
 
-- Current public prerelease: `v0.9.0rc7`
-- Current main release draft: `0.9.0rc8`
-- `v0.9.0rc7` GitHub prerelease has been created and verified
-- `v0.9.0rc8` tag has not been created
-- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc7
+- Current public prerelease: `v0.9.0rc8`
+- Current main development version: `0.9.0rc9.dev0`
+- `v0.9.0rc8` GitHub prerelease has been created and verified
+- `v0.9.0rc9` tag has not been created
+- Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc8
 - Release verified: yes
-- Post-release status: `docs/post_release_status_v0.9.0rc7.md`
-- Latest post-release status commit: `37923d4`
+- Post-release status: `docs/post_release_status_v0.9.0rc8.md`
+- Latest post-release status commit: `b11b103`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
 - Local Agent API readiness: in progress
@@ -47,17 +47,18 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path through the v0.9.0rc8 release draft cycle
+## Recommended path through the post-v0.9.0rc8 rc9 development cycle
 
-`v0.9.0rc7` is the current public prerelease. `main` now builds as the
-`0.9.0rc8` development state. The `v0.9.0rc8` tag has not been created,
-no GitHub release exists for rc8, and PyPI remains unpublished.
+`v0.9.0rc8` is the current public prerelease. `main` now builds as the
+`0.9.0rc9.dev0` development state. The `v0.9.0rc8` GitHub prerelease has been
+created and the `v0.9.0rc9` tag has not been created; no GitHub release exists
+for rc9, and PyPI remains unpublished.
 Recommended goals:
 
 - Use `docs/v1_0_gap_audit.md` to classify hard blockers,
   soft blockers, deferred items, and future work.
-- Use `docs/release_readiness_v0.9.0rc8.md` to keep rc8 release draft checks
-  explicit.
+- Use `docs/release_readiness_v0.9.0rc9.md` to keep rc9 development and future
+  release-draft checks explicit.
 - Use `docs/v1_0_decision_matrix.md` for TestPyPI, PyPI, Elmer,
   production-validation, and public-contract-freeze decisions.
 - Use `docs/v1_0_public_contract_freeze_checklist.md` to make the freeze

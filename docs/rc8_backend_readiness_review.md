@@ -1,18 +1,20 @@
 # rc8 Backend Readiness Review
 
-Current public prerelease: v0.9.0rc7.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: v0.9.0rc8.
+Current main development version: `0.9.0rc9.dev0`.
 
 This review summarizes backend readiness after closing the optional solver
-evidence loop for Gmsh, Optiland, Meep, and MPB. It is a readiness review, not a
-release draft. It does not authorize a `v0.9.0rc8` tag, GitHub release, PyPI
-publication, TestPyPI upload, or `v1.0.0` release.
+evidence loop for Gmsh, Optiland, Meep, and MPB. v0.9.0rc8 has since been
+created as a verified GitHub prerelease. The review remains a backend evidence
+record and does not authorize PyPI publication, TestPyPI upload, v0.9.0rc9 tag
+creation, or `v1.0.0` release.
 
 ## Current Status
 
 - PyPI: not published.
 - TestPyPI: only `0.9.0rc6.dev0` uploaded and verified.
-- `v0.9.0rc8` tag: not created.
+- `v0.9.0rc8` GitHub prerelease: created and verified.
+- `v0.9.0rc9` tag: not created.
 - `v1.0.0` tag: not created.
 - Application domain benchmarks: 19 pass / 0 warn / 0 fail.
 - Default gates: no external solver execution.
@@ -91,4 +93,3 @@ Optiland, Meep, and MPB. Continue v1.0 readiness/backend engineering, keep Elmer
 deferred, and keep PyPI/TestPyPI/tag/release decisions separately gated. Do not
 claim production-grade validation, formal convergence proof, or optical
 correctness from this evidence.
-

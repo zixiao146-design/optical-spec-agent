@@ -73,9 +73,9 @@ export const demoHealth: HealthResponse = {
 
 export const demoVersion: VersionResponse = {
   ...base,
-  package_version: "0.9.0rc8.dev0",
-  current_public_prerelease: "v0.9.0rc7",
-  main_development_version: "0.9.0rc8.dev0",
+  package_version: "0.9.0rc9.dev0",
+  current_public_prerelease: "v0.9.0rc8",
+  main_development_version: "0.9.0rc9.dev0",
   pypi_published: false,
   testpypi_verified: true,
   testpypi_verified_version: "0.9.0rc6.dev0",
@@ -165,8 +165,8 @@ export const demoEvidence: ValidationEvidenceResponse = {
 
 export const demoReadiness: ReadinessResponse = {
   ...base,
-  current_public_prerelease: "v0.9.0rc7",
-  main_development_version: "0.9.0rc8.dev0",
+  current_public_prerelease: "v0.9.0rc8",
+  main_development_version: "0.9.0rc9.dev0",
   testpypi: {
     uploaded_and_verified: true,
     verified_version: "0.9.0rc6.dev0",

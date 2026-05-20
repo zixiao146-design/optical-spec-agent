@@ -4,29 +4,29 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc8`
-- Current public prerelease: `v0.9.0rc7`
-- Current main release draft: `0.9.0rc8`
-- Main branch state: v0.9.0rc8 release-draft-ready, pending tag/release approval
+- `pyproject.toml` package version on `main`: `0.9.0rc9.dev0`
+- Current public prerelease: `v0.9.0rc8`
+- Current main development version: `0.9.0rc9.dev0`
+- Main branch state: post-v0.9.0rc8 development toward v0.9.0rc9
 - Product positioning: open-source-solver-first
-- `v0.9.0rc7` GitHub prerelease has been created and verified
-- `v0.9.0rc8` is a release draft, not a public release tag
-- GitHub release for `v0.9.0rc8`: not created
-- `v0.9.0rc8` tag has not been created
+- `v0.9.0rc8` GitHub prerelease has been created and verified
+- `0.9.0rc9.dev0` is not a public release
+- GitHub release for `v0.9.0rc9`: not created
+- `v0.9.0rc9` tag has not been created
 - `v1.0.0` tag has not been created
-- Current public GitHub prerelease created: yes (`v0.9.0rc7`)
+- Current public GitHub prerelease created: yes (`v0.9.0rc8`)
 - Current public prerelease verified: yes
-- Post-release status doc: `docs/post_release_status_v0.9.0rc7.md`
-- Latest release-status commit: `37923d4`
+- Post-release status doc: `docs/post_release_status_v0.9.0rc8.md`
+- Latest release-status commit: `b11b103`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
-- TestPyPI upload for `0.9.0rc8`: not performed
+- TestPyPI upload for `0.9.0rc9.dev0`: not performed
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - TestPyPI upload approval record for rc7:
   `docs/testpypi_upload_approval_v0.9.0rc7.md`
-- TestPyPI upload approval record for rc8 release draft:
-  `docs/testpypi_upload_approval_v0.9.0rc8.md`
+- TestPyPI upload approval record for rc9 development:
+  `docs/testpypi_upload_approval_v0.9.0rc9.dev0.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
 - TestPyPI status:
@@ -36,9 +36,9 @@ This document describes the current `main` branch. It is not a release tag.
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml` (manual, passed for
   `0.9.0rc6.dev0`)
-- TestPyPI upload approval status for 0.9.0rc8: pending
-- TestPyPI upload authorized for rc8: no
-- Upload command authorized for 0.9.0rc8: no
+- TestPyPI upload approval status for 0.9.0rc9.dev0: pending
+- TestPyPI upload authorized for rc9.dev0: no
+- Upload command authorized for 0.9.0rc9.dev0: no
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - TestPyPI Trusted Publishing result: completed
 - TestPyPI clean install verification: passed
@@ -295,17 +295,18 @@ python -m twine check dist/*
 
 ## Recommended Version Action
 
-Current recommendation: treat `v0.9.0rc7` as the active verified public
-prerelease while `main` moves to post-v0.9.0rc7 development toward
-`v0.9.0rc8`. The `v0.9.0rc8` tag has not been created, no GitHub release
-exists for rc8, and publication remains separately gated. TestPyPI contains
+Current recommendation: treat `v0.9.0rc8` as the active verified public
+prerelease while `main` moves to post-v0.9.0rc8 development toward
+`v0.9.0rc9`. The `v0.9.0rc8` GitHub prerelease has been created and the
+`v0.9.0rc9` tag has not been created; no GitHub release exists for rc9, and
+publication remains separately gated. TestPyPI contains
 the `0.9.0rc6.dev0` development package via manual Trusted Publishing, but
-TestPyPI upload for `0.9.0rc8` has not been performed; PyPI remains
+TestPyPI upload for `0.9.0rc9.dev0` has not been performed; PyPI remains
 unpublished.
 
 Use `docs/rc8_backend_roadmap.md`, `docs/rc8_capability_gap_audit.md`, and
-`docs/rc8_to_v1_0_decision_path.md` for post-rc7 backend engineering. These
-documents do not prepare a `v0.9.0rc8` release draft, do not create tags or
+`docs/rc8_to_v1_0_decision_path.md` for post-rc8 backend engineering. These
+documents do not prepare a `v0.9.0rc9` release draft, do not create tags or
 GitHub releases, do not approve PyPI/TestPyPI publication, and do not claim
 production-grade physical validation or a formal convergence proof.
 
@@ -467,19 +468,19 @@ Current v1.0 evidence artifacts:
 
 ## Release Blockers
 
-- No hard release blocker is currently recorded for the post-`v0.9.0rc7`
-  `0.9.0rc8` development state.
+- No hard release blocker is currently recorded for the post-`v0.9.0rc8`
+  `0.9.0rc9.dev0` development state.
 - v1.0 hard blockers remain: explicit PyPI publication decision and final
   `v1.0.0` release criteria.
 - The public contract freeze is approved for the documented surface.
 - Do not move `v0.9.0rc1`, `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`,
-  `v0.9.0rc5`, `v0.9.0rc6`, or `v0.9.0rc7`.
+  `v0.9.0rc5`, `v0.9.0rc6`, `v0.9.0rc7`, or `v0.9.0rc8`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
-- Do not upload `0.9.0rc8` to TestPyPI unless separately approved.
+- Do not upload `0.9.0rc9.dev0` to TestPyPI unless separately approved.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
-- Next blocker class: any future `v0.9.0rc8` candidate must pass the release smoke
+- Next blocker class: any future `v0.9.0rc9` candidate must pass the release smoke
   script, full tests, build, docs checks, and release readiness checks before a
   new tag is considered.
 
@@ -502,14 +503,14 @@ Current v1.0 evidence artifacts:
 
 ## Manual Release Checklist
 
-1. Use `docs/post_release_status_v0.9.0rc7.md` as the rc7 source of truth.
+1. Use `docs/post_release_status_v0.9.0rc8.md` as the rc8 source of truth.
 2. Use `docs/v1_0_readiness_plan.md` for the next hardening priorities.
 3. Use `docs/release_engineering_playbook.md` for repeatable RC procedure.
 4. Review the public contract docs before changing CLI, schema, adapter, or
    workflow behavior.
 5. Run the packaging and validation gates before any future RC.
-6. Confirm any future `v0.9.0rc8` tag is absent locally and remotely before tag creation.
-7. Create an annotated `v0.9.0rc8` tag only after final maintainer approval.
+6. Confirm any future `v0.9.0rc9` tag is absent locally and remotely before tag creation.
+7. Create an annotated `v0.9.0rc9` tag only after final maintainer approval.
 8. Keep PyPI unpublished and do not re-upload TestPyPI unless explicitly
    approved for a new version.
 

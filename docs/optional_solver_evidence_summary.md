@@ -1,11 +1,12 @@
 # Optional Solver Evidence Summary
 
-Current public prerelease: v0.9.0rc7.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: v0.9.0rc8.
+Current main development version: `0.9.0rc9.dev0`.
 
 PyPI is not published. TestPyPI has only `0.9.0rc6.dev0` uploaded and
-verified. The `v0.9.0rc8` tag has not been created. The `v1.0.0` tag has not
-been created.
+verified. The `v0.9.0rc8` GitHub prerelease has been created and verified.
+The `v0.9.0rc9` tag has not been created. The `v1.0.0` tag has not been
+created.
 
 This document consolidates the optional solver micro-benchmark evidence that is
 already recorded and reviewed. It does not authorize any solver rerun, upload,
@@ -46,7 +47,6 @@ tag, release, or publication action.
 
 ## Recommended Next Step
 
-Use this evidence as one input to the rc8 backend readiness review. Keep Elmer
-deferred. Keep PyPI, TestPyPI, tag/release, and `v1.0.0` decisions separately
-gated.
-
+Use this evidence as carried-forward optional solver evidence for post-rc8
+v0.9.0rc9.dev0 backend readiness work. Keep Elmer deferred. Keep PyPI,
+TestPyPI, tag/release, and `v1.0.0` decisions separately gated.

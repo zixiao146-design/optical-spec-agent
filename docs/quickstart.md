@@ -29,8 +29,8 @@ names, package metadata, and `api_contract_version` remain untranslated.
 - Python 3.11.
 - Node/npm.
 - Local checkout of this repository.
-- Current public prerelease: v0.9.0rc7.
-- Current main release draft: 0.9.0rc8.
+- Current public prerelease: v0.9.0rc8.
+- Current main development version: 0.9.0rc9.dev0.
 
 ## 4. One-command Setup
 

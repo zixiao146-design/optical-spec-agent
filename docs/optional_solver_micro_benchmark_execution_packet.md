@@ -6,11 +6,11 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 
 ## Current State
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: 0.9.0rc8
+- Current public prerelease: v0.9.0rc8
+- Current main development version: 0.9.0rc9.dev0
 - PyPI: not published
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
-- v0.9.0rc8 tag: not created
+- v0.9.0rc9 tag: not created
 - v1.0.0 tag: not created
 - Solver micro-benchmark approval: granted only for the Gmsh, Optiland, and
   Meep 2026-05-20 runs

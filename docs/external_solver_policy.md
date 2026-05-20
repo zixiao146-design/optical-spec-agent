@@ -4,8 +4,8 @@ External solvers are not run by default. optical-spec-agent is
 open-source-solver-first: the default route is local artifact preview and
 offline evidence, not automatic solver execution.
 
-Current public prerelease: `v0.9.0rc7`. Current main release draft:
-`0.9.0rc8`. The `v0.9.0rc8` tag has not been created, PyPI remains
+Current public prerelease: `v0.9.0rc8`. Current main release draft:
+`0.9.0rc9.dev0`. The `v0.9.0rc8` GitHub prerelease has been created, and the `v0.9.0rc9` tag has not been created, PyPI remains
 unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
 TestPyPI upload for `0.9.0rc8` has not been performed.
 

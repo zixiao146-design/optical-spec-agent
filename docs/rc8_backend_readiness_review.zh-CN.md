@@ -1,7 +1,7 @@
 # rc8 Backend Readiness Review zh-CN
 
-Current public prerelease: v0.9.0rc7.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: v0.9.0rc8.
+Current main development version: `0.9.0rc9.dev0`.
 
 本文汇总 Gmsh、Optiland、Meep、MPB optional solver evidence loop 关闭后的
 backend readiness。它是 readiness review，不是 release draft，不授权
@@ -12,7 +12,8 @@ release。
 
 - PyPI: not published。
 - TestPyPI: 只有 `0.9.0rc6.dev0` 已上传并验证。
-- `v0.9.0rc8` tag: not created。
+- `v0.9.0rc8` GitHub prerelease: created and verified
+- `v0.9.0rc9` tag: not created。
 - `v1.0.0` tag: not created。
 - Application domain benchmarks: 19 pass / 0 warn / 0 fail。
 - Default gates: 不执行 external solver。

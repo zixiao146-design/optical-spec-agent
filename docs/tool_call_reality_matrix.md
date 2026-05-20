@@ -1,7 +1,7 @@
 # Tool-call Reality Matrix
 
-Current public prerelease: v0.9.0rc7. Current main release draft:
-`0.9.0rc8`.
+Current public prerelease: v0.9.0rc8. Current main development version:
+`0.9.0rc9.dev0`.
 
 This matrix records what the backend actually imports, calls, skips, or blocks.
 It is intended to answer whether the Agent Studio sub-agents are real backend

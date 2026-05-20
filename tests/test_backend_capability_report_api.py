@@ -16,7 +16,7 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["evidence_pack_available"] is True
     assert body["maintainer_review_recommended"] is True
     assert "Adapter-native golden coverage" in body["evidence_pack_sections"]
-    assert body["package"]["package_version"] == "0.9.0rc8"
+    assert body["package"]["package_version"] == "0.9.0rc9.dev0"
     assert {item["role_name"] for item in body["sub_agents"]} >= {"SpecAgent", "SafetyAgent"}
     assert {item["tool_name"] for item in body["internal_tools"]} >= {
         "material_catalog",

@@ -8,13 +8,13 @@ publication, tag, release, solver-run, or external LLM controls.
 
 ## 2. Current Status
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: `0.9.0rc8`
+- Current public prerelease: v0.9.0rc8
+- Current main development version: `0.9.0rc9.dev0`
 - Frontend MVP implemented and hardened
 - API contract version: 0.1
 - Visual smoke: manual / optional
 - PyPI: not published
-- v0.9.0rc8 tag: not created
+- v0.9.0rc9 tag: not created
 
 The visual smoke is not part of the default release gate or
 `./scripts/run_quality_gates.sh`.

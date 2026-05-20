@@ -1,11 +1,14 @@
 # optical-spec-agent Docs
 
-Current public prerelease: v0.9.0rc7.
-Current main release draft: `v0.9.0rc8`.
+Current public prerelease: v0.9.0rc8.
+Current main development version: `0.9.0rc9.dev0`.
 
 ## Release / Readiness
 
 - [Current release readiness](release_readiness_current.md)
+- [v0.9.0rc9 development readiness](release_readiness_v0.9.0rc9.md)
+- [TestPyPI upload approval for v0.9.0rc9.dev0](testpypi_upload_approval_v0.9.0rc9.dev0.md)
+- [v0.9.0rc8 post-release status](post_release_status_v0.9.0rc8.md)
 - [v0.9.0rc8 release draft readiness](release_readiness_v0.9.0rc8.md)
 - [v0.9.0rc8 GitHub release draft](github_release_draft_v0.9.0rc8.md)
 - [v0.9.0rc8 release notes](release_notes_v0.9.0rc8.md)

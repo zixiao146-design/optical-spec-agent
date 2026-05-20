@@ -3,8 +3,8 @@
 This playbook captures the release process hardened during the `v0.9.0rc1`,
 `v0.9.0rc2`, `v0.9.0rc3`, `v0.9.0rc4`, and `v0.9.0rc5` release candidates.
 
-Current public prerelease: `v0.9.0rc7`.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: `v0.9.0rc8`.
+Current main development version: `0.9.0rc9.dev0`.
 `0.9.0rc6.dev0` is not a public release, and the `v0.9.0rc6` tag has not
 been created. PyPI remains unpublished; TestPyPI contains the `0.9.0rc6.dev0`
 development package.

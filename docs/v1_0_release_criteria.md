@@ -2,8 +2,8 @@
 
 ## Current baseline
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: 0.9.0rc8
+- Current public prerelease: v0.9.0rc8
+- Current main development version: 0.9.0rc9.dev0
 - v1.0 public contract freeze: approved
 - TestPyPI uploaded and verified for 0.9.0rc6.dev0
 - PyPI published: no
@@ -43,7 +43,7 @@
   `docs/backend_evidence_review_decision.md` records backend evidence as
   sufficient to prepare the `v0.9.0rc7` release draft. The `v0.9.0rc7`
   GitHub prerelease has since been created and verified; PyPI publication,
-  TestPyPI upload for `0.9.0rc8`, future `v0.9.0rc8` tag/release work,
+  TestPyPI upload for `0.9.0rc9.dev0`, future `v0.9.0rc9` tag/release work,
   and `v1.0.0` release approval remain separate and not granted.
 
 ## Required before v1.0.0

@@ -16,8 +16,8 @@ def test_v1_0_public_contract_freeze_status_records_approval_and_scope():
     assert "Status: approved" in text
     assert "Approval type: maintainer-approved documentation freeze" in text
     assert "Approval date: 2026-05-16" in text
-    assert "Current public prerelease: v0.9.0rc7" in text
-    assert "Current main release draft: 0.9.0rc8" in text
+    assert "Current public prerelease: v0.9.0rc8" in text
+    assert "Current main development version: 0.9.0rc9.dev0" in text
     assert "Freeze baseline commit: 6e7ddf9c1811685c12db16bffb55cd76455267fe" in text
     assert "TestPyPI uploaded and verified: yes" in text
     assert "PyPI published: no" in text

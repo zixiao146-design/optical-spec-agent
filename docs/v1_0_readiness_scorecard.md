@@ -2,10 +2,10 @@
 
 ## Current Status
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: `0.9.0rc8`
+- Current public prerelease: v0.9.0rc8
+- Current main development version: `0.9.0rc9.dev0`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
-- TestPyPI upload approval for 0.9.0rc8: pending
+- TestPyPI upload approval for 0.9.0rc9.dev0: pending
 - v1.0.0 not released
 
 ## Ready / Strong Areas
@@ -127,7 +127,7 @@
   the 2026-05-15 package-manager install attempt is recorded as deferred.
 - TestPyPI upload exercised for 0.9.0rc6.dev0 through manual Trusted
   Publishing.
-- TestPyPI upload for 0.9.0rc8 is not performed and remains pending.
+- TestPyPI upload for 0.9.0rc9.dev0 is not performed and remains pending.
 - PyPI publication not approved.
 - PyPI publication readiness checklist records required approval, final version,
   CI, quality gates, build, twine check, metadata review, validation-claim
@@ -156,10 +156,10 @@
   Timeline are preview-first Agent Studio capabilities. Scorecard status remains
   conservative: no production-grade physical validation claim, no formal
   convergence proof claim, Elmer Level 3 deferred, PyPI unpublished, and no
-  tag/release action for `v0.9.0rc8` or `v1.0.0`.
+  tag/release action for `v0.9.0rc9` or `v1.0.0`.
 - Backend evidence review decision is recorded in
   `docs/backend_evidence_review_decision.md`: backend evidence is sufficient to
-  continue `0.9.0rc8` release draft readiness, but `v0.9.0rc8` tag creation, future GitHub
+  continue `0.9.0rc9.dev0` development readiness, but `v0.9.0rc8` tag creation, future GitHub
   release creation, PyPI publication, TestPyPI upload, and `v1.0.0` release are
   not approved.
 - rc8 backend roadmap and capability gap audit identify remaining backend
@@ -172,7 +172,7 @@
 - Continue v1.0 readiness engineering.
 - Use `docs/rc8_backend_roadmap.md`, `docs/rc8_capability_gap_audit.md`, and
   `docs/rc8_to_v1_0_decision_path.md` before deciding whether to prepare a
-  future `v0.9.0rc8` release draft.
+  future `v0.9.0rc9` release draft.
 - Use `docs/optional_solver_evidence_summary.md`,
   `docs/rc8_backend_readiness_review.md`, and
   `docs/solver_evidence_validation_maturity_mapping.md` to review closed
@@ -226,9 +226,9 @@
   Validation Evidence, and System Status.
 - Optionally evaluate TestPyPI upload with explicit approval.
 - Do not publish PyPI yet.
-- Continue post-`v0.9.0rc7` `0.9.0rc8` readiness work, while
+- Continue post-`v0.9.0rc7` `0.9.0rc9.dev0` readiness work, while
   keeping tag/release/PyPI approval separate.
-- Continue `0.9.0rc8` development; create any future `v0.9.0rc8` tag and
+- Continue `0.9.0rc9.dev0` development; create any future `v0.9.0rc8` tag and
   GitHub prerelease only after explicit maintainer approval and fresh verification.
 - Use `docs/backend_validation_maturity_matrix.md`,
   `docs/preview_boundary_policy.md`, and

@@ -1,6 +1,6 @@
 # 适配器原生光源/监测器映射
 
-Current public prerelease: v0.9.0rc7. Current main release draft:
+Current public prerelease: v0.9.0rc8. Current main release draft:
 `0.9.0rc8`。
 
 本文说明本地后端如何把光源、监测器和观测量意图映射到各个开源适配器族的

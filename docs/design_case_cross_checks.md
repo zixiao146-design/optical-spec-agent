@@ -1,6 +1,6 @@
 # Design Case Cross-Checks
 
-Current public prerelease: v0.9.0rc7. Current main release draft:
+Current public prerelease: v0.9.0rc8. Current main release draft:
 `0.9.0rc8`.
 
 Design case cross-checks verify that each bundled optical design example can be

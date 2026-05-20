@@ -6,8 +6,8 @@
 
 ## 2. 当前状态
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: 0.9.0rc8
+- Current public prerelease: v0.9.0rc8
+- Current main development version: 0.9.0rc9.dev0
 - PyPI 未发布
 - TestPyPI 仅验证过 0.9.0rc6.dev0
 - 本教程不运行外部求解器

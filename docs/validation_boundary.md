@@ -4,7 +4,7 @@ This document states what current tests and diagnostics validate, and what they
 do not validate.
 
 Version scope: current public prerelease `v0.9.0rc7`; current `main` development
-version `0.9.0rc8`. The `v0.9.0rc8` tag has not been created, PyPI remains
+version `0.9.0rc9.dev0`. The `v0.9.0rc8` GitHub prerelease has been created, and the `v0.9.0rc9` tag has not been created, PyPI remains
 unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
 TestPyPI upload for `0.9.0rc8` has not been performed.
 

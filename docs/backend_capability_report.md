@@ -1,7 +1,7 @@
 # Backend Capability Report
 
-Current public prerelease: v0.9.0rc7. Current main release draft:
-`0.9.0rc8`.
+Current public prerelease: v0.9.0rc8. Current main development version:
+`0.9.0rc9.dev0`.
 
 The backend capability report is a maintainer-facing proof of what the local
 Agent Studio backend can actually import, call, execute, or block today. It is
@@ -16,12 +16,13 @@ blocked external actions, use
 The review decision in
 [`backend_evidence_review_decision.md`](backend_evidence_review_decision.md)
 records that backend evidence is sufficient to prepare a `v0.9.0rc7` release
-draft, while tag creation, GitHub release creation, PyPI publication, TestPyPI
-upload, and `v1.0.0` approval remain separate and not granted.
+draft. The v0.9.0rc8 prerelease has since been created and verified, while
+future tag creation, GitHub release creation, PyPI publication, TestPyPI upload,
+and `v1.0.0` approval remain separate and not granted.
 
 ## What The Report Proves
 
-- Package metadata remains `0.9.0rc8`; PyPI is not published.
+- Package metadata remains `0.9.0rc9.dev0`; PyPI is not published.
 - Sub-agent roles appear in a real sample `AgentTaskSession` trace.
 - Internal tools are importable, callable, and recorded in the sample
   `tool_call_ledger`.

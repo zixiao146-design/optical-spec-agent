@@ -8,7 +8,7 @@
 - 中文手把手教程已加入前端和文档：
   `docs/agent_studio_chinese_guided_tutorial.md`。
 - 中文术语表见 `docs/frontend_chinese_terminology.md`。
-- Current main release draft: 0.9.0rc8。
+- Current main development version: 0.9.0rc9.dev0。
 - PyPI 未发布。
 
 ## 2. 语言切换

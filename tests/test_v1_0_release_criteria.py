@@ -12,8 +12,8 @@ def test_v1_0_release_criteria_exists_and_bounds_release_claims():
     path = ROOT / "docs" / "v1_0_release_criteria.md"
     assert path.exists()
     text = path.read_text(encoding="utf-8")
-    assert "Current public prerelease: v0.9.0rc7" in text
-    assert "Current main release draft: 0.9.0rc8" in text
+    assert "Current public prerelease: v0.9.0rc8" in text
+    assert "Current main development version: 0.9.0rc9.dev0" in text
     assert "v1.0 public contract freeze: approved" in text
     assert "PyPI published: no" in text
     assert "v1.0.0 released: no" in text
@@ -31,5 +31,5 @@ def test_v1_0_release_criteria_exists_and_bounds_release_claims():
     assert "not a PyPI publication trigger" in text
     assert "docs/backend_evidence_review_decision.md" in text
     assert "sufficient to prepare the `v0.9.0rc7` release draft" in text
-    assert "future `v0.9.0rc8` tag/release work" in text
+    assert "future `v0.9.0rc9` tag/release work" in text
     assert "v1.0.0` release approval remain separate and not granted" in text

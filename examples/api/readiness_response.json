@@ -19,8 +19,8 @@
     "Decide PyPI publication later with explicit maintainer approval.",
     "Prepare v1.0.0 release draft only after explicit approval."
   ],
-  "current_public_prerelease": "v0.9.0rc7",
-  "main_development_version": "0.9.0rc8",
+  "current_public_prerelease": "v0.9.0rc8",
+  "main_development_version": "0.9.0rc9.dev0",
   "testpypi": {
     "uploaded_and_verified": true,
     "verified_version": "0.9.0rc6.dev0",

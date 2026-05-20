@@ -176,7 +176,7 @@ from optical_spec_agent.validators.spec_validator import SpecValidator
 router = APIRouter()
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-CURRENT_PUBLIC_PRERELEASE = "v0.9.0rc7"
+CURRENT_PUBLIC_PRERELEASE = "v0.9.0rc8"
 MAIN_DEVELOPMENT_VERSION = __version__
 
 SAFETY_FLAGS: dict[str, bool] = {

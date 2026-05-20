@@ -23,7 +23,8 @@ def test_rc8_backend_readiness_review_docs_are_conservative():
     assert "Application domain benchmarks: 19 pass / 0 warn / 0 fail" in combined
     assert "PyPI: not published" in combined
     assert "TestPyPI: only `0.9.0rc6.dev0` uploaded and verified" in en_text
-    assert "does not authorize a `v0.9.0rc8` tag" in en_text
+    assert "does not authorize PyPI publication" in en_text
+    assert "v0.9.0rc9 tag" in en_text
     assert "does not authorize" in en_text
     assert "PyPI publication remains a separate maintainer decision" in en_text
     assert "Elmer: deferred, not Level 3, not executed" in combined

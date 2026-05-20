@@ -1,6 +1,6 @@
 # Observable Diagnostics
 
-Current public prerelease: v0.9.0rc7. Current main release draft:
+Current public prerelease: v0.9.0rc8. Current main release draft:
 `0.9.0rc8`.
 
 Observable diagnostics translate inferred monitor intent into explicit

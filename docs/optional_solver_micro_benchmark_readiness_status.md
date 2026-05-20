@@ -1,9 +1,9 @@
 # Optional Solver Micro-benchmark Readiness Status
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: 0.9.0rc8
+- Current public prerelease: v0.9.0rc8
+- Current main development version: 0.9.0rc9.dev0
 - PyPI: not published
-- v0.9.0rc8 tag: absent
+- v0.9.0rc9 tag: absent
 - v1.0.0 tag: absent
 - Solver micro-benchmark default mode: no execution
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0

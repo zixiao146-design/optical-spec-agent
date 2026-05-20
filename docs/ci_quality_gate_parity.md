@@ -9,12 +9,12 @@ software.
 
 ## Current Status
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: `0.9.0rc8`
+- Current public prerelease: v0.9.0rc8
+- Current main development version: `0.9.0rc9.dev0`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
-- v0.9.0rc8 tag: not created
+- v0.9.0rc9 tag: not created
 - TestPyPI upload approval for 0.9.0rc8: pending
-- Upload command authorized for 0.9.0rc8: no
+- Upload command authorized for 0.9.0rc9.dev0: no
 - PyPI publication approval: not granted
 
 ## Local Quality Gate

@@ -2,7 +2,7 @@
 
 本文档说明 Agent Studio 后端如何用本地确定性逻辑推断光源、监测器和观测量。
 
-Current public prerelease: v0.9.0rc7。Current main release draft:
+Current public prerelease: v0.9.0rc8。Current main release draft:
 `0.9.0rc8`。
 
 ## 目的

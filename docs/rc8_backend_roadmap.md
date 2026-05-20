@@ -1,22 +1,23 @@
 # rc8 Backend Roadmap
 
-Current public prerelease: `v0.9.0rc7`.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: `v0.9.0rc8`.
+Current main development version: `0.9.0rc9.dev0`.
 
-This roadmap describes post-`v0.9.0rc7` backend engineering now packaged into
-the `v0.9.0rc8` release draft. It does not create a tag, does not create a
-GitHub release, does not approve PyPI publication, and does not authorize
-TestPyPI upload.
+This roadmap describes post-`v0.9.0rc7` backend engineering that was packaged
+into the `v0.9.0rc8` GitHub prerelease. It is carried forward as context for
+post-rc8 `0.9.0rc9.dev0` backend work. It does not create a future tag, does
+not create a GitHub release, does not approve PyPI publication, and does not
+authorize TestPyPI upload.
 
 ## Operating Boundaries
 
-- `0.9.0rc8` is not a public release.
-- `v0.9.0rc8` tag has not been created.
+- `0.9.0rc9.dev0` is not a public release.
+- `v0.9.0rc9` tag has not been created.
 - `v1.0.0` tag has not been created.
 - PyPI remains unpublished.
 - PyPI publication approval remains not granted.
 - TestPyPI uploaded and verified only for `0.9.0rc6.dev0`.
-- TestPyPI upload for `0.9.0rc8` has not been performed.
+- TestPyPI upload for `0.9.0rc9.dev0` has not been performed.
 - External solvers are not run by default.
 - External LLMs are not called by default.
 - No production-grade physical validation is claimed.
@@ -90,8 +91,8 @@ TestPyPI upload.
 
 ## Deferred / Non-blocker
 
-- PyPI publication and TestPyPI upload for `0.9.0rc8`.
-- `v0.9.0rc8` tag creation and GitHub prerelease creation.
+- PyPI publication and TestPyPI upload for `0.9.0rc9.dev0`.
+- `v0.9.0rc9` tag creation and GitHub prerelease creation.
 - Frontend display of backend evidence review data.
 - Elmer Level 3 validation.
 - Optional external solver execution.

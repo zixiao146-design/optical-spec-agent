@@ -13,9 +13,12 @@ def test_docs_index_exists_and_links_major_docs():
     assert index.exists()
     text = index.read_text(encoding="utf-8")
     required = [
-        "Current public prerelease: v0.9.0rc7",
-        "Current main release draft: `v0.9.0rc8`",
+        "Current public prerelease: v0.9.0rc8",
+        "Current main development version: `0.9.0rc9.dev0`",
         "release_readiness_current.md",
+        "release_readiness_v0.9.0rc9.md",
+        "testpypi_upload_approval_v0.9.0rc9.dev0.md",
+        "post_release_status_v0.9.0rc8.md",
         "release_readiness_v0.9.0rc8.md",
         "rc8_backend_roadmap.md",
         "rc8_capability_gap_audit.md",

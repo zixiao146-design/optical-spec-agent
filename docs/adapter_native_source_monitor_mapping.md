@@ -1,6 +1,6 @@
 # Adapter-Native Source/Monitor Mapping
 
-Current public prerelease: v0.9.0rc7. Current main release draft:
+Current public prerelease: v0.9.0rc8. Current main release draft:
 `0.9.0rc8`.
 
 This document explains how local optical source, monitor, and observable intent

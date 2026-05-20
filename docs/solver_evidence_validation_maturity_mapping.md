@@ -1,7 +1,7 @@
 # Solver Evidence Validation Maturity Mapping
 
-Current public prerelease: v0.9.0rc7.
-Current main release draft: `0.9.0rc8`.
+Current public prerelease: v0.9.0rc8.
+Current main development version: `0.9.0rc9.dev0`.
 
 This document explains how optional solver micro-benchmark evidence maps into
 the conservative backend validation maturity model.

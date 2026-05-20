@@ -12,9 +12,9 @@ def test_optional_solver_readiness_status_records_current_boundaries():
     path = ROOT / "docs" / "optional_solver_micro_benchmark_readiness_status.md"
     assert path.exists()
     text = path.read_text(encoding="utf-8")
-    assert "Current public prerelease: v0.9.0rc7" in text
-    assert "Current main release draft: 0.9.0rc8" in text
-    assert "v0.9.0rc8 tag: absent" in text
+    assert "Current public prerelease: v0.9.0rc8" in text
+    assert "Current main development version: 0.9.0rc9.dev0" in text
+    assert "v0.9.0rc9 tag: absent" in text
     assert "Solver micro-benchmark default mode: no execution" in text
     assert "optional_solver_micro_benchmark_execution_packet.md" in text
     assert "optional_solver_approval_records/" in text

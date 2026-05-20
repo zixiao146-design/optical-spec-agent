@@ -2,14 +2,14 @@
 
 ## Current state
 
-- Current public prerelease: v0.9.0rc7
-- Current main release draft: 0.9.0rc8
+- Current public prerelease: v0.9.0rc8
+- Current main development version: 0.9.0rc9.dev0
 - PyPI published: no
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
 - v0.9.0rc7 tag created: yes
 - v0.9.0rc7 GitHub prerelease created: yes
 - v0.9.0rc8 tag created: no
-- TestPyPI upload for 0.9.0rc8: not performed
+- TestPyPI upload for 0.9.0rc9.dev0: not performed
 - v1.0.0 released: no
 
 ## Original Review Conclusion
