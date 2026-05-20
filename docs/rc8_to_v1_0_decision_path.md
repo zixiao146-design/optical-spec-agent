@@ -1,22 +1,22 @@
-# rc8.dev0 to v1.0 Decision Path
+# rc8 to v1.0 Decision Path
 
 Current public prerelease: `v0.9.0rc7`.
-Current main development version: `0.9.0rc8.dev0`.
+Current main release draft: `0.9.0rc8`.
 
 This path keeps post-rc7 backend engineering separate from future `v0.9.0rc8`,
 PyPI, and `v1.0.0` decisions.
 
-## Gate 1: Continue rc8.dev0 Backend Engineering
+## Gate 1: Continue rc8 Backend Engineering
 
 Status: open and active.
 
 Required posture:
 
-- Keep package version at `0.9.0rc8.dev0` until a release draft is approved.
+- Keep package version at `0.9.0rc8` until a release draft is approved.
 - Keep `v0.9.0rc8` tag absent.
 - Keep `v1.0.0` tag absent.
 - Keep PyPI unpublished.
-- Keep TestPyPI upload for `0.9.0rc8.dev0` unperformed unless explicitly
+- Keep TestPyPI upload for `0.9.0rc8` unperformed unless explicitly
   approved.
 - Continue backend evidence hardening without overclaiming validation.
 
@@ -41,7 +41,7 @@ Before preparing a release draft, maintainers should confirm:
 - TestPyPI no-upload preflight passes.
 - Quality gates, pytest, build, make check, normal smoke, and wheel smoke pass.
 - `project.version` and `__version__` are ready to move from
-  `0.9.0rc8.dev0` to `0.9.0rc8`.
+  `0.9.0rc8` to `0.9.0rc8`.
 - Release draft notes and readiness docs exist.
 - `v0.9.0rc8` tag remains absent before creation.
 - PyPI/TestPyPI decision remains explicit.
@@ -94,6 +94,6 @@ Status: not approved.
 
 ## Recommendation
 
-Continue v1.0 readiness/backend engineering in `0.9.0rc8.dev0`, then revisit
+Continue v1.0 readiness/backend engineering in `0.9.0rc8`, then revisit
 the `v0.9.0rc8` release-draft decision only after the rc8 capability gaps are
 reviewed and the standard evidence checks pass.

@@ -175,7 +175,7 @@ The maintainer
 [`backend evidence review decision`](docs/backend_evidence_review_decision.md)
 recorded backend evidence as sufficient for the `v0.9.0rc7` release draft,
 which has now been published as the current GitHub prerelease. PyPI
-publication, TestPyPI upload for `0.9.0rc8.dev0`, a future `v0.9.0rc8` tag,
+publication, TestPyPI upload for `0.9.0rc8`, a future `v0.9.0rc8` tag,
 and `v1.0.0` approval remain separate and not granted.
 The backend also includes
 [`design requirement templates`](docs/design_requirement_templates.md) and a
@@ -184,7 +184,7 @@ mapping layer. These deterministic templates connect first-run goals to optical
 intent, required inputs, default assumptions, material/geometry choices,
 expected calculators or adapters, tool-call ledger entries, and preview
 artifacts without using an external LLM.
-The rc8.dev0 backend now makes material provenance and ambiguous requirement
+The rc8 backend now makes material provenance and ambiguous requirement
 handling explicit through
 [`material provenance policy`](docs/material_provenance_policy.md),
 [`ambiguous requirement matching`](docs/ambiguous_requirement_matching.md), and
@@ -216,8 +216,8 @@ optical constants, and PyPI/TestPyPI upload or GitHub tag/release controls are
 not exposed.
 
 Release status: the current public release candidate is `v0.9.0rc7`, while the
-current `main` development version is `0.9.0rc8.dev0`. The `v0.9.0rc8` tag has
-not been created, no `v0.9.0rc8` GitHub release exists, and `0.9.0rc8.dev0` is
+current `main` development version is `0.9.0rc8`. The `v0.9.0rc8` tag has
+not been created, no `v0.9.0rc8` GitHub release exists, and `0.9.0rc8` is
 not a public release.
 It includes v0.6 local/manual diagnostics, v0.7 multi-solver adapter MVP
 scaffolds, v0.8 LLM parser foundation work, and v0.9 synchronous workflow
@@ -225,7 +225,7 @@ orchestration foundation work as preview/scaffold/evaluation capabilities.
 The `v0.9.0rc7` git tag and GitHub prerelease were created after maintainer
 review and supersede `v0.9.0rc6` as the current release candidate. PyPI remains
 unpublished. TestPyPI upload completed for `0.9.0rc6.dev0` through manual
-Trusted Publishing, but TestPyPI upload for `0.9.0rc8.dev0` has not been performed;
+Trusted Publishing, but TestPyPI upload for `0.9.0rc8` has not been performed;
 this repository state is not a final stable `1.0` release, and PyPI
 publication remains separately gated.
 See [`docs/versioning_policy.md`](docs/versioning_policy.md) and
@@ -235,12 +235,12 @@ current release policy and release-readiness matrix. Use
 for the repeatable RC procedure and
 [`docs/v1_0_readiness_plan.md`](docs/v1_0_readiness_plan.md) for the path from
 the current RC line toward `v1.0`.
-Current rc8 development readiness and publication gates are tracked in
+Current rc8 release draft readiness and publication gates are tracked in
 [`docs/release_readiness_v0.9.0rc8.md`](docs/release_readiness_v0.9.0rc8.md),
 [`docs/rc8_backend_roadmap.md`](docs/rc8_backend_roadmap.md),
 [`docs/rc8_capability_gap_audit.md`](docs/rc8_capability_gap_audit.md),
 [`docs/rc8_to_v1_0_decision_path.md`](docs/rc8_to_v1_0_decision_path.md),
-[`docs/testpypi_upload_approval_v0.9.0rc8.dev0.md`](docs/testpypi_upload_approval_v0.9.0rc8.dev0.md),
+[`docs/testpypi_upload_approval_v0.9.0rc8.md`](docs/testpypi_upload_approval_v0.9.0rc8.md),
 while rc7 release records remain in
 [`docs/release_readiness_v0.9.0rc7.md`](docs/release_readiness_v0.9.0rc7.md),
 [`docs/testpypi_upload_approval_v0.9.0rc7.md`](docs/testpypi_upload_approval_v0.9.0rc7.md),
@@ -443,7 +443,7 @@ optical-spec-agent 是一个开源仿真工具链优先的光学仿真工作流 
 仿真需求转换为经过校验的 OpticalSpec JSON，并可进一步生成 Meep / MPB /
 Gmsh / Elmer / Optiland 的 solver-native input scaffold。当前公开
 pre-release 是 `v0.9.0rc7`，当前 `main` package version 是
-`0.9.0rc8.dev0` post-rc7 development state。`v0.9.0rc8` tag 尚未创建，
+`0.9.0rc8` post-rc7 development state。`v0.9.0rc8` tag 尚未创建，
 也不是最终稳定版。
 本项目不是求解器，也不提供 production-grade physical validation。完整中文文档见
 [README.zh-CN.md](README.zh-CN.md)。
@@ -486,7 +486,7 @@ Optical simulation tasks are inherently multi-parameter: geometry, materials, so
 - **Output**: typed, validated spec JSON with per-field provenance (confirmed / inferred / missing)
 - **Contract**: every field carries its status and derivation note, so downstream agents know what to trust and what to verify
 
-## Current scope (main `0.9.0rc8.dev0`: post-v0.9.0rc7 development)
+## Current scope (main `0.9.0rc8`: post-v0.9.0rc7 development)
 
 `v0.6` diagnostics are post-hoc, local/manual checks around generated Meep run
 artifacts. `v0.7` adapters generate annotated solver-input scaffolds for
@@ -508,7 +508,7 @@ Post-rc7 backend planning now lives in the rc8 roadmap and gap audit:
   identifies remaining backend hardening gaps before any future rc8, PyPI, or
   v1.0.0 decision.
 - [`docs/rc8_to_v1_0_decision_path.md`](docs/rc8_to_v1_0_decision_path.md)
-  keeps rc8.dev0 engineering separate from release-draft, PyPI, and v1.0.0
+  keeps rc8 release-draft preparation separate from release-draft, PyPI, and v1.0.0
   approvals.
 
 The current loop:
@@ -597,7 +597,7 @@ no-proprietary-solver flow, see
 [`examples/e2e/README.md`](examples/e2e/README.md).
 
 The checked-in fixtures under [`examples/`](examples/README.md) are the
-canonical no-network examples for the current `0.9.0rc8.dev0` main branch and
+canonical no-network examples for the current `0.9.0rc8` main branch and
 the public `v0.9.0rc7` RC line:
 
 ```bash

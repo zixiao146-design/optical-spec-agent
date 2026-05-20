@@ -1,7 +1,7 @@
 # rc8 Backend Readiness Review zh-CN
 
 Current public prerelease: v0.9.0rc7.
-Current main development version: `0.9.0rc8.dev0`.
+Current main release draft: `0.9.0rc8`.
 
 本文汇总 Gmsh、Optiland、Meep、MPB optional solver evidence loop 关闭后的
 backend readiness。它是 readiness review，不是 release draft，不授权
@@ -78,7 +78,7 @@ convergence proof。
 
 - Elmer remains deferred until maintainable `ElmerSolver` install route exists。
 - PyPI publication 仍是单独 maintainer decision。
-- TestPyPI upload for `0.9.0rc8.dev0` 未在此批准。
+- TestPyPI upload for `0.9.0rc8` 未在此批准。
 - 后续可以考虑 `v0.9.0rc8` release draft，但本文不授权。
 - `v1.0.0` 仍未 release。
 

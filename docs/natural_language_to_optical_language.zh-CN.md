@@ -68,7 +68,7 @@ recommended questions；未知目标不会静默选择求解器路径。
 
 ## 歧义与缺失输入
 
-rc8.dev0 后端会区分关键缺失输入和可选缺失输入：
+rc8 后端会区分关键缺失输入和可选缺失输入：
 
 - `missing_critical_inputs`：有意义的求解器设置前需要明确的值。
 - `missing_optional_inputs`：可提升预览质量的上下文。
@@ -81,7 +81,7 @@ rc8.dev0 后端会区分关键缺失输入和可选缺失输入：
 
 ## Application Domain Coverage
 
-The rc8.dev0 backend now includes `GET /api/application-domains`,
+The rc8 backend now includes `GET /api/application-domains`,
 `POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
 These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,

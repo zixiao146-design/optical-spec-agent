@@ -32,7 +32,7 @@ The maintained review decision is recorded in
 That decision records backend evidence as sufficient to prepare a
 `v0.9.0rc7` release draft. Maintainers later approved and completed the
 `v0.9.0rc7` GitHub prerelease, while PyPI publication, TestPyPI upload for
-`0.9.0rc8.dev0`, future `v0.9.0rc8` tag/release work, and `v1.0.0` release
+`0.9.0rc8`, future `v0.9.0rc8` tag/release work, and `v1.0.0` release
 approval remain separate and not granted.
 
 ## Sections

@@ -27,7 +27,7 @@ python scripts/generate_backend_evidence_pack.py \
 维护者审查决策记录在
 [`backend_evidence_review_decision.md`](backend_evidence_review_decision.md)。
 该决策说明后端证据已足以准备 `v0.9.0rc7` release draft。维护者随后已批准并完成
-`v0.9.0rc7` GitHub prerelease；但 PyPI 发布、`0.9.0rc8.dev0` 的 TestPyPI 上传、
+`v0.9.0rc7` GitHub prerelease；但 PyPI 发布、`0.9.0rc8` 的 TestPyPI 上传、
 未来 `v0.9.0rc8` tag/release 工作以及 `v1.0.0` 发布批准仍保持分离，且尚未授权。
 
 ## 包含章节

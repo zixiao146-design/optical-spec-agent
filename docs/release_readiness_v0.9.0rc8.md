@@ -1,66 +1,75 @@
-# v0.9.0rc8 Development Readiness
+# v0.9.0rc8 Release Draft Readiness
 
 ## Baseline
 
 - Current public prerelease: v0.9.0rc7
 - v0.9.0rc7 release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc7
-- v0.9.0rc7 target commit: 7040da21a51c556977be8c862ce889c351077e88
-- Current main development version: 0.9.0rc8.dev0
+- Current main release draft: v0.9.0rc8
 - v0.9.0rc8 tag: not created
-- v1.0.0 tag: not created
+- GitHub release: not created
+- v1.0.0: not released
 - PyPI: not published
-- TestPyPI uploaded and verified only for 0.9.0rc6.dev0
-- TestPyPI upload for 0.9.0rc8.dev0: not performed
 - PyPI publication approval: not granted
+- TestPyPI uploaded and verified only for 0.9.0rc6.dev0
+- TestPyPI upload for 0.9.0rc8: not performed
+- v1.0 public contract freeze: approved
+- Optional solver evidence closed for Gmsh / Optiland / Meep / MPB.
+- Elmer deferred and not Level 3.
 
-## Why Main Moved to 0.9.0rc8.dev0
+## Included rc8 Hardening
 
-- v0.9.0rc7 is already a published GitHub prerelease.
-- Post-release commits on main should not keep building as 0.9.0rc7.
-- 0.9.0rc8.dev0 marks post-rc7 development toward the next candidate.
-- v0.9.0rc8.dev0 is not itself a public release.
+- Material provenance.
+- Ambiguous requirement matching.
+- Missing-input diagnostics.
+- Application domain registry.
+- Application domain benchmarks.
+- Fiber coupling calculator.
+- Polarization calculator.
+- Fiber/polarization reference sanity cases.
+- Backend validation maturity matrix.
+- Preview boundary policy.
+- Validation claim audit.
+- Optional solver readiness / approval / environment profiles.
+- Optional solver evidence for Gmsh / Optiland / Meep / MPB.
+- Optional solver evidence summary and rc8 backend readiness review.
 
-## v0.9.0rc8 Development Goals
+## Required Checks Before Tag Creation
 
-- Continue v1.0 readiness/backend engineering.
-- Continue backend evidence hardening only where needed.
-- Decide whether and when to approve PyPI publication.
-- Keep the v1.0 public contract freeze stable.
-- Keep quality gates passing.
-- Keep TestPyPI/PyPI publication boundaries explicit.
-- Keep the open-source-solver-first strategy.
-- Keep proprietary solvers non-default/export-only.
-- Keep external solver and external LLM use optional.
-- Continue validation maturity work without overclaiming physical correctness.
-- Optionally revisit Elmer validation only when a maintainable install route exists.
-- Decide whether to expose backend evidence in the frontend later.
-
-## Required Checks Before a Future v0.9.0rc8 Release Draft
-
-- `project.version` must change from 0.9.0rc8.dev0 to 0.9.0rc8.
-- `optical_spec_agent.__version__` must match.
-- Backend evidence smoke passed.
+- git status clean.
+- `project.version == 0.9.0rc8`.
+- `__version__ == 0.9.0rc8`.
+- v0.9.0rc8 tag absent.
+- validation claim audit passed.
+- application benchmarks passed.
+- backend evidence smoke passed.
+- quality gates passed.
 - TestPyPI no-upload preflight passed.
-- Quality gates passed.
-- `smoke_release.sh` passed.
-- Wheel smoke passed.
-- `pytest` passed.
-- `python -m build` passed.
-- `make check` passed.
+- smoke passed.
+- wheel smoke passed.
+- pytest passed.
+- build passed.
+- make check passed.
 - CLI examples passed.
-- E2E examples passed.
-- Dist filenames must contain 0.9.0rc8.
-- Release draft notes must exist.
-- v0.9.0rc8 tag must be absent before creation.
-- PyPI/TestPyPI decision must be explicit.
+- dist filenames contain 0.9.0rc8.
+- no PyPI upload.
+- no TestPyPI upload for rc8.
+- no tag/release until approval.
 
-## Non-goals
+## Validation Boundaries
 
-- Do not publish PyPI now.
-- Do not upload TestPyPI now.
-- Do not create the v0.9.0rc8 tag now.
-- Do not create the v1.0.0 tag now.
-- Do not claim production-grade physical validation.
-- Do not claim formal convergence proof.
-- Do not require external solver or external LLM by default.
-- Do not require proprietary solver by default.
+- Production-grade physical validation: not claimed.
+- Production-grade solver validation: not claimed.
+- Production-grade FDTD validation: not claimed.
+- Production-grade MPB validation: not claimed.
+- Production band-structure validation: not claimed.
+- Formal convergence proof: not claimed.
+- Optical correctness: not claimed.
+- External solvers are not default dependencies and are not run by default.
+- External LLMs are not default dependencies and are not called by default.
+
+## Next Step
+
+After maintainer approval, create the annotated v0.9.0rc8 tag, create the
+GitHub prerelease, verify `draft=false` and `prerelease=true`, and add
+`docs/post_release_status_v0.9.0rc8.md`. Do not publish PyPI unless separately
+approved.

@@ -72,7 +72,7 @@ See `docs/optical_language_source_monitor.md` and
 
 ## Ambiguous and Missing Inputs
 
-The rc8.dev0 backend distinguishes critical and optional missing inputs:
+The rc8 backend distinguishes critical and optional missing inputs:
 
 - `missing_critical_inputs`: values needed before a meaningful solver setup.
 - `missing_optional_inputs`: values that improve preview fidelity.
@@ -85,7 +85,7 @@ The rc8.dev0 backend distinguishes critical and optional missing inputs:
 
 ## Application Domain Coverage
 
-The rc8.dev0 backend now includes `GET /api/application-domains`,
+The rc8 backend now includes `GET /api/application-domains`,
 `POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
 These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,

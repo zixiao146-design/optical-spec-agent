@@ -19,7 +19,7 @@ def test_backend_evidence_review_decision_records_rc7_bounds():
     assert "PyPI publication approval: not granted" in text
     assert "v1.0.0 release approval: not granted" in text
     assert "v0.9.0rc7 is now the current public prerelease" in text
-    assert "main has moved to 0.9.0rc8.dev0 development" in text
+    assert "main has moved to 0.9.0rc8 development" in text
 
     for phrase in [
         "sub-agent audit",

@@ -20,7 +20,7 @@ def _load_manifest() -> dict:
 
 def test_public_contract_manifest_baseline_and_package_metadata():
     manifest = _load_manifest()
-    assert manifest["version_scope"] == "0.9.0rc8.dev0"
+    assert manifest["version_scope"] == "0.9.0rc8"
     assert manifest["current_public_prerelease"] == "v0.9.0rc7"
     freeze = manifest["public_contract_freeze"]
     assert freeze["status"] == "approved"

@@ -1,4 +1,4 @@
-"""rc8.dev0 backend roadmap and capability gap audit checks."""
+"""rc8 backend roadmap and capability gap audit checks."""
 
 from __future__ import annotations
 
@@ -18,15 +18,15 @@ def test_current_versions_remain_post_rc7_dev_state():
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     init_text = _read("src/optical_spec_agent/__init__.py")
     readiness = _read("docs/release_readiness_current.md")
-    assert pyproject["project"]["version"] == "0.9.0rc8.dev0"
-    assert '__version__ = "0.9.0rc8.dev0"' in init_text
+    assert pyproject["project"]["version"] == "0.9.0rc8"
+    assert '__version__ = "0.9.0rc8"' in init_text
     assert "Current public prerelease: `v0.9.0rc7`" in readiness
-    assert "Current main development version: `0.9.0rc8.dev0`" in readiness
-    assert "`v0.9.0rc8.dev0` is not a public release" in readiness
+    assert "Current main release draft: `0.9.0rc8`" in readiness
+    assert "`v0.9.0rc8` is a release draft, not a public release tag" in readiness
     assert "`v0.9.0rc8` tag has not been created" in readiness
     assert "`v1.0.0` tag has not been created" in readiness
     assert "PyPI published: no" in readiness
-    assert "TestPyPI upload for `0.9.0rc8.dev0`: not performed" in readiness
+    assert "TestPyPI upload for `0.9.0rc8`: not performed" in readiness
 
 
 def test_git_tags_for_future_releases_are_absent_when_git_metadata_is_available():
@@ -50,8 +50,8 @@ def test_rc8_backend_roadmap_exists_and_classifies_capabilities():
     text = _read("docs/rc8_backend_roadmap.md")
     required = [
         "Current public prerelease: `v0.9.0rc7`",
-        "Current main development version: `0.9.0rc8.dev0`",
-        "`0.9.0rc8.dev0` is not a public release",
+        "Current main release draft: `0.9.0rc8`",
+        "`0.9.0rc8` is not a public release",
         "`v0.9.0rc8` tag has not been created",
         "`v1.0.0` tag has not been created",
         "PyPI remains unpublished",
@@ -85,12 +85,12 @@ def test_rc8_capability_gap_audit_exists_and_keeps_boundaries():
     text = _read("docs/rc8_capability_gap_audit.md")
     required = [
         "Current public prerelease: `v0.9.0rc7`",
-        "Current main development version: `0.9.0rc8.dev0`",
+        "Current main release draft: `0.9.0rc8`",
         "`v0.9.0rc8` tag: not created",
         "`v1.0.0` tag: not created",
         "PyPI: not published",
         "PyPI publication approval: not granted",
-        "TestPyPI upload for `0.9.0rc8.dev0`: not performed",
+        "TestPyPI upload for `0.9.0rc8`: not performed",
         "Gap Matrix",
         "Capability Gaps Found",
         "Calculator depth remains preview-oriented",
@@ -110,8 +110,8 @@ def test_rc8_to_v1_0_decision_path_exists_and_blocks_release_actions():
     text = _read("docs/rc8_to_v1_0_decision_path.md")
     required = [
         "Current public prerelease: `v0.9.0rc7`",
-        "Current main development version: `0.9.0rc8.dev0`",
-        "Gate 1: Continue rc8.dev0 Backend Engineering",
+        "Current main release draft: `0.9.0rc8`",
+        "Gate 1: Continue rc8 Backend Engineering",
         "Gate 2: Decide Whether to Prepare a Future v0.9.0rc8 Draft",
         "Gate 3: Decide PyPI Publication Separately",
         "Gate 4: Decide v1.0.0 Planning",

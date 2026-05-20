@@ -1,6 +1,6 @@
 # Backend Validation Maturity Matrix
 
-This matrix consolidates backend evidence levels for `0.9.0rc8.dev0`.
+This matrix consolidates backend evidence levels for `0.9.0rc8`.
 It is a conservative maintainer view: every row is preview/design-assist
 evidence, no production-grade physical validation is claimed, and no formal
 convergence proof is claimed.

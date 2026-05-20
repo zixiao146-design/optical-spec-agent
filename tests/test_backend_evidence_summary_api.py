@@ -16,7 +16,7 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert body["evidence_pack_available"] is True
     assert body["preview_design_assist_only"] is True
     assert body["package_and_release_status"]["current_public_prerelease"] == "v0.9.0rc7"
-    assert body["package_and_release_status"]["main_development_version"] == "0.9.0rc8.dev0"
+    assert body["package_and_release_status"]["main_development_version"] == "0.9.0rc8"
     assert body["package_and_release_status"]["pypi_published"] is False
     assert len(body["sub_agent_reality"]) == 8
     assert body["tool_call_reality"]["internal_tools_executed"]

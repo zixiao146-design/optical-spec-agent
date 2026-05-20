@@ -59,7 +59,7 @@
 
 - User action: open dashboard.
 - API call: `GET /api/readiness`.
-- Expected response: public prerelease, main development version, PyPI/TestPyPI
+- Expected response: public prerelease, main release draft, PyPI/TestPyPI
   status, public contract freeze status, and recommended next actions.
 - UI state: show release/readiness summary.
 - Safety boundary copy: "No PyPI or TestPyPI upload control is available in

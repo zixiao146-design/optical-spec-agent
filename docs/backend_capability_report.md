@@ -1,7 +1,7 @@
 # Backend Capability Report
 
-Current public prerelease: v0.9.0rc7. Current main development version:
-`0.9.0rc8.dev0`.
+Current public prerelease: v0.9.0rc7. Current main release draft:
+`0.9.0rc8`.
 
 The backend capability report is a maintainer-facing proof of what the local
 Agent Studio backend can actually import, call, execute, or block today. It is
@@ -21,7 +21,7 @@ upload, and `v1.0.0` approval remain separate and not granted.
 
 ## What The Report Proves
 
-- Package metadata remains `0.9.0rc8.dev0`; PyPI is not published.
+- Package metadata remains `0.9.0rc8`; PyPI is not published.
 - Sub-agent roles appear in a real sample `AgentTaskSession` trace.
 - Internal tools are importable, callable, and recorded in the sample
   `tool_call_ledger`.
@@ -74,7 +74,7 @@ upload, and `v1.0.0` approval remain separate and not granted.
    expected tools, cross-check status, and preview-only status for the seven
    design requirement templates.
 8. `material_provenance_coverage`, `ambiguous_requirement_matching`, and
-   `missing_input_diagnostics`: rc8.dev0 backend trust hardening for material
+   `missing_input_diagnostics`: rc8 backend trust hardening for material
    assumptions and under-specified natural-language goals.
 9. `application_domain_coverage` and `material_template_cross_checks`: domain,
    material, template, calculator/adapter, and missing-input coverage.

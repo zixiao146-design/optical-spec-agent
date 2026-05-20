@@ -1,7 +1,7 @@
 # rc8 Backend Readiness Review
 
 Current public prerelease: v0.9.0rc7.
-Current main development version: `0.9.0rc8.dev0`.
+Current main release draft: `0.9.0rc8`.
 
 This review summarizes backend readiness after closing the optional solver
 evidence loop for Gmsh, Optiland, Meep, and MPB. It is a readiness review, not a
@@ -79,7 +79,7 @@ claimed.
 
 - Elmer remains deferred until a maintainable `ElmerSolver` install route exists.
 - PyPI publication remains a separate maintainer decision.
-- TestPyPI upload for `0.9.0rc8.dev0` is not approved here.
+- TestPyPI upload for `0.9.0rc8` is not approved here.
 - `v0.9.0rc8` release draft work may be considered later, but this review does
   not authorize it.
 - `v1.0.0` remains unreleased.

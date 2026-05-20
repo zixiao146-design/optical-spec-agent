@@ -3,7 +3,7 @@
 ## Current baseline
 
 - Current public prerelease: `v0.9.0rc7`
-- Current main development version: `0.9.0rc8.dev0`
+- Current main release draft: `0.9.0rc8`
 - `v0.9.0rc7` GitHub prerelease has been created and verified
 - `v0.9.0rc8` tag has not been created
 - Release URL: https://github.com/zixiao146-design/optical-spec-agent/releases/tag/v0.9.0rc7
@@ -47,16 +47,16 @@ early adopters. They do not prove physical correctness of generated simulations.
 - Workflow orchestration is a local/synchronous preview.
 - The RC is not final `1.0` stability.
 
-## Recommended path through the v0.9.0rc8 development cycle
+## Recommended path through the v0.9.0rc8 release draft cycle
 
 `v0.9.0rc7` is the current public prerelease. `main` now builds as the
-`0.9.0rc8.dev0` development state. The `v0.9.0rc8` tag has not been created,
+`0.9.0rc8` development state. The `v0.9.0rc8` tag has not been created,
 no GitHub release exists for rc8, and PyPI remains unpublished.
 Recommended goals:
 
 - Use `docs/v1_0_gap_audit.md` to classify hard blockers,
   soft blockers, deferred items, and future work.
-- Use `docs/release_readiness_v0.9.0rc8.md` to keep rc8 development checks
+- Use `docs/release_readiness_v0.9.0rc8.md` to keep rc8 release draft checks
   explicit.
 - Use `docs/v1_0_decision_matrix.md` for TestPyPI, PyPI, Elmer,
   production-validation, and public-contract-freeze decisions.
@@ -165,7 +165,7 @@ Before `v1.0.0`, maintainers should decide and document:
   `docs/v1_0_compatibility_policy.md`.
 - v1.0 readiness gap audit:
   `docs/v1_0_gap_audit.md`.
-- v0.9.0rc8 development readiness:
+- v0.9.0rc8 release draft readiness:
   `docs/release_readiness_v0.9.0rc7.md`.
 - v1.0 decision matrix:
   `docs/v1_0_decision_matrix.md`.

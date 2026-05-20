@@ -14,7 +14,7 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
     text = path.read_text(encoding="utf-8")
 
     assert "Current public prerelease: v0.9.0rc7" in text
-    assert "Current main development version: 0.9.0rc8.dev0" in text
+    assert "Current main release draft: 0.9.0rc8" in text
     assert "v0.9.0rc8 tag: not created" in text
     assert "v1.0.0: not released" in text
     assert "TestPyPI: uploaded for 0.9.0rc6.dev0" in text
@@ -60,7 +60,7 @@ def test_v1_0_public_contract_freeze_checklist_tracks_scope_and_decisions():
 
 def test_public_contract_manifest_tracks_post_rc7_state_without_publish_or_upload():
     text = (ROOT / "docs" / "public_contract_manifest.json").read_text(encoding="utf-8")
-    assert '"version_scope": "0.9.0rc8.dev0"' in text
+    assert '"version_scope": "0.9.0rc8"' in text
     assert '"current_public_prerelease": "v0.9.0rc7"' in text
     assert '"v0_9_0rc5_tag_created": true' in text
     assert '"v0_9_0rc6_tag_created": true' in text

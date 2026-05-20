@@ -1,21 +1,22 @@
-# rc8.dev0 Backend Roadmap
+# rc8 Backend Roadmap
 
 Current public prerelease: `v0.9.0rc7`.
-Current main development version: `0.9.0rc8.dev0`.
+Current main release draft: `0.9.0rc8`.
 
-This roadmap describes post-`v0.9.0rc7` backend engineering toward a future
-`v0.9.0rc8` candidate. It is not a release draft, does not create a tag, does
-not approve PyPI publication, and does not authorize TestPyPI upload.
+This roadmap describes post-`v0.9.0rc7` backend engineering now packaged into
+the `v0.9.0rc8` release draft. It does not create a tag, does not create a
+GitHub release, does not approve PyPI publication, and does not authorize
+TestPyPI upload.
 
 ## Operating Boundaries
 
-- `0.9.0rc8.dev0` is not a public release.
+- `0.9.0rc8` is not a public release.
 - `v0.9.0rc8` tag has not been created.
 - `v1.0.0` tag has not been created.
 - PyPI remains unpublished.
 - PyPI publication approval remains not granted.
 - TestPyPI uploaded and verified only for `0.9.0rc6.dev0`.
-- TestPyPI upload for `0.9.0rc8.dev0` has not been performed.
+- TestPyPI upload for `0.9.0rc8` has not been performed.
 - External solvers are not run by default.
 - External LLMs are not called by default.
 - No production-grade physical validation is claimed.
@@ -37,7 +38,7 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
 | Design requirement templates | Done / stable enough | Seven templates with EN/ZH goals, expected tools, and deterministic matching | Add requirement variants for tolerances, constraints, and missing-input question generation. |
 | Natural-language to optical-language matching | Needs backend hardening | Deterministic heuristic matching, source/monitor inference, diagnostics | Broaden bilingual keyword coverage and add low-confidence fallback examples. |
 | Frontend Agent Studio | Deferred / non-blocker | Local MVP, Command Center, Example Gallery, Agent Trace Timeline | Do not add UI in rc8 backend hardening unless maintainers explicitly reprioritize frontend evidence display. |
-| PyPI publication | Deferred / non-blocker | PyPI decision docs and checklist | Decide separately after explicit maintainer approval; rc8.dev0 does not imply publication. |
+| PyPI publication | Deferred / non-blocker | PyPI decision docs and checklist | Decide separately after explicit maintainer approval; rc8 does not imply publication. |
 | v1.0.0 release criteria | Needs backend hardening | Public contract freeze approved, scorecard and criteria docs exist | Keep API/CLI/schema contract stable and close backend evidence gaps before planning v1.0.0. |
 | Elmer Level 3 | Deferred / non-blocker | Elmer Level 2 + Level-3-ready docs, install deferred record | Revisit only when a maintainable ElmerSolver install route exists. |
 
@@ -89,7 +90,7 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
 
 ## Deferred / Non-blocker
 
-- PyPI publication and TestPyPI upload for `0.9.0rc8.dev0`.
+- PyPI publication and TestPyPI upload for `0.9.0rc8`.
 - `v0.9.0rc8` tag creation and GitHub prerelease creation.
 - Frontend display of backend evidence review data.
 - Elmer Level 3 validation.

@@ -39,16 +39,16 @@ def test_health_response_defaults_safety_flags_false():
 
 def test_version_response_tracks_current_versions():
     response = VersionResponse(
-        package_version="0.9.0rc8.dev0",
+        package_version="0.9.0rc8",
         current_public_prerelease="v0.9.0rc7",
-        main_development_version="0.9.0rc8.dev0",
+        main_development_version="0.9.0rc8",
     )
     _assert_safety_defaults(response)
     assert API_CONTRACT_VERSION == "0.1"
     assert response.api_contract_version == "0.1"
-    assert response.package_version == "0.9.0rc8.dev0"
+    assert response.package_version == "0.9.0rc8"
     assert response.current_public_prerelease == "v0.9.0rc7"
-    assert response.main_development_version == "0.9.0rc8.dev0"
+    assert response.main_development_version == "0.9.0rc8"
     assert response.testpypi_verified is True
     assert response.pypi_published is False
 
@@ -82,7 +82,7 @@ def test_error_response_preserves_safety_boundaries():
 def test_readiness_response_includes_api_contract_version():
     response = ReadinessResponse(
         current_public_prerelease="v0.9.0rc7",
-        main_development_version="0.9.0rc8.dev0",
+        main_development_version="0.9.0rc8",
         testpypi={"uploaded_and_verified": True},
         pypi={"published": False},
         public_contract_freeze={"status": "approved"},

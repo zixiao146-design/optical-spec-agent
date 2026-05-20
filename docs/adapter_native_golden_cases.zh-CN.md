@@ -7,7 +7,7 @@ adapter 的原生预览语义。它们是本地后端 fixture 和测试证据，
 当前状态：
 
 - 当前公开 prerelease：`v0.9.0rc7`
-- 当前 main development version：`0.9.0rc8.dev0`
+- 当前 main release draft：`0.9.0rc8`
 - PyPI：未发布
 - TestPyPI：仅上传并验证过 `0.9.0rc6.dev0`
 

@@ -14,11 +14,11 @@ def test_publication_decision_record_authorizes_testpypi_only():
     text = path.read_text(encoding="utf-8")
 
     assert "TestPyPI uploaded: yes, for 0.9.0rc6.dev0" in text
-    assert "TestPyPI upload for 0.9.0rc8.dev0: not performed" in text
+    assert "TestPyPI upload for 0.9.0rc8: not performed" in text
     assert "PyPI published: no" in text
-    assert "TestPyPI upload approval for 0.9.0rc8.dev0: pending" in text
+    assert "TestPyPI upload approval for 0.9.0rc8: pending" in text
     assert "PyPI publication approval: not granted" in text
-    assert "Upload command authorized for 0.9.0rc8.dev0: no" in text
+    assert "Upload command authorized for 0.9.0rc8: no" in text
     assert "Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden" in text
     assert "docs/testpypi_status_v0.9.0rc6.dev0.md" in text
     assert "TestPyPI Trusted Publishing result: completed" in text

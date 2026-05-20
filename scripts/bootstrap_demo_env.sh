@@ -36,7 +36,7 @@ import fastapi
 import optical_spec_agent
 import uvicorn
 
-assert optical_spec_agent.__version__ == "0.9.0rc8.dev0"
+assert optical_spec_agent.__version__ == "0.9.0rc8"
 print(f"optical-spec-agent {optical_spec_agent.__version__} ready")
 print(f"fastapi {fastapi.__version__} ready")
 print(f"uvicorn {uvicorn.__version__} ready")

@@ -8,7 +8,7 @@ future release-candidate preparation.
 ## Current Scope
 
 - Current public prerelease: v0.9.0rc7
-- Current main development version: `0.9.0rc8.dev0`
+- Current main release draft: `0.9.0rc8`
 - PyPI/TestPyPI: PyPI not published / TestPyPI uploaded for 0.9.0rc6.dev0
 - v0.9.0rc8 tag: not created
 

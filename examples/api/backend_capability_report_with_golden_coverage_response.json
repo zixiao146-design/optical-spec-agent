@@ -24,9 +24,9 @@
   ],
   "maintainer_review_recommended": true,
   "package": {
-    "package_version": "0.9.0rc8.dev0",
+    "package_version": "0.9.0rc8",
     "current_public_prerelease": "v0.9.0rc7",
-    "main_development_version": "0.9.0rc8.dev0",
+    "main_development_version": "0.9.0rc8",
     "pypi_published": false,
     "testpypi_verified_for": "0.9.0rc6.dev0"
   },

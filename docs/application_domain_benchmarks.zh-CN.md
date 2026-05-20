@@ -71,7 +71,7 @@ API endpoints:
 - `warn`: 后端行为安全，但该场景代表部分覆盖或延期能力。
 - `fail`: 后端缺失了预期匹配、追问、阻断动作或工具行为。
 
-截至 `0.9.0rc8.dev0`，光纤耦合和偏振光学的 positive benchmark 已由确定性
+截至 `0.9.0rc8`，光纤耦合和偏振光学的 positive benchmark 已由确定性
 预览计算器闭环：
 
 - `fiber_coupling_preview_positive` 记录

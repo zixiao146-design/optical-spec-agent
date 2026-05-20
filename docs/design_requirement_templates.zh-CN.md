@@ -3,7 +3,7 @@
 本文档说明本地设计需求模板如何把自然语言光学目标映射成确定性的光学语言。这是 Agent Studio 和 Agent 命令中心的后端能力。
 
 Current public prerelease: `v0.9.0rc7`
-Current main development version: `0.9.0rc8.dev0`
+Current main release draft: `0.9.0rc8`
 API contract version: `0.1`
 PyPI：未发布
 
@@ -85,7 +85,7 @@ disambiguation inputs 和 recommended questions，而不是直接采取不安全
 
 ## Application Domain Coverage
 
-The rc8.dev0 backend now includes `GET /api/application-domains`,
+The rc8 backend now includes `GET /api/application-domains`,
 `POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
 These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,

@@ -1,9 +1,9 @@
 # Workflow Preview Contract
 
 Version scope: current public prerelease `v0.9.0rc7`; current `main` development
-version `0.9.0rc8.dev0`. The `v0.9.0rc8` tag has not been created, PyPI remains
+version `0.9.0rc8`. The `v0.9.0rc8` tag has not been created, PyPI remains
 unpublished, TestPyPI contains the `0.9.0rc6.dev0` development package, and
-TestPyPI upload for `0.9.0rc8.dev0` has not been performed.
+TestPyPI upload for `0.9.0rc8` has not been performed.
 
 Workflow orchestration is a local, synchronous preview layer. It coordinates
 existing parser, validator, adapter, diagnostics, review, replay, and report

@@ -1,7 +1,7 @@
 # Backend Functionality Status
 
-Current public prerelease: v0.9.0rc7. Current main development version:
-`0.9.0rc8.dev0`.
+Current public prerelease: v0.9.0rc7. Current main release draft:
+`0.9.0rc8`.
 
 This document records what the backend can actually import, call, execute, or
 block.
@@ -142,14 +142,14 @@ The backend does not expose TestPyPI upload, PyPI publication, git tag creation,
 or GitHub release creation endpoints. PyPI remains unpublished, and publication
 approval remains not granted.
 The `v0.9.0rc8` tag has not been created, `v1.0.0` has not been released, and
-`0.9.0rc8.dev0` is not a public release.
+`0.9.0rc8` is not a public release.
 
 ## Current Gap Audit
 
 `docs/rc8_capability_gap_audit.md` identified calculator depth, material
 provenance, ambiguous natural-language matching, metadata-only adapter-native
 mapping evidence, and Elmer Level 3 deferral as the main backend gaps to review
-before future rc8 or v1.0 decisions. rc8.dev0 now has structured material
+before future rc8 or v1.0 decisions. rc8 now has structured material
 provenance fields, `POST /api/materials/diagnose`, ambiguous/negative
 requirement examples, candidate-template matching, recommended questions, and
 critical/optional missing-input diagnostics. These additions reduce the audit
@@ -197,7 +197,7 @@ Both scripts are local-only and print:
 
 ## Application Domain Coverage
 
-The rc8.dev0 backend now includes `GET /api/application-domains`,
+The rc8 backend now includes `GET /api/application-domains`,
 `POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
 These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,

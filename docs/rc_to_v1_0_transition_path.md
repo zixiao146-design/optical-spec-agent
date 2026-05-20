@@ -1,7 +1,7 @@
 # RC to v1.0.0 Transition Path
 
 `v0.9.0rc7` is the current public prerelease. `main` is
-`0.9.0rc8.dev0`. The `v0.9.0rc8` tag has not been created, `v1.0.0` has not
+`0.9.0rc8`. The `v0.9.0rc8` tag has not been created, `v1.0.0` has not
 been released, and PyPI remains unpublished.
 
 ## Transition facts
@@ -13,9 +13,9 @@ been released, and PyPI remains unpublished.
 
 ## Version transition options
 
-- `0.9.0rc8.dev0` -> `0.9.0rc8` release draft -> `v0.9.0rc8` tag
+- `0.9.0rc8` -> `0.9.0rc8` release draft -> `v0.9.0rc8` tag
   if more release candidates are needed.
-- `0.9.0rc8.dev0` -> `1.0.0` release draft if v1.0.0 criteria are satisfied
+- `0.9.0rc8` -> `1.0.0` release draft if v1.0.0 criteria are satisfied
   and the maintainer explicitly approves.
 
 ## Required guardrails

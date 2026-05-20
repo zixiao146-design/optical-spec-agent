@@ -1,7 +1,7 @@
 # Preview Boundary Policy
 
 This policy defines the boundary for optical-spec-agent backend evidence in
-`0.9.0rc8.dev0`. The backend is useful as a deterministic optical design
+`0.9.0rc8`. The backend is useful as a deterministic optical design
 assistant, but its current evidence must remain preview/design-assist.
 
 ## What Preview/Design-Assist Means

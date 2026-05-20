@@ -4,9 +4,9 @@
   "evidence_pack_available": true,
   "preview_design_assist_only": true,
   "package_and_release_status": {
-    "package_version": "0.9.0rc8.dev0",
+    "package_version": "0.9.0rc8",
     "current_public_prerelease": "v0.9.0rc7",
-    "main_development_version": "0.9.0rc8.dev0",
+    "main_development_version": "0.9.0rc8",
     "pypi_published": false,
     "testpypi_verified_only_for": "0.9.0rc6.dev0",
     "tag_release_actions": "none",
@@ -2470,7 +2470,7 @@
     }
   ],
   "maintainer_review_questions": [
-    "Is backend evidence sufficient for continued v0.9.0rc8.dev0 readiness work?",
+    "Is backend evidence sufficient for continued v0.9.0rc8 readiness work?",
     "Is the rc8 backend readiness review sufficient as a maintainer-facing summary of optional solver evidence?",
     "Is PyPI still deferred?",
     "Should the frontend display backend evidence next?",

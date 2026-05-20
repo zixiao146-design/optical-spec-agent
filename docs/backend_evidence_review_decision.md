@@ -3,13 +3,13 @@
 ## Current state
 
 - Current public prerelease: v0.9.0rc7
-- Current main development version: 0.9.0rc8.dev0
+- Current main release draft: 0.9.0rc8
 - PyPI published: no
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
 - v0.9.0rc7 tag created: yes
 - v0.9.0rc7 GitHub prerelease created: yes
 - v0.9.0rc8 tag created: no
-- TestPyPI upload for 0.9.0rc8.dev0: not performed
+- TestPyPI upload for 0.9.0rc8: not performed
 - v1.0.0 released: no
 
 ## Original Review Conclusion
@@ -24,7 +24,7 @@
 
 - The maintainer later approved the v0.9.0rc7 annotated tag and GitHub prerelease.
 - v0.9.0rc7 is now the current public prerelease.
-- main has moved to 0.9.0rc8.dev0 development.
+- main has moved to 0.9.0rc8 development.
 - This transition does not approve TestPyPI upload, PyPI publication, a v0.9.0rc8 tag, or v1.0.0 release.
 
 ## Evidence reviewed
@@ -75,6 +75,6 @@
 
 ## Recommended next step
 
-- Continue 0.9.0rc8.dev0 backend/v1.0 readiness work.
+- Continue 0.9.0rc8 backend/v1.0 readiness work.
 - Keep PyPI publication deferred.
 - Keep future tag/release approval separate.

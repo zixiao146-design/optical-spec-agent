@@ -5,7 +5,7 @@
 
 当前状态：
 - Current public prerelease: v0.9.0rc7
-- Current main development version: 0.9.0rc8.dev0
+- Current main release draft: 0.9.0rc8
 - API contract version: 0.1
 - 材料库状态：本地预览 / 设计辅助
 - PyPI：未发布

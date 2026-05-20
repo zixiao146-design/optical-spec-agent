@@ -1,7 +1,7 @@
 # Optional Solver Evidence Summary zh-CN
 
 Current public prerelease: v0.9.0rc7.
-Current main development version: `0.9.0rc8.dev0`.
+Current main release draft: `0.9.0rc8`.
 
 PyPI 未发布。TestPyPI 只有 `0.9.0rc6.dev0` 已上传并验证。`v0.9.0rc8`
 tag 未创建，`v1.0.0` tag 未创建。

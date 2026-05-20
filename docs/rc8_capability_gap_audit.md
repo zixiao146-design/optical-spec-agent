@@ -1,7 +1,7 @@
-# rc8.dev0 Capability Gap Audit
+# rc8 Capability Gap Audit
 
 Current public prerelease: `v0.9.0rc7`.
-Current main development version: `0.9.0rc8.dev0`.
+Current main release draft: `0.9.0rc8`.
 
 This audit identifies backend gaps that should be reviewed before any future
 `v0.9.0rc8`, PyPI, or `v1.0.0` decision. It is preview/design-assist planning,
@@ -14,7 +14,7 @@ not production-grade physical validation.
 - PyPI: not published.
 - PyPI publication approval: not granted.
 - TestPyPI uploaded and verified only for `0.9.0rc6.dev0`.
-- TestPyPI upload for `0.9.0rc8.dev0`: not performed.
+- TestPyPI upload for `0.9.0rc8`: not performed.
 - External solver execution: blocked by default.
 - External LLM calls: blocked by default.
 - Production-grade physical validation: not claimed.
@@ -50,12 +50,12 @@ not production-grade physical validation.
    The local calculators are useful for sanity checks and design-assist
    summaries, but they are not production-grade physical validation.
 
-2. Material provenance should be strengthened; rc8.dev0 has already made the
+2. Material provenance should be strengthened; rc8 has already made the
    first strengthening pass.
    Starter materials now expose provenance fields and suitability diagnostics,
    but all optical constants still require independent user verification.
 
-3. Natural-language matching should add negative and ambiguous examples; rc8.dev0
+3. Natural-language matching should add negative and ambiguous examples; rc8
    now has an initial negative/ambiguous example set.
    The deterministic matcher should continue to prefer safe low/none confidence
    diagnostics and questions over overconfident case selection.
@@ -81,7 +81,7 @@ not production-grade physical validation.
 ## Non-gaps / Stable Enough
 
 - Current public prerelease remains `v0.9.0rc7`.
-- Main development version is `0.9.0rc8.dev0`.
+- Main development version is `0.9.0rc8`.
 - Backend evidence pack, backend capability report, sub-agent audit, and
   adapter golden coverage are available.
 - Application-domain registry and material-template cross-checks are available

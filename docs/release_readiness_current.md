@@ -4,13 +4,13 @@ This document describes the current `main` branch. It is not a release tag.
 
 ## Current State
 
-- `pyproject.toml` package version on `main`: `0.9.0rc8.dev0`
+- `pyproject.toml` package version on `main`: `0.9.0rc8`
 - Current public prerelease: `v0.9.0rc7`
-- Current main development version: `0.9.0rc8.dev0`
-- Main branch state: post-v0.9.0rc7 development toward `v0.9.0rc8`
+- Current main release draft: `0.9.0rc8`
+- Main branch state: v0.9.0rc8 release-draft-ready, pending tag/release approval
 - Product positioning: open-source-solver-first
 - `v0.9.0rc7` GitHub prerelease has been created and verified
-- `v0.9.0rc8.dev0` is not a public release
+- `v0.9.0rc8` is a release draft, not a public release tag
 - GitHub release for `v0.9.0rc8`: not created
 - `v0.9.0rc8` tag has not been created
 - `v1.0.0` tag has not been created
@@ -20,13 +20,13 @@ This document describes the current `main` branch. It is not a release tag.
 - Latest release-status commit: `37923d4`
 - PyPI published: no
 - TestPyPI uploaded: yes, for `0.9.0rc6.dev0`
-- TestPyPI upload for `0.9.0rc8.dev0`: not performed
+- TestPyPI upload for `0.9.0rc8`: not performed
 - TestPyPI upload approval record:
   `docs/testpypi_upload_approval_v0.9.0rc6.dev0.md`
 - TestPyPI upload approval record for rc7:
   `docs/testpypi_upload_approval_v0.9.0rc7.md`
-- TestPyPI upload approval record for rc8 development:
-  `docs/testpypi_upload_approval_v0.9.0rc8.dev0.md`
+- TestPyPI upload approval record for rc8 release draft:
+  `docs/testpypi_upload_approval_v0.9.0rc8.md`
 - Latest TestPyPI upload attempt:
   `docs/testpypi_upload_attempt_v0.9.0rc6.dev0.md`
 - TestPyPI status:
@@ -36,9 +36,9 @@ This document describes the current `main` branch. It is not a release tag.
 - TestPyPI Trusted Publishing workflow:
   `.github/workflows/testpypi-trusted-publish.yml` (manual, passed for
   `0.9.0rc6.dev0`)
-- TestPyPI upload approval status for 0.9.0rc8.dev0: pending
-- TestPyPI upload authorized for rc8.dev0: no
-- Upload command authorized for 0.9.0rc8.dev0: no
+- TestPyPI upload approval status for 0.9.0rc8: pending
+- TestPyPI upload authorized for rc8: no
+- Upload command authorized for 0.9.0rc8: no
 - Latest TestPyPI upload attempt result: failed with HTTP 403 Forbidden
 - TestPyPI Trusted Publishing result: completed
 - TestPyPI clean install verification: passed
@@ -111,7 +111,7 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/backend_evidence_review_decision.md` records that backend evidence is
   sufficient for the v0.9.0rc7 release draft that has now been published as a
   GitHub prerelease. It does not approve PyPI publication, TestPyPI upload for
-  0.9.0rc8.dev0, creating a v0.9.0rc8 tag, creating a v1.0.0 tag/release, or
+  0.9.0rc8, creating a v0.9.0rc8 tag, creating a v1.0.0 tag/release, or
   claiming production-grade physical validation.
 - rc8 backend roadmap:
   `docs/rc8_backend_roadmap.md` classifies post-rc7 backend work as done /
@@ -121,7 +121,7 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/rc8_capability_gap_audit.md` records remaining backend hardening gaps
   before any future rc8, PyPI, or v1.0.0 decision.
 - rc8 to v1.0 decision path:
-  `docs/rc8_to_v1_0_decision_path.md` keeps rc8.dev0 engineering separate from
+  `docs/rc8_to_v1_0_decision_path.md` keeps rc8 release-draft preparation separate from
   future rc8 release draft, PyPI publication, and v1.0.0 decisions.
 - Application-domain benchmarks:
   `docs/application_domain_benchmarks.md`,
@@ -300,7 +300,7 @@ prerelease while `main` moves to post-v0.9.0rc7 development toward
 `v0.9.0rc8`. The `v0.9.0rc8` tag has not been created, no GitHub release
 exists for rc8, and publication remains separately gated. TestPyPI contains
 the `0.9.0rc6.dev0` development package via manual Trusted Publishing, but
-TestPyPI upload for `0.9.0rc8.dev0` has not been performed; PyPI remains
+TestPyPI upload for `0.9.0rc8` has not been performed; PyPI remains
 unpublished.
 
 Use `docs/rc8_backend_roadmap.md`, `docs/rc8_capability_gap_audit.md`, and
@@ -440,7 +440,7 @@ Current v1.0 evidence artifacts:
   these document installed/callable/executed status, task-session tool-call
   ledgers, blocked solver/LLM/upload/tag/release actions, and local optical
   preview calculators. The generated report also cross-checks bundled design
-  cases against expected calculator or adapter-trace behavior. rc8.dev0 adds
+  cases against expected calculator or adapter-trace behavior. rc8 adds
   material provenance coverage, material suitability diagnostics, ambiguous
   requirement matching, and critical/optional missing-input diagnostics without
   changing publication or release boundaries.
@@ -468,7 +468,7 @@ Current v1.0 evidence artifacts:
 ## Release Blockers
 
 - No hard release blocker is currently recorded for the post-`v0.9.0rc7`
-  `0.9.0rc8.dev0` development state.
+  `0.9.0rc8` development state.
 - v1.0 hard blockers remain: explicit PyPI publication decision and final
   `v1.0.0` release criteria.
 - The public contract freeze is approved for the documented surface.
@@ -476,7 +476,7 @@ Current v1.0 evidence artifacts:
   `v0.9.0rc5`, `v0.9.0rc6`, or `v0.9.0rc7`.
 - Do not publish PyPI yet.
 - Do not re-upload the existing `0.9.0rc6.dev0` TestPyPI artifacts.
-- Do not upload `0.9.0rc8.dev0` to TestPyPI unless separately approved.
+- Do not upload `0.9.0rc8` to TestPyPI unless separately approved.
 - Keep generated adapter scaffolds presented as MVP inputs.
 - Keep default CI free of external solver and external LLM requirements.
 - Next blocker class: any future `v0.9.0rc8` candidate must pass the release smoke
@@ -515,7 +515,7 @@ Current v1.0 evidence artifacts:
 
 ## Application Domain Coverage
 
-The rc8.dev0 backend now includes `GET /api/application-domains`,
+The rc8 backend now includes `GET /api/application-domains`,
 `POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
 These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,

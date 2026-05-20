@@ -3,7 +3,7 @@
 ## Current Status
 
 - Current public prerelease: v0.9.0rc7
-- Current main development version: 0.9.0rc8.dev0
+- Current main release draft: 0.9.0rc8
 - Adapter family: gmsh
 - Current maturity: Level 3 - Optional manual solver validation
 - Evidence report: `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`

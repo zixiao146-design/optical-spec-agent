@@ -58,7 +58,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         assert section in report
     assert report["evidence_pack_available"] is True
     assert "Adapter-native golden coverage" in report["evidence_pack_sections"]
-    assert report["package"]["package_version"] == "0.9.0rc8.dev0"
+    assert report["package"]["package_version"] == "0.9.0rc8"
     assert report["production_grade_validation_claimed"] is False
     assert report["formal_convergence_proof_claimed"] is False
     assert len(report["requirements_templates"]) == 7

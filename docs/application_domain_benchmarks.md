@@ -78,7 +78,7 @@ API endpoints:
 - `fail`: the backend missed an expected match, question, blocked action, or
   tool behavior.
 
-As of `0.9.0rc8.dev0`, the fiber coupling and polarization optics positive
+As of `0.9.0rc8`, the fiber coupling and polarization optics positive
 benchmarks are closed by deterministic preview calculators:
 
 - `fiber_coupling_preview_positive` records

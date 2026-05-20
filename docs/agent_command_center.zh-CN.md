@@ -18,7 +18,7 @@ Agent 命令中心是 Agent Studio 中面向任务的本地光学设计入口。
 ## 当前状态
 
 - Current public prerelease: v0.9.0rc7
-- Current main development version: 0.9.0rc8.dev0
+- Current main release draft: 0.9.0rc8
 - API contract version: 0.1
 - PyPI: 未发布
 - v0.9.0rc7 tag: 未创建

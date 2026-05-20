@@ -10,7 +10,7 @@ solvers, external LLMs, or proprietary tools by default.
 ## Current state
 
 - Current public prerelease: v0.9.0rc7
-- Current main development version: 0.9.0rc8.dev0
+- Current main release draft: 0.9.0rc8
 - v1.0 public contract freeze: approved
 - API readiness: in progress
 - API status: frontend-readiness / candidate API
@@ -245,7 +245,7 @@ solver results still require explicit solver execution.
 
 ## Application Domain Coverage
 
-The rc8.dev0 backend now includes `GET /api/application-domains`,
+The rc8 backend now includes `GET /api/application-domains`,
 `POST /api/application-domains/match`, and `GET /api/application-domain-cross-checks`.
 These local-only endpoints connect ten preview domains to material suitability,
 requirement templates, expected calculators/adapters, missing-input questions,

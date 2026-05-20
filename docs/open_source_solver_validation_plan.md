@@ -14,7 +14,7 @@ commands and Python-backed module availability, and can write an availability
 JSON report, but it does not execute Meep, MPB, Gmsh, Elmer, Optiland, or any
 other solver.
 
-The rc8.dev0 micro-benchmark planning layer is documented in
+The rc8 micro-benchmark planning layer is documented in
 `docs/solver_validation_micro_benchmarks.md` and summarized by
 `validation/solver_validation_micro_benchmarks.json`. The unified wrapper
 `scripts/run_optional_solver_micro_benchmarks.sh` is default no-execute: unless

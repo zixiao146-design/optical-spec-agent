@@ -1,6 +1,6 @@
 # Preview Boundary Policy
 
-本文档定义 `0.9.0rc8.dev0` 后端证据的边界。当前后端可以作为确定性的
+本文档定义 `0.9.0rc8` 后端证据的边界。当前后端可以作为确定性的
 光学设计辅助工具，但所有证据仍必须保持 preview/design-assist 级别。
 
 ## Preview/Design-Assist 的含义

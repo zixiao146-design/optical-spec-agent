@@ -39,7 +39,7 @@ def test_offline_user_journey_docs_and_fixtures_exist():
     assert "no external solver" in text
     assert "no external LLM" in text
     assert "no proprietary" in text
-    assert "0.9.0rc8.dev0" in text
+    assert "0.9.0rc8" in text
     assert "v0.9.0rc7" in text
 
 

@@ -20,7 +20,7 @@ architecture.
 ## 2. Dashboard / Readiness
 
 - Calls `GET /api/readiness`.
-- Shows current public prerelease, main development version, TestPyPI/PyPI
+- Shows current public prerelease, main release draft, TestPyPI/PyPI
   status, and contract freeze status.
 - Shows recommended next actions.
 - Shows API mode indicator and API base URL.

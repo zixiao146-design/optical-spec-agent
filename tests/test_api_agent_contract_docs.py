@@ -14,7 +14,7 @@ def test_api_agent_contract_doc_exists_and_bounds_defaults():
     text = path.read_text(encoding="utf-8")
     assert "Local Agent API Contract" in text
     assert "Current public prerelease: v0.9.0rc7" in text
-    assert "Current main development version: 0.9.0rc8.dev0" in text
+    assert "Current main release draft: 0.9.0rc8" in text
     assert "API readiness: in progress" in text
     assert "`api_contract_version`: 0.1" in text
     assert "frontend-readiness / candidate API" in text
