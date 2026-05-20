@@ -12,8 +12,9 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
 - v0.9.0rc8 tag: not created
 - v1.0.0 tag: not created
-- Solver micro-benchmark approval: not granted
-- Solver micro-benchmark execution performed in this step: no
+- Solver micro-benchmark approval: granted only for the Gmsh 2026-05-20 run
+- Solver micro-benchmark execution performed: yes, Gmsh only on 2026-05-20
+- Other solver micro-benchmark execution performed: no
 
 ## Execution Principles
 
@@ -32,7 +33,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 ## Recommended Execution Order
 
 1. Gmsh first: CLI mesh generation is the lowest-risk path and validates a
-   local `.geo` to `.msh` path only.
+   local `.geo` to `.msh` path only. Status: completed for the approved
+   Gmsh-only run on 2026-05-20.
 2. Optiland second: local Python/package ray-preview path with no external
    electromagnetic solver.
 3. Meep third: requires the solver Python profile, typically
@@ -54,11 +56,12 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - Command template:
   - `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts:
-  - `/tmp/osa-gmsh-validation/gmsh_preview.geo`
-  - `/tmp/osa-gmsh-validation/gmsh_preview.msh`
-  - `/tmp/osa-gmsh-validation/gmsh_validation_report.json`
-- Expected report path: `/tmp/osa-gmsh-validation/gmsh_validation_report.json`
-- Cleanup notes: remove `/tmp/osa-gmsh-validation/` after review unless the
+  - `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.geo`
+  - `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh`
+  - `/tmp/osa-gmsh-micro-benchmark-report.json`
+- Expected report path: `/tmp/osa-gmsh-micro-benchmark-report.json`
+- Recorded evidence: `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`
+- Cleanup notes: remove `/tmp/osa-gmsh-micro-benchmark-output/` after review unless the
   maintainer explicitly asks to preserve local evidence.
 - Risk notes: syntax/path smoke only; not optical correctness.
 - Non-claims: no production-grade physical validation; no formal convergence

@@ -144,6 +144,9 @@ This document describes the current `main` branch. It is not a release tag.
   `PATH`. Default behavior remains no solver
   execution, Elmer remains deferred, and these records do not authorize
   PyPI/TestPyPI upload, tag creation, or GitHub release creation.
+- Approved Gmsh-only optional micro-benchmark evidence:
+  `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
+  generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.
 - Fiber coupling and polarization warning closure:
   `POST /api/optics/fiber-coupling`,
   `POST /api/optics/polarization-jones`,

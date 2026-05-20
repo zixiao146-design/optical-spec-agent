@@ -26,6 +26,8 @@
   `scripts/run_optional_gmsh_validation.sh`.
 - Gmsh optional manual validation evidence:
   `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
+- Gmsh optional micro-benchmark evidence:
+  `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`.
 - Meep optional validation pilot default report:
   `scripts/run_optional_meep_validation.sh`.
 - Meep optional manual validation evidence:
@@ -76,6 +78,8 @@
 - Optional Gmsh pilot readiness without default Gmsh execution.
 - Limited Gmsh Level 3 optional manual validation evidence for one
   project/adapter `.geo` artifact path.
+- Approved Gmsh-only 2026-05-20 optional micro-benchmark evidence for local
+  `.geo` to `.msh` mesh generation smoke only.
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.
@@ -101,6 +105,8 @@
 - No solver execution claim from availability preflight alone.
 - No production-grade Gmsh physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
+- No optical correctness claim from the 2026-05-20 Gmsh-only micro-benchmark;
+  it is mesh generation smoke evidence only.
 - No production-grade Meep physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
 - No production-grade MPB physical validation; the recorded Level 3 report is
@@ -144,6 +150,7 @@
 - `docs/gmsh_optional_validation_pilot.md`
 - `docs/gmsh_level3_readiness.md`
 - `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`
+- `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`
 - `scripts/run_optional_meep_validation.sh`
 - `docs/meep_optional_validation_pilot.md`
 - `docs/meep_level3_readiness.md`

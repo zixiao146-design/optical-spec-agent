@@ -89,8 +89,10 @@ readiness 层新增
 `scripts/check_optional_solver_readiness.py`，让维护者在任何 solver 执行前审查
 availability、预期 artifact、风险和必需批准语句。该 readiness check 不授权
 PyPI/TestPyPI upload、tag 创建或 GitHub release 创建。
-per-solver approval records 仍是 pending/deferred，位于
-`docs/optional_solver_approval_records/`。
+per-solver approval records 位于 `docs/optional_solver_approval_records/`；
+2026-05-20 已批准并执行的 Gmsh-only run 也记录在该目录，并在
+`validation/gmsh/gmsh_micro_benchmark_2026-05-20.md` 中汇总。该 run 未执行
+Meep、MPB、Optiland 或 Elmer。
 readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
 `OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
 `meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。

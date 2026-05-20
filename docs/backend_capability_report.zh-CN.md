@@ -140,6 +140,10 @@ readiness/approval 层新增
 [`optional_solver_execution_sequence.zh-CN.md`](optional_solver_execution_sequence.zh-CN.md)、
 `optional_solver_approval_records/` 和 `scripts/check_optional_solver_readiness.py`；
 它不授权 PyPI、TestPyPI、tag、release 或 solver execution 动作。
+2026-05-20 已批准并执行的 Gmsh-only run 记录在
+[`../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`](../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md)，
+仅作为可选手动 mesh generation smoke 证据；该 run 未执行 Meep、MPB、Optiland 或
+Elmer。
 
 可通过 `GET /api/backend-validation-maturity` 或
 `python scripts/audit_validation_claims.py` 检查这些边界。

@@ -10,6 +10,8 @@ not execution approval.
    - Lowest risk because it checks a CLI mesh generation path from a local
      `.geo` preview to `.msh`.
    - Stop after Gmsh and review the report before considering another solver.
+   - Status: completed for the approved Gmsh-only run on 2026-05-20; see
+     `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`.
 2. Optiland second.
    - Checks a local Python/package ray-preview path.
    - Stop after Optiland and review whether the artifact path is useful.

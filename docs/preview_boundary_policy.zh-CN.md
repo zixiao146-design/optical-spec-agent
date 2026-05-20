@@ -50,6 +50,8 @@
 - Optional solver readiness check 不执行 solver binary，也不授权发布或 release 动作。
 - Optional solver execution approval packet 和 pending records 只为未来 review 做准备；
   它们本身不授权 solver execution。
+- 2026-05-20 已批准并执行的 Gmsh-only micro-benchmark 只记录为可选手动
+  mesh generation smoke 证据，不是光学正确性证据。
 - `OSA_SOLVER_PYTHON` 可用于把 import-only probe 指向专用 solver Python；
   Gmsh 等 CLI 工具仍从当前 `PATH` 探测。
 - 默认不调用 external LLM。

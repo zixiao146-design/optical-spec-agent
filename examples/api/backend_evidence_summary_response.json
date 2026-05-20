@@ -973,11 +973,22 @@
     "approval_matrix_available": true,
     "approval_matrix_path": "docs/optional_solver_micro_benchmark_approval_matrix.md",
     "approval_record_template_path": "docs/optional_solver_micro_benchmark_approval_record_template.md",
+    "execution_approval_packet_available": true,
+    "execution_approval_packet_path": "docs/optional_solver_micro_benchmark_execution_packet.md",
+    "execution_sequence_path": "docs/optional_solver_execution_sequence.md",
+    "approval_records_present": true,
+    "approval_records_path": "docs/optional_solver_approval_records",
     "readiness_status_path": "docs/optional_solver_micro_benchmark_readiness_status.md",
+    "environment_profiles_available": true,
+    "environment_profiles_path": "validation/solver_environment_profiles.json",
+    "environment_profiles_doc": "docs/optional_solver_environment_profiles.md",
+    "solver_python_env_var": "OSA_SOLVER_PYTHON",
+    "profile_env_var": "OSA_SOLVER_READINESS_PROFILE",
     "default_runs_solver": false,
     "execution_default": false,
     "opt_in_required": true,
     "explicit_approval_required": true,
+    "all_optional_solver_execution_authorized": false,
     "solvers": [
       {
         "solver_name": "gmsh",
@@ -988,6 +999,31 @@
         "default_runs_solver": false,
         "missing_solver_non_blocking": true,
         "readiness_status": "candidate_ready_with_previous_manual_report",
+        "python_probe_supported": true,
+        "cli_probe_supported": true,
+        "profile_sensitive": true,
+        "recommended_profile": "homebrew-cli",
+        "module_names": [
+          "gmsh"
+        ],
+        "command_names": [
+          "gmsh"
+        ],
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "execution_sequence_rank": 1,
+        "approval_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+        "pending_approval_template_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_pending.md",
+        "approval_status": "approved_executed",
+        "execution_authorized": false,
+        "last_execution_status": "passed",
+        "last_execution_date": "2026-05-20",
+        "last_execution_report": "/tmp/osa-gmsh-micro-benchmark-report.json",
+        "last_execution_evidence": "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+        "last_execution_solver_version": "4.15.2-git",
+        "last_execution_scope": "Gmsh only; Meep/MPB/Optiland/Elmer not executed.",
+        "recommended_next_action": "Review the recorded Gmsh evidence before considering any separately approved next solver micro-benchmark.",
+        "environment_profile_required": "homebrew-cli",
+        "solver_python_required": false,
         "approval_required": true,
         "approval_phrase": "I approve running the optional gmsh micro-benchmark for optical-spec-agent.",
         "expected_runtime_environment": "Local environment with gmsh available on PATH after explicit maintainer approval.",
@@ -997,9 +1033,9 @@
           "gmsh_validation_report.json"
         ],
         "expected_artifact_paths": [
-          "/tmp/osa-gmsh-validation/gmsh_preview.geo",
-          "/tmp/osa-gmsh-validation/gmsh_preview.msh",
-          "/tmp/osa-gmsh-validation/gmsh_validation_report.json"
+          "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.geo",
+          "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh",
+          "/tmp/osa-gmsh-micro-benchmark-report.json"
         ],
         "cleanup_required": true,
         "default_in_quality_gates": false,
@@ -1008,8 +1044,10 @@
         "tag_release_related": false,
         "production_grade_validation_claimed": false,
         "formal_convergence_proof_claimed": false,
-        "status": "manual_report_recorded",
+        "status": "manual_micro_benchmark_passed_2026-05-20",
         "evidence_refs": [
+          "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+          "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
           "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
           "docs/gmsh_optional_validation_pilot.md"
         ]
@@ -1023,6 +1061,23 @@
         "default_runs_solver": false,
         "missing_solver_non_blocking": true,
         "readiness_status": "candidate_ready_with_previous_manual_report",
+        "python_probe_supported": true,
+        "cli_probe_supported": false,
+        "profile_sensitive": true,
+        "recommended_profile": "osa-solvers",
+        "module_names": [
+          "meep"
+        ],
+        "command_names": [],
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "execution_sequence_rank": 3,
+        "approval_record_path": "docs/optional_solver_approval_records/meep_micro_benchmark_approval_pending.md",
+        "approval_status": "pending",
+        "execution_authorized": false,
+        "last_execution_status": "not_run",
+        "recommended_next_action": "Review the Meep approval record, confirm OSA_SOLVER_PYTHON points to the osa-solvers profile, and provide the exact solver-specific approval phrase before any opt-in run.",
+        "environment_profile_required": "osa-solvers",
+        "solver_python_required": true,
         "approval_required": true,
         "approval_phrase": "I approve running the optional meep micro-benchmark for optical-spec-agent.",
         "expected_runtime_environment": "Local Python environment with PyMeep importable after explicit maintainer approval.",
@@ -1058,6 +1113,25 @@
         "default_runs_solver": false,
         "missing_solver_non_blocking": true,
         "readiness_status": "candidate_ready_with_previous_manual_report",
+        "python_probe_supported": true,
+        "cli_probe_supported": true,
+        "profile_sensitive": true,
+        "recommended_profile": "osa-solvers",
+        "module_names": [
+          "meep.mpb"
+        ],
+        "command_names": [
+          "mpb"
+        ],
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "execution_sequence_rank": 4,
+        "approval_record_path": "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
+        "approval_status": "pending",
+        "execution_authorized": false,
+        "last_execution_status": "not_run",
+        "recommended_next_action": "Review the MPB approval record, confirm meep.mpb is importable through OSA_SOLVER_PYTHON, and provide the exact solver-specific approval phrase before any opt-in run.",
+        "environment_profile_required": "osa-solvers",
+        "solver_python_required": true,
         "approval_required": true,
         "approval_phrase": "I approve running the optional mpb micro-benchmark for optical-spec-agent.",
         "expected_runtime_environment": "Local Python environment with meep.mpb importable after explicit maintainer approval.",
@@ -1093,6 +1167,25 @@
         "default_runs_solver": false,
         "missing_solver_non_blocking": true,
         "readiness_status": "candidate_ready_with_previous_manual_report",
+        "python_probe_supported": true,
+        "cli_probe_supported": true,
+        "profile_sensitive": true,
+        "recommended_profile": "current",
+        "module_names": [
+          "optiland"
+        ],
+        "command_names": [
+          "optiland"
+        ],
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "execution_sequence_rank": 2,
+        "approval_record_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_pending.md",
+        "approval_status": "pending",
+        "execution_authorized": false,
+        "last_execution_status": "not_run",
+        "recommended_next_action": "Review the Optiland approval record and provide the exact solver-specific approval phrase before any opt-in run.",
+        "environment_profile_required": "current",
+        "solver_python_required": false,
         "approval_required": true,
         "approval_phrase": "I approve running the optional optiland micro-benchmark for optical-spec-agent.",
         "expected_runtime_environment": "Local Python environment with Optiland importable after explicit maintainer approval.",
@@ -1128,6 +1221,23 @@
         "default_runs_solver": false,
         "missing_solver_non_blocking": true,
         "readiness_status": "deferred_until_maintainable_install_route",
+        "python_probe_supported": false,
+        "cli_probe_supported": true,
+        "profile_sensitive": false,
+        "recommended_profile": "deferred-elmer",
+        "module_names": [],
+        "command_names": [
+          "ElmerSolver"
+        ],
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "execution_sequence_rank": 99,
+        "approval_record_path": "docs/optional_solver_approval_records/elmer_micro_benchmark_deferred.md",
+        "approval_status": "deferred",
+        "execution_authorized": false,
+        "last_execution_status": "not_run",
+        "recommended_next_action": "Keep Elmer deferred until a maintainable ElmerSolver install route exists and a new explicit approval is recorded.",
+        "environment_profile_required": "deferred-elmer",
+        "solver_python_required": false,
         "approval_required": true,
         "approval_phrase": "I approve running the optional elmer micro-benchmark for optical-spec-agent.",
         "expected_runtime_environment": "Deferred until a maintainable local ElmerSolver install route exists and maintainer approval is explicit.",
@@ -1159,7 +1269,12 @@
     "notes": [
       "Unified solver micro-benchmark wrapper is default no-execute.",
       "Readiness script performs availability detection only and does not execute solvers.",
+      "Readiness can be calibrated with OSA_SOLVER_PYTHON and OSA_SOLVER_READINESS_PROFILE.",
       "Approval matrix and approval record template are maintainer review aids.",
+      "Gmsh has an approved 2026-05-20 Gmsh-only optional micro-benchmark pass recorded as mesh generation smoke evidence.",
+      "Meep, MPB, Optiland, and Elmer were not executed by the 2026-05-20 Gmsh-only run.",
+      "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
+      "Future execution should run one solver at a time after explicit approval.",
       "Opt-in environment variables are required for solver-backed runs.",
       "Elmer remains deferred and is not Level 3."
     ],
@@ -1167,6 +1282,9 @@
     "default_solver_execution": false,
     "optional_solver_readiness_available": true,
     "optional_solver_approval_matrix_available": true,
+    "optional_solver_execution_approval_packet_available": true,
+    "optional_solver_approval_records_present": true,
+    "optional_solver_environment_profiles_available": true,
     "optional_solver_execution_default": false,
     "manual_opt_in_only": true,
     "no_production_grade_claim": true
@@ -1888,7 +2006,13 @@
           "docs/solver_validation_micro_benchmarks.md",
           "docs/optional_solver_micro_benchmark_approval_matrix.md",
           "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
           "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
+          "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+          "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
           "validation/gmsh/gmsh_validation_pilot_2026-05-14.md"
         ],
         "tests_or_scripts": [
@@ -1898,8 +2022,10 @@
           "tests/test_optional_solver_micro_benchmarks_script.py"
         ],
         "limitations": [
-          "Gmsh has a recorded narrow optional manual validation report.",
+          "Gmsh has a recorded optional manual micro-benchmark pass from 2026-05-20.",
           "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
           "Optional solver-backed micro-benchmarks require explicit opt-in.",
           "Default pytest, smoke, release gates, and quality gates do not run solvers.",
           "No production-grade physical validation or formal convergence proof is claimed."
@@ -1917,7 +2043,11 @@
           "docs/solver_validation_micro_benchmarks.md",
           "docs/optional_solver_micro_benchmark_approval_matrix.md",
           "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
           "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
           "validation/meep/meep_validation_pilot_2026-05-14.md"
         ],
         "tests_or_scripts": [
@@ -1929,6 +2059,8 @@
         "limitations": [
           "Meep has a recorded narrow optional manual validation report.",
           "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
           "Optional solver-backed micro-benchmarks require explicit opt-in.",
           "Default pytest, smoke, release gates, and quality gates do not run solvers.",
           "No production-grade physical validation or formal convergence proof is claimed."
@@ -1946,7 +2078,11 @@
           "docs/solver_validation_micro_benchmarks.md",
           "docs/optional_solver_micro_benchmark_approval_matrix.md",
           "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
           "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
           "validation/mpb/mpb_validation_pilot_2026-05-14.md"
         ],
         "tests_or_scripts": [
@@ -1958,6 +2094,8 @@
         "limitations": [
           "MPB has a recorded narrow optional manual validation report.",
           "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
           "Optional solver-backed micro-benchmarks require explicit opt-in.",
           "Default pytest, smoke, release gates, and quality gates do not run solvers.",
           "No production-grade physical validation or formal convergence proof is claimed."
@@ -1975,7 +2113,11 @@
           "docs/solver_validation_micro_benchmarks.md",
           "docs/optional_solver_micro_benchmark_approval_matrix.md",
           "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
           "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
           "validation/optiland/optiland_validation_pilot_2026-05-14.md"
         ],
         "tests_or_scripts": [
@@ -1987,6 +2129,8 @@
         "limitations": [
           "Optiland has a recorded narrow optional manual validation report.",
           "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
           "Optional solver-backed micro-benchmarks require explicit opt-in.",
           "Default pytest, smoke, release gates, and quality gates do not run solvers.",
           "No production-grade physical validation or formal convergence proof is claimed."
@@ -2004,7 +2148,11 @@
           "docs/solver_validation_micro_benchmarks.md",
           "docs/optional_solver_micro_benchmark_approval_matrix.md",
           "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
           "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
           "validation/elmer/elmer_install_deferred_2026-05-15.md"
         ],
         "tests_or_scripts": [
@@ -2016,6 +2164,8 @@
         "limitations": [
           "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
           "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
           "Optional solver-backed micro-benchmarks require explicit opt-in.",
           "Default pytest, smoke, release gates, and quality gates do not run solvers.",
           "No production-grade physical validation or formal convergence proof is claimed."
@@ -2072,8 +2222,13 @@
       "optional_solver_micro_benchmarks_opt_in_required": true,
       "optional_solver_readiness_available": true,
       "optional_solver_approval_matrix_available": true,
+      "optional_solver_environment_profiles_available": true,
+      "optional_solver_execution_approval_packet_available": true,
+      "optional_solver_approval_records_present": true,
       "optional_solver_execution_default": false,
       "explicit_solver_approval_required": true,
+      "all_optional_solver_execution_authorized": false,
+      "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
       "elmer_micro_benchmark_status": "deferred"
     },
     "preview_boundary_summary": {
@@ -2083,7 +2238,7 @@
       "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
       "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services.",
       "pypi": "PyPI publication would not imply production-grade validation.",
-      "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, and default gates do not run solvers."
+      "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20, and default gates do not run solvers."
     },
     "external_solver_executed": false,
     "external_llm_required": false,
@@ -2098,7 +2253,7 @@
     "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
     "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services.",
     "pypi": "PyPI publication would not imply production-grade validation.",
-    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, and default gates do not run solvers."
+    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20, and default gates do not run solvers."
   },
   "validation_claim_audit_available": true,
   "blocked_or_deferred_capabilities": [

@@ -122,6 +122,12 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert solver_micro["explicit_approval_required"] is True
     assert solver_micro["all_optional_solver_execution_authorized"] is False
     assert len(solver_micro["solvers"]) == 5
+    gmsh = next(item for item in solver_micro["solvers"] if item["solver_name"] == "gmsh")
+    assert gmsh["approval_status"] == "approved_executed"
+    assert gmsh["last_execution_status"] == "passed"
+    assert gmsh["last_execution_evidence"] == (
+        "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md"
+    )
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
     assert solver_micro["formal_convergence_proof_claimed"] is False

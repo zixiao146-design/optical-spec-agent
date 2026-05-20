@@ -95,6 +95,7 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert summary.summary["optional_solver_execution_default"] is False
     assert summary.summary["explicit_solver_approval_required"] is True
     assert summary.summary["all_optional_solver_execution_authorized"] is False
+    assert summary.summary["gmsh_optional_micro_benchmark_status"] == "passed_2026-05-20"
     assert summary.summary["elmer_micro_benchmark_status"] == "deferred"
     assert "not a production-grade optical constants database" in summary.preview_boundary_summary["materials"]
     assert "not physical correctness" in summary.preview_boundary_summary["application_domains"]

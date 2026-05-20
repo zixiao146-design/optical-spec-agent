@@ -337,9 +337,11 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
+                "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+                "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
                 "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
             ],
-            "Gmsh has a recorded narrow optional manual validation report.",
+            "Gmsh has a recorded optional manual micro-benchmark pass from 2026-05-20.",
         ),
         (
             "meep_optional_solver_micro_benchmark",
@@ -423,7 +425,7 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                     status_note,
                     "Readiness checks detect availability only and do not execute solvers.",
                     "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-                    "Execution approval packet and per-solver records remain pending/deferred until explicit approval.",
+                    "Only the recorded Gmsh run was explicitly approved and executed; other per-solver records remain pending/deferred.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -463,6 +465,7 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "optional_solver_execution_default": False,
             "explicit_solver_approval_required": True,
             "all_optional_solver_execution_authorized": False,
+            "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
             "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
@@ -492,8 +495,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "explicit opt-in only; readiness checks detect availability only, "
                 "can be calibrated with OSA_SOLVER_PYTHON for solver-specific "
                 "Python profiles, include pending/deferred per-solver approval "
-                "records and one-solver-at-a-time sequencing, and default gates "
-                "do not run solvers."
+                "records and one-solver-at-a-time sequencing, record the Gmsh-only "
+                "optional manual micro-benchmark pass from 2026-05-20, and default "
+                "gates do not run solvers."
             ),
         },
     )

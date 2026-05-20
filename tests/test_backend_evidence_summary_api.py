@@ -63,6 +63,13 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
     assert body["optional_solver_micro_benchmarks"]["all_optional_solver_execution_authorized"] is False
     assert body["optional_solver_micro_benchmarks"]["manual_opt_in_only"] is True
+    gmsh = next(
+        item
+        for item in body["optional_solver_micro_benchmarks"]["solvers"]
+        if item["solver_name"] == "gmsh"
+    )
+    assert gmsh["approval_status"] == "approved_executed"
+    assert gmsh["last_execution_status"] == "passed"
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(

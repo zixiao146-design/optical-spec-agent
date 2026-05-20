@@ -37,3 +37,16 @@ def test_optional_solver_approval_records_are_pending_or_deferred():
     assert "not Level 3" in elmer
     assert "maintainable install route" in elmer
 
+
+def test_gmsh_approved_execution_record_is_separate_from_pending_template():
+    path = RECORD_DIR / "gmsh_micro_benchmark_approval_2026-05-20.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    assert "Approval status: approved for this Gmsh run" in text
+    assert "Execution authorized: yes, Gmsh only" in text
+    assert "Solver execution performed: yes, Gmsh only" in text
+    assert "Other solvers authorized: no" in text
+    assert "PyPI publication authorized: no" in text
+    assert "TestPyPI upload authorized: no" in text
+    assert "Tag or GitHub release creation authorized: no" in text
+    assert "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md" in text

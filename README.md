@@ -121,8 +121,11 @@ The readiness layer adds
 availability, expected artifacts, risks, and the required approval phrase
 before any solver execution. This readiness check does not authorize
 PyPI/TestPyPI upload, tag creation, or GitHub release creation.
-Per-solver approval records remain pending/deferred under
-[`docs/optional_solver_approval_records/`](docs/optional_solver_approval_records/).
+Per-solver approval records live under
+[`docs/optional_solver_approval_records/`](docs/optional_solver_approval_records/);
+the approved Gmsh-only 2026-05-20 run is recorded there and summarized in
+[`validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`](validation/gmsh/gmsh_micro_benchmark_2026-05-20.md).
+Meep, MPB, Optiland, and Elmer were not executed by that run.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

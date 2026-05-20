@@ -94,6 +94,13 @@ def test_backend_capability_report_api_returns_expected_sections():
         is False
     )
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
+    gmsh = next(
+        item
+        for item in body["optional_solver_micro_benchmarks"]["solvers"]
+        if item["solver_name"] == "gmsh"
+    )
+    assert gmsh["approval_status"] == "approved_executed"
+    assert gmsh["last_execution_status"] == "passed"
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",

@@ -9,6 +9,8 @@
    - 风险最低，因为它只检查本地 `.geo` preview 到 `.msh` 的 CLI mesh
      generation 路径。
    - Gmsh 后暂停并 review report，再考虑下一个 solver。
+   - 状态：2026-05-20 已按 Gmsh-only 批准执行并通过；见
+     `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`。
 2. Optiland second。
    - 检查本地 Python/package ray-preview 路径。
    - Optiland 后暂停并 review artifact path。

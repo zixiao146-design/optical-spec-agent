@@ -65,13 +65,14 @@ approval remain separate and not granted.
   calculators.
 - Optional solver micro-benchmarks: a manifest-backed plan for tiny open-source
   solver-backed checks that remain manual and explicit opt-in only. Default
-  evidence pack generation does not run solvers.
+  evidence pack generation does not run solvers. The approved Gmsh-only
+  2026-05-20 run is recorded as optional manual mesh generation smoke evidence.
 - Optional solver readiness/approval: availability detection, expected
   artifacts, risk notes, and explicit approval phrase are documented before any
   solver-backed micro-benchmark can be run. The execution approval packet,
-  one-solver-at-a-time sequence, and pending/deferred per-solver records are
-  review aids only. This does not authorize PyPI, TestPyPI, tag, release, or
-  solver execution actions.
+  one-solver-at-a-time sequence, the approved Gmsh-only record, and
+  pending/deferred records for other solvers are review aids only. This does not
+  authorize PyPI, TestPyPI, tag, release, or other solver execution actions.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

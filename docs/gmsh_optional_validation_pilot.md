@@ -17,6 +17,10 @@ without making Gmsh a default dependency.
 - Current pilot status: opt-in validation passed on 2026-05-14 for a narrow
   project/adapter `.geo` artifact path.
 - Evidence report: `validation/gmsh/gmsh_validation_pilot_2026-05-14.md`.
+- Current micro-benchmark status: approved Gmsh-only run passed on 2026-05-20
+  for local `.geo` to `.msh` mesh generation smoke.
+- Micro-benchmark evidence:
+  `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`.
 - Level 3 readiness: `docs/gmsh_level3_readiness.md`.
 
 ## Input Fixture

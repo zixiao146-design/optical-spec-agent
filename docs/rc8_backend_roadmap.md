@@ -60,6 +60,8 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   [`solver_validation_micro_benchmarks.md`](solver_validation_micro_benchmarks.md)
   without adding solvers to default pytest, smoke, quality gates, or release
   gates.
+- Review the approved Gmsh-only 2026-05-20 optional micro-benchmark evidence
+  before considering any separately approved Meep, MPB, Optiland, or Elmer run.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.

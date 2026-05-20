@@ -26,11 +26,17 @@
       ],
       "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "execution_sequence_rank": 1,
-      "approval_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_pending.md",
-      "approval_status": "pending",
+      "approval_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+      "pending_approval_template_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_pending.md",
+      "approval_status": "approved_executed",
       "execution_authorized": false,
-      "last_execution_status": "not_run",
-      "recommended_next_action": "Review the Gmsh approval record and provide the exact solver-specific approval phrase before any opt-in run.",
+      "last_execution_status": "passed",
+      "last_execution_date": "2026-05-20",
+      "last_execution_report": "/tmp/osa-gmsh-micro-benchmark-report.json",
+      "last_execution_evidence": "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+      "last_execution_solver_version": "4.15.2-git",
+      "last_execution_scope": "Gmsh only; Meep/MPB/Optiland/Elmer not executed.",
+      "recommended_next_action": "Review the recorded Gmsh evidence before considering any separately approved next solver micro-benchmark.",
       "environment_profile_required": "homebrew-cli",
       "solver_python_required": false,
       "approval_required": true,
@@ -42,9 +48,9 @@
         "gmsh_validation_report.json"
       ],
       "expected_artifact_paths": [
-        "/tmp/osa-gmsh-validation/gmsh_preview.geo",
-        "/tmp/osa-gmsh-validation/gmsh_preview.msh",
-        "/tmp/osa-gmsh-validation/gmsh_validation_report.json"
+        "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.geo",
+        "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh",
+        "/tmp/osa-gmsh-micro-benchmark-report.json"
       ],
       "cleanup_required": true,
       "default_in_quality_gates": false,
@@ -53,8 +59,10 @@
       "tag_release_related": false,
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
-      "status": "manual_report_recorded",
+      "status": "manual_micro_benchmark_passed_2026-05-20",
       "evidence_refs": [
+        "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+        "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
         "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
         "docs/gmsh_optional_validation_pilot.md"
       ]

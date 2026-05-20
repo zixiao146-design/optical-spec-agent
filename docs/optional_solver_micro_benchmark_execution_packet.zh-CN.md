@@ -12,8 +12,9 @@
 - TestPyPI 仅上传并验证过：0.9.0rc6.dev0
 - v0.9.0rc8 tag：未创建
 - v1.0.0 tag：未创建
-- solver micro-benchmark approval：未授予
-- 本步骤执行 solver micro-benchmark：否
+- solver micro-benchmark approval：仅授予 2026-05-20 Gmsh run
+- 已执行 solver micro-benchmark：是，仅 Gmsh，日期 2026-05-20
+- 其他 solver micro-benchmark 执行：否
 
 ## 执行原则
 
@@ -31,7 +32,7 @@
 ## 推荐执行顺序
 
 1. Gmsh first：CLI mesh generation 风险最低，只验证本地 `.geo` 到 `.msh`
-   路径。
+   路径。状态：2026-05-20 已按 Gmsh-only 批准执行并通过。
 2. Optiland second：本地 Python/package ray-preview 路径，不涉及外部电磁
    solver。
 3. Meep third：需要 solver Python profile，通常是
@@ -52,11 +53,12 @@
 - 命令模板：
   - `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts：
-  - `/tmp/osa-gmsh-validation/gmsh_preview.geo`
-  - `/tmp/osa-gmsh-validation/gmsh_preview.msh`
-  - `/tmp/osa-gmsh-validation/gmsh_validation_report.json`
-- Expected report path：`/tmp/osa-gmsh-validation/gmsh_validation_report.json`
-- Cleanup：review 后移除 `/tmp/osa-gmsh-validation/`，除非维护者要求保留。
+  - `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.geo`
+  - `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh`
+  - `/tmp/osa-gmsh-micro-benchmark-report.json`
+- Expected report path：`/tmp/osa-gmsh-micro-benchmark-report.json`
+- Recorded evidence：`validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`
+- Cleanup：review 后移除 `/tmp/osa-gmsh-micro-benchmark-output/`，除非维护者要求保留。
 - Risk：只验证 syntax/path smoke，不验证 optical correctness。
 - Non-claims：no production-grade physical validation；no formal convergence proof。
 

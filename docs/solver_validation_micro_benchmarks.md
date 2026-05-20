@@ -25,7 +25,7 @@ convergence proof, or real optical-design correctness.
 
 | Solver | Candidate benchmark | Expected artifact | Boundary |
 | --- | --- | --- | --- |
-| Gmsh | Tiny mesh generation from a local `.geo` preview | `.msh` | Validates syntax/path only, not optical correctness. |
+| Gmsh | Tiny mesh generation from a local `.geo` preview | `.msh` | Executed/passed on 2026-05-20 for the approved Gmsh-only run; validates syntax/path only, not optical correctness. |
 | Meep | Tiny PyMeep smoke from a generated preview artifact | result JSON | Validates import/run path only, not production-grade FDTD. |
 | MPB | Tiny band-structure smoke through `meep.mpb` | band summary JSON | Validates MPB Python path only. |
 | Optiland | Tiny ray-trace or import/run smoke | result JSON | Validates local Optiland path only. |
@@ -84,7 +84,8 @@ Execution approval is prepared in
 [`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md),
 with one-solver-at-a-time sequencing in
 [`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md)
-and per-solver pending/deferred approval records under
+and per-solver pending/deferred approval records, plus the approved Gmsh-only
+2026-05-20 execution record, under
 [`optional_solver_approval_records/`](optional_solver_approval_records/).
 
 ## Claims

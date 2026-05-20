@@ -47,14 +47,24 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         assert item["approval_record_path"].startswith(
             "docs/optional_solver_approval_records/"
         ), name
-        assert item["approval_status"] in {"pending", "deferred"}, name
+        assert item["approval_status"] in {"pending", "deferred", "approved_executed"}, name
         assert item["execution_authorized"] is False, name
-        assert item["last_execution_status"] == "not_run", name
+        assert item["last_execution_status"] in {"not_run", "passed"}, name
         assert item["recommended_next_action"], name
         assert item["environment_profile_required"], name
         assert item["solver_python_required"] in {True, False}, name
     assert solvers["gmsh"]["command_names"] == ["gmsh"]
     assert solvers["gmsh"]["execution_sequence_rank"] == 1
+    assert solvers["gmsh"]["approval_status"] == "approved_executed"
+    assert solvers["gmsh"]["last_execution_status"] == "passed"
+    assert solvers["gmsh"]["last_execution_date"] == "2026-05-20"
+    assert solvers["gmsh"]["last_execution_evidence"] == (
+        "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md"
+    )
+    assert "gmsh_micro_benchmark_approval_2026-05-20.md" in solvers["gmsh"]["approval_record_path"]
+    assert solvers["gmsh"]["pending_approval_template_path"].endswith(
+        "gmsh_micro_benchmark_approval_pending.md"
+    )
     assert "meep" in solvers["meep"]["module_names"]
     assert solvers["meep"]["execution_sequence_rank"] == 3
     assert solvers["meep"]["solver_python_required"] is True

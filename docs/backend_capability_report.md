@@ -191,6 +191,10 @@ The readiness/approval layer adds
 per-solver records under [`optional_solver_approval_records/`](optional_solver_approval_records/),
 and `scripts/check_optional_solver_readiness.py`. It does not authorize PyPI,
 TestPyPI, tag, release, or solver execution actions.
+The approved Gmsh-only 2026-05-20 run is recorded in
+[`../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`](../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md)
+as optional manual mesh generation smoke evidence. Meep, MPB, Optiland, and
+Elmer were not executed by that run.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

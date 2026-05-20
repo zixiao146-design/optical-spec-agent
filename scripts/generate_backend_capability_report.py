@@ -186,14 +186,14 @@ def _write_markdown(report: BackendCapabilityReport, path: Path) -> None:
             f"- elmer_deferred: `{solver_micro['elmer_deferred']}`",
             f"- production_grade_claim: `{solver_micro['production_grade_claim']}`",
             "",
-            "| Solver | Status | Readiness | Opt-in env | Approval required | Default runs solver |",
-            "| --- | --- | --- | --- | --- | --- |",
+            "| Solver | Status | Readiness | Approval | Last execution | Opt-in env | Default runs solver |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
         ]
     )
     for item in solver_micro["solvers"]:
         lines.append(
-            "| {solver_name} | {status} | {readiness_status} | {opt_in_env_var} | "
-            "{approval_required} | {default_runs_solver} |".format(
+            "| {solver_name} | {status} | {readiness_status} | {approval_status} | "
+            "{last_execution_status} | {opt_in_env_var} | {default_runs_solver} |".format(
                 **item
             )
         )

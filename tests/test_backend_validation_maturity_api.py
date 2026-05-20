@@ -29,6 +29,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert body["summary"]["optional_solver_execution_default"] is False
     assert body["summary"]["explicit_solver_approval_required"] is True
     assert body["summary"]["all_optional_solver_execution_authorized"] is False
+    assert body["summary"]["gmsh_optional_micro_benchmark_status"] == "passed_2026-05-20"
     assert body["summary"]["elmer_micro_benchmark_status"] == "deferred"
     component_ids = {record["component_id"] for record in body["records"]}
     assert "fiber_coupling_calculator" in component_ids

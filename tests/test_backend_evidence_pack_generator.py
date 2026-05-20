@@ -100,6 +100,12 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert solver_micro["all_optional_solver_execution_authorized"] is False
     assert solver_micro["no_production_grade_claim"] is True
     assert len(solver_micro["solvers"]) == 5
+    gmsh = next(item for item in solver_micro["solvers"] if item["solver_name"] == "gmsh")
+    assert gmsh["approval_status"] == "approved_executed"
+    assert gmsh["last_execution_status"] == "passed"
+    assert gmsh["last_execution_evidence"] == (
+        "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md"
+    )
     assert solver_micro["elmer_deferred"] is True
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",

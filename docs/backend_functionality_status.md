@@ -109,6 +109,8 @@ External solvers are not run by default. `/api/tool-capabilities` may detect
 whether Meep, Gmsh, MPB, ElmerSolver, or Optiland appear importable or on PATH,
 but detection is not execution. Elmer remains Level 2 + Level-3-ready with
 install deferred.
+The approved Gmsh-only optional micro-benchmark passed on 2026-05-20 and is
+recorded as mesh generation smoke evidence, not optical correctness evidence.
 
 ## Publication / Release Actions
 

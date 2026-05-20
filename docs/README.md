@@ -303,6 +303,7 @@ manual-only and must not publish or create tags/releases from default CI.
 - [Optiland manual validation report schema](manual_solver_validation_reports/optiland_validation_report_schema.json)
 - [Elmer manual validation report schema](manual_solver_validation_reports/elmer_validation_report_schema.json)
 - [Gmsh optional manual validation report](../validation/gmsh/gmsh_validation_pilot_2026-05-14.md)
+- [Gmsh optional micro-benchmark evidence - 2026-05-20](../validation/gmsh/gmsh_micro_benchmark_2026-05-20.md)
 - [Meep optional manual validation report](../validation/meep/meep_validation_pilot_2026-05-14.md)
 - [MPB optional manual validation report](../validation/mpb/mpb_validation_pilot_2026-05-14.md)
 - [Optiland optional manual validation report](../validation/optiland/optiland_validation_pilot_2026-05-14.md)
