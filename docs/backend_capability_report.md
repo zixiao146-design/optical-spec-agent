@@ -186,8 +186,11 @@ The readiness/approval layer adds
 [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
 [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md),
 [`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md),
+[`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md),
+[`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md),
+per-solver records under [`optional_solver_approval_records/`](optional_solver_approval_records/),
 and `scripts/check_optional_solver_readiness.py`. It does not authorize PyPI,
-TestPyPI, tag, or release actions.
+TestPyPI, tag, release, or solver execution actions.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

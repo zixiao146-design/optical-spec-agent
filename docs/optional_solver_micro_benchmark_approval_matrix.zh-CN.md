@@ -27,3 +27,8 @@ readiness 状态见
 [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md)。
 环境 profile 见
 [`optional_solver_environment_profiles.zh-CN.md`](optional_solver_environment_profiles.zh-CN.md)。
+未来执行审批包见
+[`optional_solver_micro_benchmark_execution_packet.zh-CN.md`](optional_solver_micro_benchmark_execution_packet.zh-CN.md)，
+pending per-solver records 位于
+[`optional_solver_approval_records/`](optional_solver_approval_records/)，一次只运行一个
+solver 的顺序见 [`optional_solver_execution_sequence.zh-CN.md`](optional_solver_execution_sequence.zh-CN.md)。

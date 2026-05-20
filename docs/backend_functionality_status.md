@@ -219,6 +219,10 @@ and
 record expected artifacts, risks, and the explicit approval phrase. Default
 backend checks still do not execute solvers, upload packages, create tags, or
 create releases.
+The execution approval packet, per-solver approval records, and
+one-solver-at-a-time sequence are prepared as future review aids only; all
+execution remains unauthorized until explicit solver-specific approval is
+recorded.
 Readiness is calibrated by environment profile: current Python/current `PATH`
 is the default, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

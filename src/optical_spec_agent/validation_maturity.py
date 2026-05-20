@@ -333,6 +333,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_micro_benchmark_execution_packet.md",
+                "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
                 "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
@@ -347,6 +349,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_micro_benchmark_execution_packet.md",
+                "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
                 "validation/meep/meep_validation_pilot_2026-05-14.md",
@@ -361,6 +365,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_micro_benchmark_execution_packet.md",
+                "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
                 "validation/mpb/mpb_validation_pilot_2026-05-14.md",
@@ -375,6 +381,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_micro_benchmark_execution_packet.md",
+                "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
                 "validation/optiland/optiland_validation_pilot_2026-05-14.md",
@@ -389,6 +397,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
                 "docs/optional_solver_environment_profiles.md",
+                "docs/optional_solver_micro_benchmark_execution_packet.md",
+                "docs/optional_solver_execution_sequence.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
                 "validation/elmer/elmer_install_deferred_2026-05-15.md",
@@ -413,6 +423,7 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                     status_note,
                     "Readiness checks detect availability only and do not execute solvers.",
                     "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+                    "Execution approval packet and per-solver records remain pending/deferred until explicit approval.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -447,8 +458,11 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "optional_solver_readiness_available": True,
             "optional_solver_approval_matrix_available": True,
             "optional_solver_environment_profiles_available": True,
+            "optional_solver_execution_approval_packet_available": True,
+            "optional_solver_approval_records_present": True,
             "optional_solver_execution_default": False,
             "explicit_solver_approval_required": True,
+            "all_optional_solver_execution_authorized": False,
             "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
@@ -477,7 +491,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "Open-source solver-backed micro-benchmarks are optional/manual/"
                 "explicit opt-in only; readiness checks detect availability only, "
                 "can be calibrated with OSA_SOLVER_PYTHON for solver-specific "
-                "Python profiles, and default gates do not run solvers."
+                "Python profiles, include pending/deferred per-solver approval "
+                "records and one-solver-at-a-time sequencing, and default gates "
+                "do not run solvers."
             ),
         },
     )

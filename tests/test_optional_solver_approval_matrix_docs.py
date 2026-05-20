@@ -28,3 +28,6 @@ def test_optional_solver_approval_matrix_docs_exist_and_bound_execution():
         assert "OSA_SOLVER_PYTHON" in text
         assert "OSA_SOLVER_READINESS_PROFILE" in text
         assert "osa-solvers" in text
+        assert "execution_packet" in text or "执行审批包" in text
+        assert "optional_solver_approval_records" in text
+        assert "execution_sequence" in text or "一次只运行一个" in text

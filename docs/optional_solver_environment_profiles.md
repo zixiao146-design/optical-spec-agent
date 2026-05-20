@@ -44,3 +44,8 @@ Optiland, or Elmer simulation.
 - Solver-backed micro-benchmarks still require explicit maintainer approval.
 - TestPyPI, PyPI, tag, and release actions are unrelated and remain separately gated.
 - No production-grade physical validation or formal convergence proof is claimed.
+
+Execution approval is prepared separately in
+[`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md)
+and per-solver pending records under
+[`optional_solver_approval_records/`](optional_solver_approval_records/).

@@ -16,7 +16,10 @@ def test_optional_solver_readiness_status_records_current_boundaries():
     assert "Current main development version: 0.9.0rc8.dev0" in text
     assert "v0.9.0rc8 tag: absent" in text
     assert "Solver micro-benchmark default mode: no execution" in text
+    assert "optional_solver_micro_benchmark_execution_packet.md" in text
+    assert "optional_solver_approval_records/" in text
     assert "Elmer | deferred" in text
+    assert "Meep and `meep.mpb` are detectable" in text
     assert "explicit" in text.lower()
     assert "OSA_SOLVER_PYTHON" in text
     assert "OSA_SOLVER_READINESS_PROFILE=osa-solvers" in text

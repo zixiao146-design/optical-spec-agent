@@ -82,6 +82,8 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert solver_micro["manifest_exists"] is True
     assert solver_micro["readiness_available"] is True
     assert solver_micro["approval_matrix_available"] is True
+    assert solver_micro["execution_approval_packet_available"] is True
+    assert solver_micro["approval_records_present"] is True
     assert solver_micro["environment_profiles_available"] is True
     assert solver_micro["optional_solver_environment_profiles_available"] is True
     assert solver_micro["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
@@ -91,8 +93,11 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert solver_micro["explicit_approval_required"] is True
     assert solver_micro["optional_solver_readiness_available"] is True
     assert solver_micro["optional_solver_approval_matrix_available"] is True
+    assert solver_micro["optional_solver_execution_approval_packet_available"] is True
+    assert solver_micro["optional_solver_approval_records_present"] is True
     assert solver_micro["optional_solver_execution_default"] is False
     assert solver_micro["manual_opt_in_only"] is True
+    assert solver_micro["all_optional_solver_execution_authorized"] is False
     assert solver_micro["no_production_grade_claim"] is True
     assert len(solver_micro["solvers"]) == 5
     assert solver_micro["elmer_deferred"] is True

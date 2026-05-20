@@ -80,6 +80,12 @@ This can distinguish a base project environment from a dedicated PyMeep /
 `meep.mpb` environment without executing a solver. Environment profiles are
 documented in
 [`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md).
+Execution approval is prepared in
+[`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md),
+with one-solver-at-a-time sequencing in
+[`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md)
+and per-solver pending/deferred approval records under
+[`optional_solver_approval_records/`](optional_solver_approval_records/).
 
 ## Claims
 

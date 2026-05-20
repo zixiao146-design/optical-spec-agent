@@ -52,6 +52,8 @@ convergence proof is claimed.
 - Optional solver readiness is now reviewable through
   [`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md),
   [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
+  [`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md),
+  [`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md),
   and `scripts/check_optional_solver_readiness.py`; this readiness layer still
   performs no solver execution by default.
 - Solver readiness is profile/environment-specific. `OSA_SOLVER_PYTHON` can

@@ -43,11 +43,29 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         assert isinstance(item["module_names"], list), name
         assert isinstance(item["command_names"], list), name
         assert item["solver_python_env_var"] == "OSA_SOLVER_PYTHON", name
+        assert isinstance(item["execution_sequence_rank"], int), name
+        assert item["approval_record_path"].startswith(
+            "docs/optional_solver_approval_records/"
+        ), name
+        assert item["approval_status"] in {"pending", "deferred"}, name
+        assert item["execution_authorized"] is False, name
+        assert item["last_execution_status"] == "not_run", name
+        assert item["recommended_next_action"], name
+        assert item["environment_profile_required"], name
+        assert item["solver_python_required"] in {True, False}, name
     assert solvers["gmsh"]["command_names"] == ["gmsh"]
+    assert solvers["gmsh"]["execution_sequence_rank"] == 1
     assert "meep" in solvers["meep"]["module_names"]
+    assert solvers["meep"]["execution_sequence_rank"] == 3
+    assert solvers["meep"]["solver_python_required"] is True
     assert "meep.mpb" in solvers["mpb"]["module_names"]
+    assert solvers["mpb"]["execution_sequence_rank"] == 4
+    assert solvers["mpb"]["solver_python_required"] is True
     assert "optiland" in solvers["optiland"]["module_names"]
+    assert solvers["optiland"]["execution_sequence_rank"] == 2
     assert solvers["elmer"]["command_names"] == ["ElmerSolver"]
+    assert solvers["elmer"]["execution_sequence_rank"] == 99
+    assert solvers["elmer"]["approval_status"] == "deferred"
     assert solvers["elmer"]["status"] == "deferred"
     assert solvers["elmer"]["readiness_status"] == "deferred_until_maintainable_install_route"
     assert "Level-3-ready" in solvers["elmer"]["current_maturity"]

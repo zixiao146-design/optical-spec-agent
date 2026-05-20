@@ -71,6 +71,11 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["optional_solver_micro_benchmarks"]["manifest_exists"] is True
     assert body["optional_solver_micro_benchmarks"]["readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["approval_matrix_available"] is True
+    assert (
+        body["optional_solver_micro_benchmarks"]["execution_approval_packet_available"]
+        is True
+    )
+    assert body["optional_solver_micro_benchmarks"]["approval_records_present"] is True
     assert body["optional_solver_micro_benchmarks"]["environment_profiles_available"] is True
     assert (
         body["optional_solver_micro_benchmarks"]["environment_profiles_path"]
@@ -82,6 +87,12 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["optional_solver_micro_benchmarks"]["execution_default"] is False
     assert body["optional_solver_micro_benchmarks"]["opt_in_required"] is True
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
+    assert (
+        body["optional_solver_micro_benchmarks"][
+            "all_optional_solver_execution_authorized"
+        ]
+        is False
+    )
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {

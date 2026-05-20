@@ -4,6 +4,13 @@ Use this template before any optional solver-backed micro-benchmark is run.
 Filling it out does not approve PyPI/TestPyPI publication, tag creation, GitHub
 release creation, or `v1.0.0` release.
 
+The maintained execution packet is
+[`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md).
+Current pending/deferred records live under
+[`optional_solver_approval_records/`](optional_solver_approval_records/).
+Run one solver at a time, following
+[`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md).
+
 ## Solver Selected
 
 - Solver:

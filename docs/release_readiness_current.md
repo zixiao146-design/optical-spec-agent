@@ -133,7 +133,10 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/optional_solver_micro_benchmark_approval_matrix.md`,
   `docs/optional_solver_micro_benchmark_approval_record_template.md`,
   `docs/optional_solver_micro_benchmark_readiness_status.md`, and
-  `docs/optional_solver_environment_profiles.md`, plus
+  `docs/optional_solver_environment_profiles.md`,
+  `docs/optional_solver_micro_benchmark_execution_packet.md`,
+  `docs/optional_solver_execution_sequence.md`, and
+  `docs/optional_solver_approval_records/`, plus
   `scripts/check_optional_solver_readiness.py` make candidate solver execution
   reviewable before any opt-in run. Readiness is environment-aware:
   `OSA_SOLVER_PYTHON` can probe a dedicated solver Python such as

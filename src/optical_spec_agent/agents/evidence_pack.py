@@ -195,6 +195,12 @@ def generate_backend_evidence_pack(
             "optional_solver_approval_matrix_available": payload[
                 "optional_solver_micro_benchmarks"
             ]["approval_matrix_available"],
+            "optional_solver_execution_approval_packet_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["execution_approval_packet_available"],
+            "optional_solver_approval_records_present": payload[
+                "optional_solver_micro_benchmarks"
+            ]["approval_records_present"],
             "optional_solver_environment_profiles_available": payload[
                 "optional_solver_micro_benchmarks"
             ]["environment_profiles_available"],
@@ -210,6 +216,9 @@ def generate_backend_evidence_pack(
             "explicit_approval_required": payload[
                 "optional_solver_micro_benchmarks"
             ]["explicit_approval_required"],
+            "all_optional_solver_execution_authorized": payload[
+                "optional_solver_micro_benchmarks"
+            ]["all_optional_solver_execution_authorized"],
             "manual_opt_in_only": True,
             "no_production_grade_claim": True,
         },

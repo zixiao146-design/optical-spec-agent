@@ -110,3 +110,6 @@ The readiness/approval matrix now makes each candidate solver reviewable before
 execution: availability detection only, expected artifacts, risk notes, and the
 required approval phrase are recorded without running solvers or authorizing
 PyPI/TestPyPI, tag, or release actions.
+The execution approval packet adds per-solver pending/deferred records and a
+one-solver-at-a-time sequence so future opt-in runs can be approved and reviewed
+without batching solvers or changing default release gates.

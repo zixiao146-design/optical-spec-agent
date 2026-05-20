@@ -69,6 +69,12 @@ python scripts/check_optional_solver_readiness.py
 这样可以区分项目基础环境和专用 PyMeep / `meep.mpb` 环境，但仍不会执行 solver。
 环境 profile 见
 [`optional_solver_environment_profiles.zh-CN.md`](optional_solver_environment_profiles.zh-CN.md)。
+执行审批准备见
+[`optional_solver_micro_benchmark_execution_packet.zh-CN.md`](optional_solver_micro_benchmark_execution_packet.zh-CN.md)，
+一次只运行一个 solver 的顺序见
+[`optional_solver_execution_sequence.zh-CN.md`](optional_solver_execution_sequence.zh-CN.md)，
+per-solver pending/deferred approval records 位于
+[`optional_solver_approval_records/`](optional_solver_approval_records/)。
 
 ## 声明边界
 

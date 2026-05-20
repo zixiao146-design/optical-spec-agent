@@ -115,10 +115,14 @@ approval before any solver-backed run.
 The readiness layer adds
 [`optional solver approval matrix`](docs/optional_solver_micro_benchmark_approval_matrix.md),
 [`approval record template`](docs/optional_solver_micro_benchmark_approval_record_template.md),
-and `scripts/check_optional_solver_readiness.py` so maintainers can review
+[`execution approval packet`](docs/optional_solver_micro_benchmark_execution_packet.md),
+[`execution sequence`](docs/optional_solver_execution_sequence.md), and
+`scripts/check_optional_solver_readiness.py` so maintainers can review
 availability, expected artifacts, risks, and the required approval phrase
 before any solver execution. This readiness check does not authorize
 PyPI/TestPyPI upload, tag creation, or GitHub release creation.
+Per-solver approval records remain pending/deferred under
+[`docs/optional_solver_approval_records/`](docs/optional_solver_approval_records/).
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

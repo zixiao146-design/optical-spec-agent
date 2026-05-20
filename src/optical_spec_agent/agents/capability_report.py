@@ -186,6 +186,11 @@ class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     approval_matrix_available: bool = True
     approval_matrix_path: str = "docs/optional_solver_micro_benchmark_approval_matrix.md"
     approval_record_template_path: str = "docs/optional_solver_micro_benchmark_approval_record_template.md"
+    execution_approval_packet_available: bool = True
+    execution_approval_packet_path: str = "docs/optional_solver_micro_benchmark_execution_packet.md"
+    execution_sequence_path: str = "docs/optional_solver_execution_sequence.md"
+    approval_records_present: bool = True
+    approval_records_path: str = "docs/optional_solver_approval_records"
     readiness_status_path: str = "docs/optional_solver_micro_benchmark_readiness_status.md"
     environment_profiles_available: bool = True
     environment_profiles_path: str = "validation/solver_environment_profiles.json"
@@ -196,6 +201,7 @@ class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     execution_default: bool = False
     opt_in_required: bool = True
     explicit_approval_required: bool = True
+    all_optional_solver_execution_authorized: bool = False
     solvers: list[dict[str, Any]] = Field(default_factory=list)
     elmer_deferred: bool = True
     production_grade_claim: bool = False
@@ -755,6 +761,10 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         approval_matrix_available=Path(
             "docs/optional_solver_micro_benchmark_approval_matrix.md"
         ).exists(),
+        execution_approval_packet_available=Path(
+            "docs/optional_solver_micro_benchmark_execution_packet.md"
+        ).exists(),
+        approval_records_present=Path("docs/optional_solver_approval_records").exists(),
         environment_profiles_available=Path(
             "validation/solver_environment_profiles.json"
         ).exists(),
@@ -762,6 +772,11 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         execution_default=False,
         opt_in_required=bool(payload.get("opt_in_required", True)),
         explicit_approval_required=True,
+        all_optional_solver_execution_authorized=all(
+            bool(item.get("execution_authorized", False)) for item in solvers
+        )
+        if solvers
+        else False,
         solvers=solvers,
         elmer_deferred=any(
             item.get("solver_name") == "elmer" and item.get("status") == "deferred"
@@ -778,6 +793,8 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
             "Readiness script performs availability detection only and does not execute solvers.",
             "Readiness can be calibrated with OSA_SOLVER_PYTHON and OSA_SOLVER_READINESS_PROFILE.",
             "Approval matrix and approval record template are maintainer review aids.",
+            "Execution approval packet and per-solver records are pending/deferred review aids.",
+            "Future execution should run one solver at a time after explicit approval.",
             "Opt-in environment variables are required for solver-backed runs.",
             "Elmer remains deferred and is not Level 3.",
         ],

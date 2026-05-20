@@ -3,6 +3,13 @@
 在运行任何可选 solver-backed micro-benchmark 之前使用本模板。填写本模板不代表批准
 PyPI/TestPyPI 发布、tag 创建、GitHub release 创建或 `v1.0.0` 发布。
 
+维护中的执行审批包见
+[`optional_solver_micro_benchmark_execution_packet.zh-CN.md`](optional_solver_micro_benchmark_execution_packet.zh-CN.md)。
+当前 pending/deferred records 位于
+[`optional_solver_approval_records/`](optional_solver_approval_records/)。
+请按 [`optional_solver_execution_sequence.zh-CN.md`](optional_solver_execution_sequence.zh-CN.md)
+一次只运行一个 solver。
+
 ## 选择的 Solver
 
 - Solver:

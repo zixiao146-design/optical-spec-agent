@@ -32,3 +32,9 @@ Readiness status is recorded in
 [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md).
 Environment profiles are documented in
 [`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md).
+Future execution approval is packaged in
+[`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md),
+with pending per-solver records under
+[`optional_solver_approval_records/`](optional_solver_approval_records/) and a
+one-solver-at-a-time sequence in
+[`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md).

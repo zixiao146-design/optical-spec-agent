@@ -135,8 +135,11 @@ readiness/approval 层新增
 [`optional_solver_micro_benchmark_approval_matrix.zh-CN.md`](optional_solver_micro_benchmark_approval_matrix.zh-CN.md)、
 [`optional_solver_micro_benchmark_approval_record_template.zh-CN.md`](optional_solver_micro_benchmark_approval_record_template.zh-CN.md)、
 [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md)、
-[`optional_solver_environment_profiles.zh-CN.md`](optional_solver_environment_profiles.zh-CN.md)
-和 `scripts/check_optional_solver_readiness.py`；它不授权 PyPI、TestPyPI、tag 或 release 动作。
+[`optional_solver_environment_profiles.zh-CN.md`](optional_solver_environment_profiles.zh-CN.md)、
+[`optional_solver_micro_benchmark_execution_packet.zh-CN.md`](optional_solver_micro_benchmark_execution_packet.zh-CN.md)、
+[`optional_solver_execution_sequence.zh-CN.md`](optional_solver_execution_sequence.zh-CN.md)、
+`optional_solver_approval_records/` 和 `scripts/check_optional_solver_readiness.py`；
+它不授权 PyPI、TestPyPI、tag、release 或 solver execution 动作。
 
 可通过 `GET /api/backend-validation-maturity` 或
 `python scripts/audit_validation_claims.py` 检查这些边界。

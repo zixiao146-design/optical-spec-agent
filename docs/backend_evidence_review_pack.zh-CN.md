@@ -70,6 +70,9 @@ python scripts/generate_backend_evidence_pack.py \
 - Optional solver readiness 使用 `scripts/check_optional_solver_readiness.py`
   和 approval matrix/template；它不执行 solver。`OSA_SOLVER_PYTHON`
   可以把 import-only probe 指向 `osa-solvers` 等专用 solver Python。
+- Optional solver execution approval packet、execution sequence 和
+  per-solver pending/deferred records 只是 review aids；它们本身不授权 solver
+  execution、PyPI/TestPyPI upload、tag 或 release。
 - 默认不调用外部 LLM。
 - 不上传 TestPyPI/PyPI。
 - 不创建 Git tag 或 GitHub release。

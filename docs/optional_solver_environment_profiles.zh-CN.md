@@ -41,3 +41,8 @@ python scripts/check_optional_solver_readiness.py
 - solver-backed micro-benchmark 仍需要维护者明确批准。
 - TestPyPI、PyPI、tag、release 与此无关，仍然单独 gate。
 - 不声称生产级物理验证或形式化收敛证明。
+
+执行审批另见
+[`optional_solver_micro_benchmark_execution_packet.zh-CN.md`](optional_solver_micro_benchmark_execution_packet.zh-CN.md)
+以及 [`optional_solver_approval_records/`](optional_solver_approval_records/) 下的
+per-solver pending records。

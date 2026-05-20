@@ -114,7 +114,9 @@ no-solver release path.
 The approval/readiness layer is tracked in
 [`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md),
 [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
-and [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md);
+[`optional_solver_micro_benchmark_execution_packet.md`](optional_solver_micro_benchmark_execution_packet.md),
+[`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md), and
+[`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md);
 it is still default no-execution and does not authorize PyPI/TestPyPI upload,
 tag creation, or release creation.
 Readiness is now environment-aware through

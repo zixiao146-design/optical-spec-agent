@@ -68,8 +68,10 @@ approval remain separate and not granted.
   evidence pack generation does not run solvers.
 - Optional solver readiness/approval: availability detection, expected
   artifacts, risk notes, and explicit approval phrase are documented before any
-  solver-backed micro-benchmark can be run. This does not authorize PyPI,
-  TestPyPI, tag, or release actions.
+  solver-backed micro-benchmark can be run. The execution approval packet,
+  one-solver-at-a-time sequence, and pending/deferred per-solver records are
+  review aids only. This does not authorize PyPI, TestPyPI, tag, release, or
+  solver execution actions.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,
