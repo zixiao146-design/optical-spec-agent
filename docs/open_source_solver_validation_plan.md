@@ -27,6 +27,9 @@ The readiness/approval layer is documented in
 `scripts/check_optional_solver_readiness.py` performs availability detection
 only; it does not execute solver commands, create releases, create tags, or
 authorize PyPI/TestPyPI publication.
+Readiness is calibrated by profile. Default checks use the active Python and
+current `PATH`; maintainers can set `OSA_SOLVER_PYTHON` to probe a dedicated
+solver Python such as `osa-solvers`, which is useful for PyMeep and `meep.mpb`.
 
 ## Candidate open-source solver families
 
@@ -95,8 +98,8 @@ non-blocking, and no Elmer execution or completed report exists yet. The
 `validation/elmer/elmer_install_deferred_2026-05-15.md`.
 
 For Python-backed stacks, Meep availability can be reported through
-`import meep as mp`, MPB availability can be reported through `from meep import
-mpb`, and Optiland availability can be reported through `import optiland`.
+`import meep`, MPB availability can be reported through `import meep.mpb`, and
+Optiland availability can be reported through `import optiland`.
 MPB CLI absence is acceptable when `meep.mpb` is available. ElmerSolver remains
 optional/manual and may be unavailable without failing default preflight.
 

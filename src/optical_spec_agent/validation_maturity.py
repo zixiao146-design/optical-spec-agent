@@ -332,7 +332,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/solver_validation_micro_benchmarks.md",
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
+                "docs/optional_solver_environment_profiles.md",
                 "validation/solver_validation_micro_benchmarks.json",
+                "validation/solver_environment_profiles.json",
                 "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
             ],
             "Gmsh has a recorded narrow optional manual validation report.",
@@ -344,7 +346,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/solver_validation_micro_benchmarks.md",
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
+                "docs/optional_solver_environment_profiles.md",
                 "validation/solver_validation_micro_benchmarks.json",
+                "validation/solver_environment_profiles.json",
                 "validation/meep/meep_validation_pilot_2026-05-14.md",
             ],
             "Meep has a recorded narrow optional manual validation report.",
@@ -356,7 +360,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/solver_validation_micro_benchmarks.md",
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
+                "docs/optional_solver_environment_profiles.md",
                 "validation/solver_validation_micro_benchmarks.json",
+                "validation/solver_environment_profiles.json",
                 "validation/mpb/mpb_validation_pilot_2026-05-14.md",
             ],
             "MPB has a recorded narrow optional manual validation report.",
@@ -368,7 +374,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/solver_validation_micro_benchmarks.md",
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
+                "docs/optional_solver_environment_profiles.md",
                 "validation/solver_validation_micro_benchmarks.json",
+                "validation/solver_environment_profiles.json",
                 "validation/optiland/optiland_validation_pilot_2026-05-14.md",
             ],
             "Optiland has a recorded narrow optional manual validation report.",
@@ -380,7 +388,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/solver_validation_micro_benchmarks.md",
                 "docs/optional_solver_micro_benchmark_approval_matrix.md",
                 "docs/optional_solver_micro_benchmark_readiness_status.md",
+                "docs/optional_solver_environment_profiles.md",
                 "validation/solver_validation_micro_benchmarks.json",
+                "validation/solver_environment_profiles.json",
                 "validation/elmer/elmer_install_deferred_2026-05-15.md",
             ],
             "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
@@ -402,6 +412,7 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 limitations=[
                     status_note,
                     "Readiness checks detect availability only and do not execute solvers.",
+                    "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -435,6 +446,7 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "optional_solver_micro_benchmarks_opt_in_required": True,
             "optional_solver_readiness_available": True,
             "optional_solver_approval_matrix_available": True,
+            "optional_solver_environment_profiles_available": True,
             "optional_solver_execution_default": False,
             "explicit_solver_approval_required": True,
             "elmer_micro_benchmark_status": "deferred",
@@ -464,7 +476,8 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "optional_solver_micro_benchmarks": (
                 "Open-source solver-backed micro-benchmarks are optional/manual/"
                 "explicit opt-in only; readiness checks detect availability only, "
-                "and default gates do not run solvers."
+                "can be calibrated with OSA_SOLVER_PYTHON for solver-specific "
+                "Python profiles, and default gates do not run solvers."
             ),
         },
     )

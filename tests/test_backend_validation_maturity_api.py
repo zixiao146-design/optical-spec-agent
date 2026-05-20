@@ -23,6 +23,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert body["summary"]["optional_solver_micro_benchmarks_opt_in_required"] is True
     assert body["summary"]["optional_solver_readiness_available"] is True
     assert body["summary"]["optional_solver_approval_matrix_available"] is True
+    assert body["summary"]["optional_solver_environment_profiles_available"] is True
     assert body["summary"]["optional_solver_execution_default"] is False
     assert body["summary"]["explicit_solver_approval_required"] is True
     assert body["summary"]["elmer_micro_benchmark_status"] == "deferred"
@@ -34,6 +35,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert "elmer_optional_solver_micro_benchmark" in component_ids
     assert "tool_call_ledger" in component_ids
     assert "not a production-grade optical constants database" in body["preview_boundary_summary"]["materials"]
+    assert "OSA_SOLVER_PYTHON" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False

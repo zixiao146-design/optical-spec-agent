@@ -55,6 +55,8 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
     assert body["optional_solver_micro_benchmarks"]["optional_solver_readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_approval_matrix_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["optional_solver_environment_profiles_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert body["optional_solver_micro_benchmarks"]["optional_solver_execution_default"] is False
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
     assert body["optional_solver_micro_benchmarks"]["manual_opt_in_only"] is True

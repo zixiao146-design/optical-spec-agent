@@ -14,6 +14,17 @@
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
       "readiness_status": "candidate_ready_with_previous_manual_report",
+      "python_probe_supported": true,
+      "cli_probe_supported": true,
+      "profile_sensitive": true,
+      "recommended_profile": "homebrew-cli",
+      "module_names": [
+        "gmsh"
+      ],
+      "command_names": [
+        "gmsh"
+      ],
+      "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "approval_required": true,
       "approval_phrase": "I approve running the optional gmsh micro-benchmark for optical-spec-agent.",
       "expected_runtime_environment": "Local environment with gmsh available on PATH after explicit maintainer approval.",
@@ -49,6 +60,15 @@
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
       "readiness_status": "candidate_ready_with_previous_manual_report",
+      "python_probe_supported": true,
+      "cli_probe_supported": false,
+      "profile_sensitive": true,
+      "recommended_profile": "osa-solvers",
+      "module_names": [
+        "meep"
+      ],
+      "command_names": [],
+      "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "approval_required": true,
       "approval_phrase": "I approve running the optional meep micro-benchmark for optical-spec-agent.",
       "expected_runtime_environment": "Local Python environment with PyMeep importable after explicit maintainer approval.",
@@ -84,6 +104,17 @@
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
       "readiness_status": "candidate_ready_with_previous_manual_report",
+      "python_probe_supported": true,
+      "cli_probe_supported": true,
+      "profile_sensitive": true,
+      "recommended_profile": "osa-solvers",
+      "module_names": [
+        "meep.mpb"
+      ],
+      "command_names": [
+        "mpb"
+      ],
+      "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "approval_required": true,
       "approval_phrase": "I approve running the optional mpb micro-benchmark for optical-spec-agent.",
       "expected_runtime_environment": "Local Python environment with meep.mpb importable after explicit maintainer approval.",
@@ -119,6 +150,17 @@
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
       "readiness_status": "candidate_ready_with_previous_manual_report",
+      "python_probe_supported": true,
+      "cli_probe_supported": true,
+      "profile_sensitive": true,
+      "recommended_profile": "current",
+      "module_names": [
+        "optiland"
+      ],
+      "command_names": [
+        "optiland"
+      ],
+      "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "approval_required": true,
       "approval_phrase": "I approve running the optional optiland micro-benchmark for optical-spec-agent.",
       "expected_runtime_environment": "Local Python environment with Optiland importable after explicit maintainer approval.",
@@ -154,6 +196,15 @@
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
       "readiness_status": "deferred_until_maintainable_install_route",
+      "python_probe_supported": false,
+      "cli_probe_supported": true,
+      "profile_sensitive": false,
+      "recommended_profile": "deferred-elmer",
+      "module_names": [],
+      "command_names": [
+        "ElmerSolver"
+      ],
+      "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "approval_required": true,
       "approval_phrase": "I approve running the optional elmer micro-benchmark for optical-spec-agent.",
       "expected_runtime_environment": "Deferred until a maintainable local ElmerSolver install route exists and maintainer approval is explicit.",

@@ -68,7 +68,8 @@ python scripts/generate_backend_evidence_pack.py \
 - Optional solver-backed micro-benchmarks 必须显式设置
   `OSA_RUN_OPTIONAL_*_VALIDATION=1`，且不属于默认 gate。
 - Optional solver readiness 使用 `scripts/check_optional_solver_readiness.py`
-  和 approval matrix/template；它不执行 solver。
+  和 approval matrix/template；它不执行 solver。`OSA_SOLVER_PYTHON`
+  可以把 import-only probe 指向 `osa-solvers` 等专用 solver Python。
 - 默认不调用外部 LLM。
 - 不上传 TestPyPI/PyPI。
 - 不创建 Git tag 或 GitHub release。

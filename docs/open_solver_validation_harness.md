@@ -36,6 +36,9 @@ layer. It checks command/module availability only and writes an optional JSON
 report when `OSA_SOLVER_READINESS_REPORT` is set. Review
 `docs/optional_solver_micro_benchmark_approval_matrix.md` and the approval
 record template before setting any `OSA_RUN_OPTIONAL_*_VALIDATION=1` variable.
+Readiness is profile-specific: set `OSA_SOLVER_PYTHON` to probe a dedicated
+solver Python such as `osa-solvers`, and set `OSA_SOLVER_READINESS_PROFILE` to
+label the report. This still performs import/path detection only.
 
 ## Candidate Open-source Solver Families
 
@@ -45,12 +48,13 @@ record template before setting any `OSA_RUN_OPTIONAL_*_VALIDATION=1` variable.
 - Elmer: current MVP/scaffold FEM input preview.
 - Optiland: current MVP/scaffold optical-design preview.
 
-Meep may be available through `import meep as mp` even when a `meep` CLI command
-is absent. MPB may be available through `from meep import mpb` even when an
-`mpb` CLI command is absent. Optiland may be available through `import optiland`
-even when an `optiland` CLI command is absent. Gmsh is currently detected by
-`command -v gmsh`; Elmer is detected by `command -v ElmerSolver`, and
-ElmerSolver absence is acceptable for default gates.
+Meep may be available through a `meep` Python import even when a `meep` CLI
+command is absent. MPB may be available through `meep.mpb` in a dedicated
+solver Python even when an `mpb` CLI command is absent. Optiland may be
+available through `import optiland` even when an `optiland` CLI command is
+absent. Gmsh is currently detected from the current `PATH` via `command -v
+gmsh`; Elmer is detected by `command -v ElmerSolver`, and ElmerSolver absence
+is acceptable for default gates.
 
 Candidate availability does not mean validation was run. An installed solver
 does not imply production-grade correctness.

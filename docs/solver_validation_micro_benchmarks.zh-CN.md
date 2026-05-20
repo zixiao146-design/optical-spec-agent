@@ -56,6 +56,19 @@ python scripts/check_optional_solver_readiness.py
 ```
 
 该脚本只做 availability detection，不运行 solver binary，也不执行 solver example。
+Readiness 与环境相关：默认使用当前 Python 和当前 `PATH`；如果维护者希望探测
+专用 solver Python，可以设置 `OSA_SOLVER_PYTHON`，例如本地 `osa-solvers`
+conda 环境：
+
+```bash
+OSA_SOLVER_PYTHON=/opt/homebrew/Caskroom/miniforge/base/envs/osa-solvers/bin/python \
+OSA_SOLVER_READINESS_PROFILE=osa-solvers \
+python scripts/check_optional_solver_readiness.py
+```
+
+这样可以区分项目基础环境和专用 PyMeep / `meep.mpb` 环境，但仍不会执行 solver。
+环境 profile 见
+[`optional_solver_environment_profiles.zh-CN.md`](optional_solver_environment_profiles.zh-CN.md)。
 
 ## 声明边界
 

@@ -73,6 +73,10 @@ not production-grade physical validation.
    `validation/solver_validation_micro_benchmarks.json` and
    `scripts/run_optional_solver_micro_benchmarks.sh` consolidate tiny optional
    Gmsh/Meep/MPB/Optiland checks while preserving default no-solver behavior.
+   `validation/solver_environment_profiles.json` and
+   `docs/optional_solver_environment_profiles.md` calibrate readiness for
+   current Python, dedicated solver Python profiles such as `osa-solvers`,
+   Homebrew CLI tools, and deferred Elmer without executing solvers.
 
 ## Non-gaps / Stable Enough
 

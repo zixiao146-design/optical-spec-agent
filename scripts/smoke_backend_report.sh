@@ -24,6 +24,7 @@ env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
     -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
     ./scripts/run_optional_solver_micro_benchmarks.sh
 echo "OPTIONAL SOLVER READINESS CHECK PASSED"
+echo "OPTIONAL SOLVER READINESS PROFILE CHECK PASSED"
 echo "OPTIONAL SOLVER MICRO-BENCHMARK DEFAULT NO-EXECUTE PASSED"
 
 python - <<'PY'
@@ -120,6 +121,14 @@ require(
 require(
     report["optional_solver_micro_benchmarks"]["opt_in_required"] is True,
     "optional solver micro-benchmarks no longer require opt-in",
+)
+require(
+    report["optional_solver_micro_benchmarks"]["environment_profiles_available"] is True,
+    "optional solver environment profiles missing",
+)
+require(
+    report["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON",
+    "optional solver python env var changed",
 )
 require(report["validation_claim_audit_available"] is True, "validation claim audit missing")
 require(len(report["requirements_templates"]) == 7, "requirement template count mismatch")

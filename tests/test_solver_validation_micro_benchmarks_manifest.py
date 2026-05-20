@@ -36,6 +36,18 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         assert item["pypi_publication_related"] is False, name
         assert item["tag_release_related"] is False, name
         assert item["readiness_status"], name
+        assert item["python_probe_supported"] in {True, False}, name
+        assert item["cli_probe_supported"] in {True, False}, name
+        assert item["profile_sensitive"] in {True, False}, name
+        assert item["recommended_profile"], name
+        assert isinstance(item["module_names"], list), name
+        assert isinstance(item["command_names"], list), name
+        assert item["solver_python_env_var"] == "OSA_SOLVER_PYTHON", name
+    assert solvers["gmsh"]["command_names"] == ["gmsh"]
+    assert "meep" in solvers["meep"]["module_names"]
+    assert "meep.mpb" in solvers["mpb"]["module_names"]
+    assert "optiland" in solvers["optiland"]["module_names"]
+    assert solvers["elmer"]["command_names"] == ["ElmerSolver"]
     assert solvers["elmer"]["status"] == "deferred"
     assert solvers["elmer"]["readiness_status"] == "deferred_until_maintainable_install_route"
     assert "Level-3-ready" in solvers["elmer"]["current_maturity"]

@@ -95,6 +95,8 @@ means a local evidence check did not match the expected contract.
   `OSA_RUN_OPTIONAL_*_VALIDATION=1` approval and are not default gates.
 - Optional solver readiness uses `scripts/check_optional_solver_readiness.py`
   and the approval matrix/template; it performs no solver execution.
+  `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
+  Python environment such as `osa-solvers`.
 - No external LLM is called by default.
 - No TestPyPI/PyPI upload is performed.
 - No Git tag or GitHub release is created.

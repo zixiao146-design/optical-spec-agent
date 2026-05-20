@@ -105,6 +105,10 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert solver_micro["manifest_exists"] is True
     assert solver_micro["readiness_available"] is True
     assert solver_micro["approval_matrix_available"] is True
+    assert solver_micro["environment_profiles_available"] is True
+    assert solver_micro["environment_profiles_path"] == "validation/solver_environment_profiles.json"
+    assert solver_micro["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
+    assert solver_micro["profile_env_var"] == "OSA_SOLVER_READINESS_PROFILE"
     assert solver_micro["default_runs_solver"] is False
     assert solver_micro["execution_default"] is False
     assert solver_micro["opt_in_required"] is True

@@ -1,0 +1,52 @@
+{
+  "schema_version": "solver_environment_profiles.v0.1",
+  "default_executes_solver": false,
+  "profiles": [
+    {
+      "profile_id": "current",
+      "description": "Current Python interpreter and current PATH used by the active shell.",
+      "python": "current",
+      "path_policy": "current PATH",
+      "command_detection_only": false,
+      "notes": [
+        "This is the default readiness profile.",
+        "It is suitable for CI/default checks because it performs import and command availability detection only."
+      ]
+    },
+    {
+      "profile_id": "osa-solvers",
+      "description": "Dedicated optional solver conda environment for PyMeep, meep.mpb, and other solver Python packages.",
+      "python_env_var": "OSA_SOLVER_PYTHON",
+      "expected_python_hint": "/opt/homebrew/Caskroom/miniforge/base/envs/osa-solvers/bin/python",
+      "path_policy": "caller supplied; not required in CI",
+      "command_detection_only": false,
+      "notes": [
+        "This profile is optional and maintainer-local.",
+        "Tests must not require the hinted path to exist.",
+        "The readiness script uses this interpreter for import-only Python probes when OSA_SOLVER_PYTHON is set."
+      ]
+    },
+    {
+      "profile_id": "homebrew-cli",
+      "description": "Current PATH with Homebrew-style CLI tools such as gmsh.",
+      "python": "current",
+      "path_policy": "current PATH",
+      "command_detection_only": true,
+      "notes": [
+        "This profile is useful for CLI availability checks.",
+        "The readiness script uses command path detection only for CLI probes and does not run solver binaries."
+      ]
+    },
+    {
+      "profile_id": "deferred-elmer",
+      "description": "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
+      "python": "not applicable",
+      "path_policy": "not applicable",
+      "command_detection_only": true,
+      "notes": [
+        "Elmer is not Level 3.",
+        "Readiness remains documentation-only until an explicit maintainer-approved local install route exists."
+      ]
+    }
+  ]
+}

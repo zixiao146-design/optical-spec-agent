@@ -87,6 +87,9 @@ readiness 层新增
 和 `scripts/check_optional_solver_readiness.py`，让维护者在任何 solver 执行前审查
 availability、预期 artifact、风险和必需批准语句。该 readiness check 不授权
 PyPI/TestPyPI upload、tag 创建或 GitHub release 创建。
+readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
+`OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
+`meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。
 证据审查包可以通过
 `python scripts/generate_backend_evidence_pack.py --json-out /tmp/osa-backend-evidence-pack.json --markdown-out /tmp/osa-backend-evidence-pack.md`
 生成，也可以用 `./scripts/smoke_backend_evidence_pack.sh` 冒烟检查；它只是维护者审查产物，

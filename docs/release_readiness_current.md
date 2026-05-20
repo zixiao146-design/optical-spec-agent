@@ -133,8 +133,12 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/optional_solver_micro_benchmark_approval_matrix.md`,
   `docs/optional_solver_micro_benchmark_approval_record_template.md`,
   `docs/optional_solver_micro_benchmark_readiness_status.md`, and
+  `docs/optional_solver_environment_profiles.md`, plus
   `scripts/check_optional_solver_readiness.py` make candidate solver execution
-  reviewable before any opt-in run. Default behavior remains no solver
+  reviewable before any opt-in run. Readiness is environment-aware:
+  `OSA_SOLVER_PYTHON` can probe a dedicated solver Python such as
+  `osa-solvers`, while CLI tools such as Gmsh are detected from the current
+  `PATH`. Default behavior remains no solver
   execution, Elmer remains deferred, and these records do not authorize
   PyPI/TestPyPI upload, tag creation, or GitHub release creation.
 - Fiber coupling and polarization warning closure:

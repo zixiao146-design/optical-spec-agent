@@ -117,3 +117,8 @@ The approval/readiness layer is tracked in
 and [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md);
 it is still default no-execution and does not authorize PyPI/TestPyPI upload,
 tag creation, or release creation.
+Readiness is now environment-aware through
+[`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md):
+the default profile uses current Python/current `PATH`, while
+`OSA_SOLVER_PYTHON` can probe a dedicated solver Python such as `osa-solvers`
+for PyMeep and `meep.mpb` without running any solver benchmark.

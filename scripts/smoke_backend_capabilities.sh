@@ -18,6 +18,7 @@ env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
     -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
     ./scripts/run_optional_solver_micro_benchmarks.sh
 echo "OPTIONAL SOLVER READINESS CHECK PASSED"
+echo "OPTIONAL SOLVER READINESS PROFILE CHECK PASSED"
 echo "OPTIONAL SOLVER MICRO-BENCHMARK DEFAULT NO-EXECUTE PASSED"
 
 python - <<'PY'
@@ -83,6 +84,10 @@ require(
 require(
     maturity_payload["summary"]["optional_solver_micro_benchmarks_opt_in_required"] is True,
     "optional solver micro-benchmarks no longer require opt-in",
+)
+require(
+    maturity_payload["summary"]["optional_solver_environment_profiles_available"] is True,
+    "optional solver environment profiles missing",
 )
 require(maturity_payload["external_solver_executed"] is False, "validation maturity executed solver")
 require(

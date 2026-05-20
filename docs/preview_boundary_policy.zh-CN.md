@@ -31,7 +31,7 @@
 | Source/monitor models | 仅 preview metadata；不声称真实 solver monitor result。 |
 | Adapter mappings | adapter-native 语义预览；真实结果需要显式批准 solver execution。 |
 | Optional solver micro-benchmarks | 仅手动、显式 opt-in；默认 tests、smoke、quality gates 和 release gates 不运行 solver。 |
-| Optional solver readiness | 只做 availability detection 和 approval matrix；不执行 solver，也不授权 PyPI/TestPyPI upload、tag 或 release。 |
+| Optional solver readiness | profile-aware availability detection 和 approval matrix；不执行 solver，也不授权 PyPI/TestPyPI upload、tag 或 release。 |
 | Sub-agents | 确定性后端角色；不是独立自主服务。 |
 | Frontend | UI/demo surface；不是验证证据。 |
 
@@ -48,5 +48,7 @@
 - 默认不执行 external solver。
 - Optional solver-backed validation 只能手动显式 opt-in。
 - Optional solver readiness check 不执行 solver binary，也不授权发布或 release 动作。
+- `OSA_SOLVER_PYTHON` 可用于把 import-only probe 指向专用 solver Python；
+  Gmsh 等 CLI 工具仍从当前 `PATH` 探测。
 - 默认不调用 external LLM。
 - Elmer Level 3 仍然 deferred。

@@ -85,7 +85,9 @@ python scripts/check_optional_solver_readiness.py
 ./scripts/run_optional_solver_micro_benchmarks.sh
 ```
 
-readiness 脚本只检查 command/module availability。只有显式设置
+readiness 脚本只检查 command/module availability，并且是 environment-aware：
+默认使用当前 Python/当前 `PATH`；`OSA_SOLVER_PYTHON` 可以探测 `osa-solvers`
+等专用 solver Python 中的 PyMeep 和 `meep.mpb`。只有显式设置
 `OSA_RUN_OPTIONAL_*_VALIDATION=1` 后，才允许进入 solver-backed pilot 路径。
 默认报告、默认 smoke 和默认质量门禁都不设置这些变量。审批矩阵和审批记录模板见
 [`optional_solver_micro_benchmark_approval_matrix.zh-CN.md`](optional_solver_micro_benchmark_approval_matrix.zh-CN.md)
@@ -132,7 +134,8 @@ Optional solver-backed micro-benchmarks 见
 readiness/approval 层新增
 [`optional_solver_micro_benchmark_approval_matrix.zh-CN.md`](optional_solver_micro_benchmark_approval_matrix.zh-CN.md)、
 [`optional_solver_micro_benchmark_approval_record_template.zh-CN.md`](optional_solver_micro_benchmark_approval_record_template.zh-CN.md)、
-[`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md)
+[`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md)、
+[`optional_solver_environment_profiles.zh-CN.md`](optional_solver_environment_profiles.zh-CN.md)
 和 `scripts/check_optional_solver_readiness.py`；它不授权 PyPI、TestPyPI、tag 或 release 动作。
 
 可通过 `GET /api/backend-validation-maturity` 或

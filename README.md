@@ -119,6 +119,10 @@ and `scripts/check_optional_solver_readiness.py` so maintainers can review
 availability, expected artifacts, risks, and the required approval phrase
 before any solver execution. This readiness check does not authorize
 PyPI/TestPyPI upload, tag creation, or GitHub release creation.
+Readiness is environment-aware: the default profile uses the current Python and
+current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
+such as `osa-solvers` for PyMeep and `meep.mpb`; see
+[`optional solver environment profiles`](docs/optional_solver_environment_profiles.md).
 The evidence pack can be generated with
 `python scripts/generate_backend_evidence_pack.py --json-out /tmp/osa-backend-evidence-pack.json --markdown-out /tmp/osa-backend-evidence-pack.md`
 or smoke-checked with `./scripts/smoke_backend_evidence_pack.sh`; it is a

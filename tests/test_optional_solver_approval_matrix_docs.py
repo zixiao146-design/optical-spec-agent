@@ -25,4 +25,6 @@ def test_optional_solver_approval_matrix_docs_exist_and_bound_execution():
         assert "formal convergence" in text.lower() or "形式化收敛" in text
         assert "PyPI/TestPyPI" in text
         assert "Elmer remains deferred" in text or "Elmer 仍是" in text
-
+        assert "OSA_SOLVER_PYTHON" in text
+        assert "OSA_SOLVER_READINESS_PROFILE" in text
+        assert "osa-solvers" in text

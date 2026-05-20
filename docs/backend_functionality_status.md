@@ -219,3 +219,7 @@ and
 record expected artifacts, risks, and the explicit approval phrase. Default
 backend checks still do not execute solvers, upload packages, create tags, or
 create releases.
+Readiness is calibrated by environment profile: current Python/current `PATH`
+is the default, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
+such as `osa-solvers` for PyMeep and `meep.mpb`; see
+[`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md).

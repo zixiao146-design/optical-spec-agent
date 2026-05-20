@@ -187,6 +187,11 @@ class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     approval_matrix_path: str = "docs/optional_solver_micro_benchmark_approval_matrix.md"
     approval_record_template_path: str = "docs/optional_solver_micro_benchmark_approval_record_template.md"
     readiness_status_path: str = "docs/optional_solver_micro_benchmark_readiness_status.md"
+    environment_profiles_available: bool = True
+    environment_profiles_path: str = "validation/solver_environment_profiles.json"
+    environment_profiles_doc: str = "docs/optional_solver_environment_profiles.md"
+    solver_python_env_var: str = "OSA_SOLVER_PYTHON"
+    profile_env_var: str = "OSA_SOLVER_READINESS_PROFILE"
     default_runs_solver: bool = False
     execution_default: bool = False
     opt_in_required: bool = True
@@ -750,6 +755,9 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         approval_matrix_available=Path(
             "docs/optional_solver_micro_benchmark_approval_matrix.md"
         ).exists(),
+        environment_profiles_available=Path(
+            "validation/solver_environment_profiles.json"
+        ).exists(),
         default_runs_solver=bool(payload.get("default_runs_solver", False)),
         execution_default=False,
         opt_in_required=bool(payload.get("opt_in_required", True)),
@@ -768,6 +776,7 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         notes=[
             "Unified solver micro-benchmark wrapper is default no-execute.",
             "Readiness script performs availability detection only and does not execute solvers.",
+            "Readiness can be calibrated with OSA_SOLVER_PYTHON and OSA_SOLVER_READINESS_PROFILE.",
             "Approval matrix and approval record template are maintainer review aids.",
             "Opt-in environment variables are required for solver-backed runs.",
             "Elmer remains deferred and is not Level 3.",

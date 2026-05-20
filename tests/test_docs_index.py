@@ -63,6 +63,8 @@ def test_docs_index_exists_and_links_major_docs():
         "optional_solver_micro_benchmark_approval_record_template.md",
         "optional_solver_micro_benchmark_approval_record_template.zh-CN.md",
         "optional_solver_micro_benchmark_readiness_status.md",
+        "optional_solver_environment_profiles.md",
+        "optional_solver_environment_profiles.zh-CN.md",
         "backend_evidence_review_decision.md",
         "design_case_cross_checks.md",
         "design_case_cross_checks.zh-CN.md",

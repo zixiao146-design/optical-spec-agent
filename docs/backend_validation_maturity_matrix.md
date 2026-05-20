@@ -54,6 +54,10 @@ convergence proof is claimed.
   [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
   and `scripts/check_optional_solver_readiness.py`; this readiness layer still
   performs no solver execution by default.
+- Solver readiness is profile/environment-specific. `OSA_SOLVER_PYTHON` can
+  point import probes at a dedicated solver Python such as `osa-solvers`, while
+  CLI tools such as Gmsh are detected from the current `PATH`; see
+  [`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md).
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 

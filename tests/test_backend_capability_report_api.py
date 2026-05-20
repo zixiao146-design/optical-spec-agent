@@ -71,6 +71,13 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert body["optional_solver_micro_benchmarks"]["manifest_exists"] is True
     assert body["optional_solver_micro_benchmarks"]["readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["approval_matrix_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["environment_profiles_available"] is True
+    assert (
+        body["optional_solver_micro_benchmarks"]["environment_profiles_path"]
+        == "validation/solver_environment_profiles.json"
+    )
+    assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
+    assert body["optional_solver_micro_benchmarks"]["profile_env_var"] == "OSA_SOLVER_READINESS_PROFILE"
     assert body["optional_solver_micro_benchmarks"]["default_runs_solver"] is False
     assert body["optional_solver_micro_benchmarks"]["execution_default"] is False
     assert body["optional_solver_micro_benchmarks"]["opt_in_required"] is True
@@ -113,6 +120,8 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
     assert body["optional_solver_micro_benchmarks"]["opt_in_required"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_readiness_available"] is True
     assert body["optional_solver_micro_benchmarks"]["optional_solver_approval_matrix_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["optional_solver_environment_profiles_available"] is True
+    assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
     assert body["external_solver_executed"] is False
 

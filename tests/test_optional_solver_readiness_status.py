@@ -18,5 +18,9 @@ def test_optional_solver_readiness_status_records_current_boundaries():
     assert "Solver micro-benchmark default mode: no execution" in text
     assert "Elmer | deferred" in text
     assert "explicit" in text.lower()
+    assert "OSA_SOLVER_PYTHON" in text
+    assert "OSA_SOLVER_READINESS_PROFILE=osa-solvers" in text
+    assert "meep.mpb" in text
+    assert "optional_solver_environment_profiles.md" in text
     assert "No PyPI upload" in text
     assert "TestPyPI upload" in text

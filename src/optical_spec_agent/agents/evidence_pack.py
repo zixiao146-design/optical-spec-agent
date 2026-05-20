@@ -195,6 +195,15 @@ def generate_backend_evidence_pack(
             "optional_solver_approval_matrix_available": payload[
                 "optional_solver_micro_benchmarks"
             ]["approval_matrix_available"],
+            "optional_solver_environment_profiles_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["environment_profiles_available"],
+            "solver_python_env_var": payload["optional_solver_micro_benchmarks"][
+                "solver_python_env_var"
+            ],
+            "profile_env_var": payload["optional_solver_micro_benchmarks"][
+                "profile_env_var"
+            ],
             "optional_solver_execution_default": payload[
                 "optional_solver_micro_benchmarks"
             ]["execution_default"],
