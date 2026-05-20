@@ -26,6 +26,8 @@ Latest local readiness findings are environment-specific:
   mesh-generation smoke evidence, not optical correctness evidence.
 - Optiland is available in the local Python/package profile, and the approved
   Optiland-only optional micro-benchmark passed on 2026-05-20.
+- Maintainer review accepted the Optiland result as optional manual ray/path
+  smoke evidence, not optical correctness evidence.
 - Meep and `meep.mpb` are detectable through the maintainer-reported
   `osa-solvers` Python profile when `OSA_SOLVER_PYTHON` points there.
 - Elmer remains unavailable/deferred.
@@ -40,7 +42,7 @@ Latest local readiness findings are environment-specific:
 | Gmsh | Executed/passed for the approved Gmsh-only optional micro-benchmark on 2026-05-20; review accepted it as optional manual mesh-generation smoke evidence | no by default; yes only for the completed approved Gmsh run | future Gmsh runs require fresh approval | Evidence: `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`; review: `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`; availability detection checks `gmsh` on PATH and can optionally probe the `gmsh` Python module. |
 | Meep | Candidate-ready with previous narrow manual report | no | yes | Availability detection checks `meep` through current Python or `OSA_SOLVER_PYTHON`. |
 | MPB | Candidate-ready with previous narrow manual report | no | yes | Availability detection checks `meep.mpb` through current Python or `OSA_SOLVER_PYTHON`; MPB CLI is optional. |
-| Optiland | Executed/passed for the approved Optiland-only optional micro-benchmark on 2026-05-20; recorded as optional manual ray/path smoke evidence | no by default; yes only for the completed approved Optiland run | future Optiland runs require fresh approval | Evidence: `validation/optiland/optiland_micro_benchmark_2026-05-20.md`; approval: `docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md`; availability detection checks `optiland` through current Python or `OSA_SOLVER_PYTHON`, plus optional CLI path. |
+| Optiland | Executed/passed for the approved Optiland-only optional micro-benchmark on 2026-05-20; review accepted it as optional manual ray/path smoke evidence | no by default; yes only for the completed approved Optiland run | future Optiland runs require fresh approval | Evidence: `validation/optiland/optiland_micro_benchmark_2026-05-20.md`; approval: `docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md`; review: `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`; availability detection checks `optiland` through current Python or `OSA_SOLVER_PYTHON`, plus optional CLI path. |
 | Elmer | deferred | no | yes | Elmer remains Level 2 + Level-3-ready until a maintainable ElmerSolver install route exists. |
 
 ## Next Step
@@ -55,7 +57,7 @@ The one-solver-at-a-time execution sequence is documented in
 The current pending/deferred records plus the approved Gmsh-only and
 Optiland-only execution records are stored under
 [`optional_solver_approval_records/`](optional_solver_approval_records/).
-The Optiland run closes only the separately approved Optiland execution step;
+The reviewed Optiland run closes only the separately approved Optiland execution step;
 it does not approve Meep, MPB, Elmer, any future Gmsh or Optiland rerun,
 PyPI/TestPyPI upload, tag creation, or release creation.
 

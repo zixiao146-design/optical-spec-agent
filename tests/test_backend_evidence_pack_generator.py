@@ -117,8 +117,15 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert optiland["last_execution_evidence"] == (
         "validation/optiland/optiland_micro_benchmark_2026-05-20.md"
     )
+    assert optiland["review_record_path"].endswith(
+        "optiland_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        optiland["review_status"]
+        == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
     assert any(
-        "Optiland has an approved 2026-05-20 Optiland-only" in note
+        "Optiland evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
     assert solver_micro["elmer_deferred"] is True

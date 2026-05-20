@@ -116,6 +116,13 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert optiland["last_execution_evidence"] == (
         "validation/optiland/optiland_micro_benchmark_2026-05-20.md"
     )
+    assert optiland["review_record_path"].endswith(
+        "optiland_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        optiland["review_status"]
+        == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
     assert set(body["adapter_native_golden_coverage"]["adapters_covered"]) == {
         "meep",

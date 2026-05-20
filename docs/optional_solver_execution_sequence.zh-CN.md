@@ -18,6 +18,8 @@
    - Optiland 后暂停并 review artifact path。
    - 状态：2026-05-20 已按 Optiland-only 批准执行并通过；见
      `validation/optiland/optiland_micro_benchmark_2026-05-20.md`。
+   - Review 状态：接受为 optional manual ray/path smoke evidence；见
+     `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`。
    - 范围：仅作为 optional manual ray/path smoke evidence，不是透镜设计验证。
 3. Meep third。
    - 需要 `OSA_SOLVER_PYTHON` 指向 `osa-solvers` 等 solver Python profile。
@@ -50,5 +52,5 @@
 
 不要在没有 separate approval 的情况下批量运行所有 solvers。
 已接受的 Gmsh review 本身不授权 Optiland；Optiland 只是在单独 approval
-record 后执行。已完成的 Optiland run 不授权 Meep、MPB、Elmer、未来 Gmsh
+record 后执行。已接受的 Optiland review 不授权 Meep、MPB、Elmer、未来 Gmsh
 rerun 或未来 Optiland rerun。

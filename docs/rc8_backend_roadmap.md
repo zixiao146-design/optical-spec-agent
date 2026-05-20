@@ -64,8 +64,8 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   micro-benchmark evidence before considering any separately approved Meep,
   MPB, Elmer, future Gmsh rerun, or future Optiland rerun.
 - Record that the Gmsh review accepted the evidence only as optional manual
-  mesh-generation smoke evidence; record that Optiland evidence is only
-  optional manual ray/path smoke evidence.
+  mesh-generation smoke evidence; record that the Optiland review accepted the
+  evidence only as optional manual ray/path smoke evidence.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.

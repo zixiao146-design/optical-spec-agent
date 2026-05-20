@@ -76,6 +76,7 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 
 - Solver: Optiland
 - Status: completed for the separately approved Optiland-only 2026-05-20 run;
+  maintainer review accepted it as optional manual ray/path smoke evidence, and
   future Optiland runs require fresh approval.
 - Readiness profile: `current` or a Python profile with `optiland` importable
 - Required env vars after approval:

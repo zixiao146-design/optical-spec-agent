@@ -113,6 +113,6 @@ PyPI/TestPyPI, tag, or release actions.
 The execution approval packet adds per-solver pending/deferred records and a
 one-solver-at-a-time sequence so future opt-in runs can be approved and reviewed
 without batching solvers or changing default release gates.
-The Gmsh review decision closes the Gmsh loop only; the Optiland evidence record
+The Gmsh review decision closes the Gmsh loop only; the Optiland review decision
 closes only the separately approved Optiland run. Meep/MPB require
 `OSA_SOLVER_PYTHON` and separate approval, and Elmer remains deferred.

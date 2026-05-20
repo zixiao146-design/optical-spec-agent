@@ -19,6 +19,8 @@ not execution approval.
    - Stop after Optiland and review whether the artifact path is useful.
    - Status: completed for the approved Optiland-only run on 2026-05-20; see
      `validation/optiland/optiland_micro_benchmark_2026-05-20.md`.
+   - Review status: accepted as optional manual ray/path smoke evidence; see
+     `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`.
    - Scope: optional manual ray/path smoke evidence only, not lens design
      validation.
 3. Meep third.
@@ -55,5 +57,5 @@ not execution approval.
 
 Do not batch all solvers without separate approval.
 The accepted Gmsh review did not authorize Optiland; Optiland was run only
-after its separate approval record. The completed Optiland run does not
+after its separate approval record. The accepted Optiland review does not
 authorize Meep, MPB, Elmer, any future Gmsh rerun, or any future Optiland rerun.

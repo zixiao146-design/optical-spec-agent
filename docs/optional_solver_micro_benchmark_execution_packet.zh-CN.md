@@ -69,8 +69,9 @@
 ### Optiland
 
 - Solver：Optiland
-- 状态：2026-05-20 已按单独批准的 Optiland-only run 执行并通过；未来再次运行
-  Optiland 需要重新批准。
+- 状态：2026-05-20 已按单独批准的 Optiland-only run 执行并通过；maintainer
+  review 接受为 optional manual ray/path smoke evidence，未来再次运行 Optiland
+  需要重新批准。
 - Readiness profile：`current` 或可 import `optiland` 的 Python profile
 - 批准后需要的 env var：
   - `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1`

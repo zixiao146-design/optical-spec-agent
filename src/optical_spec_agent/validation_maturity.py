@@ -390,9 +390,10 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "validation/solver_environment_profiles.json",
                 "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
                 "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
+                "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
                 "validation/optiland/optiland_validation_pilot_2026-05-14.md",
             ],
-            "Optiland has an approved optional manual ray/path smoke pass from 2026-05-20.",
+            "Optiland has a reviewed and accepted optional manual ray/path smoke pass from 2026-05-20.",
         ),
         (
             "elmer_optional_solver_micro_benchmark",
@@ -471,6 +472,7 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
             "gmsh_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
             "optiland_optional_micro_benchmark_status": "passed_2026-05-20",
+            "optiland_optional_micro_benchmark_review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
             "next_optional_solver_candidate": "meep_or_mpb_requires_osa_solver_python_not_approved",
             "elmer_micro_benchmark_status": "deferred",
         },
@@ -504,7 +506,7 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "records and one-solver-at-a-time sequencing, record the Gmsh-only "
                 "optional manual micro-benchmark pass from 2026-05-20 as reviewed "
                 "mesh-generation smoke evidence, record the separately approved "
-                "Optiland-only pass from 2026-05-20 as ray/path smoke evidence, "
+                "Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, "
                 "keep Meep/MPB unapproved pending OSA_SOLVER_PYTHON-specific "
                 "approval, and default gates do not run solvers."
             ),

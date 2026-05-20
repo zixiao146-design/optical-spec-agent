@@ -87,6 +87,8 @@
   Elmer, PyPI/TestPyPI upload, tag creation, or release creation.
 - Approved Optiland-only 2026-05-20 optional micro-benchmark evidence for local
   adapter scaffold plus tiny Optiland object construction smoke only.
+- Maintainer review accepted the Optiland evidence as optional manual ray/path
+  smoke evidence only; it does not claim optical correctness.
 - The Optiland evidence does not approve Meep, MPB, Elmer, any future Gmsh or
   Optiland rerun, PyPI/TestPyPI upload, tag creation, or release creation.
 - Limited Meep Level 3 optional manual validation evidence for one

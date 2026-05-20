@@ -102,6 +102,10 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     )
     assert summary.summary["optiland_optional_micro_benchmark_status"] == "passed_2026-05-20"
     assert (
+        summary.summary["optiland_optional_micro_benchmark_review_status"]
+        == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
+    assert (
         summary.summary["next_optional_solver_candidate"]
         == "meep_or_mpb_requires_osa_solver_python_not_approved"
     )
@@ -112,7 +116,7 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert "availability" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "OSA_SOLVER_PYTHON" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "one-solver-at-a-time" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
-    assert "Optiland-only pass" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
+    assert "reviewed ray/path smoke evidence" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "Meep/MPB unapproved" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert summary.production_grade_validation_claimed is False
     assert summary.formal_convergence_proof_claimed is False

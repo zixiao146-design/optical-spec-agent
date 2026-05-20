@@ -75,8 +75,8 @@ python scripts/generate_backend_evidence_pack.py \
   execution、PyPI/TestPyPI upload、tag 或 release。
 - 2026-05-20 已批准并执行的 Gmsh-only run 只记录为可选手动 mesh generation
   smoke 证据，并已被 review 接受；该 run 未执行 Meep、MPB、Optiland 或 Elmer。
-  2026-05-20 另一个单独批准的 Optiland-only run 只记录为可选手动 ray/path
-  smoke 证据；Meep/MPB 需要 `OSA_SOLVER_PYTHON` 和单独批准；Elmer 仍
+  2026-05-20 另一个单独批准的 Optiland-only run 已 review 接受为可选手动
+  ray/path smoke 证据；Meep/MPB 需要 `OSA_SOLVER_PYTHON` 和单独批准；Elmer 仍
   deferred。
 - 默认不调用外部 LLM。
 - 不上传 TestPyPI/PyPI。

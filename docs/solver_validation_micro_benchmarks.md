@@ -28,14 +28,14 @@ convergence proof, or real optical-design correctness.
 | Gmsh | Tiny mesh generation from a local `.geo` preview | `.msh` | Executed/passed on 2026-05-20 for the approved Gmsh-only run; validates syntax/path only, not optical correctness. |
 | Meep | Tiny PyMeep smoke from a generated preview artifact | result JSON | Validates import/run path only, not production-grade FDTD. |
 | MPB | Tiny band-structure smoke through `meep.mpb` | band summary JSON | Validates MPB Python path only. |
-| Optiland | Tiny ray-trace or import/run smoke | result JSON | Executed/passed on 2026-05-20 for the approved Optiland-only run; validates local Optiland path only, not lens design correctness. |
+| Optiland | Tiny ray-trace or import/run smoke | result JSON | Executed/passed on 2026-05-20 for the approved Optiland-only run; review accepted it as optional manual ray/path smoke evidence only, not lens design correctness. |
 | Elmer | Deferred until maintainable `ElmerSolver` install exists | deferred report | No Level 3 validation is claimed. |
 
 The 2026-05-20 Gmsh result has been reviewed and accepted only as optional
 manual mesh-generation smoke evidence. It does not authorize any further solver
 execution and does not change default test, quality gate, or release gate
-behavior. A separate 2026-05-20 Optiland-only run was approved and passed as
-optional manual ray/path smoke evidence. Meep and MPB require
+behavior. A separate 2026-05-20 Optiland-only run was approved, passed, and
+reviewed as optional manual ray/path smoke evidence. Meep and MPB require
 `OSA_SOLVER_PYTHON` plus separate approval; Elmer remains deferred. No future
 Gmsh or Optiland rerun is approved by these records.
 

@@ -41,3 +41,4 @@ def test_optiland_optional_micro_benchmark_evidence_is_recorded():
     assert "Optical correctness claimed: no" in evidence_text
     assert "ray/path smoke" in combined
     assert "evidence" in combined
+    assert "Gmsh is not authorized to run again in this task" in approval_text

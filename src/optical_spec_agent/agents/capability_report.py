@@ -795,7 +795,7 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
             "Approval matrix and approval record template are maintainer review aids.",
             "Gmsh has an approved 2026-05-20 Gmsh-only optional micro-benchmark pass recorded as mesh generation smoke evidence.",
             "The Gmsh evidence was reviewed and accepted as optional manual mesh-generation smoke evidence; it does not authorize further solver execution.",
-            "Optiland has an approved 2026-05-20 Optiland-only optional micro-benchmark pass recorded as ray/path smoke evidence.",
+            "Optiland evidence was reviewed and accepted as optional manual ray/path smoke evidence; it does not authorize further solver execution.",
             "Gmsh was not rerun by the Optiland task; Meep, MPB, and Elmer were not executed.",
             "Meep/MPB require OSA_SOLVER_PYTHON and separate approval; Elmer remains deferred.",
             "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",

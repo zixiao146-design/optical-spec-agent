@@ -114,8 +114,8 @@ reviewed as accepted optional manual mesh-generation smoke evidence, not
 optical correctness evidence. That review does not approve Optiland, Meep, MPB,
 Elmer, or any future Gmsh rerun.
 The separately approved Optiland-only optional micro-benchmark also passed on
-2026-05-20 and is recorded only as optional manual ray/path smoke evidence, not
-production lens design validation. Meep, MPB, and Elmer remain unexecuted by
+2026-05-20 and is reviewed as accepted optional manual ray/path smoke evidence,
+not production lens design validation. Meep, MPB, and Elmer remain unexecuted by
 these tasks.
 
 ## Publication / Release Actions
@@ -232,7 +232,7 @@ one-solver-at-a-time sequence are prepared as future review aids only; all
 execution remains unauthorized until explicit solver-specific approval is
 recorded.
 The Gmsh review decision closes only the already approved Gmsh run. The
-Optiland evidence record closes only the separately approved Optiland run.
+Optiland review decision closes only the separately approved Optiland run.
 Meep/MPB require `OSA_SOLVER_PYTHON` and separate approval; Elmer remains
 deferred.
 Readiness is calibrated by environment profile: current Python/current `PATH`

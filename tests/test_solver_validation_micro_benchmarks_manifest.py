@@ -90,6 +90,13 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert solvers["optiland"]["last_execution_evidence"] == (
         "validation/optiland/optiland_micro_benchmark_2026-05-20.md"
     )
+    assert solvers["optiland"]["review_record_path"] == (
+        "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md"
+    )
+    assert (
+        solvers["optiland"]["review_status"]
+        == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
     assert "optiland_micro_benchmark_approval_2026-05-20.md" in solvers["optiland"]["approval_record_path"]
     assert solvers["optiland"]["next_candidate_solver"] == "meep_or_mpb_after_osa_solver_python"
     assert solvers["optiland"]["next_candidate_approved"] is False

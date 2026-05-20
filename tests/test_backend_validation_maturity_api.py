@@ -36,6 +36,10 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     )
     assert body["summary"]["optiland_optional_micro_benchmark_status"] == "passed_2026-05-20"
     assert (
+        body["summary"]["optiland_optional_micro_benchmark_review_status"]
+        == "accepted_as_optional_manual_ray_path_smoke_evidence"
+    )
+    assert (
         body["summary"]["next_optional_solver_candidate"]
         == "meep_or_mpb_requires_osa_solver_python_not_approved"
     )
@@ -50,7 +54,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert "not a production-grade optical constants database" in body["preview_boundary_summary"]["materials"]
     assert "OSA_SOLVER_PYTHON" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "one-solver-at-a-time" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
-    assert "Optiland-only pass" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
+    assert "reviewed ray/path smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False
