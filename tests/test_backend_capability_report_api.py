@@ -114,7 +114,7 @@ def test_backend_capability_report_api_returns_expected_sections():
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "elmer_deferred"
     assert gmsh["next_candidate_approved"] is False
     optiland = next(
         item
@@ -159,9 +159,12 @@ def test_backend_capability_report_api_returns_expected_sections():
         for item in body["optional_solver_micro_benchmarks"]["solvers"]
         if item["solver_name"] == "mpb"
     )
-    assert mpb["approval_status"] == "pending"
+    assert mpb["approval_status"] == "approved_executed"
     assert mpb["execution_authorized"] is False
-    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["last_execution_status"] == "passed"
+    assert mpb["last_execution_evidence"] == (
+        "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
+    )
     assert mpb["decision_packet_path"].endswith("mpb_micro_benchmark_decision_packet.md")
     assert mpb["cli_required"] is False
     assert body["adapter_native_golden_coverage"]["status"] == "ok"
@@ -228,7 +231,7 @@ def test_backend_evidence_summary_api_is_linked_to_capability_report():
         if item["solver_name"] == "mpb"
     )
     assert mpb["decision_packet_path"].endswith("mpb_micro_benchmark_decision_packet.md")
-    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["last_execution_status"] == "passed"
     assert body["external_solver_executed"] is False
 
 

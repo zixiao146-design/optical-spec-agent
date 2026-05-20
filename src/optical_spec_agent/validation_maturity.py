@@ -375,12 +375,14 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md",
+                "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md",
                 "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
+                "validation/mpb/mpb_micro_benchmark_2026-05-20.md",
                 "validation/mpb/mpb_validation_pilot_2026-05-14.md",
             ],
-            "MPB has a prepared decision packet and recorded narrow optional manual validation report, but no 2026-05-20 MPB micro-benchmark execution.",
+            "MPB has an approved 2026-05-20 optional manual MPB/band-structure smoke pass through meep.mpb and OSA_SOLVER_PYTHON.",
         ),
         (
             "optiland_optional_solver_micro_benchmark",
@@ -435,9 +437,9 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                     status_note,
                     "Readiness checks detect availability only and do not execute solvers.",
                     "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-                    "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+                    "Only the recorded Gmsh, Optiland, Meep, and MPB runs were explicitly approved and executed; Elmer remains deferred.",
                     "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
-                    "The MPB decision packet requires OSA_SOLVER_PYTHON, treats meep.mpb import as readiness only, and does not authorize execution.",
+                    "The MPB optional micro-benchmark used OSA_SOLVER_PYTHON and records MPB/band-structure smoke evidence only.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -486,9 +488,10 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "meep_optional_micro_benchmark_review_status": "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence",
             "meep_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only",
             "mpb_optional_micro_benchmark_decision_packet_available": True,
-            "mpb_optional_micro_benchmark_status": "not_run",
+            "mpb_optional_micro_benchmark_status": "passed_2026-05-20",
+            "mpb_optional_micro_benchmark_review_status": "pending_review",
             "mpb_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only_meep_mpb",
-            "next_optional_solver_candidate": "mpb_requires_osa_solver_python_not_approved",
+            "next_optional_solver_candidate": "none_elmer_deferred",
             "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
@@ -524,9 +527,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, "
                 "record the separately approved Meep-only pass from 2026-05-20 "
                 "as reviewed optional manual PyMeep/FDTD smoke evidence through "
-                "OSA_SOLVER_PYTHON, prepare an MPB decision packet while keeping "
-                "MPB unapproved and unexecuted pending OSA_SOLVER_PYTHON-specific "
-                "approval, "
+                "OSA_SOLVER_PYTHON, record the separately approved MPB-only pass "
+                "from 2026-05-20 as optional manual MPB/band-structure smoke "
+                "evidence through meep.mpb and OSA_SOLVER_PYTHON, "
                 "and default gates do not run solvers."
             ),
         },

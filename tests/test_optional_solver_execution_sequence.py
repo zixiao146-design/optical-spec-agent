@@ -22,13 +22,15 @@ def test_optional_solver_execution_sequence_docs_define_order_and_stops():
     assert "OSA_SOLVER_PYTHON" in text
     assert "meep_micro_benchmark_decision_packet.md" in text
     assert "mpb_micro_benchmark_decision_packet.md" in text
-    assert "MPB remains unapproved and unexecuted" in text
+    assert "validation/mpb/mpb_micro_benchmark_2026-05-20.md" in text
+    assert "MPB/band-structure smoke evidence" in text
     assert "MPB CLI is not required" in text
     assert "meep_micro_benchmark_review_2026-05-20.md" in text
     assert "validation/meep/meep_micro_benchmark_2026-05-20.md" in text
     assert "accepted as optional manual PyMeep/FDTD smoke evidence" in text
     assert "PyMeep/FDTD smoke evidence only" in text
     assert "future Meep rerun" in text
+    assert "Gmsh/Optiland/Meep/MPB rerun" in text
     assert "Stop Conditions" in text
     assert "Do not batch all solvers without separate approval" in text
     assert "not Level 3" in text

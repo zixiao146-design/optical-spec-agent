@@ -102,7 +102,11 @@
 - MPB optional micro-benchmark decision packet:
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`.
   It records the required `OSA_SOLVER_PYTHON` profile and `meep.mpb`
-  import-only readiness path, but MPB remains not executed and not approved.
+  import-only readiness path for the approved MPB-only run.
+- MPB optional micro-benchmark evidence:
+  `validation/mpb/mpb_micro_benchmark_2026-05-20.md`.
+  It records optional manual MPB/band-structure smoke evidence only and does
+  not approve future MPB reruns, uploads, tags, or releases.
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.
@@ -134,8 +138,8 @@
   narrow optional manual validation evidence only.
 - No production-grade MPB physical validation; the recorded Level 3 report is
   narrow optional manual validation evidence only.
-- No production-grade MPB validation, optical correctness claim, or new MPB
-  execution from the MPB decision packet alone.
+- No production-grade MPB validation, production band-structure validation, or
+  optical correctness claim from the approved MPB-only micro-benchmark.
 - No production-grade Optiland optical validation; the recorded Level 3 report
   is narrow optional manual validation evidence only.
 - No Elmer Level 3 solver-backed validation yet; Elmer remains Level 2 pending

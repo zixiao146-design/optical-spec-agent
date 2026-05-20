@@ -103,8 +103,11 @@ pytest, smoke, quality gates, CI, or release validation, and does not claim
 production-grade physical validation or a formal convergence proof.
 The later MPB decision packet
 `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
-prepares a future `OSA_SOLVER_PYTHON`-scoped micro-benchmark approval path only.
-It records `meep.mpb` import-only readiness and does not authorize MPB execution.
+records the `OSA_SOLVER_PYTHON`-scoped approval path used for the separately
+approved 2026-05-20 MPB-only micro-benchmark. That run is recorded in
+`validation/mpb/mpb_micro_benchmark_2026-05-20.md` as optional manual
+MPB/band-structure smoke evidence only, and it does not authorize future MPB
+reruns.
 
 ## Optiland Level 3 Boundary
 

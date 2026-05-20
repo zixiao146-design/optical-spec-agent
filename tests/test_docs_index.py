@@ -73,6 +73,7 @@ def test_docs_index_exists_and_links_major_docs():
         "optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md",
         "optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md",
         "optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md",
+        "optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md",
         "optional_solver_environment_profiles.md",
         "optional_solver_environment_profiles.zh-CN.md",
         "backend_evidence_review_decision.md",

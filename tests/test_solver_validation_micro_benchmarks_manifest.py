@@ -68,7 +68,7 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         solvers["gmsh"]["review_status"]
         == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
     )
-    assert solvers["gmsh"]["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert solvers["gmsh"]["next_candidate_solver"] == "elmer_deferred"
     assert solvers["gmsh"]["next_candidate_approved"] is False
     assert solvers["gmsh"]["no_further_solver_authorized"] is True
     assert "gmsh_micro_benchmark_approval_2026-05-20.md" in solvers["gmsh"]["approval_record_path"]
@@ -93,7 +93,7 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
     assert solvers["meep"]["no_further_solver_authorized"] is True
-    assert solvers["meep"]["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert solvers["meep"]["next_candidate_solver"] == "elmer_deferred"
     assert solvers["meep"]["decision_packet_path"] == (
         "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
     )
@@ -113,9 +113,20 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert "meep.mpb" in solvers["mpb"]["module_names"]
     assert solvers["mpb"]["execution_sequence_rank"] == 4
     assert solvers["mpb"]["solver_python_required"] is True
-    assert solvers["mpb"]["approval_status"] == "pending"
+    assert solvers["mpb"]["approval_status"] == "approved_executed"
     assert solvers["mpb"]["execution_authorized"] is False
-    assert solvers["mpb"]["last_execution_status"] == "not_run"
+    assert solvers["mpb"]["last_execution_status"] == "passed"
+    assert solvers["mpb"]["last_execution_date"] == "2026-05-20"
+    assert solvers["mpb"]["last_execution_evidence"] == (
+        "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
+    )
+    assert solvers["mpb"]["review_status"] == "pending_review"
+    assert solvers["mpb"]["next_candidate_solver"] == "elmer_deferred"
+    assert solvers["mpb"]["next_candidate_approved"] is False
+    assert solvers["mpb"]["no_further_solver_authorized"] is True
+    assert solvers["mpb"]["approval_record_path"] == (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md"
+    )
     assert solvers["mpb"]["decision_packet_path"] == (
         "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
     )
@@ -125,7 +136,13 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         "I approve running the optional MPB micro-benchmark for optical-spec-agent "
         "using OSA_SOLVER_PYTHON=<path>."
     )
-    assert "decision packet is prepared" in solvers["mpb"]["recommended_next_action"]
+    assert "MPB evidence is recorded" in solvers["mpb"]["recommended_next_action"]
+    assert "No future MPB rerun" in solvers["mpb"]["recommended_next_action"]
+    assert "validation/mpb/mpb_micro_benchmark_2026-05-20.md" in solvers["mpb"]["evidence_refs"]
+    assert (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md"
+        in solvers["mpb"]["evidence_refs"]
+    )
     assert (
         "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
         in solvers["mpb"]["evidence_refs"]
@@ -152,7 +169,7 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         == "accepted_as_optional_manual_ray_path_smoke_evidence"
     )
     assert "optiland_micro_benchmark_approval_2026-05-20.md" in solvers["optiland"]["approval_record_path"]
-    assert solvers["optiland"]["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert solvers["optiland"]["next_candidate_solver"] == "elmer_deferred"
     assert solvers["optiland"]["next_candidate_approved"] is False
     assert solvers["optiland"]["no_further_solver_authorized"] is True
     assert solvers["elmer"]["command_names"] == ["ElmerSolver"]

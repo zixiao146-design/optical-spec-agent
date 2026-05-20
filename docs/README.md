@@ -68,6 +68,7 @@ Current main development version: `0.9.0rc8.dev0`.
 - [Meep micro-benchmark approval - 2026-05-20](optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md)
 - [Meep micro-benchmark review decision - 2026-05-20](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
 - [MPB micro-benchmark decision packet](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
+- [MPB micro-benchmark approval - 2026-05-20](optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md)
 - [Optional solver environment profiles](optional_solver_environment_profiles.md)
 - [Optional solver environment profiles zh-CN](optional_solver_environment_profiles.zh-CN.md)
 - [Solver micro-benchmark report schema](manual_solver_validation_reports/solver_micro_benchmark_report_schema.json)

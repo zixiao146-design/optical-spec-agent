@@ -145,7 +145,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         gmsh["review_status"]
         == "accepted_as_optional_manual_mesh_generation_smoke_evidence"
     )
-    assert gmsh["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "elmer_deferred"
     assert gmsh["next_candidate_approved"] is False
     assert gmsh["no_further_solver_authorized"] is True
     optiland = next(item for item in solver_micro["solvers"] if item["solver_name"] == "optiland")
@@ -178,11 +178,17 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
     mpb = next(item for item in solver_micro["solvers"] if item["solver_name"] == "mpb")
-    assert mpb["approval_status"] == "pending"
+    assert mpb["approval_status"] == "approved_executed"
     assert mpb["execution_authorized"] is False
-    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["last_execution_status"] == "passed"
+    assert mpb["last_execution_evidence"] == (
+        "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
+    )
     assert mpb["decision_packet_path"].endswith(
         "mpb_micro_benchmark_decision_packet.md"
+    )
+    assert mpb["approval_record_path"].endswith(
+        "mpb_micro_benchmark_approval_2026-05-20.md"
     )
     assert mpb["cli_required"] is False
     assert any(
@@ -190,7 +196,7 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         for note in solver_micro["notes"]
     )
     assert any("Meep evidence was reviewed and accepted" in note for note in solver_micro["notes"])
-    assert any("MPB has a prepared decision packet" in note for note in solver_micro["notes"])
+    assert any("MPB has an approved 2026-05-20 MPB-only" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
     assert solver_micro["formal_convergence_proof_claimed"] is False

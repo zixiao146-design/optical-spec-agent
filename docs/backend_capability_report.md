@@ -218,12 +218,13 @@ approved Meep-only 2026-05-20 run is recorded in
 [`../validation/meep/meep_micro_benchmark_2026-05-20.md`](../validation/meep/meep_micro_benchmark_2026-05-20.md)
 and reviewed in
 [`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
-as optional manual PyMeep/FDTD smoke evidence only. MPB and Elmer remain not
-executed by these tasks, and Gmsh/Optiland/Meep reruns require separate
-approval. The Meep review does not authorize MPB, PyPI/TestPyPI upload, tag
-creation, or release creation.
-The MPB decision packet prepares the next decision path only; MPB remains
-unexecuted and requires separate explicit approval with `OSA_SOLVER_PYTHON`.
+as optional manual PyMeep/FDTD smoke evidence only. The separately approved
+MPB-only 2026-05-20 run is recorded in
+[`../validation/mpb/mpb_micro_benchmark_2026-05-20.md`](../validation/mpb/mpb_micro_benchmark_2026-05-20.md)
+as optional manual MPB/band-structure smoke evidence pending separate review.
+Elmer remains not executed by these tasks, and Gmsh/Optiland/Meep/MPB reruns
+require separate approval. None of these records authorizes PyPI/TestPyPI
+upload, tag creation, or release creation.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

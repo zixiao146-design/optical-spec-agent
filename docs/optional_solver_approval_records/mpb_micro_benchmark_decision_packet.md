@@ -2,9 +2,9 @@
 
 ## Current status
 
-- MPB micro-benchmark approval: pending
-- MPB execution authorized: no
-- MPB executed: no
+- MPB micro-benchmark approval: approved for the 2026-05-20 MPB-only run
+- MPB execution authorized: yes for the completed 2026-05-20 MPB-only run; no future rerun authorized
+- MPB executed: yes, MPB / `meep.mpb` only, on 2026-05-20
 - Meep executed in this task: no
 - Gmsh executed in this task: no
 - Optiland executed in this task: no
@@ -36,13 +36,13 @@ Required explicit phrase:
 
 `I approve running the optional MPB micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.`
 
-## Expected future opt-in command
+## Opt-in Command Used For Approved Run
 
-DO NOT RUN WITHOUT APPROVAL:
+DO NOT RUN WITHOUT NEW APPROVAL FOR FUTURE RERUNS:
 
 ```bash
 OSA_RUN_OPTIONAL_MPB_VALIDATION=1 \
-OSA_SOLVER_PYTHON=<path> \
+OSA_SOLVER_PYTHON=/opt/homebrew/Caskroom/miniforge/base/envs/osa-solvers/bin/python \
 OSA_MPB_VALIDATION_REPORT=/tmp/osa-mpb-micro-benchmark-report.json \
 OSA_MPB_OUTPUT_DIR=/tmp/osa-mpb-micro-benchmark-output \
 ./scripts/run_optional_solver_micro_benchmarks.sh
@@ -54,6 +54,14 @@ OSA_MPB_OUTPUT_DIR=/tmp/osa-mpb-micro-benchmark-output \
 - MPB result JSON or band summary JSON
 - optional manual validation report
 - no committed raw generated artifacts unless explicitly approved
+
+## Recorded Evidence
+
+- approval record: `docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md`
+- evidence record: `validation/mpb/mpb_micro_benchmark_2026-05-20.md`
+- report path: `/tmp/osa-mpb-micro-benchmark-report.json`
+- status: passed
+- future MPB rerun authorization: no
 
 ## Non-claims
 

@@ -17,18 +17,20 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - Solver micro-benchmark execution performed: yes, Gmsh only for its approved
   run, Optiland only for its separately approved run, and Meep only for its
   separately approved run
-- Solver micro-benchmark review decisions: Gmsh accepted only as optional
-  manual mesh-generation smoke evidence; Optiland accepted only as optional
-  manual ray/path smoke evidence; Meep accepted only as optional manual
-  PyMeep/FDTD smoke evidence
+- Solver micro-benchmark evidence: Gmsh accepted only as optional manual
+  mesh-generation smoke evidence; Optiland accepted only as optional manual
+  ray/path smoke evidence; Meep accepted only as optional manual PyMeep/FDTD
+  smoke evidence; MPB recorded as optional manual MPB/band-structure smoke
+  evidence pending separate review
 - Meep decision packet: prepared at
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`;
   approved/executed/reviewed for the Meep-only 2026-05-20 run as optional
   manual PyMeep/FDTD smoke evidence
 - MPB decision packet: prepared at
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`;
-  approval pending, execution authorized: no, execution performed: no
-- Other solver micro-benchmark execution performed: MPB and Elmer were not run
+  approved and executed for the MPB-only 2026-05-20 run through
+  `OSA_SOLVER_PYTHON`
+- Other solver micro-benchmark execution performed: Elmer was not run
 
 ## Execution Principles
 
@@ -59,7 +61,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
    Status: completed for the approved Meep-only run on 2026-05-20 and reviewed
    as optional manual PyMeep/FDTD smoke evidence.
 4. MPB fourth: requires the solver Python profile and `meep.mpb`.
-   Status: decision packet prepared; approval pending; execution authorized: no.
+   Status: completed for the approved MPB-only run on 2026-05-20 and recorded
+   as optional manual MPB/band-structure smoke evidence pending separate review.
 5. Elmer deferred: keep deferred until a maintainable `ElmerSolver` install
    route exists.
 
@@ -142,9 +145,15 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 ### MPB
 
 - Solver: MPB through `meep.mpb`
+- Status: completed for the separately approved MPB-only 2026-05-20 run;
+  future MPB runs require fresh approval
 - Readiness profile: `osa-solvers`
 - Decision packet:
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+- Approval record:
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md`
+- Evidence record:
+  `validation/mpb/mpb_micro_benchmark_2026-05-20.md`
 - MPB CLI required: no, if `meep.mpb` is importable through `OSA_SOLVER_PYTHON`
 - Required env vars after approval:
   - `OSA_SOLVER_PYTHON=<path to solver Python>`

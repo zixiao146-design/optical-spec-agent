@@ -76,20 +76,22 @@ approval remain separate and not granted.
   Meep-only records, and pending/deferred records for
   other solvers are review aids only.
   This does not authorize PyPI, TestPyPI, tag, release, or other solver
-  execution actions. The Meep run used `OSA_SOLVER_PYTHON`; MPB still requires
-  `OSA_SOLVER_PYTHON` plus separate approval, and Elmer remains deferred. The
+  execution actions. The Meep and MPB runs used `OSA_SOLVER_PYTHON`; Elmer
+  remains deferred. The
   Meep decision packet at
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`
   records the `OSA_SOLVER_PYTHON` path and required approval phrase for the
   approved Meep-only smoke run. The Meep review record
   `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`
   accepts the result only as optional manual PyMeep/FDTD smoke evidence and
-  does not authorize MPB execution.
+  does not authorize future Meep reruns.
   The MPB decision packet at
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
   records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
-  readiness path, future command, artifacts, cleanup, and non-claims, but does
-  not authorize MPB execution.
+  readiness path, approved command, artifacts, cleanup, and non-claims for the
+  approved MPB-only run. The MPB evidence is recorded as optional manual
+  MPB/band-structure smoke evidence only and does not authorize future MPB
+  reruns.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

@@ -33,9 +33,12 @@ def test_optional_solver_readiness_status_records_current_boundaries():
     assert "approved Meep-only optional micro-benchmark" in text
     assert "accepted the Meep result as optional manual PyMeep/FDTD" in text
     assert "future Meep runs require fresh approval" in text
-    assert "MPB | Candidate-ready with previous narrow manual report and MPB decision packet; not executed" in text
+    assert "MPB | Executed/passed for the approved MPB-only optional micro-benchmark on 2026-05-20" in text
+    assert "validation/mpb/mpb_micro_benchmark_2026-05-20.md" in text
+    assert "mpb_micro_benchmark_approval_2026-05-20.md" in text
     assert "MPB CLI is not required if the Python path is available" in text
-    assert "MPB remains unapproved and unexecuted" in text
+    assert "optional manual MPB/band-structure smoke" in text
+    assert "future MPB runs require fresh approval" in text
     assert "Elmer | deferred" in text
     assert "Meep and `meep.mpb` are detectable" in text
     assert "explicit" in text.lower()

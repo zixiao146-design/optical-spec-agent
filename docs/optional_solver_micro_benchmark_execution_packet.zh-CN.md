@@ -13,19 +13,21 @@
 - v0.9.0rc8 tag：未创建
 - v1.0.0 tag：未创建
 - solver micro-benchmark approval：仅授予 2026-05-20 Gmsh run、单独批准的
-  2026-05-20 Optiland run 和单独批准的 2026-05-20 Meep run
+  2026-05-20 Optiland run、单独批准的 2026-05-20 Meep run 和单独批准的
+  2026-05-20 MPB run
 - 已执行 solver micro-benchmark：是，Gmsh only 用于其批准 run，Optiland only
-  用于其单独批准 run，Meep only 用于其单独批准 run
+  用于其单独批准 run，Meep only 用于其单独批准 run，MPB only 用于其单独批准 run
 - solver micro-benchmark review decision：Gmsh 只被接受为 optional manual
   mesh-generation smoke evidence；Optiland 只被接受为 optional manual ray/path
-  smoke evidence；Meep 只被接受为 optional manual PyMeep/FDTD smoke evidence
+  smoke evidence；Meep 只被接受为 optional manual PyMeep/FDTD smoke evidence；
+  MPB 已记录为 optional manual MPB/band-structure smoke evidence，等待单独 review
 - Meep decision packet：
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`；
   已用于 Meep-only 2026-05-20 run，并 review 接受为 optional manual PyMeep/FDTD smoke evidence
 - MPB decision packet：
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`；
-  approval pending，execution authorized: no，execution performed: no
-- 其他 solver micro-benchmark 执行：MPB 和 Elmer 未执行
+  已用于单独批准的 MPB-only 2026-05-20 run
+- 其他 solver micro-benchmark 执行：Elmer 未执行
 
 ## 执行原则
 
@@ -52,7 +54,8 @@
    `OSA_SOLVER_PYTHON=<osa-solvers python>`。状态：2026-05-20 已按 Meep-only
    批准执行并通过，并已 review 为 optional manual PyMeep/FDTD smoke evidence。
 4. MPB fourth：需要 solver Python profile 和 `meep.mpb`。
-   状态：decision packet 已准备；approval pending；execution authorized: no。
+   状态：2026-05-20 已按 MPB-only 批准执行并通过，记录为 optional manual
+   MPB/band-structure smoke evidence，等待单独 review。
 5. Elmer deferred：直到存在可维护的 `ElmerSolver` 安装路径。
 
 ## Per-solver 审批包
@@ -126,9 +129,14 @@
 ### MPB
 
 - Solver：MPB through `meep.mpb`
+- 状态：已完成单独批准的 2026-05-20 MPB-only run；未来 rerun 仍需重新批准
 - Readiness profile：`osa-solvers`
 - Decision packet：
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+- Approval record：
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md`
+- Evidence record：
+  `validation/mpb/mpb_micro_benchmark_2026-05-20.md`
 - MPB CLI required：如果 `OSA_SOLVER_PYTHON` 可以导入 `meep.mpb`，则不要求 CLI
 - 批准后需要的 env vars：
   - `OSA_SOLVER_PYTHON=<path to solver Python>`

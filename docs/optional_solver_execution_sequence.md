@@ -40,7 +40,10 @@ not execution approval.
    - Decision packet:
      `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`.
    - MPB CLI is not required if the `meep.mpb` Python import path is available.
-   - Status: decision packet prepared; MPB remains unapproved and unexecuted.
+   - Status: completed for the approved 2026-05-20 MPB-only run and recorded
+     as optional manual MPB/band-structure smoke evidence pending separate
+     review.
+   - Evidence: `validation/mpb/mpb_micro_benchmark_2026-05-20.md`.
    - Stop after MPB and review the band-path smoke report.
 5. Elmer deferred.
    - Do not run until a maintainable `ElmerSolver` install route exists.
@@ -73,6 +76,6 @@ after its separate approval record. The accepted Optiland review does not
 authorize Meep; Meep was run only after its separate approval record. The
 accepted Meep evidence does not authorize MPB, Elmer, any future Gmsh rerun,
 any future Optiland rerun, or any future Meep rerun.
-The MPB decision packet is preparation only and does not authorize MPB
-execution without a future separate approval phrase naming MPB and the
-`OSA_SOLVER_PYTHON` path.
+The approved MPB evidence closes only the MPB-only run and does not authorize
+Elmer, any future Gmsh/Optiland/Meep/MPB rerun, PyPI/TestPyPI upload, tag
+creation, or release creation.

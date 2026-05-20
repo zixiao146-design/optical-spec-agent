@@ -70,14 +70,16 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   non-claims for the approved Meep-only smoke run.
 - Use the MPB decision packet
   [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
-  as preparation only. It records the required `OSA_SOLVER_PYTHON` profile,
-  `meep.mpb` import-only readiness path, future command, artifacts, cleanup,
-  and non-claims, but MPB remains unapproved and unexecuted.
+  as the preparation record for the approved MPB-only run. It records the
+  required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only readiness path,
+  command, artifacts, cleanup, and non-claims; it does not authorize future MPB
+  reruns.
 - Record that the Gmsh review accepted the evidence only as optional manual
   mesh-generation smoke evidence; record that the Optiland review accepted the
   evidence only as optional manual ray/path smoke evidence; record that the
   Meep review accepted the evidence only as optional manual PyMeep/FDTD smoke
-  evidence.
+  evidence; record that MPB evidence remains optional manual MPB/band-structure
+  smoke evidence pending separate review.
 - Improve missing-input diagnostics for goals with multiple possible observables.
 - Add structured material provenance fields for every preview material entry.
 - Expand deterministic natural-language matching for bilingual and terse goals.
@@ -149,5 +151,6 @@ Meep, MPB, Elmer, or future Gmsh reruns.
 The Meep-only micro-benchmark is reviewed and accepted as optional manual
 PyMeep/FDTD smoke evidence only; it does not authorize MPB, Elmer,
 PyPI/TestPyPI upload, tag/release creation, or future Meep reruns.
-The MPB decision packet is now ready for future review, but it does not
-authorize MPB execution.
+The MPB-only micro-benchmark is recorded as optional manual MPB/band-structure
+smoke evidence pending separate review; it does not authorize Elmer,
+PyPI/TestPyPI upload, tag/release creation, or future MPB reruns.

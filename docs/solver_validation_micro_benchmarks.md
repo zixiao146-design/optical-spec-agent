@@ -27,7 +27,7 @@ convergence proof, or real optical-design correctness.
 | --- | --- | --- | --- |
 | Gmsh | Tiny mesh generation from a local `.geo` preview | `.msh` | Executed/passed on 2026-05-20 for the approved Gmsh-only run; validates syntax/path only, not optical correctness. |
 | Meep | Tiny PyMeep smoke from a generated preview artifact | result JSON | Executed/passed on 2026-05-20 for the approved Meep-only run through `OSA_SOLVER_PYTHON`; reviewed and accepted as optional manual PyMeep/FDTD smoke evidence only, not production-grade FDTD. |
-| MPB | Tiny band-structure smoke through `meep.mpb` | band summary JSON | Decision packet prepared; validates MPB Python path only after future approval. |
+| MPB | Tiny band-structure smoke through `meep.mpb` | result JSON / band summary JSON when generated | Executed/passed on 2026-05-20 for the approved MPB-only run through `OSA_SOLVER_PYTHON`; records optional manual MPB/band-structure smoke evidence only, not production-grade MPB validation. |
 | Optiland | Tiny ray-trace or import/run smoke | result JSON | Executed/passed on 2026-05-20 for the approved Optiland-only run; review accepted it as optional manual ray/path smoke evidence only, not lens design correctness. |
 | Elmer | Deferred until maintainable `ElmerSolver` install exists | deferred report | No Level 3 validation is claimed. |
 
@@ -37,10 +37,11 @@ execution and does not change default test, quality gate, or release gate
 behavior. A separate 2026-05-20 Optiland-only run was approved, passed, and
 reviewed as optional manual ray/path smoke evidence. A separate 2026-05-20
 Meep-only run used `OSA_SOLVER_PYTHON`, passed, and is reviewed and accepted
-as optional manual PyMeep/FDTD smoke evidence. MPB requires `OSA_SOLVER_PYTHON` plus
-separate approval; its decision packet is prepared but MPB remains unexecuted.
-Elmer remains deferred. No future Gmsh, Optiland, or Meep rerun is approved by
-these records.
+as optional manual PyMeep/FDTD smoke evidence. A separate 2026-05-20 MPB-only
+run used `OSA_SOLVER_PYTHON`, executed through `meep.mpb`, passed, and is
+recorded as optional manual MPB/band-structure smoke evidence pending separate
+review. Elmer remains deferred. No future Gmsh, Optiland, Meep, or MPB rerun is
+approved by these records.
 The Meep-specific decision packet is recorded at
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md).
 It records the required `OSA_SOLVER_PYTHON` profile and opt-in command for the
@@ -48,8 +49,8 @@ approved Meep-only run.
 The MPB-specific decision packet is recorded at
 [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md).
 It records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
-readiness path, future command, expected artifacts, cleanup, and non-claims.
-It does not authorize MPB execution.
+readiness path, the approved MPB-only command, expected artifacts, cleanup, and
+non-claims for the 2026-05-20 run. It does not authorize future MPB reruns.
 
 ## Required Approval
 
@@ -105,15 +106,15 @@ Execution approval is prepared in
 with one-solver-at-a-time sequencing in
 [`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md)
 and per-solver pending/deferred approval records, plus the approved Gmsh-only,
-Optiland-only, and Meep-only 2026-05-20 execution records, under
+Optiland-only, Meep-only, and MPB-only 2026-05-20 execution records, under
 [`optional_solver_approval_records/`](optional_solver_approval_records/).
 The Meep decision packet, approval record, and review record in that directory
-do not authorize MPB, Elmer, upload, tag, release actions, or any future Meep
-rerun. The Meep review record is
+do not authorize Elmer, upload, tag, release actions, or any future Meep rerun.
+The Meep review record is
 [`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md).
-The MPB decision packet in the same directory is preparation only and remains
-pending until a maintainer gives the exact MPB approval phrase with an
-`OSA_SOLVER_PYTHON` path.
+The MPB approval record and evidence file in the same directory tree record the
+separately approved MPB-only run. They do not authorize future MPB reruns,
+Elmer, upload, tag, or release actions.
 
 ## Claims
 

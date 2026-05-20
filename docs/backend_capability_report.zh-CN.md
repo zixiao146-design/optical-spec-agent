@@ -154,11 +154,13 @@ Optiland 或 Elmer，也不批准后续 solver 执行。另一个单独批准的
 [`../validation/meep/meep_micro_benchmark_2026-05-20.md`](../validation/meep/meep_micro_benchmark_2026-05-20.md)，
 并在
 [`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
-中被接受为可选手动 PyMeep/FDTD smoke 证据；MPB 和 Elmer 仍未在这些任务中执行。
+中被接受为可选手动 PyMeep/FDTD smoke 证据。单独批准的 MPB-only run 记录在
+[`../validation/mpb/mpb_micro_benchmark_2026-05-20.md`](../validation/mpb/mpb_micro_benchmark_2026-05-20.md)，
+只作为可选手动 MPB/band-structure smoke 证据，等待单独 review；Elmer 仍未执行。
 MPB-specific decision packet
 [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
 已经准备；它要求 `OSA_SOLVER_PYTHON`，把 `meep.mpb` import 视为 readiness
-only，且不授权 MPB 执行。
+only，且不授权未来 MPB rerun。
 
 可通过 `GET /api/backend-validation-maturity` 或
 `python scripts/audit_validation_claims.py` 检查这些边界。

@@ -4,6 +4,7 @@ set -euo pipefail
 OSA_RUN_OPTIONAL_MPB_VALIDATION="${OSA_RUN_OPTIONAL_MPB_VALIDATION:-0}"
 OSA_MPB_VALIDATION_REPORT="${OSA_MPB_VALIDATION_REPORT:-}"
 OSA_MPB_OUTPUT_DIR="${OSA_MPB_OUTPUT_DIR:-/tmp/osa-mpb-validation}"
+OSA_SOLVER_PYTHON="${OSA_SOLVER_PYTHON:-}"
 MPB_SPEC="examples/specs/mpb_preview.json"
 MPB_GENERATED_ARTIFACT="${OSA_MPB_OUTPUT_DIR}/mpb_preview.py"
 MPB_VALIDATION_SCRIPT="${OSA_MPB_OUTPUT_DIR}/mpb_minimal_validation.py"
@@ -21,7 +22,11 @@ print(data["project"]["version"])
 PY
 )"
 
-PYTHON_BIN="$(command -v python || true)"
+if [[ -n "${OSA_SOLVER_PYTHON}" ]]; then
+  PYTHON_BIN="${OSA_SOLVER_PYTHON}"
+else
+  PYTHON_BIN="$(command -v python || true)"
+fi
 MPB_CLI_AVAILABLE="false"
 MPB_CLI_PATH=""
 MPB_AVAILABLE="false"
@@ -38,6 +43,16 @@ echo "MPB optional validation pilot for optical-spec-agent ${PROJECT_VERSION}"
 echo "Input fixture: ${MPB_SPEC}"
 echo "Output directory: ${OSA_MPB_OUTPUT_DIR}"
 echo "Python executable: ${PYTHON_BIN:-unavailable}"
+if [[ -n "${OSA_SOLVER_PYTHON}" ]]; then
+  echo "Python source: OSA_SOLVER_PYTHON"
+else
+  echo "Python source: current PATH"
+fi
+
+if [[ -n "${OSA_SOLVER_PYTHON}" && ! -x "${OSA_SOLVER_PYTHON}" ]]; then
+  echo "OSA_SOLVER_PYTHON is set but is not executable: ${OSA_SOLVER_PYTHON}" >&2
+  exit 2
+fi
 
 if MPB_CLI_PATH="$(command -v mpb 2>/dev/null || true)" && [[ -n "${MPB_CLI_PATH}" ]]; then
   MPB_CLI_AVAILABLE="true"
@@ -131,7 +146,11 @@ result = {
     "resolution": 4,
     "frequencies_recorded": len(getattr(mode_solver, "all_freqs", []) or []),
     "production_grade_validation_claimed": False,
+    "production_grade_mpb_validation_claimed": False,
+    "production_band_structure_validation_claimed": False,
     "formal_convergence_proof_claimed": False,
+    "optical_correctness_claimed": False,
+    "meep_fdtd_benchmark_executed": False,
 }
 output_artifact.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 print("MPB tiny validation passed")
@@ -177,14 +196,23 @@ data = {
     "mpb_cli_available": sys.argv[4] == "true",
     "mpb_cli_path": sys.argv[5] or None,
     "python_executable": sys.argv[6] or None,
+    "solver_python_env_var": "OSA_SOLVER_PYTHON",
     "solver_version": sys.argv[7] or None,
     "optional_validation_enabled": sys.argv[8] == "1",
     "mpb_executed": sys.argv[9] == "true",
     "passed": sys.argv[10] == "true",
     "level3_achieved": sys.argv[11] == "true",
     "production_grade_validation_claimed": False,
+    "production_grade_mpb_validation_claimed": False,
+    "production_band_structure_validation_claimed": False,
     "formal_convergence_proof_claimed": False,
+    "optical_correctness_claimed": False,
     "proprietary_required": False,
+    "meep_fdtd_benchmark_executed": False,
+    "gmsh_executed": False,
+    "optiland_executed": False,
+    "elmer_executed": False,
+    "external_solver_executed": sys.argv[9] == "true",
     "input_fixture": sys.argv[12],
     "generated_artifact": sys.argv[13],
     "validation_script": sys.argv[14],

@@ -119,7 +119,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "elmer_deferred"
     assert gmsh["next_candidate_approved"] is False
     optiland = next(item for item in solver_micro["solvers"] if item["solver_name"] == "optiland")
     assert optiland["approval_status"] == "approved_executed"
@@ -152,9 +152,12 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
     mpb = next(item for item in solver_micro["solvers"] if item["solver_name"] == "mpb")
-    assert mpb["approval_status"] == "pending"
+    assert mpb["approval_status"] == "approved_executed"
     assert mpb["execution_authorized"] is False
-    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["last_execution_status"] == "passed"
+    assert mpb["last_execution_evidence"] == (
+        "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
+    )
     assert mpb["decision_packet_path"].endswith(
         "mpb_micro_benchmark_decision_packet.md"
     )
@@ -167,7 +170,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Meep evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
-    assert any("MPB has a prepared decision packet" in note for note in solver_micro["notes"])
+    assert any("MPB has an approved 2026-05-20 MPB-only" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",

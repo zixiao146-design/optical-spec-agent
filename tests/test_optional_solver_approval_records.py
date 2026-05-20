@@ -132,6 +132,27 @@ def test_mpb_pending_record_references_decision_packet_without_authorization():
     assert "Optical correctness: not claimed" in text
 
 
+def test_mpb_approved_execution_record_is_separate_from_pending_template():
+    path = RECORD_DIR / "mpb_micro_benchmark_approval_2026-05-20.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    assert "Approval status: approved for this MPB run" in text
+    assert "Execution authorized: yes, MPB only" in text
+    assert (
+        "OSA_SOLVER_PYTHON=/opt/homebrew/Caskroom/miniforge/base/envs/osa-solvers/bin/python"
+        in text
+    )
+    assert "Meep benchmark authorized: no" in text
+    assert "Gmsh authorized: no" in text
+    assert "Optiland authorized: no" in text
+    assert "Elmer authorized: no" in text
+    assert "PyPI/TestPyPI/tag/release authorized: no" in text
+    assert "no production-grade MPB validation" in text
+    assert "no formal convergence proof" in text
+    assert "no optical correctness claim" in text
+    assert "no production band-structure validation" in text
+
+
 def test_meep_approved_execution_record_is_separate_from_pending_template():
     path = RECORD_DIR / "meep_micro_benchmark_approval_2026-05-20.md"
     assert path.exists()

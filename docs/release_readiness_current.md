@@ -150,8 +150,8 @@ This document describes the current `main` branch. It is not a release tag.
   the approved Meep-only run.
 - Approved Meep-only optional micro-benchmark evidence:
   `validation/meep/meep_micro_benchmark_2026-05-20.md`. This is PyMeep/FDTD
-  smoke evidence only; MPB was not executed, and Gmsh/Optiland were not rerun
-  in that task.
+  smoke evidence only; MPB was not executed in that task, and Gmsh/Optiland
+  were not rerun in that task.
 - Meep micro-benchmark review decision:
   `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`.
   The evidence is accepted only as optional manual PyMeep/FDTD smoke evidence;
@@ -160,8 +160,12 @@ This document describes the current `main` branch. It is not a release tag.
 - MPB optional micro-benchmark decision packet:
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`.
   It records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
-  readiness path, future opt-in command, expected artifacts, cleanup, and
-  non-claims. MPB remains not executed and not approved.
+  readiness path, opt-in command, expected artifacts, cleanup, and non-claims
+  for the approved MPB-only run.
+- Approved MPB-only optional micro-benchmark evidence:
+  `validation/mpb/mpb_micro_benchmark_2026-05-20.md`. This is optional manual
+  MPB/band-structure smoke evidence only; Meep FDTD, Gmsh, Optiland, and Elmer
+  were not run in that task. Future MPB reruns require separate approval.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.
@@ -172,8 +176,9 @@ This document describes the current `main` branch. It is not a release tag.
 - Approved Optiland-only optional micro-benchmark evidence:
   `validation/optiland/optiland_micro_benchmark_2026-05-20.md`. This is
   reviewed and accepted ray/path smoke evidence only; Gmsh was not rerun in
-  that task, and Meep, MPB, and Elmer were not run. MPB requires
-  `OSA_SOLVER_PYTHON` and separate approval; Elmer remains deferred.
+  that task, and Meep, MPB, and Elmer were not run. Future solver runs require
+  separate approval; Meep/MPB require `OSA_SOLVER_PYTHON`; Elmer remains
+  deferred.
 - Optiland micro-benchmark review decision:
   `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`.
   The evidence is accepted only as optional manual ray/path smoke evidence.

@@ -39,14 +39,15 @@ Latest local readiness findings are environment-specific:
   evidence, or MPB authorization.
 - An MPB-specific decision packet is recorded at
   `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`.
-  It documents the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
-  readiness path, future opt-in command, artifacts, cleanup, and non-claims.
-  MPB remains unapproved and unexecuted.
+  The approved MPB-only optional micro-benchmark used `OSA_SOLVER_PYTHON`,
+  executed through `meep.mpb`, and passed on 2026-05-20 as optional manual
+  MPB/band-structure smoke evidence only.
 - Elmer remains unavailable/deferred.
 - Gmsh was executed only for the approved Gmsh run. Optiland was executed only
   for the separately approved Optiland run. Meep was executed only for the
-  separately approved Meep run. No MPB or Elmer micro-benchmark has been
-  executed or approved by this status.
+  separately approved Meep run. MPB was executed only for the separately
+  approved MPB run. No Elmer micro-benchmark has been executed or approved by
+  this status.
 
 ## Readiness By Solver
 
@@ -54,7 +55,7 @@ Latest local readiness findings are environment-specific:
 | --- | --- | --- | --- | --- |
 | Gmsh | Executed/passed for the approved Gmsh-only optional micro-benchmark on 2026-05-20; review accepted it as optional manual mesh-generation smoke evidence | no by default; yes only for the completed approved Gmsh run | future Gmsh runs require fresh approval | Evidence: `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`; review: `docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`; availability detection checks `gmsh` on PATH and can optionally probe the `gmsh` Python module. |
 | Meep | Executed/passed for the approved Meep-only optional micro-benchmark on 2026-05-20; review accepted it as optional manual PyMeep/FDTD smoke evidence | no by default; yes only for the completed approved Meep run | future Meep runs require fresh approval | Evidence: `validation/meep/meep_micro_benchmark_2026-05-20.md`; approval: `docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md`; review: `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`; decision packet: `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`; MPB remains separate and requires `OSA_SOLVER_PYTHON` plus separate approval. |
-| MPB | Candidate-ready with previous narrow manual report and MPB decision packet; not executed | no | yes | Decision packet: `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`; availability detection checks `meep.mpb` through current Python or `OSA_SOLVER_PYTHON`; MPB CLI is not required if the Python path is available. |
+| MPB | Executed/passed for the approved MPB-only optional micro-benchmark on 2026-05-20 through `meep.mpb`; recorded as optional manual MPB/band-structure smoke evidence pending separate review | no by default; yes only for the completed approved MPB run | future MPB runs require fresh approval | Evidence: `validation/mpb/mpb_micro_benchmark_2026-05-20.md`; approval: `docs/optional_solver_approval_records/mpb_micro_benchmark_approval_2026-05-20.md`; decision packet: `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`; availability detection checks `meep.mpb` through current Python or `OSA_SOLVER_PYTHON`; MPB CLI is not required if the Python path is available. |
 | Optiland | Executed/passed for the approved Optiland-only optional micro-benchmark on 2026-05-20; review accepted it as optional manual ray/path smoke evidence | no by default; yes only for the completed approved Optiland run | future Optiland runs require fresh approval | Evidence: `validation/optiland/optiland_micro_benchmark_2026-05-20.md`; approval: `docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md`; review: `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`; availability detection checks `optiland` through current Python or `OSA_SOLVER_PYTHON`, plus optional CLI path. |
 | Elmer | deferred | no | yes | Elmer remains Level 2 + Level-3-ready until a maintainable ElmerSolver install route exists. |
 
@@ -68,16 +69,17 @@ Profile setup is documented in
 The one-solver-at-a-time execution sequence is documented in
 [`optional_solver_execution_sequence.md`](optional_solver_execution_sequence.md).
 The current pending/deferred records plus the approved Gmsh-only, Optiland-only,
-and Meep-only execution records are stored under
+Meep-only, and MPB-only execution records are stored under
 [`optional_solver_approval_records/`](optional_solver_approval_records/).
 The reviewed Meep evidence is accepted only as optional manual PyMeep/FDTD
-smoke evidence. It does not approve MPB, Elmer, any future
+smoke evidence. It does not approve Elmer, any future
 Gmsh/Optiland/Meep rerun, PyPI/TestPyPI upload, tag creation, or release
 creation.
-The MPB decision packet prepares a future decision path only. It does not
-approve MPB execution, PyPI/TestPyPI upload, tag creation, or release creation.
+The MPB evidence is recorded only as optional manual MPB/band-structure smoke
+evidence pending separate review. It does not approve future MPB reruns,
+PyPI/TestPyPI upload, tag creation, or release creation.
 The reviewed Optiland run closes only the separately approved Optiland execution step;
-it does not approve MPB, Elmer, any future Gmsh, Optiland, or Meep rerun,
+it does not approve Elmer, any future Gmsh, Optiland, Meep, or MPB rerun,
 PyPI/TestPyPI upload, tag creation, or release creation.
 
 No PyPI upload, TestPyPI upload, tag creation, GitHub release creation, or

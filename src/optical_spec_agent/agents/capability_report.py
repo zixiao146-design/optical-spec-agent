@@ -810,9 +810,13 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
             "Gmsh has an approved 2026-05-20 Gmsh-only optional micro-benchmark pass recorded as mesh generation smoke evidence.",
             "The Gmsh evidence was reviewed and accepted as optional manual mesh-generation smoke evidence; it does not authorize further solver execution.",
             "Optiland evidence was reviewed and accepted as optional manual ray/path smoke evidence; it does not authorize further solver execution.",
-            "Gmsh was not rerun by the Optiland or Meep tasks; Optiland was not rerun by the Meep task.",
-            "Meep evidence was reviewed and accepted as optional manual PyMeep/FDTD smoke evidence; it does not authorize MPB or further solver execution.",
-            "MPB has a prepared decision packet but was not executed; it requires OSA_SOLVER_PYTHON plus separate approval; Elmer remains deferred.",
+            (
+                "Gmsh was not rerun by the Optiland, Meep, or MPB tasks; "
+                "Optiland was not rerun by the Meep or MPB tasks; the Meep "
+                "FDTD benchmark was not rerun by the MPB task."
+            ),
+            "Meep evidence was reviewed and accepted as optional manual PyMeep/FDTD smoke evidence; it does not authorize future Meep reruns or other solver execution.",
+            "MPB has an approved 2026-05-20 MPB-only optional micro-benchmark pass recorded as MPB/band-structure smoke evidence; it does not authorize future MPB reruns or other solver execution.",
             "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
             "Future execution should run one solver at a time after explicit approval.",
             "Opt-in environment variables are required for solver-backed runs.",

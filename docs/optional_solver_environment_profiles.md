@@ -38,7 +38,9 @@ The MPB decision packet also uses this profile:
 [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md).
 For MPB, `from meep import mpb` or `meep.mpb` import readiness is sufficient
 for the profile check; an MPB CLI is not required if the Python path is
-available. This is still import-only readiness and does not execute MPB.
+available. The separately approved 2026-05-20 MPB-only run used this profile
+and is recorded in `validation/mpb/mpb_micro_benchmark_2026-05-20.md`.
+Future MPB reruns still require fresh solver-specific approval.
 
 ## Solver-specific notes
 

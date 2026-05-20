@@ -136,9 +136,11 @@ Meep-only 2026-05-20 run is recorded in
 [`validation/meep/meep_micro_benchmark_2026-05-20.md`](validation/meep/meep_micro_benchmark_2026-05-20.md)
 and reviewed in
 [`docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
-as optional manual PyMeep/FDTD smoke evidence only. MPB and Elmer remain
-not executed by these tasks and require separate approval; Gmsh, Optiland, and
-Meep reruns also require separate approval.
+as optional manual PyMeep/FDTD smoke evidence only. The separately approved
+MPB-only 2026-05-20 run is recorded in
+[`validation/mpb/mpb_micro_benchmark_2026-05-20.md`](validation/mpb/mpb_micro_benchmark_2026-05-20.md)
+as optional manual MPB/band-structure smoke evidence only. Elmer remains
+deferred; Gmsh, Optiland, Meep, and MPB reruns all require separate approval.
 The Meep decision packet
 [`meep_micro_benchmark_decision_packet.md`](docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
 records the required `OSA_SOLVER_PYTHON` profile, approval phrase, expected
@@ -146,8 +148,8 @@ command, artifacts, and non-claims for that one approved Meep run.
 The MPB decision packet
 [`mpb_micro_benchmark_decision_packet.md`](docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
 records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
-readiness path, expected future command, artifacts, cleanup, and non-claims.
-It is preparation only and does not authorize MPB execution.
+readiness path, approved command, artifacts, cleanup, and non-claims for the
+approved MPB-only run. It does not authorize future MPB reruns.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

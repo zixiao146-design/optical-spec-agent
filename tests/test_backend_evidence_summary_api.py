@@ -83,7 +83,7 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "mpb_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "elmer_deferred"
     assert gmsh["next_candidate_approved"] is False
     optiland = next(
         item
@@ -129,8 +129,15 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
         if item["solver_name"] == "mpb"
     )
     assert mpb["decision_packet_path"].endswith("mpb_micro_benchmark_decision_packet.md")
-    assert mpb["approval_status"] == "pending"
-    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["approval_status"] == "approved_executed"
+    assert mpb["execution_authorized"] is False
+    assert mpb["last_execution_status"] == "passed"
+    assert mpb["last_execution_evidence"] == (
+        "validation/mpb/mpb_micro_benchmark_2026-05-20.md"
+    )
+    assert mpb["approval_record_path"].endswith(
+        "mpb_micro_benchmark_approval_2026-05-20.md"
+    )
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(

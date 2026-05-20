@@ -33,7 +33,8 @@
    - Decision packet:
      `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`。
    - 如果 `meep.mpb` Python import path 可用，则不要求 MPB CLI。
-   - 状态：decision packet 已准备；MPB 仍未授权、未执行。
+   - 状态：2026-05-20 已按 MPB-only 批准执行并通过；见
+     `validation/mpb/mpb_micro_benchmark_2026-05-20.md`。
    - MPB 后暂停并 review band-path smoke report。
 5. Elmer deferred。
    - 没有可维护的 `ElmerSolver` 安装路径前不要运行。
@@ -61,7 +62,7 @@
 不要在没有 separate approval 的情况下批量运行所有 solvers。
 已接受的 Gmsh review 本身不授权 Optiland；Optiland 只是在单独 approval
 record 后执行。已接受的 Optiland review 本身不授权 Meep；Meep 只是在单独
-approval record 后执行。已接受的 Meep 证据不授权 MPB、Elmer、未来 Gmsh
-rerun、未来 Optiland rerun 或未来 Meep rerun。
-MPB decision packet 只是未来决策准备；没有单独批准 phrase 和
-`OSA_SOLVER_PYTHON` 路径前，不授权 MPB 执行。
+approval record 后执行。已接受的 Meep 证据不授权 MPB；MPB 只是在单独
+approval record 后执行。MPB 证据目前只记录为 optional manual MPB/band-structure
+smoke evidence，等待单独 review；它不授权 Elmer、未来 Gmsh/Optiland/Meep/MPB
+rerun、PyPI/TestPyPI upload、tag 创建或 release 创建。

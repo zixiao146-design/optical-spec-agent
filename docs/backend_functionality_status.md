@@ -118,12 +118,15 @@ The separately approved Optiland-only optional micro-benchmark also passed on
 not production lens design validation. The separately approved Meep-only
 optional micro-benchmark passed on 2026-05-20 using `OSA_SOLVER_PYTHON` and is
 reviewed as accepted optional manual PyMeep/FDTD smoke evidence, not production
-FDTD validation. MPB and Elmer remain unexecuted by these tasks.
+FDTD validation. The separately approved MPB-only optional micro-benchmark
+passed on 2026-05-20 using `OSA_SOLVER_PYTHON` and `meep.mpb` and is recorded as
+optional manual MPB/band-structure smoke evidence pending separate review.
+Elmer remains unexecuted by these tasks.
 The Meep record does not authorize MPB, uploads, tags, releases, or future Meep
 reruns.
 The MPB decision packet now documents the required `OSA_SOLVER_PYTHON` profile,
 `meep.mpb` import-only readiness path, expected artifacts, and approval phrase,
-but MPB remains unapproved and unexecuted.
+but it does not authorize future MPB reruns.
 
 ## Publication / Release Actions
 
