@@ -113,6 +113,28 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
     assert "meep.mpb" in solvers["mpb"]["module_names"]
     assert solvers["mpb"]["execution_sequence_rank"] == 4
     assert solvers["mpb"]["solver_python_required"] is True
+    assert solvers["mpb"]["approval_status"] == "pending"
+    assert solvers["mpb"]["execution_authorized"] is False
+    assert solvers["mpb"]["last_execution_status"] == "not_run"
+    assert solvers["mpb"]["decision_packet_path"] == (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+    )
+    assert solvers["mpb"]["readiness_profile"] == "osa-solvers"
+    assert solvers["mpb"]["cli_required"] is False
+    assert solvers["mpb"]["approval_phrase"] == (
+        "I approve running the optional MPB micro-benchmark for optical-spec-agent "
+        "using OSA_SOLVER_PYTHON=<path>."
+    )
+    assert "decision packet is prepared" in solvers["mpb"]["recommended_next_action"]
+    assert (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+        in solvers["mpb"]["evidence_refs"]
+    )
+    assert (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md"
+        in solvers["mpb"]["evidence_refs"]
+    )
+    assert "/tmp/osa-mpb-micro-benchmark-report.json" in solvers["mpb"]["expected_artifact_paths"]
     assert "optiland" in solvers["optiland"]["module_names"]
     assert solvers["optiland"]["execution_sequence_rank"] == 2
     assert solvers["optiland"]["approval_status"] == "approved_executed"

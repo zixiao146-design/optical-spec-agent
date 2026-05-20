@@ -143,6 +143,11 @@ The Meep decision packet
 [`meep_micro_benchmark_decision_packet.md`](docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
 records the required `OSA_SOLVER_PYTHON` profile, approval phrase, expected
 command, artifacts, and non-claims for that one approved Meep run.
+The MPB decision packet
+[`mpb_micro_benchmark_decision_packet.md`](docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
+records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
+readiness path, expected future command, artifacts, cleanup, and non-claims.
+It is preparation only and does not authorize MPB execution.
 Readiness is environment-aware: the default profile uses the current Python and
 current `PATH`, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

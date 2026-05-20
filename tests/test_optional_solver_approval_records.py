@@ -109,6 +109,29 @@ def test_meep_pending_record_references_decision_packet_without_authorization():
     assert "does not authorize MPB execution, Meep execution, uploads, tags, or releases" in text
 
 
+def test_mpb_pending_record_references_decision_packet_without_authorization():
+    pending = RECORD_DIR / "mpb_micro_benchmark_approval_pending.md"
+    packet = RECORD_DIR / "mpb_micro_benchmark_decision_packet.md"
+    assert pending.exists()
+    assert packet.exists()
+    text = pending.read_text(encoding="utf-8")
+    assert "Approval status: pending" in text
+    assert "Execution authorized: no" in text
+    assert "Solver execution performed: no" in text
+    assert "mpb_micro_benchmark_decision_packet.md" in text
+    assert "OSA_SOLVER_PYTHON" in text
+    assert "from meep import mpb" in text
+    assert "MPB CLI required: no" in text
+    assert "DO NOT RUN WITHOUT APPROVAL" in text
+    assert "OSA_RUN_OPTIONAL_MPB_VALIDATION=1" in text
+    assert "PyPI publication: not approved" in text
+    assert "TestPyPI upload: not approved" in text
+    assert "Tag or GitHub release creation: not approved" in text
+    assert "Production-grade MPB validation: not claimed" in text
+    assert "Formal convergence proof: not claimed" in text
+    assert "Optical correctness: not claimed" in text
+
+
 def test_meep_approved_execution_record_is_separate_from_pending_template():
     path = RECORD_DIR / "meep_micro_benchmark_approval_2026-05-20.md"
     assert path.exists()

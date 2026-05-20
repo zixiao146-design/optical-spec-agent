@@ -116,4 +116,5 @@ without batching solvers or changing default release gates.
 The Gmsh review decision closes the Gmsh loop only; the Optiland review decision
 closes only the separately approved Optiland run. The Meep review decision
 closes only the separately approved Meep run using `OSA_SOLVER_PYTHON`. MPB
-requires `OSA_SOLVER_PYTHON` and separate approval, and Elmer remains deferred.
+now has a prepared decision packet, but still requires `OSA_SOLVER_PYTHON` and
+separate approval before any execution. Elmer remains deferred.

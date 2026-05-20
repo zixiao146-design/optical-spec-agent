@@ -193,6 +193,10 @@ class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     meep_decision_packet_path: str = (
         "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
     )
+    mpb_decision_packet_available: bool = True
+    mpb_decision_packet_path: str = (
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+    )
     approval_records_present: bool = True
     approval_records_path: str = "docs/optional_solver_approval_records"
     readiness_status_path: str = "docs/optional_solver_micro_benchmark_readiness_status.md"
@@ -771,6 +775,9 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         meep_decision_packet_available=Path(
             "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
         ).exists(),
+        mpb_decision_packet_available=Path(
+            "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+        ).exists(),
         approval_records_present=Path("docs/optional_solver_approval_records").exists(),
         environment_profiles_available=Path(
             "validation/solver_environment_profiles.json"
@@ -805,7 +812,7 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
             "Optiland evidence was reviewed and accepted as optional manual ray/path smoke evidence; it does not authorize further solver execution.",
             "Gmsh was not rerun by the Optiland or Meep tasks; Optiland was not rerun by the Meep task.",
             "Meep evidence was reviewed and accepted as optional manual PyMeep/FDTD smoke evidence; it does not authorize MPB or further solver execution.",
-            "MPB was not executed and requires OSA_SOLVER_PYTHON plus separate approval; Elmer remains deferred.",
+            "MPB has a prepared decision packet but was not executed; it requires OSA_SOLVER_PYTHON plus separate approval; Elmer remains deferred.",
             "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
             "Future execution should run one solver at a time after explicit approval.",
             "Opt-in environment variables are required for solver-backed runs.",

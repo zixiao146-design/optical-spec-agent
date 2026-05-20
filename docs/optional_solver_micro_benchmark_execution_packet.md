@@ -25,6 +25,9 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`;
   approved/executed/reviewed for the Meep-only 2026-05-20 run as optional
   manual PyMeep/FDTD smoke evidence
+- MPB decision packet: prepared at
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`;
+  approval pending, execution authorized: no, execution performed: no
 - Other solver micro-benchmark execution performed: MPB and Elmer were not run
 
 ## Execution Principles
@@ -53,8 +56,10 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
    smoke evidence.
 3. Meep third: requires the solver Python profile, typically
    `OSA_SOLVER_PYTHON=<osa-solvers python>`.
-   Status: decision packet prepared, approval pending, execution authorized: no.
+   Status: completed for the approved Meep-only run on 2026-05-20 and reviewed
+   as optional manual PyMeep/FDTD smoke evidence.
 4. MPB fourth: requires the solver Python profile and `meep.mpb`.
+   Status: decision packet prepared; approval pending; execution authorized: no.
 5. Elmer deferred: keep deferred until a maintainable `ElmerSolver` install
    route exists.
 
@@ -138,6 +143,9 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 
 - Solver: MPB through `meep.mpb`
 - Readiness profile: `osa-solvers`
+- Decision packet:
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+- MPB CLI required: no, if `meep.mpb` is importable through `OSA_SOLVER_PYTHON`
 - Required env vars after approval:
   - `OSA_SOLVER_PYTHON=<path to solver Python>`
   - `OSA_SOLVER_READINESS_PROFILE=osa-solvers`
@@ -145,17 +153,17 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - Approval phrase:
   - `I approve running the optional MPB micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.`
 - Command template:
-  - `OSA_SOLVER_PYTHON=<path> OSA_SOLVER_READINESS_PROFILE=osa-solvers OSA_RUN_OPTIONAL_MPB_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
+  - `OSA_RUN_OPTIONAL_MPB_VALIDATION=1 OSA_SOLVER_PYTHON=<path> OSA_MPB_VALIDATION_REPORT=/tmp/osa-mpb-micro-benchmark-report.json OSA_MPB_OUTPUT_DIR=/tmp/osa-mpb-micro-benchmark-output ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts:
-  - `/tmp/osa-mpb-validation/mpb_preview.py`
-  - `/tmp/osa-mpb-validation/mpb_validation_result.json`
-  - `/tmp/osa-mpb-validation/mpb_validation_report.json`
-- Expected report path: `/tmp/osa-mpb-validation/mpb_validation_report.json`
-- Cleanup notes: remove `/tmp/osa-mpb-validation/` after review unless
+  - `/tmp/osa-mpb-micro-benchmark-output/mpb_preview.py`
+  - `/tmp/osa-mpb-micro-benchmark-output/mpb_validation_result.json`
+  - `/tmp/osa-mpb-micro-benchmark-output/mpb_band_summary.json` if generated
+- Expected report path: `/tmp/osa-mpb-micro-benchmark-report.json`
+- Cleanup notes: remove `/tmp/osa-mpb-micro-benchmark-output/` after review unless
   preservation is requested.
 - Risk notes: tiny band path smoke only; not band convergence evidence.
-- Non-claims: no production-grade physical validation; no formal convergence
-  proof.
+- Non-claims: no production-grade MPB validation; no production-grade physical
+  validation; no formal convergence proof; no optical correctness claim.
 
 ### Elmer
 

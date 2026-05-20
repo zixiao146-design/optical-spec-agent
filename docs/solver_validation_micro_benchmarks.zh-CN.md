@@ -22,7 +22,7 @@
 | --- | --- | --- | --- |
 | Gmsh | 从本地 `.geo` preview 生成微型 mesh | `.msh` | 2026-05-20 已按 Gmsh-only 批准执行并通过；只验证语法和路径，不验证光学正确性。 |
 | Meep | 基于生成的 preview artifact 执行微型 PyMeep smoke | result JSON | 2026-05-20 已按 Meep-only 批准通过 `OSA_SOLVER_PYTHON` 执行并通过，且 review 接受为 optional manual PyMeep/FDTD smoke evidence；只验证 import/run 路径，不是生产级 FDTD。 |
-| MPB | 通过 `meep.mpb` 执行微型 band-structure smoke | band summary JSON | 只验证 MPB Python 路径。 |
+| MPB | 通过 `meep.mpb` 执行微型 band-structure smoke | band summary JSON | Decision packet 已准备；未来批准后只验证 MPB Python 路径。 |
 | Optiland | 微型 ray-trace 或 import/run smoke | result JSON | 2026-05-20 已按 Optiland-only 批准执行并通过，review 接受为 optional manual ray/path smoke evidence；只验证本地 Optiland 路径，不验证透镜设计正确性。 |
 | Elmer | 等待可维护的 `ElmerSolver` 安装路径 | deferred report | 不声称 Level 3 验证。 |
 
@@ -32,12 +32,16 @@ test、quality gate 或 release gate 行为。另一个单独批准的 2026-05-2
 Optiland-only run 已通过，并已 review 接受为 optional manual ray/path smoke
 evidence。单独批准的 2026-05-20 Meep-only run 使用 `OSA_SOLVER_PYTHON`
 并已通过，review 接受为 optional manual PyMeep/FDTD smoke evidence。MPB 仍需要
-`OSA_SOLVER_PYTHON` 和单独批准；Elmer 仍 deferred。当前记录不批准未来
-Gmsh、Optiland 或 Meep rerun。
+`OSA_SOLVER_PYTHON` 和单独批准；其 decision packet 已准备，但 MPB 仍未执行。
+Elmer 仍 deferred。当前记录不批准未来 Gmsh、Optiland 或 Meep rerun。
 Meep 专用 decision packet 记录在
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)，
 记录必需的 `OSA_SOLVER_PYTHON` profile 和 opt-in 命令，用于已批准的
 Meep-only run。
+MPB 专用 decision packet 记录在
+[`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)，
+记录必需的 `OSA_SOLVER_PYTHON` profile、`meep.mpb` import-only readiness
+路径、未来命令、预期 artifact、cleanup 和 non-claims。它不授权 MPB 执行。
 
 ## 必需批准
 
@@ -91,6 +95,8 @@ Optiland-only 和 Meep-only approved execution records，位于
 [`optional_solver_approval_records/`](optional_solver_approval_records/)。
 其中 Meep decision packet、approval record 和 review record 不授权 MPB、
 Elmer、upload、tag、release 动作或任何未来 Meep rerun。
+同一目录中的 MPB decision packet 只是准备材料；只有维护者用包含
+`OSA_SOLVER_PYTHON` 路径的 MPB approval phrase 单独批准后，才可执行。
 
 ## 声明边界
 

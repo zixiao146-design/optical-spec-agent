@@ -101,6 +101,10 @@ and after generating an adapter MPB preview artifact. It does not make MPB a
 default dependency, does not require MPB CLI, does not add MPB to default
 pytest, smoke, quality gates, CI, or release validation, and does not claim
 production-grade physical validation or a formal convergence proof.
+The later MPB decision packet
+`docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+prepares a future `OSA_SOLVER_PYTHON`-scoped micro-benchmark approval path only.
+It records `meep.mpb` import-only readiness and does not authorize MPB execution.
 
 ## Optiland Level 3 Boundary
 

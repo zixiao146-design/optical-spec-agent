@@ -65,6 +65,9 @@ solver convergence, and material-data verification.
   `OSA_SOLVER_PYTHON` and is reviewed and accepted only as optional manual
   PyMeep/FDTD smoke evidence; it does not approve MPB, Elmer, or any future
   Meep rerun.
+- The MPB decision packet records an `OSA_SOLVER_PYTHON` and `meep.mpb`
+  import-only readiness path for future review, but MPB remains unapproved and
+  unexecuted.
 - `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
   Python environment; CLI tools such as Gmsh are still detected through the
   current `PATH`.

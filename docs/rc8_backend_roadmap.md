@@ -68,6 +68,11 @@ not approve PyPI publication, and does not authorize TestPyPI upload.
   [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
   to review the `OSA_SOLVER_PYTHON` profile, approval phrase, artifacts, and
   non-claims for the approved Meep-only smoke run.
+- Use the MPB decision packet
+  [`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)
+  as preparation only. It records the required `OSA_SOLVER_PYTHON` profile,
+  `meep.mpb` import-only readiness path, future command, artifacts, cleanup,
+  and non-claims, but MPB remains unapproved and unexecuted.
 - Record that the Gmsh review accepted the evidence only as optional manual
   mesh-generation smoke evidence; record that the Optiland review accepted the
   evidence only as optional manual ray/path smoke evidence; record that the
@@ -144,3 +149,5 @@ Meep, MPB, Elmer, or future Gmsh reruns.
 The Meep-only micro-benchmark is reviewed and accepted as optional manual
 PyMeep/FDTD smoke evidence only; it does not authorize MPB, Elmer,
 PyPI/TestPyPI upload, tag/release creation, or future Meep reruns.
+The MPB decision packet is now ready for future review, but it does not
+authorize MPB execution.

@@ -146,6 +146,10 @@ it requires `OSA_SOLVER_PYTHON` and records the one approved Meep-only
 [`optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md)
 accepts that run only as optional manual PyMeep/FDTD smoke evidence, not
 production FDTD validation.
+The MPB-specific decision packet is
+[`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md);
+it requires `OSA_SOLVER_PYTHON`, treats `meep.mpb` import as readiness only,
+and does not authorize MPB execution.
 
 Coverage can also be read directly:
 
@@ -218,6 +222,8 @@ as optional manual PyMeep/FDTD smoke evidence only. MPB and Elmer remain not
 executed by these tasks, and Gmsh/Optiland/Meep reruns require separate
 approval. The Meep review does not authorize MPB, PyPI/TestPyPI upload, tag
 creation, or release creation.
+The MPB decision packet prepares the next decision path only; MPB remains
+unexecuted and requires separate explicit approval with `OSA_SOLVER_PYTHON`.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

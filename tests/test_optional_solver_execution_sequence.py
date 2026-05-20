@@ -21,6 +21,9 @@ def test_optional_solver_execution_sequence_docs_define_order_and_stops():
     assert "Elmer deferred" in text
     assert "OSA_SOLVER_PYTHON" in text
     assert "meep_micro_benchmark_decision_packet.md" in text
+    assert "mpb_micro_benchmark_decision_packet.md" in text
+    assert "MPB remains unapproved and unexecuted" in text
+    assert "MPB CLI is not required" in text
     assert "meep_micro_benchmark_review_2026-05-20.md" in text
     assert "validation/meep/meep_micro_benchmark_2026-05-20.md" in text
     assert "accepted as optional manual PyMeep/FDTD smoke evidence" in text
@@ -33,4 +36,5 @@ def test_optional_solver_execution_sequence_docs_define_order_and_stops():
     assert "Gmsh first" in zh_text
     assert "Optiland second" in zh_text
     assert "OSA_SOLVER_PYTHON" in zh_text
+    assert "mpb_micro_benchmark_decision_packet.md" in zh_text
     assert "Elmer deferred" in zh_text

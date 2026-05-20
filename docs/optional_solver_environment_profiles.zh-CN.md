@@ -31,6 +31,12 @@ Meep decision packet 明确使用该 profile：
 `validation/meep/meep_micro_benchmark_2026-05-20.md`。未来 Meep rerun 仍需要
 包含 `OSA_SOLVER_PYTHON` 路径的全新 solver-specific approval phrase。
 
+MPB decision packet 也使用该 profile：
+[`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md)。
+对 MPB 而言，`from meep import mpb` 或 `meep.mpb` import readiness 足以用于
+profile 检查；如果 Python path 可用，则不要求 MPB CLI。这仍然只是 import-only
+readiness，不会执行 MPB。
+
 ## Solver 说明
 
 - Gmsh readiness 通常基于当前 `PATH` 中的 `gmsh` CLI。

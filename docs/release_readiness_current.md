@@ -157,6 +157,11 @@ This document describes the current `main` branch. It is not a release tag.
   The evidence is accepted only as optional manual PyMeep/FDTD smoke evidence;
   it does not approve MPB, PyPI/TestPyPI upload, tag/release creation, or any
   future Meep rerun.
+- MPB optional micro-benchmark decision packet:
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`.
+  It records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
+  readiness path, future opt-in command, expected artifacts, cleanup, and
+  non-claims. MPB remains not executed and not approved.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.

@@ -115,6 +115,12 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
         summary.summary["meep_optional_micro_benchmark_readiness_profile"]
         == "osa-solvers_import_only"
     )
+    assert summary.summary["mpb_optional_micro_benchmark_decision_packet_available"] is True
+    assert summary.summary["mpb_optional_micro_benchmark_status"] == "not_run"
+    assert (
+        summary.summary["mpb_optional_micro_benchmark_readiness_profile"]
+        == "osa-solvers_import_only_meep_mpb"
+    )
     assert (
         summary.summary["next_optional_solver_candidate"]
         == "mpb_requires_osa_solver_python_not_approved"
@@ -130,5 +136,6 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert "Meep-only pass" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "reviewed optional manual PyMeep/FDTD smoke evidence" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "PyMeep/FDTD smoke evidence" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
+    assert "MPB decision packet" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert summary.production_grade_validation_claimed is False
     assert summary.formal_convergence_proof_claimed is False

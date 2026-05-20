@@ -121,6 +121,9 @@ reviewed as accepted optional manual PyMeep/FDTD smoke evidence, not production
 FDTD validation. MPB and Elmer remain unexecuted by these tasks.
 The Meep record does not authorize MPB, uploads, tags, releases, or future Meep
 reruns.
+The MPB decision packet now documents the required `OSA_SOLVER_PYTHON` profile,
+`meep.mpb` import-only readiness path, expected artifacts, and approval phrase,
+but MPB remains unapproved and unexecuted.
 
 ## Publication / Release Actions
 
@@ -239,6 +242,9 @@ The Gmsh review decision closes only the already approved Gmsh run. The
 Optiland review decision closes only the separately approved Optiland run.
 The Meep review decision closes only the separately approved Meep run. MPB
 requires `OSA_SOLVER_PYTHON` and separate approval; Elmer remains deferred.
+The MPB-specific decision packet is prepared for a future approval decision only;
+it does not authorize MPB execution, uploads, tags, releases, or any production
+validation claim.
 The Meep-specific decision packet records the approval phrase and expected
 artifacts for the approved smoke run, but it does not authorize future Meep
 reruns.

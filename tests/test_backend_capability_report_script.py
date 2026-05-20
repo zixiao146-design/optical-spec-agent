@@ -118,6 +118,11 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         solver_micro["meep_decision_packet_path"]
         == "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
     )
+    assert solver_micro["mpb_decision_packet_available"] is True
+    assert (
+        solver_micro["mpb_decision_packet_path"]
+        == "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+    )
     assert solver_micro["approval_records_path"] == "docs/optional_solver_approval_records"
     assert solver_micro["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert solver_micro["profile_env_var"] == "OSA_SOLVER_READINESS_PROFILE"
@@ -172,11 +177,20 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
         meep["review_status"]
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
+    mpb = next(item for item in solver_micro["solvers"] if item["solver_name"] == "mpb")
+    assert mpb["approval_status"] == "pending"
+    assert mpb["execution_authorized"] is False
+    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["decision_packet_path"].endswith(
+        "mpb_micro_benchmark_decision_packet.md"
+    )
+    assert mpb["cli_required"] is False
     assert any(
         "Optiland evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
     assert any("Meep evidence was reviewed and accepted" in note for note in solver_micro["notes"])
+    assert any("MPB has a prepared decision packet" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
     assert solver_micro["formal_convergence_proof_claimed"] is False

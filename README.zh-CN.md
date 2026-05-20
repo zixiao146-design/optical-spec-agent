@@ -107,6 +107,11 @@ Meep decision packet
 `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`
 记录必需的 `OSA_SOLVER_PYTHON` profile、approval phrase、命令、artifact
 和 non-claims，用于这次已批准的 Meep-only run。
+MPB decision packet
+`docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+记录必需的 `OSA_SOLVER_PYTHON` profile、`meep.mpb` import-only readiness
+路径、未来命令、artifact、cleanup 和 non-claims。它只是准备材料，不授权
+MPB 执行。
 readiness 现在是 environment-aware：默认 profile 使用当前 Python 和当前 `PATH`；
 `OSA_SOLVER_PYTHON` 可以探测 `osa-solvers` 等专用 solver Python 中的 PyMeep 和
 `meep.mpb`。见 `docs/optional_solver_environment_profiles.zh-CN.md`。

@@ -59,6 +59,8 @@
 - 2026-05-20 单独批准并执行的 Meep-only micro-benchmark 使用
   `OSA_SOLVER_PYTHON`，review 后只接受为 optional manual PyMeep/FDTD smoke evidence；
   它不批准 MPB、Elmer 或未来 Meep rerun。
+- MPB decision packet 只记录未来 review 所需的 `OSA_SOLVER_PYTHON` 和
+  `meep.mpb` import-only readiness 路径；MPB 仍未获批且未执行。
 - `OSA_SOLVER_PYTHON` 可用于把 import-only probe 指向专用 solver Python；
   Gmsh 等 CLI 工具仍从当前 `PATH` 探测。
 - 默认不调用 external LLM。

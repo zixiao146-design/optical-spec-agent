@@ -30,6 +30,10 @@
    - Meep 后暂停并 review PyMeep report，再考虑 MPB。
 4. MPB fourth。
    - 需要 `OSA_SOLVER_PYTHON` 和 `meep.mpb`。
+   - Decision packet:
+     `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`。
+   - 如果 `meep.mpb` Python import path 可用，则不要求 MPB CLI。
+   - 状态：decision packet 已准备；MPB 仍未授权、未执行。
    - MPB 后暂停并 review band-path smoke report。
 5. Elmer deferred。
    - 没有可维护的 `ElmerSolver` 安装路径前不要运行。
@@ -59,3 +63,5 @@
 record 后执行。已接受的 Optiland review 本身不授权 Meep；Meep 只是在单独
 approval record 后执行。已接受的 Meep 证据不授权 MPB、Elmer、未来 Gmsh
 rerun、未来 Optiland rerun 或未来 Meep rerun。
+MPB decision packet 只是未来决策准备；没有单独批准 phrase 和
+`OSA_SOLVER_PYTHON` 路径前，不授权 MPB 执行。

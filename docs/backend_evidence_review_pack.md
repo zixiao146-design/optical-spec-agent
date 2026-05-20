@@ -85,6 +85,11 @@ approval remain separate and not granted.
   `docs/optional_solver_approval_records/meep_micro_benchmark_review_2026-05-20.md`
   accepts the result only as optional manual PyMeep/FDTD smoke evidence and
   does not authorize MPB execution.
+  The MPB decision packet at
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+  records the required `OSA_SOLVER_PYTHON` profile, `meep.mpb` import-only
+  readiness path, future command, artifacts, cleanup, and non-claims, but does
+  not authorize MPB execution.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,

@@ -100,6 +100,11 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         solver_micro["meep_decision_packet_path"]
         == "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
     )
+    assert solver_micro["mpb_decision_packet_available"] is True
+    assert (
+        solver_micro["mpb_decision_packet_path"]
+        == "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+    )
     assert solver_micro["optional_solver_execution_default"] is False
     assert solver_micro["manual_opt_in_only"] is True
     assert solver_micro["all_optional_solver_execution_authorized"] is False
@@ -146,6 +151,14 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         meep["review_status"]
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
+    mpb = next(item for item in solver_micro["solvers"] if item["solver_name"] == "mpb")
+    assert mpb["approval_status"] == "pending"
+    assert mpb["execution_authorized"] is False
+    assert mpb["last_execution_status"] == "not_run"
+    assert mpb["decision_packet_path"].endswith(
+        "mpb_micro_benchmark_decision_packet.md"
+    )
+    assert mpb["cli_required"] is False
     assert any(
         "Optiland evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
@@ -154,6 +167,7 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
         "Meep evidence was reviewed and accepted" in note
         for note in solver_micro["notes"]
     )
+    assert any("MPB has a prepared decision packet" in note for note in solver_micro["notes"])
     assert solver_micro["elmer_deferred"] is True
     assert {item["calculator_name"] for item in payload["optical_calculators"]} == {
         "thin_film",

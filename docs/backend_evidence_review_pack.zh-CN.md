@@ -79,6 +79,10 @@ python scripts/generate_backend_evidence_pack.py \
   ray/path smoke 证据。2026-05-20 单独批准的 Meep-only run 使用
   `OSA_SOLVER_PYTHON`，review 后只接受为可选手动 PyMeep/FDTD smoke 证据；MPB 仍需要
   `OSA_SOLVER_PYTHON` 和单独批准；Elmer 仍 deferred。
+- MPB decision packet
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+  已准备，记录必需的 `OSA_SOLVER_PYTHON` profile、`meep.mpb` import-only
+  readiness path、未来命令、artifact、cleanup 和 non-claims，但不授权 MPB 执行。
 - 默认不调用外部 LLM。
 - 不上传 TestPyPI/PyPI。
 - 不创建 Git tag 或 GitHub release。

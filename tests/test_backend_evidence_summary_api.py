@@ -63,6 +63,11 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
         body["optional_solver_micro_benchmarks"]["meep_decision_packet_path"]
         == "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md"
     )
+    assert body["optional_solver_micro_benchmarks"]["mpb_decision_packet_available"] is True
+    assert (
+        body["optional_solver_micro_benchmarks"]["mpb_decision_packet_path"]
+        == "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md"
+    )
     assert body["optional_solver_micro_benchmarks"]["solver_python_env_var"] == "OSA_SOLVER_PYTHON"
     assert body["optional_solver_micro_benchmarks"]["optional_solver_execution_default"] is False
     assert body["optional_solver_micro_benchmarks"]["explicit_approval_required"] is True
@@ -118,6 +123,14 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
         meep["review_status"]
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
+    mpb = next(
+        item
+        for item in body["optional_solver_micro_benchmarks"]["solvers"]
+        if item["solver_name"] == "mpb"
+    )
+    assert mpb["decision_packet_path"].endswith("mpb_micro_benchmark_decision_packet.md")
+    assert mpb["approval_status"] == "pending"
+    assert mpb["last_execution_status"] == "not_run"
     assert body["optional_solver_micro_benchmarks"]["elmer_deferred"] is True
     assert "PyPI publication would not imply" in body["preview_boundary_summary"]["pypi"]
     assert all(

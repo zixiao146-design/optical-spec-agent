@@ -45,6 +45,8 @@ def test_backend_validation_maturity_api_returns_safe_summary():
         body["summary"]["meep_optional_micro_benchmark_review_status"]
         == "accepted_as_optional_manual_pymeep_fdtd_smoke_evidence"
     )
+    assert body["summary"]["mpb_optional_micro_benchmark_decision_packet_available"] is True
+    assert body["summary"]["mpb_optional_micro_benchmark_status"] == "not_run"
     assert (
         body["summary"]["next_optional_solver_candidate"]
         == "mpb_requires_osa_solver_python_not_approved"
@@ -63,6 +65,7 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert "reviewed ray/path smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "Meep-only pass" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert "reviewed optional manual PyMeep/FDTD smoke evidence" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
+    assert "MPB decision packet" in body["preview_boundary_summary"]["optional_solver_micro_benchmarks"]
     assert body["external_solver_executed"] is False
     assert body["external_llm_required"] is False
     assert body["production_grade_validation_claimed"] is False

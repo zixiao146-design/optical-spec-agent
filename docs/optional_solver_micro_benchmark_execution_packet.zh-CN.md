@@ -22,6 +22,9 @@
 - Meep decision packet：
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`；
   已用于 Meep-only 2026-05-20 run，并 review 接受为 optional manual PyMeep/FDTD smoke evidence
+- MPB decision packet：
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`；
+  approval pending，execution authorized: no，execution performed: no
 - 其他 solver micro-benchmark 执行：MPB 和 Elmer 未执行
 
 ## 执行原则
@@ -46,9 +49,10 @@
    solver。状态：2026-05-20 已按单独批准的 Optiland-only run 执行并通过，
    并已 review 为 optional manual ray/path smoke evidence。
 3. Meep third：需要 solver Python profile，通常是
-   `OSA_SOLVER_PYTHON=<osa-solvers python>`。状态：decision packet 已准备，
-   approval pending，execution authorized: no。
+   `OSA_SOLVER_PYTHON=<osa-solvers python>`。状态：2026-05-20 已按 Meep-only
+   批准执行并通过，并已 review 为 optional manual PyMeep/FDTD smoke evidence。
 4. MPB fourth：需要 solver Python profile 和 `meep.mpb`。
+   状态：decision packet 已准备；approval pending；execution authorized: no。
 5. Elmer deferred：直到存在可维护的 `ElmerSolver` 安装路径。
 
 ## Per-solver 审批包
@@ -123,6 +127,9 @@
 
 - Solver：MPB through `meep.mpb`
 - Readiness profile：`osa-solvers`
+- Decision packet：
+  `docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`
+- MPB CLI required：如果 `OSA_SOLVER_PYTHON` 可以导入 `meep.mpb`，则不要求 CLI
 - 批准后需要的 env vars：
   - `OSA_SOLVER_PYTHON=<path to solver Python>`
   - `OSA_SOLVER_READINESS_PROFILE=osa-solvers`
@@ -130,15 +137,15 @@
 - 审批短语：
   - `I approve running the optional MPB micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.`
 - 命令模板：
-  - `OSA_SOLVER_PYTHON=<path> OSA_SOLVER_READINESS_PROFILE=osa-solvers OSA_RUN_OPTIONAL_MPB_VALIDATION=1 ./scripts/run_optional_solver_micro_benchmarks.sh`
+  - `OSA_RUN_OPTIONAL_MPB_VALIDATION=1 OSA_SOLVER_PYTHON=<path> OSA_MPB_VALIDATION_REPORT=/tmp/osa-mpb-micro-benchmark-report.json OSA_MPB_OUTPUT_DIR=/tmp/osa-mpb-micro-benchmark-output ./scripts/run_optional_solver_micro_benchmarks.sh`
 - Expected artifacts：
-  - `/tmp/osa-mpb-validation/mpb_preview.py`
-  - `/tmp/osa-mpb-validation/mpb_validation_result.json`
-  - `/tmp/osa-mpb-validation/mpb_validation_report.json`
-- Expected report path：`/tmp/osa-mpb-validation/mpb_validation_report.json`
-- Cleanup：review 后移除 `/tmp/osa-mpb-validation/`，除非要求保留。
+  - `/tmp/osa-mpb-micro-benchmark-output/mpb_preview.py`
+  - `/tmp/osa-mpb-micro-benchmark-output/mpb_validation_result.json`
+  - `/tmp/osa-mpb-micro-benchmark-output/mpb_band_summary.json`（如生成）
+- Expected report path：`/tmp/osa-mpb-micro-benchmark-report.json`
+- Cleanup：review 后移除 `/tmp/osa-mpb-micro-benchmark-output/`，除非要求保留。
 - Risk：tiny band path smoke only，不是 band convergence evidence。
-- Non-claims：no production-grade physical validation；no formal convergence proof。
+- Non-claims：no production-grade MPB validation；no production-grade physical validation；no formal convergence proof；no optical correctness claim。
 
 ### Elmer
 

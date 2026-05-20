@@ -164,14 +164,17 @@
       "solver_python_env_var": "OSA_SOLVER_PYTHON",
       "execution_sequence_rank": 4,
       "approval_record_path": "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
+      "decision_packet_path": "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md",
       "approval_status": "pending",
       "execution_authorized": false,
       "last_execution_status": "not_run",
-      "recommended_next_action": "MPB remains not executed. It requires separate explicit maintainer approval and OSA_SOLVER_PYTHON before any opt-in run.",
+      "recommended_next_action": "MPB remains not executed. The MPB decision packet is prepared; explicit maintainer approval and OSA_SOLVER_PYTHON are required before any opt-in run.",
       "environment_profile_required": "osa-solvers",
+      "readiness_profile": "osa-solvers",
       "solver_python_required": true,
+      "cli_required": false,
       "approval_required": true,
-      "approval_phrase": "I approve running the optional mpb micro-benchmark for optical-spec-agent.",
+      "approval_phrase": "I approve running the optional MPB micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.",
       "expected_runtime_environment": "Local Python environment with meep.mpb importable after explicit maintainer approval.",
       "expected_artifacts": [
         "mpb_preview.py",
@@ -179,9 +182,10 @@
         "mpb_validation_report.json"
       ],
       "expected_artifact_paths": [
-        "/tmp/osa-mpb-validation/mpb_preview.py",
-        "/tmp/osa-mpb-validation/mpb_validation_result.json",
-        "/tmp/osa-mpb-validation/mpb_validation_report.json"
+        "/tmp/osa-mpb-micro-benchmark-output/mpb_preview.py",
+        "/tmp/osa-mpb-micro-benchmark-output/mpb_validation_result.json",
+        "/tmp/osa-mpb-micro-benchmark-output/mpb_band_summary.json",
+        "/tmp/osa-mpb-micro-benchmark-report.json"
       ],
       "cleanup_required": true,
       "default_in_quality_gates": false,
@@ -192,6 +196,8 @@
       "formal_convergence_proof_claimed": false,
       "status": "manual_report_recorded",
       "evidence_refs": [
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md",
+        "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
         "validation/mpb/mpb_validation_pilot_2026-05-14.md",
         "docs/mpb_optional_validation_pilot.md"
       ]

@@ -34,6 +34,11 @@ The 2026-05-20 approved Meep-only micro-benchmark used this profile and is
 recorded in `validation/meep/meep_micro_benchmark_2026-05-20.md`. Future Meep
 reruns still require a fresh solver-specific approval phrase with an
 `OSA_SOLVER_PYTHON` path.
+The MPB decision packet also uses this profile:
+[`optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md`](optional_solver_approval_records/mpb_micro_benchmark_decision_packet.md).
+For MPB, `from meep import mpb` or `meep.mpb` import readiness is sufficient
+for the profile check; an MPB CLI is not required if the Python path is
+available. This is still import-only readiness and does not execute MPB.
 
 ## Solver-specific notes
 
