@@ -54,6 +54,19 @@ The unified wrapper is:
 By default it prints the manifest summary, writes an optional JSON report when
 `OSA_SOLVER_MICRO_BENCHMARK_REPORT` is set, and performs no solver execution.
 
+Before any opt-in run, review the
+[`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md)
+readiness matrix and fill the
+[`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md)
+for the selected solver. The no-execution readiness check is:
+
+```bash
+python scripts/check_optional_solver_readiness.py
+```
+
+That script performs availability detection only; it does not run solver
+binaries or import/run solver examples.
+
 ## Claims
 
 These micro-benchmarks may support optional manual validation evidence for a

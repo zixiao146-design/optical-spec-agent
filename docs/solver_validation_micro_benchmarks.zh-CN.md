@@ -45,6 +45,18 @@ Elmer 仍保持 deferred。现有 pilot 脚本文档中保留 `OSA_RUN_OPTIONAL_
 
 默认情况下它只打印 manifest summary；如果设置了 `OSA_SOLVER_MICRO_BENCHMARK_REPORT`，会写出 JSON report；默认不执行任何 solver。
 
+任何 opt-in run 之前，都应先审查
+[`optional_solver_micro_benchmark_approval_matrix.zh-CN.md`](optional_solver_micro_benchmark_approval_matrix.zh-CN.md)
+readiness matrix，并为被选中的 solver 填写
+[`optional_solver_micro_benchmark_approval_record_template.zh-CN.md`](optional_solver_micro_benchmark_approval_record_template.zh-CN.md)。
+只做可用性检测、且不执行 solver 的命令是：
+
+```bash
+python scripts/check_optional_solver_readiness.py
+```
+
+该脚本只做 availability detection，不运行 solver binary，也不执行 solver example。
+
 ## 声明边界
 
 这些 micro-benchmarks 在显式运行并记录后，可以作为小型项目路径的可选手动验证证据。它们不意味着：

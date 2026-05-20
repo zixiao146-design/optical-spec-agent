@@ -129,6 +129,14 @@ This document describes the current `main` branch. It is not a release tag.
   `examples/application_domain_benchmarks/` evaluate positive, ambiguous,
   underconstrained, unsupported, and unsafe/blocked optical-design requests
   without running solvers or calling external LLMs.
+- Optional solver micro-benchmark readiness/approval:
+  `docs/optional_solver_micro_benchmark_approval_matrix.md`,
+  `docs/optional_solver_micro_benchmark_approval_record_template.md`,
+  `docs/optional_solver_micro_benchmark_readiness_status.md`, and
+  `scripts/check_optional_solver_readiness.py` make candidate solver execution
+  reviewable before any opt-in run. Default behavior remains no solver
+  execution, Elmer remains deferred, and these records do not authorize
+  PyPI/TestPyPI upload, tag creation, or GitHub release creation.
 - Fiber coupling and polarization warning closure:
   `POST /api/optics/fiber-coupling`,
   `POST /api/optics/polarization-jones`,

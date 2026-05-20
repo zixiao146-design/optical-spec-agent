@@ -32,6 +32,7 @@ Users must verify:
 | Source/monitor models | Preview metadata only; no real solver monitor result is claimed. |
 | Adapter mappings | Adapter-native semantic previews; real results require explicit solver execution. |
 | Optional solver micro-benchmarks | Manual, explicit opt-in only; default tests, smoke, quality gates, and release gates do not run solvers. |
+| Optional solver readiness | Availability detection and approval matrix only; no solver execution, PyPI/TestPyPI upload, tag, or release authorization. |
 | Sub-agents | Deterministic backend roles; not independent autonomous services. |
 | Frontend | UI/demo surface; not validation evidence. |
 
@@ -48,5 +49,7 @@ solver convergence, and material-data verification.
 - No guaranteed accuracy is claimed.
 - No external solver execution is performed by default.
 - Optional solver-backed validation is manual and explicit opt-in only.
+- Optional solver readiness checks do not execute solver binaries and do not
+  authorize publication or release actions.
 - No external LLM is called by default.
 - Elmer Level 3 remains deferred.

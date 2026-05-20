@@ -31,6 +31,12 @@ default no-execute mode it does not run solvers; it reads
 summary, and can write a JSON summary when `OSA_SOLVER_MICRO_BENCHMARK_REPORT`
 is set.
 
+`scripts/check_optional_solver_readiness.py` is the no-execution readiness
+layer. It checks command/module availability only and writes an optional JSON
+report when `OSA_SOLVER_READINESS_REPORT` is set. Review
+`docs/optional_solver_micro_benchmark_approval_matrix.md` and the approval
+record template before setting any `OSA_RUN_OPTIONAL_*_VALIDATION=1` variable.
+
 ## Candidate Open-source Solver Families
 
 - Meep: current preview adapter and optional explicit local execution harness.

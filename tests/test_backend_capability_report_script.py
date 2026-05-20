@@ -103,8 +103,12 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert "adapters" in report["preview_boundary_summary"]
     solver_micro = report["optional_solver_micro_benchmarks"]
     assert solver_micro["manifest_exists"] is True
+    assert solver_micro["readiness_available"] is True
+    assert solver_micro["approval_matrix_available"] is True
     assert solver_micro["default_runs_solver"] is False
+    assert solver_micro["execution_default"] is False
     assert solver_micro["opt_in_required"] is True
+    assert solver_micro["explicit_approval_required"] is True
     assert len(solver_micro["solvers"]) == 5
     assert solver_micro["elmer_deferred"] is True
     assert solver_micro["production_grade_claim"] is False
@@ -133,6 +137,8 @@ def test_backend_capability_report_script_generates_json_and_markdown(tmp_path: 
     assert "Validation Maturity Summary" in text
     assert "Preview Boundary Summary" in text
     assert "Optional Solver Micro-benchmarks" in text
+    assert "readiness_available" in text
+    assert "explicit_approval_required" in text
     assert "Maintainer Evidence Pack" in text
     assert "NO UPLOAD PERFORMED" in text
 

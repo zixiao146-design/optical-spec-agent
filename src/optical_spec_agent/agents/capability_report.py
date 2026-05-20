@@ -181,8 +181,16 @@ class ApplicationDomainBenchmarkCoverage(BaseModel):
 class OptionalSolverMicroBenchmarkCoverage(BaseModel):
     manifest_exists: bool
     manifest_path: str = "validation/solver_validation_micro_benchmarks.json"
+    readiness_available: bool = True
+    readiness_script: str = "scripts/check_optional_solver_readiness.py"
+    approval_matrix_available: bool = True
+    approval_matrix_path: str = "docs/optional_solver_micro_benchmark_approval_matrix.md"
+    approval_record_template_path: str = "docs/optional_solver_micro_benchmark_approval_record_template.md"
+    readiness_status_path: str = "docs/optional_solver_micro_benchmark_readiness_status.md"
     default_runs_solver: bool = False
+    execution_default: bool = False
     opt_in_required: bool = True
+    explicit_approval_required: bool = True
     solvers: list[dict[str, Any]] = Field(default_factory=list)
     elmer_deferred: bool = True
     production_grade_claim: bool = False
@@ -728,14 +736,24 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
     if not manifest_path.exists():
         return OptionalSolverMicroBenchmarkCoverage(
             manifest_exists=False,
+            readiness_available=Path("scripts/check_optional_solver_readiness.py").exists(),
+            approval_matrix_available=Path(
+                "docs/optional_solver_micro_benchmark_approval_matrix.md"
+            ).exists(),
             notes=["Optional solver micro-benchmark manifest is missing."],
         )
     payload = json.loads(manifest_path.read_text(encoding="utf-8"))
     solvers = payload.get("solvers", [])
     return OptionalSolverMicroBenchmarkCoverage(
         manifest_exists=True,
+        readiness_available=Path("scripts/check_optional_solver_readiness.py").exists(),
+        approval_matrix_available=Path(
+            "docs/optional_solver_micro_benchmark_approval_matrix.md"
+        ).exists(),
         default_runs_solver=bool(payload.get("default_runs_solver", False)),
+        execution_default=False,
         opt_in_required=bool(payload.get("opt_in_required", True)),
+        explicit_approval_required=True,
         solvers=solvers,
         elmer_deferred=any(
             item.get("solver_name") == "elmer" and item.get("status") == "deferred"
@@ -749,6 +767,8 @@ def _optional_solver_micro_benchmarks() -> OptionalSolverMicroBenchmarkCoverage:
         ),
         notes=[
             "Unified solver micro-benchmark wrapper is default no-execute.",
+            "Readiness script performs availability detection only and does not execute solvers.",
+            "Approval matrix and approval record template are maintainer review aids.",
             "Opt-in environment variables are required for solver-backed runs.",
             "Elmer remains deferred and is not Level 3.",
         ],

@@ -166,18 +166,23 @@ def _write_markdown(pack: BackendEvidencePack, path: Path) -> None:
             "## Optional solver micro-benchmarks",
             "",
             f"- manifest_exists: `{solver_micro['manifest_exists']}`",
+            f"- readiness_available: `{solver_micro['readiness_available']}`",
+            f"- approval_matrix_available: `{solver_micro['approval_matrix_available']}`",
             f"- default_runs_solver: `{solver_micro['default_runs_solver']}`",
+            f"- execution_default: `{solver_micro['execution_default']}`",
             f"- opt_in_required: `{solver_micro['opt_in_required']}`",
+            f"- explicit_approval_required: `{solver_micro['explicit_approval_required']}`",
             f"- elmer_deferred: `{solver_micro['elmer_deferred']}`",
             f"- no_production_grade_claim: `{solver_micro['no_production_grade_claim']}`",
             "",
-            "| Solver | Status | Opt-in env | Default runs solver |",
-            "| --- | --- | --- | --- |",
+            "| Solver | Status | Readiness | Opt-in env | Approval required | Default runs solver |",
+            "| --- | --- | --- | --- | --- | --- |",
         ]
     )
     for item in solver_micro["solvers"]:
         lines.append(
-            "| {solver_name} | {status} | {opt_in_env_var} | {default_runs_solver} |".format(
+            "| {solver_name} | {status} | {readiness_status} | {opt_in_env_var} | "
+            "{approval_required} | {default_runs_solver} |".format(
                 **item
             )
         )

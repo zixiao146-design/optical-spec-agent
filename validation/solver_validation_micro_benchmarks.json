@@ -13,11 +13,25 @@
       "opt_in_env_var": "OSA_RUN_OPTIONAL_GMSH_VALIDATION",
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
+      "readiness_status": "candidate_ready_with_previous_manual_report",
+      "approval_required": true,
+      "approval_phrase": "I approve running the optional gmsh micro-benchmark for optical-spec-agent.",
+      "expected_runtime_environment": "Local environment with gmsh available on PATH after explicit maintainer approval.",
       "expected_artifacts": [
         "gmsh_preview.geo",
         "gmsh_preview.msh",
         "gmsh_validation_report.json"
       ],
+      "expected_artifact_paths": [
+        "/tmp/osa-gmsh-validation/gmsh_preview.geo",
+        "/tmp/osa-gmsh-validation/gmsh_preview.msh",
+        "/tmp/osa-gmsh-validation/gmsh_validation_report.json"
+      ],
+      "cleanup_required": true,
+      "default_in_quality_gates": false,
+      "default_in_release_gates": false,
+      "pypi_publication_related": false,
+      "tag_release_related": false,
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "status": "manual_report_recorded",
@@ -34,11 +48,25 @@
       "opt_in_env_var": "OSA_RUN_OPTIONAL_MEEP_VALIDATION",
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
+      "readiness_status": "candidate_ready_with_previous_manual_report",
+      "approval_required": true,
+      "approval_phrase": "I approve running the optional meep micro-benchmark for optical-spec-agent.",
+      "expected_runtime_environment": "Local Python environment with PyMeep importable after explicit maintainer approval.",
       "expected_artifacts": [
         "meep_preview.py",
         "meep_validation_result.json",
         "meep_validation_report.json"
       ],
+      "expected_artifact_paths": [
+        "/tmp/osa-meep-validation/meep_preview.py",
+        "/tmp/osa-meep-validation/meep_validation_result.json",
+        "/tmp/osa-meep-validation/meep_validation_report.json"
+      ],
+      "cleanup_required": true,
+      "default_in_quality_gates": false,
+      "default_in_release_gates": false,
+      "pypi_publication_related": false,
+      "tag_release_related": false,
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "status": "manual_report_recorded",
@@ -55,11 +83,25 @@
       "opt_in_env_var": "OSA_RUN_OPTIONAL_MPB_VALIDATION",
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
+      "readiness_status": "candidate_ready_with_previous_manual_report",
+      "approval_required": true,
+      "approval_phrase": "I approve running the optional mpb micro-benchmark for optical-spec-agent.",
+      "expected_runtime_environment": "Local Python environment with meep.mpb importable after explicit maintainer approval.",
       "expected_artifacts": [
         "mpb_preview.py",
         "mpb_validation_result.json",
         "mpb_validation_report.json"
       ],
+      "expected_artifact_paths": [
+        "/tmp/osa-mpb-validation/mpb_preview.py",
+        "/tmp/osa-mpb-validation/mpb_validation_result.json",
+        "/tmp/osa-mpb-validation/mpb_validation_report.json"
+      ],
+      "cleanup_required": true,
+      "default_in_quality_gates": false,
+      "default_in_release_gates": false,
+      "pypi_publication_related": false,
+      "tag_release_related": false,
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "status": "manual_report_recorded",
@@ -76,11 +118,25 @@
       "opt_in_env_var": "OSA_RUN_OPTIONAL_OPTILAND_VALIDATION",
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
+      "readiness_status": "candidate_ready_with_previous_manual_report",
+      "approval_required": true,
+      "approval_phrase": "I approve running the optional optiland micro-benchmark for optical-spec-agent.",
+      "expected_runtime_environment": "Local Python environment with Optiland importable after explicit maintainer approval.",
       "expected_artifacts": [
         "optiland_preview.py",
         "optiland_validation_result.json",
         "optiland_validation_report.json"
       ],
+      "expected_artifact_paths": [
+        "/tmp/osa-optiland-validation/optiland_preview.py",
+        "/tmp/osa-optiland-validation/optiland_validation_result.json",
+        "/tmp/osa-optiland-validation/optiland_validation_report.json"
+      ],
+      "cleanup_required": true,
+      "default_in_quality_gates": false,
+      "default_in_release_gates": false,
+      "pypi_publication_related": false,
+      "tag_release_related": false,
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "status": "manual_report_recorded",
@@ -97,10 +153,23 @@
       "opt_in_env_var": "OSA_RUN_OPTIONAL_ELMER_VALIDATION",
       "default_runs_solver": false,
       "missing_solver_non_blocking": true,
+      "readiness_status": "deferred_until_maintainable_install_route",
+      "approval_required": true,
+      "approval_phrase": "I approve running the optional elmer micro-benchmark for optical-spec-agent.",
+      "expected_runtime_environment": "Deferred until a maintainable local ElmerSolver install route exists and maintainer approval is explicit.",
       "expected_artifacts": [
         "case.sif",
         "elmer_validation_report.json"
       ],
+      "expected_artifact_paths": [
+        "/tmp/osa-elmer-validation/case.sif",
+        "/tmp/osa-elmer-validation/elmer_validation_report.json"
+      ],
+      "cleanup_required": true,
+      "default_in_quality_gates": false,
+      "default_in_release_gates": false,
+      "pypi_publication_related": false,
+      "tag_release_related": false,
       "production_grade_validation_claimed": false,
       "formal_convergence_proof_claimed": false,
       "status": "deferred",

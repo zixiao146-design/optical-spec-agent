@@ -102,3 +102,7 @@ preview evidence. That future work must stay separate from PyPI and release
 decisions unless maintainers explicitly decide otherwise.
 The optional solver-backed micro-benchmark plan is the next disciplined step,
 but it is manual and explicit opt-in only.
+The readiness/approval matrix now makes each candidate solver reviewable before
+execution: availability detection only, expected artifacts, risk notes, and the
+required approval phrase are recorded without running solvers or authorizing
+PyPI/TestPyPI, tag, or release actions.

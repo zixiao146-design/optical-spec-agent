@@ -209,3 +209,13 @@ and [`preview_boundary_policy.md`](preview_boundary_policy.md). In short:
 
 `scripts/audit_validation_claims.py` checks docs, source, tests, examples, and
 README files for unsafe validation overclaims before future release-draft work.
+
+Optional solver execution readiness is now separated from execution:
+`scripts/check_optional_solver_readiness.py` performs availability detection
+only, while
+[`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md)
+and
+[`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md)
+record expected artifacts, risks, and the explicit approval phrase. Default
+backend checks still do not execute solvers, upload packages, create tags, or
+create releases.

@@ -66,4 +66,11 @@ def test_optional_solver_micro_benchmark_script_default_mode(tmp_path: Path):
     assert report["any_opt_in_enabled"] is False
     assert report["external_solver_executed"] is False
     assert all(item["executed"] is False for item in report["results"])
-
+    manifest = json.loads(
+        (ROOT / "validation" / "solver_validation_micro_benchmarks.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert all(item["approval_required"] is True for item in manifest["solvers"])
+    assert all(item["default_in_quality_gates"] is False for item in manifest["solvers"])
+    assert all(item["default_in_release_gates"] is False for item in manifest["solvers"])

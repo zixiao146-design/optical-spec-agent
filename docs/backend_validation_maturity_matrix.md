@@ -49,6 +49,11 @@ convergence proof is claimed.
 - Optional solver-backed micro-benchmarks require explicit opt-in environment
   variables and are not part of default pytest, smoke, quality gates, or release
   gates.
+- Optional solver readiness is now reviewable through
+  [`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md),
+  [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
+  and `scripts/check_optional_solver_readiness.py`; this readiness layer still
+  performs no solver execution by default.
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 

@@ -189,6 +189,18 @@ def generate_backend_evidence_pack(
             **payload["optional_solver_micro_benchmarks"],
             "preview_design_assist_only": True,
             "default_solver_execution": False,
+            "optional_solver_readiness_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["readiness_available"],
+            "optional_solver_approval_matrix_available": payload[
+                "optional_solver_micro_benchmarks"
+            ]["approval_matrix_available"],
+            "optional_solver_execution_default": payload[
+                "optional_solver_micro_benchmarks"
+            ]["execution_default"],
+            "explicit_approval_required": payload[
+                "optional_solver_micro_benchmarks"
+            ]["explicit_approval_required"],
             "manual_opt_in_only": True,
             "no_production_grade_claim": True,
         },

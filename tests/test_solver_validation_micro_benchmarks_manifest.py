@@ -26,6 +26,16 @@ def test_solver_validation_micro_benchmark_manifest_is_conservative():
         assert item["formal_convergence_proof_claimed"] is False, name
         assert item["optional_script"].startswith("scripts/run_optional_")
         assert item["opt_in_env_var"].startswith("OSA_RUN_OPTIONAL_")
+        assert item["approval_required"] is True, name
+        assert "I approve running the optional" in item["approval_phrase"], name
+        assert item["expected_runtime_environment"], name
+        assert item["expected_artifact_paths"], name
+        assert item["cleanup_required"] is True, name
+        assert item["default_in_quality_gates"] is False, name
+        assert item["default_in_release_gates"] is False, name
+        assert item["pypi_publication_related"] is False, name
+        assert item["tag_release_related"] is False, name
+        assert item["readiness_status"], name
     assert solvers["elmer"]["status"] == "deferred"
+    assert solvers["elmer"]["readiness_status"] == "deferred_until_maintainable_install_route"
     assert "Level-3-ready" in solvers["elmer"]["current_maturity"]
-

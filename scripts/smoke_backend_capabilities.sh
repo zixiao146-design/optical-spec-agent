@@ -10,12 +10,15 @@ python scripts/audit_sub_agents.py
 python scripts/check_adapter_native_golden.py
 python scripts/evaluate_application_domain_benchmarks.py
 python scripts/audit_validation_claims.py
+python scripts/check_optional_solver_readiness.py
 env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
     -u OSA_RUN_OPTIONAL_MEEP_VALIDATION \
     -u OSA_RUN_OPTIONAL_MPB_VALIDATION \
     -u OSA_RUN_OPTIONAL_OPTILAND_VALIDATION \
     -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
     ./scripts/run_optional_solver_micro_benchmarks.sh
+echo "OPTIONAL SOLVER READINESS CHECK PASSED"
+echo "OPTIONAL SOLVER MICRO-BENCHMARK DEFAULT NO-EXECUTE PASSED"
 
 python - <<'PY'
 from fastapi.testclient import TestClient

@@ -81,11 +81,16 @@ python scripts/check_adapter_native_golden.py
 也可以在不运行 solver 的情况下检查 optional solver micro-benchmark planning：
 
 ```bash
+python scripts/check_optional_solver_readiness.py
 ./scripts/run_optional_solver_micro_benchmarks.sh
 ```
 
-只有显式设置 `OSA_RUN_OPTIONAL_*_VALIDATION=1` 后，才允许进入 solver-backed
-pilot 路径。默认报告、默认 smoke 和默认质量门禁都不设置这些变量。
+readiness 脚本只检查 command/module availability。只有显式设置
+`OSA_RUN_OPTIONAL_*_VALIDATION=1` 后，才允许进入 solver-backed pilot 路径。
+默认报告、默认 smoke 和默认质量门禁都不设置这些变量。审批矩阵和审批记录模板见
+[`optional_solver_micro_benchmark_approval_matrix.zh-CN.md`](optional_solver_micro_benchmark_approval_matrix.zh-CN.md)
+和
+[`optional_solver_micro_benchmark_approval_record_template.zh-CN.md`](optional_solver_micro_benchmark_approval_record_template.zh-CN.md)。
 
 覆盖矩阵也可以直接读取：
 
@@ -124,6 +129,11 @@ Optional solver-backed micro-benchmarks 见
 [`solver_validation_micro_benchmarks.zh-CN.md`](solver_validation_micro_benchmarks.zh-CN.md)。
 它们只能手动显式 opt-in，不属于默认 pytest/smoke/release gate，也不声明
 生产级物理验证或形式化收敛证明。
+readiness/approval 层新增
+[`optional_solver_micro_benchmark_approval_matrix.zh-CN.md`](optional_solver_micro_benchmark_approval_matrix.zh-CN.md)、
+[`optional_solver_micro_benchmark_approval_record_template.zh-CN.md`](optional_solver_micro_benchmark_approval_record_template.zh-CN.md)、
+[`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md)
+和 `scripts/check_optional_solver_readiness.py`；它不授权 PyPI、TestPyPI、tag 或 release 动作。
 
 可通过 `GET /api/backend-validation-maturity` 或
 `python scripts/audit_validation_claims.py` 检查这些边界。

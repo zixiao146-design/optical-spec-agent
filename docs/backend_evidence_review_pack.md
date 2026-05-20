@@ -66,6 +66,10 @@ approval remain separate and not granted.
 - Optional solver micro-benchmarks: a manifest-backed plan for tiny open-source
   solver-backed checks that remain manual and explicit opt-in only. Default
   evidence pack generation does not run solvers.
+- Optional solver readiness/approval: availability detection, expected
+  artifacts, risk notes, and explicit approval phrase are documented before any
+  solver-backed micro-benchmark can be run. This does not authorize PyPI,
+  TestPyPI, tag, or release actions.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,
@@ -89,6 +93,8 @@ means a local evidence check did not match the expected contract.
 - No external solver is executed by default.
 - Optional solver-backed micro-benchmarks require explicit
   `OSA_RUN_OPTIONAL_*_VALIDATION=1` approval and are not default gates.
+- Optional solver readiness uses `scripts/check_optional_solver_readiness.py`
+  and the approval matrix/template; it performs no solver execution.
 - No external LLM is called by default.
 - No TestPyPI/PyPI upload is performed.
 - No Git tag or GitHub release is created.
@@ -109,6 +115,8 @@ The generated evidence pack now includes:
 - `validation_claim_audit_available`: records that
   `scripts/audit_validation_claims.py` is part of the backend evidence
   workflow.
+- `optional_solver_micro_benchmarks`: includes readiness/approval matrix
+  availability, default no-execution status, and explicit approval requirement.
 
 See [`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
 and [`preview_boundary_policy.md`](preview_boundary_policy.md).

@@ -15,12 +15,15 @@ python scripts/generate_backend_evidence_pack.py \
 
 python scripts/evaluate_application_domain_benchmarks.py
 python scripts/audit_validation_claims.py
+python scripts/check_optional_solver_readiness.py
 env -u OSA_RUN_OPTIONAL_GMSH_VALIDATION \
     -u OSA_RUN_OPTIONAL_MEEP_VALIDATION \
     -u OSA_RUN_OPTIONAL_MPB_VALIDATION \
     -u OSA_RUN_OPTIONAL_OPTILAND_VALIDATION \
     -u OSA_RUN_OPTIONAL_ELMER_VALIDATION \
     ./scripts/run_optional_solver_micro_benchmarks.sh
+echo "OPTIONAL SOLVER READINESS CHECK PASSED"
+echo "OPTIONAL SOLVER MICRO-BENCHMARK DEFAULT NO-EXECUTE PASSED"
 
 python - <<'PY'
 import json
@@ -180,6 +183,8 @@ echo "POLARIZATION REFERENCE SANITY PASSED"
 echo "VALIDATION MATURITY CHECKS PASSED"
 echo "VALIDATION CLAIM AUDIT PASSED"
 echo "OPTIONAL SOLVER MICRO-BENCHMARK PLAN PASSED"
+echo "OPTIONAL SOLVER READINESS CHECK PASSED"
+echo "OPTIONAL SOLVER MICRO-BENCHMARK DEFAULT NO-EXECUTE PASSED"
 echo "NO SOLVER EXECUTION PERFORMED"
 echo "NO EXTERNAL LLM CALLED"
 echo "NO UPLOAD PERFORMED"

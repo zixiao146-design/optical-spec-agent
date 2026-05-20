@@ -21,6 +21,10 @@ def test_backend_validation_maturity_api_returns_safe_summary():
     assert body["summary"]["material_maturity_level"] == "documented_preview_user_must_verify"
     assert body["summary"]["optional_solver_micro_benchmark_default"] == "no_solver_execution"
     assert body["summary"]["optional_solver_micro_benchmarks_opt_in_required"] is True
+    assert body["summary"]["optional_solver_readiness_available"] is True
+    assert body["summary"]["optional_solver_approval_matrix_available"] is True
+    assert body["summary"]["optional_solver_execution_default"] is False
+    assert body["summary"]["explicit_solver_approval_required"] is True
     assert body["summary"]["elmer_micro_benchmark_status"] == "deferred"
     component_ids = {record["component_id"] for record in body["records"]}
     assert "fiber_coupling_calculator" in component_ids

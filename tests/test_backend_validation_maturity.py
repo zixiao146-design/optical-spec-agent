@@ -87,9 +87,14 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert summary.summary["material_maturity_level"] == "documented_preview_user_must_verify"
     assert summary.summary["optional_solver_micro_benchmark_default"] == "no_solver_execution"
     assert summary.summary["optional_solver_micro_benchmarks_opt_in_required"] is True
+    assert summary.summary["optional_solver_readiness_available"] is True
+    assert summary.summary["optional_solver_approval_matrix_available"] is True
+    assert summary.summary["optional_solver_execution_default"] is False
+    assert summary.summary["explicit_solver_approval_required"] is True
     assert summary.summary["elmer_micro_benchmark_status"] == "deferred"
     assert "not a production-grade optical constants database" in summary.preview_boundary_summary["materials"]
     assert "not physical correctness" in summary.preview_boundary_summary["application_domains"]
     assert "explicit opt-in" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
+    assert "availability" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert summary.production_grade_validation_claimed is False
     assert summary.formal_convergence_proof_claimed is False

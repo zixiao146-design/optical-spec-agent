@@ -111,3 +111,9 @@ Optional solver-backed validation planning is tracked separately in
 and `validation/solver_validation_micro_benchmarks.json`. It is manual,
 explicit opt-in only, keeps Elmer deferred, and does not change the default
 no-solver release path.
+The approval/readiness layer is tracked in
+[`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md),
+[`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
+and [`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md);
+it is still default no-execution and does not authorize PyPI/TestPyPI upload,
+tag creation, or release creation.

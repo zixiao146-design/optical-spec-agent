@@ -125,12 +125,17 @@ Optional solver-backed micro-benchmark planning can be checked without running
 solvers:
 
 ```bash
+python scripts/check_optional_solver_readiness.py
 ./scripts/run_optional_solver_micro_benchmarks.sh
 ```
 
-This wrapper requires explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1` variables for
-any solver-backed run. Default report generation and smoke checks do not set
-those variables.
+The readiness script checks command/module availability only. The wrapper
+requires explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1` variables for any
+solver-backed run. Default report generation and smoke checks do not set those
+variables. The approval matrix and approval record template are
+[`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md)
+and
+[`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md).
 
 Coverage can also be read directly:
 
@@ -173,6 +178,12 @@ Optional solver-backed micro-benchmarks are documented in
 They are manual and explicit opt-in only, are not default pytest/smoke/release
 gates, and do not claim production-grade physical validation or formal
 convergence proof.
+The readiness/approval layer adds
+[`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md),
+[`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md),
+[`optional_solver_micro_benchmark_readiness_status.md`](optional_solver_micro_benchmark_readiness_status.md),
+and `scripts/check_optional_solver_readiness.py`. It does not authorize PyPI,
+TestPyPI, tag, or release actions.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

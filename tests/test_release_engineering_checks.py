@@ -134,6 +134,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "open_solver_validation_harness.md",
         "solver_validation_micro_benchmarks.md",
         "solver_validation_micro_benchmarks.zh-CN.md",
+        "optional_solver_micro_benchmark_approval_matrix.md",
+        "optional_solver_micro_benchmark_approval_matrix.zh-CN.md",
+        "optional_solver_micro_benchmark_approval_record_template.md",
+        "optional_solver_micro_benchmark_approval_record_template.zh-CN.md",
+        "optional_solver_micro_benchmark_readiness_status.md",
         "adapter_maturity_model.md",
         "gmsh_optional_validation_pilot.md",
         "gmsh_level3_readiness.md",
@@ -226,6 +231,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
         "preview_boundary_policy.zh-CN.md",
         "solver_validation_micro_benchmarks.md",
         "solver_validation_micro_benchmarks.zh-CN.md",
+        "optional_solver_micro_benchmark_approval_matrix.md",
+        "optional_solver_micro_benchmark_approval_matrix.zh-CN.md",
+        "optional_solver_micro_benchmark_approval_record_template.md",
+        "optional_solver_micro_benchmark_approval_record_template.zh-CN.md",
+        "optional_solver_micro_benchmark_readiness_status.md",
         "backend_evidence_review_decision.md",
         "rc8_backend_roadmap.md",
         "rc8_capability_gap_audit.md",
@@ -342,6 +352,7 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     assert (ROOT / "scripts" / "testpypi_preflight.sh").exists()
     assert (ROOT / "scripts" / "run_quality_gates.sh").exists()
     assert (ROOT / "scripts" / "open_solver_validation_preflight.sh").exists()
+    assert (ROOT / "scripts" / "check_optional_solver_readiness.py").exists()
     assert (ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh").exists()
     assert (ROOT / "scripts" / "run_optional_gmsh_validation.sh").exists()
     assert (ROOT / "scripts" / "run_optional_meep_validation.sh").exists()
@@ -483,6 +494,11 @@ def test_validation_and_packaging_gate_docs_exist_and_bound_claims():
     optional_micro_script = (
         ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh"
     ).read_text(encoding="utf-8")
+    readiness_script = (ROOT / "scripts" / "check_optional_solver_readiness.py").read_text(
+        encoding="utf-8"
+    )
+    assert "SOLVER READINESS CHECK PASSED" in readiness_script
+    assert "NO SOLVER EXECUTION PERFORMED" in readiness_script
     assert "NO SOLVER EXECUTION PERFORMED BY DEFAULT" in optional_micro_script
     assert "OSA_RUN_OPTIONAL_GMSH_VALIDATION" in optional_micro_script
     assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION" in optional_micro_script
@@ -537,6 +553,7 @@ def test_release_and_preflight_scripts_do_not_publish():
         ROOT / "scripts" / "run_optional_optiland_validation.sh",
         ROOT / "scripts" / "run_optional_elmer_validation.sh",
         ROOT / "scripts" / "run_optional_solver_micro_benchmarks.sh",
+        ROOT / "scripts" / "check_optional_solver_readiness.py",
         ROOT / "scripts" / "smoke_agent_api.sh",
         ROOT / "scripts" / "smoke_backend_report.sh",
         ROOT / "scripts" / "generate_backend_capability_report.py",

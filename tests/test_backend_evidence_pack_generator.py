@@ -80,7 +80,14 @@ def test_backend_evidence_pack_generator_writes_json_and_markdown(tmp_path):
     assert "materials" in payload["preview_boundary_summary"]
     solver_micro = payload["optional_solver_micro_benchmarks"]
     assert solver_micro["manifest_exists"] is True
+    assert solver_micro["readiness_available"] is True
+    assert solver_micro["approval_matrix_available"] is True
     assert solver_micro["default_runs_solver"] is False
+    assert solver_micro["execution_default"] is False
+    assert solver_micro["explicit_approval_required"] is True
+    assert solver_micro["optional_solver_readiness_available"] is True
+    assert solver_micro["optional_solver_approval_matrix_available"] is True
+    assert solver_micro["optional_solver_execution_default"] is False
     assert solver_micro["manual_opt_in_only"] is True
     assert solver_micro["no_production_grade_claim"] is True
     assert len(solver_micro["solvers"]) == 5

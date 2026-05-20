@@ -21,6 +21,13 @@ The rc8.dev0 micro-benchmark planning layer is documented in
 an explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1` variable is set, it only prints
 the manifest summary and optional JSON report metadata.
 
+The readiness/approval layer is documented in
+`docs/optional_solver_micro_benchmark_approval_matrix.md` and
+`docs/optional_solver_micro_benchmark_approval_record_template.md`.
+`scripts/check_optional_solver_readiness.py` performs availability detection
+only; it does not execute solver commands, create releases, create tags, or
+authorize PyPI/TestPyPI publication.
+
 ## Candidate open-source solver families
 
 - Meep: current research-preview adapter and optional explicit local execution

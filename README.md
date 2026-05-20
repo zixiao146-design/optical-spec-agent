@@ -112,6 +112,13 @@ The optional solver-backed micro-benchmark plan provides a disciplined manual
 path for tiny open-source solver checks, but `scripts/run_optional_solver_micro_benchmarks.sh`
 is default no-execute and requires explicit `OSA_RUN_OPTIONAL_*_VALIDATION=1`
 approval before any solver-backed run.
+The readiness layer adds
+[`optional solver approval matrix`](docs/optional_solver_micro_benchmark_approval_matrix.md),
+[`approval record template`](docs/optional_solver_micro_benchmark_approval_record_template.md),
+and `scripts/check_optional_solver_readiness.py` so maintainers can review
+availability, expected artifacts, risks, and the required approval phrase
+before any solver execution. This readiness check does not authorize
+PyPI/TestPyPI upload, tag creation, or GitHub release creation.
 The evidence pack can be generated with
 `python scripts/generate_backend_evidence_pack.py --json-out /tmp/osa-backend-evidence-pack.json --markdown-out /tmp/osa-backend-evidence-pack.md`
 or smoke-checked with `./scripts/smoke_backend_evidence_pack.sh`; it is a
