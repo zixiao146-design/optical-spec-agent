@@ -115,11 +115,12 @@ optical correctness evidence. That review does not approve Optiland, Meep, MPB,
 Elmer, or any future Gmsh rerun.
 The separately approved Optiland-only optional micro-benchmark also passed on
 2026-05-20 and is reviewed as accepted optional manual ray/path smoke evidence,
-not production lens design validation. Meep, MPB, and Elmer remain unexecuted by
-these tasks.
-The Meep decision packet is now prepared as a future approval aid only. It
-requires `OSA_SOLVER_PYTHON`, keeps execution authorized: no, and does not
-authorize MPB, uploads, tags, or releases.
+not production lens design validation. The separately approved Meep-only
+optional micro-benchmark passed on 2026-05-20 using `OSA_SOLVER_PYTHON` and is
+recorded as optional manual PyMeep/FDTD smoke evidence, not production FDTD
+validation. MPB and Elmer remain unexecuted by these tasks.
+The Meep record does not authorize MPB, uploads, tags, releases, or future Meep
+reruns.
 
 ## Publication / Release Actions
 
@@ -236,9 +237,11 @@ execution remains unauthorized until explicit solver-specific approval is
 recorded.
 The Gmsh review decision closes only the already approved Gmsh run. The
 Optiland review decision closes only the separately approved Optiland run.
-Meep/MPB require `OSA_SOLVER_PYTHON` and separate approval; Elmer remains
-deferred. The Meep-specific decision packet records the future approval phrase
-and expected artifacts but keeps Meep pending/not run.
+The Meep approval record closes only the separately approved Meep run. MPB
+requires `OSA_SOLVER_PYTHON` and separate approval; Elmer remains deferred.
+The Meep-specific decision packet records the approval phrase and expected
+artifacts for the approved smoke run, but it does not authorize future Meep
+reruns.
 Readiness is calibrated by environment profile: current Python/current `PATH`
 is the default, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see

@@ -30,9 +30,10 @@ Optiland, or Elmer simulation.
 
 The Meep decision packet uses this profile explicitly:
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md).
-It keeps Meep approval pending and execution unauthorized until the maintainer
-provides the exact solver-specific approval phrase with an `OSA_SOLVER_PYTHON`
-path.
+The 2026-05-20 approved Meep-only micro-benchmark used this profile and is
+recorded in `validation/meep/meep_micro_benchmark_2026-05-20.md`. Future Meep
+reruns still require a fresh solver-specific approval phrase with an
+`OSA_SOLVER_PYTHON` path.
 
 ## Solver-specific notes
 

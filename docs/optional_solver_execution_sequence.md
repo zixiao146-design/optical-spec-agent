@@ -28,7 +28,10 @@ not execution approval.
      `osa-solvers`.
    - Decision packet:
      `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`.
-   - Current status: approval pending, execution authorized: no, executed: no.
+   - Status: completed for the approved Meep-only run on 2026-05-20; see
+     `validation/meep/meep_micro_benchmark_2026-05-20.md`.
+   - Scope: optional manual PyMeep/FDTD smoke evidence only, not production
+     FDTD validation or optical correctness evidence.
    - Stop after Meep and review the PyMeep report before considering MPB.
 4. MPB fourth.
    - Requires `OSA_SOLVER_PYTHON` and `meep.mpb`.
@@ -61,4 +64,6 @@ not execution approval.
 Do not batch all solvers without separate approval.
 The accepted Gmsh review did not authorize Optiland; Optiland was run only
 after its separate approval record. The accepted Optiland review does not
-authorize Meep, MPB, Elmer, any future Gmsh rerun, or any future Optiland rerun.
+authorize Meep; Meep was run only after its separate approval record. The
+accepted Meep evidence does not authorize MPB, Elmer, any future Gmsh rerun,
+any future Optiland rerun, or any future Meep rerun.

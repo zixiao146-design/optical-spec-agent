@@ -33,7 +33,7 @@ convergence proof is claimed.
 | Optical language | observable diagnostics | `fixture_guarded_preview` | observable taxonomy fixtures and tests | Observable fit is not a computed physical result. |
 | Adapters | adapter-native source/monitor mapping | `fixture_guarded_preview` | adapter mapping fixtures and tests | Real adapter results require explicit solver execution. |
 | Adapters | adapter golden coverage | `fixture_guarded_preview` | golden cases and strict metadata diff | Metadata checks are not solver monitor outputs. |
-| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, the approved Gmsh-only and Optiland-only 2026-05-20 evidence records, the Gmsh and Optiland review decisions, the Meep decision packet, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. Gmsh evidence is accepted only as mesh-generation smoke, and Optiland evidence is accepted only as ray/path smoke; neither proves optical correctness. Meep is only prepared as a future decision packet and is not executed or authorized. |
+| Optional solver validation | Gmsh/Meep/MPB/Optiland micro-benchmark plan | `optional_manual_solver_validated` for recorded pilots | `validation/solver_validation_micro_benchmarks.json`, existing 2026-05-14 manual reports, the approved Gmsh-only, Optiland-only, and Meep-only 2026-05-20 evidence records, the Gmsh and Optiland review decisions, the Meep decision packet, and `scripts/run_optional_solver_micro_benchmarks.sh` | Explicit opt-in only; default pytest, smoke, release gates, and quality gates do not run solvers. Gmsh evidence is accepted only as mesh-generation smoke, Optiland evidence only as ray/path smoke, and Meep evidence only as PyMeep/FDTD smoke; none proves optical correctness. MPB remains not executed. |
 | Optional solver validation | Elmer micro-benchmark plan | `documented_preview` / deferred | `validation/elmer/elmer_install_deferred_2026-05-15.md` and Elmer optional pilot docs | Elmer remains Level 2 + Level-3-ready; Level 3 is not claimed. |
 | Application domains | domain benchmarks | `benchmark_checked_preview` | 19 pass / 0 warn / 0 fail scenario suite | Benchmarks test deterministic behavior, not physical correctness. |
 | Agents | sub-agent task sessions | `fixture_guarded_preview` | audit script and tool-call ledger tests | Roles are deterministic local backend roles. |
@@ -65,10 +65,13 @@ convergence proof is claimed.
   accepts only optional manual mesh-generation smoke evidence. The separately
   reviewed Optiland evidence
   [`../validation/optiland/optiland_micro_benchmark_2026-05-20.md`](../validation/optiland/optiland_micro_benchmark_2026-05-20.md)
-  is only optional manual ray/path smoke evidence. Meep/MPB require
+  is only optional manual ray/path smoke evidence. The separately approved Meep
+  evidence
+  [`../validation/meep/meep_micro_benchmark_2026-05-20.md`](../validation/meep/meep_micro_benchmark_2026-05-20.md)
+  is only optional manual PyMeep/FDTD smoke evidence. MPB requires
   `OSA_SOLVER_PYTHON` and separate approval. The Meep decision packet
   [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)
-  documents that future path while keeping Meep pending/not run.
+  documents the approved Meep-only path and non-claims.
 - No external LLM is required by default.
 - Elmer remains Level 2 + Level-3-ready; Level 3 is deferred.
 

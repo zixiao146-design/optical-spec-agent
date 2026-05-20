@@ -147,8 +147,11 @@ This document describes the current `main` branch. It is not a release tag.
 - Meep optional micro-benchmark decision packet:
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`.
   It records the required `OSA_SOLVER_PYTHON` profile and approval phrase for
-  a future Meep decision; Meep approval remains pending, execution authorized
-  remains no, and Meep has not been executed.
+  the approved Meep-only run.
+- Approved Meep-only optional micro-benchmark evidence:
+  `validation/meep/meep_micro_benchmark_2026-05-20.md`. This is PyMeep/FDTD
+  smoke evidence only; MPB was not executed, and Gmsh/Optiland were not rerun
+  in that task.
 - Approved Gmsh-only optional micro-benchmark evidence:
   `validation/gmsh/gmsh_micro_benchmark_2026-05-20.md`. This is mesh
   generation smoke evidence only; Meep, MPB, Optiland, and Elmer were not run.
@@ -159,7 +162,7 @@ This document describes the current `main` branch. It is not a release tag.
 - Approved Optiland-only optional micro-benchmark evidence:
   `validation/optiland/optiland_micro_benchmark_2026-05-20.md`. This is
   reviewed and accepted ray/path smoke evidence only; Gmsh was not rerun in
-  that task, and Meep, MPB, and Elmer were not run. Meep/MPB require
+  that task, and Meep, MPB, and Elmer were not run. MPB requires
   `OSA_SOLVER_PYTHON` and separate approval; Elmer remains deferred.
 - Optiland micro-benchmark review decision:
   `docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`.

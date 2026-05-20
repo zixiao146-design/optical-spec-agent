@@ -21,9 +21,9 @@ def test_optional_solver_execution_sequence_docs_define_order_and_stops():
     assert "Elmer deferred" in text
     assert "OSA_SOLVER_PYTHON" in text
     assert "meep_micro_benchmark_decision_packet.md" in text
-    assert "approval pending" in text
-    assert "execution authorized: no" in text
-    assert "executed: no" in text
+    assert "validation/meep/meep_micro_benchmark_2026-05-20.md" in text
+    assert "PyMeep/FDTD smoke evidence only" in text
+    assert "future Meep rerun" in text
     assert "Stop Conditions" in text
     assert "Do not batch all solvers without separate approval" in text
     assert "not Level 3" in text

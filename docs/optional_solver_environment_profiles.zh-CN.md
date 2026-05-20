@@ -27,8 +27,9 @@ python scripts/check_optional_solver_readiness.py
 
 Meep decision packet 明确使用该 profile：
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md)。
-在维护者提供包含 `OSA_SOLVER_PYTHON` 路径的 solver-specific approval phrase
-之前，Meep approval 仍是 pending，execution authorized 仍是 no。
+2026-05-20 已批准的 Meep-only micro-benchmark 使用了该 profile，并记录在
+`validation/meep/meep_micro_benchmark_2026-05-20.md`。未来 Meep rerun 仍需要
+包含 `OSA_SOLVER_PYTHON` 路径的全新 solver-specific approval phrase。
 
 ## Solver 说明
 

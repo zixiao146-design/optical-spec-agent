@@ -20,7 +20,7 @@ detection only, not solver execution.
 | Solver | Current status | Availability detection | Opt-in env var | Script path | Expected input fixture | Expected output artifact | Risk / limitation | Requires explicit approval | Default execution | Production-grade claim | Formal convergence claim |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Gmsh | Executed/passed for the approved 2026-05-20 Gmsh-only run; reviewed and accepted as optional manual mesh-generation smoke evidence | `command -v gmsh` on current `PATH`; optional `gmsh` Python import probe | `OSA_RUN_OPTIONAL_GMSH_VALIDATION=1` | `scripts/run_optional_gmsh_validation.sh` | `examples/specs/gmsh_preview.json` | `/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh` and `/tmp/osa-gmsh-micro-benchmark-report.json` | Mesh path smoke only; not optical correctness | approved/executed/reviewed for Gmsh only on 2026-05-20; future runs need fresh approval | no | no | no |
-| Meep | Candidate-ready for a future explicit decision; decision packet prepared, execution still pending/not run | `meep` import probe through current Python or `OSA_SOLVER_PYTHON`; recommended profile is `osa-solvers` | `OSA_RUN_OPTIONAL_MEEP_VALIDATION=1` | `scripts/run_optional_meep_validation.sh` | `examples/specs/missing_wavelength_meep_preview.json` | `/tmp/osa-meep-micro-benchmark-output/` artifacts and `/tmp/osa-meep-micro-benchmark-report.json` | Tiny PyMeep path smoke only; not FDTD validation; MPB remains separate even if `meep.mpb` is detected | yes, using `I approve running the optional Meep micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.` | no | no | no |
+| Meep | Executed/passed for the approved 2026-05-20 Meep-only run; recorded as optional manual PyMeep/FDTD smoke evidence | `meep` import probe through current Python or `OSA_SOLVER_PYTHON`; recommended profile is `osa-solvers` | `OSA_RUN_OPTIONAL_MEEP_VALIDATION=1` | `scripts/run_optional_meep_validation.sh` | `examples/specs/missing_wavelength_meep_preview.json` | `/tmp/osa-meep-micro-benchmark-output/` artifacts and `/tmp/osa-meep-micro-benchmark-report.json` | Tiny PyMeep path smoke only; not production FDTD validation; MPB remains separate even if `meep.mpb` is detected | approved/executed for Meep only on 2026-05-20 using `OSA_SOLVER_PYTHON=/opt/homebrew/Caskroom/miniforge/base/envs/osa-solvers/bin/python`; future runs need fresh approval | no | no | no |
 | MPB | Candidate-ready with previous narrow manual report | `meep.mpb` import probe through current Python or `OSA_SOLVER_PYTHON`; optional `mpb` CLI path | `OSA_RUN_OPTIONAL_MPB_VALIDATION=1` | `scripts/run_optional_mpb_validation.sh` | `examples/specs/mpb_preview.json` | `/tmp/osa-mpb-validation/mpb_validation_result.json` and report JSON | Tiny band path smoke only; not band convergence evidence | yes | no | no | no |
 | Optiland | Executed/passed for the approved 2026-05-20 Optiland-only run; reviewed and accepted as optional manual ray/path smoke evidence | `optiland` import probe through current Python or `OSA_SOLVER_PYTHON`, optional CLI path check | `OSA_RUN_OPTIONAL_OPTILAND_VALIDATION=1` | `scripts/run_optional_optiland_validation.sh` | `examples/specs/optiland_preview.json` | `/tmp/osa-optiland-micro-benchmark-output/optiland_validation_result.json` and `/tmp/osa-optiland-micro-benchmark-report.json` | Tiny ray/backend path smoke only; not lens design validation | accepted for Optiland only on 2026-05-20; future runs need fresh approval | no | no | no |
 | Elmer | Deferred | `command -v ElmerSolver` only | `OSA_RUN_OPTIONAL_ELMER_VALIDATION=1` | `scripts/run_optional_elmer_validation.sh` | future local `.sif` fixture | `/tmp/osa-elmer-validation/elmer_validation_report.json` | Deferred until a maintainable ElmerSolver install route exists; Elmer remains Level 2 + Level-3-ready | yes | no | no | no |
@@ -50,7 +50,14 @@ The Optiland review record is
 It accepts only optional manual ray/path smoke evidence and does not approve
 Meep, MPB, Elmer, any future Gmsh or Optiland rerun, PyPI/TestPyPI upload,
 tag creation, or release creation.
+The Meep approval record is
+[`optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md`](optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md).
+The Meep evidence record is
+[`../validation/meep/meep_micro_benchmark_2026-05-20.md`](../validation/meep/meep_micro_benchmark_2026-05-20.md).
+It accepts only optional manual PyMeep/FDTD smoke evidence and does not approve
+MPB, Elmer, any future Gmsh/Optiland/Meep rerun, PyPI/TestPyPI upload, tag
+creation, or release creation.
 The Meep decision packet is
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md).
-It documents the required `OSA_SOLVER_PYTHON` profile, future command, artifacts,
-and non-claims while keeping Meep approval pending and execution unauthorized.
+It documents the required `OSA_SOLVER_PYTHON` profile, command, artifacts, and
+non-claims for the approved Meep-only run.

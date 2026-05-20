@@ -1,321 +1,111 @@
 {
-  "api_contract_version": "0.1",
-  "status": "ok",
-  "evidence_pack_available": true,
-  "preview_design_assist_only": true,
-  "package_and_release_status": {
-    "package_version": "0.9.0rc8.dev0",
-    "current_public_prerelease": "v0.9.0rc7",
-    "main_development_version": "0.9.0rc8.dev0",
-    "pypi_published": false,
-    "testpypi_verified_only_for": "0.9.0rc6.dev0",
-    "tag_release_actions": "none",
-    "upload_actions": "none"
-  },
-  "sub_agent_reality": [
-    {
-      "role_name": "SpecAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": false
-    },
-    {
-      "role_name": "MaterialAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": true
-    },
-    {
-      "role_name": "GeometryAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": false
-    },
-    {
-      "role_name": "AdapterAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": true
-    },
-    {
-      "role_name": "WorkflowAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": false
-    },
-    {
-      "role_name": "EvidenceAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": true
-    },
-    {
-      "role_name": "SafetyAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": true
-    },
-    {
-      "role_name": "RecommendationAgent",
-      "role_exists": true,
-      "importable_or_trace_role": true,
-      "executed_in_sample_session": true,
-      "output_summary_available": true,
-      "evidence_refs_available": false
-    }
-  ],
-  "tool_call_reality": {
-    "internal_tools_executed": [
-      "material_catalog",
-      "example_registry",
-      "agent_trace_builder",
-      "task_session_builder",
-      "adapter_preview_generator",
-      "workflow_planner",
-      "source_monitor_inference",
-      "ambiguous_requirement_matching",
-      "application_domain_registry",
-      "material_template_cross_checks",
-      "application_domain_benchmarks",
-      "missing_input_diagnostics",
-      "observable_diagnostics",
-      "adapter_native_mapping",
-      "adapter_native_golden_coverage",
-      "validation_maturity_summary",
-      "optical_calculators"
+  "adapter_native_golden_coverage": {
+    "adapters_covered": [
+      "elmer",
+      "gmsh",
+      "meep",
+      "mpb",
+      "optiland"
     ],
-    "internal_tools_available": [
-      "material_catalog",
-      "material_suitability_diagnostics",
-      "example_registry",
-      "agent_trace_builder",
-      "task_session_builder",
-      "adapter_preview_generator",
-      "workflow_planner",
-      "source_monitor_inference",
-      "ambiguous_requirement_matching",
-      "application_domain_registry",
-      "material_template_cross_checks",
-      "application_domain_benchmarks",
-      "missing_input_diagnostics",
-      "observable_diagnostics",
-      "adapter_native_mapping",
-      "adapter_native_golden_coverage",
-      "validation_maturity_summary",
-      "optical_calculators"
+    "cases": [
+      {
+        "adapter_name": "elmer",
+        "case_id": "elmer_fem_boundary_source",
+        "fragment_match": true,
+        "metadata_match": true,
+        "preview_only": true,
+        "safety_match": true,
+        "solver_executed": false,
+        "solver_required_for_real_result": true
+      },
+      {
+        "adapter_name": "gmsh",
+        "case_id": "gmsh_mesh_region",
+        "fragment_match": true,
+        "metadata_match": true,
+        "preview_only": true,
+        "safety_match": true,
+        "solver_executed": false,
+        "solver_required_for_real_result": true
+      },
+      {
+        "adapter_name": "meep",
+        "case_id": "meep_nanoparticle_scattering",
+        "fragment_match": true,
+        "metadata_match": true,
+        "preview_only": true,
+        "safety_match": true,
+        "solver_executed": false,
+        "solver_required_for_real_result": true
+      },
+      {
+        "adapter_name": "mpb",
+        "case_id": "mpb_photonic_crystal_band",
+        "fragment_match": true,
+        "metadata_match": true,
+        "preview_only": true,
+        "safety_match": true,
+        "solver_executed": false,
+        "solver_required_for_real_result": true
+      },
+      {
+        "adapter_name": "optiland",
+        "case_id": "optiland_lens_image_plane",
+        "fragment_match": true,
+        "metadata_match": true,
+        "preview_only": true,
+        "safety_match": true,
+        "solver_executed": false,
+        "solver_required_for_real_result": true
+      }
     ],
-    "calculator_tools_executed": [
-      "optical_calculators"
-    ],
-    "blocked_external_actions": [
-      "external_solver",
-      "external_llm",
-      "testpypi_upload",
-      "pypi_publish",
-      "git_tag",
-      "github_release"
-    ]
-  },
-  "optical_calculators": [
-    {
-      "calculator_name": "thin_film",
-      "implemented": true,
-      "sanity_reference_cases": [
-        "thin_film_single_interface_air_glass",
-        "thin_film_quarter_wave_ar_550nm"
-      ],
-      "failure_modes": [
-        "negative wavelength",
-        "zero/negative thickness",
-        "invalid refractive index"
-      ],
-      "api_endpoints": [
-        "/api/optics/thin-film",
-        "/api/optics/thin-film-spectrum",
-        "/api/optics/quarter-wave-ar"
-      ],
-      "quality_level": "sanity_checked_preview",
-      "preview_design_assist": true,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    },
-    {
-      "calculator_name": "paraxial",
-      "implemented": true,
-      "sanity_reference_cases": [
-        "paraxial_thin_lens_1to1",
-        "abcd_free_space_matrix",
-        "two_lens_4f_relay_1_to_1"
-      ],
-      "failure_modes": [
-        "zero focal length",
-        "object at focal plane",
-        "invalid ABCD element"
-      ],
-      "api_endpoints": [
-        "/api/optics/paraxial-lens",
-        "/api/optics/paraxial-system",
-        "/api/optics/two-lens-relay"
-      ],
-      "quality_level": "sanity_checked_preview",
-      "preview_design_assist": true,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    },
-    {
-      "calculator_name": "gaussian_beam",
-      "implemented": true,
-      "sanity_reference_cases": [
-        "gaussian_beam_rayleigh_range",
-        "gaussian_beam_radius_at_waist",
-        "gaussian_beam_radius_at_rayleigh_range"
-      ],
-      "failure_modes": [
-        "negative wavelength",
-        "zero waist",
-        "invalid sweep points"
-      ],
-      "api_endpoints": [
-        "/api/optics/gaussian-beam",
-        "/api/optics/gaussian-beam-series",
-        "/api/optics/gaussian-beam-focus"
-      ],
-      "quality_level": "sanity_checked_preview",
-      "preview_design_assist": true,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    },
-    {
-      "calculator_name": "waveguide",
-      "implemented": true,
-      "sanity_reference_cases": [
-        "waveguide_v_number_sanity",
-        "slab_waveguide_v_number_sweep"
-      ],
-      "failure_modes": [
-        "core_n <= cladding_n",
-        "negative wavelength",
-        "invalid sweep points"
-      ],
-      "api_endpoints": [
-        "/api/optics/waveguide-estimate",
-        "/api/optics/waveguide-sweep",
-        "/api/optics/waveguide-single-mode-range"
-      ],
-      "quality_level": "sanity_checked_preview",
-      "preview_design_assist": true,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    },
-    {
-      "calculator_name": "fiber_coupling",
-      "implemented": true,
-      "sanity_reference_cases": [
-        "fiber_gaussian_perfect_overlap",
-        "fiber_gaussian_waist_mismatch",
-        "fiber_gaussian_offset_loss",
-        "fiber_gaussian_tilt_loss"
-      ],
-      "failure_modes": [
-        "negative wavelength",
-        "zero waist",
-        "non-finite waist or wavelength",
-        "negative lateral offset",
-        "non-finite angular tilt"
-      ],
-      "api_endpoints": [
-        "/api/optics/fiber-coupling"
-      ],
-      "quality_level": "sanity_checked_preview",
-      "preview_design_assist": true,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    },
-    {
-      "calculator_name": "polarization",
-      "implemented": true,
-      "sanity_reference_cases": [
-        "jones_linear_0deg",
-        "jones_linear_90deg",
-        "jones_linear_polarizer_malus",
-        "jones_half_waveplate_preview",
-        "jones_quarter_waveplate_phase_preview"
-      ],
-      "failure_modes": [
-        "zero Jones-vector intensity",
-        "invalid Jones-vector shape",
-        "non-finite retardance",
-        "non-finite angle"
-      ],
-      "api_endpoints": [
-        "/api/optics/polarization-jones"
-      ],
-      "quality_level": "sanity_checked_preview",
-      "preview_design_assist": true,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    }
-  ],
-  "material_provenance_coverage": {
-    "material_count": 13,
-    "materials_with_provenance": 13,
-    "materials_requiring_user_verification": 13,
-    "production_grade_optical_constants_claimed": false,
-    "notes": [
-      "All starter material records are local preview/design-assist entries.",
-      "Numeric n/k values remain approximate and require user verification.",
-      "No external material database lookup is performed."
-    ],
-    "preview_design_assist_only": true,
-    "no_external_material_database_lookup": true,
-    "production_grade_optical_constants_database": false
+    "missing_adapters": [],
+    "status": "ok"
   },
   "ambiguous_requirement_matching": {
+    "ambiguous_goals_generate_questions": true,
     "available": true,
-    "deterministic": true,
-    "no_external_llm_used": true,
     "covered_cases": [
       "generic_optical_system",
       "waveguide_or_coating",
       "lens_optimization_underconstrained",
       "unknown_application"
     ],
+    "deterministic": true,
+    "no_external_llm_used": true,
     "notes": [
       "Generic optical goal confidence: none.",
       "Mixed waveguide/coating candidates: thin_film_ar_coating, slab_waveguide_single_mode.",
       "Underconstrained lens missing inputs: focal_length, aperture, field_of_view, object_distance.",
       "Ambiguous goals generate questions instead of unsafe solver actions."
     ],
-    "ambiguous_goals_generate_questions": true,
     "unsafe_default_solver_action": false
   },
-  "missing_input_diagnostics": {
-    "available": true,
-    "critical_optional_split": true,
-    "safe_to_preview_default": true,
-    "safe_to_run_solver_default": false,
-    "notes": [
-      "Critical inputs reported: aperture, field_of_view, focal_length, object_distance.",
-      "Optional inputs reported: aperture, field_of_view, wavelength.",
-      "safe_to_preview remains true while safe_to_run_solver remains false."
-    ]
+  "api_contract_version": "0.1",
+  "application_domain_benchmarks": {
+    "ambiguous_count": 3,
+    "fail_count": 0,
+    "formal_convergence_proof_claimed": false,
+    "no_external_solver_execution": true,
+    "pass_count": 19,
+    "positive_count": 10,
+    "preview_design_assist_only": true,
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "safety_summary": {
+      "external_llm_required": false,
+      "external_solver_executed": false,
+      "formal_convergence_proof_claimed": false,
+      "production_grade_validation_claimed": false,
+      "proprietary_solver_required": false
+    },
+    "scenario_count": 19,
+    "underconstrained_count": 3,
+    "unsupported_count": 3,
+    "unsupported_requests_blocked_or_deferred": true,
+    "warn_count": 0
   },
   "application_domain_coverage": {
-    "domain_count": 10,
     "covered_domains": [
       "nanoparticle_plasmonics",
       "thin_film_coating",
@@ -328,1981 +118,19 @@
       "fiber_coupling_preview",
       "polarization_optics_preview"
     ],
-    "partial_domains": [],
+    "domain_count": 10,
     "failed_domains": [],
-    "preview_only": true,
-    "production_grade_validation_claimed": false,
+    "no_external_solver_execution": true,
     "notes": [
       "Application domains are local preview coverage anchors, not production validation.",
       "Fiber coupling and polarization optics now have deterministic local preview calculators; solver-backed validation remains deferred.",
       "No external solver, external LLM, or material database lookup is required."
     ],
+    "partial_domains": [],
     "preview_design_assist_only": true,
-    "no_external_solver_execution": true
-  },
-  "material_template_cross_checks": {
-    "total": 10,
-    "pass_count": 10,
-    "warning_count": 0,
-    "fail_count": 0,
-    "cross_checks": [
-      {
-        "domain_id": "nanoparticle_plasmonics",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [],
-        "expected_adapters": [
-          "meep",
-          "gmsh"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "ag",
-          "au",
-          "sio2",
-          "air",
-          "water"
-        ],
-        "unsuitable_materials": [
-          "glass_bk7_preview",
-          "glass_fused_silica_preview"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "ag",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "au",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "sio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "air",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "water",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "thin_film_coating",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.thin_film.spectrum",
-          "optics.thin_film.quarter_wave_ar"
-        ],
-        "expected_adapters": [
-          "preview-only TMM calculator path"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "sio2",
-          "tio2",
-          "al2o3",
-          "glass_bk7_preview"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "sio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "tio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "al2o3",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "glass_bk7_preview",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "slab_waveguide",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.waveguide.sweep",
-          "optics.waveguide.single_mode_range"
-        ],
-        "expected_adapters": [
-          "mpb",
-          "elmer"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "si",
-          "si3n4",
-          "sio2",
-          "air"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "si",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "si3n4",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "sio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "air",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "photonic_crystal",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [],
-        "expected_adapters": [
-          "mpb"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "si",
-          "gaas",
-          "sio2",
-          "air"
-        ],
-        "unsuitable_materials": [
-          "water"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "si",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "gaas",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "sio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "air",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "dielectric_metasurface",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [],
-        "expected_adapters": [
-          "meep",
-          "gmsh"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "tio2",
-          "si3n4",
-          "si",
-          "sio2"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au",
-          "water"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "tio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "si3n4",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "si",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "sio2",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "lens_ray_optics",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.paraxial.two_lens_relay",
-          "optics.paraxial.thin_lens"
-        ],
-        "expected_adapters": [
-          "optiland"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "glass_bk7_preview",
-          "glass_fused_silica_preview",
-          "air"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au",
-          "si"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "glass_bk7_preview",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "glass_fused_silica_preview",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "air",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "gaussian_beam_focusing",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.gaussian_beam.series",
-          "optics.gaussian_beam.focus"
-        ],
-        "expected_adapters": [
-          "optiland"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "air",
-          "glass_fused_silica_preview"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "air",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "glass_fused_silica_preview",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "No deterministic suitability rule for air in gaussian_beam_focusing.",
-          "No deterministic suitability rule for glass_fused_silica_preview in gaussian_beam_focusing."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "imaging_system_preview",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.paraxial.two_lens_relay"
-        ],
-        "expected_adapters": [
-          "optiland"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "glass_bk7_preview",
-          "glass_fused_silica_preview",
-          "air"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "glass_bk7_preview",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "glass_fused_silica_preview",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "air",
-            "suitability": "suitable",
-            "suitable": true,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "Application domain has local preview coverage."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "fiber_coupling_preview",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.fiber_coupling.gaussian_mode_overlap"
-        ],
-        "expected_adapters": [
-          "mpb",
-          "optiland"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "glass_fused_silica_preview",
-          "sio2",
-          "si3n4",
-          "air"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "glass_fused_silica_preview",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "sio2",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "si3n4",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "air",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "No deterministic suitability rule for glass_fused_silica_preview in fiber_coupling_preview.",
-          "No deterministic suitability rule for sio2 in fiber_coupling_preview.",
-          "No deterministic suitability rule for si3n4 in fiber_coupling_preview.",
-          "No deterministic suitability rule for air in fiber_coupling_preview."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      },
-      {
-        "domain_id": "polarization_optics_preview",
-        "status": "pass",
-        "template_coverage": true,
-        "material_suitability_coverage": true,
-        "expected_calculators": [
-          "optics.polarization.jones"
-        ],
-        "expected_adapters": [
-          "meep"
-        ],
-        "expected_tool_status": "covered",
-        "missing_input_questions_present": true,
-        "suggested_materials": [
-          "tio2",
-          "si3n4",
-          "sio2",
-          "glass_fused_silica_preview"
-        ],
-        "unsuitable_materials": [
-          "ag",
-          "au"
-        ],
-        "material_suitability_summary": [
-          {
-            "material_id": "tio2",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "si3n4",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "sio2",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          },
-          {
-            "material_id": "glass_fused_silica_preview",
-            "suitability": "unknown",
-            "suitable": null,
-            "requires_user_verification": true
-          }
-        ],
-        "diagnostics": [
-          "No deterministic suitability rule for tio2 in polarization_optics_preview.",
-          "No deterministic suitability rule for si3n4 in polarization_optics_preview.",
-          "No deterministic suitability rule for sio2 in polarization_optics_preview.",
-          "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview."
-        ],
-        "deferred_capability": null,
-        "preview_only": true,
-        "external_solver_executed": false,
-        "external_llm_required": false,
-        "proprietary_solver_required": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false
-      }
-    ],
     "preview_only": true,
-    "production_grade_validation_claimed": false,
-    "formal_convergence_proof_claimed": false,
-    "preview_design_assist_only": true,
-    "no_production_grade_claim": true
+    "production_grade_validation_claimed": false
   },
-  "application_domain_benchmarks": {
-    "scenario_count": 19,
-    "pass_count": 19,
-    "warn_count": 0,
-    "fail_count": 0,
-    "positive_count": 10,
-    "ambiguous_count": 3,
-    "underconstrained_count": 3,
-    "unsupported_count": 3,
-    "safety_summary": {
-      "external_solver_executed": false,
-      "external_llm_required": false,
-      "proprietary_solver_required": false,
-      "production_grade_validation_claimed": false,
-      "formal_convergence_proof_claimed": false
-    },
-    "preview_only": true,
-    "production_grade_validation_claimed": false,
-    "formal_convergence_proof_claimed": false,
-    "preview_design_assist_only": true,
-    "unsupported_requests_blocked_or_deferred": true,
-    "no_external_solver_execution": true
-  },
-  "optional_solver_micro_benchmarks": {
-    "manifest_exists": true,
-    "manifest_path": "validation/solver_validation_micro_benchmarks.json",
-    "readiness_available": true,
-    "readiness_script": "scripts/check_optional_solver_readiness.py",
-    "approval_matrix_available": true,
-    "approval_matrix_path": "docs/optional_solver_micro_benchmark_approval_matrix.md",
-    "approval_record_template_path": "docs/optional_solver_micro_benchmark_approval_record_template.md",
-    "execution_approval_packet_available": true,
-    "execution_approval_packet_path": "docs/optional_solver_micro_benchmark_execution_packet.md",
-    "execution_sequence_path": "docs/optional_solver_execution_sequence.md",
-    "meep_decision_packet_available": true,
-    "meep_decision_packet_path": "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
-    "approval_records_present": true,
-    "approval_records_path": "docs/optional_solver_approval_records",
-    "readiness_status_path": "docs/optional_solver_micro_benchmark_readiness_status.md",
-    "environment_profiles_available": true,
-    "environment_profiles_path": "validation/solver_environment_profiles.json",
-    "environment_profiles_doc": "docs/optional_solver_environment_profiles.md",
-    "solver_python_env_var": "OSA_SOLVER_PYTHON",
-    "profile_env_var": "OSA_SOLVER_READINESS_PROFILE",
-    "default_runs_solver": false,
-    "execution_default": false,
-    "opt_in_required": true,
-    "explicit_approval_required": true,
-    "all_optional_solver_execution_authorized": false,
-    "solvers": [
-      {
-        "solver_name": "gmsh",
-        "adapter": "gmsh",
-        "current_maturity": "Level 3 - Optional manual solver validation",
-        "optional_script": "scripts/run_optional_gmsh_validation.sh",
-        "opt_in_env_var": "OSA_RUN_OPTIONAL_GMSH_VALIDATION",
-        "default_runs_solver": false,
-        "missing_solver_non_blocking": true,
-        "readiness_status": "candidate_ready_with_previous_manual_report",
-        "python_probe_supported": true,
-        "cli_probe_supported": true,
-        "profile_sensitive": true,
-        "recommended_profile": "homebrew-cli",
-        "module_names": [
-          "gmsh"
-        ],
-        "command_names": [
-          "gmsh"
-        ],
-        "solver_python_env_var": "OSA_SOLVER_PYTHON",
-        "execution_sequence_rank": 1,
-        "approval_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
-        "pending_approval_template_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_pending.md",
-        "review_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
-        "review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
-        "review_decision_date": "2026-05-20",
-        "approval_status": "approved_executed",
-        "execution_authorized": false,
-        "last_execution_status": "passed",
-        "last_execution_date": "2026-05-20",
-        "last_execution_report": "/tmp/osa-gmsh-micro-benchmark-report.json",
-        "last_execution_evidence": "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
-        "last_execution_solver_version": "4.15.2-git",
-        "last_execution_scope": "Gmsh only for the earlier approved run; Optiland was executed later under separate approval; Meep/MPB/Elmer not executed.",
-        "recommended_next_action": "Gmsh evidence is reviewed and accepted as optional manual mesh-generation smoke evidence. Optiland evidence is reviewed and accepted as optional manual ray/path smoke evidence. Meep/MPB require OSA_SOLVER_PYTHON and separate approval; no future Gmsh or Optiland rerun is authorized.",
-        "next_candidate_solver": "meep_after_osa_solver_python",
-        "next_candidate_approved": false,
-        "no_further_solver_authorized": true,
-        "environment_profile_required": "homebrew-cli",
-        "solver_python_required": false,
-        "approval_required": true,
-        "approval_phrase": "I approve running the optional gmsh micro-benchmark for optical-spec-agent.",
-        "expected_runtime_environment": "Local environment with gmsh available on PATH after explicit maintainer approval.",
-        "expected_artifacts": [
-          "gmsh_preview.geo",
-          "gmsh_preview.msh",
-          "gmsh_validation_report.json"
-        ],
-        "expected_artifact_paths": [
-          "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.geo",
-          "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh",
-          "/tmp/osa-gmsh-micro-benchmark-report.json"
-        ],
-        "cleanup_required": true,
-        "default_in_quality_gates": false,
-        "default_in_release_gates": false,
-        "pypi_publication_related": false,
-        "tag_release_related": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "status": "manual_micro_benchmark_passed_2026-05-20",
-        "evidence_refs": [
-          "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
-          "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
-          "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
-          "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
-          "docs/gmsh_optional_validation_pilot.md"
-        ]
-      },
-      {
-        "solver_name": "meep",
-        "adapter": "meep",
-        "current_maturity": "Level 3 - Optional manual solver validation",
-        "optional_script": "scripts/run_optional_meep_validation.sh",
-        "opt_in_env_var": "OSA_RUN_OPTIONAL_MEEP_VALIDATION",
-        "default_runs_solver": false,
-        "missing_solver_non_blocking": true,
-        "readiness_status": "candidate_ready_with_previous_manual_report",
-        "python_probe_supported": true,
-        "cli_probe_supported": false,
-        "profile_sensitive": true,
-        "recommended_profile": "osa-solvers",
-        "module_names": [
-          "meep"
-        ],
-        "command_names": [],
-        "solver_python_env_var": "OSA_SOLVER_PYTHON",
-        "execution_sequence_rank": 3,
-        "approval_record_path": "docs/optional_solver_approval_records/meep_micro_benchmark_approval_pending.md",
-        "decision_packet_path": "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
-        "approval_status": "pending",
-        "execution_authorized": false,
-        "last_execution_status": "not_run",
-        "recommended_next_action": "Review the Meep decision packet, confirm OSA_SOLVER_PYTHON points to the osa-solvers profile, and provide explicit maintainer approval before execution.",
-        "environment_profile_required": "osa-solvers",
-        "readiness_profile": "osa-solvers",
-        "solver_python_required": true,
-        "approval_required": true,
-        "approval_phrase": "I approve running the optional Meep micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.",
-        "expected_runtime_environment": "Local Python environment with PyMeep importable after explicit maintainer approval.",
-        "expected_artifacts": [
-          "meep_preview.py",
-          "meep_validation_result.json",
-          "meep_validation_report.json"
-        ],
-        "expected_artifact_paths": [
-          "/tmp/osa-meep-micro-benchmark-output/meep_preview.py",
-          "/tmp/osa-meep-micro-benchmark-output/meep_validation_result.json",
-          "/tmp/osa-meep-micro-benchmark-report.json"
-        ],
-        "cleanup_required": true,
-        "default_in_quality_gates": false,
-        "default_in_release_gates": false,
-        "pypi_publication_related": false,
-        "tag_release_related": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "status": "manual_report_recorded",
-        "evidence_refs": [
-          "validation/meep/meep_validation_pilot_2026-05-14.md",
-          "docs/meep_optional_validation_pilot.md"
-        ]
-      },
-      {
-        "solver_name": "mpb",
-        "adapter": "mpb",
-        "current_maturity": "Level 3 - Optional manual solver validation",
-        "optional_script": "scripts/run_optional_mpb_validation.sh",
-        "opt_in_env_var": "OSA_RUN_OPTIONAL_MPB_VALIDATION",
-        "default_runs_solver": false,
-        "missing_solver_non_blocking": true,
-        "readiness_status": "candidate_ready_with_previous_manual_report",
-        "python_probe_supported": true,
-        "cli_probe_supported": true,
-        "profile_sensitive": true,
-        "recommended_profile": "osa-solvers",
-        "module_names": [
-          "meep.mpb"
-        ],
-        "command_names": [
-          "mpb"
-        ],
-        "solver_python_env_var": "OSA_SOLVER_PYTHON",
-        "execution_sequence_rank": 4,
-        "approval_record_path": "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
-        "approval_status": "pending",
-        "execution_authorized": false,
-        "last_execution_status": "not_run",
-        "recommended_next_action": "Review the MPB approval record, confirm meep.mpb is importable through OSA_SOLVER_PYTHON, and provide the exact solver-specific approval phrase before any opt-in run.",
-        "environment_profile_required": "osa-solvers",
-        "solver_python_required": true,
-        "approval_required": true,
-        "approval_phrase": "I approve running the optional mpb micro-benchmark for optical-spec-agent.",
-        "expected_runtime_environment": "Local Python environment with meep.mpb importable after explicit maintainer approval.",
-        "expected_artifacts": [
-          "mpb_preview.py",
-          "mpb_validation_result.json",
-          "mpb_validation_report.json"
-        ],
-        "expected_artifact_paths": [
-          "/tmp/osa-mpb-validation/mpb_preview.py",
-          "/tmp/osa-mpb-validation/mpb_validation_result.json",
-          "/tmp/osa-mpb-validation/mpb_validation_report.json"
-        ],
-        "cleanup_required": true,
-        "default_in_quality_gates": false,
-        "default_in_release_gates": false,
-        "pypi_publication_related": false,
-        "tag_release_related": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "status": "manual_report_recorded",
-        "evidence_refs": [
-          "validation/mpb/mpb_validation_pilot_2026-05-14.md",
-          "docs/mpb_optional_validation_pilot.md"
-        ]
-      },
-      {
-        "solver_name": "optiland",
-        "adapter": "optiland",
-        "current_maturity": "Level 3 - Optional manual backend validation",
-        "optional_script": "scripts/run_optional_optiland_validation.sh",
-        "opt_in_env_var": "OSA_RUN_OPTIONAL_OPTILAND_VALIDATION",
-        "default_runs_solver": false,
-        "missing_solver_non_blocking": true,
-        "readiness_status": "candidate_ready_with_previous_manual_report",
-        "python_probe_supported": true,
-        "cli_probe_supported": true,
-        "profile_sensitive": true,
-        "recommended_profile": "current",
-        "module_names": [
-          "optiland"
-        ],
-        "command_names": [
-          "optiland"
-        ],
-        "solver_python_env_var": "OSA_SOLVER_PYTHON",
-        "execution_sequence_rank": 2,
-        "approval_record_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
-        "approval_status": "approved_executed",
-        "execution_authorized": false,
-        "last_execution_status": "passed",
-        "recommended_next_action": "Optiland evidence is reviewed and accepted as optional manual ray/path smoke evidence. Meep/MPB require OSA_SOLVER_PYTHON and separate explicit approval before any opt-in run. No further solver execution is authorized.",
-        "environment_profile_required": "current",
-        "solver_python_required": false,
-        "approval_required": true,
-        "approval_phrase": "I approve running the optional optiland micro-benchmark for optical-spec-agent.",
-        "expected_runtime_environment": "Local Python environment with Optiland importable after explicit maintainer approval.",
-        "expected_artifacts": [
-          "optiland_preview.py",
-          "optiland_validation_result.json",
-          "optiland_validation_report.json"
-        ],
-        "expected_artifact_paths": [
-          "/tmp/osa-optiland-validation/optiland_preview.py",
-          "/tmp/osa-optiland-validation/optiland_validation_result.json",
-          "/tmp/osa-optiland-validation/optiland_validation_report.json"
-        ],
-        "cleanup_required": true,
-        "default_in_quality_gates": false,
-        "default_in_release_gates": false,
-        "pypi_publication_related": false,
-        "tag_release_related": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "status": "manual_micro_benchmark_passed_2026-05-20",
-        "evidence_refs": [
-          "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
-          "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
-          "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
-          "validation/optiland/optiland_validation_pilot_2026-05-14.md",
-          "docs/optiland_optional_validation_pilot.md"
-        ],
-        "pending_approval_template_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_pending.md",
-        "last_execution_date": "2026-05-20",
-        "last_execution_report": "/tmp/osa-optiland-micro-benchmark-report.json",
-        "last_execution_evidence": "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
-        "last_execution_solver_version": "0.6.0",
-        "last_execution_scope": "Optiland only; Gmsh/Meep/MPB/Elmer not executed in this task.",
-        "review_record_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
-        "review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
-        "next_candidate_solver": "meep_after_osa_solver_python",
-        "next_candidate_approved": false,
-        "no_further_solver_authorized": true
-      },
-      {
-        "solver_name": "elmer",
-        "adapter": "elmer",
-        "current_maturity": "Level 2 - Golden/evidence fixtures, Level-3-ready",
-        "optional_script": "scripts/run_optional_elmer_validation.sh",
-        "opt_in_env_var": "OSA_RUN_OPTIONAL_ELMER_VALIDATION",
-        "default_runs_solver": false,
-        "missing_solver_non_blocking": true,
-        "readiness_status": "deferred_until_maintainable_install_route",
-        "python_probe_supported": false,
-        "cli_probe_supported": true,
-        "profile_sensitive": false,
-        "recommended_profile": "deferred-elmer",
-        "module_names": [],
-        "command_names": [
-          "ElmerSolver"
-        ],
-        "solver_python_env_var": "OSA_SOLVER_PYTHON",
-        "execution_sequence_rank": 99,
-        "approval_record_path": "docs/optional_solver_approval_records/elmer_micro_benchmark_deferred.md",
-        "approval_status": "deferred",
-        "execution_authorized": false,
-        "last_execution_status": "not_run",
-        "recommended_next_action": "Keep Elmer deferred until a maintainable ElmerSolver install route exists and a new explicit approval is recorded.",
-        "environment_profile_required": "deferred-elmer",
-        "solver_python_required": false,
-        "approval_required": true,
-        "approval_phrase": "I approve running the optional elmer micro-benchmark for optical-spec-agent.",
-        "expected_runtime_environment": "Deferred until a maintainable local ElmerSolver install route exists and maintainer approval is explicit.",
-        "expected_artifacts": [
-          "case.sif",
-          "elmer_validation_report.json"
-        ],
-        "expected_artifact_paths": [
-          "/tmp/osa-elmer-validation/case.sif",
-          "/tmp/osa-elmer-validation/elmer_validation_report.json"
-        ],
-        "cleanup_required": true,
-        "default_in_quality_gates": false,
-        "default_in_release_gates": false,
-        "pypi_publication_related": false,
-        "tag_release_related": false,
-        "production_grade_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "status": "deferred",
-        "evidence_refs": [
-          "validation/elmer/elmer_install_deferred_2026-05-15.md",
-          "docs/elmer_optional_validation_pilot.md"
-        ]
-      }
-    ],
-    "elmer_deferred": true,
-    "production_grade_claim": false,
-    "formal_convergence_proof_claimed": false,
-    "notes": [
-      "Unified solver micro-benchmark wrapper is default no-execute.",
-      "Readiness script performs availability detection only and does not execute solvers.",
-      "Readiness can be calibrated with OSA_SOLVER_PYTHON and OSA_SOLVER_READINESS_PROFILE.",
-      "Approval matrix and approval record template are maintainer review aids.",
-      "Gmsh has an approved 2026-05-20 Gmsh-only optional micro-benchmark pass recorded as mesh generation smoke evidence.",
-      "The Gmsh evidence was reviewed and accepted as optional manual mesh-generation smoke evidence; it does not authorize further solver execution.",
-      "Optiland evidence was reviewed and accepted as optional manual ray/path smoke evidence; it does not authorize further solver execution.",
-      "Gmsh was not rerun by the Optiland task; Meep, MPB, and Elmer were not executed.",
-      "Meep has a decision packet prepared with OSA_SOLVER_PYTHON profile requirements; Meep execution remains unauthorized and not run.",
-      "MPB requires OSA_SOLVER_PYTHON and separate approval; Elmer remains deferred.",
-      "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
-      "Future execution should run one solver at a time after explicit approval.",
-      "Opt-in environment variables are required for solver-backed runs.",
-      "Elmer remains deferred and is not Level 3."
-    ],
-    "preview_design_assist_only": true,
-    "default_solver_execution": false,
-    "optional_solver_readiness_available": true,
-    "optional_solver_approval_matrix_available": true,
-    "optional_solver_execution_approval_packet_available": true,
-    "optional_solver_approval_records_present": true,
-    "optional_solver_environment_profiles_available": true,
-    "optional_solver_execution_default": false,
-    "manual_opt_in_only": true,
-    "no_production_grade_claim": true
-  },
-  "design_case_cross_checks": [
-    {
-      "example_id": "dielectric_metasurface_preview",
-      "status": "pass",
-      "expected_calculator": null,
-      "calculator_called": false,
-      "material_suggestions": [
-        "tio2",
-        "si3n4",
-        "si",
-        "sio2"
-      ],
-      "adapter_recommendation": "meep with gmsh geometry preview",
-      "tool_call_ledger_entries": [
-        "requirements.match_template",
-        "requirements.extract_optical_intent",
-        "requirements.match_ambiguity_check",
-        "application_domains.match_goal",
-        "application_domains.cross_check_domain",
-        "optical_language.generate_disambiguation_questions",
-        "optical_language.infer_source_monitor",
-        "optical_language.diagnose_missing_inputs",
-        "optical_language.diagnose_observable",
-        "optical_language.map_source_monitor_to_adapter",
-        "material_catalog.suggest",
-        "example_registry.load",
-        "agent_trace.build",
-        "workflow_plan.preview",
-        "adapter_preview.generate",
-        "external_solver.meep",
-        "external_solver.gmsh",
-        "external_solver.mpb",
-        "external_solver.elmer",
-        "external_solver.optiland",
-        "external_llm",
-        "testpypi_upload",
-        "pypi_publish",
-        "git_tag_create",
-        "github_release_create"
-      ],
-      "diagnostics": [
-        "No scalar calculator is required for this example category."
-      ]
-    },
-    {
-      "example_id": "lens_raytrace_preview",
-      "status": "pass",
-      "expected_calculator": "optics.paraxial",
-      "calculator_called": true,
-      "material_suggestions": [
-        "glass_bk7_preview",
-        "glass_fused_silica_preview",
-        "air"
-      ],
-      "adapter_recommendation": "optiland",
-      "tool_call_ledger_entries": [
-        "requirements.match_template",
-        "requirements.extract_optical_intent",
-        "requirements.match_ambiguity_check",
-        "application_domains.match_goal",
-        "application_domains.cross_check_domain",
-        "optical_language.generate_disambiguation_questions",
-        "optical_language.infer_source_monitor",
-        "optical_language.diagnose_missing_inputs",
-        "optical_language.diagnose_observable",
-        "optical_language.map_source_monitor_to_adapter",
-        "material_catalog.suggest",
-        "example_registry.load",
-        "agent_trace.build",
-        "workflow_plan.preview",
-        "adapter_preview.generate",
-        "optics.paraxial.two_lens_relay",
-        "external_solver.meep",
-        "external_solver.gmsh",
-        "external_solver.mpb",
-        "external_solver.elmer",
-        "external_solver.optiland",
-        "external_llm",
-        "testpypi_upload",
-        "pypi_publish",
-        "git_tag_create",
-        "github_release_create"
-      ],
-      "diagnostics": [
-        "Expected calculator executed: optics.paraxial."
-      ]
-    },
-    {
-      "example_id": "nanoparticle_plasmonics",
-      "status": "pass",
-      "expected_calculator": null,
-      "calculator_called": false,
-      "material_suggestions": [
-        "au",
-        "ag",
-        "sio2",
-        "water",
-        "air"
-      ],
-      "adapter_recommendation": "meep with gmsh geometry preview",
-      "tool_call_ledger_entries": [
-        "requirements.match_template",
-        "requirements.extract_optical_intent",
-        "requirements.match_ambiguity_check",
-        "application_domains.match_goal",
-        "application_domains.cross_check_domain",
-        "optical_language.generate_disambiguation_questions",
-        "optical_language.infer_source_monitor",
-        "optical_language.diagnose_missing_inputs",
-        "optical_language.diagnose_observable",
-        "optical_language.map_source_monitor_to_adapter",
-        "material_catalog.suggest",
-        "example_registry.load",
-        "agent_trace.build",
-        "workflow_plan.preview",
-        "adapter_preview.generate",
-        "external_solver.meep",
-        "external_solver.gmsh",
-        "external_solver.mpb",
-        "external_solver.elmer",
-        "external_solver.optiland",
-        "external_llm",
-        "testpypi_upload",
-        "pypi_publish",
-        "git_tag_create",
-        "github_release_create"
-      ],
-      "diagnostics": [
-        "No scalar calculator is required for this example category."
-      ]
-    },
-    {
-      "example_id": "photonic_crystal_band",
-      "status": "pass",
-      "expected_calculator": null,
-      "calculator_called": false,
-      "material_suggestions": [
-        "si",
-        "gaas",
-        "sio2",
-        "air"
-      ],
-      "adapter_recommendation": "mpb",
-      "tool_call_ledger_entries": [
-        "requirements.match_template",
-        "requirements.extract_optical_intent",
-        "requirements.match_ambiguity_check",
-        "application_domains.match_goal",
-        "application_domains.cross_check_domain",
-        "optical_language.generate_disambiguation_questions",
-        "optical_language.infer_source_monitor",
-        "optical_language.diagnose_missing_inputs",
-        "optical_language.diagnose_observable",
-        "optical_language.map_source_monitor_to_adapter",
-        "material_catalog.suggest",
-        "example_registry.load",
-        "agent_trace.build",
-        "workflow_plan.preview",
-        "adapter_preview.generate",
-        "external_solver.meep",
-        "external_solver.gmsh",
-        "external_solver.mpb",
-        "external_solver.elmer",
-        "external_solver.optiland",
-        "external_llm",
-        "testpypi_upload",
-        "pypi_publish",
-        "git_tag_create",
-        "github_release_create"
-      ],
-      "diagnostics": [
-        "No scalar calculator is required for this example category."
-      ]
-    },
-    {
-      "example_id": "thin_film_coating",
-      "status": "pass",
-      "expected_calculator": "optics.thin_film",
-      "calculator_called": true,
-      "material_suggestions": [
-        "sio2",
-        "tio2",
-        "al2o3"
-      ],
-      "adapter_recommendation": "preview-only; future TMM adapter candidate",
-      "tool_call_ledger_entries": [
-        "requirements.match_template",
-        "requirements.extract_optical_intent",
-        "requirements.match_ambiguity_check",
-        "application_domains.match_goal",
-        "application_domains.cross_check_domain",
-        "optical_language.generate_disambiguation_questions",
-        "optical_language.infer_source_monitor",
-        "optical_language.diagnose_missing_inputs",
-        "optical_language.diagnose_observable",
-        "optical_language.map_source_monitor_to_adapter",
-        "material_catalog.suggest",
-        "example_registry.load",
-        "agent_trace.build",
-        "workflow_plan.preview",
-        "adapter_preview.generate",
-        "optics.thin_film.spectrum",
-        "external_solver.meep",
-        "external_solver.gmsh",
-        "external_solver.mpb",
-        "external_solver.elmer",
-        "external_solver.optiland",
-        "external_llm",
-        "testpypi_upload",
-        "pypi_publish",
-        "git_tag_create",
-        "github_release_create"
-      ],
-      "diagnostics": [
-        "Expected calculator executed: optics.thin_film."
-      ]
-    },
-    {
-      "example_id": "waveguide_mode",
-      "status": "pass",
-      "expected_calculator": "optics.waveguide",
-      "calculator_called": true,
-      "material_suggestions": [
-        "si",
-        "sio2",
-        "si3n4",
-        "gaas"
-      ],
-      "adapter_recommendation": "mpb or elmer preview",
-      "tool_call_ledger_entries": [
-        "requirements.match_template",
-        "requirements.extract_optical_intent",
-        "requirements.match_ambiguity_check",
-        "application_domains.match_goal",
-        "application_domains.cross_check_domain",
-        "optical_language.generate_disambiguation_questions",
-        "optical_language.infer_source_monitor",
-        "optical_language.diagnose_missing_inputs",
-        "optical_language.diagnose_observable",
-        "optical_language.map_source_monitor_to_adapter",
-        "material_catalog.suggest",
-        "example_registry.load",
-        "agent_trace.build",
-        "workflow_plan.preview",
-        "adapter_preview.generate",
-        "optics.waveguide.sweep",
-        "external_solver.meep",
-        "external_solver.gmsh",
-        "external_solver.mpb",
-        "external_solver.elmer",
-        "external_solver.optiland",
-        "external_llm",
-        "testpypi_upload",
-        "pypi_publish",
-        "git_tag_create",
-        "github_release_create"
-      ],
-      "diagnostics": [
-        "Expected calculator executed: optics.waveguide."
-      ]
-    }
-  ],
-  "source_monitor_observable_diagnostics": {
-    "source_monitor_inference_available": true,
-    "source_monitor_inference_executed": true,
-    "missing_input_diagnostics_available": true,
-    "missing_input_diagnostics_executed": true,
-    "observable_taxonomy_available": true,
-    "observable_diagnostics_executed": true,
-    "adapter_native_mapping_available": true,
-    "adapter_native_mapping_executed": true,
-    "monitor_metadata": "preview-only; no real solver monitor result is claimed."
-  },
-  "adapter_native_golden_coverage": {
-    "status": "ok",
-    "adapters_covered": [
-      "elmer",
-      "gmsh",
-      "meep",
-      "mpb",
-      "optiland"
-    ],
-    "missing_adapters": [],
-    "cases": [
-      {
-        "adapter_name": "elmer",
-        "case_id": "elmer_fem_boundary_source",
-        "metadata_match": true,
-        "fragment_match": true,
-        "safety_match": true,
-        "solver_required_for_real_result": true,
-        "solver_executed": false,
-        "preview_only": true
-      },
-      {
-        "adapter_name": "gmsh",
-        "case_id": "gmsh_mesh_region",
-        "metadata_match": true,
-        "fragment_match": true,
-        "safety_match": true,
-        "solver_required_for_real_result": true,
-        "solver_executed": false,
-        "preview_only": true
-      },
-      {
-        "adapter_name": "meep",
-        "case_id": "meep_nanoparticle_scattering",
-        "metadata_match": true,
-        "fragment_match": true,
-        "safety_match": true,
-        "solver_required_for_real_result": true,
-        "solver_executed": false,
-        "preview_only": true
-      },
-      {
-        "adapter_name": "mpb",
-        "case_id": "mpb_photonic_crystal_band",
-        "metadata_match": true,
-        "fragment_match": true,
-        "safety_match": true,
-        "solver_required_for_real_result": true,
-        "solver_executed": false,
-        "preview_only": true
-      },
-      {
-        "adapter_name": "optiland",
-        "case_id": "optiland_lens_image_plane",
-        "metadata_match": true,
-        "fragment_match": true,
-        "safety_match": true,
-        "solver_required_for_real_result": true,
-        "solver_executed": false,
-        "preview_only": true
-      }
-    ]
-  },
-  "validation_maturity_summary": {
-    "api_contract_version": "0.1",
-    "status": "ok",
-    "records": [
-      {
-        "area": "materials",
-        "component_id": "material_library",
-        "maturity_level": "documented_preview",
-        "evidence_refs": [
-          "docs/material_provenance_policy.md",
-          "docs/material_library.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_material_provenance.py",
-          "tests/test_material_suitability_diagnostics.py"
-        ],
-        "limitations": [
-          "Local curated preview catalog only.",
-          "User must verify optical constants before physical conclusions.",
-          "Not a production-grade optical constants database."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "requirements",
-        "component_id": "design_requirement_templates",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/design_requirement_templates.md",
-          "examples/design_requirements/"
-        ],
-        "tests_or_scripts": [
-          "tests/test_design_requirement_templates.py",
-          "tests/test_requirement_matching.py"
-        ],
-        "limitations": [
-          "Deterministic heuristic matching only.",
-          "Ambiguous goals produce questions rather than solver actions."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "requirements",
-        "component_id": "natural_language_to_optical_language",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/natural_language_to_optical_language.md",
-          "docs/ambiguous_requirement_matching.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_ambiguous_requirement_matching.py",
-          "tests/test_missing_input_diagnostics_deepening.py"
-        ],
-        "limitations": [
-          "No external LLM is used by default.",
-          "Confidence is routing evidence, not a correctness guarantee."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "application_domains",
-        "component_id": "application_domain_benchmarks",
-        "maturity_level": "benchmark_checked_preview",
-        "evidence_refs": [
-          "docs/application_domain_benchmarks.md",
-          "examples/application_domain_benchmarks/"
-        ],
-        "tests_or_scripts": [
-          "scripts/evaluate_application_domain_benchmarks.py",
-          "tests/test_application_domain_benchmark_evaluator.py"
-        ],
-        "limitations": [
-          "Benchmarks test deterministic routing, diagnostics, and blocked actions.",
-          "Benchmarks do not establish physical accuracy."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optical_language",
-        "component_id": "source_monitor_diagnostics",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/optical_language_source_monitor.md",
-          "docs/source_monitor_missing_input_diagnostics.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optical_language_inference.py",
-          "tests/test_optical_language_diagnostics.py"
-        ],
-        "limitations": [
-          "Source and monitor records are preview metadata.",
-          "No real solver monitor result is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optical_language",
-        "component_id": "observable_diagnostics",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/observable_diagnostics.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_observable_diagnostics.py",
-          "tests/test_optical_language_observable_api.py"
-        ],
-        "limitations": [
-          "Observable taxonomy describes requested outputs and adapter fit.",
-          "Real physical outputs require separately approved solver execution."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "adapters",
-        "component_id": "adapter_native_mapping",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/adapter_native_source_monitor_mapping.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_adapter_source_monitor_mapping.py",
-          "tests/test_adapter_preview_source_monitor_metadata.py"
-        ],
-        "limitations": [
-          "Adapter-native mapping is metadata preview only.",
-          "External solvers are not run by default."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "adapters",
-        "component_id": "adapter_golden_coverage",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/adapter_native_golden_coverage_matrix.md",
-          "examples/adapter_native_golden/"
-        ],
-        "tests_or_scripts": [
-          "scripts/check_adapter_native_golden.py",
-          "tests/test_adapter_native_golden_metadata_diff.py"
-        ],
-        "limitations": [
-          "Golden cases check preview metadata and expected fragments.",
-          "Golden cases are not real solver monitor results."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "agents",
-        "component_id": "sub_agent_task_sessions",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/sub_agent_architecture.md",
-          "docs/backend_evidence_review_pack.md"
-        ],
-        "tests_or_scripts": [
-          "scripts/audit_sub_agents.py",
-          "tests/test_agent_task_session.py"
-        ],
-        "limitations": [
-          "Sub-agents are deterministic backend roles in one local process.",
-          "They are not independent autonomous services."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "agents",
-        "component_id": "tool_call_ledger",
-        "maturity_level": "fixture_guarded_preview",
-        "evidence_refs": [
-          "docs/tool_call_reality_matrix.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_tool_call_ledger.py"
-        ],
-        "limitations": [
-          "Ledger records backend tool-call reality for local sessions.",
-          "Blocked external actions remain disabled unless separately approved."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "frontend",
-        "component_id": "agent_studio",
-        "maturity_level": "documented_preview",
-        "evidence_refs": [
-          "docs/frontend_mvp_product_spec.md",
-          "docs/agent_command_center.md"
-        ],
-        "tests_or_scripts": [
-          "tests/test_frontend_mvp_files.py",
-          "tests/test_frontend_visual_smoke_plan.py"
-        ],
-        "limitations": [
-          "Frontend is a UI/demo surface, not validation evidence.",
-          "Backend evidence remains the source of validation maturity status."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "calculators",
-        "component_id": "thin_film_calculator",
-        "maturity_level": "sanity_checked_preview",
-        "evidence_refs": [
-          "docs/optical_calculator_reference_cases.md",
-          "thin_film_single_interface_air_glass",
-          "thin_film_quarter_wave_ar_550nm"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optics_thin_film_reference_cases.py",
-          "scripts/smoke_backend_capabilities.sh"
-        ],
-        "limitations": [
-          "Analytic/local preview calculation only.",
-          "Reference cases are sanity checks, not production-grade validation.",
-          "No formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "calculators",
-        "component_id": "paraxial_calculator",
-        "maturity_level": "sanity_checked_preview",
-        "evidence_refs": [
-          "docs/optical_calculator_reference_cases.md",
-          "paraxial_thin_lens_1to1",
-          "abcd_free_space_matrix",
-          "two_lens_4f_relay_1_to_1"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optics_paraxial_reference_cases.py",
-          "scripts/smoke_backend_capabilities.sh"
-        ],
-        "limitations": [
-          "Analytic/local preview calculation only.",
-          "Reference cases are sanity checks, not production-grade validation.",
-          "No formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "calculators",
-        "component_id": "gaussian_beam_calculator",
-        "maturity_level": "sanity_checked_preview",
-        "evidence_refs": [
-          "docs/optical_calculator_reference_cases.md",
-          "gaussian_beam_rayleigh_range",
-          "gaussian_beam_radius_at_rayleigh_range"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optics_gaussian_beam_reference_cases.py",
-          "scripts/smoke_backend_capabilities.sh"
-        ],
-        "limitations": [
-          "Analytic/local preview calculation only.",
-          "Reference cases are sanity checks, not production-grade validation.",
-          "No formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "calculators",
-        "component_id": "waveguide_calculator",
-        "maturity_level": "sanity_checked_preview",
-        "evidence_refs": [
-          "docs/optical_calculator_reference_cases.md",
-          "waveguide_v_number_sanity",
-          "slab_waveguide_v_number_sweep"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optics_waveguide_reference_cases.py",
-          "scripts/smoke_backend_capabilities.sh"
-        ],
-        "limitations": [
-          "Analytic/local preview calculation only.",
-          "Reference cases are sanity checks, not production-grade validation.",
-          "No formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "calculators",
-        "component_id": "fiber_coupling_calculator",
-        "maturity_level": "sanity_checked_preview",
-        "evidence_refs": [
-          "docs/optical_calculator_reference_cases.md",
-          "fiber_gaussian_perfect_overlap",
-          "fiber_gaussian_offset_loss",
-          "fiber_gaussian_tilt_loss"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optics_fiber_coupling_reference_cases.py",
-          "scripts/smoke_backend_capabilities.sh"
-        ],
-        "limitations": [
-          "Analytic/local preview calculation only.",
-          "Reference cases are sanity checks, not production-grade validation.",
-          "No formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "calculators",
-        "component_id": "polarization_calculator",
-        "maturity_level": "sanity_checked_preview",
-        "evidence_refs": [
-          "docs/optical_calculator_reference_cases.md",
-          "jones_linear_polarizer_malus",
-          "jones_half_waveplate_preview",
-          "jones_quarter_waveplate_phase_preview"
-        ],
-        "tests_or_scripts": [
-          "tests/test_optics_polarization_reference_cases.py",
-          "scripts/smoke_backend_capabilities.sh"
-        ],
-        "limitations": [
-          "Analytic/local preview calculation only.",
-          "Reference cases are sanity checks, not production-grade validation.",
-          "No formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": false,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optional_solver_micro_benchmarks",
-        "component_id": "gmsh_optional_solver_micro_benchmark",
-        "maturity_level": "optional_manual_solver_validated",
-        "evidence_refs": [
-          "docs/solver_validation_micro_benchmarks.md",
-          "docs/optional_solver_micro_benchmark_approval_matrix.md",
-          "docs/optional_solver_micro_benchmark_readiness_status.md",
-          "docs/optional_solver_environment_profiles.md",
-          "docs/optional_solver_micro_benchmark_execution_packet.md",
-          "docs/optional_solver_execution_sequence.md",
-          "validation/solver_validation_micro_benchmarks.json",
-          "validation/solver_environment_profiles.json",
-          "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
-          "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
-          "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
-          "validation/gmsh/gmsh_validation_pilot_2026-05-14.md"
-        ],
-        "tests_or_scripts": [
-          "scripts/check_optional_solver_readiness.py",
-          "scripts/run_optional_solver_micro_benchmarks.sh",
-          "tests/test_optional_solver_readiness_script.py",
-          "tests/test_optional_solver_micro_benchmarks_script.py"
-        ],
-        "limitations": [
-          "Gmsh has a reviewed and accepted optional manual mesh-generation smoke pass from 2026-05-20.",
-          "Readiness checks detect availability only and do not execute solvers.",
-          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-          "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
-          "The Meep optional micro-benchmark decision packet requires OSA_SOLVER_PYTHON and separate approval before execution.",
-          "Optional solver-backed micro-benchmarks require explicit opt-in.",
-          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
-          "No production-grade physical validation or formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optional_solver_micro_benchmarks",
-        "component_id": "meep_optional_solver_micro_benchmark",
-        "maturity_level": "optional_manual_solver_validated",
-        "evidence_refs": [
-          "docs/solver_validation_micro_benchmarks.md",
-          "docs/optional_solver_micro_benchmark_approval_matrix.md",
-          "docs/optional_solver_micro_benchmark_readiness_status.md",
-          "docs/optional_solver_environment_profiles.md",
-          "docs/optional_solver_micro_benchmark_execution_packet.md",
-          "docs/optional_solver_execution_sequence.md",
-          "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
-          "docs/optional_solver_approval_records/meep_micro_benchmark_approval_pending.md",
-          "validation/solver_validation_micro_benchmarks.json",
-          "validation/solver_environment_profiles.json",
-          "validation/meep/meep_validation_pilot_2026-05-14.md"
-        ],
-        "tests_or_scripts": [
-          "scripts/check_optional_solver_readiness.py",
-          "scripts/run_optional_solver_micro_benchmarks.sh",
-          "tests/test_optional_solver_readiness_script.py",
-          "tests/test_optional_solver_micro_benchmarks_script.py"
-        ],
-        "limitations": [
-          "Meep has a decision packet prepared for a future optional micro-benchmark, but execution remains pending and unauthorized.",
-          "Readiness checks detect availability only and do not execute solvers.",
-          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-          "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
-          "The Meep optional micro-benchmark decision packet requires OSA_SOLVER_PYTHON and separate approval before execution.",
-          "Optional solver-backed micro-benchmarks require explicit opt-in.",
-          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
-          "No production-grade physical validation or formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optional_solver_micro_benchmarks",
-        "component_id": "mpb_optional_solver_micro_benchmark",
-        "maturity_level": "optional_manual_solver_validated",
-        "evidence_refs": [
-          "docs/solver_validation_micro_benchmarks.md",
-          "docs/optional_solver_micro_benchmark_approval_matrix.md",
-          "docs/optional_solver_micro_benchmark_readiness_status.md",
-          "docs/optional_solver_environment_profiles.md",
-          "docs/optional_solver_micro_benchmark_execution_packet.md",
-          "docs/optional_solver_execution_sequence.md",
-          "validation/solver_validation_micro_benchmarks.json",
-          "validation/solver_environment_profiles.json",
-          "validation/mpb/mpb_validation_pilot_2026-05-14.md"
-        ],
-        "tests_or_scripts": [
-          "scripts/check_optional_solver_readiness.py",
-          "scripts/run_optional_solver_micro_benchmarks.sh",
-          "tests/test_optional_solver_readiness_script.py",
-          "tests/test_optional_solver_micro_benchmarks_script.py"
-        ],
-        "limitations": [
-          "MPB has a recorded narrow optional manual validation report.",
-          "Readiness checks detect availability only and do not execute solvers.",
-          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-          "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
-          "The Meep optional micro-benchmark decision packet requires OSA_SOLVER_PYTHON and separate approval before execution.",
-          "Optional solver-backed micro-benchmarks require explicit opt-in.",
-          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
-          "No production-grade physical validation or formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optional_solver_micro_benchmarks",
-        "component_id": "optiland_optional_solver_micro_benchmark",
-        "maturity_level": "optional_manual_solver_validated",
-        "evidence_refs": [
-          "docs/solver_validation_micro_benchmarks.md",
-          "docs/optional_solver_micro_benchmark_approval_matrix.md",
-          "docs/optional_solver_micro_benchmark_readiness_status.md",
-          "docs/optional_solver_environment_profiles.md",
-          "docs/optional_solver_micro_benchmark_execution_packet.md",
-          "docs/optional_solver_execution_sequence.md",
-          "validation/solver_validation_micro_benchmarks.json",
-          "validation/solver_environment_profiles.json",
-          "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
-          "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
-          "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
-          "validation/optiland/optiland_validation_pilot_2026-05-14.md"
-        ],
-        "tests_or_scripts": [
-          "scripts/check_optional_solver_readiness.py",
-          "scripts/run_optional_solver_micro_benchmarks.sh",
-          "tests/test_optional_solver_readiness_script.py",
-          "tests/test_optional_solver_micro_benchmarks_script.py"
-        ],
-        "limitations": [
-          "Optiland has a reviewed and accepted optional manual ray/path smoke pass from 2026-05-20.",
-          "Readiness checks detect availability only and do not execute solvers.",
-          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-          "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
-          "The Meep optional micro-benchmark decision packet requires OSA_SOLVER_PYTHON and separate approval before execution.",
-          "Optional solver-backed micro-benchmarks require explicit opt-in.",
-          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
-          "No production-grade physical validation or formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      },
-      {
-        "area": "optional_solver_micro_benchmarks",
-        "component_id": "elmer_optional_solver_micro_benchmark",
-        "maturity_level": "documented_preview",
-        "evidence_refs": [
-          "docs/solver_validation_micro_benchmarks.md",
-          "docs/optional_solver_micro_benchmark_approval_matrix.md",
-          "docs/optional_solver_micro_benchmark_readiness_status.md",
-          "docs/optional_solver_environment_profiles.md",
-          "docs/optional_solver_micro_benchmark_execution_packet.md",
-          "docs/optional_solver_execution_sequence.md",
-          "validation/solver_validation_micro_benchmarks.json",
-          "validation/solver_environment_profiles.json",
-          "validation/elmer/elmer_install_deferred_2026-05-15.md"
-        ],
-        "tests_or_scripts": [
-          "scripts/check_optional_solver_readiness.py",
-          "scripts/run_optional_solver_micro_benchmarks.sh",
-          "tests/test_optional_solver_readiness_script.py",
-          "tests/test_optional_solver_micro_benchmarks_script.py"
-        ],
-        "limitations": [
-          "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
-          "Readiness checks detect availability only and do not execute solvers.",
-          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-          "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
-          "The Meep optional micro-benchmark decision packet requires OSA_SOLVER_PYTHON and separate approval before execution.",
-          "Optional solver-backed micro-benchmarks require explicit opt-in.",
-          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
-          "No production-grade physical validation or formal convergence proof is claimed."
-        ],
-        "production_grade_physical_validation_claimed": false,
-        "formal_convergence_proof_claimed": false,
-        "external_solver_required": true,
-        "external_solver_executed_by_default": false
-      }
-    ],
-    "summary": {
-      "record_count": 22,
-      "areas": [
-        "adapters",
-        "agents",
-        "application_domains",
-        "calculators",
-        "frontend",
-        "materials",
-        "optical_language",
-        "optional_solver_micro_benchmarks",
-        "requirements"
-      ],
-      "levels": [
-        "benchmark_checked_preview",
-        "documented_preview",
-        "fixture_guarded_preview",
-        "optional_manual_solver_validated",
-        "sanity_checked_preview"
-      ],
-      "by_area": {
-        "adapters": 2,
-        "agents": 2,
-        "application_domains": 1,
-        "calculators": 6,
-        "frontend": 1,
-        "materials": 1,
-        "optical_language": 2,
-        "optional_solver_micro_benchmarks": 5,
-        "requirements": 2
-      },
-      "by_level": {
-        "benchmark_checked_preview": 1,
-        "documented_preview": 3,
-        "fixture_guarded_preview": 8,
-        "optional_manual_solver_validated": 4,
-        "sanity_checked_preview": 6
-      },
-      "calculator_maturity_level": "sanity_checked_preview",
-      "application_domain_maturity_level": "benchmark_checked_preview",
-      "adapter_source_monitor_maturity_level": "fixture_guarded_preview",
-      "material_maturity_level": "documented_preview_user_must_verify",
-      "optional_solver_micro_benchmark_default": "no_solver_execution",
-      "optional_solver_micro_benchmarks_opt_in_required": true,
-      "optional_solver_readiness_available": true,
-      "optional_solver_approval_matrix_available": true,
-      "optional_solver_environment_profiles_available": true,
-      "optional_solver_execution_approval_packet_available": true,
-      "optional_solver_approval_records_present": true,
-      "optional_solver_execution_default": false,
-      "explicit_solver_approval_required": true,
-      "all_optional_solver_execution_authorized": false,
-      "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
-      "gmsh_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
-      "optiland_optional_micro_benchmark_status": "passed_2026-05-20",
-      "optiland_optional_micro_benchmark_review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
-      "meep_optional_micro_benchmark_decision_packet_available": true,
-      "meep_optional_micro_benchmark_status": "pending_not_run",
-      "meep_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only",
-      "next_optional_solver_candidate": "meep_requires_osa_solver_python_not_approved",
-      "elmer_micro_benchmark_status": "deferred"
-    },
-    "preview_boundary_summary": {
-      "calculators": "Sanity-checked preview/design-assist calculators; physical validation remains user responsibility.",
-      "materials": "Local curated preview catalog; not a production-grade optical constants database.",
-      "adapters": "Adapter-native source/monitor mappings are preview metadata; real results require explicit solver execution.",
-      "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
-      "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services.",
-      "pypi": "PyPI publication would not imply production-grade validation.",
-      "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20 as reviewed mesh-generation smoke evidence, record the separately approved Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, prepare a Meep-specific decision packet with OSA_SOLVER_PYTHON profile requirements while keeping Meep execution unauthorized, keep MPB unapproved pending OSA_SOLVER_PYTHON-specific approval, and default gates do not run solvers."
-    },
-    "external_solver_executed": false,
-    "external_llm_required": false,
-    "proprietary_solver_required": false,
-    "production_grade_validation_claimed": false,
-    "formal_convergence_proof_claimed": false
-  },
-  "preview_boundary_summary": {
-    "calculators": "Sanity-checked preview/design-assist calculators; physical validation remains user responsibility.",
-    "materials": "Local curated preview catalog; not a production-grade optical constants database.",
-    "adapters": "Adapter-native source/monitor mappings are preview metadata; real results require explicit solver execution.",
-    "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
-    "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services.",
-    "pypi": "PyPI publication would not imply production-grade validation.",
-    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20 as reviewed mesh-generation smoke evidence, record the separately approved Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, prepare a Meep-specific decision packet with OSA_SOLVER_PYTHON profile requirements while keeping Meep execution unauthorized, keep MPB unapproved pending OSA_SOLVER_PYTHON-specific approval, and default gates do not run solvers."
-  },
-  "validation_claim_audit_available": true,
   "blocked_or_deferred_capabilities": [
     {
       "capability": "external_solver",
@@ -2359,15 +187,2199 @@
       "reason": "No formal convergence proof is claimed."
     }
   ],
+  "design_case_cross_checks": [
+    {
+      "adapter_recommendation": "meep with gmsh geometry preview",
+      "calculator_called": false,
+      "diagnostics": [
+        "No scalar calculator is required for this example category."
+      ],
+      "example_id": "dielectric_metasurface_preview",
+      "expected_calculator": null,
+      "material_suggestions": [
+        "tio2",
+        "si3n4",
+        "si",
+        "sio2"
+      ],
+      "status": "pass",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ]
+    },
+    {
+      "adapter_recommendation": "optiland",
+      "calculator_called": true,
+      "diagnostics": [
+        "Expected calculator executed: optics.paraxial."
+      ],
+      "example_id": "lens_raytrace_preview",
+      "expected_calculator": "optics.paraxial",
+      "material_suggestions": [
+        "glass_bk7_preview",
+        "glass_fused_silica_preview",
+        "air"
+      ],
+      "status": "pass",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.paraxial.two_lens_relay",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ]
+    },
+    {
+      "adapter_recommendation": "meep with gmsh geometry preview",
+      "calculator_called": false,
+      "diagnostics": [
+        "No scalar calculator is required for this example category."
+      ],
+      "example_id": "nanoparticle_plasmonics",
+      "expected_calculator": null,
+      "material_suggestions": [
+        "au",
+        "ag",
+        "sio2",
+        "water",
+        "air"
+      ],
+      "status": "pass",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ]
+    },
+    {
+      "adapter_recommendation": "mpb",
+      "calculator_called": false,
+      "diagnostics": [
+        "No scalar calculator is required for this example category."
+      ],
+      "example_id": "photonic_crystal_band",
+      "expected_calculator": null,
+      "material_suggestions": [
+        "si",
+        "gaas",
+        "sio2",
+        "air"
+      ],
+      "status": "pass",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ]
+    },
+    {
+      "adapter_recommendation": "preview-only; future TMM adapter candidate",
+      "calculator_called": true,
+      "diagnostics": [
+        "Expected calculator executed: optics.thin_film."
+      ],
+      "example_id": "thin_film_coating",
+      "expected_calculator": "optics.thin_film",
+      "material_suggestions": [
+        "sio2",
+        "tio2",
+        "al2o3"
+      ],
+      "status": "pass",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.thin_film.spectrum",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ]
+    },
+    {
+      "adapter_recommendation": "mpb or elmer preview",
+      "calculator_called": true,
+      "diagnostics": [
+        "Expected calculator executed: optics.waveguide."
+      ],
+      "example_id": "waveguide_mode",
+      "expected_calculator": "optics.waveguide",
+      "material_suggestions": [
+        "si",
+        "sio2",
+        "si3n4",
+        "gaas"
+      ],
+      "status": "pass",
+      "tool_call_ledger_entries": [
+        "requirements.match_template",
+        "requirements.extract_optical_intent",
+        "requirements.match_ambiguity_check",
+        "application_domains.match_goal",
+        "application_domains.cross_check_domain",
+        "optical_language.generate_disambiguation_questions",
+        "optical_language.infer_source_monitor",
+        "optical_language.diagnose_missing_inputs",
+        "optical_language.diagnose_observable",
+        "optical_language.map_source_monitor_to_adapter",
+        "material_catalog.suggest",
+        "example_registry.load",
+        "agent_trace.build",
+        "workflow_plan.preview",
+        "adapter_preview.generate",
+        "optics.waveguide.sweep",
+        "external_solver.meep",
+        "external_solver.gmsh",
+        "external_solver.mpb",
+        "external_solver.elmer",
+        "external_solver.optiland",
+        "external_llm",
+        "testpypi_upload",
+        "pypi_publish",
+        "git_tag_create",
+        "github_release_create"
+      ]
+    }
+  ],
+  "evidence_pack_available": true,
+  "external_llm_required": false,
+  "external_solver_executed": false,
+  "formal_convergence_proof_claimed": false,
   "maintainer_review_questions": [
     "Is backend evidence sufficient for continued v0.9.0rc8.dev0 readiness work?",
     "Is PyPI still deferred?",
     "Should the frontend display backend evidence next?",
     "Which calculator or optical design domain should deepen next?"
   ],
-  "external_solver_executed": false,
-  "external_llm_required": false,
-  "proprietary_solver_required": false,
+  "material_provenance_coverage": {
+    "material_count": 13,
+    "materials_requiring_user_verification": 13,
+    "materials_with_provenance": 13,
+    "no_external_material_database_lookup": true,
+    "notes": [
+      "All starter material records are local preview/design-assist entries.",
+      "Numeric n/k values remain approximate and require user verification.",
+      "No external material database lookup is performed."
+    ],
+    "preview_design_assist_only": true,
+    "production_grade_optical_constants_claimed": false,
+    "production_grade_optical_constants_database": false
+  },
+  "material_template_cross_checks": {
+    "cross_checks": [
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "nanoparticle_plasmonics",
+        "expected_adapters": [
+          "meep",
+          "gmsh"
+        ],
+        "expected_calculators": [],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "ag",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "au",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "water",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "ag",
+          "au",
+          "sio2",
+          "air",
+          "water"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "glass_bk7_preview",
+          "glass_fused_silica_preview"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "thin_film_coating",
+        "expected_adapters": [
+          "preview-only TMM calculator path"
+        ],
+        "expected_calculators": [
+          "optics.thin_film.spectrum",
+          "optics.thin_film.quarter_wave_ar"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "tio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "al2o3",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "glass_bk7_preview",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "sio2",
+          "tio2",
+          "al2o3",
+          "glass_bk7_preview"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "slab_waveguide",
+        "expected_adapters": [
+          "mpb",
+          "elmer"
+        ],
+        "expected_calculators": [
+          "optics.waveguide.sweep",
+          "optics.waveguide.single_mode_range"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "si",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "si3n4",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "si",
+          "si3n4",
+          "sio2",
+          "air"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "photonic_crystal",
+        "expected_adapters": [
+          "mpb"
+        ],
+        "expected_calculators": [],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "si",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "gaas",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "si",
+          "gaas",
+          "sio2",
+          "air"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "water"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "dielectric_metasurface",
+        "expected_adapters": [
+          "meep",
+          "gmsh"
+        ],
+        "expected_calculators": [],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "tio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "si3n4",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "si",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "tio2",
+          "si3n4",
+          "si",
+          "sio2"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au",
+          "water"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "lens_ray_optics",
+        "expected_adapters": [
+          "optiland"
+        ],
+        "expected_calculators": [
+          "optics.paraxial.two_lens_relay",
+          "optics.paraxial.thin_lens"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "glass_bk7_preview",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "glass_bk7_preview",
+          "glass_fused_silica_preview",
+          "air"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au",
+          "si"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "No deterministic suitability rule for air in gaussian_beam_focusing.",
+          "No deterministic suitability rule for glass_fused_silica_preview in gaussian_beam_focusing."
+        ],
+        "domain_id": "gaussian_beam_focusing",
+        "expected_adapters": [
+          "optiland"
+        ],
+        "expected_calculators": [
+          "optics.gaussian_beam.series",
+          "optics.gaussian_beam.focus"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "air",
+          "glass_fused_silica_preview"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "Application domain has local preview coverage."
+        ],
+        "domain_id": "imaging_system_preview",
+        "expected_adapters": [
+          "optiland"
+        ],
+        "expected_calculators": [
+          "optics.paraxial.two_lens_relay"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "glass_bk7_preview",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          },
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "suitable",
+            "suitable": true
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "glass_bk7_preview",
+          "glass_fused_silica_preview",
+          "air"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "No deterministic suitability rule for glass_fused_silica_preview in fiber_coupling_preview.",
+          "No deterministic suitability rule for sio2 in fiber_coupling_preview.",
+          "No deterministic suitability rule for si3n4 in fiber_coupling_preview.",
+          "No deterministic suitability rule for air in fiber_coupling_preview."
+        ],
+        "domain_id": "fiber_coupling_preview",
+        "expected_adapters": [
+          "mpb",
+          "optiland"
+        ],
+        "expected_calculators": [
+          "optics.fiber_coupling.gaussian_mode_overlap"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "glass_fused_silica_preview",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "si3n4",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "air",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "glass_fused_silica_preview",
+          "sio2",
+          "si3n4",
+          "air"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ]
+      },
+      {
+        "deferred_capability": null,
+        "diagnostics": [
+          "No deterministic suitability rule for tio2 in polarization_optics_preview.",
+          "No deterministic suitability rule for si3n4 in polarization_optics_preview.",
+          "No deterministic suitability rule for sio2 in polarization_optics_preview.",
+          "No deterministic suitability rule for glass_fused_silica_preview in polarization_optics_preview."
+        ],
+        "domain_id": "polarization_optics_preview",
+        "expected_adapters": [
+          "meep"
+        ],
+        "expected_calculators": [
+          "optics.polarization.jones"
+        ],
+        "expected_tool_status": "covered",
+        "external_llm_required": false,
+        "external_solver_executed": false,
+        "formal_convergence_proof_claimed": false,
+        "material_suitability_coverage": true,
+        "material_suitability_summary": [
+          {
+            "material_id": "tio2",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "si3n4",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "sio2",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          },
+          {
+            "material_id": "glass_fused_silica_preview",
+            "requires_user_verification": true,
+            "suitability": "unknown",
+            "suitable": null
+          }
+        ],
+        "missing_input_questions_present": true,
+        "preview_only": true,
+        "production_grade_validation_claimed": false,
+        "proprietary_solver_required": false,
+        "status": "pass",
+        "suggested_materials": [
+          "tio2",
+          "si3n4",
+          "sio2",
+          "glass_fused_silica_preview"
+        ],
+        "template_coverage": true,
+        "unsuitable_materials": [
+          "ag",
+          "au"
+        ]
+      }
+    ],
+    "fail_count": 0,
+    "formal_convergence_proof_claimed": false,
+    "no_production_grade_claim": true,
+    "pass_count": 10,
+    "preview_design_assist_only": true,
+    "preview_only": true,
+    "production_grade_validation_claimed": false,
+    "total": 10,
+    "warning_count": 0
+  },
+  "missing_input_diagnostics": {
+    "available": true,
+    "critical_optional_split": true,
+    "notes": [
+      "Critical inputs reported: aperture, field_of_view, focal_length, object_distance.",
+      "Optional inputs reported: aperture, field_of_view, wavelength.",
+      "safe_to_preview remains true while safe_to_run_solver remains false."
+    ],
+    "safe_to_preview_default": true,
+    "safe_to_run_solver_default": false
+  },
+  "optical_calculators": [
+    {
+      "api_endpoints": [
+        "/api/optics/thin-film",
+        "/api/optics/thin-film-spectrum",
+        "/api/optics/quarter-wave-ar"
+      ],
+      "calculator_name": "thin_film",
+      "failure_modes": [
+        "negative wavelength",
+        "zero/negative thickness",
+        "invalid refractive index"
+      ],
+      "formal_convergence_proof_claimed": false,
+      "implemented": true,
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "quality_level": "sanity_checked_preview",
+      "sanity_reference_cases": [
+        "thin_film_single_interface_air_glass",
+        "thin_film_quarter_wave_ar_550nm"
+      ]
+    },
+    {
+      "api_endpoints": [
+        "/api/optics/paraxial-lens",
+        "/api/optics/paraxial-system",
+        "/api/optics/two-lens-relay"
+      ],
+      "calculator_name": "paraxial",
+      "failure_modes": [
+        "zero focal length",
+        "object at focal plane",
+        "invalid ABCD element"
+      ],
+      "formal_convergence_proof_claimed": false,
+      "implemented": true,
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "quality_level": "sanity_checked_preview",
+      "sanity_reference_cases": [
+        "paraxial_thin_lens_1to1",
+        "abcd_free_space_matrix",
+        "two_lens_4f_relay_1_to_1"
+      ]
+    },
+    {
+      "api_endpoints": [
+        "/api/optics/gaussian-beam",
+        "/api/optics/gaussian-beam-series",
+        "/api/optics/gaussian-beam-focus"
+      ],
+      "calculator_name": "gaussian_beam",
+      "failure_modes": [
+        "negative wavelength",
+        "zero waist",
+        "invalid sweep points"
+      ],
+      "formal_convergence_proof_claimed": false,
+      "implemented": true,
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "quality_level": "sanity_checked_preview",
+      "sanity_reference_cases": [
+        "gaussian_beam_rayleigh_range",
+        "gaussian_beam_radius_at_waist",
+        "gaussian_beam_radius_at_rayleigh_range"
+      ]
+    },
+    {
+      "api_endpoints": [
+        "/api/optics/waveguide-estimate",
+        "/api/optics/waveguide-sweep",
+        "/api/optics/waveguide-single-mode-range"
+      ],
+      "calculator_name": "waveguide",
+      "failure_modes": [
+        "core_n <= cladding_n",
+        "negative wavelength",
+        "invalid sweep points"
+      ],
+      "formal_convergence_proof_claimed": false,
+      "implemented": true,
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "quality_level": "sanity_checked_preview",
+      "sanity_reference_cases": [
+        "waveguide_v_number_sanity",
+        "slab_waveguide_v_number_sweep"
+      ]
+    },
+    {
+      "api_endpoints": [
+        "/api/optics/fiber-coupling"
+      ],
+      "calculator_name": "fiber_coupling",
+      "failure_modes": [
+        "negative wavelength",
+        "zero waist",
+        "non-finite waist or wavelength",
+        "negative lateral offset",
+        "non-finite angular tilt"
+      ],
+      "formal_convergence_proof_claimed": false,
+      "implemented": true,
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "quality_level": "sanity_checked_preview",
+      "sanity_reference_cases": [
+        "fiber_gaussian_perfect_overlap",
+        "fiber_gaussian_waist_mismatch",
+        "fiber_gaussian_offset_loss",
+        "fiber_gaussian_tilt_loss"
+      ]
+    },
+    {
+      "api_endpoints": [
+        "/api/optics/polarization-jones"
+      ],
+      "calculator_name": "polarization",
+      "failure_modes": [
+        "zero Jones-vector intensity",
+        "invalid Jones-vector shape",
+        "non-finite retardance",
+        "non-finite angle"
+      ],
+      "formal_convergence_proof_claimed": false,
+      "implemented": true,
+      "preview_design_assist": true,
+      "production_grade_validation_claimed": false,
+      "quality_level": "sanity_checked_preview",
+      "sanity_reference_cases": [
+        "jones_linear_0deg",
+        "jones_linear_90deg",
+        "jones_linear_polarizer_malus",
+        "jones_half_waveplate_preview",
+        "jones_quarter_waveplate_phase_preview"
+      ]
+    }
+  ],
+  "optional_solver_micro_benchmarks": {
+    "all_optional_solver_execution_authorized": false,
+    "approval_matrix_available": true,
+    "approval_matrix_path": "docs/optional_solver_micro_benchmark_approval_matrix.md",
+    "approval_record_template_path": "docs/optional_solver_micro_benchmark_approval_record_template.md",
+    "approval_records_path": "docs/optional_solver_approval_records",
+    "approval_records_present": true,
+    "default_runs_solver": false,
+    "default_solver_execution": false,
+    "elmer_deferred": true,
+    "environment_profiles_available": true,
+    "environment_profiles_doc": "docs/optional_solver_environment_profiles.md",
+    "environment_profiles_path": "validation/solver_environment_profiles.json",
+    "execution_approval_packet_available": true,
+    "execution_approval_packet_path": "docs/optional_solver_micro_benchmark_execution_packet.md",
+    "execution_default": false,
+    "execution_sequence_path": "docs/optional_solver_execution_sequence.md",
+    "explicit_approval_required": true,
+    "formal_convergence_proof_claimed": false,
+    "manifest_exists": true,
+    "manifest_path": "validation/solver_validation_micro_benchmarks.json",
+    "manual_opt_in_only": true,
+    "meep_decision_packet_available": true,
+    "meep_decision_packet_path": "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
+    "no_production_grade_claim": true,
+    "notes": [
+      "Unified solver micro-benchmark wrapper is default no-execute.",
+      "Readiness script performs availability detection only and does not execute solvers.",
+      "Readiness can be calibrated with OSA_SOLVER_PYTHON and OSA_SOLVER_READINESS_PROFILE.",
+      "Approval matrix and approval record template are maintainer review aids.",
+      "Gmsh has an approved 2026-05-20 Gmsh-only optional micro-benchmark pass recorded as mesh generation smoke evidence.",
+      "The Gmsh evidence was reviewed and accepted as optional manual mesh-generation smoke evidence; it does not authorize further solver execution.",
+      "Optiland evidence was reviewed and accepted as optional manual ray/path smoke evidence; it does not authorize further solver execution.",
+      "Gmsh was not rerun by the Optiland or Meep tasks; Optiland was not rerun by the Meep task.",
+      "Meep has a separate approved 2026-05-20 Meep-only optional micro-benchmark pass recorded as PyMeep/FDTD smoke evidence.",
+      "MPB was not executed and requires OSA_SOLVER_PYTHON plus separate approval; Elmer remains deferred.",
+      "Execution approval packet and per-solver records preserve pending/deferred review aids for future runs.",
+      "Future execution should run one solver at a time after explicit approval.",
+      "Opt-in environment variables are required for solver-backed runs.",
+      "Elmer remains deferred and is not Level 3."
+    ],
+    "opt_in_required": true,
+    "optional_solver_approval_matrix_available": true,
+    "optional_solver_approval_records_present": true,
+    "optional_solver_environment_profiles_available": true,
+    "optional_solver_execution_approval_packet_available": true,
+    "optional_solver_execution_default": false,
+    "optional_solver_readiness_available": true,
+    "preview_design_assist_only": true,
+    "production_grade_claim": false,
+    "profile_env_var": "OSA_SOLVER_READINESS_PROFILE",
+    "readiness_available": true,
+    "readiness_script": "scripts/check_optional_solver_readiness.py",
+    "readiness_status_path": "docs/optional_solver_micro_benchmark_readiness_status.md",
+    "solver_python_env_var": "OSA_SOLVER_PYTHON",
+    "solvers": [
+      {
+        "adapter": "gmsh",
+        "approval_phrase": "I approve running the optional gmsh micro-benchmark for optical-spec-agent.",
+        "approval_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+        "approval_required": true,
+        "approval_status": "approved_executed",
+        "cleanup_required": true,
+        "cli_probe_supported": true,
+        "command_names": [
+          "gmsh"
+        ],
+        "current_maturity": "Level 3 - Optional manual solver validation",
+        "default_in_quality_gates": false,
+        "default_in_release_gates": false,
+        "default_runs_solver": false,
+        "environment_profile_required": "homebrew-cli",
+        "evidence_refs": [
+          "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+          "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+          "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
+          "validation/gmsh/gmsh_validation_pilot_2026-05-14.md",
+          "docs/gmsh_optional_validation_pilot.md"
+        ],
+        "execution_authorized": false,
+        "execution_sequence_rank": 1,
+        "expected_artifact_paths": [
+          "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.geo",
+          "/tmp/osa-gmsh-micro-benchmark-output/gmsh_preview.msh",
+          "/tmp/osa-gmsh-micro-benchmark-report.json"
+        ],
+        "expected_artifacts": [
+          "gmsh_preview.geo",
+          "gmsh_preview.msh",
+          "gmsh_validation_report.json"
+        ],
+        "expected_runtime_environment": "Local environment with gmsh available on PATH after explicit maintainer approval.",
+        "formal_convergence_proof_claimed": false,
+        "last_execution_date": "2026-05-20",
+        "last_execution_evidence": "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+        "last_execution_report": "/tmp/osa-gmsh-micro-benchmark-report.json",
+        "last_execution_scope": "Gmsh only for the earlier approved run; Optiland and Meep were executed later under separate approvals; MPB/Elmer not executed.",
+        "last_execution_solver_version": "4.15.2-git",
+        "last_execution_status": "passed",
+        "missing_solver_non_blocking": true,
+        "module_names": [
+          "gmsh"
+        ],
+        "next_candidate_approved": false,
+        "next_candidate_solver": "mpb_after_osa_solver_python",
+        "no_further_solver_authorized": true,
+        "opt_in_env_var": "OSA_RUN_OPTIONAL_GMSH_VALIDATION",
+        "optional_script": "scripts/run_optional_gmsh_validation.sh",
+        "pending_approval_template_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_pending.md",
+        "production_grade_validation_claimed": false,
+        "profile_sensitive": true,
+        "pypi_publication_related": false,
+        "python_probe_supported": true,
+        "readiness_status": "candidate_ready_with_previous_manual_report",
+        "recommended_next_action": "Gmsh evidence is reviewed and accepted as optional manual mesh-generation smoke evidence. Meep and Optiland have separate recorded evidence; no future Gmsh rerun is authorized.",
+        "recommended_profile": "homebrew-cli",
+        "review_decision_date": "2026-05-20",
+        "review_record_path": "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
+        "review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
+        "solver_name": "gmsh",
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "solver_python_required": false,
+        "status": "manual_micro_benchmark_passed_2026-05-20",
+        "tag_release_related": false
+      },
+      {
+        "adapter": "meep",
+        "approval_phrase": "I approve running the optional Meep micro-benchmark for optical-spec-agent using OSA_SOLVER_PYTHON=<path>.",
+        "approval_record_path": "docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md",
+        "approval_required": true,
+        "approval_status": "approved_executed",
+        "cleanup_required": true,
+        "cli_probe_supported": false,
+        "command_names": [],
+        "current_maturity": "Level 3 - Optional manual solver validation",
+        "decision_packet_path": "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
+        "default_in_quality_gates": false,
+        "default_in_release_gates": false,
+        "default_runs_solver": false,
+        "environment_profile_required": "osa-solvers",
+        "evidence_refs": [
+          "validation/meep/meep_micro_benchmark_2026-05-20.md",
+          "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
+          "docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md",
+          "validation/meep/meep_validation_pilot_2026-05-14.md",
+          "docs/meep_optional_validation_pilot.md"
+        ],
+        "execution_authorized": false,
+        "execution_sequence_rank": 3,
+        "expected_artifact_paths": [
+          "/tmp/osa-meep-micro-benchmark-output/meep_preview.py",
+          "/tmp/osa-meep-micro-benchmark-output/meep_minimal_validation.py",
+          "/tmp/osa-meep-micro-benchmark-output/meep_validation_result.json",
+          "/tmp/osa-meep-micro-benchmark-report.json"
+        ],
+        "expected_artifacts": [
+          "meep_preview.py",
+          "meep_minimal_validation.py",
+          "meep_validation_result.json",
+          "meep_validation_report.json"
+        ],
+        "expected_runtime_environment": "Local Python environment with PyMeep importable after explicit maintainer approval.",
+        "formal_convergence_proof_claimed": false,
+        "last_execution_date": "2026-05-20",
+        "last_execution_evidence": "validation/meep/meep_micro_benchmark_2026-05-20.md",
+        "last_execution_scope": "Meep only for the approved Meep run using OSA_SOLVER_PYTHON; Gmsh and Optiland were not rerun; MPB/Elmer not executed.",
+        "last_execution_status": "passed",
+        "missing_solver_non_blocking": true,
+        "module_names": [
+          "meep"
+        ],
+        "next_candidate_approved": false,
+        "next_candidate_solver": "mpb_after_osa_solver_python",
+        "opt_in_env_var": "OSA_RUN_OPTIONAL_MEEP_VALIDATION",
+        "optional_script": "scripts/run_optional_meep_validation.sh",
+        "production_grade_validation_claimed": false,
+        "profile_sensitive": true,
+        "pypi_publication_related": false,
+        "python_probe_supported": true,
+        "readiness_profile": "osa-solvers",
+        "readiness_status": "candidate_ready_with_previous_manual_report",
+        "recommended_next_action": "Meep evidence is recorded as optional manual PyMeep/FDTD smoke evidence. MPB requires separate OSA_SOLVER_PYTHON approval before any execution; no future Meep rerun is authorized.",
+        "recommended_profile": "osa-solvers",
+        "review_status": "not_reviewed_yet",
+        "solver_name": "meep",
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "solver_python_required": true,
+        "status": "manual_micro_benchmark_passed_2026-05-20",
+        "tag_release_related": false
+      },
+      {
+        "adapter": "mpb",
+        "approval_phrase": "I approve running the optional mpb micro-benchmark for optical-spec-agent.",
+        "approval_record_path": "docs/optional_solver_approval_records/mpb_micro_benchmark_approval_pending.md",
+        "approval_required": true,
+        "approval_status": "pending",
+        "cleanup_required": true,
+        "cli_probe_supported": true,
+        "command_names": [
+          "mpb"
+        ],
+        "current_maturity": "Level 3 - Optional manual solver validation",
+        "default_in_quality_gates": false,
+        "default_in_release_gates": false,
+        "default_runs_solver": false,
+        "environment_profile_required": "osa-solvers",
+        "evidence_refs": [
+          "validation/mpb/mpb_validation_pilot_2026-05-14.md",
+          "docs/mpb_optional_validation_pilot.md"
+        ],
+        "execution_authorized": false,
+        "execution_sequence_rank": 4,
+        "expected_artifact_paths": [
+          "/tmp/osa-mpb-validation/mpb_preview.py",
+          "/tmp/osa-mpb-validation/mpb_validation_result.json",
+          "/tmp/osa-mpb-validation/mpb_validation_report.json"
+        ],
+        "expected_artifacts": [
+          "mpb_preview.py",
+          "mpb_validation_result.json",
+          "mpb_validation_report.json"
+        ],
+        "expected_runtime_environment": "Local Python environment with meep.mpb importable after explicit maintainer approval.",
+        "formal_convergence_proof_claimed": false,
+        "last_execution_status": "not_run",
+        "missing_solver_non_blocking": true,
+        "module_names": [
+          "meep.mpb"
+        ],
+        "opt_in_env_var": "OSA_RUN_OPTIONAL_MPB_VALIDATION",
+        "optional_script": "scripts/run_optional_mpb_validation.sh",
+        "production_grade_validation_claimed": false,
+        "profile_sensitive": true,
+        "pypi_publication_related": false,
+        "python_probe_supported": true,
+        "readiness_status": "candidate_ready_with_previous_manual_report",
+        "recommended_next_action": "MPB remains not executed. It requires separate explicit maintainer approval and OSA_SOLVER_PYTHON before any opt-in run.",
+        "recommended_profile": "osa-solvers",
+        "solver_name": "mpb",
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "solver_python_required": true,
+        "status": "manual_report_recorded",
+        "tag_release_related": false
+      },
+      {
+        "adapter": "optiland",
+        "approval_phrase": "I approve running the optional optiland micro-benchmark for optical-spec-agent.",
+        "approval_record_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
+        "approval_required": true,
+        "approval_status": "approved_executed",
+        "cleanup_required": true,
+        "cli_probe_supported": true,
+        "command_names": [
+          "optiland"
+        ],
+        "current_maturity": "Level 3 - Optional manual backend validation",
+        "default_in_quality_gates": false,
+        "default_in_release_gates": false,
+        "default_runs_solver": false,
+        "environment_profile_required": "current",
+        "evidence_refs": [
+          "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
+          "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
+          "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
+          "validation/optiland/optiland_validation_pilot_2026-05-14.md",
+          "docs/optiland_optional_validation_pilot.md"
+        ],
+        "execution_authorized": false,
+        "execution_sequence_rank": 2,
+        "expected_artifact_paths": [
+          "/tmp/osa-optiland-validation/optiland_preview.py",
+          "/tmp/osa-optiland-validation/optiland_validation_result.json",
+          "/tmp/osa-optiland-validation/optiland_validation_report.json"
+        ],
+        "expected_artifacts": [
+          "optiland_preview.py",
+          "optiland_validation_result.json",
+          "optiland_validation_report.json"
+        ],
+        "expected_runtime_environment": "Local Python environment with Optiland importable after explicit maintainer approval.",
+        "formal_convergence_proof_claimed": false,
+        "last_execution_date": "2026-05-20",
+        "last_execution_evidence": "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
+        "last_execution_report": "/tmp/osa-optiland-micro-benchmark-report.json",
+        "last_execution_scope": "Optiland only for the approved Optiland run; Gmsh was earlier and Meep was later under separate approvals; MPB/Elmer not executed.",
+        "last_execution_solver_version": "0.6.0",
+        "last_execution_status": "passed",
+        "missing_solver_non_blocking": true,
+        "module_names": [
+          "optiland"
+        ],
+        "next_candidate_approved": false,
+        "next_candidate_solver": "mpb_after_osa_solver_python",
+        "no_further_solver_authorized": true,
+        "opt_in_env_var": "OSA_RUN_OPTIONAL_OPTILAND_VALIDATION",
+        "optional_script": "scripts/run_optional_optiland_validation.sh",
+        "pending_approval_template_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_pending.md",
+        "production_grade_validation_claimed": false,
+        "profile_sensitive": true,
+        "pypi_publication_related": false,
+        "python_probe_supported": true,
+        "readiness_status": "candidate_ready_with_previous_manual_report",
+        "recommended_next_action": "Optiland evidence is reviewed and accepted as optional manual ray/path smoke evidence. Meep has separate recorded smoke evidence; no future Optiland rerun is authorized.",
+        "recommended_profile": "current",
+        "review_record_path": "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
+        "review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
+        "solver_name": "optiland",
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "solver_python_required": false,
+        "status": "manual_micro_benchmark_passed_2026-05-20",
+        "tag_release_related": false
+      },
+      {
+        "adapter": "elmer",
+        "approval_phrase": "I approve running the optional elmer micro-benchmark for optical-spec-agent.",
+        "approval_record_path": "docs/optional_solver_approval_records/elmer_micro_benchmark_deferred.md",
+        "approval_required": true,
+        "approval_status": "deferred",
+        "cleanup_required": true,
+        "cli_probe_supported": true,
+        "command_names": [
+          "ElmerSolver"
+        ],
+        "current_maturity": "Level 2 - Golden/evidence fixtures, Level-3-ready",
+        "default_in_quality_gates": false,
+        "default_in_release_gates": false,
+        "default_runs_solver": false,
+        "environment_profile_required": "deferred-elmer",
+        "evidence_refs": [
+          "validation/elmer/elmer_install_deferred_2026-05-15.md",
+          "docs/elmer_optional_validation_pilot.md"
+        ],
+        "execution_authorized": false,
+        "execution_sequence_rank": 99,
+        "expected_artifact_paths": [
+          "/tmp/osa-elmer-validation/case.sif",
+          "/tmp/osa-elmer-validation/elmer_validation_report.json"
+        ],
+        "expected_artifacts": [
+          "case.sif",
+          "elmer_validation_report.json"
+        ],
+        "expected_runtime_environment": "Deferred until a maintainable local ElmerSolver install route exists and maintainer approval is explicit.",
+        "formal_convergence_proof_claimed": false,
+        "last_execution_status": "not_run",
+        "missing_solver_non_blocking": true,
+        "module_names": [],
+        "opt_in_env_var": "OSA_RUN_OPTIONAL_ELMER_VALIDATION",
+        "optional_script": "scripts/run_optional_elmer_validation.sh",
+        "production_grade_validation_claimed": false,
+        "profile_sensitive": false,
+        "pypi_publication_related": false,
+        "python_probe_supported": false,
+        "readiness_status": "deferred_until_maintainable_install_route",
+        "recommended_next_action": "Keep Elmer deferred until a maintainable ElmerSolver install route exists and a new explicit approval is recorded.",
+        "recommended_profile": "deferred-elmer",
+        "solver_name": "elmer",
+        "solver_python_env_var": "OSA_SOLVER_PYTHON",
+        "solver_python_required": false,
+        "status": "deferred",
+        "tag_release_related": false
+      }
+    ]
+  },
+  "package_and_release_status": {
+    "current_public_prerelease": "v0.9.0rc7",
+    "main_development_version": "0.9.0rc8.dev0",
+    "package_version": "0.9.0rc8.dev0",
+    "pypi_published": false,
+    "tag_release_actions": "none",
+    "testpypi_verified_only_for": "0.9.0rc6.dev0",
+    "upload_actions": "none"
+  },
+  "preview_boundary_summary": {
+    "adapters": "Adapter-native source/monitor mappings are preview metadata; real results require explicit solver execution.",
+    "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
+    "calculators": "Sanity-checked preview/design-assist calculators; physical validation remains user responsibility.",
+    "materials": "Local curated preview catalog; not a production-grade optical constants database.",
+    "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20 as reviewed mesh-generation smoke evidence, record the separately approved Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, record the separately approved Meep-only pass from 2026-05-20 as optional manual PyMeep/FDTD smoke evidence through OSA_SOLVER_PYTHON, keep MPB unapproved pending OSA_SOLVER_PYTHON-specific approval, and default gates do not run solvers.",
+    "pypi": "PyPI publication would not imply production-grade validation.",
+    "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services."
+  },
+  "preview_design_assist_only": true,
   "production_grade_validation_claimed": false,
-  "formal_convergence_proof_claimed": false
+  "proprietary_solver_required": false,
+  "source_monitor_observable_diagnostics": {
+    "adapter_native_mapping_available": true,
+    "adapter_native_mapping_executed": true,
+    "missing_input_diagnostics_available": true,
+    "missing_input_diagnostics_executed": true,
+    "monitor_metadata": "preview-only; no real solver monitor result is claimed.",
+    "observable_diagnostics_executed": true,
+    "observable_taxonomy_available": true,
+    "source_monitor_inference_available": true,
+    "source_monitor_inference_executed": true
+  },
+  "status": "ok",
+  "sub_agent_reality": [
+    {
+      "evidence_refs_available": false,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "SpecAgent"
+    },
+    {
+      "evidence_refs_available": true,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "MaterialAgent"
+    },
+    {
+      "evidence_refs_available": false,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "GeometryAgent"
+    },
+    {
+      "evidence_refs_available": true,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "AdapterAgent"
+    },
+    {
+      "evidence_refs_available": false,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "WorkflowAgent"
+    },
+    {
+      "evidence_refs_available": true,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "EvidenceAgent"
+    },
+    {
+      "evidence_refs_available": true,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "SafetyAgent"
+    },
+    {
+      "evidence_refs_available": false,
+      "executed_in_sample_session": true,
+      "importable_or_trace_role": true,
+      "output_summary_available": true,
+      "role_exists": true,
+      "role_name": "RecommendationAgent"
+    }
+  ],
+  "tool_call_reality": {
+    "blocked_external_actions": [
+      "external_solver",
+      "external_llm",
+      "testpypi_upload",
+      "pypi_publish",
+      "git_tag",
+      "github_release"
+    ],
+    "calculator_tools_executed": [
+      "optical_calculators"
+    ],
+    "internal_tools_available": [
+      "material_catalog",
+      "material_suitability_diagnostics",
+      "example_registry",
+      "agent_trace_builder",
+      "task_session_builder",
+      "adapter_preview_generator",
+      "workflow_planner",
+      "source_monitor_inference",
+      "ambiguous_requirement_matching",
+      "application_domain_registry",
+      "material_template_cross_checks",
+      "application_domain_benchmarks",
+      "missing_input_diagnostics",
+      "observable_diagnostics",
+      "adapter_native_mapping",
+      "adapter_native_golden_coverage",
+      "validation_maturity_summary",
+      "optical_calculators"
+    ],
+    "internal_tools_executed": [
+      "material_catalog",
+      "example_registry",
+      "agent_trace_builder",
+      "task_session_builder",
+      "adapter_preview_generator",
+      "workflow_planner",
+      "source_monitor_inference",
+      "ambiguous_requirement_matching",
+      "application_domain_registry",
+      "material_template_cross_checks",
+      "application_domain_benchmarks",
+      "missing_input_diagnostics",
+      "observable_diagnostics",
+      "adapter_native_mapping",
+      "adapter_native_golden_coverage",
+      "validation_maturity_summary",
+      "optical_calculators"
+    ]
+  },
+  "validation_claim_audit_available": true,
+  "validation_maturity_summary": {
+    "api_contract_version": "0.1",
+    "external_llm_required": false,
+    "external_solver_executed": false,
+    "formal_convergence_proof_claimed": false,
+    "preview_boundary_summary": {
+      "adapters": "Adapter-native source/monitor mappings are preview metadata; real results require explicit solver execution.",
+      "application_domains": "Benchmarks verify deterministic routing, missing-input diagnostics, and blocked actions, not physical correctness.",
+      "calculators": "Sanity-checked preview/design-assist calculators; physical validation remains user responsibility.",
+      "materials": "Local curated preview catalog; not a production-grade optical constants database.",
+      "optional_solver_micro_benchmarks": "Open-source solver-backed micro-benchmarks are optional/manual/explicit opt-in only; readiness checks detect availability only, can be calibrated with OSA_SOLVER_PYTHON for solver-specific Python profiles, include pending/deferred per-solver approval records and one-solver-at-a-time sequencing, record the Gmsh-only optional manual micro-benchmark pass from 2026-05-20 as reviewed mesh-generation smoke evidence, record the separately approved Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, record the separately approved Meep-only pass from 2026-05-20 as optional manual PyMeep/FDTD smoke evidence through OSA_SOLVER_PYTHON, keep MPB unapproved pending OSA_SOLVER_PYTHON-specific approval, and default gates do not run solvers.",
+      "pypi": "PyPI publication would not imply production-grade validation.",
+      "sub_agents": "Sub-agent traces show deterministic local role execution, not independent autonomous services."
+    },
+    "production_grade_validation_claimed": false,
+    "proprietary_solver_required": false,
+    "records": [
+      {
+        "area": "materials",
+        "component_id": "material_library",
+        "evidence_refs": [
+          "docs/material_provenance_policy.md",
+          "docs/material_library.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Local curated preview catalog only.",
+          "User must verify optical constants before physical conclusions.",
+          "Not a production-grade optical constants database."
+        ],
+        "maturity_level": "documented_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_material_provenance.py",
+          "tests/test_material_suitability_diagnostics.py"
+        ]
+      },
+      {
+        "area": "requirements",
+        "component_id": "design_requirement_templates",
+        "evidence_refs": [
+          "docs/design_requirement_templates.md",
+          "examples/design_requirements/"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Deterministic heuristic matching only.",
+          "Ambiguous goals produce questions rather than solver actions."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_design_requirement_templates.py",
+          "tests/test_requirement_matching.py"
+        ]
+      },
+      {
+        "area": "requirements",
+        "component_id": "natural_language_to_optical_language",
+        "evidence_refs": [
+          "docs/natural_language_to_optical_language.md",
+          "docs/ambiguous_requirement_matching.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "No external LLM is used by default.",
+          "Confidence is routing evidence, not a correctness guarantee."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_ambiguous_requirement_matching.py",
+          "tests/test_missing_input_diagnostics_deepening.py"
+        ]
+      },
+      {
+        "area": "application_domains",
+        "component_id": "application_domain_benchmarks",
+        "evidence_refs": [
+          "docs/application_domain_benchmarks.md",
+          "examples/application_domain_benchmarks/"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Benchmarks test deterministic routing, diagnostics, and blocked actions.",
+          "Benchmarks do not establish physical accuracy."
+        ],
+        "maturity_level": "benchmark_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/evaluate_application_domain_benchmarks.py",
+          "tests/test_application_domain_benchmark_evaluator.py"
+        ]
+      },
+      {
+        "area": "optical_language",
+        "component_id": "source_monitor_diagnostics",
+        "evidence_refs": [
+          "docs/optical_language_source_monitor.md",
+          "docs/source_monitor_missing_input_diagnostics.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Source and monitor records are preview metadata.",
+          "No real solver monitor result is claimed."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optical_language_inference.py",
+          "tests/test_optical_language_diagnostics.py"
+        ]
+      },
+      {
+        "area": "optical_language",
+        "component_id": "observable_diagnostics",
+        "evidence_refs": [
+          "docs/observable_diagnostics.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Observable taxonomy describes requested outputs and adapter fit.",
+          "Real physical outputs require separately approved solver execution."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_observable_diagnostics.py",
+          "tests/test_optical_language_observable_api.py"
+        ]
+      },
+      {
+        "area": "adapters",
+        "component_id": "adapter_native_mapping",
+        "evidence_refs": [
+          "docs/adapter_native_source_monitor_mapping.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Adapter-native mapping is metadata preview only.",
+          "External solvers are not run by default."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_adapter_source_monitor_mapping.py",
+          "tests/test_adapter_preview_source_monitor_metadata.py"
+        ]
+      },
+      {
+        "area": "adapters",
+        "component_id": "adapter_golden_coverage",
+        "evidence_refs": [
+          "docs/adapter_native_golden_coverage_matrix.md",
+          "examples/adapter_native_golden/"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Golden cases check preview metadata and expected fragments.",
+          "Golden cases are not real solver monitor results."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/check_adapter_native_golden.py",
+          "tests/test_adapter_native_golden_metadata_diff.py"
+        ]
+      },
+      {
+        "area": "agents",
+        "component_id": "sub_agent_task_sessions",
+        "evidence_refs": [
+          "docs/sub_agent_architecture.md",
+          "docs/backend_evidence_review_pack.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Sub-agents are deterministic backend roles in one local process.",
+          "They are not independent autonomous services."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/audit_sub_agents.py",
+          "tests/test_agent_task_session.py"
+        ]
+      },
+      {
+        "area": "agents",
+        "component_id": "tool_call_ledger",
+        "evidence_refs": [
+          "docs/tool_call_reality_matrix.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Ledger records backend tool-call reality for local sessions.",
+          "Blocked external actions remain disabled unless separately approved."
+        ],
+        "maturity_level": "fixture_guarded_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_tool_call_ledger.py"
+        ]
+      },
+      {
+        "area": "frontend",
+        "component_id": "agent_studio",
+        "evidence_refs": [
+          "docs/frontend_mvp_product_spec.md",
+          "docs/agent_command_center.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Frontend is a UI/demo surface, not validation evidence.",
+          "Backend evidence remains the source of validation maturity status."
+        ],
+        "maturity_level": "documented_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_frontend_mvp_files.py",
+          "tests/test_frontend_visual_smoke_plan.py"
+        ]
+      },
+      {
+        "area": "calculators",
+        "component_id": "thin_film_calculator",
+        "evidence_refs": [
+          "docs/optical_calculator_reference_cases.md",
+          "thin_film_single_interface_air_glass",
+          "thin_film_quarter_wave_ar_550nm"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Analytic/local preview calculation only.",
+          "Reference cases are sanity checks, not production-grade validation.",
+          "No formal convergence proof is claimed."
+        ],
+        "maturity_level": "sanity_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optics_thin_film_reference_cases.py",
+          "scripts/smoke_backend_capabilities.sh"
+        ]
+      },
+      {
+        "area": "calculators",
+        "component_id": "paraxial_calculator",
+        "evidence_refs": [
+          "docs/optical_calculator_reference_cases.md",
+          "paraxial_thin_lens_1to1",
+          "abcd_free_space_matrix",
+          "two_lens_4f_relay_1_to_1"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Analytic/local preview calculation only.",
+          "Reference cases are sanity checks, not production-grade validation.",
+          "No formal convergence proof is claimed."
+        ],
+        "maturity_level": "sanity_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optics_paraxial_reference_cases.py",
+          "scripts/smoke_backend_capabilities.sh"
+        ]
+      },
+      {
+        "area": "calculators",
+        "component_id": "gaussian_beam_calculator",
+        "evidence_refs": [
+          "docs/optical_calculator_reference_cases.md",
+          "gaussian_beam_rayleigh_range",
+          "gaussian_beam_radius_at_rayleigh_range"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Analytic/local preview calculation only.",
+          "Reference cases are sanity checks, not production-grade validation.",
+          "No formal convergence proof is claimed."
+        ],
+        "maturity_level": "sanity_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optics_gaussian_beam_reference_cases.py",
+          "scripts/smoke_backend_capabilities.sh"
+        ]
+      },
+      {
+        "area": "calculators",
+        "component_id": "waveguide_calculator",
+        "evidence_refs": [
+          "docs/optical_calculator_reference_cases.md",
+          "waveguide_v_number_sanity",
+          "slab_waveguide_v_number_sweep"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Analytic/local preview calculation only.",
+          "Reference cases are sanity checks, not production-grade validation.",
+          "No formal convergence proof is claimed."
+        ],
+        "maturity_level": "sanity_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optics_waveguide_reference_cases.py",
+          "scripts/smoke_backend_capabilities.sh"
+        ]
+      },
+      {
+        "area": "calculators",
+        "component_id": "fiber_coupling_calculator",
+        "evidence_refs": [
+          "docs/optical_calculator_reference_cases.md",
+          "fiber_gaussian_perfect_overlap",
+          "fiber_gaussian_offset_loss",
+          "fiber_gaussian_tilt_loss"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Analytic/local preview calculation only.",
+          "Reference cases are sanity checks, not production-grade validation.",
+          "No formal convergence proof is claimed."
+        ],
+        "maturity_level": "sanity_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optics_fiber_coupling_reference_cases.py",
+          "scripts/smoke_backend_capabilities.sh"
+        ]
+      },
+      {
+        "area": "calculators",
+        "component_id": "polarization_calculator",
+        "evidence_refs": [
+          "docs/optical_calculator_reference_cases.md",
+          "jones_linear_polarizer_malus",
+          "jones_half_waveplate_preview",
+          "jones_quarter_waveplate_phase_preview"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": false,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Analytic/local preview calculation only.",
+          "Reference cases are sanity checks, not production-grade validation.",
+          "No formal convergence proof is claimed."
+        ],
+        "maturity_level": "sanity_checked_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "tests/test_optics_polarization_reference_cases.py",
+          "scripts/smoke_backend_capabilities.sh"
+        ]
+      },
+      {
+        "area": "optional_solver_micro_benchmarks",
+        "component_id": "gmsh_optional_solver_micro_benchmark",
+        "evidence_refs": [
+          "docs/solver_validation_micro_benchmarks.md",
+          "docs/optional_solver_micro_benchmark_approval_matrix.md",
+          "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
+          "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
+          "validation/gmsh/gmsh_micro_benchmark_2026-05-20.md",
+          "docs/optional_solver_approval_records/gmsh_micro_benchmark_approval_2026-05-20.md",
+          "docs/optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md",
+          "validation/gmsh/gmsh_validation_pilot_2026-05-14.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Gmsh has a reviewed and accepted optional manual mesh-generation smoke pass from 2026-05-20.",
+          "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+          "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
+          "Optional solver-backed micro-benchmarks require explicit opt-in.",
+          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+          "No production-grade physical validation or formal convergence proof is claimed."
+        ],
+        "maturity_level": "optional_manual_solver_validated",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/check_optional_solver_readiness.py",
+          "scripts/run_optional_solver_micro_benchmarks.sh",
+          "tests/test_optional_solver_readiness_script.py",
+          "tests/test_optional_solver_micro_benchmarks_script.py"
+        ]
+      },
+      {
+        "area": "optional_solver_micro_benchmarks",
+        "component_id": "meep_optional_solver_micro_benchmark",
+        "evidence_refs": [
+          "docs/solver_validation_micro_benchmarks.md",
+          "docs/optional_solver_micro_benchmark_approval_matrix.md",
+          "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
+          "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
+          "docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md",
+          "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
+          "validation/meep/meep_micro_benchmark_2026-05-20.md",
+          "validation/meep/meep_validation_pilot_2026-05-14.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Meep has a separate approved optional manual PyMeep/FDTD smoke pass from 2026-05-20.",
+          "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+          "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
+          "Optional solver-backed micro-benchmarks require explicit opt-in.",
+          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+          "No production-grade physical validation or formal convergence proof is claimed."
+        ],
+        "maturity_level": "optional_manual_solver_validated",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/check_optional_solver_readiness.py",
+          "scripts/run_optional_solver_micro_benchmarks.sh",
+          "tests/test_optional_solver_readiness_script.py",
+          "tests/test_optional_solver_micro_benchmarks_script.py"
+        ]
+      },
+      {
+        "area": "optional_solver_micro_benchmarks",
+        "component_id": "mpb_optional_solver_micro_benchmark",
+        "evidence_refs": [
+          "docs/solver_validation_micro_benchmarks.md",
+          "docs/optional_solver_micro_benchmark_approval_matrix.md",
+          "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
+          "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
+          "validation/mpb/mpb_validation_pilot_2026-05-14.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "MPB has a recorded narrow optional manual validation report.",
+          "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+          "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
+          "Optional solver-backed micro-benchmarks require explicit opt-in.",
+          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+          "No production-grade physical validation or formal convergence proof is claimed."
+        ],
+        "maturity_level": "optional_manual_solver_validated",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/check_optional_solver_readiness.py",
+          "scripts/run_optional_solver_micro_benchmarks.sh",
+          "tests/test_optional_solver_readiness_script.py",
+          "tests/test_optional_solver_micro_benchmarks_script.py"
+        ]
+      },
+      {
+        "area": "optional_solver_micro_benchmarks",
+        "component_id": "optiland_optional_solver_micro_benchmark",
+        "evidence_refs": [
+          "docs/solver_validation_micro_benchmarks.md",
+          "docs/optional_solver_micro_benchmark_approval_matrix.md",
+          "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
+          "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
+          "validation/optiland/optiland_micro_benchmark_2026-05-20.md",
+          "docs/optional_solver_approval_records/optiland_micro_benchmark_approval_2026-05-20.md",
+          "docs/optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md",
+          "validation/optiland/optiland_validation_pilot_2026-05-14.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Optiland has a reviewed and accepted optional manual ray/path smoke pass from 2026-05-20.",
+          "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+          "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
+          "Optional solver-backed micro-benchmarks require explicit opt-in.",
+          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+          "No production-grade physical validation or formal convergence proof is claimed."
+        ],
+        "maturity_level": "optional_manual_solver_validated",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/check_optional_solver_readiness.py",
+          "scripts/run_optional_solver_micro_benchmarks.sh",
+          "tests/test_optional_solver_readiness_script.py",
+          "tests/test_optional_solver_micro_benchmarks_script.py"
+        ]
+      },
+      {
+        "area": "optional_solver_micro_benchmarks",
+        "component_id": "elmer_optional_solver_micro_benchmark",
+        "evidence_refs": [
+          "docs/solver_validation_micro_benchmarks.md",
+          "docs/optional_solver_micro_benchmark_approval_matrix.md",
+          "docs/optional_solver_micro_benchmark_readiness_status.md",
+          "docs/optional_solver_environment_profiles.md",
+          "docs/optional_solver_micro_benchmark_execution_packet.md",
+          "docs/optional_solver_execution_sequence.md",
+          "validation/solver_validation_micro_benchmarks.json",
+          "validation/solver_environment_profiles.json",
+          "validation/elmer/elmer_install_deferred_2026-05-15.md"
+        ],
+        "external_solver_executed_by_default": false,
+        "external_solver_required": true,
+        "formal_convergence_proof_claimed": false,
+        "limitations": [
+          "Elmer remains deferred until a maintainable ElmerSolver install route exists.",
+          "Readiness checks detect availability only and do not execute solvers.",
+          "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
+          "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+          "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
+          "Optional solver-backed micro-benchmarks require explicit opt-in.",
+          "Default pytest, smoke, release gates, and quality gates do not run solvers.",
+          "No production-grade physical validation or formal convergence proof is claimed."
+        ],
+        "maturity_level": "documented_preview",
+        "production_grade_physical_validation_claimed": false,
+        "tests_or_scripts": [
+          "scripts/check_optional_solver_readiness.py",
+          "scripts/run_optional_solver_micro_benchmarks.sh",
+          "tests/test_optional_solver_readiness_script.py",
+          "tests/test_optional_solver_micro_benchmarks_script.py"
+        ]
+      }
+    ],
+    "status": "ok",
+    "summary": {
+      "adapter_source_monitor_maturity_level": "fixture_guarded_preview",
+      "all_optional_solver_execution_authorized": false,
+      "application_domain_maturity_level": "benchmark_checked_preview",
+      "areas": [
+        "adapters",
+        "agents",
+        "application_domains",
+        "calculators",
+        "frontend",
+        "materials",
+        "optical_language",
+        "optional_solver_micro_benchmarks",
+        "requirements"
+      ],
+      "by_area": {
+        "adapters": 2,
+        "agents": 2,
+        "application_domains": 1,
+        "calculators": 6,
+        "frontend": 1,
+        "materials": 1,
+        "optical_language": 2,
+        "optional_solver_micro_benchmarks": 5,
+        "requirements": 2
+      },
+      "by_level": {
+        "benchmark_checked_preview": 1,
+        "documented_preview": 3,
+        "fixture_guarded_preview": 8,
+        "optional_manual_solver_validated": 4,
+        "sanity_checked_preview": 6
+      },
+      "calculator_maturity_level": "sanity_checked_preview",
+      "elmer_micro_benchmark_status": "deferred",
+      "explicit_solver_approval_required": true,
+      "gmsh_optional_micro_benchmark_review_status": "accepted_as_optional_manual_mesh_generation_smoke_evidence",
+      "gmsh_optional_micro_benchmark_status": "passed_2026-05-20",
+      "levels": [
+        "benchmark_checked_preview",
+        "documented_preview",
+        "fixture_guarded_preview",
+        "optional_manual_solver_validated",
+        "sanity_checked_preview"
+      ],
+      "material_maturity_level": "documented_preview_user_must_verify",
+      "meep_optional_micro_benchmark_decision_packet_available": true,
+      "meep_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only",
+      "meep_optional_micro_benchmark_status": "passed_2026-05-20",
+      "next_optional_solver_candidate": "mpb_requires_osa_solver_python_not_approved",
+      "optiland_optional_micro_benchmark_review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
+      "optiland_optional_micro_benchmark_status": "passed_2026-05-20",
+      "optional_solver_approval_matrix_available": true,
+      "optional_solver_approval_records_present": true,
+      "optional_solver_environment_profiles_available": true,
+      "optional_solver_execution_approval_packet_available": true,
+      "optional_solver_execution_default": false,
+      "optional_solver_micro_benchmark_default": "no_solver_execution",
+      "optional_solver_micro_benchmarks_opt_in_required": true,
+      "optional_solver_readiness_available": true,
+      "record_count": 22
+    }
+  }
 }

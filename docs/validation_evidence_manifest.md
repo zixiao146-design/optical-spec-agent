@@ -91,6 +91,11 @@
   smoke evidence only; it does not claim optical correctness.
 - The Optiland evidence does not approve Meep, MPB, Elmer, any future Gmsh or
   Optiland rerun, PyPI/TestPyPI upload, tag creation, or release creation.
+- Approved Meep-only 2026-05-20 optional micro-benchmark evidence for local
+  adapter scaffold plus tiny PyMeep/FDTD smoke only:
+  `validation/meep/meep_micro_benchmark_2026-05-20.md`.
+- The Meep evidence does not approve MPB, Elmer, any future Gmsh/Optiland/Meep
+  rerun, PyPI/TestPyPI upload, tag creation, or release creation.
 - Limited Meep Level 3 optional manual validation evidence for one
   project-owned PyMeep validation path generated from an adapter preview
   artifact.

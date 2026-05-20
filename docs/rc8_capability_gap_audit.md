@@ -33,7 +33,7 @@ not production-grade physical validation.
 | Observable diagnostics | Taxonomy and adapter compatibility exist | Combined observables need richer required-input handling | Preview artifacts may hide observable prerequisites | Add multi-observable cases and expected warnings. |
 | Adapter-native mappings | Five adapters mapped with golden metadata | Mapping is preview metadata, not executed solver semantics | Real solver users may expect monitor results | Keep `solver_execution_required_for_real_result` prominent. |
 | Adapter golden coverage | Strict metadata diffs cover five golden cases | Coverage is narrow per adapter | Adapter changes can pass without broader semantic coverage | Add one additional case per adapter when adapter previews change. |
-| Optional solver-backed micro-benchmarks | Existing Gmsh/Meep/MPB/Optiland pilots are now represented in a unified manifest; approved Gmsh-only and Optiland-only 2026-05-20 micro-benchmarks passed as optional manual smoke evidence; a Meep decision packet is prepared with `OSA_SOLVER_PYTHON` requirements; Elmer remains deferred | Optional solver-backed checks are not default gates and are not reproducible Level 4 benchmarks; Meep remains pending/not run | Maintainers may overread manual pilots or decision packets as production validation | Keep `scripts/run_optional_solver_micro_benchmarks.sh` default no-execute and require explicit opt-in variables. |
+| Optional solver-backed micro-benchmarks | Existing Gmsh/Meep/MPB/Optiland pilots are now represented in a unified manifest; approved Gmsh-only, Optiland-only, and Meep-only 2026-05-20 micro-benchmarks passed as optional manual smoke evidence; Elmer remains deferred | Optional solver-backed checks are not default gates and are not reproducible Level 4 benchmarks; MPB remains not executed | Maintainers may overread manual pilots or decision packets as production validation | Keep `scripts/run_optional_solver_micro_benchmarks.sh` default no-execute and require explicit opt-in variables. |
 | Design requirement templates | Seven templates and deterministic matching exist | Requirements lack tolerance/optimization constraints | Goals may not capture design acceptance criteria | Add tolerance, sweep, and pass/fail fields for candidate templates. |
 | Natural-language to optical-language matching | Deterministic heuristic EN/ZH matching, candidate templates, confidence, and questions exist | Novel phrasing may still need more negative examples | Unexpected matches can produce misleading plans | Keep adding ambiguous/negative cases and confidence-threshold tests. |
 | Application domain coverage | Ten domains map to templates, materials, calculators/adapters, and missing-input questions | Fiber coupling and polarization now have deterministic preview calculators, but real coupling/vector validation remains deferred | Domain coverage could be mistaken for full physical validation | Keep pass/warning/fail semantics explicit and require explicit solver or experimental evidence for physical validation. |
@@ -114,7 +114,6 @@ The execution approval packet adds per-solver pending/deferred records and a
 one-solver-at-a-time sequence so future opt-in runs can be approved and reviewed
 without batching solvers or changing default release gates.
 The Gmsh review decision closes the Gmsh loop only; the Optiland review decision
-closes only the separately approved Optiland run. Meep/MPB require
-`OSA_SOLVER_PYTHON` and separate approval, and Elmer remains deferred. The Meep
-decision packet prepares that future review path without authorizing or running
-Meep.
+closes only the separately approved Optiland run. The Meep approval record
+closes only the separately approved Meep run using `OSA_SOLVER_PYTHON`. MPB
+requires `OSA_SOLVER_PYTHON` and separate approval, and Elmer remains deferred.

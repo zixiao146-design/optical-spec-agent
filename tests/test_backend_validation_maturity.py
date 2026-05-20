@@ -106,14 +106,14 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
         == "accepted_as_optional_manual_ray_path_smoke_evidence"
     )
     assert summary.summary["meep_optional_micro_benchmark_decision_packet_available"] is True
-    assert summary.summary["meep_optional_micro_benchmark_status"] == "pending_not_run"
+    assert summary.summary["meep_optional_micro_benchmark_status"] == "passed_2026-05-20"
     assert (
         summary.summary["meep_optional_micro_benchmark_readiness_profile"]
         == "osa-solvers_import_only"
     )
     assert (
         summary.summary["next_optional_solver_candidate"]
-        == "meep_requires_osa_solver_python_not_approved"
+        == "mpb_requires_osa_solver_python_not_approved"
     )
     assert summary.summary["elmer_micro_benchmark_status"] == "deferred"
     assert "not a production-grade optical constants database" in summary.preview_boundary_summary["materials"]
@@ -123,7 +123,7 @@ def test_backend_validation_maturity_summary_has_preview_boundaries():
     assert "OSA_SOLVER_PYTHON" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "one-solver-at-a-time" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert "reviewed ray/path smoke evidence" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
-    assert "Meep-specific decision packet" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
-    assert "keeping Meep execution unauthorized" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
+    assert "Meep-only pass" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
+    assert "PyMeep/FDTD smoke evidence" in summary.preview_boundary_summary["optional_solver_micro_benchmarks"]
     assert summary.production_grade_validation_claimed is False
     assert summary.formal_convergence_proof_claimed is False

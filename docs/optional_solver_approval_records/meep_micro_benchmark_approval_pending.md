@@ -4,6 +4,9 @@
 - Execution authorized: no
 - Solver execution performed: no
 - Solver: Meep / PyMeep
+- Note: this pending template is retained for future Meep rerun approvals. The
+  separately approved 2026-05-20 Meep-only run is recorded in
+  `docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md`.
 - Required environment profile: `osa-solvers`
 - Decision packet:
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`

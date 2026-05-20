@@ -21,7 +21,19 @@ print(data["project"]["version"])
 PY
 )"
 
-PYTHON_BIN="$(command -v python || true)"
+MEEP_SOLVER_PYTHON="${OSA_SOLVER_PYTHON:-}"
+PYTHON_BIN=""
+PYTHON_SOURCE="current PATH"
+if [[ -n "${MEEP_SOLVER_PYTHON}" ]]; then
+  PYTHON_SOURCE="OSA_SOLVER_PYTHON"
+  if [[ -x "${MEEP_SOLVER_PYTHON}" ]]; then
+    PYTHON_BIN="${MEEP_SOLVER_PYTHON}"
+  else
+    echo "OSA_SOLVER_PYTHON is set but is not executable: ${MEEP_SOLVER_PYTHON}" >&2
+  fi
+else
+  PYTHON_BIN="$(command -v python || true)"
+fi
 MEEP_AVAILABLE="false"
 MEEP_VERSION=""
 MEEP_EXECUTED="false"
@@ -35,6 +47,7 @@ EXIT_CODE="0"
 echo "Meep optional validation pilot for optical-spec-agent ${PROJECT_VERSION}"
 echo "Input fixture: ${MEEP_SPEC}"
 echo "Output directory: ${OSA_MEEP_OUTPUT_DIR}"
+echo "Python source: ${PYTHON_SOURCE}"
 echo "Python executable: ${PYTHON_BIN:-unavailable}"
 
 if [[ -n "${PYTHON_BIN}" ]]; then

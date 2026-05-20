@@ -12,17 +12,19 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 - TestPyPI uploaded and verified only for: 0.9.0rc6.dev0
 - v0.9.0rc8 tag: not created
 - v1.0.0 tag: not created
-- Solver micro-benchmark approval: granted only for the Gmsh and Optiland
-  2026-05-20 runs
+- Solver micro-benchmark approval: granted only for the Gmsh, Optiland, and
+  Meep 2026-05-20 runs
 - Solver micro-benchmark execution performed: yes, Gmsh only for its approved
-  run and Optiland only for its separately approved run
+  run, Optiland only for its separately approved run, and Meep only for its
+  separately approved run
 - Solver micro-benchmark review decisions: Gmsh accepted only as optional
   manual mesh-generation smoke evidence; Optiland accepted only as optional
   manual ray/path smoke evidence
 - Meep decision packet: prepared at
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`;
-  approval pending, execution authorized: no, executed: no
-- Other solver micro-benchmark execution performed: no
+  approved/executed for the Meep-only 2026-05-20 run as optional manual
+  PyMeep/FDTD smoke evidence
+- Other solver micro-benchmark execution performed: MPB and Elmer were not run
 
 ## Execution Principles
 
@@ -108,8 +110,8 @@ publication, tag creation, GitHub release creation, or `v1.0.0`.
 ### Meep
 
 - Solver: Meep / PyMeep
-- Status: decision packet prepared; approval pending; execution authorized: no;
-  executed: no
+- Status: completed for the approved Meep-only 2026-05-20 run; future reruns
+  require fresh approval
 - Readiness profile: `osa-solvers`
 - Required env vars after approval:
   - `OSA_SOLVER_PYTHON=<path to solver Python>`

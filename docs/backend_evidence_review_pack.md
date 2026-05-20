@@ -73,13 +73,15 @@ approval remain separate and not granted.
   artifacts, risk notes, and explicit approval phrase are documented before any
   solver-backed micro-benchmark can be run. The execution approval packet,
   one-solver-at-a-time sequence, the reviewed Gmsh-only and Optiland-only
-  records, and pending/deferred records for other solvers are review aids only.
+  records, the approved Meep-only record, and pending/deferred records for
+  other solvers are review aids only.
   This does not authorize PyPI, TestPyPI, tag, release, or other solver
-  execution actions. Meep/MPB require `OSA_SOLVER_PYTHON` plus separate
-  approval; Elmer remains deferred. The Meep decision packet at
+  execution actions. The Meep run used `OSA_SOLVER_PYTHON`; MPB still requires
+  `OSA_SOLVER_PYTHON` plus separate approval, and Elmer remains deferred. The
+  Meep decision packet at
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`
-  records the future `OSA_SOLVER_PYTHON` path and required approval phrase
-  while keeping Meep pending/not run.
+  records the `OSA_SOLVER_PYTHON` path and required approval phrase for the
+  approved Meep-only smoke run.
 - Design-case cross-checks: optical design examples mapped to expected
   calculators, adapters, and tool-call ledger entries.
 - Source / monitor / observable diagnostics: deterministic inference,
@@ -106,8 +108,9 @@ means a local evidence check did not match the expected contract.
 - Optional solver readiness uses `scripts/check_optional_solver_readiness.py`
   and the approval matrix/template; it performs no solver execution.
   `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
-  Python environment such as `osa-solvers`. The Meep decision packet uses that
-  profile support but does not authorize or execute Meep.
+  Python environment such as `osa-solvers`. The approved Meep-only
+  micro-benchmark used that profile support, but default checks still do not
+  execute Meep or MPB.
 - No external LLM is called by default.
 - No TestPyPI/PyPI upload is performed.
 - No Git tag or GitHub release is created.

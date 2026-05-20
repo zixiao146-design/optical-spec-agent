@@ -12,17 +12,17 @@
 - TestPyPI 仅上传并验证过：0.9.0rc6.dev0
 - v0.9.0rc8 tag：未创建
 - v1.0.0 tag：未创建
-- solver micro-benchmark approval：仅授予 2026-05-20 Gmsh run 和单独批准的
-  2026-05-20 Optiland run
+- solver micro-benchmark approval：仅授予 2026-05-20 Gmsh run、单独批准的
+  2026-05-20 Optiland run 和单独批准的 2026-05-20 Meep run
 - 已执行 solver micro-benchmark：是，Gmsh only 用于其批准 run，Optiland only
-  用于其单独批准 run
+  用于其单独批准 run，Meep only 用于其单独批准 run
 - solver micro-benchmark review decision：Gmsh 只被接受为 optional manual
   mesh-generation smoke evidence；Optiland 只被接受为 optional manual ray/path
   smoke evidence
 - Meep decision packet：
   `docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`；
-  approval pending，execution authorized: no，executed: no
-- 其他 solver micro-benchmark 执行：否
+  已用于 Meep-only 2026-05-20 run，记录为 optional manual PyMeep/FDTD smoke evidence
+- 其他 solver micro-benchmark 执行：MPB 和 Elmer 未执行
 
 ## 执行原则
 
@@ -99,8 +99,7 @@
 ### Meep
 
 - Solver：Meep / PyMeep
-- 状态：decision packet 已准备；approval pending；execution authorized: no；
-  executed: no
+- 状态：已完成 2026-05-20 Meep-only 批准 run；未来 rerun 仍需重新批准
 - Readiness profile：`osa-solvers`
 - 批准后需要的 env vars：
   - `OSA_SOLVER_PYTHON=<path to solver Python>`

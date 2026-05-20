@@ -52,5 +52,6 @@
 
 不要在没有 separate approval 的情况下批量运行所有 solvers。
 已接受的 Gmsh review 本身不授权 Optiland；Optiland 只是在单独 approval
-record 后执行。已接受的 Optiland review 不授权 Meep、MPB、Elmer、未来 Gmsh
-rerun 或未来 Optiland rerun。
+record 后执行。已接受的 Optiland review 本身不授权 Meep；Meep 只是在单独
+approval record 后执行。已接受的 Meep 证据不授权 MPB、Elmer、未来 Gmsh
+rerun、未来 Optiland rerun 或未来 Meep rerun。

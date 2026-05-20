@@ -61,9 +61,9 @@ solver convergence, and material-data verification.
   and accepted as optional manual ray/path smoke evidence, not lens design
   validation; it does not approve Meep, MPB, Elmer, or any future Optiland
   rerun.
-- The Meep decision packet is preparation only: it requires
-  `OSA_SOLVER_PYTHON`, keeps Meep approval pending, and records no Meep
-  execution.
+- The separately approved Meep-only 2026-05-20 micro-benchmark used
+  `OSA_SOLVER_PYTHON` and is recorded only as optional manual PyMeep/FDTD smoke
+  evidence; it does not approve MPB, Elmer, or any future Meep rerun.
 - `OSA_SOLVER_PYTHON` can calibrate import-only probes for a dedicated solver
   Python environment; CLI tools such as Gmsh are still detected through the
   current `PATH`.

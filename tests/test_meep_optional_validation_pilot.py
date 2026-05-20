@@ -57,6 +57,8 @@ def test_meep_optional_validation_script_has_no_publish_or_release_commands():
     assert "NO MEEP EXECUTION PERFORMED" in text
     assert "OPTIONAL VALIDATION NOT ENABLED" in text
     assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION" in text
+    assert "OSA_SOLVER_PYTHON" in text
+    assert "Python source" in text
     assert "level3_achieved" in text
     assert "formal_convergence_proof_claimed" in text
     forbidden = [

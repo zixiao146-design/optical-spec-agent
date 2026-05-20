@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_meep_optional_micro_benchmark_decision_packet_is_pending_and_safe():
+def test_meep_optional_micro_benchmark_decision_packet_records_approved_run_and_boundaries():
     path = (
         ROOT
         / "docs"
@@ -17,9 +17,9 @@ def test_meep_optional_micro_benchmark_decision_packet_is_pending_and_safe():
     )
     assert path.exists()
     text = path.read_text(encoding="utf-8")
-    assert "Meep micro-benchmark approval: pending" in text
-    assert "Meep execution authorized: no" in text
-    assert "Meep executed: no" in text
+    assert "Meep micro-benchmark approval: approved for the 2026-05-20 Meep-only run" in text
+    assert "Meep execution authorized: yes, for the 2026-05-20 Meep-only run only" in text
+    assert "Meep executed: yes, passed on 2026-05-20" in text
     assert "MPB executed: no" in text
     assert "Gmsh executed in this task: no" in text
     assert "Optiland executed in this task: no" in text
@@ -30,7 +30,7 @@ def test_meep_optional_micro_benchmark_decision_packet_is_pending_and_safe():
         "I approve running the optional Meep micro-benchmark for optical-spec-agent "
         "using OSA_SOLVER_PYTHON=<path>."
     ) in text
-    assert "DO NOT RUN WITHOUT APPROVAL" in text
+    assert "Do not rerun without fresh approval" in text
     assert "OSA_RUN_OPTIONAL_MEEP_VALIDATION=1" in text
     assert "PyPI publication: not approved" in text
     assert "TestPyPI upload: not approved" in text
@@ -41,4 +41,3 @@ def test_meep_optional_micro_benchmark_decision_packet_is_pending_and_safe():
     assert "no optical correctness claim" in text
     assert "no default solver dependency" in text
     assert "no release gate behavior" in text
-

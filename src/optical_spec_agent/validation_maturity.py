@@ -355,12 +355,13 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                 "docs/optional_solver_micro_benchmark_execution_packet.md",
                 "docs/optional_solver_execution_sequence.md",
                 "docs/optional_solver_approval_records/meep_micro_benchmark_decision_packet.md",
-                "docs/optional_solver_approval_records/meep_micro_benchmark_approval_pending.md",
+                "docs/optional_solver_approval_records/meep_micro_benchmark_approval_2026-05-20.md",
                 "validation/solver_validation_micro_benchmarks.json",
                 "validation/solver_environment_profiles.json",
+                "validation/meep/meep_micro_benchmark_2026-05-20.md",
                 "validation/meep/meep_validation_pilot_2026-05-14.md",
             ],
-            "Meep has a decision packet prepared for a future optional micro-benchmark, but execution remains pending and unauthorized.",
+            "Meep has a separate approved optional manual PyMeep/FDTD smoke pass from 2026-05-20.",
         ),
         (
             "mpb_optional_solver_micro_benchmark",
@@ -431,8 +432,8 @@ def build_backend_validation_maturity_records() -> list[ValidationMaturityRecord
                     status_note,
                     "Readiness checks detect availability only and do not execute solvers.",
                     "Readiness is profile/environment-specific and can use OSA_SOLVER_PYTHON for import-only probes.",
-                    "Only the recorded Gmsh and Optiland runs were explicitly approved and executed; Meep, MPB, and Elmer remain pending/deferred.",
-                    "The Meep optional micro-benchmark decision packet requires OSA_SOLVER_PYTHON and separate approval before execution.",
+                    "Only the recorded Gmsh, Optiland, and Meep runs were explicitly approved and executed; MPB and Elmer remain pending/deferred.",
+                    "The Meep optional micro-benchmark used OSA_SOLVER_PYTHON and records PyMeep/FDTD smoke evidence only.",
                     "Optional solver-backed micro-benchmarks require explicit opt-in.",
                     "Default pytest, smoke, release gates, and quality gates do not run solvers.",
                     "No production-grade physical validation or formal convergence proof is claimed.",
@@ -477,9 +478,9 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
             "optiland_optional_micro_benchmark_status": "passed_2026-05-20",
             "optiland_optional_micro_benchmark_review_status": "accepted_as_optional_manual_ray_path_smoke_evidence",
             "meep_optional_micro_benchmark_decision_packet_available": True,
-            "meep_optional_micro_benchmark_status": "pending_not_run",
+            "meep_optional_micro_benchmark_status": "passed_2026-05-20",
             "meep_optional_micro_benchmark_readiness_profile": "osa-solvers_import_only",
-            "next_optional_solver_candidate": "meep_requires_osa_solver_python_not_approved",
+            "next_optional_solver_candidate": "mpb_requires_osa_solver_python_not_approved",
             "elmer_micro_benchmark_status": "deferred",
         },
         preview_boundary_summary={
@@ -513,9 +514,10 @@ def build_backend_validation_maturity_summary() -> BackendValidationMaturityResp
                 "optional manual micro-benchmark pass from 2026-05-20 as reviewed "
                 "mesh-generation smoke evidence, record the separately approved "
                 "Optiland-only pass from 2026-05-20 as reviewed ray/path smoke evidence, "
-                "prepare a Meep-specific decision packet with OSA_SOLVER_PYTHON "
-                "profile requirements while keeping Meep execution unauthorized, "
-                "keep MPB unapproved pending OSA_SOLVER_PYTHON-specific approval, "
+                "record the separately approved Meep-only pass from 2026-05-20 "
+                "as optional manual PyMeep/FDTD smoke evidence through "
+                "OSA_SOLVER_PYTHON, keep MPB unapproved pending "
+                "OSA_SOLVER_PYTHON-specific approval, "
                 "and default gates do not run solvers."
             ),
         },

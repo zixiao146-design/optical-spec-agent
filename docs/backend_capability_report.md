@@ -139,10 +139,11 @@ matrix and approval record template are
 [`optional_solver_micro_benchmark_approval_matrix.md`](optional_solver_micro_benchmark_approval_matrix.md)
 and
 [`optional_solver_micro_benchmark_approval_record_template.md`](optional_solver_micro_benchmark_approval_record_template.md).
-The Meep-specific future decision packet is
+The Meep-specific decision packet is
 [`optional_solver_approval_records/meep_micro_benchmark_decision_packet.md`](optional_solver_approval_records/meep_micro_benchmark_decision_packet.md);
-it requires `OSA_SOLVER_PYTHON`, keeps Meep approval pending, and records no
-Meep execution.
+it requires `OSA_SOLVER_PYTHON` and records the one approved Meep-only
+2026-05-20 run as optional manual PyMeep/FDTD smoke evidence, not production
+FDTD validation.
 
 Coverage can also be read directly:
 
@@ -200,18 +201,19 @@ The approved Gmsh-only 2026-05-20 run is recorded in
 and reviewed in
 [`optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/gmsh_micro_benchmark_review_2026-05-20.md)
 as accepted optional manual mesh-generation smoke evidence. Meep, MPB,
-Optiland, and Elmer were not executed by that run, and no further solver
+Optiland, and Elmer were not executed by that Gmsh run, and no further solver
 execution is approved by the review. The separately approved Optiland-only
 2026-05-20 run is recorded in
 [`../validation/optiland/optiland_micro_benchmark_2026-05-20.md`](../validation/optiland/optiland_micro_benchmark_2026-05-20.md)
 and reviewed in
 [`optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md`](optional_solver_approval_records/optiland_micro_benchmark_review_2026-05-20.md)
-as accepted optional manual ray/path smoke evidence only. Meep, MPB, and Elmer
-remain not executed by these tasks, and Gmsh/Optiland reruns require separate
-approval.
-The Meep decision packet is prepared for a future explicit approval decision
-only; it does not authorize Meep, MPB, PyPI/TestPyPI upload, tag creation, or
-release creation.
+as accepted optional manual ray/path smoke evidence only. The separately
+approved Meep-only 2026-05-20 run is recorded in
+[`../validation/meep/meep_micro_benchmark_2026-05-20.md`](../validation/meep/meep_micro_benchmark_2026-05-20.md)
+as optional manual PyMeep/FDTD smoke evidence only. MPB and Elmer remain not
+executed by these tasks, and Gmsh/Optiland/Meep reruns require separate
+approval. The Meep run does not authorize MPB, PyPI/TestPyPI upload, tag
+creation, or release creation.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.

@@ -78,7 +78,7 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
     assert gmsh["review_record_path"].endswith(
         "gmsh_micro_benchmark_review_2026-05-20.md"
     )
-    assert gmsh["next_candidate_solver"] == "meep_after_osa_solver_python"
+    assert gmsh["next_candidate_solver"] == "mpb_after_osa_solver_python"
     assert gmsh["next_candidate_approved"] is False
     optiland = next(
         item
@@ -102,9 +102,12 @@ def test_backend_evidence_summary_api_returns_safe_review_sections():
         for item in body["optional_solver_micro_benchmarks"]["solvers"]
         if item["solver_name"] == "meep"
     )
-    assert meep["approval_status"] == "pending"
+    assert meep["approval_status"] == "approved_executed"
     assert meep["execution_authorized"] is False
-    assert meep["last_execution_status"] == "not_run"
+    assert meep["last_execution_status"] == "passed"
+    assert meep["last_execution_evidence"] == (
+        "validation/meep/meep_micro_benchmark_2026-05-20.md"
+    )
     assert meep["decision_packet_path"].endswith(
         "meep_micro_benchmark_decision_packet.md"
     )
