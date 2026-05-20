@@ -339,3 +339,18 @@ Before `v1.0.0`, maintainers should decide and document:
 - Do not claim production-grade physical validation.
 - Do not claim formal convergence proof.
 - Do not require external solver or external LLM by default.
+
+## rc9 audit package
+
+Current public prerelease: `v0.9.0rc8`. Current main development version:
+`0.9.0rc9.dev0`. The rc9 v1.0 readiness audit package is tracked in
+`docs/rc9_v1_0_readiness_gap_audit.md`,
+`docs/rc9_backend_stabilization_plan.md`,
+`docs/rc9_pypi_publication_decision_review.md`,
+`docs/rc9_go_no_go_matrix.md`, and `docs/rc9_release_strategy.md`.
+
+The package keeps PyPI unpublished, keeps `v1.0.0` not approved, keeps Elmer
+deferred and not Level 3, and keeps validation wording conservative: no
+production-grade physical validation claim, no production-grade solver
+validation claim, no formal convergence proof claim, and no optical correctness
+claim.

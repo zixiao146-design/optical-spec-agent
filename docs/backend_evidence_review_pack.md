@@ -157,3 +157,17 @@ The generated evidence pack now includes:
 
 See [`backend_validation_maturity_matrix.md`](backend_validation_maturity_matrix.md)
 and [`preview_boundary_policy.md`](preview_boundary_policy.md).
+
+## rc9 audit integration
+
+The rc9 maintainer audit package is:
+
+- `docs/rc9_v1_0_readiness_gap_audit.md`
+- `docs/rc9_backend_stabilization_plan.md`
+- `docs/rc9_pypi_publication_decision_review.md`
+- `docs/rc9_go_no_go_matrix.md`
+- `docs/rc9_release_strategy.md`
+
+This audit changes no package version, runs no optional solver benchmark,
+uploads no package, creates no tag or release, and adds no production-grade
+validation claim.

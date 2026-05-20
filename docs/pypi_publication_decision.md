@@ -114,3 +114,15 @@ remove the artifact from all caches.
 - Do not publish without separate approval.
 - Do not publish automatically from release scripts.
 - Do not upload from `scripts/testpypi_preflight.sh`.
+
+## rc9 decision review
+
+The rc9 PyPI decision review is `docs/rc9_pypi_publication_decision_review.md`.
+It keeps PyPI deferred for the active `0.9.0rc9.dev0` development state.
+
+- PyPI published: no
+- PyPI publication approval: not granted
+- TestPyPI upload for `0.9.0rc9.dev0`: not performed
+- Upload command authorized for PyPI: no
+- Current public prerelease: `v0.9.0rc8`
+- Current main development version: `0.9.0rc9.dev0`

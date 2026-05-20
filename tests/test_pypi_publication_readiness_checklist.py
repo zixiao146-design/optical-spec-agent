@@ -30,6 +30,9 @@ def test_pypi_publication_readiness_checklist_tracks_current_gate():
     assert "Validation claims reviewed and kept conservative" in text
     assert "Do not publish PyPI yet" in text
     assert "Prepare PyPI only after a separate explicit publication decision" in text
+    assert "docs/rc9_pypi_publication_decision_review.md" in text
+    assert "Current recommendation: keep PyPI deferred" in text
+    assert "Upload command authorized for PyPI: no" in text
 
 
 def test_pypi_publication_readiness_checklist_records_risks_and_limits():
@@ -46,5 +49,6 @@ def test_pypi_publication_readiness_checklist_records_risks_and_limits():
         "Dependency resolution differs from TestPyPI",
         "does not authorize PyPI publication",
         "formal convergence proof claims",
+        "TestPyPI upload for `0.9.0rc9.dev0`: not performed",
     ]:
         assert phrase in text

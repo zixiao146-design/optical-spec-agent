@@ -237,6 +237,11 @@ for the repeatable RC procedure and
 the current RC line toward `v1.0`.
 Post-rc8 rc9 development readiness and publication gates are tracked in
 [`docs/release_readiness_v0.9.0rc9.md`](docs/release_readiness_v0.9.0rc9.md),
+[`docs/rc9_v1_0_readiness_gap_audit.md`](docs/rc9_v1_0_readiness_gap_audit.md),
+[`docs/rc9_backend_stabilization_plan.md`](docs/rc9_backend_stabilization_plan.md),
+[`docs/rc9_pypi_publication_decision_review.md`](docs/rc9_pypi_publication_decision_review.md),
+[`docs/rc9_go_no_go_matrix.md`](docs/rc9_go_no_go_matrix.md),
+[`docs/rc9_release_strategy.md`](docs/rc9_release_strategy.md),
 [`docs/post_release_status_v0.9.0rc8.md`](docs/post_release_status_v0.9.0rc8.md),
 [`docs/rc8_backend_roadmap.md`](docs/rc8_backend_roadmap.md),
 [`docs/rc8_capability_gap_audit.md`](docs/rc8_capability_gap_audit.md),
@@ -269,7 +274,9 @@ tracked in
 [`docs/pypi_publication_readiness_checklist.md`](docs/pypi_publication_readiness_checklist.md)
 and
 [`docs/pypi_post_publication_verification_plan.md`](docs/pypi_post_publication_verification_plan.md);
-the current recommendation remains not to publish PyPI yet.
+the current recommendation remains not to publish PyPI yet. The rc9 PyPI
+decision review keeps PyPI deferred and no upload command authorized while
+`0.9.0rc9.dev0` remains an active development version.
 The v1.0.0 planning package is documented in
 [`docs/v1_0_release_criteria.md`](docs/v1_0_release_criteria.md),
 [`docs/v1_0_release_plan.md`](docs/v1_0_release_plan.md),

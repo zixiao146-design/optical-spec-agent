@@ -93,3 +93,16 @@ Optiland, Meep, and MPB. Continue v1.0 readiness/backend engineering, keep Elmer
 deferred, and keep PyPI/TestPyPI/tag/release decisions separately gated. Do not
 claim production-grade validation, formal convergence proof, or optical
 correctness from this evidence.
+
+## Post-rc8 rc9 audit follow-up
+
+Post-rc8 planning continues in `0.9.0rc9.dev0` through:
+
+- `docs/rc9_v1_0_readiness_gap_audit.md`
+- `docs/rc9_backend_stabilization_plan.md`
+- `docs/rc9_pypi_publication_decision_review.md`
+- `docs/rc9_go_no_go_matrix.md`
+- `docs/rc9_release_strategy.md`
+
+Current public prerelease remains `v0.9.0rc8`. PyPI remains unpublished,
+`v1.0.0` remains unapproved, and Elmer remains deferred and not Level 3.

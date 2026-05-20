@@ -49,6 +49,16 @@ This document describes the current `main` branch. It is not a release tag.
   `docs/pypi_post_publication_verification_plan.md`
 - v1.0.0 release criteria:
   `docs/v1_0_release_criteria.md`
+- rc9 v1.0 readiness gap audit:
+  `docs/rc9_v1_0_readiness_gap_audit.md`
+- rc9 backend stabilization plan:
+  `docs/rc9_backend_stabilization_plan.md`
+- rc9 PyPI publication decision review:
+  `docs/rc9_pypi_publication_decision_review.md`
+- rc9 go/no-go matrix:
+  `docs/rc9_go_no_go_matrix.md`
+- rc9 release strategy:
+  `docs/rc9_release_strategy.md`
 - v1.0.0 release plan:
   `docs/v1_0_release_plan.md`
 - RC to v1.0.0 transition path:
@@ -513,6 +523,11 @@ Current v1.0 evidence artifacts:
 7. Create an annotated `v0.9.0rc9` tag only after final maintainer approval.
 8. Keep PyPI unpublished and do not re-upload TestPyPI unless explicitly
    approved for a new version.
+9. Use `docs/rc9_v1_0_readiness_gap_audit.md`,
+   `docs/rc9_backend_stabilization_plan.md`,
+   `docs/rc9_pypi_publication_decision_review.md`,
+   `docs/rc9_go_no_go_matrix.md`, and `docs/rc9_release_strategy.md` before
+   any future rc9 release-draft, PyPI, or v1.0.0 planning decision.
 
 ## Application Domain Coverage
 

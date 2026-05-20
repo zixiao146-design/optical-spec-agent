@@ -117,3 +117,15 @@ with `--no-deps`.
 This record authorizes TestPyPI upload only for `0.9.0rc6.dev0`. It does not
 authorize PyPI publication, GitHub release creation, tag creation, production-
 grade validation claims, or formal convergence proof claims.
+
+## Current rc9 publication decision
+
+The current rc9 publication decision is reviewed in
+`docs/rc9_pypi_publication_decision_review.md`.
+
+- PyPI published: no
+- PyPI publication approval: not granted
+- TestPyPI upload for `0.9.0rc9.dev0`: not performed
+- Upload command authorized for PyPI: no
+- Current public prerelease: `v0.9.0rc8`
+- Current main development version: `0.9.0rc9.dev0`

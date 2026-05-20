@@ -263,3 +263,18 @@ Readiness is calibrated by environment profile: current Python/current `PATH`
 is the default, while `OSA_SOLVER_PYTHON` can probe a dedicated solver Python
 such as `osa-solvers` for PyMeep and `meep.mpb`; see
 [`optional_solver_environment_profiles.md`](optional_solver_environment_profiles.md).
+
+## rc9 stabilization audit
+
+The current rc9 backend audit package is:
+
+- `docs/rc9_v1_0_readiness_gap_audit.md`
+- `docs/rc9_backend_stabilization_plan.md`
+- `docs/rc9_pypi_publication_decision_review.md`
+- `docs/rc9_go_no_go_matrix.md`
+- `docs/rc9_release_strategy.md`
+
+Current public prerelease is `v0.9.0rc8`; current main development version is
+`0.9.0rc9.dev0`. PyPI remains unpublished, `v1.0.0` is not approved, Elmer
+remains deferred, default gates do not execute solvers, and no production-grade
+validation or formal convergence proof is claimed.

@@ -234,3 +234,20 @@
   `docs/preview_boundary_policy.md`, and
   `scripts/audit_validation_claims.py` before future rc8/PyPI/v1.0 decision
   work so backend evidence remains conservative.
+
+## rc9 audit checkpoint
+
+- rc9 v1.0 readiness gap audit:
+  `docs/rc9_v1_0_readiness_gap_audit.md`
+- rc9 backend stabilization plan:
+  `docs/rc9_backend_stabilization_plan.md`
+- rc9 PyPI publication decision review:
+  `docs/rc9_pypi_publication_decision_review.md`
+- rc9 go/no-go matrix: `docs/rc9_go_no_go_matrix.md`
+- rc9 release strategy: `docs/rc9_release_strategy.md`
+- Current public prerelease remains `v0.9.0rc8`.
+- Current main development version remains `0.9.0rc9.dev0`.
+- PyPI remains unpublished and PyPI publication approval remains not granted.
+- `v1.0.0` remains not approved and not released.
+- No production-grade physical validation, production-grade solver validation,
+  formal convergence proof, or optical correctness claim is made.

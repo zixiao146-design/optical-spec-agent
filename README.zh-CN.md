@@ -241,6 +241,15 @@ v1.0 compatibility 和 evidence 跟踪见 `docs/v1_0_compatibility_policy.md`、
 `docs/v1_0_public_contract_freeze_checklist.md`、
 `docs/public_contract_manifest.json`、`docs/public_contract_change_checklist.md`、
 `examples/e2e/README.md` 和 `examples/examples_manifest.json`。
+当前 rc9 v1.0 readiness、后端稳定化、PyPI 决策和 go/no-go 审计见
+`docs/rc9_v1_0_readiness_gap_audit.md`、
+`docs/rc9_backend_stabilization_plan.md`、
+`docs/rc9_pypi_publication_decision_review.md`、
+`docs/rc9_go_no_go_matrix.md` 和 `docs/rc9_release_strategy.md`。这些文档保持
+当前公开候选版本为 `v0.9.0rc8`、main 开发版本为 `0.9.0rc9.dev0`，并说明
+PyPI 仍 deferred、`v1.0.0` 未批准。No production-grade validation is claimed.
+No formal convergence proof claim is made.
+
 当前 rc7 release draft readiness 和发布 gate 见 `docs/release_readiness_v0.9.0rc7.md`、
 `docs/testpypi_upload_approval_v0.9.0rc7.md`，以及历史 rc6 release 记录：
 `docs/release_readiness_v0.9.0rc6.md`、

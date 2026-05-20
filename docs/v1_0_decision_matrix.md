@@ -94,3 +94,16 @@ claimed.
 - Decision: prepare v1.0.0 release draft only after explicit maintainer
   approval; Agent Studio remains future/Phase 2 work and is not a v1.0.0
   blocker.
+
+## rc9 audit inputs
+
+- `docs/rc9_v1_0_readiness_gap_audit.md`
+- `docs/rc9_backend_stabilization_plan.md`
+- `docs/rc9_pypi_publication_decision_review.md`
+- `docs/rc9_go_no_go_matrix.md`
+- `docs/rc9_release_strategy.md`
+
+The rc9 matrix recommendation is to continue backend hardening, keep PyPI
+deferred, and avoid creating `v1.0.0`. No production-grade validation claim is
+made. No formal convergence proof claim is made. No optical correctness claim
+is made.

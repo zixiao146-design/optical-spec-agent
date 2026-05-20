@@ -245,3 +245,14 @@ solver validation claims.
 
 Use `GET /api/backend-validation-maturity` or
 `python scripts/audit_validation_claims.py` to inspect these boundaries.
+
+## rc9 backend audit references
+
+- `docs/rc9_v1_0_readiness_gap_audit.md`
+- `docs/rc9_backend_stabilization_plan.md`
+- `docs/rc9_pypi_publication_decision_review.md`
+- `docs/rc9_go_no_go_matrix.md`
+- `docs/rc9_release_strategy.md`
+
+PyPI remains unpublished, `v1.0.0` is not approved, default solver execution is
+disabled, and validation claims remain conservative.

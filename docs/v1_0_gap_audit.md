@@ -111,3 +111,12 @@
   not a release blocker.
 - Keep Elmer deferred unless a maintainable install route appears.
 - Prepare v0.9.0rc6 only if new hardening justifies another release candidate.
+
+## rc9 gap audit superseding note
+
+The latest post-rc8 gap audit is `docs/rc9_v1_0_readiness_gap_audit.md`.
+Current public prerelease is `v0.9.0rc8`; current main development version is
+`0.9.0rc9.dev0`. PyPI is not published, `v1.0.0` is not approved, Elmer remains
+deferred and not Level 3, and the project does not claim production-grade
+physical validation, production-grade solver validation, formal convergence
+proof, or optical correctness.

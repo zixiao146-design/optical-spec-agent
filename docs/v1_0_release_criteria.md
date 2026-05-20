@@ -122,3 +122,16 @@ Validation maturity is consolidated in
 and [`preview_boundary_policy.md`](preview_boundary_policy.md). These documents
 help prevent future v1.0 decisions from overreading backend evidence as physical
 validation, solver convergence, or material-data verification.
+
+## rc9 decision checkpoint
+
+Use `docs/rc9_v1_0_readiness_gap_audit.md`,
+`docs/rc9_backend_stabilization_plan.md`,
+`docs/rc9_pypi_publication_decision_review.md`,
+`docs/rc9_go_no_go_matrix.md`, and `docs/rc9_release_strategy.md` before any
+future rc9 release draft, PyPI decision, or `v1.0.0` planning package.
+
+Current public prerelease is `v0.9.0rc8`; current main development version is
+`0.9.0rc9.dev0`. PyPI is not published, PyPI publication approval is not
+granted, `v1.0.0` is not approved, and no production-grade validation or formal
+convergence proof is claimed.

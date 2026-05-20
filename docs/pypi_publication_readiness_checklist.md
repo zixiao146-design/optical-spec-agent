@@ -55,3 +55,13 @@
 This checklist does not authorize PyPI publication, tag creation, GitHub release
 creation, TestPyPI re-upload, production-grade physical validation claims, or
 formal convergence proof claims.
+
+## rc9 PyPI review
+
+Use `docs/rc9_pypi_publication_decision_review.md` before any post-rc8 PyPI
+decision. Current recommendation: keep PyPI deferred.
+
+- Upload command authorized for PyPI: no
+- TestPyPI upload for `0.9.0rc9.dev0`: not performed
+- Current public prerelease: `v0.9.0rc8`
+- Current main development version: `0.9.0rc9.dev0`

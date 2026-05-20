@@ -43,5 +43,13 @@ def test_backend_functionality_status_records_reality_and_boundaries():
         "External solvers are not run by default",
         "NO SOLVER EXECUTION PERFORMED",
         "NO EXTERNAL LLM CALLED",
+        "docs/rc9_v1_0_readiness_gap_audit.md",
+        "docs/rc9_backend_stabilization_plan.md",
+        "docs/rc9_pypi_publication_decision_review.md",
+        "docs/rc9_go_no_go_matrix.md",
+        "docs/rc9_release_strategy.md",
+        "Current public prerelease is `v0.9.0rc8`",
+        "current main development version is",
+        "`0.9.0rc9.dev0`",
     ]:
         assert phrase in text

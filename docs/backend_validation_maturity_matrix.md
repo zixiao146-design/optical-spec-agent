@@ -103,3 +103,16 @@ python scripts/audit_validation_claims.py
 ```
 
 The audit blocks unsafe claim language while allowing explicit negated forms.
+
+## rc9 stabilization audit
+
+The rc9 stabilization audit is tracked in
+`docs/rc9_v1_0_readiness_gap_audit.md`,
+`docs/rc9_backend_stabilization_plan.md`,
+`docs/rc9_pypi_publication_decision_review.md`,
+`docs/rc9_go_no_go_matrix.md`, and `docs/rc9_release_strategy.md`.
+
+Optional manual smoke evidence is closed and reviewed for Gmsh, Optiland, Meep,
+and MPB. Elmer remains deferred and not Level 3. These records do not claim
+production-grade physical validation, production-grade solver validation,
+formal convergence proof, or optical correctness.

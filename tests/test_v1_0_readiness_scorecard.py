@@ -78,3 +78,11 @@ def test_v1_0_readiness_scorecard_exists_and_tracks_current_status():
     assert "not approved" in text
     assert "remaining backend" in text
     assert "hardening areas before any future rc8, PyPI, or v1.0.0 decision" in text
+    assert "rc9 v1.0 readiness gap audit" in text
+    assert "docs/rc9_v1_0_readiness_gap_audit.md" in text
+    assert "docs/rc9_backend_stabilization_plan.md" in text
+    assert "docs/rc9_pypi_publication_decision_review.md" in text
+    assert "docs/rc9_go_no_go_matrix.md" in text
+    assert "docs/rc9_release_strategy.md" in text
+    assert "PyPI remains unpublished" in text
+    assert "`v1.0.0` remains not approved and not released" in text
